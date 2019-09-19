@@ -1,5 +1,5 @@
-## Objetivo personal
-> Compartir conocimiento acerca de los lenguajes de programación, nuevas tecnologías e información útil y necesaria para mantenerme siempre actualizado. Espero poder ayudar a quienes tengan ganas de aprender.
+## Objetivo
+> Compartir conocimiento acerca de los lenguajes de programación, nuevas tecnologías e información útil y necesaria para mantenerse siempre actualizado. Dirigido a quienes realmente tengan ganas de aprender.
 
 - - -
 
