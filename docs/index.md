@@ -4,9 +4,21 @@
 - - -
 
 ## Documentación
-### Programación
-- Aprendiendo a usar Emacs, un IDE muy potente.
-[Ir a la página](programacion.md)
+### 1. Programación
+- Programando en Emacs, un IDE muy potente.
+ [Ir a la página](ide-emacs.md)
+- Subir proyectos a Repositorios con Github Bash
+
+### 2. Linux
+- Aprendiendo lo básico de Linux
+ [Ir a la página](linux-basico.md)
+- Configurando la red
+- Crear programas con BASH
+
+### 3. Maquinas Virtuales
+- Como crear y configurar una Máquina Virtual
+ [Ir a la página](virtualbox.md)
+
 
 - - -
 

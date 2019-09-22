@@ -1,22 +1,22 @@
-# Aprendiendo a usar Emacs
+# Programando en Emacs
 
-## Comandos importantes
-* C+g (Cancelar accion)
-
-- - -
-
-## Atajos
-- C (Ctrl)
-- X (Alt)
+# 1. Comandos importantes
+#### 1. Cancelar Accion `C+g`
 
 - - -
 
-## Edición
-- C-w (Cortar texto)
-- C-w (Pegar texto)
-- C-w (Copiar texto)
-- C-w u (Deshacer cambio)
-- C-x C-s (Guardar archivo)
+## 2. Atajos
+- Los atajos que dicen **C** se refieren a la tecla Ctrl
+- Los atajos que mencionan **X** hacen referencia a la tecla Alt
+
+- - -
+
+# 3. Edición	
+#### 3.1 Cortar texto `C-w`
+#### 3.2 Copiar texto `X-w`
+#### 3.3 Pegar texto `C-w `
+#### 3.4 Deshacer cambio `C-w u`
+####3.5 Guardar archivo `C-x C-s`
 
 - - -
 
@@ -112,3 +112,4 @@ Si la computadora falla, puede recuperar su edición de auto guardado encontrand
 # Recursos
 - [Documentación Oficial](https://www.gnu.org/software/emacs/manual/html_node/emacs/Exiting.html)
 - [Comando C-M-v Scroll-other-window](https://www.gnu.org/software/emacs/manual/html_node/emacs/Other-Window.html)
+- [Renombrar multiples archivos](http://pragmaticemacs.com/emacs/dired-rename-multiple-files/)
