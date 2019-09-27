@@ -10,10 +10,12 @@
 - Subir proyectos a Repositorios con Github Bash
 
 ### 2. Linux
-- Aprendiendo lo básico de Linux
- [Ir a la página](linux-basico.md)
+- Conociendo lo básico de Linux (Nivel Básico)
+ [Ir a la página](linux-nivel-basico.md)
+- Sobrevivir usando la terminal de Linux - (Nivel Medio)
+ [Ir a la página](linux-nivel-medio.md)
 - Configurando la red
-- Crear programas con BASH
+- Crear programas en BASH
 
 ### 3. Maquinas Virtuales
 - Como crear y configurar una Máquina Virtual
