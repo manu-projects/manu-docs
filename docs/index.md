@@ -20,7 +20,11 @@
 - Como crear y configurar una Máquina Virtual
  [Ir a la página](virtualbox.md)
 
-### 4. Tutoriales de programación
+### 4. Documentar
+- Descubriendo los archivos .md
+- Primeros pasos usando LaTeX
+
+### 5. Ejercicios de programación
 - Aprendiendo Haskell
   [Ir a la página](https://github.com/neverkas/aprende-haskell)
 - Aprendiendo C++
