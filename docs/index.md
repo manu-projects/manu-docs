@@ -11,7 +11,6 @@
 
 ### 2. Linux
 - Conociendo lo básico de Linux (Nivel Básico)
- [Ir a la página](linux-nivel-basico.md)
 - Sobrevivir usando la terminal de Linux - (Nivel Medio)
  [Ir a la página](linux-nivel-medio.md)
 - Configurando la red
@@ -20,6 +19,17 @@
 ### 3. Maquinas Virtuales
 - Como crear y configurar una Máquina Virtual
  [Ir a la página](virtualbox.md)
+
+### 4. Tutoriales de programación
+- Aprendiendo Haskell
+  [Ir a la página](https://github.com/neverkas/aprende-haskell)
+- Aprendiendo C++
+  [Ir a la página](https://github.com/neverkas/aprende-cpp)
+- Aprendiendo Lenguaje de Máquina
+  [Ir a la página](https://github.com/neverkas/aprende-assembler-8085)
+
+
+
 
 
 - - -

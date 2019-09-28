@@ -202,16 +202,58 @@ chmod ugo=xr archivo.txt # Asignar solo Permiso de ejecución(x) y lectura(r) pa
 
 - - -
 
-# 5.Tuberia (Pipe)
+# 6. Tareas
+> Las tareas son programas que se pueden iniciar en primer plano(foreground), en el caso de ejecutar vía terminal, esta tarea tomará control de la terminal y deberá finalizarla para seguir utilizandola. Mientras que las que se ejecutan en segundo plano(background), permiten el manejo de la ventana de la terminal.
 
-## 5.1 tipos
-- 3 tipos
-- entrada
-`cat pepe.txt << ls -l $HOME`
+### 6.1 Iniciar una tarea en primer plano
+>Esta tarea se va a seguir ejecutando hasta que se finalice desde la interfáz gráfica de ese programa, o si se finaliza desde la terminal, hasta tanto no se puede usar esa terminal para otros comandos.
+```bash
+firefox # inicia el navegador firefox en primer plano
+```
 
-#### 2.2 tuberias nombradas
-> crea archivo de tuberias para que otros procesos reutilicen
-> se pueden crear con el comando `mknod` 
+### 6.2 Iniciar una tarea en segundo plano
+>En segundo plano se pueden agregar aquellas que no necesitan interactuar con la consola, es como un "esconder" mientras se ejecutan.
+```bash
+firefox & # inicia el navegador firefox en segundo plano
+```
+>Observación: Sólo se necesita de agregar el **&** seguido de nombre del programa
+
+### 6.2 Pasar una tarea a primer o segundo plano
+>A veces puede ocurrir que se desee alternar
+```bash
+fg numeroTarea # pasa una tarea a primer plano
+fg numeroTarea # pasa la tarea a segundo plano
+```
+
+
+### Ver tareas en ejecución
+> Visualizar las tareas que se estan ejecutando nos ayuda conocer su información (PID, nombre) y finalizarlas cuando uno desee o no.
+```bash
+jobs # me devuelve una lista con las tareas en ejecución, su PID y nombre
+```
+
+- - -
+
+# 5.Tuberia y Redirección de datos
+>Una tuberia se representa con el simbolo **|** y permite utilizar la salida de un programa como entrada de otro es decir pasarlo por parametro.
+
+### 5.1 Filtrar el listado de directorio
+> Con **ls** listamos el directorio c
+```bash
+ls -l | grep "control" # listamos todo el directorio o señalamos los que digan "control"
+```
+
+### 5.2 Redirigir la salida de un programa como entrada de otro
+> Esto se podria usar para guardar información en caso de tener fallas al instalar o configurar un programa y se necesite consultar en algún foro que soliciten información de lo que devuelve ejecutar un comando
+```bash
+ls > /tmp/datos.txt # guarda lo que devuelve ls (el directorio) y lo guarda en datos.txt
+```
+
+### 5.3 Rederigir
+> investigar otro ejemplo mejor
+```bash
+grep 'root' < /etc/passwd
+```
 
 - - -
 
