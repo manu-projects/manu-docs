@@ -234,154 +234,18 @@ ls > /tmp/datos.txt # guarda en datos.txt lo que devuelve el comando ls (el list
 grep 'pedro' < /archivos/clientes.txt # El contenido del .txt se lo pasa al grep
 ```
 
-- - - 
-
-# 6. Tareas && Procesos
-
-> Los **procesos** son programas que se pueden estar ejecutando o no. Estos procesos se los llama **tarea** en caso de que se esten corriendo en el sistema.
-
-> Las **tareas** se pueden iniciar tanto en **primer plano** (foreground) como en **segundo plano** (background). En el primer caso, se puede dar si se ejecuta la tarea desde la terminal, esta tomará el control de la consola y solo se podra hacer uso de la terminal cuando la tarea finalize o que nosotros la finalizemos. En el segundo caso, permiten utilizar la terminal mientras la tarea se está ejecutando.
-
-### 6.1 Iniciar una tarea en primer plano
->Esta tarea se va a seguir ejecutando hasta que se finalice desde la interfáz gráfica de ese programa, o si se finaliza desde la terminal, hasta tanto no se puede usar esa terminal para otros comandos.
-```bash
-firefox # inicia el navegador firefox en primer plano
-```
-
-### 6.2 Iniciar una tarea en segundo plano
->En segundo plano se pueden agregar aquellas que no necesitan interactuar con la consola, es como un "esconder" mientras se ejecutan.
-```bash
-firefox & # inicia el navegador firefox en segundo plano
-tar -cvzf fotos.tar.gz fotos & # comprimir los archivos de la carpeta fotos
-```
->Observación: Sólo se necesita de agregar el **&** seguido de nombre del programa
-
-### 6.2 Evitar imprimir  mensajes de una tarea que está segundo plano
->Con el comando **nohup** podemos seguir utilizando la terminal, sin que aparezcan los mensajes que generan los programas que tenemos en segundo plano.
-```bash
-nohup mkdocs serve & # corre el programa "mkdocs" en segundo plano, y no mostrará los mensajes
-```
-
-### 6.3 Pasar una tarea a primer o segundo plano
->A veces puede ocurrir que se desee alternar
-```bash
-fg numeroTarea # pasa una tarea a primer plano
-fg numeroTarea # pasa la tarea a segundo plano
-```
-
-### 6.4 Ver procesos y tareas
-> Con el comando **jobs** podemos conocer las tareas que se ejecutan en segundo plano desde la terminal que tenemos abierta. Este nos detallará el **número de proceso**(important para luego detenerlo), su **estado de ejecución**.
-
-> Con el comando **ps** nos mostrará todas las tareas (dispone de varios parametros que personalizan la información)
-
-Algunas referencias a las columnas del listado de procesos:
-
-|Columna|Descripción					|
-|:------|:----------------------------------------------|
-| pid	| Identificador del proceso			|
-| tty	| Identifica la terminal donde esta corriendo 	|
-| comm	| Es el comando que se ejecutó en la terminal	|
-| etime | Cantidad de tiempo en ejecución    		|
-| %mem	| Cuanto ocupa en memoria 			|
-| %cpu 	| Cuanto utiliza del procesador 		|
-
-Otras referencias de los parámetros para el comando **ps** que lista los procesos:
-
-| Parámetro | Descripción                                                    |
-|:---------:|:---------------------------------------------------------------|
-| a         | Muestra los procesos que tienen una terminal controladora	     |
-| x         | Muestra los procesos que "no" tienen una terminal controladora |
-| f         | Muestra las relaciones padre/hijo entre los procesos 	     |
-
-
-```bash
-jobs # devuelve una lista con las tareas en ejecución en la terminal actual
-ps   # devuelve todas las tareas 
-```
-
-### 6.4.1 Obtener solo el número de proceso
-> Suelo optar por **pgrep** seguido del nombre del proceso, que es mas sencillo.
-> Aunque también de una más extensa sería con **ps** para listar los procesos, con filtrar el proceso con **grep** y retornar la columna del PID con **awk**
-
-```bash
-pgrep | nombreTarea		# devuelve el numero de id del un proceso
-ps | grep nombreTarea | awk '{print $1}' # también devuelve el numero de id del proceso
-```
-
-### 6.4.1 Obtener solo algunos datos de los procesos
->En caso de querer saber solo algunas de las columnas de **ps** podemos usar el parametro **eo** seguido de las columnas. 
-Algunos campos podrian ser
-
-```bash
-ps -eo pid,comm,etime # mostrará la columna del identificador, el comando, y tiempo en ejecución
-```
->**Observación:** Es importante que las columnas este separadas por coma sin espacios.
-
-### 6.4.1 Ordenar los procesos por algun campo
-> Para esto necesitamos del parametro **--sort** seguido de los campos que utilizamos como criterio para ordenar
-```bash
-ps -eo pid,comm,etime,%cpu --sort=-%mem | head 
-```
-> **Observación:** Si queres visualizar la cabecera de los campos, agregar **head**
-
-### 6.4.2 Mostrar procesos padres e hijos
-> A veces es importante conocer si un proceso depende de varios es decir al detener este sus procesos hijos también.
-```bash
-ps --forest # muestra los procesos padres e hijos
-```
-
-### 6.5 Detener una tarea en ejecución
-> Si la tara está en **primer plano** podriamos usar el atajo **CTRL+Z**
-
-> Si la tarea está en **segundo plano**, utilizaremos el comando **kill** seguido del numero de proceso o el PID que lo identifica.
-
-```bash
-kill %1 	# detiene el proceso numero 1
-```
-
->**Observación:** Al utilizar el % va seguido del número de proceso, caso contrario agregar el PID del proceso
-
-### 6.6 Guardar un proceso dependiente de una terminal
->Con el comando **disown** se puede guardar un proceso que está corriendo en **segundo plano** sobre una terminal, y si la misma se cierra el proceso no se interrumpirá.
->Como argumento se le puede pasar el **PID** ó el número de proceso precedido por el **%**
-
-Opción 1, con el comando **pgrep**:
-```bash
-nohup mkdocs serve& # ejecuto el programa en segundo plano, y oculto sus mensajes
-pgrep mkdocs 	    # busco el PID del proceso
-disown 3003  	    # le paso PID para guardarlo
-```
-Opción 2, con el comando **ps**:
-```bash
-nohup mkdocs serve& # ejecuto el programa en segundo plano, y oculto sus mensajes
-ps -ax | grep mkdocs # busco el PID
-disown 3003   	     # le paso el PID (si es que fuese 3003)
-```
-
-### 6.6 Practicando procesos, tareas
-```
-firefox & ; chrome & # corro en segundo plano ambos navegadores web
-
-jobs 	    	     # verifico el numero de proceso de ambos, y si estan corriendo
-kill %1		     # detengo el que tenga el número de proceso 1
-
-ps -a | grep chrome  # verifico el PID del programa, suponiendo que firefox se detuvo
-kill 3021    	     # detengo el proceso con PID 3021 (suponiendo que es chrome)
-
-```
-
 - - -
 
-# 7. Documentación de los programas
+# 6. Documentación de los programas
 > Al usar el comando **man**, nos despliega información necesaria de como utilizar otros comandos y programas
 
-### 7.1 Obtener documentación resumida de un programa
+### 6.1 Obtener documentación resumida de un programa
 >Se le pasa el parametro **-f**
 ```bash
 man -f grep # devuelve información acerca del comando grep
 ```
 
-### 7.2 Obtener documentación más ordenada de un programa
+### 6.2 Obtener documentación más ordenada de un programa
 > es otra herramienta parecida a man pero más fácil de entender (aunque no tan completa como man), esta dispone de hipervinculos de referencia
 ```bash
 info grep # devuelve información acerca del comando grep
@@ -389,45 +253,45 @@ info grep # devuelve información acerca del comando grep
 
 - - -
 
-# 8. Otros comandos interesantes
+# 7. Otros comandos interesantes
 
-### 8.1. Ejecutar multiples comandos en una linea
+### 7.1. Ejecutar multiples comandos en una linea
 >Para esto debemos utilizar el símbolo ** ; ** para separar los comandos a ejecutar
 ```bash
 ls -l ; cat /etc/passwd
 ```
 
-### 8.2. Ejecutar un programa luego de otro
+### 7.2. Ejecutar un programa luego de otro
 >A diferencia de utilizar **;**, con el operador lógico **&&** podemos pedirle que ejecute un programa luego que uno anterior se haya ejecutado. Podria verse como un si sucede esto,entonces hace este otro también.
 ```bash
 mkdir programa1 && programa2
 ```
 
-### 8.3. Saber la ruta de un programa
+### 7.3. Saber la ruta de un programa
 ```bash
 whereis ls
 ```
 
-### 8.4. Pasar por parametro la salida de un comando
+### 7.4. Pasar por parametro la salida de un comando
 >Una alternativa a esto sería el uso de los **acentos inversos** que nos permiten pasar la salida de un comando como parametro a otro comando
 ```bash
 kill `cat carpeta/proceso.pid`
 ```
 
-### 8.5 Cambiar de usuario
+### 7.5 Cambiar de usuario
 >En caso que estemos usando varios usuarios, o accedamos a una terminal externa
 ```
 su neverkas # cambia el usuario a Neverkas
 ```
 
-### 8.6 Saber en que terminal nos encontramos
+### 7.6 Saber en que terminal nos encontramos
 >En caso de que tengamos varias terminales abiertas ejecutando varios procesos en segundo plano, y queramos buscar los procesos de una terminal específica, pero no sabemos de cual. Nos posicionamos en esa terminal y ejecutamos el comando **tty**.
 
 ```bash
 tty # nos devuelve información de la terminal actual
 ```
 
-### 8.7 Saber la ruta en la que se encuentra la terminal
+### 7.7 Saber la ruta en la que se encuentra la terminal
 >Con **pwd** podemos saber en que ruta nos encontramos en caso de conectarnos en algun servidor
 ```bash
 pwd # muestra la ruta en donde nos encontramos parados
@@ -435,7 +299,7 @@ pwd # muestra la ruta en donde nos encontramos parados
 
 - - -
 
-# 9. Referencias
+# 8. Referencias
 >Para armar esta guia me base en algunos libros y sitios web que consideré útiles
 
 - Libro - Manual de Administracion de Linux, Steve Shah
