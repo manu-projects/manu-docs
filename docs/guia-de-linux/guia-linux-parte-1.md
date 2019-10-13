@@ -1,3 +1,5 @@
+# Guia de Linux - Lineas de comando (Parte-1)
+
 - - -
 # 1. Enlaces
 >Existen dos tipos de enlaces, blandos y duros, el que más nos interesa por ahora es el primero.
@@ -213,7 +215,7 @@ ls -la 	#
 
 - - -
 
-# 5.Tuberia, Redirección de datos
+# 5.Tuberia (Pipe) && Redirección de datos
 >Una tuberia se representa con el simbolo **|** y permite utilizar la salida de un programa como entrada de otro es decir pasarlo por parametro.
 
 ### 5.1 Filtrar el listado de directorio
@@ -225,14 +227,76 @@ ls -l | grep "control" # listamos todo el directorio o señalamos los que digan 
 ### 5.2 Redirigir la salida de un programa como entrada de otro
 > Esto se podria usar para guardar información en caso de tener fallas al instalar o configurar un programa y se necesite consultar en algún foro que soliciten información de lo que devuelve ejecutar un comando
 ```bash
-ls > /tmp/datos.txt # guarda en datos.txt lo que devuelve el comando ls (el listado del directorio)
+# guardamos en datos.txt lo que devuelve el comando ls (listado del directorio)
+ls > /tmp/datos.txt
 ```
+>**Observación**: Si volvemos a ejecutar el comando, sobreescribirá el archivo, borrando el contenido que ya tenía:
 
-### 5.3 Rederigir como entrada la salida de otro
+### 5.3 Redirigir como entrada la salida de otro programa
 > 
 ```bash
 grep 'pedro' < /archivos/clientes.txt # El contenido del .txt se lo pasa al grep
 ```
+
+### 5.4 Insertar texto a un archivo 
+>Si usamos lo aprendido, podemos insertar texto a un archivo
+>Esta manera lleva más pasos, pero es una manera de entender algunos comandos
+```bash
+# 1. Creamos archivos temporales con texto
+echo "Su nombre es Carlos" > /tmp/empleado-nombre.txt
+echo "su país es Argentina" > /tmp/empleado-pais.txt
+
+# 2. Creamos un segundo archivo y le agregamos el contenido del anterior
+cat /tmp/empleado-nombre.txt >> empleado.txt
+cat /tmp/empleado-pais.txt >> empleado.txt
+
+# 3. Borramos los archivos temporales que ya no necesitamos
+rm /tmp/empleado-*.txt # se borran los archivos .txt que empiecen con empleado seguido de un guión 
+```
+
+### 5.5 Insertar texto al principio de un archivo en una linea con "cat"
+>Esta manera lleva menos pasos, pero es mejor entender primero el mecanismo del anterior
+
+```bash
+echo "Su nombre es Carlos" | cat - empleado.txt > tmp && mv tmp empleado.txt
+```
+
+Explicación paso a paso de la anterior linea de comando:
+
+1. Con `echo` imprimimos por pantalla un texto, lo que esté entre comillas seguido de él
+
+2. Con ` | ` ó conocido como **pipe** utiliza como entrada la salida de otro programa,
+en este caso reutilizamos lo que imprimimos por pantalla, lo que queremos como texto
+pasar a un archivo.
+
+3. Con `cat` concatenamos texto de archivos, en este caso la salida del **echo**,
+el primer parámetro es un guión **-** que quiere decir que le pasaremos un texto no un archivo,
+el segundo parámetro **empleado.txt** es el nombre de archivo con el que concatena el texto
+
+4. Con `>` utilizado para **redireccionar de la salida de un comando** pasará el texto
+que concatenamos con **cat**, y lo guardará en el archivo temporal **tmp** que podría
+haber tenido cualquier otro nombre que quisieramos
+
+5. Con `&&` indicamos que cuando se cumpla el comando anterior (de concatenar el texto con
+el archivo y guardarlo en otro temporal) entonces prosiga con el siguiente comando, pero
+sólo si solo el comando anterior tuvo éxito en realizarse. En caso que lanze un error,
+no ejecutará lo que le siga
+
+6. Con `mv` sobreescribimos el archivo **empleado.txt** con lo que se guardó en **tmp**
+
+### 5.6 Insertar texto al principio de un archivo con el comando sed
+>Con el comando `sed` se puede mostrar, y modificar un archivo mediante **expresiones regulares**
+>Aunque esta manera parezca incluso más fácil que las anteriores, pero siempre es bueno conocer
+>otras alternativas y entender como funcionan los comandos básicos de linux.
+
+```
+sed -i "1iSu nombre es Carlos\n" empleado.txt # agregamos un texto al principio seguido de un salto de linea
+```
+
+Su explicación sería:
+1. Con `-i` como parámetro nos referimos que vamos a insertar texto
+2. Con `"1i"` al principio de la cadena de texto, hacemos referencia a la primera linea
+
 
 - - -
 
@@ -297,6 +361,33 @@ tty # nos devuelve información de la terminal actual
 pwd # muestra la ruta en donde nos encontramos parados
 ```
 
+### 7.8 Listar paquetes instalados ordenados por fecha
+>Si necesitamos saber por esas casualidades los paquetes instalados via terminal,
+y guardarlo en un archivo paquetes-instalados.txt buscamos en **dpkg.log**
+```
+grep -i "install" /var/log/dpkg.log > /tmp/paquetes-instalados.txt
+```
+
+### 7.9 Conocer el tipo de terminal en ejecución
+>Existen diversos tipos de terminales, quizás necesitas realizar una configuración
+>y desconoces cual es el tipo de terminal que estas utilizando.
+>Algunos tipos de terminal son:
+- GNOME
+- KDE
+- XFCE
+- JWM
+
+```bash
+# Para saber la distribución de linux y el tipo de terminal
+env | grep XDG_CURRENT_DESKTOP
+
+# Si es GNOME, algunas opciones para conocer la versión
+gnome-shell --version # opcion 1
+
+apt-cache show gnome-shell | grep Version # opcion 2 con apt-cache
+```
+
+
 - - -
 
 # 8. Referencias
@@ -310,4 +401,14 @@ pwd # muestra la ruta en donde nos encontramos parados
 - Proyecto de Informacion sobre Linux [Ver Página](http://www.linfo.org/index.html)
 
 - Ejemplos del comando ps [Ver Página](https://www.tecmint.com/ps-command-examples-for-linux-process-monitoring/)
+- Entendiendo como usar el comando sed
+    - Ejemplos del comando sed, LikeGeeks [Ver Página](https://likegeeks.com/sed-linux/)
+    - Ejemplos del comando sed, LinuxAdictos [Ver Página](https://www.linuxadictos.com/sed-ejemplos-del-comando-magico-para-gnu-linux.html)
+		- Ejemplos del comando sed, TecMint [Ver Página](https://www.tecmint.com/linux-sed-command-tips-tricks/)
+		
+- Entendiendo como usar el comando cat
+    - Explicación #1 del comando cat por RedHat [Ver Página](https://access.redhat.com/documentation/en-US/RedHat_Enterprise_Linux/4/html/Step_by_Step_Guide/s1-navigating-sio.html)		
+    - Explicación #2 del comando cat [Ver Página](https://www.computerhope.com/unix/ucat.htm)
+    - Explicación #3 del comando cat [Ver Página](https://hipertextual.com/archivo/2014/07/redirecciones-y-tuberias-bash/)
+
 - Guia de comandos bash [Ver Página](https://likegeeks.com/linux-bash-scripting-awesome-guide-part5/#Linux-Signals)

@@ -1,1 +1,18 @@
 site_name: Manu Docs
+site_author: 'Neverkas'
+repo_name: 'GitHub'
+repo_url: https://github.com/neverkas/manu-doc
+theme:
+    name: readthedocs
+nav:
+- Home: 'index.md'
+- Guia de Linux:
+    - 'Lineas de comando (Parte 1)': 'guia-de-linux/guia-linux-parte-1.md'
+    - 'Lineas de comando (Parte 2)': 'guia-de-linux/guia-linux-parte-2.md'
+    - 'Configuraciones': 'guia-de-linux/guia-linux-3.md'
+    - 'Configuración de Red': 'guia-de-linux/linux-configuracion-de-red.md'
+- Guia de Git: 'guia-git.md'
+- Guia de Emacs: 'ide-emacs.md'
+- Guia de Maquinas Virtuales:
+    - 'Configurando Virtualbox': 'virtualbox.md'
+

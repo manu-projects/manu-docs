@@ -1,4 +1,12 @@
-# Programando en Emacs
+# Programar con Emacs
+
+## 1. Editar archivos desde la terminal de linux
+>Si estamos apurados y queremos ver ó modificar un archivo sin entorno gráfico
+>ejecutamos el ide pasando el parámetro **-nw**
+```bash
+emacs -nw /etc/hosts # abrimos el archivo hosts
+```
+>**Observación**: Si queremos evitar pasarle el parámetro, podemos crear un alias en linux
 
 ## 1. Atajos
 
@@ -31,6 +39,7 @@
 | C-x h 		| Seleccionar todo el texto	|<td colspan="4">
 |	C-x				| Cancelar acción									|<td colspan="4">
 | C-x C-s 	| Guardar archivo					|<td colspan="4">
+| C-x C-v 	| Actualizar buffer					|<td colspan="4">
 
 - - -
 
@@ -94,12 +103,7 @@ C-x C-f /sudo::/ruta/archivo.extension #
 
 ## 7. Configuración personalizada
 
-### 7.1. Abrir Emacs desde la terminal sin entorno gráfico (GUI)
-```bash
-root@root:~$ emacs -nw # abrir emacs sin entorno gráfico
-```
-
-### 7.2. Configurar la indentación del código (tabulación)
+### 7.1. Configurar la indentación del código (tabulación)
 
 ```
 ;; Set Indentation (tabs)
@@ -108,7 +112,7 @@ root@root:~$ emacs -nw # abrir emacs sin entorno gráfico
 (setq-default tab-width 2)
 ```
 
-### 7.3. Autoindentación
+### 7.2. Autoindentación
 ```
 ;; https://www.emacswiki.org/emacs/AutoIndentation 
 (add-hook 'lisp-mode-hook '(lambda ()
