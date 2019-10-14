@@ -1,5 +1,7 @@
 # Guia de Linux - Lineas de comando (Parte-1)
 
+<img src="/images/linux-terminal.png">
+
 - - -
 # 1. Enlaces
 >Existen dos tipos de enlaces, blandos y duros, el que más nos interesa por ahora es el primero.

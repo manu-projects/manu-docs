@@ -1,5 +1,7 @@
 # Guia de Linux - Lineas de comando (Parte-2)
 
+<img src="/images/linux-terminal.png">
+
 # 1. Tareas && Procesos
 
 > Los **procesos** son programas que se pueden estar ejecutando o no. Estos procesos se los llama **tarea** en caso de que se esten corriendo en el sistema.

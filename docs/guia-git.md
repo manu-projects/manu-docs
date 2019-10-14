@@ -1,5 +1,7 @@
 # Guia de GIT
 
+<img src=/images/programming-software.jpg>
+
 # 1. Básico
 
 Investigar mas de
