@@ -1,4 +1,3 @@
-
 # VIDEOS PENDIENTES:
 - ubuntu neofetch add image
 - https://www.youtube.com/watch?v=QAaT6BTUnPg
@@ -41,7 +40,11 @@ https://gist.github.com/dabroder/813a941218bdb164fb4c178d464d5c23
 ## 1. Cambiar la terminal a rxvt
 https://www.youtube.com/watch?v=_kjbj-Ez1vU
 
-CONFIGURACIÓN https://addy-dclxvi.github.io/post/configuring-urxvt/
+- Rxvt - Configuraciones
+    - Referencia #1 por ArchLinux [Ver Pagina](https://wiki.archlinux.org/index.php/Rxvt-unicode_(Espa%C3%B1ol))
+    - Referencia #2 por Addy [Ver Pagina](https://addy-dclxvi.github.io/post/configuring-urxvt/)
+- Rxvt - Habilitar transparencia a la terminal [Ver Pagina](https://wiki.archlinux.org/index.php/Rxvt-unicode/Tips_and_tricks#Transparency)
+
 
 ### 1. Instalamos la nueva terminal rxvt
 >Si queremos cambiar a una terminal más personalizada y sin limitaciones,
@@ -50,27 +53,120 @@ CONFIGURACIÓN https://addy-dclxvi.github.io/post/configuring-urxvt/
 sudo apt install rxvt-unicode
 ```
 
-### 2. Creamos el archivo de configuración
+### 2. Creamos los directorios y archivos necesarios
 >En este archivo podemos aplicar las configuraciones que queremos aplicar a la terminal,
 >luego de haberlas agregado ejecutamos el siguiente comando en nuestra terminal predeterminada
 > `xrdb ~/.Xresources`
 ```bash
-touch .Xresources #creamos el archivo para las configuraciones
+touch ~/.Xresources # creamos el archivo para las configuraciones
+mkdir ~/.rxvt/ext # creamos directorio, donde guardaremos plugins
 ```
 
 ### 3. Algunas configuraciones
 https://github.com/bookercodes/dotfiles/tree/arch
-
-```bash
-!1. Configuramos la fuente
 !Más info: https://wiki.archlinux.org/index.php/Rxvt-unicode#Font_declaration_methods
-URxvt.font: xft:monaco:size=16
+!Mas info: https://wiki.gentoo.org/wiki/Rxvt-unicode
+!Mas info: https://github.com/muennich/urxvt-perls
 
-!2. Ocultar el scrollbar
-!NO APARECE EN LA PAGINA!
-!URxvt.scrollBar: false
+```xresources
+!Para aplicar cambios ejecutar en la terminal la sig linea de comando
+!xrdb ~/.Xresources
 
+!Configuramos la ruta donde agregamos las extensiones
+URxvt.perl-lib: ~/.urxvt/ext/
+
+!Configuramos la fuente
+URxvt.font: xft:DejaVu Sans Mono:size=11
+
+!! URxvt Appearance
+URxvt.letterSpace: 0
+URxvt.lineSpace: 0
+URxvt.geometry: 92x24
+URxvt.internalBorder: 24
+URxvt.cursorBlink: true
+URxvt.cursorUnderline: false
+URxvt.saveline: 2048
+URxvt.scrollBar: false
+URxvt.scrollBar_right: false
+URxvt.urgentOnBell: true
+URxvt.depth: 32
+URxvt.iso14755: false
+
+!! Common Keybinds for Navigations
+URxvt.keysym.Shift-Up: command:\033]720;1\007
+URxvt.keysym.Shift-Down: command:\033]721;1\007
+URxvt.keysym.Control-Up: \033[1;5A
+URxvt.keysym.Control-Down: \033[1;5B
+URxvt.keysym.Control-Right: \033[1;5C
+URxvt.keysym.Control-Left: \033[1;5D
+
+!! Copy Paste & Other Extensions
+!URxvt.perl-ext-common: default,selection-to-clipboard,pasta,matcher,keyboard-select
+URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
+URxvt.copyCommand: xclip -i -selection clipboard
+URxvt.pasteCommand: xclip -o -selection clipboard
+URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.M-v: perl:clipboard:paste
+URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-s: perl:keyboard-select:search
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.urlLauncher: firefox
+URxvt.underlineURLs: true
+URxvt.urlButton: 1
+
+!! Colorscheme
+!! Para cambiar a otros diseños podemos elegir en  https://terminal.sexy/
+! special
+*.foreground: #93a1a1
+*.background: #141c21
+*.cursorColor: #afbfbf
+
+! black
+*.color0: #263640
+*.color8: #4a697d
+
+! red
+*.color1: #d12f2c
+*.color9: #fa3935
+
+! green
+*.color2: #819400
+*.color10: #a4bd00
+
+! yellow
+*.color3: #b08500
+*.color11: #d9a400
+
+! blue
+*.color4: #2587cc
+*.color12: #2ca2f5
+
+! magenta
+*.color5: #696ebf
+*.color13: #8086e8
+
+! cyan
+*.color6: #289c93
+*.color14: #33c5ba
+
+! white
+*.color7: #bfbaac
+*.color15: #fdf6e3
 ```
+
+### 4. Atajos
+- Shift+ArrowUp scroll hacia arriba
+- Shift+ArrowDown scroll hacia abajo
+- Control+ArrowLeft desplaza el cursor a la izquierda por palabra
+- Control+ArrowRight desplaza el cursor a la derecha por palabra
+- M-w Copia texto seleccionado al portapapeles
+- C-y Pega texto del portapapeles
+
+>*Observaciones:*
+- Con *M*  nos referimos a MetaKey, que es la tecla Alt
+- Con *C* hacemos referencia a la tecla Control
+- Los shortcuts de copiar y pegar, los adapte por costumbre de usar Emacs
 
 - - -
 
@@ -141,6 +237,7 @@ ROFI https://www.youtube.com/watch?v=wcMyH3o5FMg
 
 
 - - -
+
 # 4. Rofi 
 >Parecido a una terminal? permite ejecutar comandos, diferencia? facilidad?
 
@@ -240,6 +337,34 @@ cp /etc/i3blocks.conf ~/.config/i3/
 >y reiniciamos el i3 con `Super+Shift+R`
 
 https://i3wm.org/docs/userguide.html#_configuring_i3bar
+
+- - -
+
+# 8. Terminal File Manager 
+>Con `Ranger File Manager` nos ayuda navegar por los directorios, y el manejo de archivos y carpetas,
+>como puede ser copiar,mover,borrar, etc..
+
+- Referencias sobre Ranger Terminal File Manager
+    -Documentacion Oficial [Ver Pagina](https://github.com/ranger/ranger)
+		-Wiki, por ArchLinux [Ver Pagina](https://wiki.archlinux.org/index.php/Ranger)
+    -Referencia 1, por Vitux [Ver Pagina](https://vitux.com/how-to-install-ranger-terminal-file-manager-on-linux/)
+    -Referencia 2, por Vultr [Ver Pagina](https://www.vultr.com/docs/how-to-install-ranger-terminal-file-manager-on-linux)
+
+## 8.1 Instalacion && Ejecucion
+>En la terminal solo ejecutamos la siguiente linea de codigo
+```bash
+sudo apt-get install ranger -y # para instalar en ubuntu
+```
+
+>Para iniciarlo solo escribimos la siguiente linea de comando
+```bash
+ranger
+```
+
+## 8.2 Atajos
+>Algunos de ellos son:
+- Shift+q Salir de la terminal
+
 
 - - -
 

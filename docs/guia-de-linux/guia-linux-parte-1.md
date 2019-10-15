@@ -2,6 +2,8 @@
 
 <img src="/images/linux-terminal.png">
 
+# averiguar por: doas, cmus, qutebrowser, emerge
+
 - - -
 # 1. Enlaces
 >Existen dos tipos de enlaces, blandos y duros, el que más nos interesa por ahora es el primero.
@@ -389,6 +391,57 @@ gnome-shell --version # opcion 1
 apt-cache show gnome-shell | grep Version # opcion 2 con apt-cache
 ```
 
+### 7.10 Personalizar el prompt de la terminal
+>Con **prompt** nos referimos al texto que aparece antes de las lineas de comando
+>que ejecutamos en la terminal. Este suele indicar el nombre de usuario, el grupo
+>al que pertenece y la ruta de directorios a la que vamos accediendo en el sistema.
+
+#### 7.10.1 Modificamos la configuracion de la terminal
+>Para modificar necesitamos modificar el archivo `.bashrc` (con cuidado) y buscamos
+>en donde diga lo siguiente
+
+```bash
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+```
+
+>Y lo modificamos para que se parezca a lo siguiente
+```bash
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+```
+
+>Lo que hicimos fue modificar la segunda linea, acortando la informacion que aparece en la terminal,
+>ahora solo veremos el nombre del usuario seguido de la ruta.
+
+#### 7.10.2 Otras variantes
+>En caso que queramos entender un poco mas como funciona, y personalizarlo aun mas, esta te compartimos
+una lista de los parametros y que informacion imprime cada uno.
+
+| Caracter | Descripción																			| | | | |
+|:--------:|:-------------------------------------------------|-|-|-|-|
+| \u       | Nombre del usuario de la sesion									|<td colspan=4>
+| \h       | Nombre del host																	|<td colspan=4>
+| \d       | Fecha en formato mm/dd/YYYY											|<td colspan=4>
+| \A       | Hora del sistema																	|<td colspan=4>
+| \j       | Cantidad de tareas en ejecucion por esa terminal	|<td colspan=4>
+
+
+```
+# Algunas variantes podrian ser:
+
+PS1="[codeando] \u@\h:\w\$ "
+# [codeando] user@group ~/Documents: $
+
+PS1=”\A \u: \w\$ “
+# 10:22 user: ~/Documents $
+```
 
 - - -
 
@@ -414,3 +467,6 @@ apt-cache show gnome-shell | grep Version # opcion 2 con apt-cache
     - Explicación #3 del comando cat [Ver Página](https://hipertextual.com/archivo/2014/07/redirecciones-y-tuberias-bash/)
 
 - Guia de comandos bash [Ver Página](https://likegeeks.com/linux-bash-scripting-awesome-guide-part5/#Linux-Signals)
+- Personalizar prompt de la terminal
+    - Referencia #1, Vitux [Ver Pagina](https://vitux.com/how-to-customize-ubuntu-bash-prompt/)
+		- Referencia #2, Ubunlog [Ver Pagina](https://ubunlog.com/prompt-ejemplos-personalizar-terminal/)

@@ -14,6 +14,7 @@
 - Sobrevivir usando la terminal - Parte 1 [Ir a la página](guia-de-linux/guia-linux-parte-1.md)
 - Sobrevivir usando la terminal - Parte 2 [Ir a la página](guia-de-linux/guia-linux-parte-2.md)
 - Configuraciones útiles [Ir a la página](guia-de-linux/guia-linux-3.md)
+- Personalizar el sistema [Ir a la pagina](guia-de-linux/guia-linux-personalizar.md)
 - Entender que es una de red
 - Crear programas en BASH
 
