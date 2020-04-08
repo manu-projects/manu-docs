@@ -166,12 +166,21 @@ git stash drop
     - Opción 2 - [Ver Página](https://www.leaseweb.com/labs/2013/08/git-tip-beautiful-colored-and-readable-output/)
 
 # Videos útiles
-Fetch pull rebase
-https://www.youtube.com/watch?v=r-PTFYVmGNo
+- Comandos **fetch** **pull** y **rebase**
+ [Ver Video](https://www.youtube.com/watch?v=r-PTFYVmGNo)
 
-https://pvigier.github.io/2019/05/06/commit-graph-drawing-algorithms.html
-https://medium.com/datadriveninvestor/git-rebase-vs-merge-cc5199edd77c
-https://www.bitsnbites.eu/a-tidy-linear-git-history/
+- Interpretacion grafica del comando **commit**
+ [Ver Pagina](https://pvigier.github.io/2019/05/06/commit-graph-drawing-algorithms.html)
 
-https://www.slideshare.net/th507/git-an-intro-of-plumbing-and-porcelain-commands
-https://jeffsaracco.com/Happy-git-Trees/
+- Diferencias entre los comandos **rebase** y **merge**
+ [Ver Pagina](https://medium.com/datadriveninvestor/git-rebase-vs-merge-cc5199edd77c)
+
+- Interpretacion grafica del historial
+[Ver Pagina](https://www.bitsnbites.eu/a-tidy-linear-git-history/)
+
+- Tutorial de Git
+ [Ver Pagina](https://www.slideshare.net/th507/git-an-intro-of-plumbing-and-porcelain-commands)
+
+- Interpretacion grafica del historial y comandos
+[Ver Pagina](https://jeffsaracco.com/Happy-git-Trees/)
+

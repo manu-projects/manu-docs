@@ -1,33 +1,3 @@
-https://www.emacswiki.org/emacs/WhatAreTheNeedsOfProgrammers#toc6
-https://truongtx.me/2013/03/10/ecb-emacs-code-browser
-
-https://www.reddit.com/r/emacs/comments/931ogo/finally_a_decent_method_outline_for_my_emacs_ecb/
-
-cedet
-https://appsintheopen.com/articles/1-setting-up-emacs-for-rails-development/part/6-setting-up-the-emacs-code-browser
-
-estoy usando neoTree por ahora
-https://github.com/jaypei/emacs-neotree/blob/dev/README.md
-https://github.com/Alexander-Miller/treemacs
-
-view method,classes,..
-https://stackoverflow.com/questions/7497132/emacs-ecb-method-window-not-showing-all-methods
-https://superuser.com/questions/629090/emacs-displaying-list-of-subroutines-functions-classes-in-a-source-file
-http://cedet.sourceforge.net/
-https://www.emacswiki.org/emacs/ImenuMode
-http://cedet.sourceforge.net/
-
-ECB
-http://ecb.sourceforge.net/docs/ecb_002dmethods.html
-http://www.xemacs.org/Documentation/sources/xemacs-packages/xemacs-packages/ecb/ecb_5.html
-http://ecb.sourceforge.net/docs/Interactive-ECB-commands.html
-
-
-https://elpy.readthedocs.io/en/latest/introduction.html#overview
-http://ecb.sourceforge.net/
-
---------
-
 # Programar con Emacs
 
 ## 1. Editar archivos desde la terminal de linux
@@ -190,3 +160,36 @@ trabajo si el sistema falla.” Puede encontrar un archivo existente, para verlo
 - Comando C-M-v Scroll-other-window, GNU.org [Ver Página](https://www.gnu.org/software/emacs/manual/html_node/emacs/Other-Window.html)
 
 - Renombrar multiples archivos [Ver Página](http://pragmaticemacs.com/emacs/dired-rename-multiple-files/)
+
+# Referencias pendientes a revisar
+
+ - https://www.emacswiki.org/emacs/WhatAreTheNeedsOfProgrammers#toc6
+ - https://truongtx.me/2013/03/10/ecb-emacs-code-browser
+ - https://www.reddit.com/r/emacs/comments/931ogo/finally_a_decent_method_outline_for_my_emacs_ecb/
+
+**cedet**
+
+- https://appsintheopen.com/articles/1-setting-up-emacs-for-rails-development/part/6-setting-up-the-emacs-code-browser
+
+**actualmente usando neoTree**
+
+ - https://github.com/jaypei/emacs-neotree/blob/dev/README.md
+ - https://github.com/Alexander-Miller/treemacs
+
+**View method, classes,..**
+
+ - https://stackoverflow.com/questions/7497132/emacs-ecb-method-window-not-showing-all-methods
+ - https://superuser.com/questions/629090/emacs-displaying-list-of-subroutines-functions-classes-in-a-source-file
+ - http://cedet.sourceforge.net/
+ - https://www.emacswiki.org/emacs/ImenuMode
+http://cedet.sourceforge.net/
+
+**ECB**
+
+ - http://ecb.sourceforge.net/docs/ecb_002dmethods.html
+ - http://www.xemacs.org/Documentation/sources/xemacs-packages/xemacs-packages/ecb/ecb_5.html
+ - http://ecb.sourceforge.net/docs/Interactive-ECB-commands.html
+
+
+ - https://elpy.readthedocs.io/en/latest/introduction.html#overview
+ - http://ecb.sourceforge.net/
