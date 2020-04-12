@@ -13,7 +13,9 @@ nav:
     - 'Configuraciones': 'guia-de-linux/guia-linux-3.md'
     - 'Configuración de Red': 'guia-de-linux/linux-configuracion-de-red.md'
 - Guia de Git: 'guia-git.md'
-- Guia de Emacs: 'ide-emacs.md'
+- Guia de Emacs:
+    - 'Empezando con Emacs': 'guia-de-emacs/guia-emacs-parte-1.md'
+    - 'Avanzando con Spacemacs': 'guia-de-emacs/guia-emacs-parte-2.md'
 - Guia de Maquinas Virtuales:
     - 'Configurando Virtualbox': 'virtualbox.md'
 
