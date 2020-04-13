@@ -14,8 +14,9 @@ nav:
     - 'Configuración de Red': 'guia-de-linux/linux-configuracion-de-red.md'
 - Guia de Git: 'guia-git.md'
 - Guia de Emacs:
-    - 'Empezando con Emacs': 'guia-de-emacs/guia-emacs-parte-1.md'
-    - 'Avanzando con Spacemacs': 'guia-de-emacs/guia-emacs-parte-2.md'
+    - 'Empezando con Emacs': 'guia-de-emacs/guia-emacs.md'
+    - 'Avanzando con Spacemacs': 'guia-de-emacs/guia-emacs-spacemacs.md'
+    - 'Integrando el Modo Org': 'guia-de-emacs/guia-emacs-modo-org.md'
+    - 'Integrando Git con MAGIT': 'guia-de-emacs/guia-emacs-magit.md'
 - Guia de Maquinas Virtuales:
     - 'Configurando Virtualbox': 'virtualbox.md'
-

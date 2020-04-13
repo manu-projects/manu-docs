@@ -10,74 +10,75 @@ emacs -nw /etc/hosts # abrimos el archivo hosts
 
 ## 1. Atajos
 
-| Atajo | Descripción							   | | | | | | |
-|:------|----------------------------|-|-|-|-|-|-|
-| C			| Se refiere a la tecla Ctrl |<td colspan="6">
-| X			| Se refiere a la tecla Alt  |<td colspan="6">
+| Atajo   | Descripción                |
+| :------ | -----------                |
+| C       | Se refiere a la tecla Ctrl |
+| X       | Se refiere a la tecla Alt  |
 
 - - -
 
 ## 2. Acciones
 
-|	Comando							| Descripción											| | | | |
-|:------------------|:---------------------------------|-|-|-|-|
-| C-x C-c						| Salir de Emacs					|<td colspan="4">
-| M-x dired	   	 	  | Listar directorio								|<td colspan="4">
-| M-x shell 	    	| Abre la terminal									|<td colspan="4">
-| M-x list-packages	| Lista todos los paquetes					|<td colspan="4">
+| Comando             | Descripción                        |
+| :------------------ | :--------------------------------- |
+| C-x C-c             | Salir de Emacs                     |
+| M-x dired           | Listar directorio                  |
+| M-x shell           | Abre la terminal                   |
+| M-x list-packages   | Lista todos los paquetes           |
 
 - - -
 
 ## 3. Comandos para Edición
 
-| Comando		| Descripción			| | | | |
-|:----------|:----------------|-|-|-|-|
-| C-w				| Cortar texto		|<td colspan="4">
-| X-w	 		 	| Copiar texto 		|<td colspan="4">
-| C-y	 			| Pegar texto			|<td colspan="4">
-| C-w u	  	| Deshacer cambio |<td colspan="4">
-| C-x h 		| Seleccionar todo el texto	|<td colspan="4">
-|	C-x				| Cancelar acción									|<td colspan="4">
-| C-x C-s 	| Guardar archivo					|<td colspan="4">
-| C-x C-v 	| Actualizar buffer					|<td colspan="4">
+| Comando     | Descripción               |
+| :---------- | :----------------         |
+| C-w         | Cortar texto              |
+| X-w         | Copiar texto              |
+| C-y         | Pegar texto               |
+| C-w u       | Deshacer cambio           |
+| C-x h       | Seleccionar todo el texto |
+| C-x         | Cancelar acción           |
+| C-x C-s     | Guardar archivo           |
+| C-x C-v     | Actualizar buffer         |
 
 - - -
 
 ## 4. Comandos de Desplazamiento
 
-| Comando   | Descripción																				|
-|:----------|:--------------------------------------------------|
-| M-AvPag   | Scrollear otra ventana, sin mover el cursor				|
-| M-RePag   | Scrollear otra ventana, sin mover el cursor				|
-| C-s 	    | Busqueda incremental, hacia adelante							|
-| C-r 	    | Busqueda decremental, hacia atras									|
-| C-g 	    | Finaliza búsqueda																	|
-| C-u 8 *   | Escribe el asterisco 8 veces											|
-| M-Delback | Borra por palabras																|
-| &nbsp;    |																										|
-| C-k 	    | Borra desde el puntero hasta el final de linea		|
-| M-k 	    | Elimina texto hasta final del texto, parrafos			|
-| &nbsp;    | 	      	    	  	    	   				 							|
-| C-v  	    | Avanzar sig. Página																|
-| M-v 	    | Retroceder, anterior página												|
-| M-< 	    | Retroceder por palabras														|
-| M-> 	    | Avanzar por palabras															|
-| C-a 	    | Principio de linea																|
-| C-e 	    | Final de linea																		|
+| Comando   | Descripción |
+|:----------|:----------- |
+| M-AvPag   | Scrollear otra ventana, sin mover el cursor |
+| M-RePag   | Scrollear otra ventana, sin mover el cursor |
+| C-s 	    | Busqueda incremental, hacia adelante |
+| C-r 	    | Busqueda decremental, hacia atras |
+| C-g 	    | Finaliza búsqueda |
+| C-u 8 *   | Escribe el asterisco 8 veces |
+| M-Delback | Borra por palabras |
+| &nbsp;    | |
+| C-k 	    | Borra desde el puntero hasta el final de linea |
+| M-k 	    | Elimina texto hasta final del texto, parrafos |
+| &nbsp;    | |
+| C-v  	    | Avanzar sig. Página |
+| M-v 	    | Retroceder, anterior página |
+| M-< 	    | Retroceder por palabras |
+| M-> 	    | Avanzar por palabras |
+| C-a 	    | Principio de linea |
+| C-e 	    | Final de linea |
 
 - - -
 
 ## 5. Control de Buffers / Ventanas
 
-| Comando	| Descripción																			| | | | |
-|:--------|:-----------------------------------------------|-|-|-|-|
-| C-x 1   | Cierras las otras ventanas que no es la actual |<td colspan="4">
-| C-x 2   | Divide la ventana en 2 (horizontal)     	    	   		 			 |<td colspan="4">
-| C-x 3   | Divide la ventana en 2 (vertical)     	    	   		 			 |<td colspan="4">
-| C-x o   | Mueve el cursor a la otra ventana		  				 |<td colspan="4">
-| C-x b   | Cambiar a otro buffer	    		  			 			   |<td colspan="4">
-| C-x C-b | Listar buffers				   										 |<td colspan="4">
-| C-x k		| Cerrar ventana (no emacs)											 |<td colspan="4">
+| Comando         | Descripción                                      |
+| :--------       | :----------------------------------------------- |
+| M-x eval-buffer | Cargar configuraciones sin cerrar emacs          |
+| C-x 1           | Cierras las otras ventanas que no es la actual   |
+| C-x 2           | Divide la ventana en 2 (horizontal)              |
+| C-x 3           | Divide la ventana en 2 (vertical)                |
+| C-x o           | Mueve el cursor a la otra ventana                |
+| C-x b           | Cambiar a otro buffer                            |
+| C-x C-b         | Listar buffers                                   |
+| C-x k           | Cerrar ventana (no emacs)                        |
 
 - - -
 
@@ -91,13 +92,13 @@ C-x C-f /sudo::/ruta/archivo.extension #
 ### 6.2 Acciones sobre el listado de directorios (dired)
 > Luego de haber lanzar `M-x dired` se pueden ejecutar acciones estando dentro del listado
 
-| Acción    | Descripción	      	   		   						 			| | | | |
-|:----------|:----------------------------------------------|-|-|-|-|
-| d					| Seleccionar archivo para aplicarle una acción |<td colspan="4">
-| x	   		  | Ejecutar acción 	       		  		 		    	  |<td colspan="4">
-| g 	   		| Actualizar cambios													  |<td colspan="4">
-| C-x C-f   | Crear un archivo 				   										|<td colspan="4">
-| C-x C-q		| Renombrar archivos (Finalizar con C-c C-c)		|<td colspan="4">
+| Acción      | Descripción                                     |
+| :---------- | :---------------------------------------------- |
+| d           | Seleccionar archivo para aplicarle una acción   |
+| x           | Ejecutar acción                                 |
+| g           | Actualizar cambios                              |
+| C-x C-f     | Crear un archivo                                |
+| C-x C-q     | Renombrar archivos (Finalizar con C-c C-c)      |
 
 - - -
 
