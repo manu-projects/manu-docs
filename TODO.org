@@ -1,5 +1,11 @@
-* [TODO] Guia de Emacs [25%]
-** [TODO] Empezando con Emacs [%]
+* [TODO] Guia de git [0%]
+** [TODO] Como manejarse con los tags y las versiones
+   Algunas preguntas que se me ocurren
+   - Deberia hacer una lista de nuevas caracteristicas/funcionalidades por cada version?
+   - Por correcciones de tantos bugs pasaria de v0.1.0 a v0.1.1 ?
+   Pagina: [[https://github.com/org-trello/org-trello/blob/master/TODO.org][Org-Trello]]
+* [TODO] Guia de Emacs [0%]
+** [CHECK] Empezando con Emacs [%]
 ** [TODO] Avanzando con Spacemacs [75%]
 *** [DONE] Tips
     CLOSED: [2020-04-13 lun 15:40]
@@ -33,8 +39,7 @@
      CLOSED: [2020-04-13 lun 15:42]
 **** [DONE] Configuraciones
      CLOSED: [2020-04-13 lun 15:42]
-** [DONE] Integrando el Modo Org [100%]
-   CLOSED: [2020-04-13 lun 15:53]
+** [TODO] Integrando el Modo Org [72%]
 *** [DONE] Iniciar emacs con un archivo .org
     CLOSED: [2020-04-13 lun 15:49]
 *** [DONE] Crear una lista de tareas
@@ -49,6 +54,21 @@
     CLOSED: [2020-04-13 lun 15:49]
 *** [DONE] Atajos
     CLOSED: [2020-04-13 lun 15:50]
+*** [TODO] Asociar con Trello
+    Para pasar los archivos .org a trello
+    http://org-trello.github.io/demo.html
+    https://github.com/org-trello/org-trello/blob/master/TODO.org
+*** [TODO] [#A] Crear links internos/externos
+    Por el momento podes usar el shortcut **C-c C-l**
+    Paginas pendientes
+    - [[https://orgmode.org/manual/Link-Format.html][Link-Format (orgmode.org)]]
+    - [[https://orgmode.org/guide/Hyperlinks.html][Hyperlink (orgemode.org)]]
+    - [[https://orgmode.org/manual/External-Links.html][External-links (orgmode.org)]]
+*** [TODO] [#A] Estado/prioridad de las tareas
+**** [TODO] Como cambiar el estado/prioridad de cada tarea
+**** [TODO] Personalizar el color y texto del estado/prioridad
+**** [TODO] [#A] Agregar tareas con el estado TODO de forma predeterminada
+     Para no estar cambiando a cada tarea el estado a **TODO**
 *** [DONE] Referencias
     CLOSED: [2020-04-13 lun 15:50]
 **** [DONE] Guias Basicas
