@@ -39,7 +39,7 @@
      CLOSED: [2020-04-13 lun 15:42]
 **** [DONE] Configuraciones
      CLOSED: [2020-04-13 lun 15:42]
-** [TODO] Integrando el Modo Org [72%]
+** [TODO] Integrando el Modo Org [66%]
 *** [DONE] Iniciar emacs con un archivo .org
     CLOSED: [2020-04-13 lun 15:49]
 *** [DONE] Crear una lista de tareas
@@ -69,6 +69,16 @@
 **** [TODO] Personalizar el color y texto del estado/prioridad
 **** [TODO] [#A] Agregar tareas con el estado TODO de forma predeterminada
      Para no estar cambiando a cada tarea el estado a **TODO**
+*** [TODO] [#A] Exportar archivos a markdown (.md)
+    Por el momento agregamos el siguiente script en el archivo de configuracion de .spacemacs
+
+    Algunos paginas de referencia:
+    - [[https://stackoverflow.com/questions/22988092/emacs-org-mode-export-markdown][Agregar script en la configuracion de emacs/spacemacs (stackoverflow.com)]]
+    - [[https://www.gnu.org/software/emacs/manual/html_node/org/Markdown-export.html][Markdown export (gnu.org)]]
+    - [[https://orgmode.org/worg/exporters/ox-overview.html][List of Org-mode exporters (orgmode.org)]]
+    - [[https://orgmode.org/org.html#Markdown-Export][Markdown export (orgmode.org)]]
+    - [[https://orgmode.org/manual/Exporting.html][Exporting (orgmode.org)]]
+    - [[https://daringfireball.net/projects/markdown/][Plugin Markdown (daringfireball.net)]]
 *** [DONE] Referencias
     CLOSED: [2020-04-13 lun 15:50]
 **** [DONE] Guias Basicas
@@ -114,3 +124,7 @@
      CLOSED: [2020-04-13 lun 15:37]
 **** [DONE] Videos de referencia
      CLOSED: [2020-04-14 mar 15:37]
+** [TODO] [#A] Comentarios de Trello [0%]
+   Quedaron algunos tips en [[https://trello.com/b/ktG3yyQS/xmanudocs][XManuDocs (trello.com)]]
+*** [TODO] Powerline estructura
+*** [TODO] Personalizar la shell y terminal
