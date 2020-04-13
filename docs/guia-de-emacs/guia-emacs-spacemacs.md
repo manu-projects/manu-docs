@@ -134,11 +134,3 @@
 
 ### Personalizando la terminal
 - Referencia #1 [Ver Video](https://www.youtube.com/watch?v=L9vA7FHoQnk)
-
-### Pendientes a revisar
-- https://www.youtube.com/watch?v=8k7BTIqufqQ
-- https://orgmode.org/guide/Hyperlinks.html
-- https://www.youtube.com/watch?v=I2C6QTtxfe8
-- https://www.youtube.com/watch?v=39u8K12rXHE
-- https://orgmode.org/manual/Initial-visibility.html
-- https://www.youtube.com/watch?v=S4f-GUxu3CY

@@ -1,0 +1,96 @@
+* [TODO] Guia de Emacs [25%]
+** [TODO] Empezando con Emacs [%]
+** [TODO] Avanzando con Spacemacs [75%]
+*** [DONE] Tips
+    CLOSED: [2020-04-13 lun 15:40]
+*** [DONE] Gestionar archivos, proyectos
+    CLOSED: [2020-04-13 lun 15:40]
+**** [DONE] Atajos con Treemacs/Neotree
+     CLOSED: [2020-04-13 lun 15:40]
+**** [DONE] Atajos con Projectfile
+     CLOSED: [2020-04-13 lun 15:40]
+**** [DONE] Referencias
+     CLOSED: [2020-04-13 lun 15:40]
+*** [DONE] Atajos en Hybrid Mode
+    CLOSED: [2020-04-13 lun 15:41]
+**** [DONE] Atajos en Evil Mode
+     CLOSED: [2020-04-13 lun 15:40]
+**** [DONE] Atajos en Holy Mode
+     CLOSED: [2020-04-13 lun 15:40]
+*** [TODO] Referencias
+**** [TODO] Videos
+    Quedaron algunos videos pendientes por mirar/revisar
+    - https://www.youtube.com/watch?v=8k7BTIqufqQ
+    - https://orgmode.org/guide/Hyperlinks.html
+    - https://www.youtube.com/watch?v=I2C6QTtxfe8
+    - https://www.youtube.com/watch?v=39u8K12rXHE
+    - https://orgmode.org/manual/Initial-visibility.html
+    - https://www.youtube.com/watch?v=S4f-GUxu3CY
+
+**** [DONE] Guias basicas
+     CLOSED: [2020-04-13 lun 15:42]
+**** [DONE] Guias avanzadas
+     CLOSED: [2020-04-13 lun 15:42]
+**** [DONE] Configuraciones
+     CLOSED: [2020-04-13 lun 15:42]
+** [DONE] Integrando el Modo Org [100%]
+   CLOSED: [2020-04-13 lun 15:53]
+*** [DONE] Iniciar emacs con un archivo .org
+    CLOSED: [2020-04-13 lun 15:49]
+*** [DONE] Crear una lista de tareas
+    CLOSED: [2020-04-13 lun 15:49]
+*** [DONE] Crear una sub-lista de tareas
+    CLOSED: [2020-04-13 lun 15:49]
+*** [DONE] Crear tareas con viñetas
+    CLOSED: [2020-04-13 lun 15:49]
+*** [DONE] Crear una lista de seguimiento con to-do
+    CLOSED: [2020-04-13 lun 15:49]
+*** [DONE] Crear una lista de seguimiento con checkboxes
+    CLOSED: [2020-04-13 lun 15:49]
+*** [DONE] Atajos
+    CLOSED: [2020-04-13 lun 15:50]
+*** [DONE] Referencias
+    CLOSED: [2020-04-13 lun 15:50]
+**** [DONE] Guias Basicas
+     CLOSED: [2020-04-13 lun 15:49]
+**** [DONE] Guias Completas
+     CLOSED: [2020-04-13 lun 15:49]
+**** [DONE] Como organizarse con el modo org
+     CLOSED: [2020-04-13 lun 15:49]
+**** [DONE] Cambiar las prioridades de las tareas
+     CLOSED: [2020-04-13 lun 15:49]
+**** [DONE] Modificar la agenda de estados
+     CLOSED: [2020-04-13 lun 15:49]
+**** [DONE] Otros
+     CLOSED: [2020-04-13 lun 15:49]
+**** [DONE] Integrar archivos .org en Dropbox
+     CLOSED: [2020-04-11 sáb 15:49]
+** [TODO] Integrando Git con MAGIT [75%]
+*** [TODO] Tips [75%]
+**** [TODO] Diferencia entre push remote y upstream
+     - Lo mismo para pull
+     - Algunas referencias
+     - https://help.github.com/es/github/using-git/pushing-commits-to-a-remote-repository
+     - https://stackoverflow.com/questions/13751319/git-push-current-vs-push-upstream-tracking
+     - https://www.reddit.com/r/emacs/comments/8ficmj/magit_upstream_vs_pushremote/
+     - https://fluca1978.github.io/2017/06/11/magit-spin-offs-anothew-way-to-name.html
+**** [DONE] Traer cambios de un branch al master
+     CLOSED: [2020-04-13 lun 15:25]
+**** [DONE] Guardar cambios de forma temporal (stash)
+     CLOSED: [2020-04-13 lun 15:30]
+**** [DONE] Listar historial de commits de un archivo
+     CLOSED: [2020-04-13 lun 15:30]
+*** [DONE] Atajos
+    CLOSED: [2020-04-13 lun 15:24]
+*** [DONE] Posibles situaciones
+    CLOSED: [2020-04-13 lun 15:37]
+**** [DONE] Hacer cambios, subirlos y actualizar
+     CLOSED: [2020-04-13 lun 15:37]
+**** [DONE] Resolver conflicto, diferencia entre archivos
+     CLOSED: [2020-04-13 lun 15:37]
+*** [DONE] Referencias
+    CLOSED: [2020-04-13 lun 15:37]
+**** [DONE] Paginas de referencia
+     CLOSED: [2020-04-13 lun 15:37]
+**** [DONE] Videos de referencia
+     CLOSED: [2020-04-14 mar 15:37]

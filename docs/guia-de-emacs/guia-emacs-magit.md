@@ -45,6 +45,11 @@ Ej. origin/hotfix y hotfix, origin/testing y testing, etc..
 > donde quedan las modificaciones que aun no se hizo **commit** (si lo hicieramos quedarian
 > en **stage**)
 
+**Referencias:**
+
+- Referencia #1 - Code Tutsplus [Ver Pagina](https://code.tutsplus.com/es/tutorials/quick-tip-leveraging-the-power-of-git-stash--cms-22988)
+- Referencia #2 - RunRoom -  [Ver Pagina](https://www.runroom.com/realworld/git-stash)
+
 ### Listar historial de commits de un archivo
 > Corremos el comando **blame** presionando **SPC g b** y nos muestra un log de los cambios
 > Si presionamos **b** va a los commits anteriores y con **q** los mas recientes
@@ -73,19 +78,6 @@ Ej. origin/hotfix y hotfix, origin/testing y testing, etc..
 | p e         | Hacer *push*** en un repositorio externo                          |
 | F p         | Hacer **pull**                                                    |
 |             |                                                                   |
-
-
-**Pendiente a Investigar:**
-
-- Acerca de spin-off
-- Diferencia entre un push remote y upstream (lo mismo para pull)
-
-Algunas referencias:
-
-- https://help.github.com/es/github/using-git/pushing-commits-to-a-remote-repository
-- https://stackoverflow.com/questions/13751319/git-push-current-vs-push-upstream-tracking
-- https://www.reddit.com/r/emacs/comments/8ficmj/magit_upstream_vs_pushremote/
-- https://fluca1978.github.io/2017/06/11/magit-spin-offs-anothew-way-to-name.html
 
 - - -
 
