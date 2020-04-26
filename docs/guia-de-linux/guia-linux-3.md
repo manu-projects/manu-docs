@@ -1,5 +1,4 @@
 # Guia de Linux - Configuración
-
 ## 1. Crear un Alias
 >Los **alias** nos permiten ejecutar comandos con un nombre personalizado.
 >Puede darse que querramos ejecutar un programa con varios parámetros, con

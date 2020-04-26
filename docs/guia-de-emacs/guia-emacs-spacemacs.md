@@ -80,6 +80,116 @@
 
 - - -
 
+# Curiosidades
+
+## 1. Ecuaciones matematicas con org mode
+
+**Configuraciones**
+
+1. Agregar o descomentar las siguientes lineas en los layers de .spacemacs
+
+``
+latex
+bibtex
+auto-completion
+``
+
+2. Agregar la siguiente configuracion dentro de user-config de .spacemacs
+
+``
+  ;; Aumentamos el tamaño del texto que suele aparecer en tamaño chico
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0)** 
+``
+
+3. Aplicar los cambios reiniciando spacemacs con ``SPC-q-r`` 
+
+**Escribir ecuaciones**
+
+1. Para escribir ecuaciones debemos encerrarlas con el simbolo pesos **$$**
+Ej. ``$$ 4x^2 = 16 \times \frac{2}{4x} $$``
+2. Para visualizar ejecutar ``C-c C-x C-l`` o  ``, T x``
+3. Para mostrar el texto en formato latex ejecutar ``C-c C-c`` o ``, ,``
+
+Por ultimo, si queremos que muestren todas las formulas al abrir un documento, agregar al principio
+del archivo la siguiente linea
+``#+STARTUP: latexpreview``
+
+
+**Referencias**
+
+- [Lista de simbolos (orgmode.org)](https://orgmode.org/worg/org-symbols.html)
+- [Tutorial (orgmode.org)](https://orgmode.org/worg/org-tutorials/org-latex-preview.html)
+- [Tutorial #2 (orgmode.org)](https://orgmode.org/manual/LaTeX-fragments.html)
+- [Aumentar tamaño del texto #1 (emacs.stackexchange.com)](https://emacs.stackexchange.com/questions/19880/font-size-control-of-latex-previews-in-org-files)
+- [Aumentar tamaño del texto #2 (tex.stackexchange.com)](https://tex.stackexchange.com/questions/78501/change-size-of-the-inline-image-for-latex-fragment-in-emacs-org-mode)
+
+- - -
+
+
+**Posibles Errores:**
+
+1. No nos permita ver una vista preliminar del archivo
+
+``
+>File "/tmp/orgtex9997XKu.dvi" wasn't produced. Please adjust 'dvipng' part of `org-preview-latex-process-alist'.
+>Found a log is generated, /tmp/orgtex9997XKu.log. Something interesting is in this log: "LaTeX Error: File `wrapfig.sty' >not found.** Then a quick search tells me texlive-latex-extra package is missing.
+``
+
+**Solucion:**
+
+1. En la terminal instalar el paquete ``texlive-latex-extra`` y ``texlive-bin``
+``
+ sudo pacman -S textlive-latex-extra
+ sudo pacman -S textlive-bin
+ ``
+ 
+2. Agregar configuracion en el **user-config** del archivo **.spacemacs** 
+
+``
+ ;; (setq org-latex-create-formula-image-program 'imagemagick)
+ (setq org-latex-create-formula-image-program 'dvipng)
+ ;;(setq-default org-html-with-latex `dvipng)
+``
+
+ **Referencias***
+ 
+ - [Referencia #1 (reddit.com)](https://www.reddit.com/r/emacs/comments/5rf9d4/help_org_setup_preview_latex_fragments/)
+ - [Referencia #2 (emacs.stackexchange.com)](https://emacs.stackexchange.com/questions/18627/preview-latex-fragment-in-org-mode-blank-square-shown)
+ - [Referencia #3 (sourceforge.net)](https://sourceforge.net/projects/dvipng/)
+ - [Referencia #4 (ecuadorminingnews.com)](https://ecuadorminingnews.com/install-texlive-bin/)
+ -[Referencia #5 (bbs.archlinux.org)](https://bbs.archlinux.org/viewtopic.php?id=168634)
+ - [Referencia #6 (stackoverflow.com)](https://stackoverflow.com/questions/30151338/org-latex-preview-is-fuzzy-on-retina-displays)
+ - [PDF-tools (github.com)](https://github.com/politza/pdf-tools)
+
+## 2. Firefox modo Vim 
+
+### Extension Vim Vixen
+> Si estas acostumbrado a navegar con los atajos de vim h,j,k,l
+[Ir a la pagina](https://addons.mozilla.org/es/firefox/addon/vim-vixen/)
+
+### Comandos basicos de VIM
+
+- Shift+Esc: enable or disable the add-on in current tab.
+
+- h, j, k, l: scroll left, down, right, up, and right
+- j, k: scroll vertically
+- h, l: scroll horizontally
+- gg, G: scroll to top/bottom
+
+- d: delete current tab
+- u: reopen close tab
+- K, J: select prev or next tab
+- r: reload current tab
+
+- t, w: open a page in current tab, new tab, or new window
+- b: Select tabs by URL or title
+- zi, zo: zoom-in/zoom-out
+- zz: Set default zoom level
+- y: copy URL in current tab
+
+
+- - -
+
 # Referencias
 
 ### Guias basicas

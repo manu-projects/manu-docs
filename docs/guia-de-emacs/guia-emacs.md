@@ -19,51 +19,61 @@ emacs -nw /etc/hosts # abrimos el archivo hosts
 
 ## 2. Acciones
 
-| Comando             | Descripción                        |
-| :------------------ | :--------------------------------- |
-| C-x C-c             | Salir de Emacs                     |
-| M-x dired           | Listar directorio                  |
-| M-x shell           | Abre la terminal                   |
-| M-x list-packages   | Lista todos los paquetes           |
+| Holy mode           | Evil Mode | Descripción                        |
+| :------------------ |           | :--------------------------------- |
+| C-x C-c             | SPC-q-q   | Salir de Emacs                     |
+| M-x dired           |           | Listar directorio                  |
+| M-x shell           | Spc-'     | Abre la terminal                   |
+| M-x list-packages   |           | Lista todos los paquetes           |
 
 - - -
-
 ## 3. Comandos para Edición
 
-| Comando     | Descripción               |
-| :---------- | :----------------         |
-| C-w         | Cortar texto              |
-| X-w         | Copiar texto              |
-| C-y         | Pegar texto               |
-| C-w u       | Deshacer cambio           |
-| C-x h       | Seleccionar todo el texto |
-| C-x         | Cancelar acción           |
-| C-x C-s     | Guardar archivo           |
-| C-x C-v     | Actualizar buffer         |
-
-- - -
+| Holy Mode       | Evil Mode     | Descripción                                    |
+| :----------     |               | :----------------                              |
+| C-w             | d             | Cortar texto                                   |
+| X-w             | y             | Copiar texto seleccionado                      |
+|                 | Y             | Copiar desde el cursor hasta final de linea    |
+| C-y             | p             | Pegar texto despues del cursor                 |
+|                 | P             | Pegar texto antes del cursor                   |
+| C-w u           | u             | Deshacer cambio                                |
+|                 |               |                                                |
+| Shift < Arrow > | v < h/j/k/l > | Seleccionar texto                              |
+| C-x h           |               | Seleccionar todo el texto                      |
+| C-x             | ESC           | Cancelar acción                                |
+| C-x C-s         | SPC f s       | Guardar archivo                                |
+| C-x C-v         |               | Actualizar buffer                              |
+|                 |               |                                                |
+|                 | o             | Insertar linea debajo del cursor               |
+|                 |               |                                                |
+| C-k             |               | Borra desde el puntero hasta el final de linea |
+| M-k             |               | Elimina texto hasta final del texto, parrafos  |
+|                 |               |                                                |
+|                 | dd            | Elimina linea                                  |
+|                 | D             | Elimina desde el principio al final de linea   |
+|                 | x             | Elimina caracter despues del cursor            |
+|                 | X             | Elimina caracter antes del cursor              |
 
 ## 4. Comandos de Desplazamiento
 
-| Comando   | Descripción |
-|:----------|:----------- |
-| M-AvPag   | Scrollear otra ventana, sin mover el cursor |
-| M-RePag   | Scrollear otra ventana, sin mover el cursor |
-| C-s 	    | Busqueda incremental, hacia adelante |
-| C-r 	    | Busqueda decremental, hacia atras |
-| C-g 	    | Finaliza búsqueda |
-| C-u 8 *   | Escribe el asterisco 8 veces |
-| M-Delback | Borra por palabras |
-| &nbsp;    | |
-| C-k 	    | Borra desde el puntero hasta el final de linea |
-| M-k 	    | Elimina texto hasta final del texto, parrafos |
-| &nbsp;    | |
-| C-v  	    | Avanzar sig. Página |
-| M-v 	    | Retroceder, anterior página |
-| M-< 	    | Retroceder por palabras |
-| M-> 	    | Avanzar por palabras |
-| C-a 	    | Principio de linea |
-| C-e 	    | Final de linea |
+| Holy Mode   | Evil Mode | Descripcion                                    |
+| :---------- |           | :-----------                                   |
+| C-s         |           | Busqueda incremental, hacia adelante           |
+| C-r         |           | Busqueda decremental, hacia atras              |
+|             |           |                                                |
+|             |           |                                                |
+| C-a         | ^         | Principio de linea                             |
+| C-e         | $         | Final de linea                                 |
+|             |           |                                                |
+| C-n         | j         | Mover cursor hacia abajo                       |
+| C-p         | k         | Mover cursor hacia arriba                      |
+| C-b         | h         | Mover cursor hacia la izquierda (backward)     |
+| C-f         | l         | Mover cursor hacia la derecha (foward)         |
+|             |           |                                                |
+| M-g         | < n > gg  | Ir a la linea n (Ej. 20gg va a la linea 20)    |
+|             |           |                                                |
+| C-u 8 *     |           | Escribe el asterisco 8 veces                   |
+
 
 - - -
 
@@ -100,7 +110,8 @@ C-x C-f /sudo::/ruta/archivo.extension #
 | C-x C-f     | Crear un archivo                                |
 | C-x C-q     | Renombrar archivos (Finalizar con C-c C-c)      |
 
-- - -
+## Referencias
+ - [Ver Pagina](https://caiorss.github.io/Emacs-Elisp-Programming/Keybindings.html)
 
 ## 7. Configuración personalizada
 
@@ -163,10 +174,11 @@ trabajo si el sistema falla.” Puede encontrar un archivo existente, para verlo
 - Renombrar multiples archivos [Ver Página](http://pragmaticemacs.com/emacs/dired-rename-multiple-files/)
 
 # Referencias pendientes a revisar
-
+ - https://develop.spacemacs.org/layers/+lang/markdown/README.html
  - https://www.emacswiki.org/emacs/WhatAreTheNeedsOfProgrammers#toc6
  - https://truongtx.me/2013/03/10/ecb-emacs-code-browser
  - https://www.reddit.com/r/emacs/comments/931ogo/finally_a_decent_method_outline_for_my_emacs_ecb/
+
 
 **cedet**
 

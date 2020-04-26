@@ -5,7 +5,34 @@
    - Por correcciones de tantos bugs pasaria de v0.1.0 a v0.1.1 ?
    Pagina: [[https://github.com/org-trello/org-trello/blob/master/TODO.org][Org-Trello]]
 * [TODO] Guia de Emacs [0%]
-** [CHECK] Empezando con Emacs [%]
+** Aprendiendo Elisp
+*** Atajos
+    M-x eval-buffer para ejecutar codigo
+    C-x C-e evaluar la ultima expresion
+*** Paginas de Referencia
+    - [[https://learnxinyminutes.com/docs/es-es/elisp-es/][Referencia #1 - (learn x in minutes)]]
+    - [[https://www.gnu.org/software/emacs/manual/html_node/eintr/][Referencia #2 (Gnu.org)]]
+    - [[https://www.gnu.org/software/emacs/tour/][Referencia #3 - Guia en general (Gnu.org)]]
+    - [[https://www.davidam.com/docu/emacs-lisp-intro-es.html][Referencia #4 - Davidam]]
+*** Videos de Referencia
+  Es el que usa emacs internamente
+  - [[https://www.youtube.com/watch?v=NQhud2ZNd1w][Tutorial (Mike Zamanasky)]]
+  - [[https://www.youtube.com/watch?v=FppjUvUDO4o][Referencia #2 - (Linuxhint)]]
+  - [[https://www.youtube.com/watch?v=8Zkte37UOnA&t=571s][Referencia #3 - (Uncle Dave)]]
+  - Serie de videos por Daniel Gopar
+    1. [[https://www.youtube.com/watch?v=CH0RUrO_oww][Elisp Tutorial Intro]]
+    2. [[https://www.youtube.com/watch?v=lmTPJB0Musk][Elisp Tutorial - Variables, Booleanos]]
+    3. [[https://www.youtube.com/watch?v=VqCSbDqHziM][Elisp Tutorial - Variables locales, bucles]]
+    4. [[https://www.youtube.com/watch?v=KwBRpS9Bs4U][Elisp Tutorial - Funciones]]
+    5. [[https://www.youtube.com/watch?v=QaX3AaK3_Lk][Elisp Tutorial - nose]]
+** [CHECK] Empezando con Emacs [0%]
+*** Canales favoritos
+    - https://www.youtube.com/watch?v=49kBWM3RQQ8&list=PL9KxKa8NpFxIcNQa9js7dQQIHc81b0-Xg (te falto agregar este, que es muy completo)
+*** [TODO] [#A] Modo artista, crear imagenes con texto
+    Para crear diseños uml con texto                  
+   - https://www.youtube.com/watch?v=cIuX87Xo8Fc 
+   - https://ondahostil.wordpress.com/2017/12/06/lo-que-he-aprendido-diagramas-en-org-mode-con-ditaa/
+   - https://lapipaplena.wordpress.com/2017/02/05/graficos-con-org-mode-ditaa-y-plantuml/
 ** [TODO] Avanzando con Spacemacs [75%]
 *** [DONE] Tips
     CLOSED: [2020-04-13 lun 15:40]
@@ -39,7 +66,32 @@
      CLOSED: [2020-04-13 lun 15:42]
 **** [DONE] Configuraciones
      CLOSED: [2020-04-13 lun 15:42]
-** [TODO] Integrando el Modo Org [66%]
+** [TODO] Integrando el Modo Org [53%]
+*** Atajos dentro de la agenda
+     | Atajo     | Descripcion                                                     |
+     | SPC-a o o | Abrir agenda                                                    |
+     | C-c a     |                                                                 |
+     | q         | Cerrar buffer de agenda                                         |
+     | f         | (foward) siguiente semana                                       |
+     | b         | (back) semana anterior                                          |
+     | m         | filtrar por keywords                                            |
+     | , d       | Cambiar desde la agenda la fecha programada (Schedule/deadline) |
+
+*** Formato
+**** Cambiar la fecha
+**** Repetir fechas (hobbies, cursos semanales, ..)
+     Seguido de la fecha agregar +1w que significa repetir la tarea todas las semanas
+     Si es cada dos dias +2d
+     Referencias
+     - [[https://www.youtube.com/watch?v=nbC-gL5wcf4][Referencia #1 - Ver Video (Rainer Konig)]]
+     - [[https://www.youtube.com/watch?v=IofHvutUWV0&t=8s][Referencia #2 - Ver VIdeo]]
+     - [[https://www.youtube.com/watch?v=u00pglDfgX4][Referencia #3 - Ver Video]]
+     - [[https://www.youtube.com/watch?v=PJ3qHIl-eOM][Personalizar Agenda View - Referencia #4 - Ver Video]]
+*** Uso profesional
+    - [[https://www.youtube.com/watch?v=7ybg3vjLQJM][Referencia #1 - Ver Video (GDQuest)]]
+    - [[https://www.youtube.com/watch?v=cRUCiF2MwP4][Referencia #1 - Ver Video (John Kitchin)]]
+    - [[https://www.youtube.com/watch?v=2t925KRBbFc][Referencia #2 - Ver Video]]
+
 *** [DONE] Iniciar emacs con un archivo .org
     CLOSED: [2020-04-13 lun 15:49]
 *** [DONE] Crear una lista de tareas
@@ -54,16 +106,33 @@
     CLOSED: [2020-04-13 lun 15:49]
 *** [DONE] Atajos
     CLOSED: [2020-04-13 lun 15:50]
-*** [TODO] Asociar con Trello
+*** [TODO] [#B] Asociar con Trello
     Para pasar los archivos .org a trello
     http://org-trello.github.io/demo.html
     https://github.com/org-trello/org-trello/blob/master/TODO.org
+*** Ahorra tiempo de trabajo con Modo Captura    https://elblogdelazaro.gitlab.io/posts/2019-11-04-org-mode-capturas-rapidas-con-org-capture/
+*** [TODO] [#C] Crear hojas de calculo
+    **C-c C-c** realinea la tabla sin mover el cursor
+    **C-c -** inserta una linea horizontal debajo de la fila actual
+    **M-a** se mueve al campo anterior
+    **M-e** se mueve al campo siguiente                           
+    - http://www.blackhats.es/wordpress/?p=83
+    - https://www.blackhats.es/wordpress/?p=84
+*** [TODO] [#A] Agenda y Fechas
+    **C-c .** inserta un timestamp plano 
+    - https://elblogdelazaro.gitlab.io/posts/2019-03-19-vista_de_agenda_personalizada/
+    - https://www.blackhats.es/wordpress/?p=214
+*** [TODO] [#C] Properties (No le encontre mucho uso por ahora)
+    - https://bzg.fr/en/org-column-view-tutorial.html/
 *** [TODO] [#A] Crear links internos/externos
     Por el momento podes usar el shortcut **C-c C-l**
     Paginas pendientes
     - [[https://orgmode.org/manual/Link-Format.html][Link-Format (orgmode.org)]]
     - [[https://orgmode.org/guide/Hyperlinks.html][Hyperlink (orgemode.org)]]
     - [[https://orgmode.org/manual/External-Links.html][External-links (orgmode.org)]]
+    - [[https://www.blackhats.es/wordpress/?p=86][Hiperenlaces (blackhats.es)]]
+    - https://nasciiboy.land/emacs/org-mode/
+    - https://elbauldelprogramador.com/chuleta-org-mode/
 *** [TODO] [#A] Estado/prioridad de las tareas
 **** [TODO] Como cambiar el estado/prioridad de cada tarea
 **** [TODO] Personalizar el color y texto del estado/prioridad
@@ -79,6 +148,9 @@
     - [[https://orgmode.org/org.html#Markdown-Export][Markdown export (orgmode.org)]]
     - [[https://orgmode.org/manual/Exporting.html][Exporting (orgmode.org)]]
     - [[https://daringfireball.net/projects/markdown/][Plugin Markdown (daringfireball.net)]]
+*** Sincronizar Google Calendar con Org Agenda
+    - https://www.youtube.com/watch?v=RyNBtfu9AJ4
+    - https://www.youtube.com/watch?v=vO_RF2dK7M0
 *** [DONE] Referencias
     CLOSED: [2020-04-13 lun 15:50]
 **** [DONE] Guias Basicas
@@ -95,6 +167,25 @@
      CLOSED: [2020-04-13 lun 15:49]
 **** [DONE] Integrar archivos .org en Dropbox
      CLOSED: [2020-04-11 sáb 15:49]
+*** [#C] Revisar
+    proyectos 
+    - https://www.youtube.com/watch?v=3iHRZzEcBIY
+    - https://hiepph.github.io/post/2017-11-24-emacs-org-syncthing/
+    - https://www.youtube.com/watch?v=37onM0bjNDg
+    - https://awesomeopensource.com/projects/org-mode
+
+    Otros
+    - http://doc.norang.ca/org-mode.html
+
+    Programming with emacs
+    - https://www.youtube.com/watch?v=GK3fij-D1G8
+    - https://www.youtube.com/watch?v=dljNabciEGg&t=587s
+
+    - https://dynalist.io/pricing
+    -https://news.ycombinator.com/item?id=20477740
+    -https://www.meetup.com/New-York-Emacs-Meetup/
+    -https://plaintextproject.online/2018/03/27/orgmode.html
+
 ** [TODO] Integrando Git con MAGIT [75%]
 *** [TODO] Tips [75%]
 **** [TODO] Diferencia entre push remote y upstream

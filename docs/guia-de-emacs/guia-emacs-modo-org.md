@@ -91,25 +91,30 @@ Ej.
 
 # Atajos
 
-| Comando                      | Descripción                                                             |
-| :----------                  | :-----------                                                            |
-| C-c C-s                      | Agendar una fecha para una tarea (schedule)                             |
-| C-c C-d                      | Programar una fecha limite para finalizar una tarea (deadline)          |
-| Shift flechas Left/Right     | Elegir el dia del mes en el calendario                                  |
-| g                            | Actualiza los cambios del buffer de la agenda (igual que con **dired**) |
-| M-x org-agenda-file-to-front | Guardar el archivo .org actual en la agenda                             |
-| C-c C-q                      | Agregar tags                                                            |
-| C-RET                        | Agregar nuevo item a la agenda                                          |
-| M Flechas Up/Down            | Cambia el orden/prioridad de las tareas, moviendo hacia arriba/abajo    |
-| M flechas Left/Right         | Mueve el nivel(tabulacion) de la tarea                                  |
-| Tab                          | Expande/Oculta una lista que tiene elementos                            |
-| Shift-Tab                    | Expande/Oculta todas las listas que tengan elementos                    |
-| Shift flechas Up/Down        | Cambiar la prioridad de la tarea (Alta/Media/Baja)                      |
-| Shift flechas Left/Right     | Cambiar el estado de la tarea (Pendiente/Finalizada/Revisar)            |
-| C-c C-t                      | Cambiar el estado de la tarea                                           |
-| M-x org-agenda m             |                                                                         |
-| C-x C-l                      | Crear hipervinculos                                                     |
-|                              |                                                                         |
+| Holy Mode                    | Evil Mode | Descripcion                                                             |
+| :----------                  |           | :-----------                                                            |
+| C-c C-s                      |           | Agendar una fecha para una tarea (schedule)                             |
+| C-c C-d                      |           | Programar una fecha limite para finalizar una tarea (deadline)          |
+| Shift flechas Left/Right     |           | Elegir el dia del mes en el calendario                                  |
+|                              |           |                                                                         |
+| g                            |           | Actualiza los cambios del buffer de la agenda (igual que con **dired**) |
+| M-x org-agenda-file-to-front |           | Guardar el archivo .org actual en la agenda                             |
+|                              |           |                                                                         |
+| C-c C-q                      |           | Agregar tags                                                            |
+| C-RET                        |           | Agregar nuevo item a la agenda                                          |
+|                              |           |                                                                         |
+| M Flechas Up/Down            |           | Cambia el orden/prioridad de las tareas, moviendo hacia arriba/abajo    |
+| M flechas Left/Right         |           | Mueve el nivel(tabulacion) de la tarea                                  |
+|                              |           |                                                                         |
+| Tab                          |           | Expande/Oculta una lista que tiene elementos                            |
+| Shift-Tab                    |           | Expande/Oculta todas las listas que tengan elementos                    |
+| Shift <Left><Right>          |           | Cambiar el estado de la tarea (Pendiente/Finalizada/Revisar)            |
+| Shift <Up><Down>             |           | Cambiar la prioridad de la tarea (Alta/Media/Baja)                      |
+| C-c C-t                      |           | Cambiar el estado de la tarea                                           |
+| M-x org-agenda m             |           |                                                                         |
+| C-x C-l                      |           | Crear hipervinculos                                                     |
+|                              | SPC m a   | Abrir agenda                                                            |
+
 
 - - -
 
@@ -117,6 +122,14 @@ Ej.
 
 ## Paginas de referencia
 
+### Atajos
+- [Atajos (Spacemacs.org)](https://www.spacemacs.org/layers/+emacs/org/README.html)
+- https://emacs.stackexchange.com/questions/33310/how-to-use-org-mode-speed-commands-speed-keys
+https://www.gnu.org/software/emacs/refcards/pdf/refcard.pdf
+https://www.spacemacs.org/layers/+emacs/org/README.html#key-bindings
+
+
+ 
 ### Guias
 - Guia basica - Emacslife - [Ver Pagina](http://emacslife.com/baby-steps-org.html)
 - Guia basica - Orgmode - [Ver Pagina](https://orgmode.org/worg/org-tutorials/orgtutorial_dto-es.html)
@@ -163,3 +176,5 @@ Ej.
 
 - Referencia #1 - Webdav - [Ver Pagina](https://webdav.io/webdav/webdav-integrations/webdav-dropbox/)
 - Referencia #2 - Opensource.com - [Ver Pagina](https://opensource.com/article/19/4/calendar-git)
+
+
