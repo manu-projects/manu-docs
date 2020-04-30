@@ -185,6 +185,9 @@
     -https://news.ycombinator.com/item?id=20477740
     -https://www.meetup.com/New-York-Emacs-Meetup/
     -https://plaintextproject.online/2018/03/27/orgmode.html
+*** Configuraciones para Exportar
+    - [[https://orgmode.org/guide/Export-Settings.html][Referencia #1 (orgmode.org)]]
+    - [[https://orgmode.org/manual/Export-Settings.html][Referencia #2 (orgmode.org)]]
 
 ** [TODO] Integrando Git con MAGIT [75%]
 *** [TODO] Tips [75%]
@@ -219,3 +222,18 @@
    Quedaron algunos tips en [[https://trello.com/b/ktG3yyQS/xmanudocs][XManuDocs (trello.com)]]
 *** [TODO] Powerline estructura
 *** [TODO] Personalizar la shell y terminal
+* Guia Linux Personalizar
+** Ocultar el Hostname del prompt 
+   https://charles4code.blogspot.com/2018/07/show-username-only-without-hostname-in.html
+** 
+* Guia Linux
+** Sincronizar Archivos en Google Drive
+ - https://www.youtube.com/watch?v=vPs9K_VC-lg
+ - https://www.youtube.com/watch?v=HblhrGIotFo
+ - https://rclone.org/drive/
+ - https://snapcraft.io/install/rclone/manjaro
+ - https://rclone.org/commands/
+ - https://snapcraft.io/install/rclone/arch
+ - https://www.youtube.com/watch?v=ARGU4HFUxq8
+ - https://www.youtube.com/watch?v=G8YMspboIXs
+

@@ -11,6 +11,11 @@ Para subir errores de terminal
 https://paste.debian.net/
 
 
+## Instalar Dropbox en Manjaro
+>Observacion, yo hice lo de la pagina 1 y anda perfecto
+
+[Ver Pagina 1](https://medium.com/@mahekarim/install-dropbox-on-arch-linux-or-manjaro-kde-fa06be45d550)
+[Ver Pagina 2](https://www.gestionatuweb.net/instalar-dropbox-en-manjaro-18-illyria/)
 
 ## Configurar Cliente IRC (Weechat)
 
@@ -48,13 +53,6 @@ https://paste.debian.net/
 ### Mostrar configuraciones
 /fset weechat.*
 /fset irc.*
-
-
-
-
-
-
-
 
 https://weechat.org/files/doc/stable/weechat_quickstart.en.html
 https://szorfein.github.io/weechat/tor/configure-weechat/

@@ -9,10 +9,14 @@ nav:
 - Guia de Linux:
     - 'Lineas de comando (Parte 1)': 'guia-de-linux/guia-linux-parte-1.md'
     - 'Lineas de comando (Parte 2)': 'guia-de-linux/guia-linux-parte-2.md'
-    - 'Lineas de comando (Parte 3)': 'guia-de-linux/guia-linux-parte-3.md'
+    - 'Problemas frecuentes': 'guia-de-linux/guia-linux-problemas-comunes.md'
     - 'Personalizar el Sistema': 'guia-de-linux/guia-linux-personalizar.md'
     - 'Configuraciones': 'guia-de-linux/guia-linux-3.md'
-    - 'Configuración de Red': 'guia-de-linux/linux-configuracion-de-red.md'
+    - 'Particionamiento': 'guia-de-linux/guia-de-linux-particinamiento.md'
+    - 'Maquinas Virtuales': 'guia-de-linux/guia-de-linux-vagrant-ansible.md'
+    - 'Gestores de paquetes': 'guia-de-linux/guia-de-linux-gestores-de-paquetes.md'
+    - 'Expresiones Regulares': 'guia-de-linux/guia-de-linux-expresiones-regulares.md'
+      - 'Configuración de Red': 'guia-de-linux/linux-configuracion-de-red.md'
 - Guia de Git: 'guia-git.md'
 - Guia de Emacs:
     - 'Empezando con Emacs': 'guia-de-emacs/guia-emacs.md'

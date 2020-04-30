@@ -32,9 +32,6 @@ chsh -s /usr/bin/zsh # cambiamos de bash a zshell
 #https://github.com/powerline/fonts/tree/master/Inconsolata # bajar la fuente
 ```
 
-# OCULTAR EL HOSTNAME DEL PROMPT
-# TE FALTA TERMINAR DE REVISAR ESTO.. PARA ACORTAR EL PROMPT
-# https://charles4code.blogspot.com/2018/07/show-username-only-without-hostname-in.html
 ```
 sudo nano .zshrc # abrimos archivo de configuracion de zsh
 
