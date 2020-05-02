@@ -14,6 +14,7 @@ emacs -nw /etc/hosts # abrimos el archivo hosts
 | :------ | -----------                |
 | C       | Se refiere a la tecla Ctrl |
 | X       | Se refiere a la tecla Alt  |
+| SPC     | Se refiere a la tecla Espacio  |
 
 - - -
 
@@ -56,23 +57,24 @@ emacs -nw /etc/hosts # abrimos el archivo hosts
 
 ## 4. Comandos de Desplazamiento
 
-| Holy Mode   | Evil Mode | Descripcion                                    |
-| :---------- |           | :-----------                                   |
-| C-s         |           | Busqueda incremental, hacia adelante           |
-| C-r         |           | Busqueda decremental, hacia atras              |
-|             |           |                                                |
-|             |           |                                                |
-| C-a         | ^         | Principio de linea                             |
-| C-e         | $         | Final de linea                                 |
-|             |           |                                                |
-| C-n         | j         | Mover cursor hacia abajo                       |
-| C-p         | k         | Mover cursor hacia arriba                      |
-| C-b         | h         | Mover cursor hacia la izquierda (backward)     |
-| C-f         | l         | Mover cursor hacia la derecha (foward)         |
-|             |           |                                                |
-| M-g         | < n > gg  | Ir a la linea n (Ej. 20gg va a la linea 20)    |
-|             |           |                                                |
-| C-u 8 *     |           | Escribe el asterisco 8 veces                   |
+| Holy Mode   | Evil Mode     | Descripcion                                                                  |
+| :---------- |               | :-----------                                                                 |
+| C-s         |               | Busqueda de texto, hacia adelante                                            |
+| C-r         |               | Busqueda de texto, hacia atras                                               |
+|             | /[patron] RET | Busqueda de texto hacia adelante (**n** para avanzar, **N** para retroceder)    |
+|             | ?[patron] RET | Busqueda de texto hacia atras (**n** para avanzar, **N** para retroceder)    |
+|             |               |                                                                              |
+| C-a         | ^             | Principio de linea                                                           |
+| C-e         | $             | Final de linea                                                               |
+|             |               |                                                                              |
+| C-n         | j             | Mover cursor hacia abajo                                                     |
+| C-p         | k             | Mover cursor hacia arriba                                                    |
+| C-b         | h             | Mover cursor hacia la izquierda (backward)                                   |
+| C-f         | l             | Mover cursor hacia la derecha (foward)                                       |
+|             |               |                                                                              |
+| M-g         | < n > gg      | Ir a la linea n (Ej. 20gg va a la linea 20)                                  |
+|             |               |                                                                              |
+| C-u 8 *     |               | Escribe el asterisco 8 veces                                                 |
 
 
 - - -

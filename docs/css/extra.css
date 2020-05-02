@@ -1,0 +1,14 @@
+.wy-menu-vertical header, .wy-menu-vertical p.caption{
+    background-color: #639;
+    font-size: 90%;
+    color: #FFF;
+    padding: 0 1em;
+}
+
+.wy-menu-vertical header, .wy-menu-vertical p.caption span::before{
+    content: "▲";
+}
+
+.wy-menu-vertical a::before{
+    content: "» "
+}

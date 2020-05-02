@@ -1,7 +1,7 @@
 ## Para iniciar Emacs con un archivo .org"
 
-1. Modificar el archivo de configuracion C-x C-f ~/.emacs.d/init.el
-2. Ir al final del archivo **C-Fin** y agregar la siguiente linea
+1. Modificar el archivo de configuracion <kbd>C-x C-f</kbd> ~/.emacs.d/init.el
+2. Ir al final del archivo <kbd>C-Fin</kbd> y agregar la siguiente linea
 > ;; cambiar por la ruta que desees
 > (find-file "~/Dropbox/orgfiles/agenda1.org")
 

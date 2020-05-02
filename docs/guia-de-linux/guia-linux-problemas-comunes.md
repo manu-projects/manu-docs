@@ -10,7 +10,6 @@ https://pasteboard.co/
 Para subir errores de terminal
 https://paste.debian.net/
 
-
 ## Instalar Dropbox en Manjaro
 >Observacion, yo hice lo de la pagina 1 y anda perfecto
 

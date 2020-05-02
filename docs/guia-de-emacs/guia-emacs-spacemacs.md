@@ -1,26 +1,28 @@
+
 # Tips - Importantes
 > Para que se guarden los cambios de la agenda, y se puedan filtrar usar **M-x org-agenda-file-to-front**
 > Para abrir la agenda **C-c a**
 
-| Comando   | Descripcion             |
-| :------   | :---------              |
-| SPC q r   | Reiniciar spacemacs     |
-| M-m f e R | Aplicar configuraciones |
+| Comando                                                          | Descripcion             |
+| :------                                                          | :---------              |
+| <kbd>SPC</kbd> <kbd>q</kbd> <kbd>r</kbd>                         | Reiniciar spacemacs     |
+| <kbd>M</kbd> <kbd>m</kbd> <kbd>f</kbd> <kbd>e</kbd> <kbd>R</kbd> | Aplicar configuraciones |
 
 # Gestionar archivos, proyectos
 
 ## Atajos con Treemacs/Neotree
-| Comando   | Descripcion      |
-| :------   | :---------       |
-| C-c C-p a | Agregar proyecto |
-| C-c C-p d | Eliminar proyecto |
+| Comando                                                          | Descripcion       |
+| :------                                                          | :---------        |
+| <kbd>C</kbd> <kbd>c</kbd> <kbd>C</kbd> <kbd>p</kbd> <kbd>a</kbd> | Agregar proyecto  |
+| <kbd>C</kbd> <kbd>c</kbd> <kbd>C</kbd> <kbd>p</kbd> <kbd>d</kbd> | Eliminar proyecto |
+
 
 ## Atajos con Projectfile
 | Comando                             | Descripcion                                 |
 | :------                             | :---------                                  |
+| SPC p f                             | Abrir algun archivo del proyecto actual     |
 | SPC f r                             | Abrir algun archivo reciente (recent files) |
 | SPC p p                             | Cambiar del proyecto actual a otro          |
-| SPC p f                             | Abrir algun archivo del proyecto actual     |
 | M-x projectile-remove-known-project | Eliminar alguno de los proyectos agregados  |
 
 ## Referencias
@@ -160,32 +162,6 @@ del archivo la siguiente linea
  -[Referencia #5 (bbs.archlinux.org)](https://bbs.archlinux.org/viewtopic.php?id=168634)
  - [Referencia #6 (stackoverflow.com)](https://stackoverflow.com/questions/30151338/org-latex-preview-is-fuzzy-on-retina-displays)
  - [PDF-tools (github.com)](https://github.com/politza/pdf-tools)
-
-## 2. Firefox modo Vim 
-
-### Extension Vim Vixen
-> Si estas acostumbrado a navegar con los atajos de vim h,j,k,l
-[Ir a la pagina](https://addons.mozilla.org/es/firefox/addon/vim-vixen/)
-
-### Comandos basicos de VIM
-
-- Shift+Esc: enable or disable the add-on in current tab.
-
-- h, j, k, l: scroll left, down, right, up, and right
-- j, k: scroll vertically
-- h, l: scroll horizontally
-- gg, G: scroll to top/bottom
-
-- d: delete current tab
-- u: reopen close tab
-- K, J: select prev or next tab
-- r: reload current tab
-
-- t, w: open a page in current tab, new tab, or new window
-- b: Select tabs by URL or title
-- zi, zo: zoom-in/zoom-out
-- zz: Set default zoom level
-- y: copy URL in current tab
 
 
 - - -

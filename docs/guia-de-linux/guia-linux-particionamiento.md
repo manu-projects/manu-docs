@@ -19,6 +19,15 @@ grub-install -v # saber la version de grub
 >And, the Swap partition gets automatically recognized, again. And finally, after installation is successfully finished, one last time to install the Refind boot manager in Terminal in Xubuntu:
 
 - - -
+# Conceptos basicos
+
+- [Particiones primarias/logicas/extendidas - Ver Video](https://www.youtube.com/watch?v=CSbUiK2pytE)
+- [Recuperar Tabla de Particiones - Ver Video](https://www.youtube.com/watch?v=I1-0cpPO3e8)
+- [Redimensionar Particiones en Ubuntu - Ver Video](https://www.youtube.com/watch?v=EQMWKwvsltY)
+- [Redimensionar particiones - Ver Videos](https://www.youtube.com/watch?v=OSkK_lgSCzk)
+- [Particionar disco duro en Ubuntu - Ver Video](https://www.youtube.com/watch?v=xuYhjtpWZuc)
+
+- - -
 
 # 1. Particionar
 
@@ -109,3 +118,5 @@ sudo apt-get install thunar
 - Como funciona el Filesystem de Linux - # Referencia 1  [Ver Video](https://www.youtube.com/watch?v=HIXzJ3Rz9po)
 
 - Como funciona el Filesystem de Linux - # Referencia 1  [Ver Video](https://www.youtube.com/watch?v=HbgzrKJvDRw)
+
+[Redimensionar con Gparted en Ubuntu - Ver Video](https://www.youtube.com/watch?v=PBHFud-Dva8)

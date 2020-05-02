@@ -2,7 +2,6 @@
 
 <img src="/images/linux-terminal.png">
 
-# averiguar por: doas, cmus, qutebrowser, emerge
 
 - - -
 # 1. Enlaces
@@ -66,14 +65,14 @@ gunzip - finanzas.txt.gz # otra manera de descomprimir sin pasar parametros
 
 La lista de los parametros que se le pueden pasar son:
 
-| Parametro | Descripción                      | | | | |
-|:----------|:---------------------------------|-|-|-|-|
-| c         | Crea el archivo                  |<td colspan=4>
-| x         | Extrae el contenido              |<td colspan=4>
-| v         | Muestra el paso a paso           |<td colspan=4>
-| z         | Comprime con gzip                |<td colspan=4>
-| j         | Comprime con bzip2               |<td colspan=4>
-| f         | Para indicar nombre del archivo  |<td colspan=4>
+| Parametro | Descripción                      |
+|:----------|:---------------------------------|
+| c         | Crea el archivo                  |
+| x         | Extrae el contenido              |
+| v         | Muestra el paso a paso           |
+| z         | Comprime con gzip                |
+| j         | Comprime con bzip2               |
+| f         | Para indicar nombre del archivo  |
 
 #### 3.2.1. Comprimir una carpeta
 >El parametro **v** permite visualizar por pantalla el paso a paso de que comprime, extrae, etc..
@@ -110,11 +109,11 @@ tar -xczf achivos.tar.gz # extrae el contenido del archivo .tar.gz
 
 ### 4.3.1. Númerica
 
-| Permiso | Descripción | | | | |
-|:--------|:------------|-|-|-|-|
-| 1       | Ejecución   |<td colspan=4>
-| 2       | Escritura   |<td colspan=4>
-| 4       | Lectura     |<td colspan=4>
+| Permiso | Descripción |
+|:--------|:------------|
+| 1       | Ejecución   |
+| 2       | Escritura   |
+| 4       | Lectura     |
 
 El orden de los permisos es:
 
@@ -153,11 +152,11 @@ chmod 755 archivo.txt
 ### 4.3.2 Simbólica
 > Para agregar, eliminar permisos se agrega primero a quien (usuario, grupo, cualquier usuario) seguido del operador **+**, **-**, **=** que agrega, elimina, reemplaza los permisos respectivamente.
 
-| Permiso | Descripción | | | | |
-|:-------:|:------------|-|-|-|-|
-| x       | Ejecución   |<td colspan=4>
-| w       | Escritura   |<td colspan=4>
-| r       | Lectura     |<td colspan=4>
+| Permiso | Descripción |
+|:-------:|:------------|
+| x       | Ejecución   |
+| w       | Escritura   |
+| r       | Lectura     |
 
 - **u**: se refiere al usuario
 - **g**: al grupo al que pertenece
@@ -424,13 +423,13 @@ fi
 >En caso que queramos entender un poco mas como funciona, y personalizarlo aun mas, esta te compartimos
 una lista de los parametros y que informacion imprime cada uno.
 
-| Caracter | Descripción																			| | | | |
-|:--------:|:-------------------------------------------------|-|-|-|-|
-| \u       | Nombre del usuario de la sesion									|<td colspan=4>
-| \h       | Nombre del host																	|<td colspan=4>
-| \d       | Fecha en formato mm/dd/YYYY											|<td colspan=4>
-| \A       | Hora del sistema																	|<td colspan=4>
-| \j       | Cantidad de tareas en ejecucion por esa terminal	|<td colspan=4>
+| Caracter   | Descripción                                        |
+| :--------: | :------------------------------------------------- |
+| \u         | Nombre del usuario de la sesion                    |
+| \h         | Nombre del host                                    |
+| \d         | Fecha en formato mm/dd/YYYY                        |
+| \A         | Hora del sistema                                   |
+| \j         | Cantidad de tareas en ejecucion por esa terminal   |
 
 
 ```

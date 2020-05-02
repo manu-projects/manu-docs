@@ -4,19 +4,30 @@ repo_name: 'GitHub'
 repo_url: https://github.com/neverkas/manu-doc
 theme:
     name: readthedocs
+    language: es
+plugins:
+  - bootstrap-tables
+extra_css:
+  - css/extra.css
+  - css/bootstrap.min.css
+extra_javascript:
+  - js/jquery-3.5.0.min.js
+  - js/customize.js 
 nav:
 - Home: 'index.md'
+- Off Topic:
+    - 'About me' : 'aboutme.md'
 - Guia de Linux:
     - 'Lineas de comando (Parte 1)': 'guia-de-linux/guia-linux-parte-1.md'
     - 'Lineas de comando (Parte 2)': 'guia-de-linux/guia-linux-parte-2.md'
     - 'Problemas frecuentes': 'guia-de-linux/guia-linux-problemas-comunes.md'
     - 'Personalizar el Sistema': 'guia-de-linux/guia-linux-personalizar.md'
     - 'Configuraciones': 'guia-de-linux/guia-linux-3.md'
-    - 'Particionamiento': 'guia-de-linux/guia-de-linux-particinamiento.md'
-    - 'Maquinas Virtuales': 'guia-de-linux/guia-de-linux-vagrant-ansible.md'
-    - 'Gestores de paquetes': 'guia-de-linux/guia-de-linux-gestores-de-paquetes.md'
-    - 'Expresiones Regulares': 'guia-de-linux/guia-de-linux-expresiones-regulares.md'
-      - 'Configuración de Red': 'guia-de-linux/linux-configuracion-de-red.md'
+    - 'Particionamiento': 'guia-de-linux/guia-linux-particionamiento.md'
+    - 'Maquinas Virtuales': 'guia-de-linux/guia-linux-vagrant-ansible.md'
+    - 'Gestores de paquetes': 'guia-de-linux/guia-linux-gestores-de-paquetes.md'
+    - 'Expresiones Regulares': 'guia-de-linux/guia-linux-expresiones-regulares.md'
+    - 'Configuración de Red': 'guia-de-linux/linux-configuracion-de-red.md'
 - Guia de Git: 'guia-git.md'
 - Guia de Emacs:
     - 'Empezando con Emacs': 'guia-de-emacs/guia-emacs.md'
@@ -25,3 +36,5 @@ nav:
     - 'Integrando Git con MAGIT': 'guia-de-emacs/guia-emacs-magit.md'
 - Guia de Maquinas Virtuales:
     - 'Configurando Virtualbox': 'virtualbox.md'
+- Otras cosillas:
+    - 'Extensiones utiles para los Navegadores Web' : 'navegadores-web-extensiones-utiles.md'

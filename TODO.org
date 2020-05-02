@@ -33,9 +33,22 @@
    - https://www.youtube.com/watch?v=cIuX87Xo8Fc 
    - https://ondahostil.wordpress.com/2017/12/06/lo-que-he-aprendido-diagramas-en-org-mode-con-ditaa/
    - https://lapipaplena.wordpress.com/2017/02/05/graficos-con-org-mode-ditaa-y-plantuml/
-** [TODO] Avanzando con Spacemacs [75%]
+*** Configuraciones personalizadas
+   http://home.thep.lu.se/~karlf/emacs.html#sec-7-10-1
+*** PLugins/Extensiones
+   - https://company-mode.github.io/
+** [TODO] Avanzando con Spacemacs [60%]
 *** [DONE] Tips
     CLOSED: [2020-04-13 lun 15:40]
+*** Errores frecuentes
+   - [[https://develop.spacemacs.org/doc/FAQ.html#why-are-packages-installed-with-package-install-automatically-deleted-by-spacemacs-when-it-boots][Preguntas frecuentes (develop.spacemacs.org)]]
+   - - Que se quiera borrar yasnippet-snippets porque tiene un package huerfano (company-tern)
+      Solucion: ir a la linea que dice **dotspacemacs-install-packages 'used-only))**
+      y cambiar el **used-only** por **used-but-keep-unused** esto lo que hace es conservar el 
+      package **yasnippet-snippets** por mas que tenga packages huerfanos (con la opcion anterior lo borraba)
+      https://github.com/syl20bnr/spacemacs/issues/1538
+      https://github.com/syl20bnr/spacemacs/issues/1538#issuecomment-317241460
+ 
 *** [DONE] Gestionar archivos, proyectos
     CLOSED: [2020-04-13 lun 15:40]
 **** [DONE] Atajos con Treemacs/Neotree
@@ -66,6 +79,48 @@
      CLOSED: [2020-04-13 lun 15:42]
 **** [DONE] Configuraciones
      CLOSED: [2020-04-13 lun 15:42]
+*** [TODO] Agregar snippets
+    Crear snippets
+    1. Presionar SPC SPC yas-new-snippet  o M-x yas-new-sippet
+    2. Crear un snippet
+    3. Llamarlo escribiendolo y presionar tab o presioar M-/ o M-x hippie-expand o SPC SPC hippie-expand
+
+    Posibles error:
+    - Que se quiera borrar yasnippet-snippets porque tiene un package huerfano (company-tern)
+      Solucion: ir a la linea que dice **dotspacemacs-install-packages 'used-only))**
+      y cambiar el **used-only** por **used-but-keep-unused** esto lo que hace es conservar el 
+      package **yasnippet-snippets** por mas que tenga packages huerfanos (con la opcion anterior lo borraba)
+      https://github.com/syl20bnr/spacemacs/issues/1538
+      https://github.com/syl20bnr/spacemacs/issues/1538#issuecomment-317241460
+    Solucion:
+1.Agregar en user-config las sig tres lineas 
+      (global-set-key (kbd "TAB") 'hippie-expand)
+  (global-set-key (kbd "<tab>") 'hippie-expand)
+  (global-set-key (kbd "\t") 'hippie-expand)
+2.Agregar en dotspacemacs-configuration-layers
+    auto-completion
+    (auto-completion :variables
+                    auto-completion-return-key-behavior nil
+                    auto-completion-tab-key-behavior 'complete
+                     auto-completion-enable-sort-by-usage t
+                     ;;auto-completion-tab-key-behavior nil
+                     auto-completion-enable-snippets-in-popup t)
+ 
+
+    Referencias
+    - [[http://jr0cket.co.uk/2016/07/spacemacs-adding-your-own-yasnippets.html][Referencia #1 - Ver Pagina]]
+    - [[https://www.youtube.com/watch?v=5kPrOs2ftN8][Referencia #1 - Ver Video]] 
+    - [[https://www.youtube.com/watch?v=51as0UrssLM][Referencia #2 - Ver Video]]
+    - [[https://www.youtube.com/watch?v=lsYdK0C2RvQ][Referencia #3 - Ver Vide]]
+    - https://github.com/syl20bnr/spacemacs/issues/10316
+    - https://jaketrent.com/post/code-snippets-spacemacs/
+    - https://www.reddit.com/r/spacemacs/comments/apye26/is_there_a_better_way_of_using_snippets_yasnippet/
+    - https://github.com/syl20bnr/spacemacs/issues/4245
+    - https://www.emacswiki.org/emacs/HippieExpand
+    - https://develop.spacemacs.org/layers/+completion/auto-completion/README.html
+    - https://github.com/joaotavora/yasnippet#where-are-the-snippets
+    - https://practicalli.github.io/spacemacs/snippets/add-your-own-snippets.html
+
 ** [TODO] Integrando el Modo Org [53%]
 *** Atajos dentro de la agenda
      | Atajo     | Descripcion                                                     |
@@ -236,4 +291,8 @@
  - https://snapcraft.io/install/rclone/arch
  - https://www.youtube.com/watch?v=ARGU4HFUxq8
  - https://www.youtube.com/watch?v=G8YMspboIXs
+* Guia Linux - Lineas de comando
+** Pendiente
+  - # averiguar por: doas, cmus, qutebrowser, emerge
+
 
