@@ -1,9 +1,16 @@
-* [TODO] Guia de git [0%]
+* [TODO] [#A] Guia de git [0%]
 ** [TODO] Como manejarse con los tags y las versiones
    Algunas preguntas que se me ocurren
    - Deberia hacer una lista de nuevas caracteristicas/funcionalidades por cada version?
    - Por correcciones de tantos bugs pasaria de v0.1.0 a v0.1.1 ?
    Pagina: [[https://github.com/org-trello/org-trello/blob/master/TODO.org][Org-Trello]]
+** [TODO] Cuando crear un branch (nuevas caracteristicas)
+** [TODO] Cuando crear un tag (para armar releases)
+** [TODO] Investigar las graficas que se forman 
+** Cuando crear issues
+** Cuando crear pull request
+** Utilidad de crear plantillas en los pull request (como hacen las entregas de tp en pdep)
+
 * [TODO] Guia de Emacs [0%]
 ** Aprendiendo Elisp
 *** Atajos
@@ -277,10 +284,30 @@
    Quedaron algunos tips en [[https://trello.com/b/ktG3yyQS/xmanudocs][XManuDocs (trello.com)]]
 *** [TODO] Powerline estructura
 *** [TODO] Personalizar la shell y terminal
+* Guia de Vim
+ - Guias basicas
+ - [[https://www.youtube.com/watch?v=iWo1cDGlNDI][comandos basicos - Ver Video]] 
+ Pendiente
+ - https://www.youtube.com/watch?v=8PZZkIr5Dcc
+ - https://www.youtube.com/watch?v=jwxK5Eg_TnM
+ - https://www.youtube.com/watch?v=OnUiHLYZgaA
+ - 
 * Guia Linux Personalizar
 ** Ocultar el Hostname del prompt 
    https://charles4code.blogspot.com/2018/07/show-username-only-without-hostname-in.html
 ** 
+* Guia Linux Resolver problemas frecuentes
+** Versionar los dotfiles
+   ya habias averiguado un poco de eso, deberias mejorarlo, 
+   no terminaste lo que tenes en ~/manjaro-dotfiles
+** Mkdocs
+   - Averiguar como mejorar el breadcrumb
+   - Analizar si seguirlo en esta seccion o abrir una nueva que sea de documentacion
+* Guia de Linux - Particionamiento
+  Pendiente en revisar
+   - [[https://unix.stackexchange.com/questions/466625/cp-cannot-create-regular-file-permission-denied][Referencia #1]]
+   - [[https://www.linuxadictos.com/solucion-al-error-read-only-file-system.html][Referencia #2]]
+ 
 * Guia Linux
 ** Sincronizar Archivos en Google Drive
  - https://www.youtube.com/watch?v=vPs9K_VC-lg
@@ -291,6 +318,23 @@
  - https://snapcraft.io/install/rclone/arch
  - https://www.youtube.com/watch?v=ARGU4HFUxq8
  - https://www.youtube.com/watch?v=G8YMspboIXs
+** Nuevos comandos
+  - Crear directorios con subdirectorios, usando el parametro -p en mkdir
+    mkdir -p
+
+    Referencias:
+    - https://techlandia.com/crear-nuevo-directorio-linux-como_44793/
+  - Conocer la particion de un archivo
+    Con el comando df
+
+    Referencias
+    - https://elbauldelprogramador.com/como-saber-que-particion-pertenece-un/
+    - https://www.profesionalreview.com/2018/03/04/saber-particion-esta-instalado-ubuntu/
+* Guia Linux - Seguridad
+** [#A] Herramientas
+   - Averiguar si el Bitwarden del escritorio funciona en las demas distribuciones ok
+   - Comentar lo de la encriptacion de contenido con rclone 
+
 * Guia Linux - Lineas de comando
 ** Pendiente
   - # averiguar por: doas, cmus, qutebrowser, emerge

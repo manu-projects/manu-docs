@@ -220,12 +220,13 @@ sudo apt-get install i3 i3status i3lock compton nitrogen -y
 y presionamos el shortcut `Super+Shift+r` para reiniciar **i3wm**
 3. Modificamos la configuración de bash con `sudo nano ~./.bashrc/`
 4. Agregamos las siguientes lineas
+
 ```
 # ejecuto neofetch
 neofetch --w3m $HOME/Pictures/Wallpapers/wallpaper-hacksign3.jpg
 # habilito la zshell
 zsh
-````
+```
 
 >**Observación**: Cada vez que se abra una terminal con `Super+Ret` se abrirá con la terminal rxvt unicode,
 >con el programa neofetch y con la zshell habilitada
@@ -235,19 +236,18 @@ zsh
 >Hay ciertos atajos que nos facilitan desplazarnos entre las ventanas, espacios de trabajo, etc..
 >sin la necesidad de utilizar el mouse.
 
-| Comando            | Descripción																														|
-|:-------------------|:-----------------------------------------------------------------------|
-|Super+Ret					 | Abre una terminal																											|
-|Super+Shift+e			 | Cerrar sesion de i3																										|
-|Super+d 						 | Despliega un menu para ejecutar lineas de comando											|
-|Super+Shift+r 			 | Reinicia el entorno i3 y mantiene los espacios de trabajo							|
-|Super+Shift+c 			 | Recarga archivos de configuración de i3																|
-|Super+Shift+Q 			 | Cierra la ventana																											|
-|Super+Flecha 			 | Cambiar cursor a otra ventana																					|
-|Super+Shift+ArrowKey| Mueve la ventana																												|
-|Super+n						 | Cambia el espacio de trabajo (Siendo **n** un número)									|
-|Super+v Super+Ret 	 | Establece que las próximas ventanas se abran en vertical							 	|
-|-Super+Shift+n 	 	 | Mueve una ventana a otro espacio de trabajo (Siendo **n** un número) 	|
+| Comando                                                       | Descripción                                                              |
+| :-------------------                                          | :----------------------------------------------------------------------- |
+| <kbd>Super</kbd>-<kbd>RET</kbd>                               | Abre una terminal                                                        |
+| <kbd>Super</kbd> <kbd>Shift</kbd> <kbd>e</kbd>                | Cerrar sesion de i3                                                      |
+| <kbd>Super</kbd>-<kbd>d</kbd>                                 | Despliega un menu para ejecutar lineas de comando                        |
+| <kbd>Super</kbd> <kbd>Shift</kbd> <kbd>r</kbd>                | Reinicia el entorno, mantiene los espacios detrabajo                     |
+| <kbd>Super</kbd> <kbd>Shift</kbd> <kbd>c</kbd>                | Recarga archivos de configuración de i3                                  |
+| <kbd>SUper</kbd> <kbd>Shift</kbd> <kbd>Q</kbd>                | Cierra la ventana                                                        |
+| <kbd>Super</kbd>-<kbd>ArrowKey</kbd>                          | Cambiar cursor a otra ventana                                            |
+| <kbd>Super</kbd> <kbd>Shift</kbd> <kbd>ArrowKey</kbd>         | Mueve la ventana                                                         |
+| <kbd>Super</kbd>-<kbd>n</kbd>                                 | Cambia el espacio de trabajo (Siendo **n** un número)                    |
+| <kbd>Super</kbd> <kbd>v</kbd> <kbd>Super</kbd> <kbd>Ret</kbd> | Las próximas ventanas se abren en vertical                               |
 
 > La combinación de comandos `Super+v Super+Ret`, quiere decir que luego de presionar `Super+v` presionamos  `Super+Ret`
 > y las proximas nuevas ventanas que se abran con `Super+Ret` se apilaran debajo de la que estemos posicionados.

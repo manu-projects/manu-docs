@@ -1,23 +1,47 @@
-## Herramientas para resolver problemas
+# Herramientas para resolver problemas
 
 1. Instalar un cliente IRC (WeeChat)
 
-## Otras herramientas
+#### 1 Capturas de pantalla (screenshot)
+> No siempre podemos transcribir el mensaje de error y/o no mostramos el escenario
+> que puede ser fundamental para que otro lo entienda
 
-Para subir screenshots rapido
-https://pasteboard.co/
+##### 1.1 Referencias
+- [PasteBoard - Ver Pagina](https://pasteboard.co/)
 
-Para subir errores de terminal
-https://paste.debian.net/
+- - -
 
-## Instalar Dropbox en Manjaro
->Observacion, yo hice lo de la pagina 1 y anda perfecto
+#### 2 Errores de la terminal
+> Si tenes inconvenientes al capturar la pantalla, otra manera seria enviar el error 
+> de la terminal.
 
-[Ver Pagina 1](https://medium.com/@mahekarim/install-dropbox-on-arch-linux-or-manjaro-kde-fa06be45d550)
-[Ver Pagina 2](https://www.gestionatuweb.net/instalar-dropbox-en-manjaro-18-illyria/)
+#### 2.1 Referencias
+- [Paste Debian - Ver Pagina](https://paste.debian.net/)
 
-## Configurar Cliente IRC (Weechat)
+- - -
 
+#### 3. Archivos en la Nube (Cloud Storage)
+> Conocido por **Cloud Storage** tenemos varias opciones para subir nuestros archivos
+> ya sea como copia de respaldo, o para acceder de manera inmediata desde cualquier
+> dispositivo (tablet, celular, ..)
+
+##### 3.1 Instalar Dropbox en la Distribucion Manjaro
+> Observacion, recomendamos la referencia 1 que es la que nos funciono de manera exitosa
+
+##### 3.2 Referencias:
+- [Referencia #1 - Ver Pagina](https://medium.com/@mahekarim/install-dropbox-on-arch-linux-or-manjaro-kde-fa06be45d550)
+- [Referencia #2 - Ver Pagina](https://www.gestionatuweb.net/instalar-dropbox-en-manjaro-18-illyria/)
+
+- - - 
+
+#### 4. Soporte en Canales IRC Configurar Cliente IRC (Weechat)
+>Para solucionar problemas a veces (no siempre) se puede recurrir a los canales de soporte de irc
+>del programa en cuestion. Resulta una manera mas rapida de plantear dudas en reemplazo a los foros.
+
+>Podemos acceder a estos chat mediante un cliente irc, nosotros explicaremos uno muy particular 
+>que se puede abrir desde la terminal (no se recomienda ejecutarlo con el comando sudo)
+
+##### 4.1 Instalacion && Configuracion de Weechat
 1. Agregar el servidor
 /server add freenode chat.freenode.net/6667 -autoconnect
 
@@ -44,40 +68,41 @@ https://paste.debian.net/
 8. Autoconectar a varios canales
 /set irc.server.freenode.autojoin "#channel1,#channel2"
 
-## Otras Configuraciones
+#### 4.2 Otras Configuraciones
 
-### Modificar opciones
+##### Modificar opciones
 /set irc.server.freenode.nombreOpcion unValor
 
-### Mostrar configuraciones
+##### Mostrar configuraciones
 /fset weechat.*
 /fset irc.*
 
-https://weechat.org/files/doc/stable/weechat_quickstart.en.html
-https://szorfein.github.io/weechat/tor/configure-weechat/
+Referencias
+ - [Primeros pasos (weechat.org)](https://weechat.org/files/doc/stable/weechat_quickstart.en.html) 
+ - [Configuracion (szorfein.github.io)](https://szorfein.github.io/weechat/tor/configure-weechat/)
 
-### Canales Sugeridos
+#### 4.3 Canales Sugeridos
 > Para conectar utilizamos **/join #nombre-canal**
 
-- #org-mode
-- #emacs
-- #spacemacs
-- #arch
+- org-mode
+- emacs
+- spacemacs
+- arch
 
-## Atajos
-| Comando     | Descripcion                |
-| Alt <n>     | Se mueve al canal <n>       |
-| Alt <Arrow> | Se mueve entre los canales |
+#### 4.4 Atajos
+
+| Comando                              | Descripcion                    |
+| :----------                          | :-------------------------     |
+| <kbd>Alt</kbd>-<kbd>n</kbd>          | Se mueve al canal <kbd>n</kbd> |
+| <kbd>Alt</kbd>-<kbd>Arrow Keys</kbd> | Se mueve entre los canales     |
 
 
+#### 4.5 Referencias
 
-Para hacer consultas en los canales de IRC
-weechat y freenode
-
-http://www.chiark.greenend.org.uk/doc/weechat-doc/html/weechat_quickstart.en.html
-https://freenode.net/kb/answer/registration
-https://wiki.archlinux.org/index.php/WeeChat
-https://freenode.net/kb/answer/weechat
-https://weechat.org/files/doc/stable/weechat_quickstart.en.html
-https://weechat.org/files/doc/devel/weechat_quickstart.en.html
-https://weechat.org/files/doc/stable/weechat_quickstart.es.html
+- [Referencia #1 - Ver Pagina](http://www.chiark.greenend.org.uk/doc/weechat-doc/html/weechat_quickstart.en.html)
+- [Referencia #2 - Ver Pagina](https://freenode.net/kb/answer/registration) 
+- [Referencia #3 - Ver Pagina](https://wiki.archlinux.org/index.php/WeeChat) 
+- [Referencia #4 - Ver Pagina](https://freenode.net/kb/answer/weechat)
+- [Referencia #5 - Ver Pagina](https://weechat.org/files/doc/stable/weechat_quickstart.en.html)
+- [Referencia #6 - Ver Pagina](https://weechat.org/files/doc/devel/weechat_quickstart.en.html)
+- [Referencia #7 - Ver Pagina](https://weechat.org/files/doc/stable/weechat_quickstart.es.html)

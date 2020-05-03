@@ -1,6 +1,3 @@
-# Revisar Links
-https://unix.stackexchange.com/questions/466625/cp-cannot-create-regular-file-permission-denied
-https://www.linuxadictos.com/solucion-al-error-read-only-file-system.html
 
 ```
 grub-install -v # saber la version de grub 
