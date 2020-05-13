@@ -10,6 +10,10 @@
 ** Cuando crear issues
 ** Cuando crear pull request
 ** Utilidad de crear plantillas en los pull request (como hacen las entregas de tp en pdep)
+* Hacer graficos 
+  Referencias:
+  - https://www.gnu.org/software/octave/
+
 * Guia de Lisp
   Para reforzar un poco el paradigma funcional e integrarlo con elisp que
   es lo que utiliza emacs por dentro, se puede ejecutar tambien en la terminal eshell
@@ -18,6 +22,9 @@
   -Para ejecutar el codigo presionar <bdk>, ,</bdk> o <bdk>C-c C-c</bdk>
 
   Referencias:
+  - [[http://cl-cookbook.sourceforge.net/emacs-ide.html][Using emacs as LISP IDE (cl-cookbook)]]
+  - [[https://www.youtube.com/watch?v=-J_xL4IGhJA][Overview and Introduction to Lisp - Part 1]]
+  - [[https://www.youtube.com/watch?v=-J_xL4IGhJA&list=PLE18841CABEA24090][Playlist - Structure and Interpretation (MIT 1986)]]
   - [[https://www.youtube.com/watch?v=QFbJKWhzhtU][Introduccion Lisp - Parte 1 (javierbravoudima) - Ver Video]]
   -[[https://www.youtube.com/watch?v=Fz9Rig9lG50][ Intro Lisp - Parte 2 - Ver Video]]
   - [[https://www.youtube.com/watch?v=Jx8riNWKe14][Intro Emacs (javier) - Ver Video]]
@@ -144,6 +151,16 @@
               )
    #+END_SRC
 
+
+#+BEGIN_SRC elisp :results raw 
+  (defvar nombre "jorgito")
+
+  (print nombre)
+#+END_SRC
+
+#+RESULTS:
+jorgito
+
 * [TODO] Guia de Emacs [0%]
 ** Aprendiendo Elisp
 *** Atajos
@@ -151,6 +168,7 @@
     C-x C-e evaluar la ultima expresion
 *** Paginas de Referencia
     - [[https://learnxinyminutes.com/docs/es-es/elisp-es/][Referencia #1 - (learn x in minutes)]]
+    - [[https://blog.8bitzen.com/posts/27-02-2019-using-orgmode-babel/][Using OrgMode Babel (8bitzen)]]
     - [[https://www.gnu.org/software/emacs/manual/html_node/eintr/][Referencia #2 (Gnu.org)]]
     - [[https://www.gnu.org/software/emacs/tour/][Referencia #3 - Guia en general (Gnu.org)]]
     - [[https://www.davidam.com/docu/emacs-lisp-intro-es.html][Referencia #4 - Davidam]]
@@ -341,7 +359,48 @@
     - https://github.com/joaotavora/yasnippet#where-are-the-snippets
     - https://practicalli.github.io/spacemacs/snippets/add-your-own-snippets.html
 ** [TODO] Integrando el Modo Org [53%]
+*** Creando presentaciones con beamer
+    Errores comunes:
+    1. No me aparece la opcion para exportar beamer
+    Solucion
+    Escribir al principio del archivo la siguiente linea
+    #+BEGIN_SRC 
+    #+STARTUP: beamer#+STARTUP: beamer
+    #+END_SRC
+    
+   Referencias:
+    - https://www.reddit.com/r/emacs/comments/60tmkl/no_latexbeamer_export_available/
+    - https://notxor.nueva-actitud.org/blog/2019/04/29/presentaciones-con-org-beamer-mode/
+    - https://orgmode.org/worg/exporters/beamer/tutorial.html
+    - https://orgmode.org/worg/exporters/beamer/ox-beamer.html 
+    - https://orgmode.org/worg/exporters/beamer/presentation.html
+    - https://cestlaz.github.io/posts/using-emacs-50-presentations/
+    - https://www.youtube.com/watch?v=Ho6nMWGtepY
+*** Creando un html moderno
+    Referencias:
+    - https://github.com/fniessen/org-html-themes
+    - https://gongzhitaao.org/orgcss/
+    - https://orgmode.org/manual/Export-Settings.html#Export-settings
 *** [#A] Escribiendo bloques de codigo
+    Posibles errores:
+    1. No me deja compilar bloques de codigo y me muestra el siguiente error
+    "no org-babel-execut function for lisp"
+    Solucion:
+    1. Agregar en el archivo de configuracion .spacemacs
+       #+BEGIN_SRC emacs-lisp 
+         (org-babel-do-load-languages
+          (quote org-babel-load-languages)
+          (quote (
+                  (ditaa . t)
+                  (haskell . t)
+                  (sh . t)
+                  (bash . t)
+                  (lisp . t)
+
+                  )))
+       #+END_SRC
+    
+    Paso a paso:
     1. Para encapsular bloques de codigo empezar con #+BEGIN_SRC seguido de nombre de lenguaje,
     escribir el codigo deseado y finalizar con la siguiente linea #+END_SRC
     2. Para ejecutar bloque de codigo ejecutar <bdk>C-c C-c</bdk>
@@ -353,8 +412,12 @@
        volver a ejecutar para desactivar
 
     Referencias:
+    - [[https://orgmode.org/manual/Using-Header-Arguments.html][Using Header Arguments (orgmode.org)]]
+    - [[https://orgmode.org/worg/org-contrib/babel/header-args.html][Header Arguments and result types (orgmode.org)]]
+    - [[https://www.offerzen.com/blog/literate-programming-empower-your-writing-with-emacs-org-mode][Literate Programming (offerzen.com)]]
     - [[https://steemit.com/spacemacs/@shark8me/indenting-code-blocks-in-spacemacs-org-mode][Indentar (tabular) codigo (steemit.com)]]
     - [[https://emacs.stackexchange.com/questions/18273/tell-org-to-treat-block-quotes-as-a-special-environment][Modificar bloques de codigo en otro buffer (emacs.stackexchange.com)]]
+    - [[https://blog.8bitzen.com/posts/27-02-2019-using-orgmode-babel/][Using orgmode babel (8bitzen)]] 
 
 *** Atajos dentro de la agenda
     | Atajo     | Descripcion                                                     |
@@ -427,6 +490,7 @@
 **** [TODO] [#A] Agregar tareas con el estado TODO de forma predeterminada
      Para no estar cambiando a cada tarea el estado a **TODO**
 *** [TODO] [#A] Exportar archivos a markdown (.md)
+    Presionar el atajo <kbd>C-c C-e</kbd> o <kbd>, , e</kbd> o <kbd>SPC org-export-dispatch<kbd>
     Por el momento agregamos el siguiente script en el archivo de configuracion de .spacemacs
 
     Algunos paginas de referencia:
