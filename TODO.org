@@ -196,6 +196,14 @@ jorgito
 *** PLugins/Extensiones
     - https://company-mode.github.io/
 ** [TODO] Avanzando con Spacemacs [50%]
+*** Layers de Spacemacs 
+**** Treemacs
+     Es un gestor de archivos
+     | Comando | Descripcion |
+     | SPC g r | Refrescar cambios    |
+
+     Referencias
+     - https://github.com/Alexander-Miller/treemacs/blob/master/README.org
 *** Nuevo modo cua-mode 
     No conozco aun todas las funcionalidades, pero te deja seleccionar 
     multiples lineas y editarlas al mismo tiempo. Ademas agregar incrementales.
@@ -381,6 +389,10 @@ jorgito
     - https://github.com/fniessen/org-html-themes
     - https://gongzhitaao.org/orgcss/
     - https://orgmode.org/manual/Export-Settings.html#Export-settings
+    - https://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html
+    - http://snarvaez.poweredbygnulinux.com/notes/org-mode-publishing-system.html
+    - https://orgmode.org/manual/Include-Files.html
+    - https://orgmode.org/manual/Publishing.html
 *** [#A] Escribiendo bloques de codigo
     Posibles errores:
     1. No me deja compilar bloques de codigo y me muestra el siguiente error
@@ -582,6 +594,25 @@ jorgito
   - https://www.youtube.com/watch?v=jwxK5Eg_TnM
   - https://www.youtube.com/watch?v=OnUiHLYZgaA
   -
+* Guia Gestores de Archivos 
+  Ranger, tiene los mismos atajos que vim
+   - h,l para moverse entre los niveles de los directorios
+   - dd para cortar
+   - y para copiar
+   - p para pegar
+   
+     | Comando                | Descripcion                                       |
+     | :mkdir  unDirectorio   | Crear un directorio                               |
+     | :rename otroNombre.txt | Para crear archivos                               |
+     | :touch nuevoFile.txt   | Para modificar el nombre del archivo seleccionado |
+     |                        |                                                   |
+
+
+  Referencias:
+  - https://www.atareao.es/software/utilidades/administrador-de-archivos-para-el-terminal/
+  - https://openwebinars.net/blog/vim-manual-de-uso-basico/
+  - https://unix.stackexchange.com/questions/384325/how-to-create-a-new-file-directory-using-ranger
+  - https://linuxconfig.org/manage-your-files-from-the-command-line-with-ranger
 * Guia Linux Personalizar
 ** Ocultar el Hostname del prompt
    https://charles4code.blogspot.com/2018/07/show-username-only-without-hostname-in.html
