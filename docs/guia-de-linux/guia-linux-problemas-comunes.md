@@ -1,5 +1,9 @@
 # Herramientas para resolver problemas frecuentes
 
+<center>
+<img src="/images/error.jpg">
+</center>
+
 > Decidimos hacer una recopilacion de herramientas utiles, a la hora de dar soluciones 
 > a problemas en general. Si tenes un error en la terminal, si estas tratando de instalar
 > un nuevo programa que no funciona acorde a como pretendias. Para saber como instalar

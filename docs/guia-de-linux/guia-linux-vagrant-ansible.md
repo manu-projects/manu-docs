@@ -1,4 +1,8 @@
-# 1. Particionar disco
+# Vagrant y Ansible
+
+<img src="/images/vagrant-ansible-docker.webp">
+
+## 1. Particionar disco
 
 #### 1.1 Crear particiones
 > Creamos dos particiones primarias y una SWAP
@@ -38,7 +42,7 @@ mount /dev/sda3 /mnt/home
 
 - - -
 
-# 3. Gestor de Paquetes
+## 2. Gestor de Paquetes
 
 #### 2.1 Agregamos el pacstrap
 > Investigar en detalle

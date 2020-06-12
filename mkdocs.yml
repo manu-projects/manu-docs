@@ -7,6 +7,7 @@ theme:
     language: es
 plugins:
   - bootstrap-tables
+  - search
 extra_css:
   - css/bootstrap.min.css
   - css/extra.css
@@ -14,9 +15,13 @@ extra_javascript:
   - js/jquery-3.5.0.min.js
   - js/customize.js 
 nav:
-- Home: 'index.md'
 - Off Topic:
     - 'About me' : 'aboutme.md'
+- Guia de Emacs:
+    - 'Empezando con Emacs': 'guia-de-emacs/guia-emacs.md'
+    - 'Avanzando con Spacemacs': 'guia-de-emacs/guia-emacs-spacemacs.md'
+    - 'Integrando el Modo Org': 'guia-de-emacs/guia-emacs-modo-org.md'
+    - 'Integrando Git con MAGIT': 'guia-de-emacs/guia-emacs-magit.md'
 - Guia de Linux:
     - 'Lineas de comando (Parte 1)': 'guia-de-linux/guia-linux-parte-1.md'
     - 'Lineas de comando (Parte 2)': 'guia-de-linux/guia-linux-parte-2.md'
@@ -28,13 +33,7 @@ nav:
     - 'Gestores de paquetes': 'guia-de-linux/guia-linux-gestores-de-paquetes.md'
     - 'Expresiones Regulares': 'guia-de-linux/guia-linux-expresiones-regulares.md'
     - 'Configuración de Red': 'guia-de-linux/linux-configuracion-de-red.md'
-- Guia de Git: 'guia-git.md'
-- Guia de Emacs:
-    - 'Empezando con Emacs': 'guia-de-emacs/guia-emacs.md'
-    - 'Avanzando con Spacemacs': 'guia-de-emacs/guia-emacs-spacemacs.md'
-    - 'Integrando el Modo Org': 'guia-de-emacs/guia-emacs-modo-org.md'
-    - 'Integrando Git con MAGIT': 'guia-de-emacs/guia-emacs-magit.md'
-- Guia de Maquinas Virtuales:
+- Nuevas Guias:
+    - 'Guia de Git': 'guia-git.md'
     - 'Configurando Virtualbox': 'virtualbox.md'
-- Otras cosillas:
     - 'Extensiones utiles para los Navegadores Web' : 'navegadores-web-extensiones-utiles.md'

@@ -1,34 +1,42 @@
-# Tips
+# Integrando GIT con MAGIT
 
-### Traer cambios de un branch al master
-> Si hicimos cambios y los guardamos en **branches** y queremos traerlos al **branch master** (suele ser la ultima version, la que ira a produccion)
+## 1. Traer cambios de un branch al master
+
+Si hicimos cambios y los guardamos en **branches** y queremos traerlos al **branch master** (suele ser la ultima version, la que ira a produccion)
 
 1. Cambiamos al **branch master**
-> Presionamos **SPC g s** para acceder al menu de Magit, 
-> luego **b b** y elegimos el **master branch** (no es lo mismo que origin/master)
+>Presionamos **SPC g s** para acceder al menu de Magit, 
+>luego **b b** y elegimos el **master branch** (no es lo mismo que origin/master)
 
 2. Hacemos **merge** con el branch que queremos (Ej. hotfix branch o testing branch)
-> Presionamos **SPC g s** luego **m m** y elegimos el **branch** para traer los cambios al **master branch**
+>Presionamos **SPC g s** luego **m m** y elegimos el **branch** para traer los cambios al **master branch**
 
 3. Hacemos **push** del **merge**
-> Presionamos con **SPC g s** luego **p p**
+>Presionamos con **SPC g s** luego **p p**
 
-### Diferencia entre master y origin/master
-> Del ejemplo anterior quizas puede aparecer esto, y pueden surgir dudas.
+- - -
+
+## 2. Diferencia entre master y origin/master
+
+Del ejemplo anterior quizas puede aparecer esto, y pueden surgir dudas.
+
 Cuando se dice **master** se refiere al **local branch** (el entorno local),
 mientras que **origin/master** hace referencia al **remote branch** (el que esta en el servidor github**
 
 **Observacion:** Lo mismo aplica con los **branches**
 Ej. origin/hotfix y hotfix, origin/testing y testing, etc..
 
-**Referencias:**
+#### 2.2 Referencias
 
 - Referencia #1 - Stackify.com - [Ver Pagina](https://stackify.com/git-checkout-remote-branch/)
 - Referencia #2 - Stackoverfow - [Ver Pagina](https://stackoverflow.com/questions/48596045/git-difference-between-origin-master-and-origin-master)
 
-### Guardar cambios de forma temporal (Stash)
-> Si hicimos cambios en archivos de nuestro ordenador (se dice que es local, y se guarda en **unstage**),
-> para guardar esos cambios en otro lugar de "forma temporal" (se guarda en **stash**) antes de hacer un **pull** 
+- - -
+
+## 3. Guardar cambios de forma temporal (Stash)
+
+Si hicimos cambios en archivos de nuestro ordenador (se dice que es local, y se guarda en **unstage**),
+para guardar esos cambios en otro lugar de "forma temporal" (se guarda en **stash**) antes de hacer un **pull** 
 
 1. Antes de hacer **commit** de los cambios, separamos el codigo con **stash**
 > Los cambios que se hicimos en los archivos del entorno local estan en **unstage** sino hicimos commit,
@@ -45,45 +53,47 @@ Ej. origin/hotfix y hotfix, origin/testing y testing, etc..
 > donde quedan las modificaciones que aun no se hizo **commit** (si lo hicieramos quedarian
 > en **stage**)
 
-**Referencias:**
+#### 3.2 Referencias
 
 - Referencia #1 - Code Tutsplus [Ver Pagina](https://code.tutsplus.com/es/tutorials/quick-tip-leveraging-the-power-of-git-stash--cms-22988)
 - Referencia #2 - RunRoom -  [Ver Pagina](https://www.runroom.com/realworld/git-stash)
 
-### Listar historial de commits de un archivo
-> Corremos el comando **blame** presionando **SPC g b** y nos muestra un log de los cambios
-> Si presionamos **b** va a los commits anteriores y con **q** los mas recientes
+- - -
 
-**Referencias:**
+## 4. Listar historial de commits de un archivo
+
+Corremos el comando **blame** presionando **SPC g b** y nos muestra un log de los cambios
+Si presionamos **b** va a los commits anteriores y con **q** los mas recientes
+
+#### 4.2. Referencias
 
 - Referencia #1 - Magit.vc - [Ver Pagina](https://magit.vc/manual/magit/Blaming.html)
 
 - - -
 
-# Atajos 
+## 5. Atajos 
 
-| Comando     | Descripción                                                       |
-| :---------- | :-----------                                                      |
-| SPC-g s     | Muestra el estado de cambios                                      |
-| Tab         | Expande/Oculta el contenido del bloque donde esta el cursor       |
-| s           | Agrega archivos nuevos/Guarda los cambios locales **unstage** en **stage**  |
-| u           | Pasa los cambios de **stage** al entorno local (unstage)          |
-| x           | Descarta los cambios                                              |
-| c c         | Crear **commit** (luego de escribir el motivo, se debe finalizar) |
-| , ,         | Finalizar **commit**                                              |
-| b c         | Crear un nuevo branch, y hacer checkout de ese branch             |
-| b b         | Cambiar de **branch** (Ej. Ir del master al develop o testing)    |
-| t t         | Crear un **tag**                                                  |
-| p p         | Hacer **push**                                                    |
-| p e         | Hacer *push*** en un repositorio externo                          |
-| F p         | Hacer **pull**                                                    |
-|             |                                                                   |
+| Comando     | Descripción                                                                |
+| :---------- | :-----------                                                               |
+| SPC-g s     | Muestra el estado de cambios                                               |
+| Tab         | Expande/Oculta el contenido del bloque donde esta el cursor                |
+| s           | Agrega archivos nuevos/Guarda los cambios locales **unstage** en **stage** |
+| u           | Pasa los cambios de **stage** al entorno local (unstage)                   |
+| x           | Descarta los cambios                                                       |
+| c c         | Crear **commit** (luego de escribir el motivo, se debe finalizar)          |
+| , ,         | Finalizar **commit**                                                       |
+| b c         | Crear un nuevo branch, y hacer checkout de ese branch                      |
+| b b         | Cambiar de **branch** (Ej. Ir del master al develop o testing)             |
+| t t         | Crear un **tag**                                                           |
+| p p         | Hacer **push**                                                             |
+| p e         | Hacer *push*** en un repositorio externo                                   |
+| F p         | Hacer **pull**                                                             |
 
 - - -
 
-# Posibles Situaciones
+## 6. Posibles Situaciones
 
-### Hacer cambios, subirlos y actualizar
+#### 6.1 Hacer cambios, subirlos y actualizar
 
 1. Guardamos los cambios de forma local **(unstage)**
 > Modificamos los archivos, guardamos con con **SPC f s** o **M-x s**
@@ -109,9 +119,10 @@ Ej. origin/hotfix y hotfix, origin/testing y testing, etc..
 **Observacion:**
 > Si ya estamos en el menu de **magit** no es necesario presionar el atajo **SPC g s**
 
-### Resolver conflicto, diferencia entre archivos
-> Si en el paso 5 del ejemplo anterior hubiesemos tenido un conflicto,
-> porque alguien modifico el mismo archivo en las mismas lineas.
+#### 6.2 Resolver conflicto, diferencia entre archivos
+
+Si en el paso 5 del ejemplo anterior hubiesemos tenido un conflicto,
+porque alguien modifico el mismo archivo en las mismas lineas.
 
 1. Hacemos **pull**
 > Para traer el archivo con el que tenemos conflicto,
@@ -143,13 +154,14 @@ Ej. origin/hotfix y hotfix, origin/testing y testing, etc..
 
 - - -
 
-# Referencias
+## 7. Referencias
 
-## Paginas de referencia
+#### 7.1 Paginas recomendadas
 
 - Referencia #1 - Salty Crane - [Ver Pagina](https://www.saltycrane.com/blog/2018/11/magit-spacemacs-evil-magit-notes/)
 
-## Videos de referencia
+#### 7.2 Videos de recomendados
+
 - Referencia #1 - [Ver Video](https://www.youtube.com/watch?v=7ywEgcbaiys)
 - Referencia #2 - [Ver Video](https://www.youtube.com/watch?v=qXgGtyjXPiw)
 - Referencia #3 - [Ver Video](https://www.youtube.com/watch?v=fFuf3hExF5w)

@@ -1,34 +1,6 @@
-
-```
-grub-install -v # saber la version de grub 
-```
-
->I install Ubuntu GNOME (mount point: / ) into /dev/sda5. I remember to give mount points to /work (ext4) and /storage (NTFS) like mentioned in the 2.3 section of this article. Be careful not to mark them as to be formatted.
->The Swap partition gets automatically recognized, no need to worry about that.
-
-- - -
-
->I install Manjaro XFCE to /dev/sda6 partition. And once again, I remember to give mount points to /work (ext4) and /storage (NTFS) and to NOT format them.
-
-- - -
-
->I install Kubuntu ( / ) to /dev/sda8. Mount points also to /work (ext4) and /storage (NTFS), again. 
->And, the Swap partition gets automatically recognized, again. And finally, after installation is successfully finished, one last time to install the Refind boot manager in Terminal in Xubuntu:
-
-- - -
 # Conceptos basicos
 
-#### Referencias
-
-- [Particiones primarias/logicas/extendidas - Ver Video](https://www.youtube.com/watch?v=CSbUiK2pytE)
-- [Recuperar Tabla de Particiones - Ver Video](https://www.youtube.com/watch?v=I1-0cpPO3e8)
-- [Redimensionar Particiones en Ubuntu - Ver Video](https://www.youtube.com/watch?v=EQMWKwvsltY)
-- [Redimensionar particiones - Ver Videos](https://www.youtube.com/watch?v=OSkK_lgSCzk)
-- [Particionar disco duro en Ubuntu - Ver Video](https://www.youtube.com/watch?v=xuYhjtpWZuc)
-
-- - -
-
-# 1. Particionar Disco
+## 1. Particionar Disco
 
 ### 1.1 Partición para Almacenamiento
 > Creamos una partición primaria del tipo NTFS y le asignamos los permisos al usuario
@@ -97,6 +69,11 @@ cd /mnt/mystorage # presionar Control+D
 - [Referencia #5 - Ver Video](https://www.youtube.com/watch?v=ZlIbGnvTEDI) 
 -  [Agregar carpetas al Nautilus - Ver Página](https://askubuntu.com/questions/1109247/how-do-i-add-folder-to-ubuntu-18-04-1-nautilus-bookmark-list)
 - [Opciones de Montaje - Ver Pagina (it-swarm.dev)](https://www.it-swarm.dev/es/mount/opciones-de-montaje-dmask-y-fmask/961637140/)
+- [Particiones primarias/logicas/extendidas - Ver Video](https://www.youtube.com/watch?v=CSbUiK2pytE)
+- [Recuperar Tabla de Particiones - Ver Video](https://www.youtube.com/watch?v=I1-0cpPO3e8)
+- [Redimensionar Particiones en Ubuntu - Ver Video](https://www.youtube.com/watch?v=EQMWKwvsltY)
+- [Redimensionar particiones - Ver Videos](https://www.youtube.com/watch?v=OSkK_lgSCzk)
+- [Particionar disco duro en Ubuntu - Ver Video](https://www.youtube.com/watch?v=xuYhjtpWZuc)
 
 - - -
 
@@ -138,3 +115,21 @@ sudo apt-get install thunar
 - Como funciona el Filesystem de Linux - # Referencia 1  [Ver Video](https://www.youtube.com/watch?v=HIXzJ3Rz9po)
 - Como funciona el Filesystem de Linux - # Referencia 1  [Ver Video](https://www.youtube.com/watch?v=HbgzrKJvDRw)
 - [Redimensionar con Gparted en Ubuntu - Ver Video](https://www.youtube.com/watch?v=PBHFud-Dva8)
+
+- - -
+
+```
+grub-install -v # saber la version de grub 
+```
+
+>I install Ubuntu GNOME (mount point: / ) into /dev/sda5. I remember to give mount points to /work (ext4) and /storage (NTFS) like mentioned in the 2.3 section of this article. Be careful not to mark them as to be formatted.
+>The Swap partition gets automatically recognized, no need to worry about that.
+
+- - -
+
+>I install Manjaro XFCE to /dev/sda6 partition. And once again, I remember to give mount points to /work (ext4) and /storage (NTFS) and to NOT format them.
+
+- - -
+
+>I install Kubuntu ( / ) to /dev/sda8. Mount points also to /work (ext4) and /storage (NTFS), again. 
+>And, the Swap partition gets automatically recognized, again. And finally, after installation is successfully finished, one last time to install the Refind boot manager in Terminal in Xubuntu:

@@ -1,3 +1,13 @@
+* [#A] Otros
+** Revisar los archivos
+   Quedaron algunos archivos de los cuales quizas no pasaste toda la informacion
+   Revisar si ya estan documentados, porque no estan agregados en el archivo
+   de configuracion mkdocs.yml
+
+   - guia-linux-personalizar.md
+   - ide-emacs.md
+   - investigando.md
+   - guia-de-linux/guia-linux-utilidades.md
 * [TODO] [#A] Guia de git [0%]
 ** [TODO] Como manejarse con los tags y las versiones
    Algunas preguntas que se me ocurren

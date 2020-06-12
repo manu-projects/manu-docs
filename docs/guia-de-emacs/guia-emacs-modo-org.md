@@ -1,25 +1,37 @@
-## Para iniciar Emacs con un archivo .org"
+# Integrando el Modo Org
+
+<img src="/images/orgmode2.png">
+
+## 1. Tareas basicas para empezar
+
+#### 1.1 Para iniciar Emacs con un archivo .org"
 
 1. Modificar el archivo de configuracion <kbd>C-x C-f</kbd> ~/.emacs.d/init.el
 2. Ir al final del archivo <kbd>C-Fin</kbd> y agregar la siguiente linea
-> ;; cambiar por la ruta que desees
-> (find-file "~/Dropbox/orgfiles/agenda1.org")
 
-- - -
+```
+;; cambiar por la ruta que desees
+(find-file "~/Dropbox/orgfiles/agenda1.org")
+```
 
-## Crear una lista de tareas
-> Escribimos el simbolo * asterisco seguido del texto
+
+#### 1.2 Crear una lista de tareas
+
+Escribimos el simbolo * asterisco seguido del texto
 
 Ej.
+
 ```
 * Lunes
 * Martes
 ```
 
-## Crear una sublista de tareas
-> Escribimos el simbolo * asterisco dos veces, y se agrega como sublista de la lista que tenga antes.
+#### 1.3 Crear una sublista de tareas
+
+Escribimos el simbolo * asterisco dos veces, y se agrega como sublista de la lista que tenga antes.
 
 Ej.
+
 ```
 * Lunes
 ** Estudiar para mañana
@@ -27,13 +39,15 @@ Ej.
 * Martes
 ```
 
-## Crear tareas con viñetas
-> Escribimos un **guion** seguido del texto que queramos seguido de **M-RET**
+#### 1.4 Crear tareas con viñetas
+
+Escribimos un **guion** seguido del texto que queramos seguido de **M-RET**
 
 - Para agregar nuevos elementos en el mismo nivel (tabulacion) presionar **M-RET**
 - Para cambiar el tipo de viñeta presionar **Shift** y las flechas Up/Down
 
- Ej.
+Ej.
+ 
 ```
 * Lunes
 ** Estudiar para mañana
@@ -44,18 +58,18 @@ Ej.
    - Matematica
 ```
 
-- - -
+#### 1.5 Crear una lista de seguimiento con to-do
 
-# Crear una lista de seguimiento con to-do
-> Para saber cuales y cuantas tareas se resolvieron y cuantas no
+Para saber cuales y cuantas tareas se resolvieron y cuantas no
 
-Al comienzo de las listas agregar **[/]** o [%]
+Al comienzo de las listas agregar **[/]** o **[%]**
 
 - Con [/] aparecera cuantas tareas se hicieron sobre el total
 - Con [%] aparecera un % del total
 - Para cambiar el estado como **Pendiente/Finalizada** presionar **Shift** y las flechas **Left/Right**
 
 Ej.
+
 ```
 * Lunes
 ** [/] Estudiar para mañana
@@ -66,17 +80,17 @@ Ej.
    - Matematica
 ```
 
-- - -
+#### 1.6 Crear una lista de seguimiento con checkboxes
 
-### Crear una lista de seguimiento con checkboxes
-> Para saber cuales y cuantas tareas se resolvieron y cuantas no
+Para saber cuales y cuantas tareas se resolvieron y cuantas no
 
-- Con [/] aparecera cuantas tareas se hicieron sobre el total
-- Con [%] aparecera un % del total
+- Con **[/]** aparecera cuantas tareas se hicieron sobre el total
+- Con **[%]** aparecera un % del total
 - Las tareas tengan **checkbox** deben comenzar con [ ] 
 - Para marcar las tareas como **Finalizadas** presionar **C-c C-c**
 
 Ej.
+
 ```
 * Lunes
 ** [/] Parciales rendidos
@@ -89,7 +103,7 @@ Ej.
 
 - - -
 
-# Atajos
+## 2. Atajos
 
 | Holy Mode                    | Evil Mode | Descripcion                                                             |
 | :----------                  |           | :-----------                                                            |
@@ -118,28 +132,27 @@ Ej.
 
 - - -
 
-# Referencias 
+## 3. Sitios web recomendados
 
-## Paginas de referencia
+#### 3.1 Atajos
 
-### Atajos
 - [Atajos (Spacemacs.org)](https://www.spacemacs.org/layers/+emacs/org/README.html)
 - https://emacs.stackexchange.com/questions/33310/how-to-use-org-mode-speed-commands-speed-keys
-https://www.gnu.org/software/emacs/refcards/pdf/refcard.pdf
-https://www.spacemacs.org/layers/+emacs/org/README.html#key-bindings
-
-
+- https://www.gnu.org/software/emacs/refcards/pdf/refcard.pdf
+- https://www.spacemacs.org/layers/+emacs/org/README.html#key-bindings
  
-### Guias
+#### 3.2 Guias
+
 - Guia basica - Emacslife - [Ver Pagina](http://emacslife.com/baby-steps-org.html)
 - Guia basica - Orgmode - [Ver Pagina](https://orgmode.org/worg/org-tutorials/orgtutorial_dto-es.html)
 - Guia completa - Norang - [Ver Pagina](http://doc.norang.ca/org-mode.html)
 
-### Agregar etiquetas a las tareas
+#### 3.3 Agregar etiquetas a las tareas
+
 - Referencia #1 - [Ver Video](https://www.youtube.com/watch?v=FJq__bBi0nI)
 - Referencia #2 - Orgmode.org - [Ver Pagina](https://orgmode.org/manual/Setting-Tags.html)
 
-### Como organizarse con el modo Org
+#### 3.4 Como organizarse con el modo Org
 
 - Referencia #1 - [Ver Video](https://www.youtube.com/watch?v=C6nbjqn5Uxw)
 - Referencia #2 - [Ver Video - Parte 1](https://www.youtube.com/watch?v=QQSaDDVP__s)
@@ -150,29 +163,30 @@ https://www.spacemacs.org/layers/+emacs/org/README.html#key-bindings
 - Referencia #7 - [Ver Video](https://www.youtube.com/watch?v=dljNabciEGg)
 - Referencia #8 - [Ver Video](https://www.youtube.com/watch?v=fgizHHd7nOo)
 
-### Cambiar las prioridades de las tareas
+#### 3.5 Cambiar las prioridades de las tareas
 
 - Referencia #1 - [Ver Video](https://www.youtube.com/watch?v=WSF4EgQqa3Q)
 - Referencia #2 - [Ver Pagina](https://github.com/harrybournis/org-fancy-priorities)
 
-### Modificar Agenda estados
+#### 3.6 Modificar Agenda estados
 
 - Referencia #1 - Practicalli - [Ver Pagina](https://practicalli.github.io/spacemacs/org-mode/todo-states-customise.html)
 - Referencia #2 - Sainathadapa - [Ver Pagina](https://sainathadapa.github.io/emacs-spacemacs-config/org-config)
 - Referencia #3 - Orgmode.org  - [Ver Pagina](https://orgmode.org/manual/TODO-Basics.html)
 - Referencia #4 - Orgmode.org -  [Ver Pagina](https://orgmode.org/manual/Setting-Tags.html)
 
-### Otros
+#### 3.5 Otros
+
 - Comandos agenda-file - Orgmode.org [Ver Pagina](https://orgmode.org/manual/Agenda-Files.html)
 - Manejar los Hipervinculos - Orgmode.org - [Ver Pagina](https://orgmode.org/manual/Handling-Links.html)
-
 - Como usar snippets -[Ver Video](https://www.youtube.com/watch?v=UT1bcq_HIkE)
 - Agendar Fechas -[Ver Video](https://www.youtube.com/watch?v=QQSaDDVP__s)
 - Crear presentaciones - [Ver video](https://www.youtube.com/watch?v=bRoSpJ23Kzk)
 - Hacer gantt - [Ver Video](https://www.youtube.com/watch?v=5ViUBaarsbw)
 
-### Integrar archivos ORG con dropbox 
-> La referencia #1 me funciono
+#### 3.6 Integrar archivos ORG con dropbox 
+
+La referencia #1 me funciono
 
 - Referencia #1 - Webdav - [Ver Pagina](https://webdav.io/webdav/webdav-integrations/webdav-dropbox/)
 - Referencia #2 - Opensource.com - [Ver Pagina](https://opensource.com/article/19/4/calendar-git)

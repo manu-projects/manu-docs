@@ -1,5 +1,7 @@
 # Programar con Emacs
 
+<img src="/images/emacs.gif">
+
 ## 1. Editar archivos desde la terminal de linux
 >Si estamos apurados y queremos ver ó modificar un archivo sin entorno gráfico
 >ejecutamos el ide pasando el parámetro **-nw**
