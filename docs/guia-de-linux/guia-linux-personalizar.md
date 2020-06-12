@@ -1,22 +1,11 @@
+# Personalizar Linux
+
+
 <img src=/images/i3wm-gnome.png>
 
-POLYBAR es para el statusbar
-COMPTON es compositor
-
-
-## Varios dotfiles
- - https://github.com/notthebee/dotfiles
- - Entendiendo i3 [Ver Pagina](https://github.com/Airblader/i3)
- 
-
-- - -
-#  ZShell
-
-https://ohmyz.sh/
 
 ## Introducción
 
-https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 
 ## Instalación
 ```bash
@@ -458,6 +447,9 @@ neofetch --w3m $HOME/Pictures/Wallpapers/wallpaper-hacksign3.jpg
 - - -
 
 # Referencias
+
+> **Observación:** El **Polybar** es para el **statusbar** mientras que **Compton** es **compositor**
+
 - Configuraciones de otros usuarios
     - Referencia #1 - Gerardbm [Ver Página](https://github.com/gerardbm/dotfiles)
 		- Referencia #2 - HackerNoon [Ver Página](https://hackernoon.com/how-to-trick-out-terminal-287c0e93fce0)
@@ -509,6 +501,13 @@ neofetch --w3m $HOME/Pictures/Wallpapers/wallpaper-hacksign3.jpg
     - Referencia #2 Narga [Ver Página](https://www.narga.net/top-best-programing-fonts/)
     - Referencia #3 Slant [Ver Página](https://www.slant.co/topics/7014/~fonts-to-use-in-a-terminal-emulator)
 
-https://github.com/bookercodes/dotfiles/tree/arch
 
 
+## Varios dotfiles
+ - https://github.com/notthebee/dotfiles
+ - Entendiendo i3 [Ver Pagina](https://github.com/Airblader/i3)
+ - https://github.com/bookercodes/dotfiles/tree/arch
+
+##  ZShell
+- https://ohmyz.sh/
+- https://github.com/robbyrussell/oh-my-zsh/wiki/Themes

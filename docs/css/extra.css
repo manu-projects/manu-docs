@@ -1,8 +1,32 @@
+/*
+*   hslpicker.com
+*/
+
+hr{
+    border: dashed 1px hsla(270, 50%, 60%, 1) !important;
+}
+
+.wy-plain-list-decimal, .rst-content .section ol, .rst-content ol.arabic, article ol{
+    margin-bottom:10px;
+}
+
+
+/* reduzco el margen inferior en los code block */
 .wy-menu-vertical header, .wy-menu-vertical p.caption{
     background-color: #639;
     font-size: 90%;
     color: #FFF;
     padding: 0 1em;
+}
+
+/* Para bloques de codigo ``` */
+.rst-content code{
+    color: hsl(6, 85%, 50%);
+    border: solid 1px #999;
+}
+.rst-content pre code{
+    border: dashed 2px hsla(270, 50%, 70%, 1);
+    background: hsl(0, 0%, 95%);
 }
 
 .wy-menu-vertical header, .wy-menu-vertical p.caption span::before{

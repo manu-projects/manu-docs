@@ -222,41 +222,44 @@ jorgito
 *** [#A] Atajos en Hybrid Mod 
 **** Nuevos atajos que uso mas frecuente
 
-     | :------      | :----------------------------------------------------               |
-     | Comando      | Descripcion                                                         |
-     | -------      | -----------------------------------------------------               |
-     | SPC b b      | Muestra un listado de buffers, para cambiar el actual               |
-     | SPC '        | Carga el buffer de la terminal                                      |
-     | SPC f r      | Lista los archivos abiertos recientemente                           |
-     | SPC f f      | Para abrir un archivo                                               |
-     | SPC f e R    | Recarga las configuraciones de .spacemacs                           |
-     | SPC q q      | Cerrar emacs                                                        |
-     | SPC q r      | Reiniciar emacs                                                     |
-     | SPC g r      | Cargar magit                                                        |
-     | SPC a o o    | Carga menu org-agenda                                               |
-     | , '          | Carga modo edicion especial para bloques de codigo                  |
-     | , ,          | Ejecuta codigo de un bloque de codigo                               |
-     | SPC <numero> | Mueve cursor hacia el numero de buffer indicado                     |
-     | SPC p f      | Cambiar carpeta de proyecto                                         |
-     | SPC f p      | Listar y abrir archivos del proyecto actual                         |
-     | C-x 1        | Cierra todos los buffers excepto donde esta el cursor               |
-     | C-x 2        | Abre un buffer horizontal al actual                                 |
-     | C-x 3        | Abre un buffer vertical al actual                                   |
-     | C-x 0        | Cierra buffer actual                                                |
-     | gg           | Mueve el cursor a la primera linea del archivo                      |
-     | <numero> gg  | Mueve el cursora la linea <numero> que indiquemos                   |
-     | :wq          | Guarda los cambios y cierra                                         |
-     | /texto RET   | Para buscar texto                                                   |
-     | d            | Borra una linea                                                     |
-     | y            | Copiar texto seleccionado                                           |
-     | p            | Pegar texto                                                         |
-     | v <h> <l>    | Seleccionar texto                                                   |
-     | V            | Seleccionar toda la linea                                           |
-     | x            | Borra el caracter por caracter                                      |
-     | n            | Avanza a la siguiente palabra de la busqueda (realizada con /texto) |
-     | ^            | Ir al principio de linea                                            |
-     | $            | Ir al final de linea                                                |
-     | <sr RET      | Carga snippet de bloque de codigo                                   |
+     | :------             | :----------------------------------------------------                            |
+     | Comando             | Descripcion                                                                      |
+     | -------             | -----------------------------------------------------                            |
+     | g c                 | Comentar un linea o bloque seleccionado (difiere entre lenguaje de programacion) |
+     | SPC b b             | Muestra un listado de buffers, para cambiar el actual                            |
+     | SPC '               | Carga el buffer de la terminal                                                   |
+     | SPC f r             | Lista los archivos abiertos recientemente                                        |
+     | SPC f f             | Para abrir un archivo                                                            |
+     | SPC f e R           | Recarga las configuraciones de .spacemacs                                        |
+     | SPC q q             | Cerrar emacs                                                                     |
+     | SPC q r             | Reiniciar emacs                                                                  |
+     | SPC g r             | Cargar magit                                                                     |
+     | SPC a o o           | Carga menu org-agenda                                                            |
+     | , '                 | Carga modo edicion especial para bloques de codigo                               |
+     | , ,                 | Ejecuta codigo de un bloque de codigo                                            |
+     | SPC <numero>        | Mueve cursor hacia el numero de buffer indicado                                  |
+     | SPC p f             | Cambiar carpeta de proyecto                                                      |
+     | SPC f p             | Listar y abrir archivos del proyecto actual                                      |
+     | C-x 1               | Cierra todos los buffers excepto donde esta el cursor                            |
+     | C-x 2               | Abre un buffer horizontal al actual                                              |
+     | C-x 3               | Abre un buffer vertical al actual                                                |
+     | C-x 0               | Cierra buffer actual                                                             |
+     | gg                  | Mueve el cursor a la primera linea del archivo                                   |
+     | <numero> gg         | Mueve el cursora la linea <numero> que indiquemos                                |
+     | :wq                 | Guarda los cambios y cierra                                                      |
+     | /texto RET          | Para buscar texto                                                                |
+     | d                   | Borra una linea                                                                  |
+     | y                   | Copiar texto seleccionado                                                        |
+     | p                   | Pegar texto                                                                      |
+     | v <h> <l>           | Seleccionar texto                                                                |
+     | V                   | Seleccionar toda la linea                                                        |
+     | x                   | Borra el caracter por caracter                                                   |
+     | n                   | Avanza a la siguiente palabra de la busqueda (realizada con /texto)              |
+     | ^                   | Ir al principio de linea                                                         |
+     | $                   | Ir al final de linea                                                             |
+     | <sr RET             | Carga snippet de bloque de codigo                                                |
+     | V g c               | Selecciona toda una linea y la comenta                                           |
+     | v Arrow-Up/Down g c | Seleccionar bloques de codigo y comentarlos                                      |
 
 
 **** [DONE] Atajos en Evil Mode
@@ -366,7 +369,17 @@ jorgito
     - https://develop.spacemacs.org/layers/+completion/auto-completion/README.html
     - https://github.com/joaotavora/yasnippet#where-are-the-snippets
     - https://practicalli.github.io/spacemacs/snippets/add-your-own-snippets.html
-** [TODO] Integrando el Modo Org [53%]
+*** Utilizando el buffer scratch
+    Referencias:
+    - https://dev.to/huytd/emacs-from-scratch-1cg6
+*** Utilizando Swiper
+    Al parecer sirve como buscador (parece que se pueden usar expresiones regulares),
+    con un buffer debajo que indica las coincidencias
+    Referencias:
+    - https://github.com/abo-abo/swiper/issues/1550
+    - https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html
+    - https://www.youtube.com/watch?v=AaUlOH4GTCs
+** [TODO] Integrando el Modo Org [50%]
 *** Creando presentaciones con beamer
     Errores comunes:
     1. No me aparece la opcion para exportar beamer
@@ -384,6 +397,11 @@ jorgito
     - https://orgmode.org/worg/exporters/beamer/presentation.html
     - https://cestlaz.github.io/posts/using-emacs-50-presentations/
     - https://www.youtube.com/watch?v=Ho6nMWGtepY
+*** [TODO] Agenda 
+    - https://es.wikipedia.org/wiki/CalDAV
+    - https://es.wikipedia.org/wiki/ICalendar
+    - https://es.wikipedia.org/wiki/HCalendar
+    - https://es.wikipedia.org/wiki/WebDAV
 *** Creando un html moderno
     Referencias:
     - https://github.com/fniessen/org-html-themes
@@ -586,9 +604,49 @@ jorgito
    Quedaron algunos tips en [[https://trello.com/b/ktG3yyQS/xmanudocs][XManuDocs (trello.com)]]
 *** [TODO] Powerline estructura
 *** [TODO] Personalizar la shell y terminal
+** Addons
+   CLiente de telegram
+   https://github.com/zevlg/telega.el
+
 * Guia de Vim
+  1. El primer paso es ir al Evil Mode presionando <kbd>ESC</kbd>, y presionar la tecla dos puntos <kbd>:</kbd>
+  2. Seguido a los <kbd>:</kbd> tenemos algunas opciones
+     - <kbd>s</kbd> reemplaza la primera palabra que coincida (solo en la linea donde este el cursor)
+     - <kbd>%s</kbd><kbd>s</kb> reemplaza la primera palabra que coincida (en cada linea del archivo)
+  
+  **Observacion:** Evil Mode es la modalidad Vim y el Holy Mode el de emacs
+    
+  #+BEGIN_EXAMPLE
+  :s/actualidad/actualmente
+  Reemplazamos la primera palabra que coincida con "actualidad" al comienzo de la linea donde este el cursor,
+  y la reemplazamos por "actualmente"
+
+  :s/actualidad/actualmente/g
+  Similar al anterior ejemplo, pero reemplaza todas las palabras que coincidan en la linea donde este el cursor
+  (es decir no solo la primera que encuentre, si no todas)
+
+  :s/actualidad/actualmente/gc
+  Similar al anterior pero nos pide confirmacion al momento de reemplazar
+  
+  :%s/actualidad/actualmente
+  Reemplazamos la primera palabra que coincida con "actualidad" al comienza de cada linea del archivo,
+  y la reemplazamos por "actualmente"
+
+  :%s/actualidad/actualmente/g
+  Similar al anterior pero reemplaza todas las palabras que coincidan, en todo el archivo (es decir no la primera que encuentre)
+
+  :%s/actualidad/actualmente/gc
+  Similar al anterior pero nos pide confirmacion al momento de reemplazar
+  #+END_EXAMPLE
+
+  Referencias
   - Guias basicas
-  - [[https://www.youtube.com/watch?v=iWo1cDGlNDI][comandos basicos - Ver Video]]
+    - [[https://www.youtube.com/watch?v=iWo1cDGlNDI][comandos basicos - Ver Video]]
+  - Buscar texto y reemplazar con Expresiones Regulares
+    - https://hipertextual.com/archivo/2015/01/como-usar-vim-14/
+    - https://www.atareao.es/tutorial/vim/buscar-y-reemplazar-en-vim/
+    - https://www.imd.guru/sistemas/vim/buscar-y-reemplazar.html
+    - https://www.linux.com/training-tutorials/vim-tips-basics-search-and-replace/
   Pendiente
   - https://www.youtube.com/watch?v=8PZZkIr5Dcc
   - https://www.youtube.com/watch?v=jwxK5Eg_TnM
@@ -656,6 +714,16 @@ jorgito
    - Averiguar si el Bitwarden del escritorio funciona en las demas distribuciones ok
    - Comentar lo de la encriptacion de contenido con rclone
 
-* Guia Linux - Lineas de comando
+* Guia Linux - Lineas de comando fundamentales
+** Comando Sed (Manipular Texto)
+  Al parecer es bastante parecido al reemplazar de vim
+
+  Referencias:
+  - http://www.sromero.org/wiki/linux/aplicaciones/uso_de_sed
+  - https://likegeeks.com/es/sed-de-linux/
+  - https://www.tecmint.com/linux-sed-command-tips-tricks/
+  - https://www.linuxadictos.com/sed-ejemplos-del-comando-magico-para-gnu-linux.html
+  - https://blog.desdelinux.net/sed-shell-scripting-comando/
+
 ** Pendiente
    - # averiguar por: doas, cmus, qutebrowser, emerge

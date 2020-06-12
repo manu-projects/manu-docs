@@ -8,8 +8,8 @@ theme:
 plugins:
   - bootstrap-tables
 extra_css:
-  - css/extra.css
   - css/bootstrap.min.css
+  - css/extra.css
 extra_javascript:
   - js/jquery-3.5.0.min.js
   - js/customize.js 
@@ -24,7 +24,7 @@ nav:
     - 'Personalizar el Sistema': 'guia-de-linux/guia-linux-personalizar.md'
     - 'Configuraciones': 'guia-de-linux/guia-linux-3.md'
     - 'Particionamiento': 'guia-de-linux/guia-linux-particionamiento.md'
-    - 'Maquinas Virtuales': 'guia-de-linux/guia-linux-vagrant-ansible.md'
+    - 'Vagrant y Ansible': 'guia-de-linux/guia-linux-vagrant-ansible.md'
     - 'Gestores de paquetes': 'guia-de-linux/guia-linux-gestores-de-paquetes.md'
     - 'Expresiones Regulares': 'guia-de-linux/guia-linux-expresiones-regulares.md'
     - 'Configuración de Red': 'guia-de-linux/linux-configuracion-de-red.md'

@@ -2,20 +2,23 @@
 <img src="/images/itsme.jpg">
 </span>
 
->Bienvenidos! Soy Emmanuel y este es mi blog de programacion.
+>Bienvenido a mi blog de programacion :)
 
->Mis hobbies son la gastronomia, la programacion y la carpinteria. Quizas creeras que son muy diferentes, 
->pero yo considero que me permiten crear "casi" lo que quiera. Cocinar las mejores recetas (lo dulce,
->es lo que mas disfruto), armar muebles a medida y claramente desarrollar programas de cualquier tipo.
+>Es opcional pasar por esta sección, pero me pareció importante transmitir quien es el que escribe todo esto,
+>después de todo, y dar la seguridad que soy un humano más, creo, espero (?).
 
->Como todos a veces me encuentro con proyectos que requieren mas tiempo de desarrollo e investigacion
->pero si me interesa, me llama la atencion y considero que tienen alguna utilidad te aseguro que 
->no dormire hasta lograrlo (pero... si me quedo dormido, seguramente siga pensando en como
->resolverlo al madrugar)
+>Soy un apasionado de la gastronomía, de la programación y porque no también de la carpintería.
+>Me parece que cada actividad nos permite reinventarnos, ser y hacer lo que queramos (siempre que esté a nuestro alcance).
 
->Mi curiosidad sobre aprender a programar surgio por ser un fanatico de los videojuegos, aunque actualmente 
->siento un gran interes por mejorar mi entorno de desarrollo en Linux.
+>Pero bueno, si entraste a mi blog no creo que haya sido porque quieras leer de comida, o muebles.
+>Asi que, vamos al grano, como todos a veces me encuentro con proyectos que requieren más tiempo de 
+>desarrollo e investigación, y si realmente alguno atrapa mi atención y considero que tienen alguna utilidad a futuro
+>seguramente no duerma por algunos días hasta lograrlo o acercarme al menos un poco. (Este es uno de esos proyectos pendientes)
 
+>Por último, lo que ciertamente despertó mi curiosidad sobre aprender a programar, fue el hecho de ser un 
+>un fanático de los videojuegos de computadora en tiempo real, aunque en la actualidad perdí cierto interés en los
+>juegos, mi interés por la informática sigue. Y nunca podré olvidar la famosa película de ficción **The Matrix***, fue
+>mi segunda motivación.
 
 <span style="float:none;"></span>
 
