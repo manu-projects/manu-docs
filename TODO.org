@@ -662,7 +662,15 @@ jorgito
   - https://www.youtube.com/watch?v=jwxK5Eg_TnM
   - https://www.youtube.com/watch?v=OnUiHLYZgaA
   -
-* Guia Gestores de Archivos 
+* Guia del Gestor de Archivos Ranger
+** Filtrar archivos
+   1. Presionar zf seguido de la expresion regular
+   2. Presionar v para seleccionar los archivos y luego accion que quieras (copiar, cortar)
+   3. Presionar nuevamente zf para volver a ver todos los archivos
+
+   Referencias
+   - https://unix.stackexchange.com/questions/568899/search-and-select-all-matching-files-in-ranger
+** Atajos
   Ranger, tiene los mismos atajos que vim
    - h,l para moverse entre los niveles de los directorios
    - dd para cortar
@@ -737,3 +745,8 @@ jorgito
 
 ** Pendiente
    - # averiguar por: doas, cmus, qutebrowser, emerge
+* Nuevas tecnologias 
+** Mermaidjs
+   Para hacer graficos (Diagramas de flujo, gantt, etc..)
+   https://mermaid-js.github.io/mermaid/#/flowchart
+   https://mermaid-js.github.io/mermaid-live-editor
