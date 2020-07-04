@@ -3,13 +3,13 @@
 ## Comandos basicos de Rclone
 
 | Comando                                       | Descripcion                                                    |
+| :-------------------------------------------- | :------------------------------------------------------------- |
 | rclone listremotes                            | Lista los servicios                                            |
 | rclone config                                 | Muestra la configuracion                                       |
 | rclone ls unRemoto:                           | Lista los archivos y directorios de unRemoto                   |
 | rclone lsd unRemoto:                          | Lista solo los directorios                                     |
 | rclone mkdir unRemoto:unaCarpeta              | Crea el directorio unaCarpeta en el remoto unRemoto            |
 | rclone sync unRemoto:unaCarpeta ~/Escritorio/ | Sincroniza contenido del remoto a una carpeta la maquina local |
-|                                               |                                                                |
 
 **Observaciones:**
 - Es posible que necesites agregar sudo 

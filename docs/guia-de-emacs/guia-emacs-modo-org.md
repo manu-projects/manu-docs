@@ -186,9 +186,16 @@ Ej.
 
 #### 3.6 Integrar archivos ORG con dropbox 
 
-La referencia #1 me funciono
+La referencia #1 me funciono solo necesitas realizar
 
-- Referencia #1 - Webdav - [Ver Pagina](https://webdav.io/webdav/webdav-integrations/webdav-dropbox/)
-- Referencia #2 - Opensource.com - [Ver Pagina](https://opensource.com/article/19/4/calendar-git)
+1. Escribis en la terminal `git clone https://aur.archlinux.org/dropbox.git`
+2. Entras al directorio `cd dropbox`
+3. Lo compilas con `makepkg -si`
+
+Luego de bajarse el paquete se te creara un directorio `~\Dropbox`
+
+- Referencia #1 - LinuxHint [Ver Pagina-](https://linuxhint.com/install_dropbox_manjaro_linux/)
+- Referencia #2 - Webdav - [Ver Pagina](https://webdav.io/webdav/webdav-integrations/webdav-dropbox/)
+- Referencia #3 - Opensource.com - [Ver Pagina](https://opensource.com/article/19/4/calendar-git)
 
 

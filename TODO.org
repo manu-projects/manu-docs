@@ -171,6 +171,53 @@
 #+RESULTS:
 jorgito
 
+* Haskell y Latex
+  Para hacer ecuaciones algebraicas para trabajos practicos como fisica:
+  1. Podemos usar haskell para realizar los calculos de manera rapida
+  2. Podemos usar latex para visualizar las ecuaciones en formato pdf
+
+  Tips:
+  1. Para usar coseno y seno tenes que pasar los grados a radianes
+  2. Para hacer cuentas en la terminal, manera rapida de tipar las funciones
+    es usar la misma sintaxis que al tipar funciones pero a la izquierda
+    iran las operaciones
+    Prelude> 0.219 / (cos(radianes 58) * 10) :: CReal
+
+  3. Para evitar resultados con notacion cientifica
+     1. Primera solucion:
+     2. Importar en el archivo .hs el modulo Numeric
+     3. Utilizar la siguiente funcion, para parsear los resultados
+        de notacion cientifica
+         showFullPrecision :: Double -> String
+         showFullPrecision x = showFFloat Nothing x ""
+     4. Segunda solucion:
+        1. Agregar la dependencia numbers en package.yaml de stack
+        2. Importar en el archivo .hs el modulo Data.Number.CReal
+        3. Agregar en el tipado de las funciones :: CReal
+  
+  #+NAME: Ecuaciones algebraicas en haskell
+  #+SRC_BEGIN haskell
+   module TpFisicaPunteria where
+   import Data.Number.CReal
+
+   -- Obs: Si no pasas a radianes el sin/cos devuelven otros numeros
+   radianes grados = (grados*2*pi) / 360
+   -- Obs: Si no usas CReal devuelve el numero en notacion cientifica
+  vMax :: CReal
+  vMax = 0.219 / (cos(radianes 58) * 10)
+  #+END_SRC
+
+  Referencias
+  1. https://stackoverflow.com/questions/37006362/haskell-how-to-avoid-scientific-notation-in-decimal-output
+  2. https://www.reddit.com/r/haskell/comments/9v40jp/using_cos_and_sin/
+  3. https://stackoverflow.com/questions/58042134/problem-loading-module-data-number-creal-in-cabal-file
+  4. https://downloads.haskell.org/~ghc/7.8.4/docs/html/users_guide/packages.html
+  5. https://hackage.haskell.org/package/exact-real-0.12.4/docs/Data-CReal.html
+  6. https://stackoverflow.com/questions/17566768/haskell-sine-and-cosine-functions-not-working
+  7. https://xbuba.com/questions/37006362
+  8. http://rigaux.org/language-study/syntax-across-languages-per-language/Haskell.html
+  9. https://hackage.haskell.org/package/ClassyPrelude-0.1/docs/Prelude-Math.html#t:Floating
+
 * [TODO] Guia de Emacs [0%]
 ** Aprendiendo Elisp
 *** Atajos
@@ -389,7 +436,75 @@ jorgito
     - https://github.com/abo-abo/swiper/issues/1550
     - https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html
     - https://www.youtube.com/watch?v=AaUlOH4GTCs
-** [TODO] Integrando el Modo Org [50%]
+** [TODO] Integrando el Modo Org [0%]
+*** TODO Utilizando columnas
+    Pendiente a revisar mas..
+    
+    Referencias:
+    - [[https://orgmode.org/worg/org-tutorials/org-column-view-tutorial.html][Org Column Tutorial - orgmode.org]]
+    - [[https://correl.phoenixinquis.net/2014/11/25/getting-organized-with-org-mode.html][Getting organized - By Correl Roush]]
+*** TODO Configuracion para bloques de codigo
+
+    **Para abrir el bloque de codigo en un nuevo buffer**
+    1. Ejecutar C-c ' o SPC , . para cerrar el buffer SPC , ,
+    2. Otra manera si no funciona C-c ' podes probar con C-x n b  
+      para volver a ver el resto del contenido C-x n w
+
+    **Para autoindentar el codigo**
+    Para auto indentar el codigo correr en ese buffer M-x aggressive-indent-mode 
+    volver a ejecutar para desactivar
+       
+    **Algunos ejemplos**
+    - Con :var podemos agregar variables que usaremos en el codigo con $
+    - Con :results podemos cambiar como imprimir el resultado osea el output
+      - drawer, aparece el inicio y fin del codigo, si no queremos que se 
+        acumule el codigo, solo que se actualice esta bueno
+      - raw, se va a acumular por cada ejecucion
+
+    #+NAME: probando-esto
+    #+BEGIN_SRC sh :var nombre="mumuki" :results drawer 
+      pwd # para ver ruta actual
+      #ls | grep "mumuki"
+      ls | grep "$nombre" # filtro directorio actual por un nombre
+    #+END_SRC
+
+
+    Referencias:
+    - [[http://www.howardism.org/Technical/Emacs/literate-devops.html][Varios tips - Howardism.org]]
+    - [[https://maciaschain.gitlab.io/gnutas/eliminar_drawers.html][Eliminar los encabezados - By MaciasChain]]
+    - [[https://org-babel.readthedocs.io/en/latest/header-args/][Header args - By OrgBabel]]
+    - https://flipboard.com/@ipp/emacs-tricks-stuff-g7r2eiq2z
+
+    **Configuacion**
+
+    1. Modificar el archivo de configuracion de spacemacs con `SPC f e d`
+    2. Buscar la linea que diga `org-babel-do-load-languages` y agregar
+       una linea por cada lenguaje entre parentesis (nombreLenguaje . t)
+    3. Si no aparece agregar el siguiente bloque de codigo y modificar a gusto
+        #+BEGIN_SRC emacs-lisp
+        (org-babel-do-load-languages 'org-babel-load-languages
+                              (append org-babel-load-languages
+                               '((python     . t)
+                                 (ruby       . t)))
+        #+END_SRC
+    
+    Paso a paso:
+    1. Para encapsular bloques de codigo empezar con #+BEGIN_SRC seguido de nombre de lenguaje,
+    escribir el codigo deseado y finalizar con la siguiente linea #+END_SRC
+    2. Para ejecutar bloque de codigo ejecutar <bdk>C-c C-c</bdk>
+    
+
+
+    Referencias para configuracion y resolver errores:
+    - [[https://www.reddit.com/r/emacs/comments/4wm4y2/appending_to_orgbabelloadlanguages/][Referencia #1 - Reddit.com]]
+    - [[https://github.com/syl20bnr/spacemacs/issues/9867][Referencia #2 - Github.com]]
+    - [[https://orgmode.org/manual/Using-Header-Arguments.html][Using Header Arguments (orgmode.org)]]
+    - [[https://orgmode.org/worg/org-contrib/babel/header-args.html][Header Arguments and result types (orgmode.org)]]
+    - [[https://www.offerzen.com/blog/literate-programming-empower-your-writing-with-emacs-org-mode][Literate Programming (offerzen.com)]]
+    - [[https://steemit.com/spacemacs/@shark8me/indenting-code-blocks-in-spacemacs-org-mode][Indentar (tabular) codigo (steemit.com)]]
+    - [[https://emacs.stackexchange.com/questions/18273/tell-org-to-treat-block-quotes-as-a-special-environment][Modificar bloques de codigo en otro buffer (emacs.stackexchange.com)]]
+    - [[https://blog.8bitzen.com/posts/27-02-2019-using-orgmode-babel/][Using orgmode babel (8bitzen)]] 
+
 *** Creando presentaciones con beamer
     Errores comunes:
     1. No me aparece la opcion para exportar beamer
@@ -421,44 +536,6 @@ jorgito
     - http://snarvaez.poweredbygnulinux.com/notes/org-mode-publishing-system.html
     - https://orgmode.org/manual/Include-Files.html
     - https://orgmode.org/manual/Publishing.html
-*** [#A] Escribiendo bloques de codigo
-    Posibles errores:
-    1. No me deja compilar bloques de codigo y me muestra el siguiente error
-    "no org-babel-execut function for lisp"
-    Solucion:
-    1. Agregar en el archivo de configuracion .spacemacs
-       #+BEGIN_SRC emacs-lisp 
-         (org-babel-do-load-languages
-          (quote org-babel-load-languages)
-          (quote (
-                  (ditaa . t)
-                  (haskell . t)
-                  (sh . t)
-                  (bash . t)
-                  (lisp . t)
-
-                  )))
-       #+END_SRC
-    
-    Paso a paso:
-    1. Para encapsular bloques de codigo empezar con #+BEGIN_SRC seguido de nombre de lenguaje,
-    escribir el codigo deseado y finalizar con la siguiente linea #+END_SRC
-    2. Para ejecutar bloque de codigo ejecutar <bdk>C-c C-c</bdk>
-    3. Para abrir el bloque de codigo en un nuevo buffer ejecutar <bdk>C-c '</bdk>
-    o <bdk>, .</bdk> y para cerrar el buffer <bdk>, ,</bdk>
-    4. Otra manera si no funciona <bdk>C-c '</bdk> podes probar con <bdk>C-x n b</bdk> y 
-      para volver a ver el resto del contenido <bdk>C-x n w</bdk>
-    5. Para auto indentar el codigo correr en ese buffer <bdk>M-x aggressive-indent-mode</bdk>
-       volver a ejecutar para desactivar
-
-    Referencias:
-    - [[https://orgmode.org/manual/Using-Header-Arguments.html][Using Header Arguments (orgmode.org)]]
-    - [[https://orgmode.org/worg/org-contrib/babel/header-args.html][Header Arguments and result types (orgmode.org)]]
-    - [[https://www.offerzen.com/blog/literate-programming-empower-your-writing-with-emacs-org-mode][Literate Programming (offerzen.com)]]
-    - [[https://steemit.com/spacemacs/@shark8me/indenting-code-blocks-in-spacemacs-org-mode][Indentar (tabular) codigo (steemit.com)]]
-    - [[https://emacs.stackexchange.com/questions/18273/tell-org-to-treat-block-quotes-as-a-special-environment][Modificar bloques de codigo en otro buffer (emacs.stackexchange.com)]]
-    - [[https://blog.8bitzen.com/posts/27-02-2019-using-orgmode-babel/][Using orgmode babel (8bitzen)]] 
-
 *** Atajos dentro de la agenda
     | Atajo     | Descripcion                                                     |
     | SPC-a o o | Abrir agenda                                                    |
@@ -580,7 +657,6 @@ jorgito
 *** Configuraciones para Exportar
     - [[https://orgmode.org/guide/Export-Settings.html][Referencia #1 (orgmode.org)]]
     - [[https://orgmode.org/manual/Export-Settings.html][Referencia #2 (orgmode.org)]]
-
 ** [TODO] Integrando Git con MAGIT [75%]
 *** [TODO] Tips [75%]
 **** [TODO] Diferencia entre push remote y upstream
