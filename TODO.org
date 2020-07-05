@@ -1,3 +1,164 @@
+* TODO [#A] Guia Linux Que hacer luego de Instalar Linux
+** 1. Comandos utiles
+
+| Comando    | Descripcion              |
+| :------    | :----------              |
+| pacman -Ss | para buscar un paquete   |
+| pacman -S  | para instalar un paquete |
+|            |                          |
+
+** 2. Actualizar e Instalar paquetes
+   #+NAME: Actualizar lista de paquetes 
+   #+BEGIN_SRC bash
+     # actualizamos la lista de paquetes
+     sudo pacman-mirrors -f0
+     # actualizamos 
+     sudo pacman -Syyu
+   #+END_SRC
+   
+   Referencias
+   - [[https://wiki.manjaro.org/Pacman-mirrors][Pacman Mirrors, WikiArch]]
+     
+** 3. Instalamos paquetes
+   #+NAME: Instalacion de paquetes
+   #+BEGIN_SRC bash
+     # Navegador web minimalista que utiliza comandos de vim
+     sudo pacman -S qutebrowser
+     # Gestor de directorios por comandos
+     sudo pacman -S ranger
+     # Nuevo gestor de paquetes# aurman ?
+
+     # otros
+     sudo pacman -S telegram-desktop
+   #+END_SRC
+
+** 4. Configurar github
+   Para evitar escribir usuario y clave en cada push trabajos con la clave publica y 
+   privada. Abrimos la terminal e ingresamos los siguientes comandos.
+   
+   #+NAME: Configurar github
+   #+BEGIN_SRC bash
+     # generamos la clave publica y privada
+     ssh-keygen
+     # buscamos el archivo que tiene la clave publica y lo mostramos por pantalla
+     find ~ -name "id_rsa.pub" | xargs cat
+     # buscamos el archivo de la clave pública que generamos# la copiamos y lo 
+     # agregamos en la configuración de git# https://github.com/settings/keys
+     # agregamos git a la lista de host confiables
+     ssh -T git@github.com```
+   #+END_SRC
+
+** 5. Instalar y configurar Emacs
+*** 5.1 Instalar y configurar
+   #+NAME: Instalar y configurar Emacs
+   #+BEGIN_SRC bash
+     # instalamos emacs
+     sudo pacman -S emacs
+     # clonamos la configuracion de spacemacs en emacs
+     git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+     # cambiamos la rama por develop, tiene mas funcionalidades (ej. treemacs)
+     cd ~/.emacs.d && git checkout develop```
+   #+END_SRC
+
+*** 5.2 Activar el modo hibrido 
+    Modificar en el archivo de configuracion de spacemacs en `~/.spacemacs````;; 
+    encontrar la siguiente linea, debe quedar de esta manera con hybrid
+    
+    #+BEGIN_SRC emacs-lisp
+    dotspacemacs-editing-style 'hybrid`
+    #+END_SRC
+    
+*** 5.3 Activamos layers
+    Activar algunos layers utilesBuscar la linea `dotspacemacs-configuration-layers` del 
+    archivo `~/.spacemacs` y agregar o descomentar las siguientes lineas```
+    
+    #+BEGIN_SRC emacs-lisp
+    ;; para control de versiones deproyectos
+    git
+    ;; para usar el org-mode y organizar archivos con tareas
+    org
+    #+END_SRC
+
+    Referencias:
+    https://github.com/Alexander-Miller/treemacs/blob/master/README.org
+
+** Versionar los dotfiles
+   ya habias averiguado un poco de eso, deberias mejorarlo,
+   no terminaste lo que tenes en ~/manjaro-dotfiles
+** Mkdocs
+   - Averiguar como mejorar el breadcrumb
+   - Analizar si seguirlo en esta seccion o abrir una nueva que sea de documentacion
+* TODO [#A] Errores de Manjaro
+Mezclar con la parte de particionamiento
+manjaro error: you need to load the kernel first
+
+  #+BEGIN_SRC bash
+    cat /etc/lsb-release # para saber la version de manjaro
+
+    sudo fdisk -l
+    sudo parted -l
+
+    # Before doing that check in chroot status of kernels:
+    mhwd-kernel -l
+
+    # Depending on result I would recommend to install some kernels in addition, e.g. 5.4:
+    sudo mhwd-kernel -i linux54
+    sudo blkid # in UEFI
+
+    mhwd-kernel -l # gives a list of available kernels
+    mhwd-kernel -li # gives a list of installed kernels
+
+    efibootmgr -v
+  #+END_SRC
+  
+para saber las particiones
+I went to BIOS for another look at what you mention:Secure Boot: disabled.Fast Boot: I see no such option in my BIOS.UEFI: Yes: “Boot Mode” is set to “UEFI”.Selected grub2 bootloader: I’m not quite sure what you mean by this. Is there a place I can go to select it?
+
+- https://instintobinario.com/rescatar-el-arranque-de-linux-con-la-consola-de-grub2/
+
+- https://forum.manjaro.org/t/howto-rescue-your-system-error-hook-invalid-value-path/123226
+- https://forum.manjaro.org/t/you-need-to-load-kernel-first-after-failed-update/132141/3
+- https://forum.manjaro.org/t/using-livecd-v17-0-1-and-above-as-grub-to-boot-os-with-broken-bootloader/24916
+- https://classicforum.manjaro.org/index.php?topic=1011.0 
+- https://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader
+- https://wiki.manjaro.org/index.php?title=UEFI_-_Install_Guide
+- https://forum.manjaro.org/t/grub-install-error-cannot-find-efi-directory/83380
+- https://forum.manjaro.org/t/node-error-while-loading-shared-libraries-libicui18n-so-60-cannot-open-shared-object-file-no-such-file-or-directory/37553/4
+- https://forum.manjaro.org/t/file-boot-vmlinuz-not-found-after-update-i-did-update-grub-black-screen/121445/2
+- https://forum.manjaro.org/t/howto-rescue-your-system-error-hook-invalid-value-path/123226
+- https://bbs.archlinux.org/viewtopic.php?id=235203
+- https://forum.manjaro.org/t/power-went-out-during-upgrade-file-boot-vmlinuz-5-1-x86-64-not-found/115909/21
+- https://forum.manjaro.org/t/boot-vmlinuz-not-found-after-hibernation/111409/7
+- https://forum.manjaro.org/t/manjaro-error-file-boot-vmlinuz-5-5-x86-64-not-found-after-update/131538/5
+- https://forum.manjaro.org/t/error-file-vmlinuz-5-4-x86-64-not-found/131502/4
+- https://forum.manjaro.org/t/error-file-vmlinuz-5-4-x86-64-not-found/131502/6
+
+- https://deblinux.wordpress.com/2012/09/22/como-crear-un-live-usb-de-manjaro-linux-y-no-morir-en-el-intento/
+- https://wiki.manjaro.org/index.php?title=Burn_an_ISO_File#Writing_to_a_USB_Stick_in_Linux
+- https://www.linuxadictos.com/17781.html
+- https://archlinuxlatinoamerica.wordpress.com/2016/10/08/crear-pendriveusb-booteable-desde-nuestra-terminal-en-gnulinux/
+- https://wiki.manjaro.org/index.php?title=Burn_an_ISO_File
+
+  
+The issue is usually provoked when you don't maintain your system at regular intervals - and I am not thinking yearly - because such neglect will often result in similar problems.As the issue stems from a change in pacman code - you may be affected if you install from an ISO previous to 18.1.5.More technical it is a change to pacman and libalpm from 5.1 to 5.2. Users keeping their system up-to-date are not affected - users neglecting updates or installing from an older ISO are affected.1ra Solucion
+You need an ISO. Boot your system using the ISO and chroot into the installation.# manjaro-chroot -a
+Update pacmanFirst step is to update pacman - this may succeed or it may not# pacman -S pacman
+
+Otraou might also suffer from a faulty kernel-initramfs image. So enter your installation with chroot and update your packages.
+sudo pacman -SyuThen recreate the kernel
+sudo mkinitcpio -p linux
+And then redo the grub.cfg
+sudo update-grub2da SolucionOnce you booted in Live media and you chroot the installed system, then you run:manjaro-chroot -asudo pacman -Syyu - to complete the update
+sudo pacman -S grub
+sudo grub-install /dev/sda - for this you have to make sure the installed system is on sda
+sudo update-grub
+then reboot into your system, after you removed the live media install USB.
+ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) Create the /boot/efi directorysudo mkdir /boot/efi
+3.) Mount the EFI partition as /boot/efisudo mount /dev/sdXY /boot/efiX = Alphabet of the drive = a,b,c ...Y = Partition number of the EFI partition = 1,2,3,4...Example - /dev/sda4
+4.) Re-install Grub.sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=manjaro --recheck
+5.) Update Grub configuration file.sudo update-grub
+
+
 * [#A] Otros
 ** Revisar los archivos
    Quedaron algunos archivos de los cuales quizas no pasaste toda la informacion
@@ -658,6 +819,8 @@ jorgito
     - [[https://orgmode.org/guide/Export-Settings.html][Referencia #1 (orgmode.org)]]
     - [[https://orgmode.org/manual/Export-Settings.html][Referencia #2 (orgmode.org)]]
 ** [TODO] Integrando Git con MAGIT [75%]
+*** Nuevas funcionalidades
+    [[http://jr0cket.co.uk/2017/02/spacemacs-using-magit-with-github.html][Magithub, by jr0cket]]
 *** [TODO] Tips [75%]
 **** [TODO] Diferencia entre push remote y upstream
      - Lo mismo para pull
@@ -684,6 +847,8 @@ jorgito
     CLOSED: [2020-04-13 lun 15:37]
 **** [DONE] Paginas de referencia
      CLOSED: [2020-04-13 lun 15:37]
+     - [[https://develop.spacemacs.org/layers/+source-control/git/README.html][Git - Spacemacs.org]]
+
 **** [DONE] Videos de referencia
      CLOSED: [2020-04-14 mar 15:37]
 ** [TODO] [#A] Comentarios de Trello [0%]
@@ -695,6 +860,7 @@ jorgito
    https://github.com/zevlg/telega.el
 
 * Guia de Vim
+** Conceptos basicos
   1. El primer paso es ir al Evil Mode presionando <kbd>ESC</kbd>, y presionar la tecla dos puntos <kbd>:</kbd>
   2. Seguido a los <kbd>:</kbd> tenemos algunas opciones
      - <kbd>s</kbd> reemplaza la primera palabra que coincida (solo en la linea donde este el cursor)
@@ -737,7 +903,16 @@ jorgito
   - https://www.youtube.com/watch?v=8PZZkIr5Dcc
   - https://www.youtube.com/watch?v=jwxK5Eg_TnM
   - https://www.youtube.com/watch?v=OnUiHLYZgaA
-  -
+    - 
+** Navegador web con vim
+   Un grandioso navegador web conocido como *qute browser*
+
+   - https://www.youtube.com/watch?v=nu-YyL7iQC4
+   - https://www.youtube.com/watch?v=g2RtjO_jXvY
+   - https://laboratoriolinux.es/index.php/-noticias-mundo-linux-/software/26950-la-nueva-version-de-qutebrowser-1-11-0-ya-esta-aqui-un-navegador-al-estilo-vim.html
+   - https://draculatheme.com/qutebrowser
+   - https://laboratoriolinux.es/index.php/-noticias-mundo-linux-/software/27249-qutebrowser-el-navegador-al-estilo-vim-se-actualiza-a-su-nueva-version-1-12-0.html
+
 * Guia del Gestor de Archivos Ranger
 ** Filtrar archivos
    1. Presionar zf seguido de la expresion regular
@@ -769,13 +944,6 @@ jorgito
 ** Ocultar el Hostname del prompt
    https://charles4code.blogspot.com/2018/07/show-username-only-without-hostname-in.html
 **
-* Guia Linux Resolver problemas frecuentes
-** Versionar los dotfiles
-   ya habias averiguado un poco de eso, deberias mejorarlo,
-   no terminaste lo que tenes en ~/manjaro-dotfiles
-** Mkdocs
-   - Averiguar como mejorar el breadcrumb
-   - Analizar si seguirlo en esta seccion o abrir una nueva que sea de documentacion
 * Guia de Linux - Particionamiento
   Pendiente en revisar
   - [[https://unix.stackexchange.com/questions/466625/cp-cannot-create-regular-file-permission-denied][Referencia #1]]
