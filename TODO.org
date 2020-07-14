@@ -1,94 +1,117 @@
-* TODO [#A] Guia Linux Que hacer luego de Instalar Linux
-** 1. Comandos utiles
+* TODO [#A] Virtualbox
+  Agregar a la guia actual
 
-| Comando    | Descripcion              |
-| :------    | :----------              |
-| pacman -Ss | para buscar un paquete   |
-| pacman -S  | para instalar un paquete |
-|            |                          |
+** 1. Instalacion de Virtualbox
+   Nos aseguramos de instalar una version que se adapte a nuestro kernel
 
-** 2. Actualizar e Instalar paquetes
-   #+NAME: Actualizar lista de paquetes 
-   #+BEGIN_SRC bash
-     # actualizamos la lista de paquetes
-     sudo pacman-mirrors -f0
-     # actualizamos 
-     sudo pacman -Syyu
+   #+BEGIN_SRC sh
+     # La version que nos diga sera la que agregamos
+     mhwd-kernel -li
+     # Instalamos virtualbox (suponiendo que tu kernel es linux54)
+     sudo pacman -Syu virtualbox linux54-virtualbox-host-modules
+     # Cargamos virtualbox
+     sudo vboxreload
+     # Instalamos la version extendida que agrega nuevas funcionalidades
+     pamac build virtualbox-ext-oracle
+     # Agregamos el usuario actual al grupo de usuarios vbox
+     sudo gpasswd -a $USER vboxusers
    #+END_SRC
+   
+** 2. Instalar Vagrant
+
+   #+BEGIN_SRC sh
+     # Instalamos vagrant
+     pacman -S vagrant
+     # Instalamos plugins 
+     # vagrant plugin install vagrant-vbguest vagrant-share
+     # creamos directorio donde instalar sl ervidor
+     mkdir manu-server 
+     cd manu-server 
+     # Inicializamos con una distribucion centos 7 como servidor linux
+     # vagrant box add centos-7.0-x86_64.box --name centos7
+
+     # vagrant init centos/7
+     vagrant init ubuntu/trusty64
+
+     # Descargamos e instalamos el servidor linux 
+     vagrant up 
+     # Nos conectamos al servidor
+     vagrant ssh
+   #+END_SRC
+   
+   | Comando           | Descripcion                                |
+   | :------           | :----------                                |
+   | vagrant provision | Instalar paquetes agregados en Vagrantfile |
+   | vagrant halt      |                                            |
+   | vagrant up        | Descargar e instalar un box                |
+   | vagrant ssh       | Conectarse al servidor                     |
+   | vagrant init      | Inicializar                                |
+
+   
+   *Referencias*
+   - https://wiki.archlinux.org/index.php/Vagrant
+   - https://www.vagrantup.com/docs/boxes/base.html
+   - https://www.vagrantup.com/intro/getting-started/provisioning.html
+   - https://dev.to/psnebc/vagrant-package-and-vagrant-box-add-8of
+   - https://medium.com/@Joachim8675309/vagrant-provisioning-e4c9fd57968d
+   - https://scotch.io/courses/getting-started-with-vagrant-for-local-development/provisioning-vmprovision-how-to-customize-the-box
+   - https://blog.ipswitch.com/installing-your-first-vagrant-box
+   - https://computingforgeeks.com/how-to-addinstall-and-run-centos-7-vagrant-box-to-virtualbox-using-vagrant/
+
+** 3. Configurar Servidor
+   En este caso usaremos ubuntu/trusty64
+   No tuve que crear particiones extra (chequear con blogs, y mas info por si acaso)
+
+   Compartir Carpetas
+   - https://blog.theodo.com/2017/07/speed-vagrant-synced-folders/
+   - https://www.vagrantup.com/docs/synced-folders/basic_usage
+   - https://stackoverflow.com/questions/19231895/how-to-share-a-folder-created-inside-vagrant
    
    Referencias
-   - [[https://wiki.manjaro.org/Pacman-mirrors][Pacman Mirrors, WikiArch]]
-     
-** 3. Instalamos paquetes
-   #+NAME: Instalacion de paquetes
-   #+BEGIN_SRC bash
-     # Navegador web minimalista que utiliza comandos de vim
-     sudo pacman -S qutebrowser
-     # Gestor de directorios por comandos
-     sudo pacman -S ranger
-     # Nuevo gestor de paquetes# aurman ?
+   - https://www.2daygeek.com/how-to-resize-active-primary-root-partition-in-linux-using-gparted-utility/
+   - https://access.redhat.com/articles/1190213
+   - https://kwilson.io/blog/format-a-linux-disk-as-ext4-from-the-command-line/
+   - https://www.tecmint.com/create-new-ext4-file-system-partition-in-linux/
+   -
+** 4. Configurar red
+   La idea es poder correr algun servidor web por ejemplo con prolog
+   y poder acceder via tu maquina
 
-     # otros
-     sudo pacman -S telegram-desktop
+   - https://www.oreilly.com/library/view/vagrant-up-and/9781449336103/ch04.html
+   - https://www.vagrantup.com/docs/networking/public_network.html
+   - https://stackoverflow.com/questions/33250304/how-to-automatically-select-bridged-network-interfaces-in-vagrant
+** Referencias
+   - https://wiki.manjaro.org/index.php?title=VirtualBox
+   - https://www.profesionalreview.com/2018/11/19/virtualbox-extension-pack/
+   - https://www.hostinger.com.ar/tutoriales/centos-vs-ubuntu-elegir-servidor-web/
+   - https://webtematica.com/centos-o-debian-para-servidores-web
+   - https://www.sinologic.net/2011-02/porque-debian-no-centos.html
+* Guia Linux
+** Comandos Importantes
+   | Comando     | Descripcion                                       |
+   | :------     | :----------                                       |
+   | mhwd-kernel |                                                   |
+   | ls -lt      | Lista los archivos ordenado por el último archivo |
+   | ls -ltr     | r de reverse ?                                    |
+
+   #+BEGIN_SRC sh
+     mhwd-kernel -li
    #+END_SRC
-
-** 4. Configurar github
-   Para evitar escribir usuario y clave en cada push trabajos con la clave publica y 
-   privada. Abrimos la terminal e ingresamos los siguientes comandos.
    
-   #+NAME: Configurar github
-   #+BEGIN_SRC bash
-     # generamos la clave publica y privada
-     ssh-keygen
-     # buscamos el archivo que tiene la clave publica y lo mostramos por pantalla
-     find ~ -name "id_rsa.pub" | xargs cat
-     # buscamos el archivo de la clave pública que generamos# la copiamos y lo 
-     # agregamos en la configuración de git# https://github.com/settings/keys
-     # agregamos git a la lista de host confiables
-     ssh -T git@github.com```
-   #+END_SRC
+*** Saber ultimo archivo descargado con el comando ls
+   - https://www.tecmint.com/sort-ls-output-by-last-modified-date-and-time/
+   - https://osxdaily.com/2017/02/02/ls-sort-by-date/
 
-** 5. Instalar y configurar Emacs
-*** 5.1 Instalar y configurar
-   #+NAME: Instalar y configurar Emacs
-   #+BEGIN_SRC bash
-     # instalamos emacs
-     sudo pacman -S emacs
-     # clonamos la configuracion de spacemacs en emacs
-     git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-     # cambiamos la rama por develop, tiene mas funcionalidades (ej. treemacs)
-     cd ~/.emacs.d && git checkout develop```
-   #+END_SRC
-
-*** 5.2 Activar el modo hibrido 
-    Modificar en el archivo de configuracion de spacemacs en `~/.spacemacs````;; 
-    encontrar la siguiente linea, debe quedar de esta manera con hybrid
+** Utilidades Interesantes
+*** Calculadora
+    - En manjaro probé bc y qalac.
+    - Otra manera es usando el comando *expr* pero hay que separar los operandos de los operadores
+    *NOTA:* Me pareció que la mejor fué qalac
     
-    #+BEGIN_SRC emacs-lisp
-    dotspacemacs-editing-style 'hybrid`
-    #+END_SRC
+    *Referencias*
+    - https://ubunlog.com/calculadora-en-la-terminal-ubuntu/
     
-*** 5.3 Activamos layers
-    Activar algunos layers utilesBuscar la linea `dotspacemacs-configuration-layers` del 
-    archivo `~/.spacemacs` y agregar o descomentar las siguientes lineas```
-    
-    #+BEGIN_SRC emacs-lisp
-    ;; para control de versiones deproyectos
-    git
-    ;; para usar el org-mode y organizar archivos con tareas
-    org
-    #+END_SRC
-
-    Referencias:
-    https://github.com/Alexander-Miller/treemacs/blob/master/README.org
-
-** Versionar los dotfiles
-   ya habias averiguado un poco de eso, deberias mejorarlo,
-   no terminaste lo que tenes en ~/manjaro-dotfiles
-** Mkdocs
-   - Averiguar como mejorar el breadcrumb
-   - Analizar si seguirlo en esta seccion o abrir una nueva que sea de documentacion
-* TODO [#A] Errores de Manjaro
+** TODO [#A] Errores de Manjaro
 Mezclar con la parte de particionamiento
 manjaro error: you need to load the kernel first
 
@@ -157,8 +180,53 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
 3.) Mount the EFI partition as /boot/efisudo mount /dev/sdXY /boot/efiX = Alphabet of the drive = a,b,c ...Y = Partition number of the EFI partition = 1,2,3,4...Example - /dev/sda4
 4.) Re-install Grub.sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=manjaro --recheck
 5.) Update Grub configuration file.sudo update-grub
+** TODO [#A] Guia Linux Que hacer luego de Instalar Linux
+** Guia del Gestor de Archivos Ranger
+** Guia Linux Personalizar
+** Ocultar el Hostname del prompt
+   https://charles4code.blogspot.com/2018/07/show-username-only-without-hostname-in.html
+** Guia de Linux - Particionamiento
+  Pendiente en revisar
+  - [[https://unix.stackexchange.com/questions/466625/cp-cannot-create-regular-file-permission-denied][Referencia #1]]
+  - [[https://www.linuxadictos.com/solucion-al-error-read-only-file-system.html][Referencia #2]]
 
+** Sincronizar Archivos en Google Drive
+   - https://www.youtube.com/watch?v=vPs9K_VC-lg
+   - https://www.youtube.com/watch?v=HblhrGIotFo
+   - https://rclone.org/drive/
+   - https://snapcraft.io/install/rclone/manjaro
+   - https://rclone.org/commands/
+   - https://snapcraft.io/install/rclone/arch
+   - https://www.youtube.com/watch?v=ARGU4HFUxq8
+   - https://www.youtube.com/watch?v=G8YMspboIXs
+** Nuevos comandos
+   - Crear directorios con subdirectorios, usando el parametro -p en mkdir
+     mkdir -p
 
+     Referencias:
+     - https://techlandia.com/crear-nuevo-directorio-linux-como_44793/
+   - Conocer la particion de un archivo
+     Con el comando df
+
+     Referencias
+     - https://elbauldelprogramador.com/como-saber-que-particion-pertenece-un/
+     - https://www.profesionalreview.com/2018/03/04/saber-particion-esta-instalado-ubuntu/
+** Herramientas de Seguridad
+   - Averiguar si el Bitwarden del escritorio funciona en las demas distribuciones ok
+   - Comentar lo de la encriptacion de contenido con rclone
+
+** Comando Sed (Manipular Texto)
+  Al parecer es bastante parecido al reemplazar de vim
+
+  Referencias:
+  - http://www.sromero.org/wiki/linux/aplicaciones/uso_de_sed
+  - https://likegeeks.com/es/sed-de-linux/
+  - https://www.tecmint.com/linux-sed-command-tips-tricks/
+  - https://www.linuxadictos.com/sed-ejemplos-del-comando-magico-para-gnu-linux.html
+  - https://blog.desdelinux.net/sed-shell-scripting-comando/
+
+** Pendiente
+   - # averiguar por: doas, cmus, qutebrowser, emerge
 * [#A] Otros
 ** Revisar los archivos
    Quedaron algunos archivos de los cuales quizas no pasaste toda la informacion
@@ -181,157 +249,6 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
 ** Cuando crear issues
 ** Cuando crear pull request
 ** Utilidad de crear plantillas en los pull request (como hacen las entregas de tp en pdep)
-* Hacer graficos 
-  Referencias:
-  - https://www.gnu.org/software/octave/
-
-* Guia de Lisp
-  Para reforzar un poco el paradigma funcional e integrarlo con elisp que
-  es lo que utiliza emacs por dentro, se puede ejecutar tambien en la terminal eshell
-
-  -Para mostrar los bloques de codigo en otro buffer presionar <bdk>, '</bdk> o <bdk>C-x '</bdk>
-  -Para ejecutar el codigo presionar <bdk>, ,</bdk> o <bdk>C-c C-c</bdk>
-
-  Referencias:
-  - [[http://cl-cookbook.sourceforge.net/emacs-ide.html][Using emacs as LISP IDE (cl-cookbook)]]
-  - [[https://www.youtube.com/watch?v=-J_xL4IGhJA][Overview and Introduction to Lisp - Part 1]]
-  - [[https://www.youtube.com/watch?v=-J_xL4IGhJA&list=PLE18841CABEA24090][Playlist - Structure and Interpretation (MIT 1986)]]
-  - [[https://www.youtube.com/watch?v=QFbJKWhzhtU][Introduccion Lisp - Parte 1 (javierbravoudima) - Ver Video]]
-  -[[https://www.youtube.com/watch?v=Fz9Rig9lG50][ Intro Lisp - Parte 2 - Ver Video]]
-  - [[https://www.youtube.com/watch?v=Jx8riNWKe14][Intro Emacs (javier) - Ver Video]]
-  - [[https://www.youtube.com/watch?v=9aI7ZAEbiF0][Common LISP (Prof. Javier)]]
-
-** Comandos basicos
-   | :--------          | :------------------------------------------------------------------------ |
-   | Comando            | Descripcion                                                               |
-   | C-x C-e            | Ejecuta un comando (Con el cursor al final de linea)                      |
-   | M-x eval-last-sexp | Ejecuta un comando (Con el cursor al final de linea)                      |
-   | setq               | Cambia el valor de una variable local                                     |
-   | print              | Imprimir los datos de una variable                                        |
-   | setf               | Cambia el valor de una variable global                                    |
-   | length             | Devuelve la longitud de una lista (una cadena es una lista de caracteres) |
-   | read               | Pide ingresar datos                                                       |
- 
-  #+BEGIN_SRC lisp :results raw
-    ;; imprimimos un mensaje
-    (print "hola")
-
-    ;; declaramos una variable local y le asignamos un texto
-    (setq nombre "hola")
-
-    ;; declaramos una variable local y le asignamos un texto
-    (setf dni "35216118")
-
-    ;; mostramos la longitud de una cadena
-    (length "palabras por aca")
-
-  #+END_SRC
-   
-** Comandos para listas
-
-   | :-------- | :------------------------------------------------------------------------ |
-   | (1 2 3)   | Representa una lista, se forman con los ()                                |
-   | append    | Inserta un elemento en una lista                                          |
-   | cons      |                                                                           |
-   | first,car | Devuelve primer elemento de una lista                                     |
-   | second    | Devuelve el segundo elemento de una lista                                 |
-   | nth <n>   | Devuelve el elemento en la posicion n de la lista                         |
-   | rest, cdr | Devuelve la lista sin el primer elemento                                  |
-
-** Comandos para funciones
-   | :-------- | :------------------------------------------------------------------------ |
-   | prog1     | Evalua todas las sentencias compuestas y devuelve la primer sentencia     |
-   | progn     | Evalua todas las sentencias compuestas y devuelve la ultima               |
-
-   #+BEGIN_SRC lisp
-     (progn
-       ;; creamos un lista
-       (setf lista '(A B C))
-
-       ;; creamos la funcion saludo,
-       ;; que tiene solo un argumento
-       (defun saludo(msg)
-         ;; imprimimos el argumento usando el comando print
-         (print msg)
-         )
-
-       ;; llamamos a la funcion saludo y le pasamos como parametro una cadena
-       (saludo "hola")
-       )
-
-     (progn
-       ;; abro un buffer nuevo lamado test
-       (switch-to-buffer-other-window "*test")
-       ;; limpio el contenido si lo tuviese
-       (erase-buffer)
-       ;; declaro una variable unNombre
-       ;; y llamamos al comando read para que ingresen datos
-       (setf unNombre (read))
-       ;; imprimimos lo que se escribio
-       (print unNombre)
-       )
-   #+END_SRC
-
-** Buffers
-   | :-------- | :----------------------- |
-   | BUffer    | Descripcion              |
-   | --------- | ------------------------ |
-   | backtrace | Es el depurador de emacs |
-   | scratch   | Para depurar codigo lisp    |
-
-   Algunas diferencias:
-   - Con setq y setf podemos cambiar el valor a las variables, pero el primero es de mas bajo nivel
-     que setf. Este segundo es de mas alto nivel, e incorpora dentro a setq.
-   - Con setq no podemos cambiar el valor de una lista
-
-   #+BEGIN_SRC lisp
-     ;; Correr cada linea con M-x  C-x C-e   
-
-     ;; ejecuto una funcion prefija
-     (+ 1 2)
-
-     ;; declaro una variable local y le asigno una lista
-     (setq dias '(lunes martes))
-     (setq letras '(A B C))
-
-     ;; declaro una variable global
-     (setf dias '(lunes martes))
-
-     ;; pido el primer elemento de la lista (a b c)
-     (first '(a b c)
-
-            ;; imprimo la variable dias
-            (print dias)
-
-            ;; Le cambio el valor del primer elemento a una lista
-            ;; si probara con setq devolveria error
-            (setf (first dias) 'viernes)
-            (print dias) ;; ahora deberia devolver (viernes martes)
-
-            ;; Creo una funcion last (le resto 1 para no excederme de la cantidad de elementos)
-            (nth (- (length dias) 1) dias)
-
-            ;; Une dos listas en una
-            (append '(a b) '(c d))
-            ;; Insertamos una sublista al principio de otra lista
-            (cons '(a b) '(c d))
-
-            ;; Creo una funcion que imprima el argumento
-            (defun saludo(mensaje)
-              (print mensaje)
-              )
-   #+END_SRC
-
-
-#+BEGIN_SRC elisp :results raw 
-  (defvar nombre "jorgito")
-
-  (print nombre)
-#+END_SRC
-
-#+RESULTS:
-jorgito
-
 * Haskell y Latex
   Para hacer ecuaciones algebraicas para trabajos practicos como fisica:
   1. Podemos usar haskell para realizar los calculos de manera rapida
@@ -401,6 +318,22 @@ jorgito
       3. [[https://www.youtube.com/watch?v=VqCSbDqHziM][Elisp Tutorial - Variables locales, bucles]]
       4. [[https://www.youtube.com/watch?v=KwBRpS9Bs4U][Elisp Tutorial - Funciones]]
       5. [[https://www.youtube.com/watch?v=QaX3AaK3_Lk][Elisp Tutorial - nose]]
+** Guia de Lisp
+  Para reforzar un poco el paradigma funcional e integrarlo con elisp que
+  es lo que utiliza emacs por dentro, se puede ejecutar tambien en la terminal eshell
+
+  -Para mostrar los bloques de codigo en otro buffer presionar <bdk>, '</bdk> o <bdk>C-x '</bdk>
+  -Para ejecutar el codigo presionar <bdk>, ,</bdk> o <bdk>C-c C-c</bdk>
+
+  Referencias:
+  - [[http://cl-cookbook.sourceforge.net/emacs-ide.html][Using emacs as LISP IDE (cl-cookbook)]]
+  - [[https://www.youtube.com/watch?v=-J_xL4IGhJA][Overview and Introduction to Lisp - Part 1]]
+  - [[https://www.youtube.com/watch?v=-J_xL4IGhJA&list=PLE18841CABEA24090][Playlist - Structure and Interpretation (MIT 1986)]]
+  - [[https://www.youtube.com/watch?v=QFbJKWhzhtU][Introduccion Lisp - Parte 1 (javierbravoudima) - Ver Video]]
+  -[[https://www.youtube.com/watch?v=Fz9Rig9lG50][ Intro Lisp - Parte 2 - Ver Video]]
+  - [[https://www.youtube.com/watch?v=Jx8riNWKe14][Intro Emacs (javier) - Ver Video]]
+  - [[https://www.youtube.com/watch?v=9aI7ZAEbiF0][Common LISP (Prof. Javier)]]
+
 ** [CHECK] Empezando con Emacs [0%]
 *** Canales favoritos
     - https://www.youtube.com/watch?v=49kBWM3RQQ8&list=PL9KxKa8NpFxIcNQa9js7dQQIHc81b0-Xg (te falto agregar este, que es muy completo)
@@ -913,84 +846,12 @@ jorgito
    - https://draculatheme.com/qutebrowser
    - https://laboratoriolinux.es/index.php/-noticias-mundo-linux-/software/27249-qutebrowser-el-navegador-al-estilo-vim-se-actualiza-a-su-nueva-version-1-12-0.html
 
-* Guia del Gestor de Archivos Ranger
-** Filtrar archivos
-   1. Presionar zf seguido de la expresion regular
-   2. Presionar v para seleccionar los archivos y luego accion que quieras (copiar, cortar)
-   3. Presionar nuevamente zf para volver a ver todos los archivos
-
-   Referencias
-   - https://unix.stackexchange.com/questions/568899/search-and-select-all-matching-files-in-ranger
-** Atajos
-  Ranger, tiene los mismos atajos que vim
-   - h,l para moverse entre los niveles de los directorios
-   - dd para cortar
-   - y para copiar
-   - p para pegar
-   
-     | Comando                | Descripcion                                       |
-     | :mkdir  unDirectorio   | Crear un directorio                               |
-     | :rename otroNombre.txt | Para crear archivos                               |
-     | :touch nuevoFile.txt   | Para modificar el nombre del archivo seleccionado |
-     |                        |                                                   |
-
-
-  Referencias:
-  - https://www.atareao.es/software/utilidades/administrador-de-archivos-para-el-terminal/
-  - https://openwebinars.net/blog/vim-manual-de-uso-basico/
-  - https://unix.stackexchange.com/questions/384325/how-to-create-a-new-file-directory-using-ranger
-  - https://linuxconfig.org/manage-your-files-from-the-command-line-with-ranger
-* Guia Linux Personalizar
-** Ocultar el Hostname del prompt
-   https://charles4code.blogspot.com/2018/07/show-username-only-without-hostname-in.html
-**
-* Guia de Linux - Particionamiento
-  Pendiente en revisar
-  - [[https://unix.stackexchange.com/questions/466625/cp-cannot-create-regular-file-permission-denied][Referencia #1]]
-  - [[https://www.linuxadictos.com/solucion-al-error-read-only-file-system.html][Referencia #2]]
-
-* Guia Linux
-** Sincronizar Archivos en Google Drive
-   - https://www.youtube.com/watch?v=vPs9K_VC-lg
-   - https://www.youtube.com/watch?v=HblhrGIotFo
-   - https://rclone.org/drive/
-   - https://snapcraft.io/install/rclone/manjaro
-   - https://rclone.org/commands/
-   - https://snapcraft.io/install/rclone/arch
-   - https://www.youtube.com/watch?v=ARGU4HFUxq8
-   - https://www.youtube.com/watch?v=G8YMspboIXs
-** Nuevos comandos
-   - Crear directorios con subdirectorios, usando el parametro -p en mkdir
-     mkdir -p
-
-     Referencias:
-     - https://techlandia.com/crear-nuevo-directorio-linux-como_44793/
-   - Conocer la particion de un archivo
-     Con el comando df
-
-     Referencias
-     - https://elbauldelprogramador.com/como-saber-que-particion-pertenece-un/
-     - https://www.profesionalreview.com/2018/03/04/saber-particion-esta-instalado-ubuntu/
-* Guia Linux - Seguridad
-** [#A] Herramientas
-   - Averiguar si el Bitwarden del escritorio funciona en las demas distribuciones ok
-   - Comentar lo de la encriptacion de contenido con rclone
-
-* Guia Linux - Lineas de comando fundamentales
-** Comando Sed (Manipular Texto)
-  Al parecer es bastante parecido al reemplazar de vim
-
-  Referencias:
-  - http://www.sromero.org/wiki/linux/aplicaciones/uso_de_sed
-  - https://likegeeks.com/es/sed-de-linux/
-  - https://www.tecmint.com/linux-sed-command-tips-tricks/
-  - https://www.linuxadictos.com/sed-ejemplos-del-comando-magico-para-gnu-linux.html
-  - https://blog.desdelinux.net/sed-shell-scripting-comando/
-
-** Pendiente
-   - # averiguar por: doas, cmus, qutebrowser, emerge
 * Nuevas tecnologias 
 ** Mermaidjs
    Para hacer graficos (Diagramas de flujo, gantt, etc..)
    https://mermaid-js.github.io/mermaid/#/flowchart
    https://mermaid-js.github.io/mermaid-live-editor
+** Hacer graficos 
+   Referencias:
+   - https://www.gnu.org/software/octave/
+
