@@ -227,6 +227,147 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
 
 ** Pendiente
    - # averiguar por: doas, cmus, qutebrowser, emerge
+* Testing con Selenium
+
+*** Instalación
+
+    #+BEGIN_SRC sh
+      # 1. lo instalamos selenium
+      sudo pacman -S python-selenium
+
+      # 2. instalamos el webdriver para firefox
+      sudo pacman -S geckodriver
+
+      # se puede instalar con pip de python
+    #+END_SRC
+
+*** Un hello world 
+    
+    #+BEGIN_SRC python
+      from selenium import webdriver
+      # para usar el sleep
+      import time
+      # para usar teclas como enter
+      from selenium.webdriver.common.keys import Keys
+      # elegimos que navegador usaremos
+      driver = webdriver.Firefox()
+      # le asignamos una dirección donde ir
+      driver.get('http://google.com')
+      # aguardamos 2 segundos antes de seguir
+      time.sleep(2)
+
+      # seleccinamos el campo de texto usual de busqueda de google
+      busqueda_box = driver.find_element_by_name('q')
+      # hacemos que escriba un texto
+      busqueda_box.send_keys('mafalda san telmo')
+      # y que simule presionar la tecla enter
+      busqueda_box.send_keys(Keys.ENTER)
+      # hacemos que espere un rato
+      time.sleep(2)
+      # se cerrará el navegador
+      driver.quit()
+
+    #+END_SRC
+
+** Referencias 
+   + https://enmilocalfunciona.io/automatizacion-de-pruebas-con-selenium-y-python/
+   + https://linuxhint.com/browser_automation_selenium_python/
+   + https://discover.manjaro.org/packages/python-selenium
+   + https://github.com/mozilla/geckodriver/releases
+
+   + [[https://stackoverflow.com/questions/1896918/running-unittest-with-typical-test-directory-structure/22244465][Unitest python selenium]]
+   + [[https://stackoverflow.com/questions/36202689/selenium-webdriver-get-text-from-input-field?rq=1][Selenium - get_attribute]]
+   + [[https://stackoverflow.com/questions/1629053/typing-enter-return-key-using-python-and-selenium][Selenium - Keys Enter]]
+
+   + [[https://www.youtube.com/watch?v=nDqgZVCbnmI][#1 Spacemacs - Python]]
+   + [[https://www.youtube.com/watch?v=r-BHx7VNX5s][#2 Spacemacs - Python]]
+   + [[https://www.youtube.com/watch?v=U6sp5dJWFAM][#3 Spacemacs - python, pyenv, pyls, flake8]]
+
+* Docker
+** Probando con alpine linux
+
+   #+BEGIN_SRC sh
+     # https://www.emacswiki.org/emacs/Evil
+     # https://orgmode.org/manual/Installation.html
+
+     # instalar git
+     apk add git
+     # instalar emacs
+     apk add emacs
+     # listar packages (entrar al emacs)
+     M-x packages-list
+     # instalar org mode (entrar a emacs )
+     M-x package-install RET org RET
+     # instalar evil mode (tratè con el list-packages pero no aparecìa)
+     git clone https://github.com/emacs-evil/evil.git
+     mv evil ~/emacs.d/
+
+     # descargar el theme dark dracula
+     https://github.com/dracula/emacs.git
+     mv /emacs/dracula-theme.el ~/emacs.d/themes/dracula-theme.el
+   #+END_SRC
+
+   Agregar lo sig al ~/.emacs para activar el vim mod y el theme dark dracula
+   #+BEGIN_SRC emacs-lisp
+     ; con esto agregamos el modo vim
+     (add-to-list 'load-path "~/.emacs.d/evil")
+     (require 'evil)
+     (evil-mode 1)
+
+     ; cargamos el theme dracula dark
+     (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+     (load-theme 'dracula t)
+   #+END_SRC
+   
+** Referencias
+   - [[https://www.youtube.com/watch?v=vjnOIE-CwMU&list=PLqRCtm0kbeHAep1hc7yW-EZQoAJqSTgD-&index=2][Video - DOcker - primeros pasos]]
+   - [[https://www.youtube.com/watch?v=6idFknRIOp4&t=201s][Video - Aprender docker en 14min]]
+
+   - https://stackoverflow.com/questions/21871479/docker-cant-connect-to-docker-daemon
+   - https://www.digitalocean.com/community/questions/how-to-fix-docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socket
+   - https://manjaro.site/how-to-install-docker-on-manjaro-18-0/
+
+** Instalación
+
+   #+NAME: Instalación y Configuración
+   #+BEGIN_SRC sh
+     sudo pacman -S docker
+
+     # Create the docker group.
+     sudo groupadd docker
+     # Add your user to the docker group.
+     sudo usermod -aG docker ${USER}
+     # relogear ò reiniciar
+
+     # verificar si anda
+     docker run hello-world
+   #+END_SRC
+
+   #+NAME: Versionando COntainers
+   #+BEGIN_SRC sh
+     # para listar imagenes corriendo
+     docker ps
+
+     # para correr o descargar && instalar una version ligera de linux con el tag 3.12
+     docker run alpine:3.12
+     # iniciar en modo "interactivo" en la terminal al contenedor alpine
+     docker run -it alpine:3.12 sh
+     # para listar archivos de la imagen
+     # seguido al nombre del container y del tag, puedo mandarle comandos al container
+     docker run alpine:3.12 ls -l
+
+     # muestra los containers instalados
+     docker image ls | head
+     # muestra los ultimos comandos de todos los containers (y su hash en la 1ra columna para versionar)
+     docker ps -a | head
+
+     # comitear un container (suponiendo que copiaste el hash de ps -a)
+     docker commit elHashDelContainer
+     # podemos verlo (copiamos el id)
+     docker image ls | head
+     # le asignamos un tag para diferenciar (suponiendo que asdasd123123 es el id)
+     docker image tag asdasd123123 miPrimerDocker
+   #+END_SRC
 * [#A] Otros
 ** Revisar los archivos
    Quedaron algunos archivos de los cuales quizas no pasaste toda la informacion
