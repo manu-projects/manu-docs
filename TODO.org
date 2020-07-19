@@ -103,6 +103,119 @@
    - https://osxdaily.com/2017/02/02/ls-sort-by-date/
 
 ** Utilidades Interesantes
+*** Calculadora con notación polaca inversa (rpn - reverse polish notation)
+    El comando para ejecutar es *dc* es nativo de linux
+
+    | Comando | Descripción                                              |
+    | :------ | :------------------------------------------------------- |
+    | dc      | Ejecuta la calculadora                                   |
+    | p       | muestra el ultimo valor agregado en la pila (en la cima) |
+    | f       | lista los valores (en el orden que se agregaron)         |
+    | r       | conmuta los ultimos 2 valores (swap)                     |
+
+    Algunos ejemplos con la notación infija y polaca inversa
+
+    | Notación Infija | Notación Polaca inversa |
+    | :-------------  | :---------------------- |
+    | (3+5)*10        | 3 5 + 10 *              |
+    | A+B*C           | A B C * +               |
+    | A*B+C           | A B * C +               |
+    | A*B+C*D         | A B * C D * +           |
+    | (A+B) / (C-D)   | A B + C D - /           |
+    | A*B / C         | A B * C /               |
+ 
+    #+NAME: Ejemplo 1, Operaciones sencillas (manera 1)
+    #+BEGIN_SRC sh
+      dc
+
+      # hagamos 3 11 5 + -
+      # si agregamos parentesis quedaría [3 (11 5 +) -]
+      #
+      # de manera infija sería 3-(11+5)
+
+      3  # 3
+      11 # 3 11
+      5  # 3 11 5
+
+      p  # devuelve 5
+
+      + # 11 5 + es 16
+      p # devuelve 16
+
+      - # 3 16 - es -13
+      p # devuelve -13
+    #+END_SRC
+
+    #+NAME: Ejemplo 2, Operaciones sencillas (manera 2)
+    #+BEGIN_SRC sh
+      dc
+
+      # hagamos 3 11 5 + -
+      # si le agregamos parentesis quedaría [3 (11 5 +) -]
+      #
+      # de manera infija sería 3-(11+5)
+      11 # 11
+      5  # 11 5
+      +  # 11 5 + es 16
+      p  # devuelve 16
+
+      3 # 16 3
+      r # 3 16 (conmuta valores)
+      - # 3 16 - es -13
+    #+END_SRC
+    
+    #+NAME: Ejemplo 3, operaciones normales
+    #+BEGIN_SRC sh
+      dc
+
+      # hagamos 2 3 11 + 5 - *
+      # si agregamos parentesis sería {2 [(3 11 +) 5 -] *}
+      #
+      # de manera infija sería: 2*[(3+11) - 5]
+
+      # que seria 2*[(3+11)-5]
+
+      2  # 2
+      3  # 2 3
+      11 # 2 3 11
+
+      +  # 3 11 + es 14
+
+      5  # 14 5
+      -  # 14 5 - es 9
+
+      2  # 9 2
+      ,*  # 9 2 * es 18
+
+    #+END_SRC
+
+    #+NAME: Ejemplo 4
+    #+BEGIN_SRC sh
+      dc
+
+      # hagamos 9 5 3 + 2 4 ^ - +
+      # si agregaramos parentesis para ver el orden sería {9 [(5 3 +) (2 4 ^) -] +}
+      #
+      # de manera infija sería 9+[(5+3)-(2)^4]
+
+      9 # 9
+      5 # 9 5
+      3 # 9 5 3
+      + # 5 3 + que es 8
+
+      2 # 9 8 2
+      4 # 9 8 2 4
+      ^ # 2 ^ 4 es 16
+
+      - # 8 16 - es -8
+      + # 9 (-8) - es 1
+
+      p # devuelve 1
+    #+END_SRC
+
+
+    *Referencias*
+    - https://www.computerhope.com/unix/udc.htm
 *** Calculadora
     - En manjaro probé bc y qalac.
     - Otra manera es usando el comando *expr* pero hay que separar los operandos de los operadores
@@ -110,7 +223,6 @@
     
     *Referencias*
     - https://ubunlog.com/calculadora-en-la-terminal-ubuntu/
-    
 ** TODO [#A] Errores de Manjaro
 Mezclar con la parte de particionamiento
 manjaro error: you need to load the kernel first
@@ -290,6 +402,9 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
      # https://www.emacswiki.org/emacs/Evil
      # https://orgmode.org/manual/Installation.html
 
+     # corremos el container la version 3.12 (el tag)
+     # si no existe lo descarga
+     docker run alpine:3.12
      # instalar git
      apk add git
      # instalar emacs
