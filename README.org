@@ -1,3 +1,5 @@
+#+STARTUP: latexpreview
+
 * TODO [#A] Virtualbox
   Agregar a la guia actual
 
@@ -104,118 +106,226 @@
 
 ** Utilidades Interesantes
 *** Calculadora con notación polaca inversa (rpn - reverse polish notation)
-    El comando para ejecutar es *dc* es nativo de linux
 
-    | Comando | Descripción                                              |
-    | :------ | :------------------------------------------------------- |
-    | dc      | Ejecuta la calculadora                                   |
-    | p       | muestra el ultimo valor agregado en la pila (en la cima) |
-    | f       | lista los valores (en el orden que se agregaron)         |
-    | r       | conmuta los ultimos 2 valores (swap)                     |
-
-    Algunos ejemplos con la notación infija y polaca inversa
-
-    | Notación Infija | Notación Polaca inversa |
-    | :-------------  | :---------------------- |
-    | (3+5)*10        | 3 5 + 10 *              |
-    | A+B*C           | A B C * +               |
-    | A*B+C           | A B * C +               |
-    | A*B+C*D         | A B * C D * +           |
-    | (A+B) / (C-D)   | A B + C D - /           |
-    | A*B / C         | A B * C /               |
- 
-    #+NAME: Ejemplo 1, Operaciones sencillas (manera 1)
-    #+BEGIN_SRC sh
-      dc
-
-      # hagamos 3 11 5 + -
-      # si agregamos parentesis quedaría [3 (11 5 +) -]
-      #
-      # de manera infija sería 3-(11+5)
-
-      3  # 3
-      11 # 3 11
-      5  # 3 11 5
-
-      p  # devuelve 5
-
-      + # 11 5 + es 16
-      p # devuelve 16
-
-      - # 3 16 - es -13
-      p # devuelve -13
-    #+END_SRC
-
-    #+NAME: Ejemplo 2, Operaciones sencillas (manera 2)
-    #+BEGIN_SRC sh
-      dc
-
-      # hagamos 3 11 5 + -
-      # si le agregamos parentesis quedaría [3 (11 5 +) -]
-      #
-      # de manera infija sería 3-(11+5)
-      11 # 11
-      5  # 11 5
-      +  # 11 5 + es 16
-      p  # devuelve 16
-
-      3 # 16 3
-      r # 3 16 (conmuta valores)
-      - # 3 16 - es -13
-    #+END_SRC
+**** Conceptos
+     + El comando para ejecutar es *dc* es nativo de linux
+     + El orden de la pila se puede interpretar de derecha a izquierda,
+       siendo el la derecha un valor que fue ingresado más reciente que el de la izquierda.
     
-    #+NAME: Ejemplo 3, operaciones normales
-    #+BEGIN_SRC sh
-      dc
+     #+NAME: Orden en que ingresan los valores
+     #+BEGIN_EXAMPLE
+     3 16 11 2
+     
+     1. el 3 fue el primero en ingresar,
+     2. el 16 se ingresó después que el 3,
+     3. el 11 luego del 16
+     4. y el 2 fue el último valor ingresado
+     5. la pila quedaría así
 
-      # hagamos 2 3 11 + 5 - *
-      # si agregamos parentesis sería {2 [(3 11 +) 5 -] *}
-      #
-      # de manera infija sería: 2*[(3+11) - 5]
+     2
+     11
+     16
+     3
+     #+END_EXAMPLE
 
-      # que seria 2*[(3+11)-5]
+     #+NAME: Orden en que operan los valores 
+     #+BEGIN_EXAMPLE
+     3 2 11 2 + * /
 
-      2  # 2
-      3  # 2 3
-      11 # 2 3 11
+     1. Primero opera 11 2 +  el resultado será 13, quedando la pila asi 3 2 13 * /
+     2. Segundo opera 2 13 * que resulta en 26, quedando la pila asi 3 26 /
+     3. Por ultimo opera  3 26 / que resulta en 0,11 aprox.
+     4. En la pila solo queda el resultado 0,11 no quedan mas valores por operar
+     #+END_EXAMPLE
 
-      +  # 3 11 + es 14
+     | Comando | Descripción                                              |
+     | :------ | :------------------------------------------------------- |
+     | dc      | Ejecuta la calculadora                                   |
+     | p       | muestra el ultimo valor agregado en la pila (en la cima) |
+     | f       | lista los valores (en el orden que se agregaron)         |
+     | r       | conmuta los ultimos 2 valores (swap)                     |
+     | c       | limpia la pila                                           |
+     | v       | para obtener la raiz de un valor                         |
 
-      5  # 14 5
-      -  # 14 5 - es 9
+     Algunos ejemplos con la notación infija y polaca inversa
 
-      2  # 9 2
-      ,*  # 9 2 * es 18
+     | Notación Infija | Notación Polaca inversa |
+     | :-------------  | :---------------------- |
+     | (3+5)*10        | 3 5 + 10 *              |
+     | A+B*C           | A B C * +               |
+     | A*B+C           | A B * C +               |
+     | A*B+C*D         | A B * C D * +           |
+     | (A+B) / (C-D)   | A B + C D - /           |
+     | A*B / C         | A B * C /               |
 
-    #+END_SRC
+**** Ejemplos sencillos
 
-    #+NAME: Ejemplo 4
-    #+BEGIN_SRC sh
-      dc
+     #+NAME: Ejemplo 1, Operaciones sencillas (manera 1)
+     #+BEGIN_SRC sh
+       dc
 
-      # hagamos 9 5 3 + 2 4 ^ - +
-      # si agregaramos parentesis para ver el orden sería {9 [(5 3 +) (2 4 ^) -] +}
-      #
-      # de manera infija sería 9+[(5+3)-(2)^4]
+       # hagamos 3 11 5 + -
+       # si agregamos parentesis para entender el orden de operación
+       # quedaría [3 (11 5 +) -]
+       #
+       # con la notación infija sería 3-(11+5)
 
-      9 # 9
-      5 # 9 5
-      3 # 9 5 3
-      + # 5 3 + que es 8
+       3  # Pila: 3
+       11 # Pila: 3 11
+       5  # Pila: 3 11 5
 
-      2 # 9 8 2
-      4 # 9 8 2 4
-      ^ # 2 ^ 4 es 16
+       # p, devuelve el último valor ingresado (el que está en la cima de la pila)
+       # nuevos valores se apilan arriba, los ingresado al principio quedan debajo (serán los ultimos en operar)
+       p  # devuelve 5
 
-      - # 8 16 - es -8
-      + # 9 (-8) - es 1
+       + # 11 5 + es 16
+       p # devuelve 16
+       # f, devuelve un listado de los valores de la pila
+       # estando en la cima el último valor ingresado(más reciente), y debajo los que se agregan al principio
+       f # Pila: 3 16
 
-      p # devuelve 1
-    #+END_SRC
+       - # 3 16 - es -13
+       p # devuelve -13
+       # Pila: -13
+
+       c # c, borra la pila, todos los valores que se hayan ingresado
+       # Pila: Vacía, ya no está el -13
+     #+END_SRC
+
+     #+NAME: Ejemplo 2, Operaciones sencillas (manera 2)
+     #+BEGIN_SRC sh
+       dc
+
+       # hagamos 3 11 5 + -
+       # si le agregamos parentesis quedaría [3 (11 5 +) -]
+       #
+       # con notación infija sería 3-(11+5)
+
+       11 # Pila: 11
+       5  # Pila: 11 5
+
+       +  # 11 5 + es 16
+       p  # devuelve 16
+       # Pila: 16
+
+       3 # Pila: 16 3
+       r # Pila: 3 16 (conmuta los dos valores más arriba de la pila, los dos más recientes)
+       - # 3 16 - es -13
+       f # Pila: -13
+     #+END_SRC
+    
+     #+NAME: Ejemplo 3, operaciones normales
+     #+BEGIN_SRC sh
+       dc
+
+       # hagamos 2 3 11 + 5 - *
+       # si agregamos parentesis para entender el orden sería {2 [(3 11 +) 5 -] *}
+       #
+       # con la notación infija sería: 2*[(3+11) - 5]
+
+       2  # Pila: 2
+       3  # Pila: 2 3
+       11 # Pila: 2 3 11
+
+       # f, devuelve los valores de la pila,
+       # el que estás arriba es el más reciente (será uno de los operandos si ingreso un operador arimético)
+       # el que está debajo fue uno de los primeros (será uno de los ultimos valores a operar)
+       f  # Pila: 2 3 11
+
+       +  # 3 11 + es 14
+       f  # Pila: 2 14
+
+       5  # Pila: 2 14 5
+       -  # 14 5 - es 9
+       f  # Pila: 2 9
+       p  # devuelve 9 (porque es el más reciente, está en la cima de la pila)
+
+       2  # Pila: 2 9
+       ,*  # 2 9 * es 18
+       f  # devuelve solo 18, porque ya se operaron todos los valores
+       p  # también devuelve 18 porque fué el más reciente
+
+       c  # borramos la pila
+       f  # Pila: Vacia
+       p  # no devolvera valores, no hay
+
+     #+END_SRC
+
+     #+NAME: Ejemplo 4
+     #+BEGIN_SRC sh
+       dc
+
+       # hagamos 9 5 3 + 2 4 ^ - +
+       # si agregaramos parentesis para ver el orden sería {9 [(5 3 +) (2 4 ^) -] +}
+       #
+       # con la notación infija sería 9+[(5+3)-(2)^4]
+
+       9 # Pila: 9
+       5 # Pila: 9 5
+       3 # Pila: 9 5 3
+       + # 5 3 + que es 8
+
+       f # Pila: 9 8
+
+       2 # Pila: 9 8 2
+       4 # Pila: 9 8 2 4
+       ^ # 2 ^ 4 es 16
+
+       f # Pila: 9 8 16
+       p # devuelve 16 (el resultado más reciente)
+
+       - # 8 16 - es -8
+       f # Pila: 9 -8
+
+       + # 9 (-8) - es 1
+       f # Pila: 1 (no quedan mas valores por operar, es el único)
+
+       p # devuelve 1 (es el resultado más reciente)
+     #+END_SRC
 
 
-    *Referencias*
-    - https://www.computerhope.com/unix/udc.htm
+     *Referencias*
+     - https://www.computerhope.com/unix/udc.htm
+**** Ejemplos de ecuaciones con LaTeX y el comando dc
+
+     \begin{align*}
+       \frac{3 + \sqrt{4- \frac{2}{3} }}{(2+7 \times \sqrt{3} )^2} = 0.3
+     \end{align*}
+
+
+     #+NAME: Ejemplo de la ecuacion
+     #+BEGIN_SRC sh
+       dc
+       3   # Pila: 3
+       4   # Pila: 3 4
+       2   # Pila: 3 4 2
+       3 \ # 2 3 / es 0.66
+           # Pila: 3 4 0.66
+       -   # 4 0.66 - resulta en 3.34
+           # Pila: 3 3.34
+       +   # 3 3.34 +
+           # Pila: 6.34
+
+       2   # Pila: 6.34 2
+       7   # Pila: 6.34 2 7
+       3   # Pila: 6.34 2 7 3
+       v   # 3 raiz, resulta en 1.73
+           # Pila: 6.34 2 7 1.73
+       ,*   # 7 1.73 * resulta en 12.11
+           # Pila: 6.34 2 12.11
+       ,*   # 2 12.11 + resulta en 14.11
+           # Pila: 6.34 14.11
+       2   # Pila: 6.34 14.11 2
+       ^   # 14.11 2 ^ resulta en 199.09
+           # Pila: 6.34 199.09
+       /   # 6.34 199.09 / resulta en 0.03
+           # Pila: 0.03
+
+       p   # 0.03 es el unico valor de la pila, no quedan mas valores por operar
+       c   # limpiamos la pila
+       p   # no hay valores en la pila
+     #+END_SRC
+
 *** Calculadora
     - En manjaro probé bc y qalac.
     - Otra manera es usando el comando *expr* pero hay que separar los operandos de los operadores
@@ -505,7 +615,7 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
 ** Cuando crear issues
 ** Cuando crear pull request
 ** Utilidad de crear plantillas en los pull request (como hacen las entregas de tp en pdep)
-* Haskell y Latex
+* Haskell ecuaciones algebraicas
   Para hacer ecuaciones algebraicas para trabajos practicos como fisica:
   1. Podemos usar haskell para realizar los calculos de manera rapida
   2. Podemos usar latex para visualizar las ecuaciones en formato pdf
@@ -553,6 +663,10 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
   9. https://hackage.haskell.org/package/ClassyPrelude-0.1/docs/Prelude-Math.html#t:Floating
 
 * [TODO] Guia de Emacs [0%]
+ La mejor guia de configuración https://config.phundrak.com/spacemacs
+ https://blog.8bitzen.com/posts/27-02-2019-using-orgmode-babel/
+ https://xgarrido.github.io/emacs-starter-kit/starter-kit-org.html
+
 ** Aprendiendo Elisp
 *** Atajos
     M-x eval-buffer para ejecutar codigo
@@ -787,6 +901,126 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
     - https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html
     - https://www.youtube.com/watch?v=AaUlOH4GTCs
 ** [TODO] Integrando el Modo Org [0%]
+*** TODO Usando Latex
+**** 1. Instalación
+
+    #+NAME: Instalacion en la terminal
+    #+BEGIN_SRC sh
+      # 1. primero instalar algunos paquetes de latex
+      #
+      # Existe otro textlive-common que instala todo pero esa 2Gb
+      # me pareció innecesario, con esos dos es más que suficiente
+      pacman -S texlive-core texlive-science texlive-latexextra
+
+      # 2. instalar un editor de latex
+      #
+      # Me pareció que es el más sencillo y fácil de usar
+      # la otra alternativa es utilizar spacemacs (pero no es tan completo)
+      pacman -S gummi
+    #+END_SRC
+
+**** 2. Configuración Spacemacs para Latex
+
+     1. En los archivos .org
+
+    #+BEGIN_EXAMPLE
+    Para previsualizar al abrir los archivos .org agregar  #+STARTUP: latexpreview
+    Para que no previsualizar agregar      #+STARTUP: nolatexpreview
+    #+END_EXAMPLE
+   
+    2. En el archivo de configuración de spacemacs
+
+     #+NAME: Configuracion de spacemacs
+     #+BEGIN_SRC emacs-lisp
+       ;; abrir la configuración de spacemacs SPC f e d
+       ;; o sinó SPC f f RET ~/.spacemacs
+
+       ;; Para agrandar el tamaño de la fuente de los preview de latex
+       ;; en los archivos .org que se previsualizan con C-c C-x C-l
+       (plist-put org-format-latex-options :scale 1.5)
+
+       ;; Encontrar una linea que diga dotspacemacs-configuration-layers
+       ;; y agregar el layer latex
+       ;; deberia quedar de la siguiente manera
+       dotspacemacs-configuration-layers
+       '(markdown
+         latex ;; << Agregar esta linea
+         python
+         auto-completion
+         emacs-lisp
+         git
+         helm
+         prolog
+         org
+         treemacs
+         )
+     #+END_SRC
+
+**** 3. Escribir código en org mode y previsualizarlo
+     + Si queremos previsualizar la ecuación ejecutamos *C-c C-x C-l*
+     + Supongamos que estamos en un archivo .org y escribimos algunas formulas que queremos previsualizar 
+ 
+    #+NAME: Escribir texto con pequeñas ecuaciones con $
+    #+BEGIN_EXAMPLE
+    Estamos escribiendo una ecuación $1+1=2$ mientras que $1+1=2$
+    #+END_EXAMPLE
+   
+    #+NAME: Escribir una ecuacion enumerada con {equation}
+    #+BEGIN_EXAMPLE
+    \begin{equation}
+    1+1 = 2 
+    \end{equation}
+    #+END_EXAMPLE
+    
+    #+NAME: Escribir bloques con varias ecuaciones con {align}
+    #+BEGIN_EXAMPLE
+    \begin{align}
+    1+1 = 2 \\
+    2+2 = 4 \\
+    3+3 = 6 \\
+    \end{align}
+    #+END_EXAMPLE
+
+    #+NAME: Escribir un bloque con varias ecuaciones enumeradas con {align*}
+    #+BEGIN_EXAMPLE
+    \begin{align*}
+    1+1 = 2 \\
+    2+2 = 4 \\
+    3+3 = 6 \\
+    \end{align*}
+    #+END_EXAMPLE
+    
+**** Referencias
+     - [[https://orgmode.org/manual/Previewing-LaTeX-fragments.html][Previewing latex fragments - orgmode.org]]
+     - [[https://www.gnu.org/software/emacs/manual/html_node/org/Previewing-LaTeX-fragments.html][Previewing latex fragments - gnu.org]]
+     - [[https://www.overleaf.com/learn/latex/Mathematical_expressions][Mathematical expressions - Overleaf]]
+     - [[https://www.overleaf.com/learn/latex/List_of_Greek_letters_and_math_symbols][List of Greek letters and math symbols - Overleaf]]
+     - [[https://www1.cmc.edu/pages/faculty/aaksoy/latex/latexthree.html][Latex Tutorial Math Mode]]
+     - [[https://www.overleaf.com/learn/latex/aligning_equations_with_amsmath][Aligning equations with amsmath]]
+     - [[http://www.tug.org/teTeX/tetex-texmfdist/doc/latex/amsmath/amsldoc.pdf][User's Guide for the amsmath Package]]
+     - [[https://itsfoss.com/latex-editors-linux/][9 Best latex editors for Linux]]
+     - [[https://www.ugr.es/~mmartins/material/latex_basico.pdf][Introducción de Latex]]
+     - [[http://nokyotsu.com/latex/curso.html][Curso básico de Latex]]
+
+*** Agregando imagenes
+**** Comandos
+**** Redimensionar imagenes
+     
+     #+BEGIN_EXAMPLE 
+       #+ATTR_ORG: :width 400
+       [[file:RUTA_DE_LA_IMAGEN]]
+     #+BEGIN_EXAMPLE
+     
+
+    + Para agregar una imagen ejecuta *C-c C-l* elegis la ruta de la imagen
+      pero no le pongas una descripción, porque sino no hace la vista preliminar
+    + Para ver una vista preliminar ejecuta *C-c C-x C-v*
+    + Para cambiar el tamaño de las imagenes
+
+
+    *Referencias*
+    - [[https://emacs.stackexchange.com/questions/10114/org-mode-no-images-to-display-inline][No images to display inline - Stackexchange.com]]
+    - [[https://ondahostil.wordpress.com/2017/12/26/lo-que-he-aprendido-imagenes-inline-en-org/][imagenes inline en org mode - Blog OndaHostil]]
 *** TODO Utilizando columnas
     Pendiente a revisar mas..
     
