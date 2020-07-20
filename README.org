@@ -89,7 +89,7 @@
    - https://webtematica.com/centos-o-debian-para-servidores-web
    - https://www.sinologic.net/2011-02/porque-debian-no-centos.html
 * Guia Linux
-** Comandos Importantes
+** TODO Comandos Importantes
    | Comando     | Descripcion                                       |
    | :------     | :----------                                       |
    | mhwd-kernel |                                                   |
@@ -104,7 +104,107 @@
    - https://www.tecmint.com/sort-ls-output-by-last-modified-date-and-time/
    - https://osxdaily.com/2017/02/02/ls-sort-by-date/
 
+** TODO Comando awk
+*** Ejemplos
+
+    
+
+*** Referencias
+    + [[https://likegeeks.com/es/comando-awk/][Comando awk - likegeeks.com]]
 ** Utilidades Interesantes
+*** Crear animaciones de captura de pantalla
+   
+    Algunos packages útiles: 
+    + Con *xrectsel* se puede saber las posiciciones (x,y) el tamaño(width,height) de una parte de la pantalla
+    + Con *byzanz-record* se captura pantalla en formato gif mediante lineas de comando
+   
+    Algunas páginas útiles:
+    + Con *gfycat.com* se puede subir animaciones gif, permite verlos como si fuese un reproductor de video.
+
+    #+NAME: Instalación y configuración
+    #+BEGIN_SRC sh
+      # para saber el tamaño de una ventana
+      sudo pacman -S xrectsel
+      # para capturar la pantalla y generar un gif
+      sudo pacman -S byzanz-record
+
+      # byzanz-record --delay=5 --duration=10 --width=400 --height=400 --x=0 --y=80 test1.gif
+    #+END_SRC
+
+    #+NAME: Script para capturar pantalla
+    #+BEGIN_SRC sh
+      # WINDOWS_SIZE=$(gdialog --title "Elegir ventana o tamanio" --yesno "Grabar una ventana o elegir tamanio?" 0 0)
+      # if $WINDOWS_SIZE; then
+      #     notify-send "elegiste si"
+      # else
+      #     notify-send "elegiste NO"
+      # fi
+
+      # Name
+      TITLE=$(gdialog --title "TITLE?" --inputbox "Elija un titulo para la animación" 200 100 2>&1)
+
+      # Time and date
+      TIME=$(date +"%Y-%m-%d_%H%M%S")
+
+      # Delay before starting
+      DELAY=10
+
+      # Standard screencast folder
+      FOLDER="$HOME/Pictures"
+
+      # Default recording duration
+      DEFAULT_DURATION=10
+
+      # Sound notification to let one know when recording is about to start (and ends)
+      beep() {
+          paplay /usr/share/sounds/freedesktop/stereo/message-new-instant.oga &
+      }
+
+      # Custom recording duration as set by user
+      DURATION=$(gdialog --title "Duration?" --inputbox "Please enter the screencast duration in seconds" 200 100 2>&1)
+
+      # Duration and output file
+      if [ $DURATION -gt 0 ]; then
+          D=$DURATION
+      else
+          D=$DEFAULT_DURATION
+      fi
+
+      # Window geometry
+      # No funciona...
+      # XWININFO=$(xwininfo)
+      # read X <<(awk -F: '/Absolute upper-left X/{print $2}' <<< "$XWININFO")
+      # read Y <<(awk -F: '/Absolute upper-left Y/{print $2}' <<< "$XWININFO")
+      # read W <<(awk -F: '/Width/{print $2}' <<< "$XWININFO")
+      # read H <<(awk -F: '/Height/{print $2}' <<< "$XWININFO")
+
+      # estaba probando pero me falta entenderlo bien (?)
+      # MYWINDOW = xrectsel
+      #W = MYWINDOW | awk -F '{print $1}'
+
+      # Notify the user of recording time and delay
+      notify-send "GIFRecorder" "Recording duration set to $D seconds. Recording will start in $DELAY seconds."
+
+      #Actual recording
+      sleep $DELAY
+      beep
+      byzanz-record -c --verbose --delay=0 --duration=$D --x=$X --y=$Y --width=$W --height=$H "$FOLDER/GIFrecord_$TIME.gif"
+      beep
+
+      # Notify the user of end of recording.
+      notify-send "GIFRecorder" "Screencast saved to $FOLDER/GIFrecord_$NAME_$TIME.gif"
+    #+END_SRC
+
+    #+RESULTS: Script para capturar pantalla
+    
+    *Referencias*
+    - [[https://gfycat.com/upload][Sitio para subir animaciones - Gfycat.com]]
+    - [[http://zenon.en-getafe.org/2007/11/27/xdialog-ventanas-en-scripts][Xdialog ventanas en scripts - Blog Zenon]]
+    - [[https://www.it-swarm.dev/es/linux/como-solicito-la-entrada-sinocancelar-en-un-script-de-shell-de-linux/958436319/][Como usar xdialog - it-swarm.dev]]
+    - [[https://aur.archlinux.org/packages/xrectsel/][Package xrectsel - AUR Arch Linux]]
+    - [[https://wiki.ubuntu.com/CreatingScreencasts][CreatingScreenScasts - Wiki Ubuntu]]
+    - [[https://www.archlinuxuser.com/2013/01/how-to-record-desktop-into-gif-using.html][How to record desktop into GIF using byzanz - ArchLinuxUser.com]]
+
 *** Calculadora con notación polaca inversa (rpn - reverse polish notation)
 
 **** Conceptos
@@ -325,7 +425,6 @@
        c   # limpiamos la pila
        p   # no hay valores en la pila
      #+END_SRC
-
 *** Calculadora
     - En manjaro probé bc y qalac.
     - Otra manera es usando el comando *expr* pero hay que separar los operandos de los operadores
