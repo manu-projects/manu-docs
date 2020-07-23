@@ -999,7 +999,23 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
     - https://github.com/abo-abo/swiper/issues/1550
     - https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html
     - https://www.youtube.com/watch?v=AaUlOH4GTCs
-** [TODO] Integrando el Modo Org [0%]
+** [TODO] Integrando el Modo Org [47%]
+*** [TODO] Creando tablas
+
+    |--------------+-----------------------------------------|
+    | Comando      | Descripción                             |
+    |--------------+-----------------------------------------|
+    | C-c -        | Agrega una linea divisoria              |
+    | C-c TAB      | Oculta/Expande una columna              |
+    | C-c C-c      | Ajusta las columnas (por si se deforma) |
+    | C-c SPC      | Borra el texto de una celda             |
+    | M-LEFT/RIGHT | Mover columnas (izquierda/derecha)      |
+    | M-UP/DOWN    | Mover filas (arriba/abajo)              |
+
+    + Referencias
+      - [[https://www.gnu.org/software/emacs/manual/html_node/org/Built_002din-table-editor.html][The built-in table editor - gnu.org]]
+      - [[https://orgmode.org/manual/Built_002din-Table-Editor.html][Built-in Table Editor - orgmode.org]]
+      - [[https://orgmode.org/manual/Column-Width-and-Alignment.html][Column width and alignment - orgmode.org]] 
 *** TODO Usando Latex
 **** 1. Instalación
 
@@ -1100,7 +1116,6 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
      - [[https://itsfoss.com/latex-editors-linux/][9 Best latex editors for Linux]]
      - [[https://www.ugr.es/~mmartins/material/latex_basico.pdf][Introducción de Latex]]
      - [[http://nokyotsu.com/latex/curso.html][Curso básico de Latex]]
-
 *** Agregando imagenes
 **** Comandos
 **** Redimensionar imagenes
@@ -1147,9 +1162,21 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
     #+NAME: probando-esto
     #+BEGIN_SRC sh :var nombre="mumuki" :results drawer 
       pwd # para ver ruta actual
-      #ls | grep "mumuki"
-      ls | grep "$nombre" # filtro directorio actual por un nombre
+      # ls | grep "mumuki"
+      # ls | grep "$nombre" # filtro directorio actual por un nombre
+
+
     #+END_SRC
+
+    #+RESULTS: probando-esto
+    :results:
+    /home/jelou/Documentos/git/manu-docs
+    docs
+    ltximg
+    mkdocs.yml
+    mkdocs.yml~
+    README.org
+    :end:
 
 
     Referencias:
