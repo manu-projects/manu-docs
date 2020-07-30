@@ -894,6 +894,33 @@ https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-regi
   - [[https://www.youtube.com/watch?v=9aI7ZAEbiF0][Common LISP (Prof. Javier)]]
 
 ** [CHECK] Empezando con Emacs [0%]
+*** [TODO] Comandos importantes
+
+    
+    |---------+------------------------------------------------|
+    | Comando | Descripción                                    |
+    |---------+------------------------------------------------|
+    | w       | Ir a la siguiente palabra (word) a la derecha  |
+    | b       | Ir a la palabra anterior (back) a la izquierda |
+    |---------+------------------------------------------------|
+
+    |-------------------+--------------------------------------------------------------------------|
+    | Comando           | Descripción                                                              |
+    |-------------------+--------------------------------------------------------------------------|
+    | M-u               | Convertir a mayuscula (upper case) la siguiente palabra                  |
+    | M-l               | Convertir a minuscula (lower case) la siguiente palabra                  |
+    | M-c               | Convertir a letra capital (capitalize) la siguiente palabra              |
+    |-------------------+--------------------------------------------------------------------------|
+    | C-x C-u           | Convertir a mayuscula una región de texto seleccionada (Varias palabras) |
+    | C-x C-l           | Convertir a minuscula una región de texto seleccionada (varias palabras) |
+    | capitalize-region |                                                                          |
+    |-------------------+--------------------------------------------------------------------------|
+    
+    *Referencias*
+    + [[http://ergoemacs.org/emacs/modernization_upcase-word.html][Toggle Letter case - ergoemacs.org]]
+    + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Case.html][Case Conversion Commands -  gnu.org]]
+    + [[https://kb.iu.edu/d/abis][Change de case and capitalization of words and regions - Knowlege Base]]
+
 *** Canales favoritos
     - https://www.youtube.com/watch?v=49kBWM3RQQ8&list=PL9KxKa8NpFxIcNQa9js7dQQIHc81b0-Xg (te falto agregar este, que es muy completo)
 *** [TODO] [#A] Modo artista, crear imagenes con texto
