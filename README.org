@@ -605,6 +605,92 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
    + [[https://www.youtube.com/watch?v=U6sp5dJWFAM][#3 Spacemacs - python, pyenv, pyls, flake8]]
 
 * Docker
+** Comandos básicos
+
+   |----------------------------------------+-------------------------------------------------------|
+   | Comando                                | Descripción                                           |
+   |----------------------------------------+-------------------------------------------------------|
+   | docker search algunContainer           | Buscar un container                                   |
+   | docker images                          | Listar containers ya instalados (entorno local)       |
+   | docker ps                              | Listar containers en ejecución                        |
+   | docker ps -a # -a es all               | Listar (all) todos los containers (activos/inactivos) |
+   | docker ps -l # -l es list              | Listar últimos containers creados                     |
+   | docker start IDdeAlgunContainer        | El ID se obtiene con *docker images*                  |
+   | docker run algunContainer algunComando | Para ejecutar una linea comandos en un container      |
+   | docker rm algunContainer               | Para eliminar un container                            |
+   | docker run -it algunContainer          | Modo interactivo (via terminal)                       |
+   | docker pull algunContainer             | Descargar o actualizarlo                              |
+   | docker pull algunContainer:unTag       | El tag puede ser una version especifica               |
+   |----------------------------------------+-------------------------------------------------------|
+
+https://hub.docker.com/repository/docker/neverkas/distroalpine
+https://www.digitalocean.com/community/tutorials/como-instalar-y-usar-docker-en-ubuntu-18-04-1-es
+https://www.ionos.es/digitalguide/servidores/configuracion/tutorial-docker-instalacion-y-primeros-pasos/
+https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+
+*** Descargar ó Actualizar un Container
+
+    #+BEGIN_SRC sh
+      # para descargar ó actualizar un container local ya existente
+      docker pull algunContainer
+
+      # para descargar una versión especifica (a partir de un tag)
+      # sino especificamos suele traer la última vesión (latest)
+      docker pull algunContainer:1.10
+    #+END_SRC
+
+*** Listar containers activos, inactivos
+     
+     #+BEGIN_SRC sh
+       # listar containers en ejecución
+       docker ps
+
+       # listar últimos containers creados
+       # -a se refiere a "all"
+       docker ps -a
+
+       # listar containers activos/en ejecución
+       # -l se refiere a "list"
+       docker ps -l
+     #+END_SRC
+       
+*** Acceder ó Iniciar/Detener ejecución de containers
+    + Para iniciar utilizamos *docker start*
+    + Para detener usamos *docker stop*
+
+    #+BEGIN_SRC sh
+      # iniciar un container
+      docker start algunContainer
+
+      # detener un container en ejecución
+      docker stop algunContainer
+
+      # entrar al modo interactivo via terminal
+      docker run -it algunContainer
+
+      # docker run -it algunContainer /bin/sh
+      # docker run -it algunContainer /bin/bash
+    #+END_SRC
+
+*** Versionar containers
+     + Suponiendo que ya habiamos creado en la página de *dockerhub* un repositorio llamado *distroalpine*
+
+**** 1. Creamos un tag a nuestro container local
+
+     #+BEGIN_SRC sh
+        docker tag a24bb4013296 neverkas/distroalpine:3.12
+     #+END_SRC
+
+**** 2. Subimos los cambios
+     
+     #+BEGIN_SRC sh
+        docker push neverkas/distroalpine:3.12
+     #+END_SRC
+
+
+     docker tag local-image:tagname new-repo:tagname
+     docker push new-repo:tagname
+
 ** Probando con alpine linux
 
    #+BEGIN_SRC sh
@@ -644,12 +730,15 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
    #+END_SRC
    
 ** Referencias
-   - [[https://www.youtube.com/watch?v=vjnOIE-CwMU&list=PLqRCtm0kbeHAep1hc7yW-EZQoAJqSTgD-&index=2][Video - DOcker - primeros pasos]]
-   - [[https://www.youtube.com/watch?v=6idFknRIOp4&t=201s][Video - Aprender docker en 14min]]
+   + [[https://www.digitalocean.com/community/tutorials/como-instalar-y-usar-docker-en-ubuntu-18-04-1-es][Como instalar y usar Docker en Ubuntu 18.04 - Digitalocean.com]]
+   + [[https://www.ionos.es/digitalguide/servidores/configuracion/tutorial-docker-instalacion-y-primeros-pasos/][Tutorial Docker - Instalación y primeros pasos - Ionos.es]]
 
-   - https://stackoverflow.com/questions/21871479/docker-cant-connect-to-docker-daemon
-   - https://www.digitalocean.com/community/questions/how-to-fix-docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socket
-   - https://manjaro.site/how-to-install-docker-on-manjaro-18-0/
+   + [[https://www.youtube.com/watch?v=vjnOIE-CwMU&list=PLqRCtm0kbeHAep1hc7yW-EZQoAJqSTgD-&index=2][Video - DOcker - primeros pasos]]
+   + [[https://www.youtube.com/watch?v=6idFknRIOp4&t=201s][Video - Aprender docker en 14min]]
+
+   + https://stackoverflow.com/questions/21871479/docker-cant-connect-to-docker-daemon
+   + https://www.digitalocean.com/community/questions/how-to-fix-docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socket
+   + https://manjaro.site/how-to-install-docker-on-manjaro-18-0/
 
 ** Instalación
 
@@ -667,7 +756,7 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
      docker run hello-world
    #+END_SRC
 
-   #+NAME: Versionando COntainers
+   #+NAME: Versionando Containers
    #+BEGIN_SRC sh
      # para listar imagenes corriendo
      docker ps
@@ -692,6 +781,7 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
      # le asignamos un tag para diferenciar (suponiendo que asdasd123123 es el id)
      docker image tag asdasd123123 miPrimerDocker
    #+END_SRC
+
 * [#A] Otros
 ** Revisar los archivos
    Quedaron algunos archivos de los cuales quizas no pasaste toda la informacion
@@ -1456,6 +1546,11 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
 ** Navegador web con vim
    Un grandioso navegador web conocido como *qute browser*
 
+   | Comando | Descripción                  |
+   | :back   | Volver atras en el historial |
+   | :open   | Abrir una web                |
+
+   - https://qutebrowser.org/doc/help/commands.html
    - https://www.youtube.com/watch?v=nu-YyL7iQC4
    - https://www.youtube.com/watch?v=g2RtjO_jXvY
    - https://laboratoriolinux.es/index.php/-noticias-mundo-linux-/software/26950-la-nueva-version-de-qutebrowser-1-11-0-ya-esta-aqui-un-navegador-al-estilo-vim.html
