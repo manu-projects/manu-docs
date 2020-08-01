@@ -13,60 +13,7 @@ se pueda volcar por categoría.
 + [[file:TODO-maquinas-virtuales.org][To-Do Maquinas Virtuales]]
 + [[file:TODO-git.org][To-Do Git Versionado]]
 + [[file:TODO-testing.org][To-Do Automatización/Testing]]
++ [[file:tecnologias.org][To-Do Nuevas Tecnologías]]
++ [[file:TODO-otros.org][To-Do Otros]]
 
-* Haskell ecuaciones algebraicas
-  Para hacer ecuaciones algebraicas para trabajos practicos como fisica:
-  1. Podemos usar haskell para realizar los calculos de manera rapida
-  2. Podemos usar latex para visualizar las ecuaciones en formato pdf
-
-  Tips:
-  1. Para usar coseno y seno tenes que pasar los grados a radianes
-  2. Para hacer cuentas en la terminal, manera rapida de tipar las funciones
-    es usar la misma sintaxis que al tipar funciones pero a la izquierda
-    iran las operaciones
-    Prelude> 0.219 / (cos(radianes 58) * 10) :: CReal
-
-  3. Para evitar resultados con notacion cientifica
-     1. Primera solucion:
-     2. Importar en el archivo .hs el modulo Numeric
-     3. Utilizar la siguiente funcion, para parsear los resultados
-        de notacion cientifica
-         showFullPrecision :: Double -> String
-         showFullPrecision x = showFFloat Nothing x ""
-     4. Segunda solucion:
-        1. Agregar la dependencia numbers en package.yaml de stack
-        2. Importar en el archivo .hs el modulo Data.Number.CReal
-        3. Agregar en el tipado de las funciones :: CReal
-  
-  #+NAME: Ecuaciones algebraicas en haskell
-  #+SRC_BEGIN haskell
-   module TpFisicaPunteria where
-   import Data.Number.CReal
-
-   -- Obs: Si no pasas a radianes el sin/cos devuelven otros numeros
-   radianes grados = (grados*2*pi) / 360
-   -- Obs: Si no usas CReal devuelve el numero en notacion cientifica
-  vMax :: CReal
-  vMax = 0.219 / (cos(radianes 58) * 10)
-  #+END_SRC
-
-  Referencias
-  1. https://stackoverflow.com/questions/37006362/haskell-how-to-avoid-scientific-notation-in-decimal-output
-  2. https://www.reddit.com/r/haskell/comments/9v40jp/using_cos_and_sin/
-  3. https://stackoverflow.com/questions/58042134/problem-loading-module-data-number-creal-in-cabal-file
-  4. https://downloads.haskell.org/~ghc/7.8.4/docs/html/users_guide/packages.html
-  5. https://hackage.haskell.org/package/exact-real-0.12.4/docs/Data-CReal.html
-  6. https://stackoverflow.com/questions/17566768/haskell-sine-and-cosine-functions-not-working
-  7. https://xbuba.com/questions/37006362
-  8. http://rigaux.org/language-study/syntax-across-languages-per-language/Haskell.html
-  9. https://hackage.haskell.org/package/ClassyPrelude-0.1/docs/Prelude-Math.html#t:Floating
-
-* Nuevas tecnologias 
-** Mermaidjs
-   Para hacer graficos (Diagramas de flujo, gantt, etc..)
-   https://mermaid-js.github.io/mermaid/#/flowchart
-   https://mermaid-js.github.io/mermaid-live-editor
-** Hacer graficos 
-   Referencias:
-   - https://www.gnu.org/software/octave/
 
