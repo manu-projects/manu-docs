@@ -1,0 +1,54 @@
+* Testing con Selenium
+*** Instalación
+
+    #+BEGIN_SRC sh
+      # 1. lo instalamos selenium
+      sudo pacman -S python-selenium
+
+      # 2. instalamos el webdriver para firefox
+      sudo pacman -S geckodriver
+
+      # se puede instalar con pip de python
+    #+END_SRC
+
+*** Un hello world 
+    
+    #+BEGIN_SRC python
+      from selenium import webdriver
+      # para usar el sleep
+      import time
+      # para usar teclas como enter
+      from selenium.webdriver.common.keys import Keys
+      # elegimos que navegador usaremos
+      driver = webdriver.Firefox()
+      # le asignamos una dirección donde ir
+      driver.get('http://google.com')
+      # aguardamos 2 segundos antes de seguir
+      time.sleep(2)
+
+      # seleccinamos el campo de texto usual de busqueda de google
+      busqueda_box = driver.find_element_by_name('q')
+      # hacemos que escriba un texto
+      busqueda_box.send_keys('mafalda san telmo')
+      # y que simule presionar la tecla enter
+      busqueda_box.send_keys(Keys.ENTER)
+      # hacemos que espere un rato
+      time.sleep(2)
+      # se cerrará el navegador
+      driver.quit()
+
+    #+END_SRC
+
+** Referencias 
+   + https://enmilocalfunciona.io/automatizacion-de-pruebas-con-selenium-y-python/
+   + https://linuxhint.com/browser_automation_selenium_python/
+   + https://discover.manjaro.org/packages/python-selenium
+   + https://github.com/mozilla/geckodriver/releases
+
+   + [[https://stackoverflow.com/questions/1896918/running-unittest-with-typical-test-directory-structure/22244465][Unitest python selenium]]
+   + [[https://stackoverflow.com/questions/36202689/selenium-webdriver-get-text-from-input-field?rq=1][Selenium - get_attribute]]
+   + [[https://stackoverflow.com/questions/1629053/typing-enter-return-key-using-python-and-selenium][Selenium - Keys Enter]]
+
+   + [[https://www.youtube.com/watch?v=nDqgZVCbnmI][#1 Spacemacs - Python]]
+   + [[https://www.youtube.com/watch?v=r-BHx7VNX5s][#2 Spacemacs - Python]]
+   + [[https://www.youtube.com/watch?v=U6sp5dJWFAM][#3 Spacemacs - python, pyenv, pyls, flake8]]

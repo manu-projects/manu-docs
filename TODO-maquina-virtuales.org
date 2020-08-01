@@ -1,0 +1,267 @@
+* [TODO] [#A] Virtualbox
+  Agregar a la guia actual
+
+** 1. Instalacion de Virtualbox
+   Nos aseguramos de instalar una version que se adapte a nuestro kernel
+
+   #+BEGIN_SRC sh
+     # La version que nos diga sera la que agregamos
+     mhwd-kernel -li
+     # Instalamos virtualbox (suponiendo que tu kernel es linux54)
+     sudo pacman -Syu virtualbox linux54-virtualbox-host-modules
+     # Cargamos virtualbox
+     sudo vboxreload
+     # Instalamos la version extendida que agrega nuevas funcionalidades
+     pamac build virtualbox-ext-oracle
+     # Agregamos el usuario actual al grupo de usuarios vbox
+     sudo gpasswd -a $USER vboxusers
+   #+END_SRC
+   
+** 2. Instalar Vagrant
+
+   #+BEGIN_SRC sh
+     # Instalamos vagrant
+     pacman -S vagrant
+     # Instalamos plugins 
+     # vagrant plugin install vagrant-vbguest vagrant-share
+     # creamos directorio donde instalar sl ervidor
+     mkdir manu-server 
+     cd manu-server 
+     # Inicializamos con una distribucion centos 7 como servidor linux
+     # vagrant box add centos-7.0-x86_64.box --name centos7
+
+     # vagrant init centos/7
+     vagrant init ubuntu/trusty64
+
+     # Descargamos e instalamos el servidor linux 
+     vagrant up 
+     # Nos conectamos al servidor
+     vagrant ssh
+   #+END_SRC
+   
+   | Comando           | Descripcion                                |
+   | :------           | :----------                                |
+   | vagrant provision | Instalar paquetes agregados en Vagrantfile |
+   | vagrant halt      |                                            |
+   | vagrant up        | Descargar e instalar un box                |
+   | vagrant ssh       | Conectarse al servidor                     |
+   | vagrant init      | Inicializar                                |
+
+   
+   *Referencias*
+   - https://wiki.archlinux.org/index.php/Vagrant
+   - https://www.vagrantup.com/docs/boxes/base.html
+   - https://www.vagrantup.com/intro/getting-started/provisioning.html
+   - https://dev.to/psnebc/vagrant-package-and-vagrant-box-add-8of
+   - https://medium.com/@Joachim8675309/vagrant-provisioning-e4c9fd57968d
+   - https://scotch.io/courses/getting-started-with-vagrant-for-local-development/provisioning-vmprovision-how-to-customize-the-box
+   - https://blog.ipswitch.com/installing-your-first-vagrant-box
+   - https://computingforgeeks.com/how-to-addinstall-and-run-centos-7-vagrant-box-to-virtualbox-using-vagrant/
+
+** 3. Configurar Servidor
+   En este caso usaremos ubuntu/trusty64
+   No tuve que crear particiones extra (chequear con blogs, y mas info por si acaso)
+
+   Compartir Carpetas
+   - https://blog.theodo.com/2017/07/speed-vagrant-synced-folders/
+   - https://www.vagrantup.com/docs/synced-folders/basic_usage
+   - https://stackoverflow.com/questions/19231895/how-to-share-a-folder-created-inside-vagrant
+   
+   Referencias
+   - https://www.2daygeek.com/how-to-resize-active-primary-root-partition-in-linux-using-gparted-utility/
+   - https://access.redhat.com/articles/1190213
+   - https://kwilson.io/blog/format-a-linux-disk-as-ext4-from-the-command-line/
+   - https://www.tecmint.com/create-new-ext4-file-system-partition-in-linux/
+   -
+** 4. Configurar red
+   La idea es poder correr algun servidor web por ejemplo con prolog
+   y poder acceder via tu maquina
+
+   - https://www.oreilly.com/library/view/vagrant-up-and/9781449336103/ch04.html
+   - https://www.vagrantup.com/docs/networking/public_network.html
+   - https://stackoverflow.com/questions/33250304/how-to-automatically-select-bridged-network-interfaces-in-vagrant
+** Referencias
+   - https://wiki.manjaro.org/index.php?title=VirtualBox
+   - https://www.profesionalreview.com/2018/11/19/virtualbox-extension-pack/
+   - https://www.hostinger.com.ar/tutoriales/centos-vs-ubuntu-elegir-servidor-web/
+   - https://webtematica.com/centos-o-debian-para-servidores-web
+   - https://www.sinologic.net/2011-02/porque-debian-no-centos.html
+     
+* Docker
+** Comandos básicos
+
+   |----------------------------------------+-------------------------------------------------------|
+   | Comando                                | Descripción                                           |
+   |----------------------------------------+-------------------------------------------------------|
+   | docker search algunContainer           | Buscar un container                                   |
+   | docker images                          | Listar containers ya instalados (entorno local)       |
+   | docker ps                              | Listar containers en ejecución                        |
+   | docker ps -a # -a es all               | Listar (all) todos los containers (activos/inactivos) |
+   | docker ps -l # -l es list              | Listar últimos containers creados                     |
+   | docker start IDdeAlgunContainer        | El ID se obtiene con *docker images*                  |
+   | docker run algunContainer algunComando | Para ejecutar una linea comandos en un container      |
+   | docker rm algunContainer               | Para eliminar un container                            |
+   | docker run -it algunContainer          | Modo interactivo (via terminal)                       |
+   | docker pull algunContainer             | Descargar o actualizarlo                              |
+   | docker pull algunContainer:unTag       | El tag puede ser una version especifica               |
+   |----------------------------------------+-------------------------------------------------------|
+
+https://hub.docker.com/repository/docker/neverkas/distroalpine
+https://www.digitalocean.com/community/tutorials/como-instalar-y-usar-docker-en-ubuntu-18-04-1-es
+https://www.ionos.es/digitalguide/servidores/configuracion/tutorial-docker-instalacion-y-primeros-pasos/
+https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+
+*** Descargar ó Actualizar un Container
+
+    #+BEGIN_SRC sh
+      # para descargar ó actualizar un container local ya existente
+      docker pull algunContainer
+
+      # para descargar una versión especifica (a partir de un tag)
+      # sino especificamos suele traer la última vesión (latest)
+      docker pull algunContainer:1.10
+    #+END_SRC
+
+*** Listar containers activos, inactivos
+     
+     #+BEGIN_SRC sh
+       # listar containers en ejecución
+       docker ps
+
+       # listar últimos containers creados
+       # -a se refiere a "all"
+       docker ps -a
+
+       # listar containers activos/en ejecución
+       # -l se refiere a "list"
+       docker ps -l
+     #+END_SRC
+       
+*** Acceder ó Iniciar/Detener ejecución de containers
+    + Para iniciar utilizamos *docker start*
+    + Para detener usamos *docker stop*
+
+    #+BEGIN_SRC sh
+      # iniciar un container
+      docker start algunContainer
+
+      # detener un container en ejecución
+      docker stop algunContainer
+
+      # entrar al modo interactivo via terminal
+      docker run -it algunContainer
+
+      # docker run -it algunContainer /bin/sh
+      # docker run -it algunContainer /bin/bash
+    #+END_SRC
+
+*** Versionar containers
+     + Suponiendo que ya habiamos creado en la página de *dockerhub* un repositorio llamado *distroalpine*
+
+**** 1. Creamos un tag a nuestro container local
+
+     #+BEGIN_SRC sh
+        docker tag a24bb4013296 neverkas/distroalpine:3.12
+     #+END_SRC
+
+**** 2. Subimos los cambios
+     
+     #+BEGIN_SRC sh
+        docker push neverkas/distroalpine:3.12
+     #+END_SRC
+
+
+     docker tag local-image:tagname new-repo:tagname
+     docker push new-repo:tagname
+
+** Probando con alpine linux
+
+   #+BEGIN_SRC sh
+     # https://www.emacswiki.org/emacs/Evil
+     # https://orgmode.org/manual/Installation.html
+
+     # corremos el container la version 3.12 (el tag)
+     # si no existe lo descarga
+     docker run alpine:3.12
+     # instalar git
+     apk add git
+     # instalar emacs
+     apk add emacs
+     # listar packages (entrar al emacs)
+     M-x packages-list
+     # instalar org mode (entrar a emacs )
+     M-x package-install RET org RET
+     # instalar evil mode (tratè con el list-packages pero no aparecìa)
+     git clone https://github.com/emacs-evil/evil.git
+     mv evil ~/emacs.d/
+
+     # descargar el theme dark dracula
+     https://github.com/dracula/emacs.git
+     mv /emacs/dracula-theme.el ~/emacs.d/themes/dracula-theme.el
+   #+END_SRC
+
+   Agregar lo sig al ~/.emacs para activar el vim mod y el theme dark dracula
+   #+BEGIN_SRC emacs-lisp
+     ; con esto agregamos el modo vim
+     (add-to-list 'load-path "~/.emacs.d/evil")
+     (require 'evil)
+     (evil-mode 1)
+
+     ; cargamos el theme dracula dark
+     (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+     (load-theme 'dracula t)
+   #+END_SRC
+   
+** Referencias
+   + [[https://www.digitalocean.com/community/tutorials/como-instalar-y-usar-docker-en-ubuntu-18-04-1-es][Como instalar y usar Docker en Ubuntu 18.04 - Digitalocean.com]]
+   + [[https://www.ionos.es/digitalguide/servidores/configuracion/tutorial-docker-instalacion-y-primeros-pasos/][Tutorial Docker - Instalación y primeros pasos - Ionos.es]]
+
+   + [[https://www.youtube.com/watch?v=vjnOIE-CwMU&list=PLqRCtm0kbeHAep1hc7yW-EZQoAJqSTgD-&index=2][Video - DOcker - primeros pasos]]
+   + [[https://www.youtube.com/watch?v=6idFknRIOp4&t=201s][Video - Aprender docker en 14min]]
+
+   + https://stackoverflow.com/questions/21871479/docker-cant-connect-to-docker-daemon
+   + https://www.digitalocean.com/community/questions/how-to-fix-docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socket
+   + https://manjaro.site/how-to-install-docker-on-manjaro-18-0/
+
+** Instalación
+
+   #+NAME: Instalación y Configuración
+   #+BEGIN_SRC sh
+     sudo pacman -S docker
+
+     # Create the docker group.
+     sudo groupadd docker
+     # Add your user to the docker group.
+     sudo usermod -aG docker ${USER}
+     # relogear ò reiniciar
+
+     # verificar si anda
+     docker run hello-world
+   #+END_SRC
+
+   #+NAME: Versionando Containers
+   #+BEGIN_SRC sh
+     # para listar imagenes corriendo
+     docker ps
+
+     # para correr o descargar && instalar una version ligera de linux con el tag 3.12
+     docker run alpine:3.12
+     # iniciar en modo "interactivo" en la terminal al contenedor alpine
+     docker run -it alpine:3.12 sh
+     # para listar archivos de la imagen
+     # seguido al nombre del container y del tag, puedo mandarle comandos al container
+     docker run alpine:3.12 ls -l
+
+     # muestra los containers instalados
+     docker image ls | head
+     # muestra los ultimos comandos de todos los containers (y su hash en la 1ra columna para versionar)
+     docker ps -a | head
+
+     # comitear un container (suponiendo que copiaste el hash de ps -a)
+     docker commit elHashDelContainer
+     # podemos verlo (copiamos el id)
+     docker image ls | head
+     # le asignamos un tag para diferenciar (suponiendo que asdasd123123 es el id)
+     docker image tag asdasd123123 miPrimerDocker
+   #+END_SRC
+
