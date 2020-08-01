@@ -502,39 +502,133 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
 4.) Re-install Grub.sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=manjaro --recheck
 5.) Update Grub configuration file.sudo update-grub
 ** TODO [#A] Guia Linux Que hacer luego de Instalar Linux
+*** 1. Comandos Utiles
+|------------+--------------------------|
+| Comando    | Descripcion              |
+|------------+--------------------------|
+| pacman -Ss | para buscar un paquete   |
+| pacman -S  | para instalar un paquete |
+|------------+--------------------------|
+*** 2. Instalamos Paquetes 
+     #+BEGIN_SRC sh
+  # Navegador web minimalista que utiliza comandos de vim
+  sudo pacman -S qutebrowser
+  # Gestor de directorios por comandos
+  sudo pacman -S ranger
+  # Nuevo gestor de paquetes# aurman ?
+
+  # otros
+  sudo pacman -S telegram-desktop
+    #+END_SRC
+*** 3. Configuramos Github
+    + Para evitar escribir usuario y clave en cada push trabajos con la clave publica y privada.
+    + Abrimos la terminal e ingresamos los siguientes comandos.
+
+    #+BEGIN_SRC sh
+      # generamos la clave publica y privada
+      ssh-keygen
+      # buscamos el archivo que tiene la clave publica y lo mostramos por pantalla
+      find ~ -name "id_rsa.pub" | xargs cat
+      # buscamos el archivo de la clave pública que generamos# la copiamos y lo 
+      # agregamos en la configuración de git# https://github.com/settings/keys
+      # agregamos git a la lista de host confiables
+      ssh -T git@github.com
+    #+END_SRC
+
+*** 4. Instalar y Configurar Emacs
+**** 4.1 Instalar y Configurar
+
+     #+BEGIN_SRC sh
+       # instalamos emacs
+       sudo pacman -S emacs
+       # clonamos la configuracion de spacemacs en emacs
+       git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+       # cambiamos la rama por develop, tiene mas funcionalidades (ej. treemacs)
+       cd ~/.emacs.d && git checkout develop
+     #+END_SRC
+**** 4.2  Activar el modo hibrido
+     + Modificar en el archivo de configuracion de spacemacs en `~/.spacemacs““;; encontrar la siguiente linea, debe quedar de esta manera con hybrid
+
+     #+BEGIN_SRC sh
+       dotspacemacs-editing-style 'hybrid`
+     #+END_SRC
+**** 4.3 Activamos layers
+     
+     + Activar algunos layers utilesBuscar la linea `dotspacemacs-configuration-layers` del archivo `~/.spacemacs` y agregar o descomentar las siguientes lineas“`
+
+     #+BEGIN_SRC sh
+       ;; para control de versiones deproyectos
+          git
+       ;; para usar el org-mode y organizar archivos con tareas
+          org
+     #+END_SRC
+     
+     **Referencias**
+     + https://github.com/Alexander-Miller/treemacs/blob/master/README.org
+*** [TODO] Versionar Dotfiles (PENDIENTE)
+    
 ** Guia del Gestor de Archivos Ranger
+*** Filtrar archivos
+
+    1. Presionar zf seguido de la expresion regular
+    2. Presionar v para seleccionar los archivos y luego accion que quieras (copiar, cortar)
+    3. Presionar nuevamente zf para volver a ver todos los archivos
+
+    *Referencias*
+    + https://unix.stackexchange.com/questions/568899/search-and-select-all-matching-files-in-ranger
+*** Atajos
+
+    Ranger, tiene los mismos atajos que vim
+
+    + h,l para moverse entre los niveles de los directorios
+    + dd para cortar
+    + y para copiar
+    + p para pegar 
+
+    | Comando                | Descripcion                                       |
+    | :mkdir unDirectorio    | Crear un directorio                               |
+    | :rename otroNombre.txt | Para crear archivos                               |
+    | :touch nuevoFile.txt   | Para modificar el nombre del archivo seleccionado |
+
+    *Referencias*
+    + https://www.atareao.es/software/utilidades/administrador-de-archivos-para-el-terminal/
+    + https://openwebinars.net/blog/vim-manual-de-uso-basico/
+    + https://unix.stackexchange.com/questions/384325/how-to-create-a-new-file-directory-using-ranger
+    + https://linuxconfig.org/manage-your-files-from-the-command-line-with-ranger
+
+
 ** Guia Linux Personalizar
-** Ocultar el Hostname del prompt
-   https://charles4code.blogspot.com/2018/07/show-username-only-without-hostname-in.html
-** Guia de Linux - Particionamiento
-  Pendiente en revisar
-  - [[https://unix.stackexchange.com/questions/466625/cp-cannot-create-regular-file-permission-denied][Referencia #1]]
-  - [[https://www.linuxadictos.com/solucion-al-error-read-only-file-system.html][Referencia #2]]
+*** Ocultar el Hostname del prompt
+    https://charles4code.blogspot.com/2018/07/show-username-only-without-hostname-in.html
+*** Guia de Linux - Particionamiento
+   Pendiente en revisar
+   - [[https://unix.stackexchange.com/questions/466625/cp-cannot-create-regular-file-permission-denied][Referencia #1]]
+   - [[https://www.linuxadictos.com/solucion-al-error-read-only-file-system.html][Referencia #2]]
 
-** Sincronizar Archivos en Google Drive
-   - https://www.youtube.com/watch?v=vPs9K_VC-lg
-   - https://www.youtube.com/watch?v=HblhrGIotFo
-   - https://rclone.org/drive/
-   - https://snapcraft.io/install/rclone/manjaro
-   - https://rclone.org/commands/
-   - https://snapcraft.io/install/rclone/arch
-   - https://www.youtube.com/watch?v=ARGU4HFUxq8
-   - https://www.youtube.com/watch?v=G8YMspboIXs
-** Nuevos comandos
-   - Crear directorios con subdirectorios, usando el parametro -p en mkdir
-     mkdir -p
+*** Sincronizar Archivos en Google Drive
+    - https://www.youtube.com/watch?v=vPs9K_VC-lg
+    - https://www.youtube.com/watch?v=HblhrGIotFo
+    - https://rclone.org/drive/
+    - https://snapcraft.io/install/rclone/manjaro
+    - https://rclone.org/commands/
+    - https://snapcraft.io/install/rclone/arch
+    - https://www.youtube.com/watch?v=ARGU4HFUxq8
+    - https://www.youtube.com/watch?v=G8YMspboIXs
+*** Nuevos comandos
+    - Crear directorios con subdirectorios, usando el parametro -p en mkdir
+      mkdir -p
 
-     Referencias:
-     - https://techlandia.com/crear-nuevo-directorio-linux-como_44793/
-   - Conocer la particion de un archivo
-     Con el comando df
+      Referencias:
+      - https://techlandia.com/crear-nuevo-directorio-linux-como_44793/
+    - Conocer la particion de un archivo
+      Con el comando df
 
-     Referencias
-     - https://elbauldelprogramador.com/como-saber-que-particion-pertenece-un/
-     - https://www.profesionalreview.com/2018/03/04/saber-particion-esta-instalado-ubuntu/
-** Herramientas de Seguridad
-   - Averiguar si el Bitwarden del escritorio funciona en las demas distribuciones ok
-   - Comentar lo de la encriptacion de contenido con rclone
+      Referencias
+      - https://elbauldelprogramador.com/como-saber-que-particion-pertenece-un/
+      - https://www.profesionalreview.com/2018/03/04/saber-particion-esta-instalado-ubuntu/
+*** Herramientas de Seguridad
+    - Averiguar si el Bitwarden del escritorio funciona en las demas distribuciones ok
+    - Comentar lo de la encriptacion de contenido con rclone
 
 ** Comando Sed (Manipular Texto)
   Al parecer es bastante parecido al reemplazar de vim
@@ -878,20 +972,130 @@ https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-regi
       4. [[https://www.youtube.com/watch?v=KwBRpS9Bs4U][Elisp Tutorial - Funciones]]
       5. [[https://www.youtube.com/watch?v=QaX3AaK3_Lk][Elisp Tutorial - nose]]
 ** Guia de Lisp
-  Para reforzar un poco el paradigma funcional e integrarlo con elisp que
-  es lo que utiliza emacs por dentro, se puede ejecutar tambien en la terminal eshell
+*** Conceptos
+   Para reforzar un poco el paradigma funcional e integrarlo con elisp que
+   es lo que utiliza emacs por dentro, se puede ejecutar tambien en la terminal eshell
 
-  -Para mostrar los bloques de codigo en otro buffer presionar <bdk>, '</bdk> o <bdk>C-x '</bdk>
-  -Para ejecutar el codigo presionar <bdk>, ,</bdk> o <bdk>C-c C-c</bdk>
+   -Para mostrar los bloques de codigo en otro buffer presionar <bdk>, '</bdk> o <bdk>C-x '</bdk>
+   -Para ejecutar el codigo presionar <bdk>, ,</bdk> o <bdk>C-c C-c</bdk>
 
-  Referencias:
-  - [[http://cl-cookbook.sourceforge.net/emacs-ide.html][Using emacs as LISP IDE (cl-cookbook)]]
-  - [[https://www.youtube.com/watch?v=-J_xL4IGhJA][Overview and Introduction to Lisp - Part 1]]
-  - [[https://www.youtube.com/watch?v=-J_xL4IGhJA&list=PLE18841CABEA24090][Playlist - Structure and Interpretation (MIT 1986)]]
-  - [[https://www.youtube.com/watch?v=QFbJKWhzhtU][Introduccion Lisp - Parte 1 (javierbravoudima) - Ver Video]]
-  -[[https://www.youtube.com/watch?v=Fz9Rig9lG50][ Intro Lisp - Parte 2 - Ver Video]]
-  - [[https://www.youtube.com/watch?v=Jx8riNWKe14][Intro Emacs (javier) - Ver Video]]
-  - [[https://www.youtube.com/watch?v=9aI7ZAEbiF0][Common LISP (Prof. Javier)]]
+   Referencias:
+   - [[http://cl-cookbook.sourceforge.net/emacs-ide.html][Using emacs as LISP IDE (cl-cookbook)]]
+   - [[https://www.youtube.com/watch?v=-J_xL4IGhJA][Overview and Introduction to Lisp - Part 1]]
+   - [[https://www.youtube.com/watch?v=-J_xL4IGhJA&list=PLE18841CABEA24090][Playlist - Structure and Interpretation (MIT 1986)]]
+   - [[https://www.youtube.com/watch?v=QFbJKWhzhtU][Introduccion Lisp - Parte 1 (javierbravoudima) - Ver Video]]
+   -[[https://www.youtube.com/watch?v=Fz9Rig9lG50][ Intro Lisp - Parte 2 - Ver Video]]
+   - [[https://www.youtube.com/watch?v=Jx8riNWKe14][Intro Emacs (javier) - Ver Video]]
+   - [[https://www.youtube.com/watch?v=9aI7ZAEbiF0][Common LISP (Prof. Javier)]]
+*** Comandos basicos
+
+| Comando            | Descripcion                                                               |
+| C-x C-e            | Ejecuta un comando (Con el cursor al final de linea)                      |
+| M-x eval-last-sexp | Ejecuta un comando (Con el cursor al final de linea)                      |
+| setq               | Cambia el valor de una variable local                                     |
+| print              | Imprimir los datos de una variable                                        |
+| setf               | Cambia el valor de una variable global                                    |
+| length             | Devuelve la longitud de una lista (una cadena es una lista de caracteres) |
+| read               | Pide ingresar datos                                                       |
+
+*** Comandos para listas
+| (1 2 3)   | Representa una lista, se forman con los ()        |
+| append    | Inserta un elemento en una lista                  |
+| cons      |                                                   |
+| first,car | Devuelve primer elemento de una lista             |
+| second    | Devuelve el segundo elemento de una lista         |
+| nth <n>   | Devuelve el elemento en la posicion n de la lista |
+| rest, cdr | Devuelve la lista sin el primer elemento          |
+
+*** Comandos para funciones
+    
+   | prog1 	| Evalua todas las sentencias compuestas y devuelve la primer sentencia |
+   | progn  |	Evalua todas las sentencias compuestas y devuelve la ultima |
+
+   #+BEGIN_SRC emacs-lisp
+     (progn
+       ;; creamos un lista
+       (setf lista '(A B C))
+
+       ;; creamos la funcion saludo,
+       ;; que tiene solo un argumento
+       (defun saludo(msg)
+         ;; imprimimos el argumento usando el comando print
+         (print msg)
+         )
+
+       ;; llamamos a la funcion saludo y le pasamos como parametro una cadena
+       (saludo "hola")
+       )
+
+     (progn
+       ;; abro un buffer nuevo lamado test
+       (switch-to-buffer-other-window "*test")
+       ;; limpio el contenido si lo tuviese
+       (erase-buffer)
+       ;; declaro una variable unNombre
+       ;; y llamamos al comando read para que ingresen datos
+       (setf unNombre (read))
+       ;; imprimimos lo que se escribio
+       (print unNombre)
+       )
+   #+END_SRC
+
+*** Buffers
+
+    | BUffer    | Descripcion              |
+    | backtrace | Es el depurador de emacs |
+    | scratch   | Para depurar codigo lisp |
+
+    Algunas diferencias
+
+    + Con setq y setf podemos cambiar el valor a las variables, pero el primero es de mas bajo nivel que setf. Este segundo es de mas alto nivel, e incorpora dentro a setq.
+    + Con setq no podemos cambiar el valor de una lista
+
+
+    #+BEGIN_SRC emacs-lisp
+      ;; Correr cada linea con M-x  C-x C-e   
+
+      ;; ejecuto una funcion prefija
+         (+ 1 2)
+
+      ;; declaro una variable local y le asigno una lista
+         (setq dias '(lunes martes))
+      (setq letras '(A B C))
+
+      ;; declaro una variable global
+         (setf dias '(lunes martes))
+
+      ;; pido el primer elemento de la lista (a b c)
+      (first '(a b c)
+
+         ;; imprimo la variable dias
+            (print dias)
+
+         ;; Le cambio el valor del primer elemento a una lista
+         ;; si probara con setq devolveria error
+            (setf (first dias) 'viernes)
+             (print dias) ;; ahora deberia devolver (viernes martes)
+
+             ;; Creo una funcion last (le resto 1 para no excederme de la cantidad de elementos)
+             (nth (- (length dias) 1) dias)
+
+             ;; Une dos listas en una
+             (append '(a b) '(c d))
+             ;; Insertamos una sublista al principio de otra lista
+             (cons '(a b) '(c d))
+
+             ;; Creo una funcion que imprima el argumento
+             (defun saludo(mensaje)
+               (print mensaje)
+             )
+    #+END_SRC
+
+    #+BEGIN_SRC emacs-lisp
+      (defvar nombre "jorgito")
+
+      (print nombre)
+    #+END_SRC
 
 ** [CHECK] Empezando con Emacs [0%]
 *** [TODO] Comandos importantes
