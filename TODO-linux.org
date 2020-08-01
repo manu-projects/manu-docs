@@ -495,17 +495,21 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
     + y para copiar
     + p para pegar 
 
-    | Comando                | Descripcion                                       |
-    | :mkdir unDirectorio    | Crear un directorio                               |
-    | :rename otroNombre.txt | Para crear archivos                               |
-    | :touch nuevoFile.txt   | Para modificar el nombre del archivo seleccionado |
+    |------------------------+--------------------------------------------------------------------|
+    | Comando                | Descripcion                                                        |
+    |------------------------+--------------------------------------------------------------------|
+    | :mkdir unDirectorio    | Crear un directorio                                                |
+    | :rename otroNombre.txt | Para crear archivos                                                |
+    | :touch nuevoFile.txt   | Para modificar el nombre del archivo seleccionado                  |
+    | :shell algunComando    | Para ejecutar comandos de terminal en la ruta donde nos situamos   |
+    | :set show_hidden!      | Mostrar los archivos ocultos (es necesario el signo de admiración) |
+    |------------------------+--------------------------------------------------------------------|
 
     *Referencias*
     + https://www.atareao.es/software/utilidades/administrador-de-archivos-para-el-terminal/
     + https://openwebinars.net/blog/vim-manual-de-uso-basico/
     + https://unix.stackexchange.com/questions/384325/how-to-create-a-new-file-directory-using-ranger
     + https://linuxconfig.org/manage-your-files-from-the-command-line-with-ranger
-
 
 ** Guia Linux Personalizar
 *** Ocultar el Hostname del prompt

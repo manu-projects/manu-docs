@@ -1,19 +1,24 @@
 
-#+TITLE: Nuevo ToDo
+#+TITLE: Nuevo To-Do
 
-+ Se organizaron las tareas de investigación en distintos módulos, de modo que si 
-aparecen nuevas tecnologias, herramientas, lenguajes o información útil para investigar 
-se pueda volcar por categoría.
++ Se organizaron las tareas de investigación en distintos módulos
++ Nos permite dividir y analizar en distintas categorías la información previo a documentar
++ Posible contenido
+  + Nuevas tecnologías/herramientas
+  + Lenguajes de programación
 
-*Categorias*:
+* Información procesada y documentada
 
-+ [[file:TODO-linux.org][To-Do Linux]]
++ La información ya procesada la solemos volcar en [[neverkas.github.io/][Manu-Docs]]
+
+* Información pendiente a documentar
+
++ [[file:TODO-linux.org][To-Do Linux (Configuraciones, lineas de comando)]]
 + [[file:TODO-emacs.org][To-Do Emacs (Editor de Macros)]]
 + [[file:TODO-vim.org][To-Do Vim (Entorno de desarrollo Integrado)]]
 + [[file:TODO-maquinas-virtuales.org][To-Do Maquinas Virtuales]]
-+ [[file:TODO-git.org][To-Do Git Versionado]]
-+ [[file:TODO-testing.org][To-Do Automatización/Testing]]
++ [[file:TODO-git.org][To-Do Git (Control de Versiones)]]
++ [[file:TODO-testing.org][To-Do Automatización de Tareas/Testing]]
 + [[file:tecnologias.org][To-Do Nuevas Tecnologías]]
 + [[file:TODO-otros.org][To-Do Otros]]
-
 
