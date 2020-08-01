@@ -9,7 +9,7 @@
 
 * Información procesada y documentada
 
-+ La información ya procesada la solemos volcar en [[neverkas.github.io/][Manu-Docs]]
++ La información ya procesada la solemos volcar en [[https://neverkas.github.io][Manu-Docs]]
 
 * Información pendiente a documentar
 
