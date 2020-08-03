@@ -1,0 +1,117 @@
+* Depurar Código (Debugging)
+** Referencias
+  *Referencias*
+  + [[https://www.tecmint.com/debug-source-code-in-linux-using-gdb/][debug source code in linux using gdb]]
+  + [[https://www.cs.yale.edu/homes/aspnes/pinewiki/C(2f)Debugging.html][C/Debugging - cs.yale.edu]]
+  + [[https://wiki.archlinux.org/index.php/Debugging][Debugging - wiki.archlinux.org]]
+  + [[https://www.linuxlinks.com/debuggers/][Linux Debuggers]]
+  + [[https://www.ubuntupit.com/best-linux-debuggers-for-modern-software-engineers/#9-bugzilla][Best linux debuggers]]
+  + [[https://www.onlinegdb.com/online_c_debugger][Onlinegdb.com]]
+  + [[https://www.youtube.com/watch?v=bWH-nL7v5F4][Video - Debugging - GDB TUtorial]]
+
+COn emacs
+https://www.cs.odu.edu/~zeil/cs252/latest/Public/debugging/index.html
+
+** (GDB) GNU Debugger
+   Este es el depurador estándar para el compilador GNU
+
+*** Referencias
+    + [[https://beej.us/guide/bggdb/][Quick guide to GDB - Beej.us]]
+    + [[https://sourceware.org/gdb/onlinedocs/gdb/Set-Watchpoints.html][Setting Watchpoints - Sourceware.org]]
+
+*** Comandos
+
+    |-----------------------------+-------------------------------------|
+    | Comando                     | Descripción                         |
+    |-----------------------------+-------------------------------------|
+    | gdb                         | Para iniciar el depurador           |
+    | gcc -g archivo.c -o archivo | Para compilar programa para depurar |
+    |                             |                                     |
+    |-----------------------------+-------------------------------------|
+
+
+    |--------------------+------------------------------------------------------------------------|
+    | Comando            | Descripción                                                            |
+    |--------------------+------------------------------------------------------------------------|
+    | file nombreArchivo | Abrir programa a depurar                                               |
+    | run                | Ejecutar el programa (si está en ejecución vuelve al principio)        |
+    | quit               | Salir del programa                                                     |
+    |--------------------+------------------------------------------------------------------------|
+    | break              | Para colocar un breakpoint (donde se detiene el debugger)              |
+    | info break         | Imprime el listado de breakpoints agregados                            |
+    | watch              | Para colocar un watchpoint (observar cambios)                          |
+    | list               | Imprime lineas del programa                                            |
+    | next               | Avanza al siguiente paso                                               |
+    | step               | (step into) Entrar y Avanzar al siguiente paso                         |
+    | continue           | Avanza al siguiente Breakpoint o al fin del programa si no hay         |
+    | print unaVariable  | Imprime el valor de una variable                                       |
+    | disable numero     | Desactivar el breakpoint con ese numero (con info se conoce el numero) |
+    |--------------------+------------------------------------------------------------------------|
+
+    
+    |---------------+-----------------|
+    | Comando corto | Comando verboso |
+    |---------------+-----------------|
+    | r             | run             |
+    | b             | break           |
+    | w             | watch           |
+    | l             | list            |
+    | n             | next            |
+    | s             | step into       |
+    | c             | continue        |
+    |---------------+-----------------|
+
+*** Colocar breakpoint en un número de linea
+   
+    #+NAME: Breakpoint en un numero de linea
+    #+BEGIN_SRC sh
+      # compilamos el archivo de esta manera para depurar
+      gcc -g unArchivo.c -o unArchivo
+
+      # iniciamos el GNU Debugger (GDB)
+      gdb
+
+      # cargamos el archivo a depurar
+      file unArchivo.c
+
+      # agregamos un breakpoint en la linea 11 del archivo
+      b unArchivo.c:11
+
+      # agregamos otro breakpoint en la función suma
+      b suma
+
+      # agregamos otro breakpoint en la función principal main
+      b main
+    #+END_SRC
+
+*** Referencias
+    + [[https://www.ibm.com/developerworks/systems/library/es-debug/index.html][Debugging tools and techniques for Linux - IBM]]
+    + [[https://www.tecmint.com/debug-source-code-in-linux-using-gdb/][Debug source code in linux using GDB - Tecmint.com]]
+
+** (DDD) Data Display Debugger
+*** Referencias
+    + [[https://www.gnu.org/software/ddd/][What is DDD? - gnu.org]]
+
+** Nemiver
+   - https://developer.gnome.org/nemiver/0.9/nemiver.html
+   - 
+   - 
+
+** Cosas
+
+  #+BEGIN_SRC sh
+    # para debugear C desde la terminal
+
+    sudo pacman -S gdb
+    # para debugear C/C++ con entorno grafico
+    sudo pacman -S nemiver
+
+    # parece que está mas enfocado para php
+    sudo pacman -S xdebug
+  #+END_SRC
+
+  Otras a revisar
+  - https://undo.io/resources/gdb-watchpoint/gdb-wizardry/
+  - https://linoxide.com/linux-how-to/user-space-debugging-tools-linux/
+https://www.youtube.com/watch?v=J7L2x1ATOgk
+
