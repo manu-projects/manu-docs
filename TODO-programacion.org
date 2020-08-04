@@ -1,17 +1,4 @@
 * Depurar Código (Debugging)
-** Referencias
-  *Referencias*
-  + [[https://www.tecmint.com/debug-source-code-in-linux-using-gdb/][debug source code in linux using gdb]]
-  + [[https://www.cs.yale.edu/homes/aspnes/pinewiki/C(2f)Debugging.html][C/Debugging - cs.yale.edu]]
-  + [[https://wiki.archlinux.org/index.php/Debugging][Debugging - wiki.archlinux.org]]
-  + [[https://www.linuxlinks.com/debuggers/][Linux Debuggers]]
-  + [[https://www.ubuntupit.com/best-linux-debuggers-for-modern-software-engineers/#9-bugzilla][Best linux debuggers]]
-  + [[https://www.onlinegdb.com/online_c_debugger][Onlinegdb.com]]
-  + [[https://www.youtube.com/watch?v=bWH-nL7v5F4][Video - Debugging - GDB TUtorial]]
-
-COn emacs
-https://www.cs.odu.edu/~zeil/cs252/latest/Public/debugging/index.html
-
 ** (GCC) GNU Compiler Collection
    *GCC* se conoce como *GNU Compiler collection* que quiere decir *colección de compiladores*
 
@@ -61,26 +48,27 @@ https://www.cs.odu.edu/~zeil/cs252/latest/Public/debugging/index.html
     |-----------------------------+-------------------------------------|
 
 
-    |----------------------------+------------------------------------------------------------------------|
-    | Comando                    | Descripción                                                            |
-    |----------------------------+------------------------------------------------------------------------|
-    | file nombreArchivo         | Abrir otro programa a depurar                                          |
-    | run                        | Ejecutar el programa (si está en ejecución vuelve al principio)        |
-    | quit                       | Salir del programa                                                     |
-    |----------------------------+------------------------------------------------------------------------|
-    | break                      | Para colocar un breakpoint (donde se detiene el debugger)              |
-    | watch                      | Para colocar un watchpoint (observar cambios)                          |
-    | next                       | Avanza al siguiente paso                                               |
-    | continue                   | Continua la ejecución del programa y vuelve al Breakpoint              |
-    | step                       | (step into) Entrar en una función y avanzar al siguiente paso          |
-    | list                       | Imprime lineas del programa                                            |
-    | set unaVariable=nuevoValor | Cambia el valor de una variable                                        |
-    | print unaVariable          | Imprime el valor de una variable                                       |
-    | info break                 | Imprime el listado de breakpoints agregados                            |
-    | delete numeroDelBreakpoint | Elimina el breakpoint con ese numero (con info se conoce el numero)    |
-    |----------------------------+------------------------------------------------------------------------|
+    |----------------------------+---------------------------------------------------------------------------|
+    | Comando                    | Descripción                                                               |
+    |----------------------------+---------------------------------------------------------------------------|
+    | file nombreArchivo         | Abrir otro programa a depurar                                             |
+    | run                        | Ejecutar el programa de manera normal (si está en ejecución, lo reinicia) |
+    | start                      | Ejecuta el paso a paso del programa desde el principio del código fuente  |
+    | quit                       | Salir del programa                                                        |
+    |----------------------------+---------------------------------------------------------------------------|
+    | display unaVariable        | Muestra el valor de las variables cada vez que se ejecuta un comando      |
+    | print unaVariable          | Imprime el valor de una variable                                          |
+    | break                      | Para colocar un breakpoint (donde se detiene el debugger)                 |
+    | watch unaVariable          | Para colocar un watchpoint (observar cambios en variables)                |
+    | next                       | Avanza al siguiente paso                                                  |
+    | continue                   | Continua la ejecución del programa y vuelve al Breakpoint                 |
+    | step                       | (step into) Entrar en una función y avanzar al siguiente paso             |
+    | list                       | Imprime lineas del programa                                               |
+    | set unaVariable=nuevoValor | Cambia el valor de una variable                                           |
+    | info break                 | Imprime el listado de breakpoints agregados                               |
+    | delete numeroDelBreakpoint | Elimina el breakpoint con ese numero (con info se conoce el numero)       |
+    |----------------------------+---------------------------------------------------------------------------|
 
-    
     |---------------+-----------------|
     | Comando corto | Comando verboso |
     |---------------+-----------------|
@@ -92,6 +80,58 @@ https://www.cs.odu.edu/~zeil/cs252/latest/Public/debugging/index.html
     | s             | step            |
     | c             | continue        |
     |---------------+-----------------|
+
+*** Colocar breakpoints condicionales
+    Esto es interesante cuando queremos crear un breakpoint en un momento específico.
+
+    #+BEGIN_EXAMPLE
+    Un for que itera, y sólo queremos agregar el breakpoint cuando el contador es i=5
+    para analizar el comportamiento
+    #+END_EXAMPLE
+
+    #+BEGIN_EXAMPLE
+    Un while que se ejecuta hasta que no se cumpla su centinela, pero no sucede, 
+    entonces evaluamos el centinela cuando tiene ese valor.
+    #+END_EXAMPLE
+    
+    #+NAME: Ejemplos con breakpoint condicional
+    #+BEGIN_SRC sh 
+      # suponiendo que queremos agregar un breakpoint en una función llamada unaFuncion
+      # cuando la variable i equivale a 5
+      (gdb) break unaFuncion if(i==5)
+
+      # agrega un breakpoint en la linea 5 de esa función
+      # cuenta el número de linea dentro del bloque
+      (gdb) break unaFuncion:5 if(nombre=='carlos')
+
+      # agrega un breakpoint en la variable centinela
+      # cuando este equivale a -1
+      (gdb) break centinela if(centinela==-1)
+
+      # otras variantes
+      (gdb) break centinela if(contador>5)
+      (gdb) break otraFuncion if(nombreIngresado=='pepe')
+      (gdb) break unaVariable if(otraVariable==2)
+    #+END_SRC
+
+*** Comparar el cambio valor de una o varias Variables
+    + Para esto utilizamos el comando *watch* que agrega *watchpoint*
+    + Nos muestra el valor anterior antes que cambie, y el nuevo.
+
+    #+BEGIN_EXAMPLE
+    Si hay operaciones aritméticas y quizás el resultado no es correcto porque su valor anterior daba mal,
+    ó para visualizar si se están asignando bien los valores a las variables
+    #+END_EXAMPLE
+    
+*** Ver el valor de distintas variables al mismo tiempo
+    + Con el comando *display* podemos generando una lista de que variables queremos ver
+    + Se visualizan cada vez que se ejecute un comando
+
+    #+BEGIN_COMMENT
+    Si queremos ver el estado de varias variables al mismo tiempo, como puede ser
+    los datos nombre, edad que se van ingresando.
+    Ó si queremos comparar entre distintos resultados de operaciones guardadas en distintas variables.
+    #+END_COMMENT
 
 *** Colocar breakpoint en un número de linea
    
@@ -164,6 +204,7 @@ https://www.cs.odu.edu/~zeil/cs252/latest/Public/debugging/index.html
     #+END_SRC
 
 *** Referencias
+    + [[https://servicios.algoritmos7540mendez.com.ar/apuntes/08_-_debugging.pdf][Debugging - Dr Mariano Mendez (UBA)]]
     + [[https://www.cs.swarthmore.edu/~newhall/unixhelp/howto_gdb.php][Guide GDB and DDD - Swarthmore College]]
     + [[https://lihuen.linti.unlp.edu.ar/index.php/C%C3%B3mo_usar_GDB][Cómo usar GDB - Lihuen - UNPL]]
     + [[http://www.lsi.us.es/~javierj/ssoo_ficheros/GuiaGDB.htm][Primeros pasos con GDB	- jjrodriguez]]
@@ -239,6 +280,19 @@ https://www.cs.odu.edu/~zeil/cs252/latest/Public/debugging/index.html
   - https://undo.io/resources/gdb-watchpoint/gdb-wizardry/
   - https://linoxide.com/linux-how-to/user-space-debugging-tools-linux/
 https://www.youtube.com/watch?v=J7L2x1ATOgk
+** Referencias
+  *Referencias*
+  + [[https://www.tecmint.com/debug-source-code-in-linux-using-gdb/][debug source code in linux using gdb]]
+  + [[https://www.cs.yale.edu/homes/aspnes/pinewiki/C(2f)Debugging.html][C/Debugging - cs.yale.edu]]
+  + [[https://wiki.archlinux.org/index.php/Debugging][Debugging - wiki.archlinux.org]]
+  + [[https://www.linuxlinks.com/debuggers/][Linux Debuggers]]
+  + [[https://www.ubuntupit.com/best-linux-debuggers-for-modern-software-engineers/#9-bugzilla][Best linux debuggers]]
+  + [[https://www.onlinegdb.com/online_c_debugger][Onlinegdb.com]]
+  + [[https://www.youtube.com/watch?v=bWH-nL7v5F4][Video - Debugging - GDB TUtorial]]
+
+COn emacs
+https://www.cs.odu.edu/~zeil/cs252/latest/Public/debugging/index.html
+
 * Programar y Depurar en C
 ** Comandos útiles en Emacs con GDB
 
