@@ -64,8 +64,11 @@
     | continue                   | Continua la ejecución del programa y vuelve al Breakpoint                 |
     | step                       | (step into) Entrar en una función y avanzar al siguiente paso             |
     | list                       | Imprime lineas del programa                                               |
+    | list n,m                   | Imprime rango de lineas (Ej. list 1,50)                                   |
+    | list unaFuncion            | Imprime las lineas de una función específica                              |
     | set unaVariable=nuevoValor | Cambia el valor de una variable                                           |
-    | info break                 | Imprime el listado de breakpoints agregados                               |
+    | info break                 | Imprime el listado de breakpoints y watchpoints agregados                 |
+    | info local                 | Imprime las variables locales                                             |
     | delete numeroDelBreakpoint | Elimina el breakpoint con ese numero (con info se conoce el numero)       |
     |----------------------------+---------------------------------------------------------------------------|
 
@@ -122,7 +125,50 @@
     Si hay operaciones aritméticas y quizás el resultado no es correcto porque su valor anterior daba mal,
     ó para visualizar si se están asignando bien los valores a las variables
     #+END_EXAMPLE
-    
+
+    #+NAME: Usando los comandos watch y display de GDB
+    #+BEGIN_SRC sh
+      # compilamos el codigo fuente
+      gcc -g miArchivo.c -o miArchivo
+      # depuramos el archivo ejecutable con GDB
+      gdb miArchivo
+
+      # estando dentro
+      (gdb) break main
+      (gdb) run
+      (gdb) display sumar
+      (gdb) display restar
+      (gdb) watch x
+      (gdb) watch y
+      (gdb) next
+      # y.. 
+    #+END_SRC
+
+    #+NAME: Ejemplo para usar watchpoint
+    #+BEGIN_SRC C
+      #include <stdio.h>
+
+      int main(void){
+        int x,y,z;
+
+        int sumar, restar, multiplicar;
+
+        // al no estar inicializadas las variables x,y
+        // va a estar sumando valores al azar (se les dice valor basura)
+        // al depurar por ejemplo podriamos usar el comando watch y display en esas variables
+        // para ver que valores van tomando, y si es el comportamiento deseado o no
+        for(int i=0; i < 5; i++){
+          sumar = x+y;
+          restar = x-y;
+          multiplicar = x*y;
+        }
+
+        z = sumar+restar+multiplicar;
+
+        return 0;
+      }
+    #+END_SRC
+
 *** Ver el valor de distintas variables al mismo tiempo
     + Con el comando *display* podemos generando una lista de que variables queremos ver
     + Se visualizan cada vez que se ejecute un comando
