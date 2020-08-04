@@ -12,13 +12,44 @@
 COn emacs
 https://www.cs.odu.edu/~zeil/cs252/latest/Public/debugging/index.html
 
-** (GDB) GNU Debugger
-   Este es el depurador estándar para el compilador GNU
+** (GCC) GNU Compiler Collection
+   *GCC* se conoce como *GNU Compiler collection* que quiere decir *colección de compiladores*
+
+*** Parámetros
+
+    |-----------+------------------------------------------------------------------------|
+    | Parametro | Descripción                                                            |
+    |-----------+------------------------------------------------------------------------|
+    | g         | El compilador incluye información sobre las variables (útil para GDB)  |
+    |           |                                                                        |
+    |-----------+------------------------------------------------------------------------|
+
+*** Ejemplos
+
+    #+NAME: Compilando codigo fuente C para depurarlo
+    #+BEGIN_SRC shell
+      # compilamos el codigo fuente unArchivo.c
+      # creando un archivo ejecutable llamado miprograma
+      gcc -g unArchivo.c -o miprograma
+
+      # si queremos depurar el programa con el Depurador DDD
+      # que tiene GUI (con interfáz gráfica)
+      ddd miprograma
+
+      # si queremos depurar el programa con el Depurador GDB
+      # sin GUI (se utiliza la terminal de comandos)
+      gdb miprograma
+    #+END_SRC
 
 *** Referencias
-    + [[https://beej.us/guide/bggdb/][Quick guide to GDB - Beej.us]]
-    + [[https://sourceware.org/gdb/onlinedocs/gdb/Set-Watchpoints.html][Setting Watchpoints - Sourceware.org]]
+    + [[https://gcc.gnu.org/][Pagina Oficial - gcc.gnu.org]]
+    + [[https://sourceware.org/gdb/onlinedocs/gdb/Variables.html][Program Variables - sourceware.org]]
 
+** (GDB) GNU Debugger
+*** Introducción
+   + Este es el depurador estándar para el compilador GNU
+   + Se utiliza mediante la terminal de comandos de linux
+   + Se puede complementar con el depurador DDD que tiene interfaz gráfica
 *** Comandos
 
     |-----------------------------+-------------------------------------|
@@ -30,23 +61,24 @@ https://www.cs.odu.edu/~zeil/cs252/latest/Public/debugging/index.html
     |-----------------------------+-------------------------------------|
 
 
-    |--------------------+------------------------------------------------------------------------|
-    | Comando            | Descripción                                                            |
-    |--------------------+------------------------------------------------------------------------|
-    | file nombreArchivo | Abrir programa a depurar                                               |
-    | run                | Ejecutar el programa (si está en ejecución vuelve al principio)        |
-    | quit               | Salir del programa                                                     |
-    |--------------------+------------------------------------------------------------------------|
-    | break              | Para colocar un breakpoint (donde se detiene el debugger)              |
-    | info break         | Imprime el listado de breakpoints agregados                            |
-    | watch              | Para colocar un watchpoint (observar cambios)                          |
-    | list               | Imprime lineas del programa                                            |
-    | next               | Avanza al siguiente paso                                               |
-    | step               | (step into) Entrar y Avanzar al siguiente paso                         |
-    | continue           | Avanza al siguiente Breakpoint o al fin del programa si no hay         |
-    | print unaVariable  | Imprime el valor de una variable                                       |
-    | disable numero     | Desactivar el breakpoint con ese numero (con info se conoce el numero) |
-    |--------------------+------------------------------------------------------------------------|
+    |----------------------------+------------------------------------------------------------------------|
+    | Comando                    | Descripción                                                            |
+    |----------------------------+------------------------------------------------------------------------|
+    | file nombreArchivo         | Abrir otro programa a depurar                                          |
+    | run                        | Ejecutar el programa (si está en ejecución vuelve al principio)        |
+    | quit                       | Salir del programa                                                     |
+    |----------------------------+------------------------------------------------------------------------|
+    | break                      | Para colocar un breakpoint (donde se detiene el debugger)              |
+    | watch                      | Para colocar un watchpoint (observar cambios)                          |
+    | next                       | Avanza al siguiente paso                                               |
+    | continue                   | Continua la ejecución del programa y vuelve al Breakpoint              |
+    | step                       | (step into) Entrar en una función y avanzar al siguiente paso          |
+    | list                       | Imprime lineas del programa                                            |
+    | set unaVariable=nuevoValor | Cambia el valor de una variable                                        |
+    | print unaVariable          | Imprime el valor de una variable                                       |
+    | info break                 | Imprime el listado de breakpoints agregados                            |
+    | delete numeroDelBreakpoint | Elimina el breakpoint con ese numero (con info se conoce el numero)    |
+    |----------------------------+------------------------------------------------------------------------|
 
     
     |---------------+-----------------|
@@ -57,7 +89,7 @@ https://www.cs.odu.edu/~zeil/cs252/latest/Public/debugging/index.html
     | w             | watch           |
     | l             | list            |
     | n             | next            |
-    | s             | step into       |
+    | s             | step            |
     | c             | continue        |
     |---------------+-----------------|
 
@@ -69,34 +101,127 @@ https://www.cs.odu.edu/~zeil/cs252/latest/Public/debugging/index.html
       gcc -g unArchivo.c -o unArchivo
 
       # iniciamos el GNU Debugger (GDB)
-      gdb
+      gdb unArchivo
 
-      # cargamos el archivo a depurar
-      file unArchivo.c
+      # cargamos otro archivo a depurar
+      file otroArchivo
 
-      # agregamos un breakpoint en la linea 11 del archivo
-      b unArchivo.c:11
+      # agregamos un breakpoint en la linea 15 del archivo actual
+      # (en una linea del archivo actual)
+      break 15
+
+      # agregamos un breakpoint en la linea 11 del archivo unArchivo.c
+      # (si usamos esta notación hay que poner la extensión)
+      break unArchivo.c:11
 
       # agregamos otro breakpoint en la función suma
-      b suma
+      # (en una función)
+      break suma
 
       # agregamos otro breakpoint en la función principal main
-      b main
+      # (en una función)
+      break main
+    #+END_SRC
+
+*** Problemas frecuentes
+
+    #+NAME: Problemas con el Contexto al imprimir o vigilar variables
+    #+BEGIN_SRC shell
+      # Si al intentar imprimir o vigilar una variable
+      # y nos muestra "No symbol in current context"
+      # es porque no le estamos dando suficiente contexto para
+      # acceder a esas variables.
+
+      (gdb) print i
+      No symbol "i" in current context.
+
+      (gdb) watch sum
+      No symbol "sum" in current context.
+    #+END_SRC
+   
+    #+NAME: Solución al problema por Contexto de variables
+    #+BEGIN_SRC shell
+      # Posible solución, suponiendo que es un programa básico
+
+      # colocar un Breakpoint en el main, y volver a intentar
+      # (de esa manera le estamos dando un contexto, es decir
+      # en donde se encuentran)
+
+      # 1. colocamos un Breakpoint en el main
+      # (que es donde tenemos las variables, son locales dentro del main)
+      (gdb) break main
+
+      # 2. ejecutamos el programa
+      (gdb) run
+
+      # 3. ahora tiene un contexto de donde se encuentran las variables
+      # (osea dentro del main, son variables locales del main)
+      (gdb) watch i
+      Hardware watchpoint 2: i
+
+      (gdb) print i
+      $1 = 0
     #+END_SRC
 
 *** Referencias
+    + [[https://www.cs.swarthmore.edu/~newhall/unixhelp/howto_gdb.php][Guide GDB and DDD - Swarthmore College]]
+    + [[https://lihuen.linti.unlp.edu.ar/index.php/C%C3%B3mo_usar_GDB][Cómo usar GDB - Lihuen - UNPL]]
+    + [[http://www.lsi.us.es/~javierj/ssoo_ficheros/GuiaGDB.htm][Primeros pasos con GDB	- jjrodriguez]]
     + [[https://www.ibm.com/developerworks/systems/library/es-debug/index.html][Debugging tools and techniques for Linux - IBM]]
     + [[https://www.tecmint.com/debug-source-code-in-linux-using-gdb/][Debug source code in linux using GDB - Tecmint.com]]
+    + [[https://www.classes.cs.uchicago.edu/archive/2017/winter/51081-1/LabFAQ/lab2/gdb.html][Debugging C and C++ using GDB - Classes UChicago]]
+    + [[https://www.bennetyee.org/ucsd-pages/Courses/cse127.w02/gdbtutorial.html][GDB Tutorial - bennetye.org]]
+    + [[https://beej.us/guide/bggdb/][Quick guide to GDB - Beej.us]]
+    + [[https://sourceware.org/gdb/onlinedocs/gdb/Set-Watchpoints.html][Setting Watchpoints - Sourceware.org]]
+
+*** Videos
+    + [[https://www.youtube.com/watch?v=xQ0ONbt-qPs][Quick Intro to GDB]]
+    + [[https://www.youtube.com/watch?v=sCtY--xRUyI][Introduction to GDB - Hardvard CS50]]
+    + [[https://www.youtube.com/watch?v=Vn1kDWVxq4s][Debugging with GDB in Emacs]]
 
 ** (DDD) Data Display Debugger
+*** Introducción
+    + 
 *** Referencias
     + [[https://www.gnu.org/software/ddd/][What is DDD? - gnu.org]]
+    + [[http://www.linuxfocus.org/Castellano/January1998/article20.html][Depurando código con ddd - linuxfocus.org]]
 
-** Nemiver
-   - https://developer.gnome.org/nemiver/0.9/nemiver.html
-   - 
-   - 
+** Depurador Nemiver
+*** Ejemplos
 
+    #+NAME: Depurando Programa C con Nemiver
+    #+BEGIN_SRC sh 
+      # - compilamos el codigo fuente probando1.c
+      # - creando el archivo ejecutable llamado probando1
+      # - se recomienda usar el parámetro -g para no tener problemas con el depurador
+      gcc -g probando1.c -o probando1
+
+      # depuramos el archivo ejecutable probando1 con nemiver
+      nemiver probando1
+    #+END_SRC
+
+*** Referencias
+   + [[http://personals.ac.upc.edu/guerrero/fo2015/Trucos_Nemiver_Mario_New.pdf][Depurar programas con Nemiver - Mario Macias]] 
+   + https://developer.gnome.org/nemiver/0.9/nemiver.html
+
+** Depurador GDBGUI 
+*** Instalación y Configuración
+
+    #+BEGIN_SRC shell
+      # instalamos el paquete gdbgui
+      # con el gestor de paquetes "pip" de python
+      pip install gdbgui --upgrade
+
+      # ejecutamos el depurador gdbgui
+      # se iniciará un servidor web, para acceder desde un navegador web
+      # http://localhost:5000
+      gdbgui
+    #+END_SRC
+   
+*** Referencias
+    + [[https://pypi.org/project/gdbgui/0.9.1.1/][Repositorio Oficial, Manual, Ejemplos - pypi.org]]
+    + [[https://www.tecmint.com/install-pip-in-linux/][How to install PIP to Manage Python packages - tecmint.com]]
+    + [[https://pip.pypa.io/en/stable/installing/][Do I need to install pip? - PyPA]]
 ** Cosas
 
   #+BEGIN_SRC sh
@@ -114,4 +239,19 @@ https://www.cs.odu.edu/~zeil/cs252/latest/Public/debugging/index.html
   - https://undo.io/resources/gdb-watchpoint/gdb-wizardry/
   - https://linoxide.com/linux-how-to/user-space-debugging-tools-linux/
 https://www.youtube.com/watch?v=J7L2x1ATOgk
+* Programar y Depurar en C
+** Comandos útiles en Emacs con GDB
+
+   |----------------------+-------------------------------------------------------------|
+   | Comando              | Descripción                                                 |
+   |----------------------+-------------------------------------------------------------|
+   | M-x gdb              | Para iniciar el modo depuración con GDB en el buffer actual |
+   | M-x gdb-many-windows | Abre los buffers necesarios de GDB                          |
+   |----------------------+-------------------------------------------------------------|
+
+** Referencias
+   + https://www.programiz.com/c-programming/c-input-output
+   + https://fresh2refresh.com/c-programming/c-printf-and-scanf/
+   + https://www.geeksforgeeks.org/use-fflushstdin-c/
+   + [[https://sourceware.org/gdb/onlinedocs/gdb/Emacs.html][Using GDB under GNU Emacs - sourceware.org]]
 
