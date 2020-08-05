@@ -1,3 +1,10 @@
+Mirando ahora
+ - https://www.youtube.com/watch?v=RCVNMRcefUk&list=PLw8RQJQ8K1ySN6bVHYEpDoh-CKVkL_uOF&index=27
+ - https://www.youtube.com/watch?v=QV_6_aKH9G8
+ - https://www.youtube.com/watch?v=7g1YmOXsCCU
+ - https://www.youtube.com/watch?v=4fc-QRl8_QQ
+ - https://www.youtube.com/watch?v=w_P3rE73Hk8
+
 * Depurar Código (Debugging)
 ** (GCC) GNU Compiler Collection
    *GCC* se conoce como *GNU Compiler collection* que quiere decir *colección de compiladores*
@@ -348,10 +355,24 @@ https://www.cs.odu.edu/~zeil/cs252/latest/Public/debugging/index.html
    | M-x gdb              | Para iniciar el modo depuración con GDB en el buffer actual |
    | M-x gdb-many-windows | Abre los buffers necesarios de GDB                          |
    |----------------------+-------------------------------------------------------------|
-
 ** Referencias
    + https://www.programiz.com/c-programming/c-input-output
    + https://fresh2refresh.com/c-programming/c-printf-and-scanf/
    + https://www.geeksforgeeks.org/use-fflushstdin-c/
    + [[https://sourceware.org/gdb/onlinedocs/gdb/Emacs.html][Using GDB under GNU Emacs - sourceware.org]]
+** Videos
+   + [[https://www.youtube.com/watch?v=bRAthoxbVyA&list=PLw8RQJQ8K1ySN6bVHYEpDoh-CKVkL_uOF&index=19][Playlist - Empieza a Programar en C]]
+   + [[https://www.youtube.com/playlist?list=PLTd5ehIj0goOAWdpCpghXiRCmEOrJJLEW][Playlist - Curso de C - Makigas.es]]
+   + [[https://www.youtube.com/playlist?list=PLTd5ehIj0goMZ33qJ7JmuXjSO8RoefiZS][Playlist - Desarrollando en C - Makigas.es]]
+   + [[https://www.youtube.com/watch?v=9ijhlPfxFnk&list=PLMDLYpoZkTxNARxzB3-FcqcXoEOExyxe7][Playlist - Curso de C desde Cero - Codeando]]
+   + [[https://www.youtube.com/watch?v=YJgnqMCg0-Y&list=PLs1sXiNvW4OyBpsI1gcEG6yQJlRPx5hhC][Programacion en C - Codigo Compilado]]
+* Desarrollar Videojuegos en C++
+** Referencias
+   + [[https://www.youtube.com/watch?v=7YBzHJJYpZo&list=PLmxqg54iaXrhTqZxylLPo0nov0OoyJqiS][Playlist - Programación de Videojuegos en C++ - Prof. Retroman]]
+   + [[https://www.youtube.com/playlist?list=PLEtcGQaT56cgt9IcNjn86O-zI3aZmv5Oo][Aprender C++ con Unreal Engine - Jesus Conde]]
+* Desarrollar videojuegos en Ensamblador
+** Referencias
+   + [[https://www.youtube.com/watch?v=6Z8pWxTbF0g&list=PLmxqg54iaXrgXYrAo_s4d7z1X13jooFTk&index=1][Playlist - Programación de Videojuegos Ensamblador Z80 - Prof. Retroman]]
+   + [[https://www.youtube.com/watch?v=5aGiwhEVKMA][Video - Dinousaurio de Chrome]]
+   + [[https://www.youtube.com/watch?v=h9KqifgNpwY][Video - Como graficar un circulo en assembler]]
 

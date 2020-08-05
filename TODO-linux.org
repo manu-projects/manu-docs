@@ -603,7 +603,24 @@
     - https://classicforum.manjaro.org/index.php?topic=29114.0
     - https://forum.manjaro.org/t/i-need-a-good-looking-red-theme-for-plasma/44944
     - https://www.fossmint.com/best-ubuntu-themes/
+*** Escritorios Virtuales
+**** Atajos personalizados
+     
+     |----------------+-------------------------------------------|
+     | Atajo          | Descripcion                               |
+     |----------------+-------------------------------------------|
+     | Alt-F2         | Ejecuta krunner (para abrir aplicaciones) |
+     |----------------+-------------------------------------------|
+     | Meta-Alt Right | Moverse al siguiente escritorio virtual   |
+     | Meta-Alt Left  | Moverse al anterior escritorio Virtual    |
+     | Ctrl-F1        | Moverse al escritorio 1 (Internet)        |
+     | Ctrl-F2        | Moverse al escritorio 2 (Desarrollo)      |
+     | Ctrl-F3        | Moverse al escritorio 3 (Multimedia)      |
+     |----------------+-------------------------------------------|
 
+**** Referencias
+    + [[https://ubunlog.com/configuracion-de-los-escritorios-virtuales-en-kde/][Configuracion de los escritorios virtuales - ubunblog.com]]
+    + [[https://docs.kde.org/trunk5/es/applications/fundamentals/kbd.html][Accesos rápidos de teclados comunes - docs.kde.org]]
 *** Ocultar el Hostname del prompt
     https://charles4code.blogspot.com/2018/07/show-username-only-without-hostname-in.html
 *** Guia de Linux - Particionamiento
