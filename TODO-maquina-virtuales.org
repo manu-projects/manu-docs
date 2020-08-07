@@ -89,27 +89,68 @@
      
 * Docker
 ** Comandos básicos
+   + El parámetro *ps* es como en linux normal, muestra los procesos en ejecución por tanto mostrará los containers activos (en ejecución)
 
-   |----------------------------------------+-------------------------------------------------------|
-   | Comando                                | Descripción                                           |
-   |----------------------------------------+-------------------------------------------------------|
-   | docker search algunContainer           | Buscar un container                                   |
-   | docker images                          | Listar containers ya instalados (entorno local)       |
-   | docker ps                              | Listar containers en ejecución                        |
-   | docker ps -a # -a es all               | Listar (all) todos los containers (activos/inactivos) |
-   | docker ps -l # -l es list              | Listar últimos containers creados                     |
-   | docker start IDdeAlgunContainer        | El ID se obtiene con *docker images*                  |
-   | docker run algunContainer algunComando | Para ejecutar una linea comandos en un container      |
-   | docker rm algunContainer               | Para eliminar un container                            |
-   | docker run -it algunContainer          | Modo interactivo (via terminal)                       |
-   | docker pull algunContainer             | Descargar o actualizarlo                              |
-   | docker pull algunContainer:unTag       | El tag puede ser una version especifica               |
-   |----------------------------------------+-------------------------------------------------------|
+   |------------------------------------------+-------------------------------------------------------------------------|
+   | Comando                                  | Descripción                                                             |
+   |------------------------------------------+-------------------------------------------------------------------------|
+   | docker start                             |                                                                         |
+   | docker stop                              |                                                                         |
+   | docker restart                           |                                                                         |
+   | docker images                            |                                                                         |
+   | docker run                               |                                                                         |
+   | docker exec                              |                                                                         |
+   |------------------------------------------+-------------------------------------------------------------------------|
+   | docker search algunContainer             | Buscar un container                                                     |
+   | docker images                            | Listar containers ya instalados (entorno local)                         |
+   | docker ps                                | Listar containers en ejecución                                          |
+   | docker ps -a # -all                      | Listar (all) todos los containers (activos/inactivos)                   |
+   | docker ps -l # -list                     | Listar (list) últimos containers creados                                |
+   | docker restart IDdeAlgun                 | Reiniciar un container (como si reiniciaras la maquina y sus servicios) |
+   | docker start IDdeAlgunContainer          | Iniciar el Container como proceso(y sus servicios)                      |
+   | docker stop IDdeAlgunContainer           | Detiene el Container como proceso(y sus servicios)                      |
+   | docker exec IdDeAlgunContainer           | Ejecuta un comando en un container (NO CREA UNO NUEVO)                  |
+   | docker run algunContainer algunComando   | Para ejecutar una linea comandos (y crea otro container)                |
+   | docker rm -f IDdeAlgunContainer          | Para eliminar un container                                              |
+   | docker rmi IDdeAlgunaImagen              | Para eliminar una imagen                                                |
+   | docker run -it algunContainer /bin/bash  | Modo interactivo (via terminal) (Y CREA OTRO CONTAINER)                 |
+   | docker exec -it algunContainer /bin/bash | Modo Interactivo (via terminal  (NO CREA UNO NUEVO)                     |
+   | docker pull algunContainer               | Descargar o actualizarlo                                                |
+   | docker pull algunContainer:unTag         | El tag puede ser una version especifica                                 |
+   |------------------------------------------+-------------------------------------------------------------------------|
+   | docker inspect IDdeAlgunContainer        | Da información COMPLETA en formato JSON                                 |
+   | docker rm $(docker ps -a -q)             | Remover todos los contenedores detenido                                 |
+   | docker rm $(docker images -q)            | Remover todas las imagenes                                              |
+   | docker kill $(docker ps -q)              | Mata el proceso de todos los contenedores en ejecución                  |
+   |------------------------------------------+-------------------------------------------------------------------------|
 
 https://hub.docker.com/repository/docker/neverkas/distroalpine
 https://www.digitalocean.com/community/tutorials/como-instalar-y-usar-docker-en-ubuntu-18-04-1-es
 https://www.ionos.es/digitalguide/servidores/configuracion/tutorial-docker-instalacion-y-primeros-pasos/
 https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+
+*** Observaciones importantes
+    + Si queremos acceder al container (NO CREAR UNO NUEVO) usamos "docker exec -it" (si usamos run se creará otro container)
+    + Siempre se crea un contenedor distinto cuando ejecutas una imagen con docker run -it IdAlgunaImagen
+    + Podemos usar el comando "docker run -it" para crear una nueva imagen, ejemplos.:
+      #+BEGIN_EXAMPLE
+      - Supongamos que tenemos un container de un ubuntu trusty (14.04) que tiene varios packages
+      (Ej. haskell, prolog, git, etc...) y queremos probar un nuevo package o configuración
+      como sería instalar mysql, mongodb, etc.. 
+      - Entonces podemos correr el comando "docker run -it" para crear un nuevo container que tiene
+      lo mismo que al que apuntamos con el ID, si no funciona lo que queriamos instalar o no era
+      lo que necesitabamos borramos ese nuevo container y nos quedamos con el anterior
+      #+END_EXAMPLE
+    + Si queremos guardar cambios de un container, debemos versionarlo comiteando y pusheando los cambios
+
+*** Eliminar varias imagenes
+    #+BEGIN_SRC sh
+      # listamos las imagenes para revisar el ID
+      docker images ls
+
+      # suponiendo que son varias imagenes se pueden agrupar en una linea
+      docker rmi a23bb4013216 a341b4013200 a24bb422226
+    #+END_SRC 
 
 *** Descargar ó Actualizar un Container
 
@@ -213,9 +254,15 @@ https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-regi
    #+END_SRC
    
 ** Referencias
+   + [[https://docs.docker.com/develop/develop-images/dockerfile_best-practices/][Best practices for writing Dockerfiles - docs.docker.com]]
+   + [[https://github.com/rocker-org/rocker/wiki/How-to-save-data][How to save data - github.com/rocker-org]]
    + [[https://www.digitalocean.com/community/tutorials/como-instalar-y-usar-docker-en-ubuntu-18-04-1-es][Como instalar y usar Docker en Ubuntu 18.04 - Digitalocean.com]]
    + [[https://www.ionos.es/digitalguide/servidores/configuracion/tutorial-docker-instalacion-y-primeros-pasos/][Tutorial Docker - Instalación y primeros pasos - Ionos.es]]
+   + [[https://colorfield.be/blog/cleaning-lando-containers][Cleaning up containers - colorfield.de]]
+   + [[https://blog.hipolabs.com/understanding-docker-without-losing-your-shit-cf2b30307c63][Understanding Docker - Blog hipolabs]]
+   + [[https://docs.docker.com/engine/reference/commandline/commit/][Docker commit - Docker.com]]
 
+   + [[https://www.youtube.com/watch?v=PbiYll21Jxg&list=PLZdsdjcJ44WU_cY2Y1LFLnmsSjFD5BZLZ][Playlist - DOcker container course (el mejor por ahora)]]
    + [[https://www.youtube.com/watch?v=vjnOIE-CwMU&list=PLqRCtm0kbeHAep1hc7yW-EZQoAJqSTgD-&index=2][Video - DOcker - primeros pasos]]
    + [[https://www.youtube.com/watch?v=6idFknRIOp4&t=201s][Video - Aprender docker en 14min]]
 
@@ -223,6 +270,89 @@ https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-regi
    + https://www.digitalocean.com/community/questions/how-to-fix-docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socket
    + https://manjaro.site/how-to-install-docker-on-manjaro-18-0/
 
+** Distribuciones de Linux (Mas actualizado)
+*** Actualmente en uso
+    Por ahora utilizo ubuntu trusty que sería la versión 14.04 que es bastante liviana
+    
+    #+BEGIN_SRC sh
+      # entramos a la terminal (se creará un nuevo contenedor "distinto" cada vez que ejecutamos este comando)
+      # docker run -it ubuntu:trusty bin/bash
+
+      # descargamos la distribución ubuntu versión trusty (14.04)
+      docker pull ubuntu:trusty
+
+      # creamos una carpeta en nuestro HOST y la compartimos
+      mkdir ~/Docker
+      # Hacemos un punto de montaje
+      # 1.Para asignar el nombre al contenedor usamos --name
+      # 2.Para referirnos al volumen usamos -v
+      # 3.La ruta (debe ser absoluta agregando ~) del HOST a compartir será ~/Docker
+      #   (si no es absoluta, se creará un volumen que se comparte entre los demás containers, a docker volume)
+      # 4.La nueva ruta que se creará en el Container /opt/share
+      # 5.La imagen a utilizar es ubuntu:trusty
+      # 6.En la bash shell
+      # docker run -v ~/Docker:/opt/share -it ubuntu:trusty /bin/bash
+      docker run -it --name test1 -v ~/Docker:/opt/share ubuntu:trusty bash
+
+      # IMPORTANTE:
+      # Recorda que cada vez que ejecutes "run" se creará un nuevo contenedor
+      # en este caso se montará un punto de montaje entre Host/Un nuevo Contenedor llamado "test1"
+      # cada vez que quieras hacer cambios en ese "contenedor"
+      # acceder con docker exec -it test /bin/bash
+
+      # comprobamos
+      docker ps -a | grep test1
+      # iniciamos el proceso del container
+      docker start test1
+      # corremos el comando "modo interactivo" en el container "test1" y accedemos a la bash shell
+      # (si usamos run, se creará un nuevo contenedor, la idea es utilizar este y no se creará otro)
+      docker exec -it test1 /bin/bash
+
+      apt-get update
+      apt-get install swi-prolog -y
+
+      # versionamos para guardar el estado del container
+      docker ps -a # para revisar el id del container
+      docker commit 5b13ee15d1f1 neverkas/ubuntu-trusty # suponiendo que ese es el ID
+      docker push neverkas/ubuntu-trusty
+
+      # revisamos el nuevo contenedor
+      docker ps -a
+
+      # salimos del contenedor
+      exit
+      # si queremos revisar la version de prolog instalada sin entrar al container
+      docker exec test1 swipl -v
+      # si queremos acceder al container y ejecutar prolog
+      docker exec -it test1 swipl
+      exit # salimos
+      # si queremos acceder solo como en la bash shell
+      docker exec -it test1 /bin/bash
+
+
+      # IMPORTANTE:
+      # - Al hacer commit se creará una nueva imagen, que apunta al repositorio publico "neverkas/ubuntu-trusty"
+      # el usuario seria neverkas
+      # seguido del nombre de container que se guardará como local (sería una imagen)
+
+
+    #+END_SRC
+
+*** Ubuntu
+    Cada versión de la distribución lleva un nombre distinto
+
+    |---------+--------|
+    | Version | Nombre |
+    |---------+--------|
+    |   14.04 | Trusty |
+    |   16.04 | Xenial |
+    |   18.04 | Bionic |
+    |---------+--------|
+
+    *Referencias*
+    + [[https://releases.ubuntu.com/][Ubuntu releases - ubuntu.com]]
+    + [[https://hub.docker.com/_/ubuntu?tab=tags][Ubuntu Tags - hub.docker.com]]
+    + [[https://wwu-pi.github.io/tutorials/lectures/lsp/010_install_swi_prolog.html][Installing SWI-Prolog - pi-github.io]]
 ** Instalación
 
    #+NAME: Instalación y Configuración
