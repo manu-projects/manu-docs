@@ -44,3 +44,10 @@
   7. https://xbuba.com/questions/37006362
   8. http://rigaux.org/language-study/syntax-across-languages-per-language/Haskell.html
   9. https://hackage.haskell.org/package/ClassyPrelude-0.1/docs/Prelude-Math.html#t:Floating
+* Wallpapers
+  - https://oswallpapers.com/parrot-security-os-4-3-default-desktop-wallpapers/
+* Tinyurls
+  Los que considero por ahora como mejores, porque permiten ponerle un nombre 
+  existen otros como bitly que te genera nombres aleatorios dificiles de recordar.
+  + [[https://tiny.cc/][Tiny.cc]]
+  + [[https://tinyurl.com/][Tinyurl.com]]

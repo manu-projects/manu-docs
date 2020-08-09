@@ -332,7 +332,7 @@ https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-regi
 
       # IMPORTANTE:
       # - Al hacer commit se creará una nueva imagen, que apunta al repositorio publico "neverkas/ubuntu-trusty"
-      # el usuario seria neverkas
+      # el usuario seria neverkas (LA PRIMERA VEZ, LAS PROXIMAS APUNTARAN SIEMPRE AL MISMO CONTAINER)
       # seguido del nombre de container que se guardará como local (sería una imagen)
 
 

@@ -1,4 +1,95 @@
 * Guia Linux
+** Multimedia - Musica/Videos/Youtube
+*** Bajar audios/videos de youtube
+    + El package *youtube-dl* nos sirve para descargar videos, musica, playlist y contenido de youtube
+
+    #+NAME: Ejemplos de uso de youtube-dl
+    #+BEGIN_SRC sh 
+      # descargamos el package
+      sudo pacman -S youtube-dl
+
+      #
+      # Estos son algunos ejemplos, se puede variar utilizando todos los parámetros
+      #
+
+      # descargara el video/playlist/canción con una calidad normal
+      youtube-dl unaUrlDeYoutube
+
+      # Te lista los distintos formatos de video/audio para descargar
+      youtube-dl -F unaurlyoutube
+
+      # descarga solo el audio con la mejor calidad
+      # e ignora los errores que tenga
+      youtube-dl -f bestaudio -i unaurlDeYoutube
+
+      # Si queremos descargar audios de una playlist podemos especificar
+      # - a partir de cual queremos
+      # - ó hasta cual queremos
+      # - ó también cuales especificamente separados por coma
+      youtube-dl -f bestaudio -i --playlist-start NUMBER
+      youtube-dl -f bestaudio -i --playlist-end NUMBER
+      youtube-dl -f bestaudio -i --playlist-items NUMBERS
+
+      # descarga video/playlist/canción con la meta data
+      # esto es autor, duración, titulo
+      # - es muy útil para mostrar esa información en un reproductor de audio
+      # e ignora los errores que tenga alguno de los videos al descargar
+      # - fundamental para descargar todos excepto esos que tienen algún error
+      youtube-dl -f bestaudio --add-metadata -i unaURLDeYoutube
+
+      # supongamos que previamente usamos con -F entonces colocamos
+      # el identificador de la calidad de audio que querramos
+      # seguido del simbolo +
+      # seguido del identificador de la calidad de video que queremos
+      # descargará el audio y el video por separado y lo juntará
+      youtube-dl -f 251+299 unaUrlDeYoutube
+    #+END_SRC
+
+*** Reproducir música 
+    + Con el package *cmus* podemos reproducir música desde la terminal
+    + Las listas de reproducción,album, canciones quedan guardados como un historial al momento de abrir nuevamente
+    + Carga las carpetas de música más rápido al no utilizar interfaz gráfica
+
+    #+NAME: Comandos
+    |-----------------------------+-------------------------------------------------------|
+    | Comando                     | Descripción                                           |
+    |-----------------------------+-------------------------------------------------------|
+    | :add ~/rutaDePlaylist       | Agregar una carpeta de archivos de audio              |
+    | :clear                      | Limpiar todo el buffer de reproducción                |
+    | :colorscheme nombreDelTheme | Cambia el tema/theme el aspecto visual del reproductor |
+    |-----------------------------+-------------------------------------------------------|
+    | ENTER                       | Reproducir un tema                                    |
+    | x                           | Reproducir un tema                              |
+    | c                           | Detener la reproducción                         |
+    | TAB                         | Navegar entre los buffers (Album/Canciones)     |
+    | supr                        | Quitar un album/artista del buffer              |
+    | q                           | Salir del reproductor                           |
+    |-----------------------------+-------------------------------------------------------|
+    | 1                           | Modo 1                                                |
+    | 2                           | Modo 3                                                |
+    | 3                           | Modo 4                                                |
+    | 4                           | Modo 5                                                |
+    | 5                           | Modo 6                                                |
+    |-----------------------------+-------------------------------------------------------|
+    | +                           | Aumentar el volumen del reproductor  (no del sistema) |
+    | -                           | Disminuir el volumen del reproductor (no del sistema) |
+    |-----------------------------+-------------------------------------------------------|
+
+    #+NAME: Ejemplos de cmus
+    #+BEGIN_SRC sh
+      # descargamos
+      sudo pacman -S cmus
+
+      # ejecutamos
+      cmus
+    #+END_SRC
+
+*** Referencias
+    + [[https://www.youtube.com/watch?v=9A-HLSvtBWc][Video #1 - Downloading videos, music with Youtube-dl]]
+    + [[https://www.youtube.com/watch?v=fOjP-7-gI4Y][Video #2 - Command line app for downloading youtube videos]]
+    + [[https://www.youtube.com/watch?v=tvUs6LdLa1c][Video #3 CMUS | Reproductor de Musica de Terminal]]
+    + [[https://blog.desdelinux.net/youtube-dl-tips-que-no-sabias/][Tips de Youtube-dl - Blog DesdeLinux]]
+
 ** TODO Comandos Importantes
    | Comando     | Descripcion                                       |
    | :------     | :----------                                       |
@@ -53,9 +144,6 @@
 
 ** TODO Comando awk
 *** Ejemplos
-
-    
-
 *** Referencias
     + [[https://likegeeks.com/es/comando-awk/][Comando awk - likegeeks.com]]
 ** Utilidades Interesantes
