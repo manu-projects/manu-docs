@@ -51,3 +51,141 @@
   existen otros como bitly que te genera nombres aleatorios dificiles de recordar.
   + [[https://tiny.cc/][Tiny.cc]]
   + [[https://tinyurl.com/][Tinyurl.com]]
+* Latex
+** Referencias
+   - https://wiki.lyx.org/Tips/KeyboardShortcuts
+   - https://wiki.lyx.org/Tips/CommandSequences
+
+** Programas para ecuaciones en latex 
+   Lyxx y texmacs tienen wrty o algo asi (? pero permite que se pueda previsualizar las ecuaciones
+   en el momento que las escribis como si fuera live, en otros suele aparecer el codigo latex 
+   y la previsualización por separado, que quizas no es tan comodo.
+
+*** Programas
+   + Lyxx
+   + TeXmacs
+*** Usando Octave
+**** Ejemplos
+
+     #+NAME: Ejemplo 1 - Función exponencial
+     #+BEGIN_EXAMPLE  octave
+       # estos ejemplos fueron probados en texmacs
+       #
+
+       # definimos el rango de la función de 1 a 25
+       x=(1:25);
+
+       # creamos la función a graficar
+       # el operador potencia debe estar precedido de un punto
+       y=x.^2
+
+       # graficamos
+       # debe tener ese tercer parámetro con punto y coma, si no a veces falla
+       # ese tercer parámetro le agrega una etiqueta para diferenciar
+       plot(x,y,";una funcion;")
+     #+END_EXAMPLE
+
+     #+NAME: Ejemplo 2 - Función intervalo abierto 
+     #+BEGIN_EXAMPLE  octave
+       # estos ejemplos fueron probados en texmacs
+       #
+
+       # definimos el rango de la función de 1 a 25
+       x=[1:25];
+
+       # creamos la función a graficar
+       # el operador potencia debe estar precedido de un punto
+       y=2.*x.*x.^2+3
+
+       # graficamos
+       # debe tener ese tercer parámetro con punto y coma, si no a veces falla
+       # ese tercer parámetro le agrega una etiqueta para diferenciar
+       plot(x,y,";una funcion;")
+     #+END_EXAMPLE
+     
+     #+NAME: Ejemplo 3 - Graficar dos funciones
+     #+BEGIN_EXAMPLE  octave
+       # estos ejemplos fueron probados en texmacs
+       #
+
+       # definimos el rango de la función de 1 a 25
+       x=(1:25);
+
+       # creamos la función "y" a graficar
+       # el operador potencia debe estar precedido de un punto
+       y=x.^2
+
+       # creamos la función "g" a graficar
+       # el operador potencia debe estar precedido de un punto
+       g=5-x.^2
+
+
+       # graficamos
+       # debe tener ese tercer parámetro con punto y coma, si no a veces falla
+       # ese tercer parámetro le agrega una etiqueta para diferenciar
+       plot(x,y,";una funcion;", x, g, ";otra funcion;")
+     #+END_EXAMPLE
+     
+**** Referencias
+     + [[http://materias.fi.uba.ar/6625/TPs/Tutoriales/Tutorial%20Rapido%20de%20Octave.pdf][TUtorial de Octave - fi.uba.ar]]
+     + [[https://www.youtube.com/watch?v=jhTTD3QEYWo][Video #1 - octave-01: Graficación básica en octave]]
+     + [[https://www.youtube.com/watch?v=jW4JDkXHUls][Video #2 - Tutorial para graficar funciones con programa octave]]
+     + https://github.com/texmacs/octavehttps://github.com/texmacs/octave
+
+*** Usando Texmacs
+
+    |-------------+------------------------------------------------|
+    | Atajos      | Descripción                                    |
+    |-------------+------------------------------------------------|
+    | @@          | Simbolo infinito                               |
+    | P TAB       | Simbolo PI                                     |
+    | Alt Shift V | Transforma en vector (agrega el acento flecha) |
+    | S TAB       | Sigma (sumatoria)                              |
+    | D TAB       | Delta (triangulo)                              |
+    | Alt F       | Fracciones                                     |
+    | Alt S       | Raiz Cuadrada                                  |
+    | Alt $       | Texto                                          |
+    | Alt N       | Para tachar                                    |
+    |-------------+------------------------------------------------|
+    | letra TAB   | Para cambiar entre las letras griegas          |
+    | <=> <==>    | El bicondicional "si solo si"                  |
+    | Alt &       | Bloque de ecuaciones                           |
+    | Shift $     | Linea de ecuación                              |
+    | /           | Para negaciones (Ej. =/ <=/  )                 |
+    |             |                                                |
+    | ⇧           | Shift                                          |
+    | ⌃           | Control                                        |
+    | ⌥           | (ALT) Alternate                                |
+    | ⌘           | Meta (windows)                                 |
+    | ⌘⌥ò ⇧F7     | (TAB) Hyper                                    |
+    |-------------+------------------------------------------------|
+
+*** Comandos fundamentales
+
+    |-------------+----------------------|
+    | Comando     | Descripción          |
+    |-------------+----------------------|
+    | \Sigma      | sumatoria            |
+    | \Delta      |                      |
+    | \cos        |                      |
+    | \sin        |                      |
+    |-------------+----------------------|
+    | \frac{n}{m} | fraccion             |
+    | 2_{n}       | subindice            |
+    | 2^{n}       | exponente            |
+    | \times      | producto             |
+    |-------------+----------------------|
+    | Alt+1       | Titulo               |
+    |-------------+----------------------|
+    | $           | Linea de ecuación    |
+    | Alt+&       | Bloque de ecuaciones |
+    |-------------+----------------------|
+
+*** Referencias
+    - [[http://es.tldp.org/Presentaciones/200304curso-glisa/texmacs/curso-glisa-texmacs.pdf][Creación de textos científicos con TeXmacs - TLDP.org]]
+    - [[http://www.texmacs.org/tmweb/manual/webman-math.en.html][Mathematical FOrmulas texmacs.org]]
+    - [[http://www.texmacs.org/tmweb/documents/manuals/texmacs-manual.es.pdf][Manual de TeXmacs - texmacs.org]]
+    - [[http://www.texmacs.org/tmdoc/devel/style/keyboard/env.es.html][Macros, Funciones, y variables de entorno - texmacs.org]]
+** Programas para graficar
+   + inkscape
+
