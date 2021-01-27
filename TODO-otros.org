@@ -127,65 +127,92 @@
      #+END_EXAMPLE
      
 **** Referencias
-     + [[http://materias.fi.uba.ar/6625/TPs/Tutoriales/Tutorial%20Rapido%20de%20Octave.pdf][TUtorial de Octave - fi.uba.ar]]
+     + [[https://www.famaf.unc.edu.ar/~menzaque/0795/2011/notas0310.pdf][Porque usar Octave?]]
+     + [[http://materias.fi.uba.ar/6625/TPs/Tutoriales/Tutorial%20Rapido%20de%20Octave.pdf][Tutorial de Octave - fi.uba.ar]]
+     + [[https://denklab.org/atix/atix15.pdf][Revisa de Software Libre ATIX]]
      + [[https://www.youtube.com/watch?v=jhTTD3QEYWo][Video #1 - octave-01: Graficación básica en octave]]
      + [[https://www.youtube.com/watch?v=jW4JDkXHUls][Video #2 - Tutorial para graficar funciones con programa octave]]
-     + https://github.com/texmacs/octavehttps://github.com/texmacs/octave
+     + https://github.com/texmacs/octave
+     + [[https://en.wikibooks.org/wiki/Octave_Programming_Tutorial/Getting_started][Octave Programming Tutorial/Getting started - wikibooks.org]]
 
 *** Usando Texmacs
-
-    |-------------+------------------------------------------------|
-    | Atajos      | Descripción                                    |
-    |-------------+------------------------------------------------|
-    | @@          | Simbolo infinito                               |
-    | P TAB       | Simbolo PI                                     |
-    | Alt Shift V | Transforma en vector (agrega el acento flecha) |
-    | S TAB       | Sigma (sumatoria)                              |
-    | D TAB       | Delta (triangulo)                              |
-    | Alt F       | Fracciones                                     |
-    | Alt S       | Raiz Cuadrada                                  |
-    | Alt $       | Texto                                          |
-    | Alt N       | Para tachar                                    |
-    |-------------+------------------------------------------------|
-    | letra TAB   | Para cambiar entre las letras griegas          |
-    | <=> <==>    | El bicondicional "si solo si"                  |
-    | Alt &       | Bloque de ecuaciones                           |
-    | Shift $     | Linea de ecuación                              |
-    | /           | Para negaciones (Ej. =/ <=/  )                 |
-    |             |                                                |
-    | ⇧           | Shift                                          |
-    | ⌃           | Control                                        |
-    | ⌥           | (ALT) Alternate                                |
-    | ⌘           | Meta (windows)                                 |
-    | ⌘⌥ò ⇧F7     | (TAB) Hyper                                    |
-    |-------------+------------------------------------------------|
+**** Tablas
+    |----------------+---------------+------------------------------------------------|
+    | Atajos Texmacs | Comando LaTeX | Descripción                                    |
+    |----------------+---------------+------------------------------------------------|
+    | @@             |               | Simbolo infinito                               |
+    | P TAB          |               | Simbolo PI                                     |
+    | Alt Shift V    |               | Transforma en vector (agrega el acento flecha) |
+    | * TAB          | \times        | Operador de Multiplicación                     |
+    | S TAB          | \Sigma        | Sigma (sumatoria)                              |
+    | D TAB          | \Delta        | Delta (triangulo)                              |
+    | Alt F          | \frac{m}{n}   | Fracciones                                     |
+    | Alt S          | \sqrt         | Raiz Cuadrada                                  |
+    | Alt $          |               | Texto                                          |
+    | Alt N          |               | Para tachar                                    |
+    |----------------+---------------+------------------------------------------------|
+    | letra TAB      |               | Para cambiar entre las letras griegas          |
+    | <=> <==>       |               | El bicondicional "si solo si"                  |
+    | Alt &          |               | Bloque de ecuaciones                           |
+    | Shift $        |               | Linea de ecuación                              |
+    | /              |               | Para negaciones (Ej. =/ <=/  )                 |
+    |                |               |                                                |
+    | ⇧              |               | Shift                                          |
+    | ⌃              |               | Control                                        |
+    | ⌥              |               | (ALT) Alternate                                |
+    | ⌘              |               | Meta (windows)                                 |
+    | ⌘⌥ò ⇧F7        |               | (TAB) Hyper                                    |
+    |----------------+---------------+------------------------------------------------|
 
 *** Comandos fundamentales
 
-    |-------------+----------------------|
-    | Comando     | Descripción          |
-    |-------------+----------------------|
-    | \Sigma      | sumatoria            |
-    | \Delta      |                      |
-    | \cos        |                      |
-    | \sin        |                      |
-    |-------------+----------------------|
-    | \frac{n}{m} | fraccion             |
-    | 2_{n}       | subindice            |
-    | 2^{n}       | exponente            |
-    | \times      | producto             |
-    |-------------+----------------------|
-    | Alt+1       | Titulo               |
-    |-------------+----------------------|
-    | $           | Linea de ecuación    |
-    | Alt+&       | Bloque de ecuaciones |
-    |-------------+----------------------|
+    |-------------+----------------------------------------------|
+    | Comando     | Descripción                                  |
+    |-------------+----------------------------------------------|
+    | \Sigma      | sumatoria                                    |
+    | \Delta      |                                              |
+    | \cos        |                                              |
+    | \sin        |                                              |
+    | \in         | pertenece (un elemento a un conjunto)        |
+    | \nin        | no pertence (n representa a la negación not) |
+    | \exists     | existe                                       |
+    | \forall     | para todo                                    |
+    | \approx     | el operador igual (aproximado)               |
+    |-------------+----------------------------------------------|
+    | \frac{n}{m} | fraccion                                     |
+    | 2_{n}       | subindice                                    |
+    | 2^{n}       | exponente                                    |
+    | \times      | producto                                     |
+    |-------------+----------------------------------------------|
+    | Alt+1       | Titulo                                       |
+    |-------------+----------------------------------------------|
+    | $           | Linea de ecuación                            |
+    | Alt+&       | Bloque de ecuaciones                         |
+    |-------------+----------------------------------------------|
 
+*** Creando indices
 *** Referencias
     - [[http://es.tldp.org/Presentaciones/200304curso-glisa/texmacs/curso-glisa-texmacs.pdf][Creación de textos científicos con TeXmacs - TLDP.org]]
+    - [[http://www.texmacs.org/tmdoc/main/links/man-toc.es.html][Generar Tabla de Contenido - texmacs.org]]
     - [[http://www.texmacs.org/tmweb/manual/webman-math.en.html][Mathematical FOrmulas texmacs.org]]
     - [[http://www.texmacs.org/tmweb/documents/manuals/texmacs-manual.es.pdf][Manual de TeXmacs - texmacs.org]]
     - [[http://www.texmacs.org/tmdoc/devel/style/keyboard/env.es.html][Macros, Funciones, y variables de entorno - texmacs.org]]
+    - [[http://btocastro.blogspot.com/2011/06/latex.html][Imagenes de los comandos, simbolos de Latex]]
+    - [[https://www.texmacs.org/tmweb/manual/webman-start.en.html][Getting started]]
+    - [[http://mira.um.es/maxima/Introduccion.html][Utilizando MAXIMA (para matemática)]]
 ** Programas para graficar
    + inkscape
 
+**** Referencias
+     + [[http://www.texmacs.org/tmweb/documents/manuals/texmacs-manual.es.pdf][El manual de GNU Texmacs - texmacs.org]]
+** Github
+github Key is already in use
+https://github.com/neverkas/manu-docs/blob/master/TODO-linux.org
+
+https://www.it-swarm.dev/es/git/error-de-github-clave-ya-en-uso/1043769190/
+https://docs.github.com/es/github/authenticating-to-github/error-key-already-in-use
+https://www.sethserver.com/multi-key-github-deployments.html
+https://stackoverflow.com/questions/21160774/github-error-key-already-in-use
+
+https://docs.github.com/es/github/getting-started-with-github/fork-a-repo
+https://www.youtube.com/watch?v=xl3nxfbGkzY

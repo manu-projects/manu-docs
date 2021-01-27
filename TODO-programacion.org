@@ -360,10 +360,11 @@ https://www.cs.odu.edu/~zeil/cs252/latest/Public/debugging/index.html
    + https://fresh2refresh.com/c-programming/c-printf-and-scanf/
    + https://www.geeksforgeeks.org/use-fflushstdin-c/
    + [[https://sourceware.org/gdb/onlinedocs/gdb/Emacs.html][Using GDB under GNU Emacs - sourceware.org]]
+   + [[https://u.osu.edu/cstutorials/2018/09/28/how-to-debug-c-program-using-gdb-in-6-simple-steps/][Debug C Program using gdb, Simple Steps - The Ohio State UNiversity]]
 ** Videos
-   + [[https://www.youtube.com/watch?v=bRAthoxbVyA&list=PLw8RQJQ8K1ySN6bVHYEpDoh-CKVkL_uOF&index=19][Playlist - Empieza a Programar en C]]
    + [[https://www.youtube.com/playlist?list=PLTd5ehIj0goOAWdpCpghXiRCmEOrJJLEW][Playlist - Curso de C - Makigas.es]]
    + [[https://www.youtube.com/playlist?list=PLTd5ehIj0goMZ33qJ7JmuXjSO8RoefiZS][Playlist - Desarrollando en C - Makigas.es]]
+   + [[https://www.youtube.com/watch?v=bRAthoxbVyA&list=PLw8RQJQ8K1ySN6bVHYEpDoh-CKVkL_uOF&index=19][Playlist - Empieza a Programar en C]]
    + [[https://www.youtube.com/watch?v=9ijhlPfxFnk&list=PLMDLYpoZkTxNARxzB3-FcqcXoEOExyxe7][Playlist - Curso de C desde Cero - Codeando]]
    + [[https://www.youtube.com/watch?v=YJgnqMCg0-Y&list=PLs1sXiNvW4OyBpsI1gcEG6yQJlRPx5hhC][Programacion en C - Codigo Compilado]]
 * Desarrollar Videojuegos en C++

@@ -26,73 +26,73 @@
       5. [[https://www.youtube.com/watch?v=QaX3AaK3_Lk][Elisp Tutorial - nose]]
 ** Guia de Lisp
 *** Conceptos
-   Para reforzar un poco el paradigma funcional e integrarlo con elisp que
-   es lo que utiliza emacs por dentro, se puede ejecutar tambien en la terminal eshell
+    Para reforzar un poco el paradigma funcional e integrarlo con elisp que
+    es lo que utiliza emacs por dentro, se puede ejecutar tambien en la terminal eshell
 
-   -Para mostrar los bloques de codigo en otro buffer presionar <bdk>, '</bdk> o <bdk>C-x '</bdk>
-   -Para ejecutar el codigo presionar <bdk>, ,</bdk> o <bdk>C-c C-c</bdk>
+    -Para mostrar los bloques de codigo en otro buffer presionar <bdk>, '</bdk> o <bdk>C-x '</bdk>
+    -Para ejecutar el codigo presionar <bdk>, ,</bdk> o <bdk>C-c C-c</bdk>
 
-   Referencias:
-   - [[http://cl-cookbook.sourceforge.net/emacs-ide.html][Using emacs as LISP IDE (cl-cookbook)]]
-   - [[https://www.youtube.com/watch?v=-J_xL4IGhJA][Overview and Introduction to Lisp - Part 1]]
-   - [[https://www.youtube.com/watch?v=-J_xL4IGhJA&list=PLE18841CABEA24090][Playlist - Structure and Interpretation (MIT 1986)]]
-   - [[https://www.youtube.com/watch?v=QFbJKWhzhtU][Introduccion Lisp - Parte 1 (javierbravoudima) - Ver Video]]
-   -[[https://www.youtube.com/watch?v=Fz9Rig9lG50][ Intro Lisp - Parte 2 - Ver Video]]
-   - [[https://www.youtube.com/watch?v=Jx8riNWKe14][Intro Emacs (javier) - Ver Video]]
-   - [[https://www.youtube.com/watch?v=9aI7ZAEbiF0][Common LISP (Prof. Javier)]]
+    Referencias:
+    - [[http://cl-cookbook.sourceforge.net/emacs-ide.html][Using emacs as LISP IDE (cl-cookbook)]]
+    - [[https://www.youtube.com/watch?v=-J_xL4IGhJA][Overview and Introduction to Lisp - Part 1]]
+    - [[https://www.youtube.com/watch?v=-J_xL4IGhJA&list=PLE18841CABEA24090][Playlist - Structure and Interpretation (MIT 1986)]]
+    - [[https://www.youtube.com/watch?v=QFbJKWhzhtU][Introduccion Lisp - Parte 1 (javierbravoudima) - Ver Video]]
+    -[[https://www.youtube.com/watch?v=Fz9Rig9lG50][ Intro Lisp - Parte 2 - Ver Video]]
+    - [[https://www.youtube.com/watch?v=Jx8riNWKe14][Intro Emacs (javier) - Ver Video]]
+    - [[https://www.youtube.com/watch?v=9aI7ZAEbiF0][Common LISP (Prof. Javier)]]
 *** Comandos basicos
 
-| Comando            | Descripcion                                                               |
-| C-x C-e            | Ejecuta un comando (Con el cursor al final de linea)                      |
-| M-x eval-last-sexp | Ejecuta un comando (Con el cursor al final de linea)                      |
-| setq               | Cambia el valor de una variable local                                     |
-| print              | Imprimir los datos de una variable                                        |
-| setf               | Cambia el valor de una variable global                                    |
-| length             | Devuelve la longitud de una lista (una cadena es una lista de caracteres) |
-| read               | Pide ingresar datos                                                       |
+    | Comando            | Descripcion                                                               |
+    | C-x C-e            | Ejecuta un comando (Con el cursor al final de linea)                      |
+    | M-x eval-last-sexp | Ejecuta un comando (Con el cursor al final de linea)                      |
+    | setq               | Cambia el valor de una variable local                                     |
+    | print              | Imprimir los datos de una variable                                        |
+    | setf               | Cambia el valor de una variable global                                    |
+    | length             | Devuelve la longitud de una lista (una cadena es una lista de caracteres) |
+    | read               | Pide ingresar datos                                                       |
 
 *** Comandos para listas
-| (1 2 3)   | Representa una lista, se forman con los ()        |
-| append    | Inserta un elemento en una lista                  |
-| cons      |                                                   |
-| first,car | Devuelve primer elemento de una lista             |
-| second    | Devuelve el segundo elemento de una lista         |
-| nth <n>   | Devuelve el elemento en la posicion n de la lista |
-| rest, cdr | Devuelve la lista sin el primer elemento          |
+    | (1 2 3)   | Representa una lista, se forman con los ()        |
+    | append    | Inserta un elemento en una lista                  |
+    | cons      |                                                   |
+    | first,car | Devuelve primer elemento de una lista             |
+    | second    | Devuelve el segundo elemento de una lista         |
+    | nth <n>   | Devuelve el elemento en la posicion n de la lista |
+    | rest, cdr | Devuelve la lista sin el primer elemento          |
 
 *** Comandos para funciones
     
-   | prog1 	| Evalua todas las sentencias compuestas y devuelve la primer sentencia |
-   | progn  |	Evalua todas las sentencias compuestas y devuelve la ultima |
+    | prog1 	| Evalua todas las sentencias compuestas y devuelve la primer sentencia |
+    | progn  |	Evalua todas las sentencias compuestas y devuelve la ultima |
 
-   #+BEGIN_SRC emacs-lisp
-     (progn
-       ;; creamos un lista
-       (setf lista '(A B C))
+    #+BEGIN_SRC emacs-lisp
+      (progn
+        ;; creamos un lista
+        (setf lista '(A B C))
 
-       ;; creamos la funcion saludo,
-       ;; que tiene solo un argumento
-       (defun saludo(msg)
-         ;; imprimimos el argumento usando el comando print
-         (print msg)
-         )
+        ;; creamos la funcion saludo,
+        ;; que tiene solo un argumento
+        (defun saludo(msg)
+          ;; imprimimos el argumento usando el comando print
+          (print msg)
+          )
 
-       ;; llamamos a la funcion saludo y le pasamos como parametro una cadena
-       (saludo "hola")
-       )
+        ;; llamamos a la funcion saludo y le pasamos como parametro una cadena
+        (saludo "hola")
+        )
 
-     (progn
-       ;; abro un buffer nuevo lamado test
-       (switch-to-buffer-other-window "*test")
-       ;; limpio el contenido si lo tuviese
-       (erase-buffer)
-       ;; declaro una variable unNombre
-       ;; y llamamos al comando read para que ingresen datos
-       (setf unNombre (read))
-       ;; imprimimos lo que se escribio
-       (print unNombre)
-       )
-   #+END_SRC
+      (progn
+        ;; abro un buffer nuevo lamado test
+        (switch-to-buffer-other-window "*test")
+        ;; limpio el contenido si lo tuviese
+        (erase-buffer)
+        ;; declaro una variable unNombre
+        ;; y llamamos al comando read para que ingresen datos
+        (setf unNombre (read))
+        ;; imprimimos lo que se escribio
+        (print unNombre)
+        )
+    #+END_SRC
 
 *** Buffers
 
@@ -110,24 +110,24 @@
       ;; Correr cada linea con M-x  C-x C-e   
 
       ;; ejecuto una funcion prefija
-         (+ 1 2)
+      (+ 1 2)
 
       ;; declaro una variable local y le asigno una lista
-         (setq dias '(lunes martes))
+      (setq dias '(lunes martes))
       (setq letras '(A B C))
 
       ;; declaro una variable global
-         (setf dias '(lunes martes))
+      (setf dias '(lunes martes))
 
       ;; pido el primer elemento de la lista (a b c)
       (first '(a b c)
 
-         ;; imprimo la variable dias
-            (print dias)
+             ;; imprimo la variable dias
+             (print dias)
 
-         ;; Le cambio el valor del primer elemento a una lista
-         ;; si probara con setq devolveria error
-            (setf (first dias) 'viernes)
+             ;; Le cambio el valor del primer elemento a una lista
+             ;; si probara con setq devolveria error
+             (setf (first dias) 'viernes)
              (print dias) ;; ahora deberia devolver (viernes martes)
 
              ;; Creo una funcion last (le resto 1 para no excederme de la cantidad de elementos)
@@ -141,7 +141,7 @@
              ;; Creo una funcion que imprima el argumento
              (defun saludo(mensaje)
                (print mensaje)
-             )
+               )
     #+END_SRC
 
     #+BEGIN_SRC emacs-lisp
@@ -374,153 +374,12 @@
     - https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html
     - https://www.youtube.com/watch?v=AaUlOH4GTCs
 ** [TODO] Integrando el Modo Org [47%]
-*** [TODO] Creando tablas
-
-    |--------------+-----------------------------------------|
-    | Comando      | Descripción                             |
-    |--------------+-----------------------------------------|
-    | C-c -        | Agrega una linea divisoria              |
-    | C-c TAB      | Oculta/Expande una columna              |
-    | C-c C-c      | Ajusta las columnas (por si se deforma) |
-    | C-c SPC      | Borra el texto de una celda             |
-    | M-LEFT/RIGHT | Mover columnas (izquierda/derecha)      |
-    | M-UP/DOWN    | Mover filas (arriba/abajo)              |
-
-    + Referencias
-      - [[https://www.gnu.org/software/emacs/manual/html_node/org/Built_002din-table-editor.html][The built-in table editor - gnu.org]]
-      - [[https://orgmode.org/manual/Built_002din-Table-Editor.html][Built-in Table Editor - orgmode.org]]
-      - [[https://orgmode.org/manual/Column-Width-and-Alignment.html][Column width and alignment - orgmode.org]] 
-*** TODO Usando Latex
-**** 1. Instalación
-
-    #+NAME: Instalacion en la terminal
-    #+BEGIN_SRC sh
-      # 1. primero instalar algunos paquetes de latex
-      #
-      # Existe otro textlive-common que instala todo pero esa 2Gb
-      # me pareció innecesario, con esos dos es más que suficiente
-      pacman -S texlive-core texlive-science texlive-latexextra
-
-      # 2. instalar un editor de latex
-      #
-      # Me pareció que es el más sencillo y fácil de usar
-      # la otra alternativa es utilizar spacemacs (pero no es tan completo)
-      pacman -S gummi
-    #+END_SRC
-
-**** 2. Configuración Spacemacs para Latex
-
-     1. En los archivos .org
-
-    #+BEGIN_EXAMPLE
-    Para previsualizar al abrir los archivos .org agregar  #+STARTUP: latexpreview
-    Para que no previsualizar agregar      #+STARTUP: nolatexpreview
-    #+END_EXAMPLE
-   
-    2. En el archivo de configuración de spacemacs
-
-     #+NAME: Configuracion de spacemacs
-     #+BEGIN_SRC emacs-lisp
-       ;; abrir la configuración de spacemacs SPC f e d
-       ;; o sinó SPC f f RET ~/.spacemacs
-
-       ;; Para agrandar el tamaño de la fuente de los preview de latex
-       ;; en los archivos .org que se previsualizan con C-c C-x C-l
-       (plist-put org-format-latex-options :scale 1.5)
-
-       ;; Encontrar una linea que diga dotspacemacs-configuration-layers
-       ;; y agregar el layer latex
-       ;; deberia quedar de la siguiente manera
-       dotspacemacs-configuration-layers
-       '(markdown
-         latex ;; << Agregar esta linea
-         python
-         auto-completion
-         emacs-lisp
-         git
-         helm
-         prolog
-         org
-         treemacs
-         )
-     #+END_SRC
-
-**** 3. Escribir código en org mode y previsualizarlo
-     + Si queremos previsualizar la ecuación ejecutamos *C-c C-x C-l*
-     + Supongamos que estamos en un archivo .org y escribimos algunas formulas que queremos previsualizar 
- 
-    #+NAME: Escribir texto con pequeñas ecuaciones con $
-    #+BEGIN_EXAMPLE
-    Estamos escribiendo una ecuación $1+1=2$ mientras que $1+1=2$
-    #+END_EXAMPLE
-   
-    #+NAME: Escribir una ecuacion enumerada con {equation}
-    #+BEGIN_EXAMPLE
-    \begin{equation}
-    1+1 = 2 
-    \end{equation}
-    #+END_EXAMPLE
-    
-    #+NAME: Escribir bloques con varias ecuaciones con {align}
-    #+BEGIN_EXAMPLE
-    \begin{align}
-    1+1 = 2 \\
-    2+2 = 4 \\
-    3+3 = 6 \\
-    \end{align}
-    #+END_EXAMPLE
-
-    #+NAME: Escribir un bloque con varias ecuaciones enumeradas con {align*}
-    #+BEGIN_EXAMPLE
-    \begin{align*}
-    1+1 = 2 \\
-    2+2 = 4 \\
-    3+3 = 6 \\
-    \end{align*}
-    #+END_EXAMPLE
-    
-**** Referencias
-     - [[https://orgmode.org/manual/Previewing-LaTeX-fragments.html][Previewing latex fragments - orgmode.org]]
-     - [[https://www.gnu.org/software/emacs/manual/html_node/org/Previewing-LaTeX-fragments.html][Previewing latex fragments - gnu.org]]
-     - [[https://www.overleaf.com/learn/latex/Mathematical_expressions][Mathematical expressions - Overleaf]]
-     - [[https://www.overleaf.com/learn/latex/List_of_Greek_letters_and_math_symbols][List of Greek letters and math symbols - Overleaf]]
-     - [[https://www1.cmc.edu/pages/faculty/aaksoy/latex/latexthree.html][Latex Tutorial Math Mode]]
-     - [[https://www.overleaf.com/learn/latex/aligning_equations_with_amsmath][Aligning equations with amsmath]]
-     - [[http://www.tug.org/teTeX/tetex-texmfdist/doc/latex/amsmath/amsldoc.pdf][User's Guide for the amsmath Package]]
-     - [[https://itsfoss.com/latex-editors-linux/][9 Best latex editors for Linux]]
-     - [[https://www.ugr.es/~mmartins/material/latex_basico.pdf][Introducción de Latex]]
-     - [[http://nokyotsu.com/latex/curso.html][Curso básico de Latex]]
-*** Agregando imagenes
-**** Comandos
-**** Redimensionar imagenes
-     
-     #+BEGIN_EXAMPLE 
-       #+ATTR_ORG: :width 400
-       [[file:RUTA_DE_LA_IMAGEN]]
-     #+BEGIN_EXAMPLE
-     
-
-    + Para agregar una imagen ejecuta *C-c C-l* elegis la ruta de la imagen
-      pero no le pongas una descripción, porque sino no hace la vista preliminar
-    + Para ver una vista preliminar ejecuta *C-c C-x C-v*
-    + Para cambiar el tamaño de las imagenes
-
-
-    *Referencias*
-    - [[https://emacs.stackexchange.com/questions/10114/org-mode-no-images-to-display-inline][No images to display inline - Stackexchange.com]]
-    - [[https://ondahostil.wordpress.com/2017/12/26/lo-que-he-aprendido-imagenes-inline-en-org/][imagenes inline en org mode - Blog OndaHostil]]
-*** TODO Utilizando columnas
-    Pendiente a revisar mas..
-    
-    Referencias:
-    - [[https://orgmode.org/worg/org-tutorials/org-column-view-tutorial.html][Org Column Tutorial - orgmode.org]]
-    - [[https://correl.phoenixinquis.net/2014/11/25/getting-organized-with-org-mode.html][Getting organized - By Correl Roush]]
 *** TODO Configuracion para bloques de codigo
 
     **Para abrir el bloque de codigo en un nuevo buffer**
     1. Ejecutar C-c ' o SPC , . para cerrar el buffer SPC , ,
     2. Otra manera si no funciona C-c ' podes probar con C-x n b  
-      para volver a ver el resto del contenido C-x n w
+       para volver a ver el resto del contenido C-x n w
 
     **Para autoindentar el codigo**
     Para auto indentar el codigo correr en ese buffer M-x aggressive-indent-mode 
@@ -565,12 +424,12 @@
     2. Buscar la linea que diga `org-babel-do-load-languages` y agregar
        una linea por cada lenguaje entre parentesis (nombreLenguaje . t)
     3. Si no aparece agregar el siguiente bloque de codigo y modificar a gusto
-        #+BEGIN_SRC emacs-lisp
-        (org-babel-do-load-languages 'org-babel-load-languages
-                              (append org-babel-load-languages
-                               '((python     . t)
-                                 (ruby       . t)))
-        #+END_SRC
+       #+BEGIN_SRC emacs-lisp
+         (org-babel-do-load-languages 'org-babel-load-languages
+                                      (append org-babel-load-languages
+                                              '((python     . t)
+                                                (ruby       . t)))
+       #+END_SRC
     
     Paso a paso:
     1. Para encapsular bloques de codigo empezar con #+BEGIN_SRC seguido de nombre de lenguaje,
@@ -588,7 +447,152 @@
     - [[https://steemit.com/spacemacs/@shark8me/indenting-code-blocks-in-spacemacs-org-mode][Indentar (tabular) codigo (steemit.com)]]
     - [[https://emacs.stackexchange.com/questions/18273/tell-org-to-treat-block-quotes-as-a-special-environment][Modificar bloques de codigo en otro buffer (emacs.stackexchange.com)]]
     - [[https://blog.8bitzen.com/posts/27-02-2019-using-orgmode-babel/][Using orgmode babel (8bitzen)]] 
+*** NUevo - Bloques de codigo
+**** Referencias
+     - [[https://emacs.stackexchange.com/questions/15065/org-mode-babel-interactive-code-block-evaluation][Ingresar datos - Input - Stackoverflow]]
+     - [[https://kitchingroup.cheme.cmu.edu/blog/2019/02/12/Using-results-from-one-code-block-in-another-org-mode/][Ingresar datos, input -]]
 
+*** [TODO] Creando tablas
+
+    |--------------+-----------------------------------------|
+    | Comando      | Descripción                             |
+    |--------------+-----------------------------------------|
+    | C-c -        | Agrega una linea divisoria              |
+    | C-c TAB      | Oculta/Expande una columna              |
+    | C-c C-c      | Ajusta las columnas (por si se deforma) |
+    | C-c SPC      | Borra el texto de una celda             |
+    | M-LEFT/RIGHT | Mover columnas (izquierda/derecha)      |
+    | M-UP/DOWN    | Mover filas (arriba/abajo)              |
+
+    + Referencias
+      - [[https://www.gnu.org/software/emacs/manual/html_node/org/Built_002din-table-editor.html][The built-in table editor - gnu.org]]
+      - [[https://orgmode.org/manual/Built_002din-Table-Editor.html][Built-in Table Editor - orgmode.org]]
+      - [[https://orgmode.org/manual/Column-Width-and-Alignment.html][Column width and alignment - orgmode.org]] 
+*** TODO Usando Latex
+**** 1. Instalación
+
+     #+NAME: Instalacion en la terminal
+     #+BEGIN_SRC sh
+       # 1. primero instalar algunos paquetes de latex
+       #
+       # Existe otro textlive-common que instala todo pero esa 2Gb
+       # me pareció innecesario, con esos dos es más que suficiente
+       pacman -S texlive-core texlive-science texlive-latexextra
+
+       # 2. instalar un editor de latex
+       #
+       # Me pareció que es el más sencillo y fácil de usar
+       # la otra alternativa es utilizar spacemacs (pero no es tan completo)
+       pacman -S gummi
+     #+END_SRC
+
+**** 2. Configuración Spacemacs para Latex
+     
+     1. En los archivos .org
+
+     #+BEGIN_EXAMPLE
+     Para previsualizar al abrir los archivos .org agregar  #+STARTUP: latexpreview
+     Para que no previsualizar agregar      #+STARTUP: nolatexpreview
+     #+END_EXAMPLE
+
+     2. En el archivo de configuración de spacemacs
+
+        #+NAME: Configuracion de spacemacs
+        #+BEGIN_SRC emacs-lisp
+          ;; abrir la configuración de spacemacs SPC f e d
+          ;; o sinó SPC f f RET ~/.spacemacs
+
+          ;; Para agrandar el tamaño de la fuente de los preview de latex
+          ;; en los archivos .org que se previsualizan con C-c C-x C-l
+          (plist-put org-format-latex-options :scale 1.5)
+
+          ;; Encontrar una linea que diga dotspacemacs-configuration-layers
+          ;; y agregar el layer latex
+          ;; deberia quedar de la siguiente manera
+          dotspacemacs-configuration-layers
+          '(markdown
+            latex ;; << Agregar esta linea
+            python
+            auto-completion
+            emacs-lisp
+            git
+            helm
+            prolog
+            org
+            treemacs
+            )
+        #+END_SRC
+
+**** 3. Escribir código en org mode y previsualizarlo
+     + Si queremos previsualizar la ecuación ejecutamos *C-c C-x C-l*
+     + Supongamos que estamos en un archivo .org y escribimos algunas formulas que queremos previsualizar 
+ 
+     #+NAME: Escribir texto con pequeñas ecuaciones con $
+     #+BEGIN_EXAMPLE
+     Estamos escribiendo una ecuación $1+1=2$ mientras que $1+1=2$
+     #+END_EXAMPLE
+
+     #+NAME: Escribir una ecuacion enumerada con {equation}
+     #+BEGIN_EXAMPLE
+     \begin{equation}
+     1+1 = 2 
+     \end{equation}
+     #+END_EXAMPLE
+
+     #+NAME: Escribir bloques con varias ecuaciones con {align}
+     #+BEGIN_EXAMPLE
+     \begin{align}
+     1+1 = 2 \\
+     2+2 = 4 \\
+     3+3 = 6 \\
+     \end{align}
+     #+END_EXAMPLE
+
+     #+NAME: Escribir un bloque con varias ecuaciones enumeradas con {align*}
+     #+BEGIN_EXAMPLE
+     \begin{align*}
+     1+1 = 2 \\
+     2+2 = 4 \\
+     3+3 = 6 \\
+     \end{align*}
+     #+END_EXAMPLE
+
+**** Referencias
+     - [[https://orgmode.org/manual/Previewing-LaTeX-fragments.html][Previewing latex fragments - orgmode.org]]
+     - [[https://www.gnu.org/software/emacs/manual/html_node/org/Previewing-LaTeX-fragments.html][Previewing latex fragments - gnu.org]]
+     - [[https://www.overleaf.com/learn/latex/Mathematical_expressions][Mathematical expressions - Overleaf]]
+     - [[https://www.overleaf.com/learn/latex/List_of_Greek_letters_and_math_symbols][List of Greek letters and math symbols - Overleaf]]
+     - [[https://www1.cmc.edu/pages/faculty/aaksoy/latex/latexthree.html][Latex Tutorial Math Mode]]
+     - [[https://www.overleaf.com/learn/latex/aligning_equations_with_amsmath][Aligning equations with amsmath]]
+     - [[http://www.tug.org/teTeX/tetex-texmfdist/doc/latex/amsmath/amsldoc.pdf][User's Guide for the amsmath Package]]
+     - [[https://itsfoss.com/latex-editors-linux/][9 Best latex editors for Linux]]
+     - [[https://www.ugr.es/~mmartins/material/latex_basico.pdf][Introducción de Latex]]
+     - [[http://nokyotsu.com/latex/curso.html][Curso básico de Latex]]
+*** Agregando imagenes
+**** Comandos
+**** Redimensionar imagenes
+     
+     #+BEGIN_EXAMPLE 
+     #+ATTR_ORG: :width 400
+     [[file:RUTA_DE_LA_IMAGEN]]
+     #+BEGIN_EXAMPLE
+     
+
+     + Para agregar una imagen ejecuta *C-c C-l* elegis la ruta de la imagen
+       pero no le pongas una descripción, porque sino no hace la vista preliminar
+     + Para ver una vista preliminar ejecuta *C-c C-x C-v*
+     + Para cambiar el tamaño de las imagenes
+
+
+     *Referencias*
+     - [[https://emacs.stackexchange.com/questions/10114/org-mode-no-images-to-display-inline][No images to display inline - Stackexchange.com]]
+     - [[https://ondahostil.wordpress.com/2017/12/26/lo-que-he-aprendido-imagenes-inline-en-org/][imagenes inline en org mode - Blog OndaHostil]]
+*** TODO Utilizando columnas
+    Pendiente a revisar mas..
+    
+    Referencias:
+    - [[https://orgmode.org/worg/org-tutorials/org-column-view-tutorial.html][Org Column Tutorial - orgmode.org]]
+    - [[https://correl.phoenixinquis.net/2014/11/25/getting-organized-with-org-mode.html][Getting organized - By Correl Roush]]
 *** Creando presentaciones con beamer
     Errores comunes:
     1. No me aparece la opcion para exportar beamer
@@ -598,7 +602,7 @@
     #+STARTUP: beamer#+STARTUP: beamer
     #+END_SRC
     
-   Referencias:
+    Referencias:
     - https://www.reddit.com/r/emacs/comments/60tmkl/no_latexbeamer_export_available/
     - https://notxor.nueva-actitud.org/blog/2019/04/29/presentaciones-con-org-beamer-mode/
     - https://orgmode.org/worg/exporters/beamer/tutorial.html

@@ -43,16 +43,51 @@
   - https://www.youtube.com/watch?v=jwxK5Eg_TnM
   - https://www.youtube.com/watch?v=OnUiHLYZgaA
     - 
-** Navegador web con vim
+** QuteBrowser - Navegador web con Modo Vim
    Un grandioso navegador web conocido como *qute browser*
+*** Atajos
+    + No es necesario escribir el comando : (dos puntos) para utilizarlos
+    + Para las letras en mayuscula presionar SHIFT+Letra, no funciona con BloqMayus
 
-   | Comando | Descripción                  |
-   | :back   | Volver atras en el historial |
-   | :open   | Abrir una web                |
-
+    |-----------+------------------------------------------------------------------|
+    | Atajo     | Descripción                                                      |
+    |-----------+------------------------------------------------------------------|
+    | i         | Modo Escribir (Insert Mode)                                      |
+    | v         | Modo Lectura (Visual Mode)                                       |
+    | Escribir  | Modo Normal                                                      |
+    |-----------+------------------------------------------------------------------|
+    | :         | Listar todos los comandos                                        |
+    | r         | Recargar página                                                  |
+    | d         | Cierra la pestaña actual                                         |
+    | o         | Buscar algo en el Buscador "DuckDuckGo" en la pestaña actual     |
+    | O         | Buscar algo en el Buscador "DuckDuckGo" en nueva pestaña         |
+    | go        | Abrir una dirección web en la pestaña actual                     |
+    | gC        | Clonar pestaña                                                   |
+    | <Ctrl-Q>  | Salir                                                            |
+    | :q        | Guardar las pestañas abiertas y salir                            |
+    |-----------+------------------------------------------------------------------|
+    | f         | Muestra etiquetas en la pantalla, simula el click con el teclado |
+    | j, k      | Scrollear hacia arriba/abajo                                     |
+    | h, l      | Scrollear hacia izquierda/derecha                                |
+    | H, L      | Moverse por el historial, a la página anterior/siguiente         |
+    | J, K      | Movernos entre las pestañas                                      |
+    | <Alt-Num> | Seleccionar una pestaña                                          |
+    |-----------+------------------------------------------------------------------|
+    | /         | Buscar palabras en la pestaña actual                             |
+    | n         | Siguiente búsqueda                                               |
+    | N         | Anterior búsqueda                                                |
+    | yy        | Copiar url de la pestaña actual                                  |
+    | yt        | Copiar el titulo de la pestaña actual                            |
+    | pp        | Pegar                                                            |
+    |-----------+------------------------------------------------------------------|
+*** Buscador DuckDuckGo
+    Es el buscador por defecto de qutebrowser
+*** Referencias
    - https://qutebrowser.org/doc/help/commands.html
    - https://www.youtube.com/watch?v=nu-YyL7iQC4
    - https://www.youtube.com/watch?v=g2RtjO_jXvY
    - https://laboratoriolinux.es/index.php/-noticias-mundo-linux-/software/26950-la-nueva-version-de-qutebrowser-1-11-0-ya-esta-aqui-un-navegador-al-estilo-vim.html
    - https://draculatheme.com/qutebrowser
    - https://laboratoriolinux.es/index.php/-noticias-mundo-linux-/software/27249-qutebrowser-el-navegador-al-estilo-vim-se-actualiza-a-su-nueva-version-1-12-0.html
+   - https://ubunlog.com/qutebrowser-navegador-estilo-vim/
+   - https://www.xataka.com/basics/duckduckgo-que-principales-diferencias-google

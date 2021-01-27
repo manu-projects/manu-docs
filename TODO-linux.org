@@ -1,4 +1,16 @@
 * Guia Linux
+** Imprimir en la terminal con formato
+   - Se debe usar el comando echo como siempre, pero se le pasa el parámetro -en
+   - Funciona similar al printf() de C
+
+   #+BEGIN_SRC bash :results output
+   echo -en "0 0 0 1\v2\v3\v4\r5 5 5 5\n"
+   #+END_SRC
+
+   #+RESULTS:
+   : 0 0 0 12345 5 5 5
+
+
 ** Multimedia - Musica/Videos/Youtube
 *** Bajar audios/videos de youtube
     + El package *youtube-dl* nos sirve para descargar videos, musica, playlist y contenido de youtube
