@@ -88,6 +88,14 @@
    - https://www.sinologic.net/2011-02/porque-debian-no-centos.html
      
 * Docker
+** Conceptos
+*** Imagen
+    - Es como una plantilla que se usa como modelo para crear *contenedores*
+    - Pueden crearse varios contenedores a partir de una imagen
+    - No se pueden modificar
+*** Contenedor
+    - Se crean a partir de una imagen
+    - Puede ser una aplicación, un sistema operativo, ...
 ** Comandos básicos
    + El parámetro *ps* es como en linux normal, muestra los procesos en ejecución por tanto mostrará los containers activos (en ejecución)
 
@@ -124,98 +132,162 @@
    | docker kill $(docker ps -q)              | Mata el proceso de todos los contenedores en ejecución                  |
    |------------------------------------------+-------------------------------------------------------------------------|
 
-https://hub.docker.com/repository/docker/neverkas/distroalpine
-https://www.digitalocean.com/community/tutorials/como-instalar-y-usar-docker-en-ubuntu-18-04-1-es
-https://www.ionos.es/digitalguide/servidores/configuracion/tutorial-docker-instalacion-y-primeros-pasos/
-https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+   Referencias:
+   1. https://docs.docker.com/engine/reference/commandline/container_prune/
+   2. https://hub.docker.com/repository/docker/neverkas/distroalpine
+   3. https://www.digitalocean.com/community/tutorials/como-instalar-y-usar-docker-en-ubuntu-18-04-1-es
+   4. https://www.ionos.es/digitalguide/servidores/configuracion/tutorial-docker-instalacion-y-primeros-pasos/
+   5. https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+   6. https://linuxize.com/post/how-to-remove-docker-images-containers-volumes-and-networks/
 
 *** Observaciones importantes
     + Si queremos acceder al container (NO CREAR UNO NUEVO) usamos "docker exec -it" (si usamos run se creará otro container)
-    + Siempre se crea un contenedor distinto cuando ejecutas una imagen con docker run -it IdAlgunaImagen
-    + Podemos usar el comando "docker run -it" para crear una nueva imagen, ejemplos.:
-      #+BEGIN_EXAMPLE
-      - Supongamos que tenemos un container de un ubuntu trusty (14.04) que tiene varios packages
+    + Siempre se crea un contenedor distinto cuando ejecutas una imagen con "docker run -it IdAlgunaImagen"
+    + Podemos usar el comando "docker run -it" para crear un nuevo contenedor
+    + Si queremos guardar cambios de un container, debemos versionarlo comiteando y pusheando los cambios
+     
+    #+name: docker-crear-imagen
+    #+BEGIN_EXAMPLE
+      Supongamos que tenemos un container de un ubuntu trusty (14.04) que tiene varios packages
       (Ej. haskell, prolog, git, etc...) y queremos probar un nuevo package o configuración
       como sería instalar mysql, mongodb, etc.. 
-      - Entonces podemos correr el comando "docker run -it" para crear un nuevo container que tiene
+      
+      Entonces podemos correr el comando "docker run -it nombreImagen" para crear un nuevo container que tiene
       lo mismo que al que apuntamos con el ID, si no funciona lo que queriamos instalar o no era
       lo que necesitabamos borramos ese nuevo container y nos quedamos con el anterior
-      #+END_EXAMPLE
-    + Si queremos guardar cambios de un container, debemos versionarlo comiteando y pusheando los cambios
+    #+END_EXAMPLE
 
-*** Eliminar varias imagenes
+*** Eliminar multiples Contenedores
+    #+name: docker-eliminar-contenedores
     #+BEGIN_SRC sh
+      # listamos los contenedores en ejecución, para saber su ID
+      docker container ls
+      # listamos los contenedores inactivos, para saber su ID
+      docker container ls -a
+
+      # para detener todos los contenedores
+      # - el parámetro -aq genera un listado de contenedores
+      docker container stop $(docker container ls -aq)
+
+      # eliminamos uno o varios contenedores por id
+      docker container rm idDeUnContenedor idOtroContenedor
+
+      # eliminamos todos los contenedores detenidos
+      docker container prune
+
+      # eliminamos contenedores por uno o varios criterios
+      # - borrar los que fueron creados hace mas de 12 horas
+      docker container prune --filter "until=12h"
+    #+END_SRC
+    
+    Referencias:
+    1. https://phoenixnap.com/kb/remove-docker-images-containers-networks-volumes
+*** Eliminar multiples imagenes
+     #+name: docker-eliminar-imagenes
+     #+BEGIN_SRC sh
       # listamos las imagenes para revisar el ID
       docker images ls
-
       # suponiendo que son varias imagenes se pueden agrupar en una linea
       docker rmi a23bb4013216 a341b4013200 a24bb422226
-    #+END_SRC 
-
-*** Descargar ó Actualizar un Container
-
+     #+END_SRC 
+        
+*** Descargar ó Actualizar un Contenedor
+    #+name: docker-descargar-actualizar-contenedor
     #+BEGIN_SRC sh
-      # para descargar ó actualizar un container local ya existente
-      docker pull algunContainer
+      # para descargar una imagen ó actualizar un container local ya existente
+      # el tag es opcional
+      docker pull nombreAlgunContainer:tag
 
       # para descargar una versión especifica (a partir de un tag)
       # sino especificamos suele traer la última vesión (latest)
-      docker pull algunContainer:1.10
+
+      # usamos de tag el número de la versión
+      docker pull ubuntu:14.04 # es trusty
+      docker pull debian:10 # es buster
+
+      # usamos de tag el nombre de la versión
+      docker pull ubuntu:trusty # 14.x
+      docker pull debian:buster # 10.x
     #+END_SRC
 
-*** Listar containers activos, inactivos
-     
+*** Listar contenedores activos e inactivos
+    #+name: docker-listar-contenedores 
      #+BEGIN_SRC sh
-       # listar containers en ejecución
-       docker ps
+      # listar containers en ejecución
+      docker ps
+      # -l se refiere a "list"
+      docker ps -l # tiene el mismo resultado que no pasarle el parámetro -l
 
-       # listar últimos containers creados
-       # -a se refiere a "all"
-       docker ps -a
-
-       # listar containers activos/en ejecución
-       # -l se refiere a "list"
-       docker ps -l
+      # lista todos los containers (los inactivos también)
+      # -a se refiere a "all"
+      docker ps -a
      #+END_SRC
        
-*** Acceder ó Iniciar/Detener ejecución de containers
+*** Acceder ó Iniciar/Detener ejecución de contenedores
     + Para iniciar utilizamos *docker start*
     + Para detener usamos *docker stop*
-
+    
+    #+name: docker-iniciar-detener
     #+BEGIN_SRC sh
       # iniciar un container
-      docker start algunContainer
+      # se le puede pasar el nombre, o el ID
+      # docker start nombreContainer
+      # docker start idContainer
+      docker start miUbuntu
 
       # detener un container en ejecución
-      docker stop algunContainer
+      # docker stop nombreContainer
+      # docker stop idContainer
+      docker stop miDebian
 
       # entrar al modo interactivo via terminal
-      docker run -it algunContainer
+      # docker exec -it nombreContainer
+      # docker exec -it idContainer
+      docker exec -it alpine
 
-      # docker run -it algunContainer /bin/sh
-      # docker run -it algunContainer /bin/bash
+      # Según la distribución de Linux puede que la ruta /bin/bash no aparezca
+      # docker exec -it algunContainer /bin/sh
+      # docker exec -it algunContainer /bin/bash
+      docker exec -it ubuntu /bin/bash
     #+END_SRC
 
 *** Versionar containers
      + Suponiendo que ya habiamos creado en la página de *dockerhub* un repositorio llamado *distroalpine*
 
 **** 1. Creamos un tag a nuestro container local
-
+     #+name: docker-crear-tag
      #+BEGIN_SRC sh
-        docker tag a24bb4013296 neverkas/distroalpine:3.12
+       docker tag a24bb4013296 neverkas/distroalpine:3.12
+
+       # los datos que aparecen son
+       # - usuario (dueño) del repositorio: neverkas
+       # - nombre del repositorio: distroalpine
+       # - tag (version en este caso): 3.12
      #+END_SRC
 
 **** 2. Subimos los cambios
-     
+     #+name: docker-push 
      #+BEGIN_SRC sh
-        docker push neverkas/distroalpine:3.12
+       docker push neverkas/distroalpine:3.12
+
+       # los datos que aparecen son
+       # - usuario (dueño) del repositorio: neverkas
+       # - nombre del repositorio: distroalpine
+       # - tag (version en este caso): 3.12
      #+END_SRC
 
 
      docker tag local-image:tagname new-repo:tagname
      docker push new-repo:tagname
 
-** Probando con alpine linux
+** Estados
+   |--------+--------------|
+   | Estado | Descripcion  |
+   |--------+--------------|
+   | exited | Inactivo     |
+   | up     | En ejecución |
+   |--------+--------------|
+** Probando Alpine (Linux)
 
    #+BEGIN_SRC sh
      # https://www.emacswiki.org/emacs/Evil
@@ -253,8 +325,23 @@ https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-regi
      (load-theme 'dracula t)
    #+END_SRC
    
+** Probando Debian (Linux)
+    #+BEGIN_SRC sh
+      # 1. Descargamos el OS Debian
+      # - Si ya lo teniamos lo actualizará
+      # - Seguido de los dos puntos se puede escribir o no una etiqueta/tag
+      # para especificar una distribución ó versión ó característica
+      docker run debian:buster
+
+      # 2. Accedemos al container
+      # - el parámetro "i" hace referencia a "Modo Interactivo"
+      # - el parámetro "t" hace referencia a "tty" una pseudo-terminal
+      # osea interactuar de forma directa con el SO, via terminal y ejecutar instrucciones
+      docker run -it debian:buster /bin/bash
+    #+END_SRC
 ** Referencias
    + [[https://docs.docker.com/develop/develop-images/dockerfile_best-practices/][Best practices for writing Dockerfiles - docs.docker.com]]
+   + https://docs.docker.com/engine/reference/commandline/container_prune/
    + [[https://github.com/rocker-org/rocker/wiki/How-to-save-data][How to save data - github.com/rocker-org]]
    + [[https://www.digitalocean.com/community/tutorials/como-instalar-y-usar-docker-en-ubuntu-18-04-1-es][Como instalar y usar Docker en Ubuntu 18.04 - Digitalocean.com]]
    + [[https://www.ionos.es/digitalguide/servidores/configuracion/tutorial-docker-instalacion-y-primeros-pasos/][Tutorial Docker - Instalación y primeros pasos - Ionos.es]]
@@ -354,10 +441,12 @@ https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-regi
     + [[https://hub.docker.com/_/ubuntu?tab=tags][Ubuntu Tags - hub.docker.com]]
     + [[https://wwu-pi.github.io/tutorials/lectures/lsp/010_install_swi_prolog.html][Installing SWI-Prolog - pi-github.io]]
 ** Instalación
-
-   #+NAME: Instalación y Configuración
+   #+NAME: docker-instalacion-configuracion
    #+BEGIN_SRC sh
+     # en manjaro
      sudo pacman -S docker
+     # en ubuntu
+     apt install docker
 
      # Create the docker group.
      sudo groupadd docker
@@ -365,29 +454,39 @@ https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-regi
      sudo usermod -aG docker ${USER}
      # relogear ò reiniciar
 
-     # verificar si anda
+     # verificamos si anda
+     # descargando la imagen de hello-world
      docker run hello-world
    #+END_SRC
 
-   #+NAME: Versionando Containers
+   #+NAME: docker-versionando-contenedor
    #+BEGIN_SRC sh
-     # para listar imagenes corriendo
+     # para listar los contenedores en ejecución
      docker ps
 
      # para correr o descargar && instalar una version ligera de linux con el tag 3.12
+     # - Si ya teniamos la imagen de la distribución Alpine, se creará un nuevo contenedor
+     # por cada vez que ejecutemos esta linea
      docker run alpine:3.12
+     # podemos asignar un nombre a cada nuevo contenedor
+     # - facilita tener varios contenedores de la misma distribución
+     # - nos evitamos utilizar los ID de los contenedores, y usar solo el nombre
+     docker run --name miLinux alpine:3.12
+
      # iniciar en modo "interactivo" en la terminal al contenedor alpine
-     docker run -it alpine:3.12 sh
+     docker exec -it alpine:3.12 sh
+     # si el contenedor tenia algun nombre
+     docker exec -it miLinux sh
      # para listar archivos de la imagen
      # seguido al nombre del container y del tag, puedo mandarle comandos al container
-     docker run alpine:3.12 ls -l
+     docker exec alpine:3.12 ls -l
 
      # muestra los containers instalados
      docker image ls | head
      # muestra los ultimos comandos de todos los containers (y su hash en la 1ra columna para versionar)
      docker ps -a | head
 
-     # comitear un container (suponiendo que copiaste el hash de ps -a)
+     # comitear un container (suponiendo que copiaste el hash al ejecutar "docker ps -a")
      docker commit elHashDelContainer
      # podemos verlo (copiamos el id)
      docker image ls | head

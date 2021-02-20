@@ -1,3 +1,22 @@
+Repositorio donde trabajo
+https://github.com/neverkas/manu-testing
+
+agregalo como submodulo en este git quizas?
+o hace un listado? pensalo
+
+*Pendiente
+Links o info desde terminal con nvim
+** Python tutoriales
+1. https://pythonexamples.org/python-typeerror-method-takes-0-positional-arguments-but-1-was-given/
+** Unitest con Python y Selenium
+1. https://www.techbeamers.com/selenium-python-test-suite-unittest/
+** Panda
+Pandas parece ser una biblioteca para manejar datos de excels
+y se puede manipular con código
+*** Referencias
+1. https://pythonexamples.org/pandas-dataframe-add-column/
+2. https://www.youtube.com/watch?v=8ASjvOIyyl8
+
 * Testing con Selenium
 *** Instalación
 
@@ -40,11 +59,14 @@
     #+END_SRC
 
 ** Referencias 
+   - [[https://selenium-python.readthedocs.io/][Selenium With Python (Muy completo)]] 
    + https://enmilocalfunciona.io/automatizacion-de-pruebas-con-selenium-y-python/
    + https://linuxhint.com/browser_automation_selenium_python/
    + https://discover.manjaro.org/packages/python-selenium
    + https://github.com/mozilla/geckodriver/releases
 
+   - https://www.geeksforgeeks.org/get_attribute-element-method-selenium-python/
+   - https://selenium-python.readthedocs.io/api.html
    + [[https://stackoverflow.com/questions/1896918/running-unittest-with-typical-test-directory-structure/22244465][Unitest python selenium]]
    + [[https://stackoverflow.com/questions/36202689/selenium-webdriver-get-text-from-input-field?rq=1][Selenium - get_attribute]]
    + [[https://stackoverflow.com/questions/1629053/typing-enter-return-key-using-python-and-selenium][Selenium - Keys Enter]]
@@ -52,3 +74,19 @@
    + [[https://www.youtube.com/watch?v=nDqgZVCbnmI][#1 Spacemacs - Python]]
    + [[https://www.youtube.com/watch?v=r-BHx7VNX5s][#2 Spacemacs - Python]]
    + [[https://www.youtube.com/watch?v=U6sp5dJWFAM][#3 Spacemacs - python, pyenv, pyls, flake8]]
+
+** Issues
+   - http://allselenium.info/file-downloads-python-selenium-webdriver/
+   - https://stackoverflow.com/questions/10629815/how-to-switch-to-new-window-in-selenium-for-python
+   - https://stackoverflow.com/questions/915338/how-can-i-find-the-link-url-by-link-text-with-xpath
+   - https://stackoverflow.com/questions/28431765/open-web-in-new-tab-selenium-python
+   - https://stackoverflow.com/questions/22515012/python-selenium-how-can-i-delete-an-element
+   - https://stackoverflow.com/questions/24852709/how-do-i-automatically-download-files-from-a-pop-up-dialog-using-selenium-python?rq=1
+* Web Scrapping
+** Referencias
+   - https://www.youtube.com/watch?v=0O1SyTh8Zxo
+* XPATH
+** Referencias
+   - http://xpather.com/
+   - https://devhints.io/xpath
+
