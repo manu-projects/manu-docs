@@ -98,7 +98,7 @@
     - Puede ser una aplicación, un sistema operativo, ...
 ** Comandos básicos
    + El parámetro *ps* es como en linux normal, muestra los procesos en ejecución por tanto mostrará los containers activos (en ejecución)
-
+*** Tabla de Comandos 
    |------------------------------------------+-------------------------------------------------------------------------|
    | Comando                                  | Descripción                                                             |
    |------------------------------------------+-------------------------------------------------------------------------|
@@ -139,6 +139,22 @@
    4. https://www.ionos.es/digitalguide/servidores/configuracion/tutorial-docker-instalacion-y-primeros-pasos/
    5. https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
    6. https://linuxize.com/post/how-to-remove-docker-images-containers-volumes-and-networks/
+   7. [[https://platzi.com/blog/desplegar-contenedores-docker/][Desplegar contenedores - platzi.com]]
+   8. [[https://pandorafms.com/blog/es/docker-run/][Docker run - pandorafms.com]]
+
+*** Tabla de parámetros
+    
+    |------------+----------------------------------------------------|
+    | Parametros | Descripción                                        |
+    |------------+----------------------------------------------------|
+    | d          | Correr contenedor en segundo plano                 |
+    | t          | (tty) Asigna una pseudo terminal al proceso        |
+    | i          | (STDIN) Mantiene el buffer de entrada abierto      |
+    | it         | Mantiene el STDIN para la pseudo-terminal          |
+    | p          | Abrir puertos del contenedor                       |
+    | v          | (Volumenes) Compartir directorios en el contenedor |
+    | link       | Enlaza un contenedor con otro                      |
+    |------------+----------------------------------------------------|
 
 *** Observaciones importantes
     + Si queremos acceder al container (NO CREAR UNO NUEVO) usamos "docker exec -it" (si usamos run se creará otro container)
@@ -279,7 +295,20 @@
 
      docker tag local-image:tagname new-repo:tagname
      docker push new-repo:tagname
+*** Correr contenedores en segundo plano
+    - Usamos el parámetro -d
 
+    #+BEGIN_SRC sh
+      # - d: Corre el contenedor en segundo parámetro,
+      # - p puertoHost:puertoContenedor, abre un puerto para el contenedor
+      # (El segundo es el que usa el contenedor, y el primer el que usaremos fuera de docker)
+      # -- name: le asignamos un nombre para usar de referencia
+      docker run -d -p 8000:80 --name miservidor debian:booster
+    #+END_SRC
+*** Abrir Puertos
+    Usamos el parámetro -p
+*** Referencias Web
+    1. [[https://es.linux-console.net/?p=1181][Contenedor en segundo plano - linux-console.com]]
 ** Estados
    |--------+--------------|
    | Estado | Descripcion  |
@@ -493,4 +522,100 @@
      # le asignamos un tag para diferenciar (suponiendo que asdasd123123 es el id)
      docker image tag asdasd123123 miPrimerDocker
    #+END_SRC
+
+* Docker Compose
+** Conceptos
+   - Manejar varios contenedores en un archivo
+   - Se puede combinar con Dockerfile
+** Instalación && Configuración
+   Intenté de instalar con pacman -S docker-compose pero tiraba error por falta de packages
+   Lo instalé mediante pip install docker-compose
+   
+   #+name: docker-compose-ejemplo
+   #+BEGIN_SRC yaml
+     # ES IMPORTANTE LA TABULACION, si no crashea
+     version: "2.1"
+     services:
+       irc:
+         # imagen que usará de base
+         image: inspircd/inspircd-docker
+         # le asignamos un nombre de referencia
+         container_name: irc
+         # puertos que usaremos
+         # puertoHost:puertoContenedor
+         # - puertoHost es el que usaremos en el host, donde corremos docker
+         # - puertoContenedor el que usa la aplicación dentro del contenedor
+         ports:
+           - "6667:6667"
+         # montamos un volumen, con directorios/archivos que apareceran en el contenedor
+         # carpetaDelHost:rutaDelContenedor
+         # - carpetaDelHost, contiene lo que aparecerá en el contenedor
+         # - carpetaDelContenedor, es la carpeta que se creará y aparecerá en el contenedor
+         volumes:
+           - configs:/CONFIGURACIONES/
+         # para configuraciones personalizadas
+         environment:
+           INSPIRCD_SERVER_NAME: "irc.localhost"
+           INSPIRCD_SERVER_DESCRIPTION: "Probando..."
+     # 
+     volumes:
+       configs:
+   #+END_SRC
+** Comandos Básicos 
+   #+name: docker-compose-comandos
+   #+BEGIN_SRC sh
+     # corremos el docker-compose.yml de la ruta actual
+     # up: crea el contenedor y lo ejecuta
+     # -d: lo ejecuta en segundo plano
+     # si no usamos -d, no podremos seguir utilizando la sesión de la terminal
+     docker-compose up -d
+
+     # acceder via terminal
+     # en compose-docker los contenedores son servicios
+     docker-compose exec nombreDelServicio sh
+     # alternativa
+     docker-compose exec nombreDelServicio bash
+
+     # muestra los contenedores (en la ruta actual)
+     docker-composer ps
+   #+END_SRC
+   
+** Referencias Web
+   1. [[https://docs.docker.com/compose/gettingstarted/][Getting Started - docs.docker.com]]
+** Videotutoriales
+   1. [[https://www.youtube.com/watch?v=pxMCpYrnzwM][Todo sobre docker compose - Webinars con Agilia]]
+   2. [[https://www.youtube.com/watch?v=G_-R2dz6T5U][Introduccion a Docker]]
+** Issues Comunes
+   1. [[https://stackoverflow.com/questions/36249744/interactive-shell-using-docker-compose][Interactive Shell - stackoverflow.com]]
+* Servicios Básicos
+  Algunos de los servicios que más utilizo son
+** Nginx
+  para servidor http, similar a apache2 pero con menos configuración
+** Duckdns 
+  - duckdns para enmascarar por asi decir la ip, como no-ip
+*** Referencias
+    - [[https://www.duckdns.org/][Duckdns - Sitio Oficial]]
+    - [[https://hub.docker.com/r/linuxserver/duckdns/][DuckDns - hub.docker.com]]
+** Inspircd
+   para servidor irc
+** Referencias Web
+   1. [[https://github.com/inspircd/inspircd-docker][Inspircd Docker - hub.docker.com]]
+   2. [[https://github.com/inspircd/inspircd-docker][Inspircd - github.com]]
+** Videotutoriales
+   1. [[https://www.youtube.com/watch?v=67f9iptWqt0&t=492s][Host a Deep web IRC Server - youtube.com]]
+* Redes
+** Firewall
+   Usamos ufw como firewall
+*** Referencias
+    1. [[https://esgeeks.com/abrir-cerrar-puertos-linux/][Abrir y cerrar puertos - esgeeks.com]]
+    2. 
+** Pendiente
+  Entender las diferencias.. 
+  Las ip que estas utilizando son
+
+  http://192.168.1.88/ esta es tu maquina local
+  http://172.21.0.2/ es la ip del contenedor docker que tiene el ngnix
+* Proxy Squid y Tor
+ - https://www.youtube.com/watch?v=vj00RVHGxFg
+ - https://www.youtube.com/watch?v=IJ-1Dksex5k
 
