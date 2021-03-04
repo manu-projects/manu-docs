@@ -90,7 +90,7 @@
 * Docker
 ** Conceptos
 *** Imagen
-    - Es como una plantilla que se usa como modelo para crear *contenedores*
+    - Es como una plantilla que se usa de modelo para crear *contenedores*
     - Pueden crearse varios contenedores a partir de una imagen
     - No se pueden modificar
 *** Contenedor
@@ -98,7 +98,9 @@
     - Puede ser una aplicación, un sistema operativo, ...
 ** Comandos básicos
    + El parámetro *ps* es como en linux normal, muestra los procesos en ejecución por tanto mostrará los containers activos (en ejecución)
-*** Tabla de Comandos 
+*** Lista de Comandos
+   
+   #+name: docker-lista-comandos
    |------------------------------------------+-------------------------------------------------------------------------|
    | Comando                                  | Descripción                                                             |
    |------------------------------------------+-------------------------------------------------------------------------|
@@ -142,63 +144,166 @@
    7. [[https://platzi.com/blog/desplegar-contenedores-docker/][Desplegar contenedores - platzi.com]]
    8. [[https://pandorafms.com/blog/es/docker-run/][Docker run - pandorafms.com]]
 
-*** Tabla de parámetros
-    
-    |------------+----------------------------------------------------|
-    | Parametros | Descripción                                        |
-    |------------+----------------------------------------------------|
-    | d          | Correr contenedor en segundo plano                 |
-    | t          | (tty) Asigna una pseudo terminal al proceso        |
-    | i          | (STDIN) Mantiene el buffer de entrada abierto      |
-    | it         | Mantiene el STDIN para la pseudo-terminal          |
-    | p          | Abrir puertos del contenedor                       |
-    | v          | (Volumenes) Compartir directorios en el contenedor |
-    | link       | Enlaza un contenedor con otro                      |
-    |------------+----------------------------------------------------|
+*** Lista de parámetros
+   
+    #+name: docker-lista-parametros
+    |------------+---------------------------------------------------------------|
+    | Parametros | Descripción                                                   |
+    |------------+---------------------------------------------------------------|
+    | d          | Correr contenedor en segundo plano                            |
+    | t          | (tty) Asigna una pseudo terminal al proceso                   |
+    | i          | (STDIN) Mantiene el buffer de entrada abierto                 |
+    | it         | Mantiene el STDIN (buffer de entrada) para la pseudo-terminal |
+    | p          | Abrir puertos del contenedor                                  |
+    | v          | (Volumenes) Compartir directorios en el contenedor            |
+    | link       | Enlaza un contenedor con otro (ideal para servidores web)     |
+    |------------+---------------------------------------------------------------|
 
 *** Observaciones importantes
-    + Si queremos acceder al container (NO CREAR UNO NUEVO) usamos "docker exec -it" (si usamos run se creará otro container)
-    + Siempre se crea un contenedor distinto cuando ejecutas una imagen con "docker run -it IdAlgunaImagen"
-    + Podemos usar el comando "docker run -it" para crear un nuevo contenedor
-    + Si queremos guardar cambios de un container, debemos versionarlo comiteando y pusheando los cambios
+    + Si queremos acceder al container (NO CREAR UNO NUEVO) usamos "docker exec -it IDdeAlgunaImagen bash" (si usamos run se creará un nuevo container)
+    + Siempre se crea un contenedor distinto cuando ejecutas una imagen con "docker run -it IdAlgunaImagen bash"
+    + Podemos usar el comando "docker run -it IDdeAlgunaImagen bash" para crear un nuevo contenedor
+    + Si queremos guardar cambios de un container, podemos versionarlo comiteando y pusheando los cambios en algun repositorio
      
     #+name: docker-crear-imagen
     #+BEGIN_EXAMPLE
-      Supongamos que tenemos un container de un ubuntu trusty (14.04) que tiene varios packages
-      (Ej. haskell, prolog, git, etc...) y queremos probar un nuevo package o configuración
-      como sería instalar mysql, mongodb, etc.. 
+      Supongamos que tenemos un container de un ubuntu trusty (14.04) que ya tiene varios packages porque es el que usamos
+      (Ej. haskell, prolog, git, etc...) pero queremos probar un nuevo package o configuración
+      como sería instalar mysql, mongodb, etc.. sin que se vea afectado el que solemos usar.
+      Osea queremos uno de prueba, que sea idéntico al que usamos, donde instalemos cosas o probemos configuraciones del sistema operativo.
       
       Entonces podemos correr el comando "docker run -it nombreImagen" para crear un nuevo container que tiene
       lo mismo que al que apuntamos con el ID, si no funciona lo que queriamos instalar o no era
       lo que necesitabamos borramos ese nuevo container y nos quedamos con el anterior
+      
+      Observaciones:
+      Si estamos diciendo que esa imagen ya dispone de varios programas que nosotros instalamos,
+      es porque nosotros previamente hicimos un build de una imagen que disponga esos programas.
+      Para más información nos toca investigar sobre Dockerfile.
     #+END_EXAMPLE
 
+*** Crear Contenedores en primer y segundo plano
+    - Para crear contenedores que corran en segundo plano pasamos el parámetro -d al comando *docker run*
+    - Para ejecutar contenedores que corran en segundo plano pasamos el parámetro -d al comando *docker exec*
+
+    #+name: docker-diferencias-primer-segundo-plano
+    #+BEGIN_QUOTE
+    Al crear un contenedor en segundo plano, se ejecutará de fondo (osea por detrás de la terminal)
+    de donde ejecutemos el comando *docker run*, pudiendo seguir utilizando esa terminal donde lo ejecutamos.
+    (particularmente útil para correr servidores linux, base de datos, ....)
+
+    Si no lo creamos en segundo plano, nos aparecerá en la terminal el resultado de ejecutar el contenedor.
+    Si el contenedor era un servidor linux ó una base de datos, el ciclo de ciclo de vida del contenedor finalizará
+    luego de ejecutar el sevidor o la base de datos.
+    Sería como encenderlo, y luego apagarlo, sin poder darle uso. Teniendo que iniciar el contenedor nuevamente.
+
+    Es decir si creamos un contenedor en primer plano (no le pasamos el parámetro -d)
+    que ejecuta un comando ó tarea. Luego que esta tarea/comando se ejecutó, se detendrá la ejecución del contenedor.
+    Por tanto no podremos ejecutar otro comando, a menos que iniciemos el contenedor con el comando *docker start*
+    #+END_QUOTE
+
+    #+name: docker-diferencias-comandos-run-exec
+    #+BEGIN_QUOTE
+    El comando *docker run* crea un contenedor que corra una tarea/comando 
+    El comando *docker exec* ejecuta en un contenedor ya existente una tarea/comando
+
+    Si queremos crear un contenedor que tenga una distribución de linux,
+    y podamos mandarle via terminal a ese linux comandos (ls, ps, ...) 
+    ó acceder al linux con una pseudoterminal (modo interactivo)
+    
+    debemos habilitar en el comando *docker run* el modo de "pseudoterminal" con el parámetro -t (hace referencia a tty)
+    para que luego podamos acceder con *docker exec* a la pseudoterminal de forma interactiva con el parámetro -i -t
+    ó solo enviarle comandos (sin usar -i -t)
+    
+    Si usamos los parámetros -i -t en el comando *docker run*,
+    habilitará la terminal, ejecutará el comando que le pasemos y entrará en el contenedor de manera interactiva
+    #+END_QUOTE
+
+    #+name: docker-crear-contenedor-en-segundo-plano
+    #+BEGIN_SRC sh
+      # Creamos un contenedor con las siguientes características
+      # -El puerto 8000 habilitado, y podamos acceder a ese puerto desde nuestro ordenador desde puerto 80 (se redirecciona)
+      # -Con el nombre "miservidor"
+      # -Que sea un linux con la distribución Debian booster
+      # -Que podamos via terminal mandarles comandos (ls,ps,...), ó también acceder de manera interactiva
+      # -Que se ejecute en segundo plano
+
+      # Parámetros utilizados:
+      # - t: Habilita la pseudoterminal, para enviar comandos o acceder de manera interactiva
+      # - d: Corre el contenedor en segundo parámetro,
+      # -- name: le asignamos un nombre para usar de referencia
+      # - p puertoHost:puertoContenedor, abre un puerto para el contenedor
+      #  (el segundo puerto es el que usa el contenedor, y el primero el que usaremos fuera de docker en nuestro ordenador)
+      docker run --name miservidor -t -d -p 8000:80 debian:booster
+
+      # ejecutamos un comando para listar los directorios de miservidor
+      # sin necesidad de acceder al contenedor de manera interactiva (osea sin los parámetros -t -i)
+      docker exec miservidor ls
+
+      # accedemos al servidor de manera interactiva (parámetro -i) mediante una pseudoterminal (parámetro -t)
+      # Observaciones:
+      # - Según la distribución de linux, puede que en vez de escribir "bash" debas escribir "sh"
+      # - Para salir del contenedor utilizar el comando "exit"
+      docker exec -ti miservidor bash
+    #+END_SRC
+    
+**** Referencias (de Issues)
+     1. [[https://mkyong.com/docker/docker-exec-bash-executable-file-not-found-in-path/][Docker -exec: Executable file not found - mkyong.com/docker]]
+     2. [[https://stackoverflow.com/questions/29599632/docker-container-is-not-running/45270860#45270860][Docker Container is not running - stackoverflow.com]]
+*** Crear Imagenes
+    #+name: docker-crear-imagenes
+    #+BEGIN_QUOTE
+    Podemos crear una imagen de un servidor web que tenga por defecto algunos lenguajes de programación
+    como haskell, php, etc.. Ó que también tenga servicios de base de datos como sql, mysql, mongodb, etc..
+    y a partir de esas imagenes podemos crear contenedores.
+    
+    Tiene como ventaja no tener que configurar manualmente ni tampoco instalar todos los paquetes uno por uno,
+    porque la imagen lo automatiza, y cada nuevo contenedor será idéntico.
+    
+    Además podemos crear contenedores para probar nuevos paquetes, que desconocemos si pueden generar alguna falla
+    con el sistema operativo que tiene el contenedor.
+
+    Por tanto si algo fallara, sólo tendriamos que borrar el contenedor y crear uno nuevo a partir de la imagen base
+    de la que partimos para crear los contenedores.
+    #+END_QUOTE
+
+**** Referencias
+     1. [[https://aulasoftwarelibre.github.io/taller-de-docker/dockerfile/][Crear imágenes propias - aulasoftwarelibre]]
 *** Eliminar multiples Contenedores
     #+name: docker-eliminar-contenedores
     #+BEGIN_SRC sh
-      # listamos los contenedores en ejecución, para saber su ID
+      # listamos los contenedores en ejecución
+      docker ps
+      # otra manera de listar los contenedores en ejecución
       docker container ls
-      # listamos los contenedores inactivos, para saber su ID
+
+      # listamos TODOS los contenedores (también los inactivos)
+      docker ps -a
+      # otra manera de listar TODOS los contenedores
       docker container ls -a
 
       # para detener todos los contenedores
-      # - el parámetro -aq genera un listado de contenedores
+      # - el parámetro -aq genera y devuelve un listado de contenedores
       docker container stop $(docker container ls -aq)
 
       # eliminamos uno o varios contenedores por id
+      # (El id lo podemos conocer cuando listamos los contenedores, es la primera columna)
       docker container rm idDeUnContenedor idOtroContenedor
 
-      # eliminamos todos los contenedores detenidos
+      # eliminamos todos los contenedores inactivos
       docker container prune
 
       # eliminamos contenedores por uno o varios criterios
       # - borrar los que fueron creados hace mas de 12 horas
       docker container prune --filter "until=12h"
     #+END_SRC
-    
-    Referencias:
-    1. https://phoenixnap.com/kb/remove-docker-images-containers-networks-volumes
+  
+**** Referencias 
+    1. [[https://phoenixnap.com/kb/remove-docker-images-containers-networks-volumes][Remove Docker images containers networks volumes - phoenix.com]]
 *** Eliminar multiples imagenes
+    Recordemos que para eliminar contenedores usamos el comando *rm*
+    mientras que para remover imagenes es *rmi*
+
      #+name: docker-eliminar-imagenes
      #+BEGIN_SRC sh
       # listamos las imagenes para revisar el ID
@@ -211,22 +316,22 @@
     #+name: docker-descargar-actualizar-contenedor
     #+BEGIN_SRC sh
       # para descargar una imagen ó actualizar un container local ya existente
-      # el tag es opcional
+      # el uso de tag es opcional
       docker pull nombreAlgunContainer:tag
 
-      # para descargar una versión especifica (a partir de un tag)
-      # sino especificamos suele traer la última vesión (latest)
+      # usamos los tags para descargar ó actualizar a una versión específica
+      # sino especificamos, nos suele traer por defecto la última vesión (latest)
 
       # usamos de tag el número de la versión
-      docker pull ubuntu:14.04 # es trusty
-      docker pull debian:10 # es buster
+      docker pull ubuntu:14.04 # es la distribución trusty de ubuntu
+      docker pull debian:10 # es la distribución buster de debian
 
       # usamos de tag el nombre de la versión
       docker pull ubuntu:trusty # 14.x
       docker pull debian:buster # 10.x
     #+END_SRC
 
-*** Listar contenedores activos e inactivos
+*** Listar contenedores en ejecución e inactivos
     #+name: docker-listar-contenedores 
      #+BEGIN_SRC sh
       # listar containers en ejecución
@@ -240,10 +345,34 @@
      #+END_SRC
        
 *** Acceder ó Iniciar/Detener ejecución de contenedores
-    + Para iniciar utilizamos *docker start*
-    + Para detener usamos *docker stop*
+    - Iniciamos el contenedor ejecutando en la terminal *docker start*
+    - Detenemos la ejecución con *docker stop*
     
-    #+name: docker-iniciar-detener
+    #+name: docker-ejemplo1-iniciar-contenedor
+    #+BEGIN_EXAMPLE
+    Si al crear el contenedor mediante *docker run*
+    no le pasamos el parámetro -it, entonces no podremos acceder por terminal
+    mediante este otro comando *docker exec -it IDdeAlgunContenedor bash*
+
+    Porque el comando *run* como dice su nombre, ejecuta un comando cuando se inicie el contenedor
+    si no le decimos que lo haga con el modo interactivo mediante una pseudoterminal (parámetros -i y -t)
+    tampoco lo hará cuando se lo pasemos al comando *exec*
+    #+END_EXAMPLE
+   
+    #+name: docker-ejemplo2-iniciar-contenedor
+    #+BEGIN_EXAMPLE
+    Usando de referencia el ejemplo1, una vez que salgamos del modo interactivo con la pseudoterminal
+    el contenedor se detendrá, y deberemos de iniciarlo nuevamente. 
+
+    Si no queremos estar iniciando a cada rato el contenedor
+    podemos adicionar el parámetro -d para ejecutarlo en un segundo plano
+    
+    Observación:
+    Tenenemos un apartado que detalle un poco más sobre el parámetro d,
+    esto es solo a modo de aclaración, de que se detendrá el contenedor una vez que salgamos del modo interactivo.
+    #+END_EXAMPLE
+    
+    #+name: docker-iniciar-detener-contenedor
     #+BEGIN_SRC sh
       # iniciar un container
       # se le puede pasar el nombre, o el ID
@@ -259,12 +388,12 @@
       # entrar al modo interactivo via terminal
       # docker exec -it nombreContainer
       # docker exec -it idContainer
-      docker exec -it alpine
+      docker exec -it alpine sh
 
       # Según la distribución de Linux puede que la ruta /bin/bash no aparezca
-      # docker exec -it algunContainer /bin/sh
+      # docker exec -it algunContainer sh
       # docker exec -it algunContainer /bin/bash
-      docker exec -it ubuntu /bin/bash
+      docker exec -it ubuntu bin/bash
     #+END_SRC
 
 *** Versionar containers
@@ -295,16 +424,6 @@
 
      docker tag local-image:tagname new-repo:tagname
      docker push new-repo:tagname
-*** Correr contenedores en segundo plano
-    - Usamos el parámetro -d
-
-    #+BEGIN_SRC sh
-      # - d: Corre el contenedor en segundo parámetro,
-      # - p puertoHost:puertoContenedor, abre un puerto para el contenedor
-      # (El segundo es el que usa el contenedor, y el primer el que usaremos fuera de docker)
-      # -- name: le asignamos un nombre para usar de referencia
-      docker run -d -p 8000:80 --name miservidor debian:booster
-    #+END_SRC
 *** Abrir Puertos
     Usamos el parámetro -p
 *** Referencias Web

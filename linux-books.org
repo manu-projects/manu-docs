@@ -1,0 +1,24 @@
+Este apartado es para separar lo que aprendo por internet
+de lo que aprendo a traves de libros de Linux
+
+* Comandos
+  #+BEGIN_SRC sh
+    # buscamos en el directorio actual
+    # archivos con extensión txt
+    find . '*.txt'
+
+    # guardamos en archivos.txt los nombres de los archivos de texto
+    find . '*.txt' -ls > archivos.txt
+
+    # buscamos y listamos los archivos de formato pdf
+    # que hayan sido modificado entre los ultimos 5 minutos
+    find ~/Descargas '*.pdf' -amin 5 -ls
+
+    # buscamos los archivos de tipo pdf
+    # y los eliminamos
+    # - con {} indicamos que ejecute el comando rm en cada archivo encontrado
+    # -con \ indicamos que no pasaremos parámetros del comando rm
+    find ~/Descargas '*.pdf' -exec rm {} \;
+  #+END_SRC
+* Referencias
+https://unix.stackexchange.com/questions/145313/find-a-file-which-is-30-minutes-old/145317
