@@ -1,0 +1,40 @@
+* Tecnologias
+  1. redis
+  2. nodejs
+  3. javascript (typescript, ecmacsript)
+* GulpJS
+  #+BEGIN_SRC shell
+    # instalamos gulp globalmente
+    npm install gulp-cli -g
+
+    # instalamos gulp localmente, como dependencia de desarrollo
+    npm install gulp -D
+
+    # inicializamos
+    npm init -y
+
+    # instalamos dependencias
+    npm install --save-dev gulp-sourcemaps gulp-concat gulp-terser
+    npm install --save-dev gulp-postcss cssnano autoprefixer
+    npm install --save-dev gulp-sass browser-sync
+
+    # browser-sync para liveserver
+  #+END_SRC
+* Referencias Youtube
+** Javascript
+*** General
+  1. [[https://www.youtube.com/watch?v=CSWnqdhN5vk&ab_channel=4tomik][JS para gente que ya sabe programar]]
+*** GulpJS
+   2. [[https://www.youtube.com/watch?v=ssG5mziTF3E][Gulp 4.0 Tutorial 2020 | Concat & Minify Your CSS and JS]]
+** WebSockets
+   1. [[https://www.youtube.com/watch?v=gzIcGhJC8hA][Scaling Websockets with Redis, HAProxy and Node JS]]
+   2. [[https://www.youtube.com/watch?v=1BfCnjr_Vjg][WebSockets in 100 Seconds & Beyond with Socket.io]]
+** Redis && Node.js
+  1. [[https://www.youtube.com/watch?v=DbWOUste1uo&ab_channel=Aprendeense%C3%B1ando][Caching en Node js usando Redis]]
+  2. [[https://www.youtube.com/watch?v=BhvLIzVL8_o&ab_channel=Fazt][Nodejs Curso Desde Cero, para principiantes]]
+  3. [[https://www.youtube.com/watch?v=RL9mnX0qXhY][Learn how to do caching in NodeJS using Redis]]
+  4. [[https://www.youtube.com/watch?v=V_9b95ecGcU&list=PLTgRMOcmRb3PULeoSKL-fH1WKY3q_wGwv][Build Complex Express Sites with Redis and Socket.io]]
+  5. [[https://www.youtube.com/watch?v=lYQgQFYhcQs][44.- Curso NodeJS - PubSub Redis, Express y SocketIO]]
+  6. [[https://www.youtube.com/watch?v=fLZ3L9MIXAQ&list=PLpOqH6AE0tNjx0SzNvlsP9-JGJ0zmuFnS&ab_channel=codigofacilito][Playlist - Curso Nodejs]]
+** Laravel && Redis && Socket.io
+   1. [[https://www.youtube.com/watch?v=oUOQzx60zYY][Aplicaciones en tiempo real con Laravel, Socket.IO y Redis]]

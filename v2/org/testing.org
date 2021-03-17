@@ -1,0 +1,20 @@
+#+TITLE:     Example of Tasks
+#+AUTHOR:    Fabrice Niessen
+#+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
+#+LANGUAGE:  en
+#+OPTIONS:   H:4 num:2 toc:4
+
+#+SETUPFILE: ../theme-readtheorg.setup
+#+INCLUDE: "archivo.org"
+
+#+BEGIN_SRC bash
+#+END_SRC
+
+* Todos los temas a saber
+  1. Como codear
+  2. [[titulo 1][este titulo si]]
+* titulo 1
+* titulo 2
+** probando
+   un archivo [[file+emacs:archivo.org][probando che]]
+** algo
