@@ -1,6 +1,6 @@
 const gulp = require("gulp");
 const concat = require('gulp-concat'); // agrupa varios archivos en uno solo
-const terser = require('gulp-terser'); // minifica js
+const terser = require('gulp-terser'); // minifica js, alternativa quizas uglify
 const sourcemaps = require('gulp-sourcemaps');
 const postcss = require('gulp-postcss');
 const cssnano = require('cssnano');
@@ -28,12 +28,21 @@ function jsTask() {
         .pipe(dest('dist/assets/js')); // copiamos el archivo a la ruta destino
 }
 
+
 function cssTask() {
     return src(cssPath)
         .pipe(sourcemaps.init())
         .pipe(concat('style.css'))
         .pipe(postcss([cssnano()])) // minificamos la hoja de estilos
         .pipe(sourcemaps.write('.'))
+        .pipe(dest('dist/assets/css'));
+}
+
+function scssTask() {
+    return src(scssPath)
+        .pipe(sourcemaps.init())
+        .pipe(sass().on('error', sass.logError))
+        .pipe(concat('sass-style.css'))
         .pipe(dest('dist/assets/css'));
 }
 
@@ -52,16 +61,19 @@ function browsersyncReload(cb){
 // al observar cambios en los archivos, ejecutará esas tareas
 function watchTask() {
     watch('*.html', browsersyncReload);
-    watch([cssPath, jsPath],{ interval: 1000 }, parallel(cssTask, jsTask));
+    watch([cssPath, scssPath, jsPath],{ interval: 1000 }, parallel(cssTask, scssTask, jsTask, browsersyncReload));
 }
 
+// cualquiera de las tareas que exportamos,
+// se pueden ejecutar por separado en la terminal con: gulp nombreTarea
 exports.copyHtml = copyHtml;
 exports.jsTask = jsTask;
 exports.cssTask = cssTask;
+exports.scssTask = scssTask;
 // usamos parallel para multiples tareas
-// exports.default = parallel(copyHtml, jsTask, cssTask);
 exports.default = series(
-    parallel(copyHtml, jsTask, cssTask),
+    parallel(copyHtml, jsTask, cssTask, scssTask),
+    // parallel(copyHtml, jsTask, mergeCssTask),
     // se quedará la terminal ejecutandose y observando cambios en los archivos
     browsersyncServe,
     watchTask

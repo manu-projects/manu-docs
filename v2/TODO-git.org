@@ -5,6 +5,13 @@
    - Por correcciones de tantos bugs pasaria de v0.1.0 a v0.1.1 ?
    Pagina: [[https://github.com/org-trello/org-trello/blob/master/TODO.org][Org-Trello]]
 ** [TODO] Cuando crear un branch (nuevas caracteristicas)
+   github branches para separar nuevas caracteristicas y para separar resolución de bugs
+   1. https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%C3%A1sicos-para-Ramificar-y-Fusionar
+   2. https://docs.github.com/es/github/collaborating-with-issues-and-pull-requests/about-branches
+   3. https://docs.github.com/es/desktop/contributing-and-collaborating-using-github-desktop/managing-branches
+   4. https://www.genbeta.com/desarrollo/manejo-de-ramas-de-desarrollo-con-git
+   5. https://www.hostinger.es/tutoriales/que-es-github
+   6. https://www.hostinger.es/tutoriales/como-usar-git-branch
 ** [TODO] Cuando crear un tag (para armar releases)
 ** [TODO] Investigar las graficas que se forman
 ** Cuando crear issues

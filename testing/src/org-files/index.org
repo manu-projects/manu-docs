@@ -1,7 +1,6 @@
 #+TITLE:     Example of Tasks
-#+AUTHOR:    Fabrice Niessen
-#+EMAIL:     (concat "fniessen" at-sign "pirilampo.org")
-#+LANGUAGE:  en
+#+AUTHOR:    Jelou
+#+LANGUAGE:  es
 #+OPTIONS:   H:4 num:2 toc:4
 #+SETUPFILE: ./theme-readtheorg.setup
 

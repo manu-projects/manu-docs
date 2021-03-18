@@ -2,30 +2,73 @@
   1. redis
   2. nodejs
   3. javascript (typescript, ecmacsript)
+* Pendiente Revisar
+  1. https://wordpress.stackexchange.com/questions/241466/functions-callback-vs-fallback
+  2. https://github.com/postcss/postcss/blob/main/docs/plugins.md
+  3. https://blog.aulaformativa.com/que-es-postcss/
+  4. https://gist.github.com/sergiojunene/08c316cf80cadec4355688eb7477ce4b#postcss
+  5. https://github.com/thecodercoder/gulp-browsersync/blob/main/gulpfile.js
+  6. https://www.npmjs.com/package/gulp-terser
 * GulpJS
+** Instalacion
   #+BEGIN_SRC shell
     # instalamos gulp globalmente
     npm install gulp-cli -g
-
-    # instalamos gulp localmente, como dependencia de desarrollo
-    npm install gulp -D
+    # -g es igual que --global
 
     # inicializamos
     npm init -y
 
+    # instalamos gulp localmente, como dependencia de desarrollo
+    npm install gulp -D
+    # -D es igual que --save-dev
+
     # instalamos dependencias
-    npm install --save-dev gulp-sourcemaps gulp-concat gulp-terser
-    npm install --save-dev gulp-postcss cssnano autoprefixer
-    npm install --save-dev gulp-sass browser-sync
+    npm install --save-dev gulp-sourcemaps gulp-concat browser-sync
+    npm install --save-dev gulp-terser gulp-postcss cssnano gulp-sass autoprefixer
 
     # browser-sync para liveserver
   #+END_SRC
+** Bibliotecas
+   importantes a buscar:
+   1. gulp-sourcemaps
+   2. webpack-stream mezclado con gulp?
+
+*** Servidor (Live Server)
+    Podemos correr un servidor para ver los cambios en el momento desde un locahost,
+    algunas bibliotecas de fácil manejo son:
+    1. browser-sync
+*** Minificar archivos
+**** Conceptos
+      1. Podemos reducir el código tanto de archivos javascript como css,
+         de esta manera se demora menos segundos en cargar cada uno.
+      2. Para minificar archivos javascript podemos las siguientes bibliotecas
+         - gulp terser
+      3. Para minificar hojas de estilos podemos usar las siguientes bibliotecas
+         - nanocss
+**** Gulp Terser
+     - Es la nueva versión de *uglify*, sirve para ofuscar el código
+     - Minimiza el código con el compatible ES6 (Ecmascript)
+**** Nanocss
+     - Optimiza el tamaño del la hoja de estilos
+*** Concatenar archivos
+    Podemos utilizar la biblioteca **gulp-concat** para agrupar el código
+    de varios archivos en uno solo. Particularmente útil cuando tenemos
+    varios archivos de javascript u hojas de estilos que queremos unificar,
+    colocando en las cabeceras de los html un solo archivo en vez de varios.
+*** otros
+**** Gulp Babel
+     - Este el módulo que usará gulp para convertir el código a ES5 (Ecmascript)
+* Referencias Web
+** Javascript
+*** GulpJS
+    1. https://css-tricks.com/gulp-for-beginners/
 * Referencias Youtube
 ** Javascript
 *** General
   1. [[https://www.youtube.com/watch?v=CSWnqdhN5vk&ab_channel=4tomik][JS para gente que ya sabe programar]]
 *** GulpJS
-   2. [[https://www.youtube.com/watch?v=ssG5mziTF3E][Gulp 4.0 Tutorial 2020 | Concat & Minify Your CSS and JS]]
+   1. [[https://www.youtube.com/watch?v=ssG5mziTF3E][Gulp 4.0 Tutorial 2020 | Concat & Minify Your CSS and JS]]
 ** WebSockets
    1. [[https://www.youtube.com/watch?v=gzIcGhJC8hA][Scaling Websockets with Redis, HAProxy and Node JS]]
    2. [[https://www.youtube.com/watch?v=1BfCnjr_Vjg][WebSockets in 100 Seconds & Beyond with Socket.io]]
