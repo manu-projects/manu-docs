@@ -728,7 +728,7 @@
       # seguido del parámetro -t
       # seguido de la imagen y un tag que especifique la versión (opcional)
       # por último la ruta donde está el Dockerfile, si se deja el punto se refiere a la ruta actual
-      docker build -t nombreImagen:algunTag .
+      docker build -t nombreNuevaImagen:algunTag .
     #+END_SRC
 *** (COPY) Copiar archivos
     - A diferencia del comando *ADD* no descomprime los archivos (Ej. .jar, .gz,..) que quizás no es la intención, 
