@@ -1,4 +1,8 @@
-#+TITLE: Guía de GIT
+#+TITLE:     Guía de GIT
+#+AUTHOR:    Jelou
+#+LANGUAGE:  es
+#+OPTIONS:   H:4 num:2 toc:4
+#+SETUPFILE: ./theme-readtheorg.setup
 
 * Libros
   1. http://dirac.df.uba.ar/_media/progit_v2.1.19.pdf

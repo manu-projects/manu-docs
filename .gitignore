@@ -1,5 +1,7 @@
 nohup.out
 
+node_modules/
+
 # mkdocs
 site/
 
