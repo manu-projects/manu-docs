@@ -3,12 +3,13 @@
   2. nodejs
   3. javascript (typescript, ecmacsript)
 * Pendiente Revisar
-  1. https://wordpress.stackexchange.com/questions/241466/functions-callback-vs-fallback
-  2. https://github.com/postcss/postcss/blob/main/docs/plugins.md
-  3. https://blog.aulaformativa.com/que-es-postcss/
-  4. https://gist.github.com/sergiojunene/08c316cf80cadec4355688eb7477ce4b#postcss
-  5. https://github.com/thecodercoder/gulp-browsersync/blob/main/gulpfile.js
-  6. https://www.npmjs.com/package/gulp-terser
+  1. https://caniuse.com/
+  2. https://gist.github.com/sergiojunene/08c316cf80cadec4355688eb7477ce4b#postcss
+  3. https://wordpress.stackexchange.com/questions/241466/functions-callback-vs-fallback
+  4. https://github.com/postcss/postcss/blob/main/docs/plugins.md
+  5. https://blog.aulaformativa.com/que-es-postcss/
+  6. https://github.com/thecodercoder/gulp-browsersync/blob/main/gulpfile.js
+  7. https://www.npmjs.com/package/gulp-terser
 * GulpJS
 ** Instalacion
   #+BEGIN_SRC shell
@@ -38,7 +39,8 @@
     Podemos correr un servidor para ver los cambios en el momento desde un locahost,
     algunas bibliotecas de fácil manejo son:
     1. browser-sync
-*** Minificar archivos
+    
+*** Minificar y Optimizar archivos
 **** Conceptos
       1. Podemos reducir el código tanto de archivos javascript como css,
          de esta manera se demora menos segundos en cargar cada uno.
@@ -49,8 +51,18 @@
 **** Gulp Terser
      - Es la nueva versión de *uglify*, sirve para ofuscar el código
      - Minimiza el código con el compatible ES6 (Ecmascript)
+**** Autoprefixer
+     - Es uno de los tantos plugins de [[PostCss][PostCss]]
+     - Agrega los [[Prefijos Vendor][prefijos vendor]]  a las propiedades de css
+     
+     Referencias:
+     1. https://github.com/postcss/autoprefixer
 **** Nanocss
+     - Es uno de los tantos plugins de [[PostCss][PostCss]]
      - Optimiza el tamaño del la hoja de estilos
+     
+     *Referencias:*
+     1. https://github.com/cssnano/cssnano
 *** Concatenar archivos
     Podemos utilizar la biblioteca **gulp-concat** para agrupar el código
     de varios archivos en uno solo. Particularmente útil cuando tenemos
@@ -59,6 +71,127 @@
 *** otros
 **** Gulp Babel
      - Este el módulo que usará gulp para convertir el código a ES5 (Ecmascript)
+     
+**** PostCss
+     - Herramienta con cientos de plugins que transforman estilos en css con javascript
+     - Tiene cientos plugins para optimizar y mejoar el uso de las hojas de estilo
+     
+     *Referencias:*
+     1. https://github.com/postcss/postcss
+     2. https://webdesign.tutsplus.com/tutorials/postcss-quickstart-guide-instant-setup-options--cms-24536
+     3. 
+* Glosario
+** Otros
+   1. https://babeljs.io/docs/en/babel-preset-env.html 
+   2. https://webdesign.tutsplus.com/series/the-command-line-for-web-design--cms-777
+** Inversión de Control
+*** Conceptos
+*** Referencias
+    1. https://es.wikipedia.org/wiki/Inversi%C3%B3n_de_control
+** Prefijos Vendor
+*** Conceptos
+    Son prefijos que se anteponen a las propiedades de estilos que aún no están estandarizados,
+    por tanto en algunos navegadores puede no verse de igual forma que en otro. Se recomienda
+    no utilizarlos en un entorno de producción (el que está público listo para usar).
+*** Ejemplos 
+    #+NAME: ejemplo-vendor-prefixies
+    #+BEGIN_SRC css
+    -webkit-transition: all 4s ease; /* google chrome ó safari */
+    -moz-transition: all 4s ease; /* mozilla firefox */
+    -ms-transition: all 4s ease; /* internet explorer */
+    -o-transition: all 4s ease; /* opera */
+    transition: all 4s ease; 
+    #+END_SRC
+   
+*** Referencias
+    1. https://developer.mozilla.org/en-US/docs/Glossary/Vendor_Prefix
+    2. https://www.wextensible.com/articulos/vendor-prefixes/
+    3. https://css-tricks.com/how-to-deal-with-vendor-prefixes/
+** Live Server
+*** Referencias
+    1. https://desarrolloweb.com/articulos/servidor-desarrollo-webpack.html
+** Dependencias (integrar con el otro)
+*** Conceptos
+   Anteriormente se utilizaba una carpeta *vendor* donde se guardaban los archivos javascript, css,
+   y bibliotecas de terceros.
+   Luego con la aparición de *Webpack* se empezó a utilizar un archivo *vendor.js* que contiene
+   todas las dependencias de la aplicación.
+
+   Diferencias con bower ? y al package.json?
+
+*** Referencias
+    1. https://www.it-swarm-es.com/es/javascript/diferencia-entre-grunt-npm-y-bower-package.json-vs-bower.json/1043868077/
+    2. https://platzi.com/blog/que-es-el-vendor-file/
+    3. https://docs.npmjs.com/cli/v7/configuring-npm/package-json
+** Dependencias de Desarrollo (pendiente a mejorar)
+*** Conceptos
+   Existen dependencias para desarrollo conocidas como *devDependencies* y dependencias.
+   Si instalamos un paquete con *npm install nombrePaquete* se instalarán sus dependencias, 
+   es decir los otros paquetes que este necesita.
+   En cambio si usamos *npm install nombrePaquete --save-dev* sólo se instalára ese paquete,
+   sin sus dependencias.
+   
+   #+BEGIN_SRC shell
+     # instalamos gulp localmente en el directorio de la aplicación
+     # y además sus depedencias
+     npm install gulp
+
+     # instalamos solo el paquete gulp-terser
+     # se puede reemplazar --save-dev por -D
+     npm install gulp-terser --save-dev
+
+   #+END_SRC
+   
+*** Referencias
+    1. https://qastack.mx/programming/18875674/whats-the-difference-between-dependencies-devdependencies-and-peerdependencies
+    2. https://qastack.mx/programming/11207638/advantages-of-bundleddependencies-over-normal-dependencies-in-npm?lq=1
+** Integración Continua (pendiente a mejorar)
+*** Conceptos
+   Algunas herramientas son gitlab, travis, jenkins, hudson, circleci, .. entre otros
+   
+   Los conceptos que intervienen son
+   - (CI) es Continuous Integration
+   - (CD) Continuous Delivery ó Entrega Continua
+   - (CD) Continuous Deployment ó Despliegue Continuo
+   
+*** Referencias
+    1. https://www.ionos.es/digitalguide/paginas-web/desarrollo-web/herramientas-de-integracion-continua/
+    2. https://blog.nicopaez.com/2019/01/19/servidores-ci-cd-diferencias-de-modelos-jenkins-vs-circleci/
+    3. https://spa.small-business-tracker.com/beyond-jenkins-7-devops-tools-141275
+    4. https://devopsti.wordpress.com/2014/09/26/integracion-continua-ci-entrega-continua-cd-y-despliegue-continuo-cd/
+    5. https://geeks.ms/jorge/2019/02/25/integracion-entrega-y-despliegue-continuo-diferencias-y-similitudes/
+** Minificación (pendiente a mejorar)
+*** Conceptos
+*** Referencias
+    1. https://docs.microsoft.com/es-es/archive/msdn-magazine/2013/october/cutting-edge-programming-css-bundling-and-minification
+** Transpilado
+*** Conceptos
+*** Referencias
+    1. https://desarrolloweb.com/articulos/transpilado-javascript-webpack.html
+    2. https://desarrolloweb.com/manuales/manual-webpack.html
+** Bundles
+*** Conceptos
+*** Referencias
+    1. https://www.drauta.com/que-son-los-bundles-de-symfony
+    2. http://www.maestrosdelweb.com/curso-symfony2-proyecto-bundles/
+** Assets Web
+*** Conceptos
+    Son las hojas de estilos css, los archivos javascript, las imágenes que se utilizan en el *frontend*
+    de las aplicaciones web, por lo general están en el directorio público de la web.
+*** Ejemplos
+    #+NAME: ejemplo-yii-assets
+    #+BEGIN_EXAMPLE
+    A menudo es preferible gestionar los assets mediante programación.
+    Por ejemplo, cuando se usa el widget yii\jui\DatePicker en una página, 
+    éste incluirá automáticamente los archivos CSS y JavaScript requeridos, 
+    en vez de tener que buscar los archivos e incluirlos manualmente. 
+    Y cuando se actualice el widget a una nueva versión, 
+    ésta usará de forma automática la nueva versión de los archivos asset
+    #+END_EXAMPLE
+*** Referencias
+    1. https://uniwebsidad.com/libros/buenas-practicas-symfony/capitulo-10
+    2. https://www.yiiframework.com/doc/guide/2.0/es/structure-assets
+    3. https://www.tutorialesprogramacionya.com/angularya/detalleconcepto.php?punto=60&codigo=60&inicio=40
 * Referencias Web
 ** Javascript
 *** GulpJS
