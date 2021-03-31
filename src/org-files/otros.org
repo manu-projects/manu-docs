@@ -1,0 +1,218 @@
+* Haskell ecuaciones algebraicas
+  Para hacer ecuaciones algebraicas para trabajos practicos como fisica:
+  1. Podemos usar haskell para realizar los calculos de manera rapida
+  2. Podemos usar latex para visualizar las ecuaciones en formato pdf
+
+  Tips:
+  1. Para usar coseno y seno tenes que pasar los grados a radianes
+  2. Para hacer cuentas en la terminal, manera rapida de tipar las funciones
+    es usar la misma sintaxis que al tipar funciones pero a la izquierda
+    iran las operaciones
+    Prelude> 0.219 / (cos(radianes 58) * 10) :: CReal
+
+  3. Para evitar resultados con notacion cientifica
+     1. Primera solucion:
+     2. Importar en el archivo .hs el modulo Numeric
+     3. Utilizar la siguiente funcion, para parsear los resultados
+        de notacion cientifica
+         showFullPrecision :: Double -> String
+         showFullPrecision x = showFFloat Nothing x ""
+     4. Segunda solucion:
+        1. Agregar la dependencia numbers en package.yaml de stack
+        2. Importar en el archivo .hs el modulo Data.Number.CReal
+        3. Agregar en el tipado de las funciones :: CReal
+  
+  #+NAME: Ecuaciones algebraicas en haskell
+  #+SRC_BEGIN haskell
+   module TpFisicaPunteria where
+   import Data.Number.CReal
+
+   -- Obs: Si no pasas a radianes el sin/cos devuelven otros numeros
+   radianes grados = (grados*2*pi) / 360
+   -- Obs: Si no usas CReal devuelve el numero en notacion cientifica
+  vMax :: CReal
+  vMax = 0.219 / (cos(radianes 58) * 10)
+  #+END_SRC
+
+  Referencias
+  1. https://stackoverflow.com/questions/37006362/haskell-how-to-avoid-scientific-notation-in-decimal-output
+  2. https://www.reddit.com/r/haskell/comments/9v40jp/using_cos_and_sin/
+  3. https://stackoverflow.com/questions/58042134/problem-loading-module-data-number-creal-in-cabal-file
+  4. https://downloads.haskell.org/~ghc/7.8.4/docs/html/users_guide/packages.html
+  5. https://hackage.haskell.org/package/exact-real-0.12.4/docs/Data-CReal.html
+  6. https://stackoverflow.com/questions/17566768/haskell-sine-and-cosine-functions-not-working
+  7. https://xbuba.com/questions/37006362
+  8. http://rigaux.org/language-study/syntax-across-languages-per-language/Haskell.html
+  9. https://hackage.haskell.org/package/ClassyPrelude-0.1/docs/Prelude-Math.html#t:Floating
+* Wallpapers
+  - https://oswallpapers.com/parrot-security-os-4-3-default-desktop-wallpapers/
+* Tinyurls
+  Los que considero por ahora como mejores, porque permiten ponerle un nombre 
+  existen otros como bitly que te genera nombres aleatorios dificiles de recordar.
+  + [[https://tiny.cc/][Tiny.cc]]
+  + [[https://tinyurl.com/][Tinyurl.com]]
+* Latex
+** Referencias
+   - https://wiki.lyx.org/Tips/KeyboardShortcuts
+   - https://wiki.lyx.org/Tips/CommandSequences
+
+** Programas para ecuaciones en latex 
+   Lyxx y texmacs tienen wrty o algo asi (? pero permite que se pueda previsualizar las ecuaciones
+   en el momento que las escribis como si fuera live, en otros suele aparecer el codigo latex 
+   y la previsualización por separado, que quizas no es tan comodo.
+
+*** Programas
+   + Lyxx
+   + TeXmacs
+*** Usando Octave
+**** Ejemplos
+
+     #+NAME: Ejemplo 1 - Función exponencial
+     #+BEGIN_EXAMPLE  octave
+       # estos ejemplos fueron probados en texmacs
+       #
+
+       # definimos el rango de la función de 1 a 25
+       x=(1:25);
+
+       # creamos la función a graficar
+       # el operador potencia debe estar precedido de un punto
+       y=x.^2
+
+       # graficamos
+       # debe tener ese tercer parámetro con punto y coma, si no a veces falla
+       # ese tercer parámetro le agrega una etiqueta para diferenciar
+       plot(x,y,";una funcion;")
+     #+END_EXAMPLE
+
+     #+NAME: Ejemplo 2 - Función intervalo abierto 
+     #+BEGIN_EXAMPLE  octave
+       # estos ejemplos fueron probados en texmacs
+       #
+
+       # definimos el rango de la función de 1 a 25
+       x=[1:25];
+
+       # creamos la función a graficar
+       # el operador potencia debe estar precedido de un punto
+       y=2.*x.*x.^2+3
+
+       # graficamos
+       # debe tener ese tercer parámetro con punto y coma, si no a veces falla
+       # ese tercer parámetro le agrega una etiqueta para diferenciar
+       plot(x,y,";una funcion;")
+     #+END_EXAMPLE
+     
+     #+NAME: Ejemplo 3 - Graficar dos funciones
+     #+BEGIN_EXAMPLE  octave
+       # estos ejemplos fueron probados en texmacs
+       #
+
+       # definimos el rango de la función de 1 a 25
+       x=(1:25);
+
+       # creamos la función "y" a graficar
+       # el operador potencia debe estar precedido de un punto
+       y=x.^2
+
+       # creamos la función "g" a graficar
+       # el operador potencia debe estar precedido de un punto
+       g=5-x.^2
+
+
+       # graficamos
+       # debe tener ese tercer parámetro con punto y coma, si no a veces falla
+       # ese tercer parámetro le agrega una etiqueta para diferenciar
+       plot(x,y,";una funcion;", x, g, ";otra funcion;")
+     #+END_EXAMPLE
+     
+**** Referencias
+     + [[https://www.famaf.unc.edu.ar/~menzaque/0795/2011/notas0310.pdf][Porque usar Octave?]]
+     + [[http://materias.fi.uba.ar/6625/TPs/Tutoriales/Tutorial%20Rapido%20de%20Octave.pdf][Tutorial de Octave - fi.uba.ar]]
+     + [[https://denklab.org/atix/atix15.pdf][Revisa de Software Libre ATIX]]
+     + [[https://www.youtube.com/watch?v=jhTTD3QEYWo][Video #1 - octave-01: Graficación básica en octave]]
+     + [[https://www.youtube.com/watch?v=jW4JDkXHUls][Video #2 - Tutorial para graficar funciones con programa octave]]
+     + https://github.com/texmacs/octave
+     + [[https://en.wikibooks.org/wiki/Octave_Programming_Tutorial/Getting_started][Octave Programming Tutorial/Getting started - wikibooks.org]]
+
+*** Usando Texmacs
+**** Tablas
+    |----------------+---------------+------------------------------------------------|
+    | Atajos Texmacs | Comando LaTeX | Descripción                                    |
+    |----------------+---------------+------------------------------------------------|
+    | @@             |               | Simbolo infinito                               |
+    | P TAB          |               | Simbolo PI                                     |
+    | Alt Shift V    |               | Transforma en vector (agrega el acento flecha) |
+    | * TAB          | \times        | Operador de Multiplicación                     |
+    | S TAB          | \Sigma        | Sigma (sumatoria)                              |
+    | D TAB          | \Delta        | Delta (triangulo)                              |
+    | Alt F          | \frac{m}{n}   | Fracciones                                     |
+    | Alt S          | \sqrt         | Raiz Cuadrada                                  |
+    | Alt $          |               | Texto                                          |
+    | Alt N          |               | Para tachar                                    |
+    |----------------+---------------+------------------------------------------------|
+    | letra TAB      |               | Para cambiar entre las letras griegas          |
+    | <=> <==>       |               | El bicondicional "si solo si"                  |
+    | Alt &          |               | Bloque de ecuaciones                           |
+    | Shift $        |               | Linea de ecuación                              |
+    | /              |               | Para negaciones (Ej. =/ <=/  )                 |
+    |                |               |                                                |
+    | ⇧              |               | Shift                                          |
+    | ⌃              |               | Control                                        |
+    | ⌥              |               | (ALT) Alternate                                |
+    | ⌘              |               | Meta (windows)                                 |
+    | ⌘⌥ò ⇧F7        |               | (TAB) Hyper                                    |
+    |----------------+---------------+------------------------------------------------|
+
+*** Comandos fundamentales
+
+    |-------------+----------------------------------------------|
+    | Comando     | Descripción                                  |
+    |-------------+----------------------------------------------|
+    | \Sigma      | sumatoria                                    |
+    | \Delta      |                                              |
+    | \cos        |                                              |
+    | \sin        |                                              |
+    | \in         | pertenece (un elemento a un conjunto)        |
+    | \nin        | no pertence (n representa a la negación not) |
+    | \exists     | existe                                       |
+    | \forall     | para todo                                    |
+    | \approx     | el operador igual (aproximado)               |
+    |-------------+----------------------------------------------|
+    | \frac{n}{m} | fraccion                                     |
+    | 2_{n}       | subindice                                    |
+    | 2^{n}       | exponente                                    |
+    | \times      | producto                                     |
+    |-------------+----------------------------------------------|
+    | Alt+1       | Titulo                                       |
+    |-------------+----------------------------------------------|
+    | $           | Linea de ecuación                            |
+    | Alt+&       | Bloque de ecuaciones                         |
+    |-------------+----------------------------------------------|
+
+*** Creando indices
+*** Referencias
+    - [[http://es.tldp.org/Presentaciones/200304curso-glisa/texmacs/curso-glisa-texmacs.pdf][Creación de textos científicos con TeXmacs - TLDP.org]]
+    - [[http://www.texmacs.org/tmdoc/main/links/man-toc.es.html][Generar Tabla de Contenido - texmacs.org]]
+    - [[http://www.texmacs.org/tmweb/manual/webman-math.en.html][Mathematical FOrmulas texmacs.org]]
+    - [[http://www.texmacs.org/tmweb/documents/manuals/texmacs-manual.es.pdf][Manual de TeXmacs - texmacs.org]]
+    - [[http://www.texmacs.org/tmdoc/devel/style/keyboard/env.es.html][Macros, Funciones, y variables de entorno - texmacs.org]]
+    - [[http://btocastro.blogspot.com/2011/06/latex.html][Imagenes de los comandos, simbolos de Latex]]
+    - [[https://www.texmacs.org/tmweb/manual/webman-start.en.html][Getting started]]
+    - [[http://mira.um.es/maxima/Introduccion.html][Utilizando MAXIMA (para matemática)]]
+** Programas para graficar
+   + inkscape
+
+**** Referencias
+     + [[http://www.texmacs.org/tmweb/documents/manuals/texmacs-manual.es.pdf][El manual de GNU Texmacs - texmacs.org]]
+** Github
+github Key is already in use
+https://github.com/neverkas/manu-docs/blob/master/TODO-linux.org
+
+https://www.it-swarm.dev/es/git/error-de-github-clave-ya-en-uso/1043769190/
+https://docs.github.com/es/github/authenticating-to-github/error-key-already-in-use
+https://www.sethserver.com/multi-key-github-deployments.html
+https://stackoverflow.com/questions/21160774/github-error-key-already-in-use
+
+https://docs.github.com/es/github/getting-started-with-github/fork-a-repo
+https://www.youtube.com/watch?v=xl3nxfbGkzY

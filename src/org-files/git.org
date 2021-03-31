@@ -1,0 +1,18 @@
+* [TODO] [#A] Guia de git [0%]
+** [TODO] Como manejarse con los tags y las versiones
+   Algunas preguntas que se me ocurren
+   - Deberia hacer una lista de nuevas caracteristicas/funcionalidades por cada version?
+   - Por correcciones de tantos bugs pasaria de v0.1.0 a v0.1.1 ?
+   Pagina: [[https://github.com/org-trello/org-trello/blob/master/TODO.org][Org-Trello]]
+** [TODO] Cuando crear un branch (nuevas caracteristicas)
+   github branches para separar nuevas caracteristicas y para separar resolución de bugs
+   1. https://docs.github.com/es/github/collaborating-with-issues-and-pull-requests/about-branches
+   2. https://docs.github.com/es/desktop/contributing-and-collaborating-using-github-desktop/managing-branches
+   3. https://www.genbeta.com/desarrollo/manejo-de-ramas-de-desarrollo-con-git
+   4. https://www.hostinger.es/tutoriales/que-es-github
+   5. https://www.hostinger.es/tutoriales/como-usar-git-branch
+** [TODO] Cuando crear un tag (para armar releases)
+** [TODO] Investigar las graficas que se forman
+** Cuando crear issues
+** Cuando crear pull request
+** Utilidad de crear plantillas en los pull request (como hacen las entregas de tp en pdep)

@@ -1,0 +1,7 @@
+pone todo lo que tengas en los correos,
+de octave, matlab, gnuplot
+con los ejemplos, documentación, ejemplos,..
+
+create un repositorio exclusivo para eso,
+y agregalo como submodulo en este git quizas?
+o hace un listado? pensalo

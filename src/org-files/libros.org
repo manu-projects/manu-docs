@@ -1,0 +1,67 @@
+#+TITLE: Libros de Formación
+
+Blogs y Libros interesantes para mejorar mi formación académica
+
+* Otros 
+
+* Programación
+* Blogs
+  - https://devexperto.com/principio-responsabilidad-unica
+* Youtube
+** Modelado
+  - [[https://www.youtube.com/watch?v=y3MWfPDmVqo][Javascript Kata - Clean Code y Buenas practicas]]
+  - [[https://www.youtube.com/watch?v=y3MWfPDmVqo][Codigo Limpio- El arte de construir software]]
+  - [[https://www.youtube.com/watch?v=y3MWfPDmVqo][Refactor de Code Smells - Clean Code]]
+  - [[https://www.youtube.com/watch?v=y3MWfPDmVqo][Refactoring Tips - De codigo a Codigo Limpio]]
+  - [[https://www.youtube.com/watch?v=y3MWfPDmVqo][Solid #1 - Principio de INversion de Dependencias]]
+  - [[https://www.youtube.com/watch?v=y3MWfPDmVqo][Solid #2 - Errores comunes al diseñar interfaces]]
+  - [[https://www.youtube.com/watch?v=y3MWfPDmVqo][Clean Architecture - Uncle bob]]
+  - [[https://www.youtube.com/watch?v=y3MWfPDmVqo][Arquitectura Hexagonal #1 - DDD]]
+  - [[https://www.youtube.com/watch?v=y3MWfPDmVqo][Arquitectura Hexagonal #2 - DDD - Domain DRive Design]]
+
+** Especificación y Requisitos
+*** UCAM - Universidad Catolica de Murcia
+   - [[https://www.youtube.com/watch?v=AbwwtjOfJIY][Ingenieria de Requisitos - Conceptos Basicos]]
+   - [[https://www.youtube.com/watch?v=gagdT0gJyqA][Especificacion de REquisitos]]
+
+*** Otros
+    - https://www.youtube.com/watch?v=4q2yBHjceLQ
+    - https://www.youtube.com/watch?v=19sxPKlH2eo
+    - https://www.youtube.com/watch?v=nH4l2NfEesU
+** Historias de Usuario - User Stories
+*** Conceptos
+*** Referencias
+    - [[https://www.youtube.com/watch?v=txOLx58sT5g][User Story mapping - cris rua]]
+    - [[https://www.youtube.com/watch?v=FJuq_lrM5Cc][Historias de Usuario - Jorge Ruiz Agile]]
+    - [[https://www.youtube.com/watch?v=ky6wFiF5vMk][Como crear historias de usuario -  Cris Rua]]
+    - [[https://www.youtube.com/watch?v=Ueq786iZ30I][Como dividir las historias de usuario  en tareas - Cris rua]]
+    - [[https://www.youtube.com/watch?v=PEaqUlwyDS4][Ing. de requisitos - UPM]]
+    - https://www.youtube.com/watch?v=FJuq_lrM5Cc
+    - https://www.youtube.com/watch?v=Zi9E1aUO_1U
+** Impact Mapping
+   - [[https://www.youtube.com/watch?v=dt-EIN8dBbY][Impact mapping - Como iniciar un proyecto - Cris rua]]
+ 
+  |--------------+---|
+  | Tipo de Meta |   |
+  |--------------+---|
+  | (S)pecific   |   |
+  | (M)easurable |   |
+  | (A)lcanzable |   |
+  | (R)elevant   |   |
+  | (T)emporal   |   |
+  |--------------+---|
+
+** Puntos de Historia
+   - [[https://www.youtube.com/watch?v=4I6F0nSCdmE][Puntos de Historia Vs horas - Cris Rua]]
+   - [[https://www.youtube.com/watch?v=O-D22kLYi2M][Estimacion de puntos de historia - Cris rua]]
+   - [[https://www.youtube.com/watch?v=ey6Pm46WXkY][Scrum Poker - Estimacion y Planeación del Scrum - Cris rua]]
+** Product Backlog
+*** Mejores
+   - https://www.youtube.com/watch?v=JuIVHk1wvcw
+   - 
+
+** Burndown Chart - Grafica de scrum
+   - [[https://www.youtube.com/watch?v=_7NJpxMT54U][Burndown chart - Cris Rua]]
+** Requesitos Funciones y NO funcionales
+** Usando Jira con Scrum
+   - [[https://www.youtube.com/watch?v=t4w8E2dKtQ8][COmo usar Kanban - Cris Rua]] 
