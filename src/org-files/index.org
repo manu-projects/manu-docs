@@ -6,7 +6,7 @@
 
  #+NAME: mover-html
  #+BEGIN_SRC elisp :exports none :results none
-   (shell-command-to-string "mv *.html ../") ;; cuidado..!
+   (shell-command-to-string "mv *.html ../views") ;; cuidado..!
  #+END_SRC
 
  #+NAME: exportar-org-files-html
