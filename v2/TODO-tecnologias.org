@@ -1,8 +1,0 @@
-* Nuevas tecnologias 
-** Mermaidjs
-   Para hacer graficos (Diagramas de flujo, gantt, etc..)
-   https://mermaid-js.github.io/mermaid/#/flowchart
-   https://mermaid-js.github.io/mermaid-live-editor
-** Hacer graficos 
-   Referencias:
-   - https://www.gnu.org/software/octave/
