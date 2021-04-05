@@ -54,7 +54,6 @@
 **** Autoprefixer
      - Es uno de los tantos plugins de [[PostCss][PostCss]]
      - Agrega los [[Prefijos Vendor][prefijos vendor]]  a las propiedades de css
-     
      Referencias:
      1. https://github.com/postcss/autoprefixer
 **** Nanocss
@@ -71,7 +70,6 @@
 *** otros
 **** Gulp Babel
      - Este el módulo que usará gulp para convertir el código a ES5 (Ecmascript)
-     
 **** PostCss
      - Herramienta con cientos de plugins que transforman estilos en css con javascript
      - Tiene cientos plugins para optimizar y mejoar el uso de las hojas de estilo
@@ -153,7 +151,6 @@
    - (CI) es Continuous Integration
    - (CD) Continuous Delivery ó Entrega Continua
    - (CD) Continuous Deployment ó Despliegue Continuo
-   
 *** Referencias
     1. https://www.ionos.es/digitalguide/paginas-web/desarrollo-web/herramientas-de-integracion-continua/
     2. https://blog.nicopaez.com/2019/01/19/servidores-ci-cd-diferencias-de-modelos-jenkins-vs-circleci/

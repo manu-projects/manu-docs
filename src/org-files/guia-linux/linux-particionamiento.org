@@ -1,0 +1,157 @@
+#+TITLE:     Guia Linux - Conceptos Particionamiento
+#+SETUPFILE: ../theme-readtheorg.setup
+#+EXPORT_FILE_NAME: ../../views/guia-linux/linux-particionamiento.html
+
+* Particionar Disco
+** Partición para Almacenamiento
+   Creamos una partición primaria del tipo NTFS y le asignamos los permisos al usuario
+   Con el comando ``id -u -n`` obtenemos el nombre de usuario, mientras que con ``chown`` 
+   le damos acceso a un usuario especifico a un directorio/archivo
+
+   #+NAME: linux-particionar-almacenamiento
+   #+BEGIN_SRC shell
+     # para saber el nombre de usuario
+     id -u -n
+
+     # para asignarle los permisos de ese usuario
+     sudo chown nombreUsuario /storage/
+   #+END_SRC
+** Listar las particiones
+   Podemos usar el comando ``lsblk`` o ``fdisk``
+
+   #+NAME: linux-listar-particiones
+   #+BEGIN_SRC shell
+     # listar particiones (no pide permisos administrador)
+     lsblk
+
+     # listar particiones (pide permisos administrador)
+     sudo fdisk -l /dev/sda
+   #+END_SRC
+** Montar la particion de Almacenamiento NTFS
+   Si la partición va interactuar entre Windows y Linux, se recomienda que sea NTFS.
+   Si sólo va a ser entre distribuciones Linux, se recomienda Ext4
+
+   Destacamos un comentario de otro usuario linux 
+
+   #+BEGIN_QUOTE
+   A good practice for some static mounted storage system like you are doing is 
+   to add a permanent mount point to /etc/fstab.
+   There are several ways to do it, but I just wanted you to be aware.
+   #+END_QUOTE
+*** Crear directorio de almacenamiento a compartir
+    Recordando que la ruta */* es la raiz y *mnt* el directorio que se 
+    se suele utilizar por defecto para acceder desde los demas distribuciones
+
+    Tambien que con el comando ``mkdir`` seguido del parametro *-p* nos facilita
+    un directorio A con subdirectorio B (dentro del directorio A)
+
+   #+NAME: linux-crear-directorio
+   #+BEGIN_SRC shell
+     # Creamos el directorio mnt y dentro mystorage
+     sudo mkdir -p /mnt/mystorage
+   #+END_SRC
+*** Montar la partición del directorio
+    - Con ``id -u`` nos permite obtener el nombre de usuario que esta en la sesion actual de la terminal
+    - Los parametros del comando ``mount``
+      1. **-uid** le pasamos el usuario que nos devuelve ``id -u``
+      2. **dmask** 
+      3. **fmask**
+      4. **/dev/sda10** es la particion de almacenamiento
+
+   #+NAME: linux-montar-particion
+   #+BEGIN_SRC shell
+     # nos devuelve el id del usuario con el que iniciamos la sesion
+     id -u
+
+     # solo cambiamos el 1001 por lo que nos devuelve id -u
+     sudo mount -o rw,user,uid=1001,dmask=007,fmask=117 /dev/sda10 /mnt/mystorage
+
+     #sudo mount -t ntfs -o ro /dev/sda10 /mnt/mystorage
+   #+END_SRC
+** Anclar un directorio al Gestor de archivos
+   El File manager por defecto de Ubuntu es Nautilus
+
+   #+NAME: linux-anclar-directorio-filemanager
+   #+BEGIN_SRC shell
+     # presionar Control+D
+     cd /mnt/mystorage
+   #+END_SRC
+** Referencias Web Extraoficiales
+   - [Referencia #2 - Ver Pagina](https://linuxconfig.org/how-to-mount-partition-with-ntfs-file-system-and-read-write-access)
+   - [Referencia #3 - Ver Página](https://askubuntu.com/questions/11840/how-do-i-use-chmod-on-an-ntfs-or-fat32-partition/956072#956072)
+   - [Agregar carpetas al Nautilus - Ver Página](https://askubuntu.com/questions/1109247/how-do-i-add-folder-to-ubuntu-18-04-1-nautilus-bookmark-list)
+   - [Opciones de Montaje - Ver Pagina (it-swarm.dev)](https://www.it-swarm.dev/es/mount/opciones-de-montaje-dmask-y-fmask/961637140/)
+** Referencias Youtube
+   - [Referencia #1 - Ver Video](https://www.youtube.com/watch?v=mPDhoYNao1o)
+   - [Referencia #4 - Ver Video](https://www.youtube.com/watch?v=hIq1dIgZrOc)
+   - [Referencia #5 - Ver Video](https://www.youtube.com/watch?v=ZlIbGnvTEDI) 
+   - [Particiones primarias/logicas/extendidas - Ver Video](https://www.youtube.com/watch?v=CSbUiK2pytE)
+   - [Recuperar Tabla de Particiones - Ver Video](https://www.youtube.com/watch?v=I1-0cpPO3e8)
+   - [Redimensionar Particiones en Ubuntu - Ver Video](https://www.youtube.com/watch?v=EQMWKwvsltY)
+   - [Redimensionar particiones - Ver Videos](https://www.youtube.com/watch?v=OSkK_lgSCzk)
+   - [Particionar disco duro en Ubuntu - Ver Video](https://www.youtube.com/watch?v=xuYhjtpWZuc)
+* Bootear Multiples Sistemas Operativos
+** Conceptos
+  Si tenes un sistema operativo por defecto por ejemplo Windows, y lo queres mantener
+  podemos recurrir a como dicen "bootear" varios sistemas operativos, en este caso seria 
+  varias distribuciones de linux.
+
+  Por lo general se suele crear un GRUB el que se ira modificando
+
+  Comentarios a destacar de uno de los artículos de las referencias que hemos agregado
+  
+  #+BEGIN_QUOTE
+  I install Ubuntu GNOME (mount point: / ) into /dev/sda5.
+  I remember to give mount points to /work (ext4) and /storage (NTFS) like mentioned 
+  in the 2.3 section of this article. Be careful not to mark them as to be formatted.
+  The Swap partition gets automatically recognized, no need to worry about that.
+  #+END_QUOTE
+
+  #+BEGIN_QUOTE
+  I install Manjaro XFCE to /dev/sda6 partition. And once again, 
+  I remember to give mount points to /work (ext4) and /storage (NTFS) and to NOT format them.
+  #+END_QUOTE
+
+  #+BEGIN_QUOTE
+  I install Kubuntu ( / ) to /dev/sda8. Mount points also to /work (ext4) 
+  and /storage (NTFS), again. And, the Swap partition gets automatically recognized, again.
+  And finally, after installation is successfully finished, one last time to install the 
+
+  Refind boot manager in Terminal in Xubuntu:
+  sudo dpkg -i ~/Downloads/refind_0.10.4-1_amd64.deb
+  #+END_QUOTE
+
+  *Observación:*
+  Por el momento sólo recomendamos ver las referencias Web que adjuntamos
+** Conocer versión del GRUB
+   #+NAME: grub-version
+   #+BEGIN_SRC shell
+     # saber la version de grub
+     grub-install -v
+   #+END_SRC
+** Referencias Web Extraoficiales
+   - [Referencia #1 - Ver Página](https://medium.com/@manujarvinen/setting-up-a-multi-boot-of-5-linux-distributions-ca1fcf8d502)
+   - [Referencia # 2 - Ver Página](https://www.maketecheasier.com/how-to-run-multiple-linux-distros-without-virtualization/)
+   - [MultipleLInuxONe - Ver Página](https://itsfoss.com/multiple-linux-one-usb/)
+   - [Referencia #3 - Ver Página](https://www.solvetic.com/tutoriales/article/5859-como-crear-usb-booteable-linux-con-iso/)
+   - [Referencia #4 - Ver Página](https://linuxmint-installation-guide.readthedocs.io/es/latest/burn.html)
+* Particionar con GParted
+** Conceptos
+   Es el que se recomienda para particionar el disco
+** Referencias Web Oficiales
+   - [Pagina Oficial - Ver Página](https://gparted.org/download.php)
+** Referencias Youtube
+   - [Redimensionar con Gparted en Ubuntu - Ver Video](https://www.youtube.com/watch?v=PBHFud-Dva8)
+* Instalar un file manager
+** Conceptos
+  Si aún no estás familiarizado a usar por completo la terminal para la gestión de archivos,
+  te sugerimos instalar un programa con interfaz gráfica (GUI) que facilita dicha tarea.
+
+   #+NAME: linux-instalar-filemanager
+   #+BEGIN_SRC shell
+     sudo apt-get install thunar
+   #+END_SRC
+** Referencias Youtube
+   - Como funciona el Filesystem de Linux - # Referencia 1  [Ver Video](https://www.youtube.com/watch?v=HIXzJ3Rz9po)
+   - Como funciona el Filesystem de Linux - # Referencia 1  [Ver Video](https://www.youtube.com/watch?v=HbgzrKJvDRw)
+

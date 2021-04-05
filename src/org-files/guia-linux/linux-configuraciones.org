@@ -1,0 +1,24 @@
+#+TITLE:     Guia Linux - Configuraciones
+#+SETUPFILE: ../theme-readtheorg.setup
+#+EXPORT_FILE_NAME: ../../views/guia-linux/linux-configuraciones.html
+
+* Crear un Alias
+  Los **alias** nos permiten ejecutar comandos con un nombre personalizado.
+  Puede darse que querramos ejecutar un programa con varios parámetros, con
+  solo escribir en la terminal una palabra, que sería más fácil de recordar.
+
+  #+NAME: linux-editar-bashrc
+  #+BEGIN_SRC shell
+    sudo nano ~/.bashrc # accedemos al archivo .bashrc para modificar
+  #+END_SRC
+
+  Suponiendo que estamos en el editor modificando el archivo *.bashrc*
+
+  #+NAME: bashrc-agregar-alias
+  #+BEGIN_SRC bash
+    # creamos el alias 'emacs' cada vez que se ejecute en la terminal
+    # en realidad ejecutará el comando 'emacs -nw' es decir con ese otro parámetro
+    alias emacs = 'emacs -nw'
+  #+END_SRC
+* Referencias
+  - Como crear referencias [Ver Página](https://vitux.com/how-to-create-aliases-for-customizing-commands-in-ubuntu/)

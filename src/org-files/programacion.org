@@ -1,9 +1,11 @@
+#+BEGIN_COMMENT
 Mirando ahora
  - https://www.youtube.com/watch?v=RCVNMRcefUk&list=PLw8RQJQ8K1ySN6bVHYEpDoh-CKVkL_uOF&index=27
  - https://www.youtube.com/watch?v=QV_6_aKH9G8
  - https://www.youtube.com/watch?v=7g1YmOXsCCU
  - https://www.youtube.com/watch?v=4fc-QRl8_QQ
  - https://www.youtube.com/watch?v=w_P3rE73Hk8
+#+END_COMMENT
 
 * Depurar Código (Debugging)
 ** (GCC) GNU Compiler Collection

@@ -1,0 +1,137 @@
+#+TITLE:     Guia Linux - Gestores de Paquetes
+#+SETUPFILE: ../theme-readtheorg.setup
+#+EXPORT_FILE_NAME: ../../views/guia-linux/linux-gestores-de-paquetes.html
+
+* Pacman
+** Comandos Basicos
+   #+NAME: pacman-comandos-basicos
+   #+BEGIN_SRC shell
+     # Install a package(s)
+     pacman -S
+
+     # Remove a package(s)
+     pacman -Rs
+
+     # Search for package(s
+     pacman -Ss
+
+     # Upgrade Packages
+     pacman -Syu
+   #+END_SRC
+** Instalar paquetes y evitar confirmar la instalación 
+   #+NAME: pacman-instalar-paquetes
+   #+BEGIN_SRC shell
+     pacman -S --noconfirm apache
+
+     # otra alternativa seria la siguiente
+     # yes | pacman -S apache
+   #+END_SRC
+** AUR Helpers
+*** AURMAN
+**** Instalación
+     Para instalar ingresar lo siguiente en la terminal
+
+     #+NAME: pacman-instalar-aurman
+     #+BEGIN_SRC shell
+     git clone https://aur.archlinux.org/aurman.git
+     cd aurman && makepkg -si
+     #+END_SRC
+**** Buscar Paquetes
+     #+NAME: aurman-buscar-paquetes
+     #+BEGIN_SRC shell
+     aurman -Ss nombre_paquete
+     #+END_SRC
+**** Instalar Paquetes
+     #+NAME: aurman-instalar-paquetes
+     #+BEGIN_SRC shell
+     aurman -S nombre_paquete
+     #+END_SRC
+**** Problemas frecuentes     
+     Si al intentar compilar con *makepkg -si* y nos lanza el siguiente error,
+     debemos copiar la *clave pública desconocida* que nos aparece.
+     Luego la importarmos con *gpg --recv-key* (que la descagará del servidor que tengamos
+     por defecto), si queremos especificar de que servidor agregamos el parámetro *-keyserver*
+     seguido de la ruta del servidor
+
+     *Posible Problema:*
+
+     #+NAME: aurman-error
+     #+BEGIN_EXAMPLE
+     ==> Validando los archivos source con md5sums...
+     aurman_sources ... Omitido
+     ==> Verificando las firmas de las fuentes con gpg...
+     aurman_sources git repo ... HA FALLADO (clave pública desconocida 465022E743D71E39)
+     ==> ERROR: ¡No se ha podido verificar alguna de las firmas PGP!
+     #+END_EXAMPLE
+
+     *Posible Solucion:*
+
+     #+NAME: aurman-error-solucion
+     #+BEGIN_SRC shell
+       # importamos la clave
+       #
+       # Observación:
+       # Si se omite el parámetro -keyserver, usará el servidor que tengamos por defecto
+       gpg --recv-key CLAVE_PUBLICA_ERROR
+
+       # Intentamos compilar nuevamente
+       makepkg -si
+     #+END_SRC
+**** Referencias Web Oficiales
+   - https://wiki.archlinux.org/index.php/GnuPG_(Espa%C3%B1ol)
+   - https://wiki.archlinux.org/index.php/AUR_helpers_(Espa%C3%B1ol)
+**** Referencias Web Extraoficiales
+   - https://www.fossmint.com/best-aur-helpers-for-arch-linux/
+   - https://denovatoanovato.net/gestores-de-paquetes-aur-helpers-archlinux/
+   - https://blog.desdelinux.net/yay-una-excelente-ayudante-para-aur-y-una-alternativa-a-yaourt/
+   - https://www.evaristogz.com/crear-publicar-firmar-claves-gpg-pgp/
+   - https://www.genbeta.com/desarrollo/manual-de-gpg-cifra-y-envia-datos-de-forma-segura
+   - [Problemas al instalar Aurman (forum.manjaro.org)](https://forum.manjaro.org/t/aur-package-fails-to-verify-pgp-gpg-key-unknown-public-key-one-or-more-pgp-signatures-could-not-be-verified/42687)
+   - [Alternativas para reemplazar yaourt (linuxadictos.com)](https://www.linuxadictos.com/las-mejores-alternativas-para-reemplazar-yaourt-en-arch-linux.html)
+   - [Yaourt esta deprecado en Arch Linux (maslinux.net)](https://maslinux.es/yaourt-esta-muerto-utiliza-estas-alternativas-para-aur-en-arch-linux/)
+** Posibles errores
+*** Permisos para instalar paquetes
+    *Problema:*
+    #+BEGIN_EXAMPLE
+    fdisk: cannot open /dev/sda: Permission denied
+    #+END_EXAMPLE
+
+    *Solución:*
+    Escribir en la terminal *su* presionar Enter, y escribir la password
+*** No funciona Pacstrap
+    Esto puede suceder en el proceso de instalación de *arch linux*
+
+    *Problema:*
+    #+BEGIN_EXAMPLE
+    [root@archlinux vagrant]# pacstrap
+    bash: pacstrap: command not found
+    #+END_EXAMPLE
+
+    **Solución:**
+    #+NAME: 
+    #+BEGIN_SRC shell
+     # instalamos pkgfile
+     yes | pacman -S pkgfile
+
+     # lo actualizamos
+     pkgfile --update
+
+     pkgfile pacstrap
+
+     # instalamos los scripts faltantes
+     yes | pacman -S extra/arch-install-scripts
+    #+END_SRC
+*** Referencias
+**** Referencias Web Oficiales
+     1. https://git.archlinux.org/arch-install-scripts.git/tree/pacstrap.in
+     2. https://wiki.archlinux.org/index.php/Pacman
+     - [Referencia #1 - Arch Linux Arm](https://archlinuxarm.org/forum/viewtopic.php?f=60&t=8529)
+**** Referencias Web Extraoficiales
+     1. https://www.muylinux.com/2012/08/01/arch-linux-instalador/
+* Referencias
+** Referencias Web Oficiales
+   - [Pacman Comandos - Documentación Oficial ](https://wiki.archlinux.org/index.php/Pacman)
+   - [USB Flash Installation Media - Wiki ArchLinux](https://wiki.archlinux.org/index.php/USB_flash_installation_medium_(Espa%C3%B1ol))
+   - [Multiboot Usb Drive - Wiki ArchLinux](https://wiki.archlinux.org/index.php/Multiboot_USB_drive_(Espa%C3%B1ol))
+** Referencias Web Extraoficiales
+   - [Referencia #1 - StackOverflow](https://stackoverflow.com/questions/35343707/linux-apt-get-command-not-found-how-to-install-a-package-in-arch-linux)
