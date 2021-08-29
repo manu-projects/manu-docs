@@ -1,0 +1,496 @@
+* Paginas viendo
+  https://github.com/IgnacioAmigo/dinogame <--- como base
+  https://pixijs.io/examples/#/sprite/basic.js <--- para animaciones
+  https://parceljs.org/getting_started.html <--- para levantar el servidor
+  
+  https://nosleepjavascript.com/intro-to-gamedev/ <-- usar "muy poco de referencia"
+  https://github.com/manu-projects/Design-Patterns-JavaScript <-- podes usar algunos patones de diseño de dds de aca
+  
+  https://programmerclick.com/article/49701210925/
+  sprite maker png
+* Matemática aplicada a videojuegos
+** Detección de Colisiones
+*** Conceptos
+*** Referencias
+    1. https://www.youtube.com/watch?v=XYzA_kPWyJ8
+* Conceptos HTML5
+  html5 conceptos context canvas
+** Canvas
+   - Etiqueta que provee HTML5
+   - Su traducción es *lienzo*
+** Context
+   - Permite acceder a los métodos de la API 2D
+   - Mediante él, podemos dibujar en el *canvas*
+** [TODO] SVG Vs Canvas
+   |--------------------------+--------------------|
+   | SVG                      | CANVAS             |
+   |--------------------------+--------------------|
+   | Se basa en XML           |                    |
+   | NO soporta javascript(?) | Soporta Javascript |
+   |--------------------------+--------------------|
+
+   - SVG se basa en XML, y es un formato de gráficos vectoriales
+   - SVG se puede graficar usando css
+   - Canvas se puede graficar usando javascript
+** Dibujar Formas
+   #+BEGIN_SRC javascript
+     // dibuja un rectángulo relleno .
+     fillRect(x,y,width,height);
+
+     // dibuja un contorno rectangular .
+     strokeRect(x,y,width,height);
+
+     // borra el área especificada y hace que sea totalmente transparente.
+     clearRect(x,y,width,height);
+   #+END_SRC
+** Rutas
+   #+BEGIN_SRC javascript
+     context.beginPath();
+     //... path drawing operations
+     context.closePath();
+   #+END_SRC
+** Método LineTo
+   #+BEGIN_SRC javascript
+     // Triángulo relleno
+     ctx.beginPath();
+     ctx.moveTo(25,25);
+     ctx.lineTo(105,25);
+     ctx.lineTo(25,105);
+     ctx.closePath();
+     ctx.fill();
+
+     // Triángulo trazado
+     ctx.beginPath();
+     ctx.moveTo(125,125);
+     ctx.lineTo(125,45);
+     ctx.lineTo(45,125);
+     ctx.closePath();
+     ctx.stroke();
+   #+END_SRC
+** DrawImage
+   https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
+** Referencias
+   1. https://eloquentjavascript.net/17_canvas.html
+   2. https://www.arkaitzgarro.com/html5/capitulo-7.html
+   3. https://desarrolloweb.com/articulos/guia-canvas-html5-desarrolladores.html
+** Libros
+   1. http://index-of.es/HTML/Oreilly.HTML5.Cookbook.Nov.2011.pdf
+* VideoTutoriales videojuegos
+** Tutoriales Cortos (web)
+  1. https://learn.thestempedia.com/courses/introduction-programming-pictoblox/lessons/intro-to-programming/topic/stage-and-sprite/
+  2. https://www.etnassoft.com/2011/01/09/canvas-y-videojuegos-en-html5/
+  3. https://mug-it.org.ar/343063-Desarrollando-videojuegos-con-HTML5-y-Javascript.note.aspx
+  4. https://docs.microsoft.com/es-es/archive/msdn-magazine/2015/april/game-development-2d-drawing-techniques-and-libraries-for-web-games
+  5. https://www.html5rocks.com/es/tutorials/canvas/performance/
+  6. https://www.gamedesignla.com/blog/290-game-design-canvas
+** Videotutoriales cortos
+  7. https://www.youtube.com/watch?v=CY0HE277IBM
+** Tutoriales Cortos (Pixi.js)
+   1. https://programmersought.com/article/29807466980/
+   2. https://developpaper.com/learning-pixijs-elf-state/
+   3. https://developpaper.com/learn-pixijs-animation-elves/
+   4. https://developpaper.com/learning-pixijs-visual-effects/
+** Tutoriales Completos
+  1. https://dspace.unl.edu.ec/jspui/bitstream/123456789/10948/1/Cartuche%20Granda%2C%20Eduardo%20Luis.pdf
+  2. http://oa.upm.es/43127/4/TFM_ROBIN_GILES_RIBERA.pdf
+  3. https://core.ac.uk/download/pdf/33106076.pdf
+** Juegos Basicos
+   1. https://www.genbeta.com/desarrollo/aprende-javascript-creando-ocho-videojuegos-simples-clasicos-que-puedes-anadir-a-tu-portafolio-1
+** Motores
+   1. https://www.hebergementwebs.com/sitio-web/11-motores-javascript-para-hacer-juegos-web-2020
+   2. 
+* Juegos pendientes
+** En Pixi.js
+*** Autos
+**** Requerimientos
+     1. Se mueva solo hacia los costados
+     2. Se le acerquen obtáculos (autos)
+     3. Mayor nivel => mayor velocidad vienen los obstáculos => mayor obstaculos aparecen
+     4. Si un obstáculo lo toca => pierde
+**** Juegos similares
+     1. https://www.youtube.com/watch?v=o5W86aGBy5M
+*** Naves
+**** Requerimientos
+**** Juegos Similiares
+*** Combate
+** En JS Nativo
+*** Tower defense
+    1. https://www.youtube.com/watch?v=QxYg8-mhhhs
+*** Naves
+    2. https://www.youtube.com/watch?v=eI9idPTT0c4
+* Bibliotecas y Herramientas
+** Mejores herramientas
+*** Sprite Editor
+    Usamos Krita porque es similar a photoshop, permite agregar guias divisorias 
+    y luego dividir la imagen y guardar en distintos archivos
+*** Texture Packer
+    EL texture packer de codeandweb permite generar un .json a partir de varios .png
+    https://www.codeandweb.com/texturepacker
+    https://free-tex-packer.com/app/ <-- es mejor parece
+*** Redux (?)
+    1. http://blog.enriqueoriol.com/2018/08/que-es-redux.html
+** Bibliotecas Elementales
+   1. https://parceljs.org/getting_started.html <-- server
+   2. https://pixijs.io/examples/#/demos-basic/container.js <-- engine js
+   3. https://greensock.com/gsap/ <-- efectos, animaciones (?)
+   4. https://tailwindcss.com/ <-- css (similar a bootstrap, materialize, etc..)
+   5. lodash (???)
+** Pendiente Chequear
+   - Elm
+   - Electron
+* [TODO] Javascript Nativo
+** [TODO] Conceptos
+*** new Image Vs. createElement
+    1. https://stackoverflow.com/questions/6241716/is-there-a-difference-between-new-image-and-document-createelementimg
+    2. https://www.quirksmode.org/js/dom0.html
+** Arrays
+   1. https://stackoverflow.com/questions/15292278/how-do-i-remove-an-array-item-in-typescript
+** [TODO] Prototype
+   Javascript es un lenguaje prototipo, que es un estilo de la programación orientada a objetos...
+
+   1. https://en.wikipedia.org/wiki/Prototype-based_programming
+** [TODO] Funciones
+*** Splice
+    1. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
+*** [TODO] Let Vs Const Vs Var 
+    vá acá o en ecmascript (?)
+**** Conceptos
+     1. ~var~ es para variables globales
+     2. ~let~ se puede actualizar su valor pero declara una unica vez
+     3. ~const~ no se puede actualizar su valor luego de inicializada
+
+     Tanto ~let~ como ~const~ son variables de ámbito local, es decir
+     viven solo en el ámbito donde se declararon
+**** Referencias
+     1. https://www.freecodecamp.org/news/var-let-and-const-whats-the-difference/
+*** [TODO] Array
+    acá ó en typeScript? o en ecmascript?
+    1. https://www.tutorialsteacher.com/typescript/typescript-array
+    2. https://www.tabnine.com/academy/javascript/how-to-get-an-objects-keys-and-values/
+*** Eventos - Keyboard
+    1. https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values
+    2. https://www.digitalocean.com/community/conceptual_articles/understanding-this-bind-call-and-apply-in-javascript
+    3. https://www.valentinog.com/blog/this/
+    4. https://www.typescriptlang.org/docs/handbook/functions.html
+*** SetInterval
+    1. https://www.w3schools.com/jsref/met_win_setinterval.asp
+*** requestAnimationFrame
+    1. http://w3.unpocodetodo.info/jsblog/requestanimationframe.php
+    2. http://www.javascriptkit.com/javatutors/requestanimationframe.shtml
+    3. https://css-tricks.com/using-requestanimationframe/
+    4. https://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
+    5. https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+** Funciones de Math
+*** Ceil Vs  Floor Vs Round
+    1. https://www.educative.io/edpresso/mathceil-mathfloor-and-mathround-in-javascript
+*** random
+    1. https://newbedev.com/seeding-the-random-number-generator-in-javascript
+    2. https://github.com/bryc/code/blob/master/jshash/PRNGs.md
+** [TODO] Operadores
+*** new - Factory function + Constructor function
+    1. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new
+    2. https://stackoverflow.com/questions/1646698/what-is-the-new-keyword-in-javascript/30478240#30478240
+    3. https://stackoverflow.com/questions/1646698/what-is-the-new-keyword-in-javascript#3658673
+    4. https://stackoverflow.com/questions/8698726/constructor-function-vs-factory-functions
+** [TODO] Debates interesantes
+*** Definir funciones en variables
+    1. https://stackoverflow.com/questions/336859/var-functionname-function-vs-function-functionname
+    2. http://adripofjavascript.com/blog/drips/variable-and-function-hoisting.html
+*** Implementaciones (?)
+    https://github.com/w3c/web-performance/
+*** Evitar el típico undefined error
+    https://css-tricks.com/%E2%80%8B%E2%80%8Bavoiding-those-dang-cannot-read-property-of-undefined-errors/
+** [DOING] Tutoriales completos
+   1. https://eloquentjavascript.net/14_dom.html
+   2. https://eloquentjavascript.net/16_game.html
+** Relacionado con juegos
+*** Crear Health Bar
+    1. https://www.youtube.com/watch?v=Wh2kVSPi_sE
+*** Crear y animar Sprites
+    https://www.youtube.com/watch?v=_3WsTJvNbJg
+*** Movimiento  (?)
+    https://www.youtube.com/watch?v=YKb50865IG8
+*** Slingler (?)
+    https://www.youtube.com/watch?v=wHDLbgCXXXc
+*** Bouncing (?)
+    1. https://www.youtube.com/watch?v=HAd2WReQ1zs
+    2. https://www.youtube.com/watch?v=GC6F8uVp2Vs
+** Libros
+   1. https://eloquentjavascript.net/
+   2. https://exploringjs.com/deep-js/toc.html
+* [TODO] ECMAScript 2015
+  tenes partes en js nativo y typescript, validar donde van
+** Variables en literales (strings)
+   1. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+   2. https://stackoverflow.com/questions/3304014/how-to-interpolate-variables-in-strings-in-javascript-without-concatenation
+* ECMAScript 2016
+* Apps funcionando
+  1. https://github.com/hfg-gmuend/pixi-parcel-example (muy bueno, soluciona problema de imports)
+  2. https://github.com/gara501/pixi-game/tree/master/app <- como el mortal kombat
+  3. https://github.com/Laastine/tile-fighter
+  4. https://github.com/CodeAndWeb/pixijs-sprite-sheets
+  5. https://github.com/cawoodm/tie-flighter
+  6. https://www.html5gamedevs.com/topic/494-pixijs-showcase/page/5/
+  7. https://github.com/samurai-js/samuraijs
+* [DOING] Leyendo
+  Estás en la parte de *Keyboard Movement*
+  
+  https://github.com/manu-projects/learningPixi <-- estamos viendo este..
+
+
+  Lo interesante hasta ahora es que..
+  1. en una variable ~let estado~ podemos guardar la referencia a una función ~play(valor)~
+     y después pasarle los parámetros a la variable estado, ej. ~estado(10)~)
+  2. lo anterior tambien sirve luego para aplicar alguno de los patrones Strategy o State
+* [TODO] Objects value
+  https://dmitripavlutin.com/access-object-keys-values-entries/
+* Pixi.js
+** Animaciones Personajes-Escenarios
+*** Para separar (split) en frames los gifs
+    1. https://ezgif.com/split
+*** Rotacion
+    1. https://www.html5gamedevs.com/topic/638-flip-a-sprite/ (muy bueno)
+    2. https://www.html5gamedevs.com/topic/33071-rotate-a-sprite-without-craziness/
+*** Referencias
+**** Referencias Extraoficiales
+    1. https://titanwolf.org/Network/Articles/Article?AID=9438b3e6-e55c-4846-a31d-81e6572c9f42#gsc.tab=0
+    2. https://www.html5gamedevs.com/topic/23998-animated-gifs/
+    3. https://github.com/krzysztof-o/spritesheet.js/
+**** Referencias Oficiales
+    3. https://pixijs.download/dev/docs/PIXI.AnimatedSprite.html
+** [TODO] Obtener hijos del Stage
+   1. https://www.html5gamedevs.com/topic/44825-how-do-you-use-getchild/
+   2. https://github.com/pixijs/pixi-animate/issues/66
+** Timer
+   1. https://github.com/soimy/eventemitter3-timer (parece funcar en v4)
+   2. https://github.com/Nazariglez/pixi-timer <-- no funciona para vesiones >= 4
+   3. https://www.html5gamedevs.com/topic/31357-how-to-user-pixi-timer-or-eventemitter/ 
+** Anchor Vs. Pivot
+   1. https://www.html5gamedevs.com/topic/15191-pixi-anchor-vs-pivot/
+   2. https://www.programmersought.com/article/30762290288/
+   3. https://stackoverflow.com/questions/53355187/why-is-the-container-of-lines-not-centered-pixi-js
+** Containers
+   1. https://www.html5gamedevs.com/topic/33175-fixed-container-size/
+** Documentación
+  1. https://pixijs.download/dev/docs/PIXI.Spritesheet.html
+  2. https://www.html5gamedevs.com/topic/45101-remove-oncomplete-handler-from-shared-loader/
+** Rendering
+   1. https://medium.com/swlh/inside-pixijs-batch-rendering-system-fad1b466c420
+** Interesante
+   implementaciones de pixi.js
+   1. https://www.goodboydigital.com/pixijs/docs/files/pixi_loaders_SpriteSheetLoader.js.html
+   2. https://api.pixijs.io/@pixi/spritesheet/src/Spritesheet.ts.html
+   3. https://jsbattle.jmrlab.com/docs/dev_guide/howtos/spritesheets.html
+* TypeScript
+** Semicolons
+   No es necesario usar el punto y coma para finalizar las sentencias
+
+   1. https://medium.com/@eugenkiss/dont-use-semicolons-in-typescript-474ccfe4bdb3
+** Map
+   1. https://howtodoinjava.com/typescript/maps/
+** Export/Import
+*** Exportar Default
+**** Alternativa 1
+    Sólo se puede exportar una clase *default* por archivo
+   
+    #+BEGIN_SRC typescript
+      /************************************************************
+      ** Archivo: UnaClase.ts
+      ** - sólo podrá haber un 'default export' en ese archivo
+      */
+      export default class UnaClase {
+          // ...
+      }
+
+      /************************************************************
+      ** Archivo: index.ts (ó cualquier otro archivo .ts donde queramos importar las clases)
+      */
+      import UnaClase from "./UnaClase";
+    #+END_SRC
+**** Alternativa 2
+    Sólo se puede exportar una clase *default* por archivo
+   
+    #+BEGIN_SRC typescript
+      /************************************************************
+      ** Archivo: UnaClase.ts
+      ** - sólo podrá haber un 'default export' en ese archivo
+      */
+      class UnaClase {
+          // ...
+      }
+
+      /************************************************************
+      ** Archivo: index.ts (ó cualquier otro archivo .ts donde queramos importar las clases)
+      */
+      import UnaClase from "./UnaClase";
+    #+END_SRC
+*** Exportar por nombre
+**** Alternativa 1
+    #+BEGIN_SRC typescript
+      /************************************************************
+      ** Archivo: VariasClases.ts
+      ** - exportamos varias clases por su nombre
+      */
+      export class UnaClase {
+          // ...
+      }
+
+      export class OtraClase {
+          // ...
+      }
+
+      /************************************************************
+      ** Archivo: index.ts (ó cualquier otro archivo .ts donde queramos importar las clases)
+      */
+      import { UnaClase, OtraClase } from "./VariasClases";
+    #+END_SRC
+**** Alternativa 2
+    #+BEGIN_SRC typescript
+      /************************************************************
+      ,** Archivo: VariasClases.ts
+      ,** - exportamos varias clases por su nombre
+      ,*/
+      class UnaClase {
+          // ...
+      }
+
+      class OtraClase {
+          // ...
+      }
+
+      export {UnaClase, OtraClase}
+
+      /************************************************************
+      ,** Archivo: index.ts (ó cualquier otro archivo .ts donde queramos importar las clases)
+      ,*/
+      import { UnaClase, OtraClase } from "./VariasClases";
+    #+END_SRC
+*** Exportar con alias
+   
+    #+BEGIN_SRC typescript
+      /************************************************************
+      ** Archivo: VariasClases.ts
+      ** - exportamos varias clases por su nombre
+      */
+      export class UnaClase {
+          // ...
+      }
+
+      export class OtraClase {
+          // ...
+      }
+
+      /************************************************************
+      ** Archivo: index.ts
+      */
+      import { UnaClase, OtraClase as MiClase } from "./VariasClases";
+    #+END_SRC
+*** Exportar multiples clases
+   
+    #+BEGIN_SRC typescript
+      /************************************************************
+      ** Archivo: VariasClases.ts
+      ** - exportamos varias clases por su nombre
+      */
+      export class UnaClase {
+          // ...
+      };
+
+      export class OtraClase {
+          // ...
+      };
+
+      /************************************************************
+      ,** Archivo: MiClase.ts
+      ,*/
+      import * as MiClase from "./VariasClases";
+      // Para importar debemos usar la notación dot y accedemos a la clase
+      // como si fuese un miembro de una estructura
+    #+END_SRC
+*** Referencias
+    1. https://esdiscuss.org/topic/moduleimport
+    2. https://www.typescriptlang.org/docs/handbook/modules.html
+    3. https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/import
+** Clases y Funciones
+   1. https://www.typescriptlang.org/docs/handbook/2/functions.html
+   2. https://www.typescriptlang.org/docs/handbook/2/classes.html
+** Types y Objects
+   1. https://medium.com/shyftplan-techblog/typescript-advanced-types-199ff1f3e3e8
+   2. https://dev.to/valentinogagliardi/typescript-tutorial-for-beginners-the-missing-guide-part-2-3ahh
+   3. https://www.typescriptlang.org/docs/handbook/basic-types.html
+   4. https://www.programmersought.com/article/44192654156/
+** Arrays
+   1. https://love2dev.com/blog/javascript-remove-from-array/
+   2. https://www.typescripttutorial.net/typescript-tutorial/typescript-array-type/
+** Tsconfig
+   1. https://stackoverflow.com/questions/43702518/typescript-property-log10-does-not-exist-on-type-math
+   2. https://stackoverflow.com/questions/42415942/what-is-target-in-tsconfig-json-for
+* Conceptos OOP
+** Accessors (getter/setter)
+*** Conceptos
+    En la terminal se debe agregar ~--target ES5~ para indicar el *ECMAScript 5*
+    Ej. ~tsc --target ES5 luchador.ts~
+*** Referencias
+   1. https://www.javatpoint.com/typescript-accessor
+* Recursos
+** Juegos
+   1. https://gamejolt.com/games/runoverzombies/613885
+** Recursos Sprites
+   1. https://www.cleanpng.com/free/game-sprite,2.html (tiene variedad y de buena calidad)
+   2. http://www.sonicgalaxy.net/sprites-gba-sa-2/
+   3. https://www.spriters-resource.com/snes/finalfight3finalfighttough/sheet/60580/
+** Mortal kombat stages
+  1. https://sites.google.com/site/mortalkombatstreetfighter/stages/mortal-kombat-stages 
+** Sprite Editor
+   1. https://docs.krita.org/en/reference_manual/dockers/grids_and_guides.html#grids-and-guides-docker
+   2. https://www.youtube.com/watch?v=_71cCuTyDxI
+** Texture Packager
+   1. http://free-tex-packer.com/download/
+   2. https://free-tex-packer.com/app/ <-- version online
+** Sonidos - Efectos Especiales para videojuegos
+   1. https://www.freesoundeffects.com/free-sounds/fight-sounds-10034/
+   2. https://opengameart.org/content/library-of-game-sounds
+** Sprites
+   1. https://www.spriters-resource.com/
+   2. https://opengameart.org/
+   3. 
+** Fonts - Fuentes de Texto
+   1. https://www.fontfreak.com/
+* Npm
+** Scripts
+*** Referencias
+    1. https://lenguajejs.com/npm/administracion/scripts-de-npm/
+    2. https://nodejs.dev/learn/the-package-json-guide
+    3. https://glebbahmutov.com/blog/organize-npm-scripts/
+    4. https://dev.to/paulasantamaria/mastering-npm-scripts-2chd
+    5. https://www.digitalocean.com/community/tutorials/how-to-use-node-js-modules-with-npm-and-package-json
+    6. https://www.tutorialdocs.com/article/npm-scripts-tutorial.html
+    7. https://www.freecodecamp.org/news/introduction-to-npm-scripts-1dbb2ae01633/
+    8. https://blog.npmjs.org/post/118810260230/building-a-simple-command-line-tool-with-npm.html
+    9. https://scotch.io/courses/getting-started-with-browserify/using-npm-scripts
+** Static files
+   Soluciona el problema de los imports de parcel.js
+   1. https://www.npmjs.com/package/parcel-plugin-static-files-copy
+   2. https://snyk.io/advisor/npm-package/parcel-plugin-static-files-copy
+* Referencias
+** Javascript Game engines
+   1. https://github.com/collections/javascript-game-engines
+** Referencias Web
+*** Tutoriales Basicos
+    1. https://docs.microsoft.com/en-us/learn/paths/build-javascript-applications-typescript/
+    2. https://ultimatecourses.com/blog/classes-vs-interfaces-in-typescript
+    3. https://www.tutorialspoint.com/typescript/typescript_modules.htm
+    1. https://www.javatpoint.com/typescript-accessor
+*** Tutoriales Crear juegos
+    1. https://www.freecodecamp.org/news/build-an-arkenoid-game-in-typescript-tutorial/
+    2. https://nosleepjavascript.com/intro-to-gamedev/
+    3. https://itnext.io/build-a-snake-game-in-typescript-8bee5b9f1ec6
+** [DOING] Referencias Youtube
+   Pixi.js SpriteSheet
+
+   1. https://www.youtube.com/watch?v=ajaduDDePIY&ab_channel=WaelYasmina
+   2. https://www.youtube.com/watch?v=dDSKexgVCaU&ab_channel=Glitch
+   3. https://www.youtube.com/watch?v=GKre-3pBQac&ab_channel=DowerChin
+* Tutoriales
+** Videotutoriales Youtube
+   1. https://www.youtube.com/playlist?list=PLTd5ehIj0goPbPaN9VEoQQVUwZN2eXdB5 (makigas)
