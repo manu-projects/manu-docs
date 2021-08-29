@@ -88,9 +88,9 @@
    - [PENDIENTE] Descubriendo los archivos .md
    - [PENDIENTE] Primeros pasos usando LaTeX
 ** Repositorios materias de programación
-   - Aprendiendo Haskell [Ir a la página](https://github.com/neverkas/aprende-haskell)
-   - Aprendiendo C++ [Ir a la página](https://github.com/neverkas/aprende-cpp)
-   - Aprendiendo Lenguaje de Máquina [Ir a la página](https://github.com/neverkas/aprende-assembler-8085)
+   - Aprendiendo Haskell [[https://github.com/neverkas/aprende-haskell][[Ir a la página]​]] 
+   - Aprendiendo C++ [[https://github.com/neverkas/aprende-cpp][[Ir a la página]​]] 
+   - Aprendiendo Lenguaje de Máquina [[https://github.com/neverkas/aprende-assembler-8085][[Ir a la página]​]]
 ** Otros 
-   - [NUEVO] Extensiones utiles para navegadores web [Ir a la pagina](navegadores-web-extensiones-utiles.md)
+   - [NUEVO] Extensiones utiles para navegadores web [Ir a la pagina]
 
