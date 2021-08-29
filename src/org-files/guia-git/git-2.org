@@ -21,7 +21,7 @@
 ** Head
    - Es un puntero que guarda la referencia del *branch* activo (el que se esté utilizando)
    - En el repositorio remoto *origin* el puntero HEAD apunta a la rama *master*
-   - En nuestro repositorio local, se puede cambiar la referencia haciendo *git checkout nombreRama*
+   - En nuestro repositorio local, se puede cambiar la referencia haciendo ~git checkout nombreRama~
 ** Track
 *** Conceptos
     - Su traducción al español es *rastrear* ó podría ser también *en seguimiento*
@@ -92,12 +92,12 @@
    - También conocido como *Index* ó *Staging Area*
    - Su traducción al español es *Area de preparación*
    - Es el paso previo a la confirmación (commit)
-   - Son los archivos que agregamos con el comando *git add* y sus cambios serán *rastreados* (se hará un seguimiento)
+   - Son los archivos que agregamos con el comando ~git add~ y sus cambios serán *rastreados* (se hará un seguimiento)
    - Los archivos del *area de preparación* pueden tener dos estados
      - *Unstaged changes*: Si los modificamos
      - *Staged changes*: Si no los modificamos
      - Unstaged changes y Staged changes (osea ambos estados):
-       Si los modificamos, los agregamos con *git add* y los volvemos a modificar y NO hacemos *git add*
+       Si los modificamos, los agregamos con ~git add~ y los volvemos a modificar y NO hacemos ~git add~
 
     |------------------------|
     | History                |
@@ -113,25 +113,24 @@
     | - unstaged files       |
     | - untracked files      |
     |------------------------|
-
 ** Tracking Branch
 *** Conceptos
-    - Cuando creamos una *rama local* a partir de una *rama remota* con *git checkout*,
+    - Cuando creamos una *rama local* a partir de una *rama remota* con ~git checkout~
       la rama local se convierte en una *rama de seguimiento* porque guarda una referencia hacia la rama remota.
-    - Si queremos hacer un seguimiento de una rama remota se utiliza *git checkout --track remoto/nombreRama*
+    - Si queremos hacer un seguimiento de una rama remota se utiliza ~git checkout --track remoto/nombreRama~
 ** MERGE_HEAD
 *** Conceptos
     - *MERGE_HEAD* está presente siempre que hay una fusión (merge) en curso.
-    - El comando *git merge --abort* es equivalente a *git reset --merge* cuando *MERGE_HEAD* está presente.
+    - El comando ~git merge --abort~ es equivalente a ~git reset --merge~ cuando *MERGE_HEAD* está presente.
 *** Referencias Web Oficiales
     1. https://mirrors.edge.kernel.org/pub/software/scm/git/docs/git-merge.html
 ** Detached Head
 *** Conceptos
     1. El *detached head* ó *head desacoplado* sucede cuando el *head* apunta a una confirmación (commit) que no es la última,
     es decir alguna de las confirmaciones (commits) anteriores al  último (al que debería apuntar HEAD)
-    2. Si queremos ir a una confirmación anterior podes utilizar *git checkout HEAD~n* (siendo n cualquier número natural,
+    2. Si queremos ir a una confirmación anterior podes utilizar ~git checkout HEAD~n~ (siendo n cualquier número natural,
        y representa cuantas confirmaciones hacia atrás queremos ir respecto de HEAD)
-    3. Podemos llegar a *detached head* desde cualquier rama (osea, no importa que hagamos *git checkout fix/precios* 
+    3. Podemos llegar a *detached head* desde cualquier rama (osea, no importa que hagamos ~git checkout fix/precios~
        y no estemos en la rama master)
 *** Posibles Escenarios
    #+NAME: detached-head-escenario1
@@ -195,11 +194,11 @@
 *** Referencias Web Extraoficiales
     1. https://loquemeinteresadelared.wordpress.com/2016/03/28/git-cookbook-que-es-el-estado-o-modo-detached-head/
 ** Master
-    - es el nombre por defecto del *branch* inicial, se asigna en el momento que inicializamos el repositorio con *git init*
+    - es el nombre por defecto del *branch* inicial, se asigna en el momento que inicializamos el repositorio con ~git init~
 ** Origin
 *** Conceptos
-   - es el nombre por defecto al *repositorio remoto*, cuando se hace el *git clone*
-   - si quisieramos podriamos cambiar su nombre por otro con *git clone -o otroNombre*
+   - es el nombre por defecto al *repositorio remoto*, cuando se hace el ~git clone~
+   - si quisieramos podriamos cambiar su nombre por otro con ~git clone -o otroNombre~
 *** Ejemplos
     #+NAME: repositorio-origin
     #+BEGIN_SRC shell
@@ -347,9 +346,9 @@
 *** Conceptos aplicados
 **** Stage files
      - Archivos guardados en el *area de stage* (area de preparado) paso previo a confirmación (commit)
-     - Estado de los archivos luego de *git add*
+     - Estado de los archivos luego de ~git add~
 **** Unstage files
-     - Archivos que se agregaron ó que se sacaron con *git rm*
+     - Archivos que se agregaron ó que se sacaron con ~git rm~
 **** Tracked files
      - Archivos que están en el *area de stage*
      - Concepto de *seguimiento* ó *rastreo* de las modificaciones de los archivos que están en *área de stage*
@@ -358,14 +357,14 @@
 **** Unstaged changes
      - Aplica sólo a los archivos que están en el área de stage
      - Concepto de que los archivos *rastreados* (que están en el area de stage) fueron modificados
-       y se necesita que se agregen los cambios al area de stage con *git add*
+       y se necesita que se agregen los cambios al area de stage con ~git add~
      - Si hacemos una confirmación (commit) de los cambios, estos no serán confirmados, por tanto tampoco se publicarán (push)
-       a menos que los agregemos con *git add*
+       a menos que los agregemos con ~git add~
 **** Staged changes
      - Aplica sólo a los archivos que están en el área de stage
      - Los archivos *rastreados* o en seguimiento del area de stage, no fueron modificados
 *** Posible Escenario
-    1. Estamos en una rama *feature-horarios* e hicimos varios cambios pero no hicimos *git add*
+    1. Estamos en una rama *feature-horarios* e hicimos varios cambios pero no hicimos ~git add~
     2. Queremos deshacer los cambios actuales
 *** Posible Solución
     #+NAME: solucion1-deshacer-cambios
@@ -386,7 +385,7 @@
     1. https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
 ** Deshacer cambios del Area de Staged
 *** Posible Escenario
-    1. Hacemos modificaciones en varios archivos y los agregamos al área de staged con *git add*
+    1. Hacemos modificaciones en varios archivos y los agregamos al área de staged con ~git add~
     2. Queremos deshacer esos cambios (el estado cambiará a *unstaged changes*)
 
     *Observaciones:*
@@ -467,7 +466,7 @@
 ** Mostrar diferencias previo confirmar cambios
 *** Conceptos
     - Cuando confirmamos cambios nos referimos a hacer un *commit*
-    - En el *área de stage* aparecen los archivos *rastreados* los que agregamos con *git add*
+    - En el *área de stage* aparecen los archivos *rastreados* los que agregamos con ~git add~
 *** Posible escenario
     1. Realizamos modificaciones en los archivos en el *área de stage*
     2. Queremos ver QUE modificaciones hicimos previo a confirmar (commit) los cambios
@@ -482,17 +481,17 @@
     Queremos hacer un *push* para publicar los cambios/confirmaciones de una rama local,
     al repositorio remoto (que suele tener el nombre de origin)
 *** Posibles Soluciones
-    Usamos el push de la siguiente manera *git push (remoto) (rama)* suponiendo que la rama local
+    Usamos el push de la siguiente manera ~git push (remoto) (rama)~ suponiendo que la rama local
     y la rama remota tienen el mismo nombre.
 
     Pero si queremos que el nombre de la rama remota, se suba con un nombre distinto al repositorio remoto
     ya sea porque en el remoto tiene otro nombre o porque así lo queremos,
-    procedemos con lo siguiente *git push (remoto) ramaLocal:ramaRemota*
+    procedemos con lo siguiente ~git push (remoto) ramaLocal:ramaRemota~
     
     Si queremos saber a que rama local apunta *HEAD* (apuntará a la rama con que hicimos git checkout nombreRama)
-    ó el historial de cambio de referencias de las ramas locales, ejecutamos *git reflog*
+    ó el historial de cambio de referencias de las ramas locales, ejecutamos ~git reflog~
     
-    Si queremos conocer las referencias de las ramas locales, ejecutamos *git branch -vv*
+    Si queremos conocer las referencias de las ramas locales, ejecutamos ~git branch -vv~
 
     #+NAME: solucion1-push-branches
     #+BEGIN_SRC shell
@@ -561,7 +560,7 @@
 *** Tips
     Para ver las ramas de seguimiento (track) asignadas,
     es decir la referencia que guardan nuestras ramas locales (si es que tienen referencias)
-    podemos utilizar *git branch -vv*
+    podemos utilizar ~git branch -vv~
 
     Las referencias tienen el formato (remoto)/(rama)
     pudiendo cambiar el repositorio remoto *origin* por otro (si es que tenemos varios repositorios)
@@ -574,12 +573,12 @@
    
     si tenemos "servidor2/serverFix"
     estamos apuntando a otro repositorio remoto, 
-    que previamente habiamos agregado con *git remote add servidor2 urlRepositorioRemoto*
-    si no recordamos el nombre, podemos listar los repositorios con *git remote --verbose*
+    que previamente habiamos agregado con: git remote add servidor2 urlRepositorioRemoto
+    si no recordamos el nombre, podemos listar los repositorios con: git remote --verbose
     #+END_EXAMPLE
 *** Posible Escenario
       Si ya tenemos un branch local llamado "serverfix" pero no tiene una referencia/puntero apuntando a una rama remota
-      se la podemos asignar con *git branch -u nombreRemoto/nombreBranch*
+      se la podemos asignar con ~git branch -u nombreRemoto/nombreBranch~
       - con esto estamos haciendo un seguimiento (track) de una rama remota
       - la referencia puede apuntar a una rama remota con el mismo nombre, ó a otra rama remota
 *** Posibles Soluciones
@@ -635,7 +634,7 @@
     Realizamos varios cambios en un branch (local) que aún no hemos subido (push) al repositorio remoto,
     otros colaboradores han realizado cambios en el mismo branch (remoto).
     
-    Si hacemos *git branch -vv* nos devolverá las *ramas de seguimiento* y su estado (ahead ó behind).
+    Si hacemos ~git branch -vv~ nos devolverá las *ramas de seguimiento* y su estado (ahead ó behind).
     - Si dice *(remoto)/nombreRama detrás 3* es porque hay 3 confirmaciones (commits) en la rama remota que
       no hemos recuperado (fetch) aún, es decir pendiente de fusionar/integrar (merge) con la rama local.
     - Si dice *(remoto)/(nombreRama) delante 2* es porque hay 2 confirmaciones (commits) en nuestra rama local que
@@ -644,11 +643,11 @@
  
     *Importante*
     Los números del estado ahead ó behind de las ramas de seguimiento, se actualizan
-    cuando recuperamos (fetch) los datos del servidor con *git fetch*
+    cuando recuperamos (fetch) los datos del servidor con ~git fetch~
 
     *Observación*
-    Cuando ejecutamos *git pull* por detrás está haciendo un *git fetch* y luego *git merge*
-    que puede NO tener los resultados esperados, no se recomienda del todo usar *git pull*
+    Cuando ejecutamos ~git pull~ por detrás está haciendo un ~git fetch~ y luego ~git merge~
+    que puede NO tener los resultados esperados, no se recomienda del todo usar ~git pull~
     porque trae los cambios y ya nos modifica el directorio de trabajo.
     
     #+NAME: ejemplo1-confirmaciones-estados
@@ -715,16 +714,15 @@
   #+NAME: git-merge-commit
   #+BEGIN_QUOTE
   Si hay cambios NO confirmados (commits) cuando comenzó la fusión (merge)
-  el comando *git merge --abort* puede que no pueda reconstruir los cambios.
+  el comando ~git merge --abort~ puede que no pueda reconstruir los cambios.
 
   Por tanto, se recomienda siempre confirmar (commit) ó guardar los cambios
-  previo a ejecutar el *git merge*
+  previo a ejecutar el ~git merge~
   #+END_QUOTE
 
   https://dzone.com/articles/a-tutorial-on-git-merge
   https://learngitbranching.js.org/ (forma interactiva, ver que agarrar)
   https://sparkbox.com/foundry/better_pull_requests_merge_requests_with_templates
-
 ** Técnicas de Fusión
 *** Fast Foward Merge 
 **** Conceptos
@@ -779,7 +777,7 @@
      #+END_SRC
 ** Marcadores de Conflicto
 *** Conceptos 
-    Cuando hacemos un *git merge* ó *git rebase* para fusionar cambios de branches,
+    Cuando hacemos un ~git merge~ ó ~git rebase~ para fusionar cambios de branches,
     git nos avisa que hubo un conflicto porque se modificaron las mismas lineas 
     en uno o varios archivos en ambas ramas.
     
@@ -895,12 +893,12 @@
     3. https://blog.nilbus.com/temporary-merge-branch-in-diff3-conflict-markers/
     4. https://stackoverflow.com/questions/457927/git-workflow-and-rebase-vs-merge-questions/11219380#11219380
     5. http://psung.blogspot.com/2011/02/reducing-merge-headaches-git-meets.html
-** Separar confirmaciones antes de una fusión (pendiente mejorar)
+** [TODO] Separar confirmaciones antes de una fusión
 *** Conceptos
     Si tenemos cambios que NO queremos confirmar (commit) antes de comenzar una fusión (merge)
-    se recomienda realizar *git stash* de los cambios.
-    Luego de terminar la fusión *git merge* ó cancelarla *git merge --abort*
-    se sugiere ejecutar *git stash pop*
+    se recomienda realizar ~git stash~ de los cambios.
+    Luego de terminar la fusión ~git merge~ ó cancelarla ~git merge --abort~
+    se sugiere ejecutar ~git stash pop~
 *** Posibles Soluciones
     #+BEGIN_SRC shell
       # separamos los últimos cambios no confirmados (que no hicimos commit)
@@ -922,14 +920,14 @@
     1. https://mirrors.edge.kernel.org/pub/software/scm/git/docs/git-stash.html
 ** Reorganizar registro de confirmaciones
 *** Conceptos
-    - Si utilizamos el comando *git rebase* es posible alterar el registro/historial de confirmaciones
-    - El uso del *git rebase* se recomienda usar con *CUIDADO* tal como con *git reset --hard*
-    - NO se recomienda usar *git rebase* en repositorios públicos, podemos arruinar el trabajo de los demás.
+    - Si utilizamos el comando ~git rebase~ es posible alterar el registro/historial de confirmaciones
+    - El uso del ~git rebase~ se recomienda usar con *CUIDADO* tal como con ~git reset --hard~
+    - NO se recomienda usar ~git rebase~ en repositorios públicos, podemos arruinar el trabajo de los demás.
 *** Posible Escenario
     1. Creamos una rama *feature/precios* y generamos varias confirmaciones c1, c2, c3  (commits)
     2. Creamos una rama *feature/promociones* y generamos varias confirmaciones c4, c5, c6  (commits)
     3. Queremos traernos las confirmaciones de ambas ramas, pero si hubiese algun conflicto
-       no queremos que figure un *merged* en el registro de confirmacion *git log* 
+       no queremos que figure un *merged* en el registro de confirmacion ~git log~
 
     #+NAME: git-rebase-escenario1
     #+BEGIN_SRC shell
@@ -993,10 +991,10 @@
    #+END_SRC
 ** Deshacer fusión no publicada
 *** Posible Escenario
-    - Si resolvimos un conflicto pero queremos deshacer el merge, podemos usar el comando *git reset*
-    - Con No publicada nos referimos al haber ejecutado el comando *git push*
+    - Si resolvimos un conflicto pero queremos deshacer el merge, podemos usar el comando ~git reset~
+    - Con No publicada nos referimos al haber ejecutado el comando ~git push~
 *** Posible Solución
-    - Cuando se trata de resolver conflictos, no podemos usar el *git reset --soft* que mantiene los cambios
+    - Cuando se trata de resolver conflictos, no podemos usar el ~git reset --soft~ que mantiene los cambios
 
     #+NAME: git-merge-deshacer 
     #+BEGIN_SRC shell
@@ -1009,9 +1007,9 @@
     1. https://midu.dev/como-deshacer-el-ultimo-commit-git/
 ** Abortar Fusión
 *** Posible Escenario
-    - Fusionamos branches ejecutando el comando *git merge* y nos salta un warning de conflicto
+    - Fusionamos branches ejecutando el comando ~git merge~ y nos salta un warning de conflicto
 *** Posible solución
-    - Podemos volver a ejecutar el comando *git merge* pero con el parámetro *--abort*
+    - Podemos volver a ejecutar el comando ~git merge~ pero con el parámetro *--abort*
 
    #+BEGIN_SRC shell
      # deshacemos el merge anterior
@@ -1155,7 +1153,7 @@
 **** Teclas atajo 
     
      |-------+-----------------------------------------------------------|
-     | Atajo | Descripción                                          |
+     | Atajo | Descripción                                               |
      |-------+-----------------------------------------------------------|
      | k,p   | siguiente diferencia (cambio)                             |
      | j,n   | anterior diferencia (cambio)                              |
@@ -1250,7 +1248,7 @@
       git push origin feature/anuncios
     #+END_SRC
 *** Posible Solución
-    Utilizamos *git merge* con el parámetro *--squash*
+    Utilizamos ~git merge~ con el parámetro *--squash*
 
     #+BEGIN_SRC shell
       # activamos la rama master
@@ -1283,16 +1281,8 @@
    4. https://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging
 ** Referencias Web Extraoficiales
    1. https://gitolite.com/git-pull--rebase
-   2. 
-
-* Pendiente Revisar
-** [TODO] Como manejarse con los tags y las versiones
-   Algunas preguntas que se me ocurren
-   - Deberia hacer una lista de nuevas caracteristicas/funcionalidades por cada version?
-   - Por correcciones de tantos bugs pasaria de v0.1.0 a v0.1.1 ?
-   Pagina: [[https://github.com/org-trello/org-trello/blob/master/TODO.org][Org-Trello]]
-** [TODO] Cuando crear un branch (nuevas caracteristicas)
-   github branches para separar nuevas caracteristicas y para separar resolución de bugs
+* [TODO] Pendiente Mejorar
+** [TODO] Cuando crear un branch
    *OFICIALES*
    1. https://git-scm.com/book/es/v2/Herramientas-de-Git-Guardado-r%C3%A1pido-y-Limpieza#r_git_stashing
    2. https://git-scm.com/book/es/v2/Fundamentos-de-Git-Deshacer-Cosas
@@ -1310,5 +1300,3 @@
    5. https://www.hostinger.es/tutoriales/como-usar-git-branch
    6. https://gist.github.com/jelcaf/1404619
 ** [TODO] Cuando crear un tag (para armar releases)
-** Cuando crear pull request
-
