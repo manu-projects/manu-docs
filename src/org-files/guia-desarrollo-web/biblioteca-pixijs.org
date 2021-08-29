@@ -1,0 +1,344 @@
+* Conceptos
+** DeltaTime
+   https://www.html5gamedevs.com/topic/36268-pixiticker-deltatime-vs-elapsedms/
+* Configuración Inicial
+import * as PIXI from 'pixi.js'
+import boyJSON from './assets/sprite-boy/boy.json'
+
+const APP_WIDTH = 300
+const APP_HEIGHT = 300
+
+const app = new PIXI.Application({
+    width:APP_WIDTH, height:APP_HEIGHT, transparent: false, backgroundColor: 0xCCC
+})
+const container = new PIXI.Container()
+
+* Render
+// --> Renderizado (?)
+
+// agregamos la vista de la app en el DOM del html
+document.body.appendChild(app.view)
+
+// modificamos
+app.renderer.backgroundColor = 0xCCCCCC
+
+app.renderer.resize(800, 300)
+
+app.renderer.view.style.position = 'absolute'
+* Figuras Geométricas
+// creamos el objeto, después le damos la forma, coloreamos, ...
+const rectangle = new PIXI.Graphics()
+// - similar a un builder, construimos paso a paso
+// - tiene una "interfaz fluida" al permitir "encadenar métodos"
+rectangle
+    .beginFill(0x000000)
+    .drawRect(100, 100, 100, 100) // positionX, positionY, width, height
+    .endFill()
+// - agregamos el objeto directo al stage
+app.stage.addChild(rectangle)
+
+const circle = new PIXI.Graphics()
+circle
+    .beginFill(0x333333)
+    .drawCircle(250, 150, 50) // positionX, positionY, radio
+    .endFill()
+app.stage.addChild(circle)
+* Texto
+const style = new PIXI.TextStyle({
+    fontFamily: 'Arial',
+    fontSize: 45,
+    fill: 'deepskyblue',
+    stroke: '#cccccc',
+    strokeThickness: 4,
+    dropShadow: true,
+    dropShadowDistance: 10,
+    dropShadowAngle: Math.PI/2, // igual que en AGA,  PI/2 es un cuarto de circunferencia
+    dropShadowBlur: 4,
+    dropShadowColor: '#000000'
+})
+
+// el segundo parámetro es opcional
+const texto = new  PIXI.Text("hola mundo", style)
+texto.position.set(50, 200) // positionX, positionY
+
+app.stage.addChild(texto)
+
+texto.style.wordWrap = true
+// envolvemos el texto como en un contenedor con un ancho predefinido
+texto.style.wordWrapWidth = 100
+texto.style.align = 'center'
+* Animaciones
+// - "ticker" se usa para crear animaciones
+// - usamos una expresión "lambda" para agregarle una función Ej. x => f(x)
+// - la función dentro del lambda invocará a la función, cada 1 segundo
+app.ticker.add(delta => loop(delta))
+
+// - Con 'Math.random() * n' generamos números al azar, donde n es el máximo valor
+function loop(delta){
+    const anotherCircle = new PIXI.Graphics()
+    anotherCircle
+        .beginFill(0xFFFFFF)
+        .drawCircle(Math.random()*app.screen.width, Math.random()*app.screen.height, 3)
+        .endFill()
+
+    //app.stage.addChild(anotherCircle)
+}
+* Textures y Sprites
+// 1. Cargamos la imagen
+// 2. Transformamos la Imagen en un Texture
+// 3. Transformamos el Texture en un Sprite
+// 4. Agregamos el Sprite al Canvas (a la vista, render, ..?)
+//
+// - Un sprite contiene a una textura, la textura representa una imagen
+// - Podemos cambiar la textura que contiene un sprite (alternando entre imagenes)
+
+// (1) Cargamos la imagen y la transformamos en un Texture
+let player1Texture = PIXI.Texture.from(liu)
+// (2) Transformamos el Texture en un Sprite
+let player1Sprite = new PIXI.Sprite(player1Texture)
+player1Sprite.x = 50
+// (3) Agregamos el Sprite al Canvas
+app.stage.addChild(player1Sprite)
+
+// Alternativa, nos ahorramos 2 pasos en 1
+const player2 = PIXI.Sprite.from(liu)
+// cambiamos el sentido del objeto (si el sentido era hacia la der. ahora estará a la izq)
+player2.scale.x = -1
+player2.x = 200
+app.stage.addChild(player2)
+* Container
+const player3 = PIXI.Sprite.from(liu)
+const player4 = PIXI.Sprite.from(liu)
+// movemos todo el contenedor con todos los objects que contenga (puede contener uno o varios objetos)
+container.position.set(200, 200) // (positionX, positionY)
+// agregamos varios objects al contenedor
+container.addChild(player3)
+container.addChild(player4)
+// agregamos el contenedor al stage
+app.stage.addChild(container)
+// las posiciones de los objects que estén dentro del contenedor
+// son posiciones "relativas" (Ej. si está position.x=0 puede estar en x=300 si el contenedor está desplazado)
+player3.x = 100
+player4.x = 150
+
+// la posición global
+console.log("globalPosition x:" + player3.getGlobalPosition().x)
+console.log("relative position x:" + player3.x)
+// obtenemos la cantidad de objetos del contenedor
+console.log(container.children)
+* Rotar Sprites
+const player2Texture = PIXI.Texture.from(liu)
+const player2Sprite = new PIXI.Sprite(player1Texture)
+player2Sprite.position.set(350, 150) // positionX, positionY
+// - cambiamos el vértice que usa para rotación, lo movemos al centro del sprite
+// - el vértice para rotación tiende a estar la esquina superior izquierda
+player2Sprite.anchor.set(0.5, 0.5)
+
+// agregamos animación para rotar el sprite cada 1 segundo
+app.ticker.add(x=> update(x))
+
+function update(x){
+    player2Sprite.rotation += 0.05
+}
+
+app.stage.addChild(player2Sprite)
+
+* Manejar Eventos - Observers/Listeneres
+let key = { value: undefined }
+
+document.addEventListener('keydown', function(e){
+    //key.value = e.key
+    // if(e.key == key.value) key.isPressed = true
+    // console.log(e.key + " " + key.isPressed)
+
+    if(e.key == 'ArrowRight'){
+        player1Sprite.x += 10
+        // player1Texture = PIXI.Texture.from(liu2)
+        // player1Sprite = new PIXI.Sprite(player1Texture)
+    }
+    else if(e.key == 'ArrowLeft'){
+        player1Sprite.x -= 10
+    }
+})
+* Loader
+** Alternativa 1
+//-----------------------------------------------------------------------\\
+// --> LOADER - Alternativa (1) <--- ME GUSTA MAS ESTA ALTERNATIVA
+//
+// Agregamos los sprite encadenando el método add()
+// indicando el nombre y ruta del recurso, solo usaremos el nombre
+// en la función que le pasemos al load() del loader
+
+const loader = PIXI.Loader.shared
+// - El 1er parámetro es el nombre del recurso (lo usaremos en la función)
+// - El 2do parámetro es la ruta donde está el recurso
+loader
+    .add('monster1', characterMonster) // agregamos un recurso (un sprite)
+    .add('monster2', characterMonster) // agregamos otro recurso (el mismo sprite con otro nombre)
+    .add('maquina', 'assets/sprite-machine.png')
+
+// cargamos el loader, pasandole una función cualquiera
+// loader.load(setup) // <-------------------- lo comentamos porque si no el loader de abajo lanzará una excepción, diciendo que NO se puede cargar recursos mientras el loader está en modo ejecución
+
+// - la función que le pasamos al loader recibe dos parámetros
+// - el 1er parámetro es el loader
+// - el 2do parámetro son los recursos (los sprites)
+function setup(loader, resources){
+    const monsterSprite1 = new PIXI.Sprite(resources.monster1.texture)
+    const monsterSprite2 = new PIXI.Sprite(resources.monster2.texture)
+    const maquinaSprite = new PIXI.Sprite(resources.maquina.texture)
+
+    maquinaSprite.x = 400
+
+    monsterSprite1.x = 350
+    monsterSprite1.scale.set(0.3, 0.3)
+    app.stage.addChild(monsterSprite1)
+
+    monsterSprite2.x = 500
+    monsterSprite2.scale.set(0.3, 0.3)
+    app.stage.addChild(monsterSprite2)
+}
+** Alternativa 2 - Arrays
+// Usamos un arreglo de las rutas de los sprites,
+// en vez de encadenar los add() de cada recurso
+
+const otroLoader = PIXI.Loader.shared
+
+// - agregamos la ruta de los sprites en un arreglo,
+// - en la función que le pasemos al load() del loader
+// debemos poner como indice del arreglo la ruta del sprite
+otroLoader
+    .add([characterMachine, characterMonster])
+    //.load(otroSetup)
+
+function otroSetup(loader, resources){
+    const machineSprite = new PIXI.Sprite(resources[characterMachine].texture)
+    machineSprite.position.set(400, 100)
+    machineSprite.scale.set(0.3, 0.3)
+    app.stage.addChild(machineSprite)
+
+    const monsterSprite = new PIXI.Sprite(resources[characterMonster].texture)
+    monsterSprite.position.set(500, 100)
+    monsterSprite.scale.set(0.3, 0.3)
+    app.stage.addChild(monsterSprite)
+}
+
+//
+otroLoader.onLoad.add(function(){
+    console.log('se cargaron los sprites')
+})
+* Spritesheet
+const xloader = PIXI.Loader.shared
+xloader
+    .add('boy', boy)
+
+//xloader.load(xsetup) // <--------- comentamos xq si no lanza excepción, por cargar más de 1 vez
+
+function xsetup(loader, resources){
+    // 1. Cargamos la textura del recurso llamado "boy"
+    const texture1 = resources.boy.texture
+    // 2. creamos un rectangulo para cropear la imagen
+    const rect1 = new PIXI.Rectangle(728, 104, 97, 137) // (posX, posY, width, height)
+    // 3. cropeamos/recortamos la textura con el rectángulo
+    texture1.frame = rect1
+    // 4. Transformamos el Texture en un Sprite
+    const sprite1 = new PIXI.Sprite(texture1)
+    // cambimos la posición y lo agregamos al Canvas
+    sprite1.position.set(450, 100)
+    app.stage.addChild(sprite1)
+
+    // Repetimos los pasos anteriores, pero...
+    // "TENEMOS QUE" crear un nuevo "Texture" del recurso "boy"
+    // porque la 2da vez que cropeemos, los cambios se harán en ambos sprites
+    // (porque apuntarian al mismo texture)
+    const texture2 = new PIXI.Texture(resources.boy.texture)
+    // sumamos el ancho del rectangulo, para capturar la imagen de su derecha en el spritesheet
+    const rect2 = new PIXI.Rectangle(728+97, 104, 97, 137)
+    texture2.frame = rect2
+    const sprite2 = new PIXI.Sprite(texture2)
+    sprite2.position.set(450+100, 100)
+    app.stage.addChild(sprite2)
+
+}
+* Loader y Spritesheet con JSON
+// - El archivo .json tiene las posiciones (x,y) del spritesheet .png
+// donde están todas las img (en vez de cargar varios .png solo cargamos uno)
+// -
+
+const loader = PIXI.Loader.shared
+loader.add('assets/boy.json')
+loader.load(setup)
+
+let boy
+
+function setup(loader, resources){
+    // recuperamos los datos del recurso (el .json)
+    let sheet = resources["assets/boy.json"];
+    // accedemos con la notación "dot" a los miembros de la estructura
+    // (el "animations" lo agregamos nosotros por separado en el json,
+    //  y le pusimos una secuencia de frames)
+    let animations = sheet.data.animations
+
+    const textures = []
+    // iteramos sobre "walk", lo habiamos agregado a mano en el .json
+    animations.walk.forEach(function(nameSprite){
+        // creamos una textura por cada frame
+        const texture = PIXI.Texture.from(nameSprite)
+        // y lo agregamos en un listado de texturas (para lograr la animación)
+        textures.push(texture)
+    })
+
+    // creamos la animación a partir de un conjunto de Texture (representan las imagenes)
+    boy = new PIXI.AnimatedSprite(textures)
+    boy.x = 400
+    boy.y = 150
+
+    app.stage.addChild(boy)
+    // importante reproducir la animación
+    //boy.play()
+    boy.animationSpeed = 0.05
+}
+
+// creamos una textura con una imagen tipo background
+const streetTexture = PIXI.Texture.from('assets/street.png')
+// creamos un sprite de background que tendrá animación
+const streetSprite = new PIXI.TilingSprite(
+    streetTexture,
+    app.screen.width,
+    app.screen.height
+)
+
+streetSprite.tileScale.set(1.5, 1.7)
+
+// la animación del fondo es que se desplazará hacia el costado 1 segundo
+app.ticker.add(function(){
+    streetSprite.tilePosition.x += 0.5
+})
+
+app.stage.addChild(streetSprite)
+* Loader y Static Files
+//-----------------------------------------------------------------------\\
+// --> LOADER + Static Files (nos evitamos usar un import por cada .png)
+
+const zloader = PIXI.Loader.shared
+// zloader
+//     .add('imaquina', 'assets/sprite-machine.png')
+
+//zloader.load(zsetup)
+
+function zsetup(loader, resources){
+    const maquinaSprite = new PIXI.Sprite(resources.imaquina.texture)
+
+    maquinaSprite.x = 400
+    maquinaSprite.scale.set(0.3, 0.3)
+    app.stage.addChild(maquinaSprite)
+}
+* Sonidos
+// importamos la clase Howl de la biblioteca Howler
+import { Howl } from 'howler'
+
+const sound = new Howl({
+    src: ['assets/filmfight.mp3']
+})
+
+sound.play()
