@@ -251,7 +251,7 @@
     - swap para la zona swap, 
 *** Windows
     - FAT32 para los datos
-* Particionamiento
+* [DOING] Particionamiento
 ** Listar/Crear/Eliminar partición
 *** Conceptos
     Posibles herramientas para particionar via terminal son
@@ -306,14 +306,17 @@
 *** Conceptos
     - El comando ~mkfs~ significa *make filesystem*
     - El formato *swap* se refiere al *área de swap* (memoria en disco)
-*** Diferenciar ext2 ext3 ext4
+
+    #+BEGIN_COMMENT
+    Diferenciar ext2 ext3 ext4
     1. https://www.learnitguide.net/2016/08/difference-between-ext2-ext3-and-ext4.html
-*** Identificar ext3 ext4
-   1. https://www.tecmint.com/find-linux-filesystem-type/
-*** Crear Ext3 
+    Identificar ext3 ext4
+    1. https://www.tecmint.com/find-linux-filesystem-type/
+    Crear Ext3 
     1. https://www.thegeekstuff.com/2011/05/ext2-ext3-ext4/
-*** Comando fsck
+    Comando fsck
     1. https://www.cyberciti.biz/tips/repairing-linux-ext2-or-ext3-file-system.html
+    #+END_COMMENT
 *** Comando mkfs (make file system)
     - Crea un *file system* en una partición (/debe estar montada, es decir tener asociado un punto de montaje/)
 
@@ -378,7 +381,7 @@
       # -> Punto de montaje será la ruta "/mnt/debian"
       sudo mount -t ext4 /dev/sda6 /mnt/debian
     #+END_SRC
-* Comandos para FileSystems
+* [DOING] Comandos para FileSystems
 ** Comando df (file system disk space usage)
 *** Conceptos
    - NO necesita del comando ~sudo~
@@ -458,7 +461,7 @@
       0       ./productos/farmacia
       0       ./productos
     #+END_SRC
-* Información de particiones y dispositivos
+* [DOING] Información de particiones y dispositivos
 ** Comando lsblk (list block devices)
    - Muestra un listado de los dispositivos en formato de árbol
    - Si queremos información resumida ejecutamos ~lsblk -S~
