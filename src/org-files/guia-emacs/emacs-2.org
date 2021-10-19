@@ -1,0 +1,745 @@
+#+TITLE:     Guia Emacs 2.0
+#+SETUPFILE: ../theme-readtheorg.setup
+#+EXPORT_FILE_NAME: ../../views/guia-emacs/emacs-2.html
+
+* [DOING] Aprendiendo Elisp
+** Atajos
+   ~M-x eval-buffer~ para ejecutar codigo
+   ~C-x C-e~ evaluar la ultima expresion
+** Paginas de Referencia
+   - [[https://learnxinyminutes.com/docs/es-es/elisp-es/][Referencia #1 - (learn x in minutes)]]
+   - [[https://blog.8bitzen.com/posts/27-02-2019-using-orgmode-babel/][Using OrgMode Babel (8bitzen)]]
+   - [[https://www.gnu.org/software/emacs/manual/html_node/eintr/][Referencia #2 (Gnu.org)]]
+   - [[https://www.gnu.org/software/emacs/tour/][Referencia #3 - Guia en general (Gnu.org)]]
+   - [[https://www.davidam.com/docu/emacs-lisp-intro-es.html][Referencia #4 - Davidam]]
+** Videos de Referencia
+   Es el que usa emacs internamente
+   - [[https://www.youtube.com/watch?v=NQhud2ZNd1w][Tutorial (Mike Zamanasky)]]
+   - [[https://www.youtube.com/watch?v=FppjUvUDO4o][Referencia #2 - (Linuxhint)]]
+   - [[https://www.youtube.com/watch?v=8Zkte37UOnA&t=571s][Referencia #3 - (Uncle Dave)]]
+   - Serie de videos por Daniel Gopar
+     1. [[https://www.youtube.com/watch?v=CH0RUrO_oww][Elisp Tutorial Intro]]
+     2. [[https://www.youtube.com/watch?v=lmTPJB0Musk][Elisp Tutorial - Variables, Booleanos]]
+     3. [[https://www.youtube.com/watch?v=VqCSbDqHziM][Elisp Tutorial - Variables locales, bucles]]
+     4. [[https://www.youtube.com/watch?v=KwBRpS9Bs4U][Elisp Tutorial - Funciones]]
+     5. [[https://www.youtube.com/watch?v=QaX3AaK3_Lk][Elisp Tutorial - nose]]
+** Guia de Lisp
+*** Conceptos
+    Para reforzar un poco el paradigma funcional e integrarlo con elisp que
+    es lo que utiliza emacs por dentro, se puede ejecutar tambien en la terminal eshell
+
+    -Para mostrar los bloques de codigo en otro buffer presionar ~, '~ ó ~C-x '~
+    -Para ejecutar el codigo presionar ~, ,~ ó ~C-c C-c~
+
+    Referencias:
+    - [[http://cl-cookbook.sourceforge.net/emacs-ide.html][Using emacs as LISP IDE (cl-cookbook)]]
+    - [[https://www.youtube.com/watch?v=-J_xL4IGhJA][Overview and Introduction to Lisp - Part 1]]
+    - [[https://www.youtube.com/watch?v=-J_xL4IGhJA&list=PLE18841CABEA24090][Playlist - Structure and Interpretation (MIT 1986)]]
+    - [[https://www.youtube.com/watch?v=QFbJKWhzhtU][Introduccion Lisp - Parte 1 (javierbravoudima) - Ver Video]]
+    -[[https://www.youtube.com/watch?v=Fz9Rig9lG50][ Intro Lisp - Parte 2 - Ver Video]]
+    - [[https://www.youtube.com/watch?v=Jx8riNWKe14][Intro Emacs (javier) - Ver Video]]
+    - [[https://www.youtube.com/watch?v=9aI7ZAEbiF0][Common LISP (Prof. Javier)]]
+*** Comandos basicos
+    |--------------------+---------------------------------------------------------------------------|
+    | Comando            | Descripción                                                               |
+    |--------------------+---------------------------------------------------------------------------|
+    | C-x C-e            | Ejecuta un comando (Con el cursor al final de linea)                      |
+    | M-x eval-last-sexp | Ejecuta un comando (Con el cursor al final de linea)                      |
+    | setq               | Cambia el valor de una variable local                                     |
+    | print              | Imprimir los datos de una variable                                        |
+    | setf               | Cambia el valor de una variable global                                    |
+    | length             | Devuelve la longitud de una lista (una cadena es una lista de caracteres) |
+    | read               | Pide ingresar datos                                                       |
+    |--------------------+---------------------------------------------------------------------------|
+*** Comandos para listas
+    |-----------+---------------------------------------------------|
+    | (1 2 3)   | Representa una lista, se forman con los ()        |
+    | append    | Inserta un elemento en una lista                  |
+    | cons      |                                                   |
+    | first,car | Devuelve primer elemento de una lista             |
+    | second    | Devuelve el segundo elemento de una lista         |
+    | nth <n>   | Devuelve el elemento en la posicion n de la lista |
+    | rest, cdr | Devuelve la lista sin el primer elemento          |
+    |-----------+---------------------------------------------------|
+*** Comandos para funciones
+    |-------+-----------------------------------------------------------------------|
+    | prog1 | Evalua todas las sentencias compuestas y devuelve la primer sentencia |
+    | progn | Evalua todas las sentencias compuestas y devuelve la ultima           |
+    |-------+-----------------------------------------------------------------------|
+
+    #+BEGIN_SRC emacs-lisp
+      (progn
+        ;; creamos un lista
+        (setf lista '(A B C))
+
+        ;; creamos la funcion saludo,
+        ;; que tiene solo un argumento
+        (defun saludo(msg)
+          ;; imprimimos el argumento usando el comando print
+          (print msg)
+          )
+
+        ;; llamamos a la funcion saludo y le pasamos como parametro una cadena
+        (saludo "hola")
+        )
+
+      (progn
+        ;; abro un buffer nuevo lamado test
+        (switch-to-buffer-other-window "*test")
+        ;; limpio el contenido si lo tuviese
+        (erase-buffer)
+        ;; declaro una variable unNombre
+        ;; y llamamos al comando read para que ingresen datos
+        (setf unNombre (read))
+        ;; imprimimos lo que se escribio
+        (print unNombre)
+        )
+    #+END_SRC
+*** Buffers
+    |-----------+--------------------------|
+    | Buffer    | Descripción              |
+    |-----------+--------------------------|
+    | backtrace | Es el depurador de emacs |
+    | scratch   | Para depurar codigo lisp |
+    |-----------+--------------------------|
+
+    Algunas diferencias
+
+    + Con setq y setf podemos cambiar el valor a las variables, pero el primero es de mas bajo nivel que setf. Este segundo es de mas alto nivel, e incorpora dentro a setq.
+    + Con setq no podemos cambiar el valor de una lista
+
+
+    #+BEGIN_SRC emacs-lisp
+      ;; Correr cada linea con M-x  C-x C-e   
+
+      ;; ejecuto una funcion prefija
+      (+ 1 2)
+
+      ;; declaro una variable local y le asigno una lista
+      (setq dias '(lunes martes))
+      (setq letras '(A B C))
+
+      ;; declaro una variable global
+      (setf dias '(lunes martes))
+
+      ;; pido el primer elemento de la lista (a b c)
+      (first '(a b c)
+
+             ;; imprimo la variable dias
+             (print dias)
+
+             ;; Le cambio el valor del primer elemento a una lista
+             ;; si probara con setq devolveria error
+             (setf (first dias) 'viernes)
+             (print dias) ;; ahora deberia devolver (viernes martes)
+
+             ;; Creo una funcion last (le resto 1 para no excederme de la cantidad de elementos)
+             (nth (- (length dias) 1) dias)
+
+             ;; Une dos listas en una
+             (append '(a b) '(c d))
+             ;; Insertamos una sublista al principio de otra lista
+             (cons '(a b) '(c d))
+
+             ;; Creo una funcion que imprima el argumento
+             (defun saludo(mensaje)
+               (print mensaje)
+               )
+    #+END_SRC
+
+    #+BEGIN_SRC emacs-lisp
+      (defvar nombre "jorgito")
+
+      (print nombre)
+    #+END_SRC
+* Empezando con Emacs
+** Configuraciones
+*** Referencias
+    - https://config.phundrak.com/spacemacs
+    - https://blog.8bitzen.com/posts/27-02-2019-using-orgmode-babel/
+    - https://xgarrido.github.io/emacs-starter-kit/starter-kit-org.html
+** [TODO] Comandos importantes
+    |---------+------------------------------------------------|
+    | Comando | Descripción                                    |
+    |---------+------------------------------------------------|
+    | w       | Ir a la siguiente palabra (word) a la derecha  |
+    | b       | Ir a la palabra anterior (back) a la izquierda |
+    |---------+------------------------------------------------|
+
+    |-------------------+--------------------------------------------------------------------------|
+    | Comando           | Descripción                                                              |
+    |-------------------+--------------------------------------------------------------------------|
+    | M-u               | Convertir a mayuscula (upper case) la siguiente palabra                  |
+    | M-l               | Convertir a minuscula (lower case) la siguiente palabra                  |
+    | M-c               | Convertir a letra capital (capitalize) la siguiente palabra              |
+    |-------------------+--------------------------------------------------------------------------|
+    | C-x C-u           | Convertir a mayuscula una región de texto seleccionada (Varias palabras) |
+    | C-x C-l           | Convertir a minuscula una región de texto seleccionada (varias palabras) |
+    | capitalize-region |                                                                          |
+    |-------------------+--------------------------------------------------------------------------|
+*** Referencias Web
+   + [[http://ergoemacs.org/emacs/modernization_upcase-word.html][Toggle Letter case - ergoemacs.org]]
+   + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Case.html][Case Conversion Commands -  gnu.org]]
+   + [[https://kb.iu.edu/d/abis][Change de case and capitalization of words and regions - Knowlege Base]]
+** Canales favoritos
+   - https://www.youtube.com/watch?v=49kBWM3RQQ8&list=PL9KxKa8NpFxIcNQa9js7dQQIHc81b0-Xg
+** [TODO] Modo artista, crear imagenes con texto
+   Para crear diseños uml con texto
+   - https://www.youtube.com/watch?v=cIuX87Xo8Fc
+   - https://ondahostil.wordpress.com/2017/12/06/lo-que-he-aprendido-diagramas-en-org-mode-con-ditaa/
+   - https://lapipaplena.wordpress.com/2017/02/05/graficos-con-org-mode-ditaa-y-plantuml/
+** Configuraciones personalizadas
+   http://home.thep.lu.se/~karlf/emacs.html#sec-7-10-1
+** PLugins y Extensiones
+   - https://company-mode.github.io/
+* Avanzando con Spacemacs
+** Layers de Spacemacs 
+*** Treemacs
+    Es un gestor de archivos
+
+    |---------+-------------------|
+    | Comando | Descripcion       |
+    |---------+-------------------|
+    | SPC g r | Refrescar cambios |
+    |---------+-------------------|
+**** Referencias
+     - https://github.com/Alexander-Miller/treemacs/blob/master/README.org
+** Nuevo modo cua-mode 
+   #+BEGIN_COMMENT
+   No conozco aun todas las funcionalidades, pero te deja seleccionar 
+   multiples lineas y editarlas al mismo tiempo. Ademas agregar incrementales.
+   #+END_COMMENT
+
+   - Se activa con ~M-x cua-mode~
+*** Funcionalidades
+    - seleccionar multiples lineas
+      Presionar C-RET <keyUp> <keyDown> y escribir 
+    - Agregar numeros de forma incremental
+      Presionar <kbd>M-n</kbd> y debajo elegir a partir de que numero, de a cuanto incrementar, y el formato
+      seguido de RET
+*** Referencias
+   - [[https://www.youtube.com/watch?v=uGLjkZxaFkw][Referencia #1 - Ver Video]]
+** Atajos en Hybrid Mod 
+*** Nuevos atajos que uso frecuentemente
+    |---------------------+----------------------------------------------------------------------------------|
+    | Comando             | Descripcion                                                                      |
+    |---------------------+----------------------------------------------------------------------------------|
+    | g c                 | Comentar un linea o bloque seleccionado (difiere entre lenguaje de programacion) |
+    | SPC b b             | Muestra un listado de buffers, para cambiar el actual                            |
+    | SPC '               | Carga el buffer de la terminal                                                   |
+    | SPC f r             | Lista los archivos abiertos recientemente                                        |
+    | SPC f f             | Para abrir un archivo                                                            |
+    | SPC f e R           | Recarga las configuraciones de .spacemacs                                        |
+    | SPC q q             | Cerrar emacs                                                                     |
+    | SPC q r             | Reiniciar emacs                                                                  |
+    | SPC g r             | Cargar magit                                                                     |
+    | SPC a o o           | Carga menu org-agenda                                                            |
+    | , '                 | Carga modo edicion especial para bloques de codigo                               |
+    | , ,                 | Ejecuta codigo de un bloque de codigo                                            |
+    | SPC <numero>        | Mueve cursor hacia el numero de buffer indicado                                  |
+    | SPC p f             | Cambiar carpeta de proyecto                                                      |
+    | SPC f p             | Listar y abrir archivos del proyecto actual                                      |
+    | C-x 1               | Cierra todos los buffers excepto donde esta el cursor                            |
+    | C-x 2               | Abre un buffer horizontal al actual                                              |
+    | C-x 3               | Abre un buffer vertical al actual                                                |
+    | C-x 0               | Cierra buffer actual                                                             |
+    | gg                  | Mueve el cursor a la primera linea del archivo                                   |
+    | <numero> gg         | Mueve el cursora la linea <numero> que indiquemos                                |
+    | :wq                 | Guarda los cambios y cierra                                                      |
+    | /texto RET          | Para buscar texto                                                                |
+    | d                   | Borra una linea                                                                  |
+    | y                   | Copiar texto seleccionado                                                        |
+    | p                   | Pegar texto                                                                      |
+    | v <h> <l>           | Seleccionar texto                                                                |
+    | V                   | Seleccionar toda la linea                                                        |
+    | x                   | Borra el caracter por caracter                                                   |
+    | n                   | Avanza a la siguiente palabra de la busqueda (realizada con /texto)              |
+    | ^                   | Ir al principio de linea                                                         |
+    | $                   | Ir al final de linea                                                             |
+    | <sr RET             | Carga snippet de bloque de codigo                                                |
+    | V g c               | Selecciona toda una linea y la comenta                                           |
+    | v Arrow-Up/Down g c | Seleccionar bloques de codigo y comentarlos                                      |
+    |---------------------+----------------------------------------------------------------------------------|
+** Ver historial de cambios, comando undo-tree
+   #+BEGIN_COMMENT
+   "Tratar de mejorar con mas investigacion y desarrollo"
+   #+END_COMMENT
+   Utilizamos undo-tree, se va a abrir un buffer *undo-tree*
+
+   |-----------+-----------+-------------------------|
+   | Holy Mode | Evil Mode | Descripcion             |
+   |-----------+-----------+-------------------------|
+   | C-x u     | SPC a u   | Abrir arbol de cambios  |
+   | C-g       | q         | Salir                   |
+   | C-q       |           | Cancelar cambios        |
+   |           | j,k       | Moverse entre los nodos |
+   |           | h,l       | Moverse entre las ramas |
+   |-----------+-----------+-------------------------|
+*** Referencias
+   - [[https://emacs.stackexchange.com/questions/27339/how-to-operate-the-undo-redo-tree-in-spacemacs][Algunos comandos (emacs.stackexchange.com)]]
+   - [[http://pragmaticemacs.com/emacs/advanced-undoredo-with-undo-tree/][Algunas configuraciones (pragmaticemacs.com)]]
+** Errores frecuentes
+*** No carga Org Agenda
+   - No carga la org-agenda y muestra como error
+     "Invalid function: org-preserve-local-variables"
+     Solucion:
+     1.Borrar los archivos org
+     cd ~/.emacs.d/elpa/develop
+     find org*/*.elc -print0 | xargs -0 rm
+     2. Ejecutar el comando dentro de spacemacs
+        spacemacs/recompile-elpa
+**** Referencias
+    - https://github.com/syl20bnr/spacemacs/issues/11801
+    - [[https://develop.spacemacs.org/doc/FAQ.html#why-are-packages-installed-with-package-install-automatically-deleted-by-spacemacs-when-it-boots][Preguntas frecuentes (develop.spacemacs.org)]]
+** [TODO] Referencias
+    - https://www.youtube.com/watch?v=8k7BTIqufqQ
+    - https://orgmode.org/guide/Hyperlinks.html
+    - https://www.youtube.com/watch?v=I2C6QTtxfe8
+    - https://www.youtube.com/watch?v=39u8K12rXHE
+    - https://orgmode.org/manual/Initial-visibility.html
+    - https://www.youtube.com/watch?v=S4f-GUxu3CY
+** [TODO] Agregar snippets
+*** Crear snippets
+   1. Presionar SPC SPC yas-new-snippet  o M-x yas-new-sippet
+   2. Crear un snippet
+   3. Llamarlo escribiendolo y presionar tab o presioar M-/ o M-x hippie-expand o SPC SPC hippie-expand
+*** Se eliminan layers por paquetes huerfanos
+    Que se quiera borrar yasnippet-snippets porque tiene un package huerfano (company-tern)
+    Solucion: ir a la linea que dice **dotspacemacs-install-packages 'used-only))**
+    y cambiar el **used-only** por **used-but-keep-unused** esto lo que hace es conservar el
+    package **yasnippet-snippets** por mas que tenga packages huerfanos (con la opcion anterior lo borraba)
+
+   *Solucion:*
+   1.Agregar en user-config las sig tres lineas
+   (global-set-key (kbd "TAB") 'hippie-expand)
+   (global-set-key (kbd "<tab>") 'hippie-expand)
+   (global-set-key (kbd "\t") 'hippie-expand)
+   2.Agregar en dotspacemacs-configuration-layers
+   auto-completion
+   (auto-completion :variables
+   auto-completion-return-key-behavior nil
+   auto-completion-tab-key-behavior 'complete
+   auto-completion-enable-sort-by-usage t
+   ;;auto-completion-tab-key-behavior nil
+   auto-completion-enable-snippets-in-popup t)
+**** Referencias
+      https://github.com/syl20bnr/spacemacs/issues/1538
+      https://github.com/syl20bnr/spacemacs/issues/1538#issuecomment-317241460
+*** Referencias
+   - [[http://jr0cket.co.uk/2016/07/spacemacs-adding-your-own-yasnippets.html][Referencia #1 - Ver Pagina]]
+   - [[https://www.youtube.com/watch?v=5kPrOs2ftN8][Referencia #1 - Ver Video]]
+   - [[https://www.youtube.com/watch?v=51as0UrssLM][Referencia #2 - Ver Video]]
+   - [[https://www.youtube.com/watch?v=lsYdK0C2RvQ][Referencia #3 - Ver Vide]]
+   - https://github.com/syl20bnr/spacemacs/issues/10316
+   - https://jaketrent.com/post/code-snippets-spacemacs/
+   - https://www.reddit.com/r/spacemacs/comments/apye26/is_there_a_better_way_of_using_snippets_yasnippet/
+   - https://github.com/syl20bnr/spacemacs/issues/4245
+   - https://www.emacswiki.org/emacs/HippieExpand
+   - https://develop.spacemacs.org/layers/+completion/auto-completion/README.html
+   - https://github.com/joaotavora/yasnippet#where-are-the-snippets
+   - https://practicalli.github.io/spacemacs/snippets/add-your-own-snippets.html
+** Utilizando el buffer scratch
+*** Referencias
+   - https://dev.to/huytd/emacs-from-scratch-1cg6
+** Utilizando Swiper
+*** Conceptos
+   Al parecer sirve como buscador (parece que se pueden usar expresiones regulares),
+   con un buffer debajo que indica las coincidencias
+*** Referencias
+   - https://github.com/abo-abo/swiper/issues/1550
+   - https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html
+   - https://www.youtube.com/watch?v=AaUlOH4GTCs
+* Integrando el Modo Org
+** TODO Configuracion para bloques de codigo
+
+   **Para abrir el bloque de codigo en un nuevo buffer**
+   1. Ejecutar C-c ' o SPC , . para cerrar el buffer SPC , ,
+   2. Otra manera si no funciona C-c ' podes probar con C-x n b  
+      para volver a ver el resto del contenido C-x n w
+
+   **Para autoindentar el codigo**
+   Para auto indentar el codigo correr en ese buffer M-x aggressive-indent-mode 
+   volver a ejecutar para desactivar
+       
+   **Algunos ejemplos**
+   - Con :var podemos agregar variables que usaremos en el codigo con $
+   - Con :results podemos cambiar como imprimir el resultado osea el output
+     - drawer, aparece el inicio y fin del codigo, si no queremos que se 
+       acumule el codigo, solo que se actualice esta bueno
+     - raw, se va a acumular por cada ejecucion
+
+   #+NAME: probando-esto
+   #+BEGIN_SRC sh :var nombre="mumuki" :results drawer 
+     pwd # para ver ruta actual
+     # ls | grep "mumuki"
+     # ls | grep "$nombre" # filtro directorio actual por un nombre
+
+
+   #+END_SRC
+
+   #+RESULTS: probando-esto
+   :results:
+   /home/jelou/Documentos/git/manu-docs
+   docs
+   ltximg
+   mkdocs.yml
+   mkdocs.yml~
+   README.org
+   :end:
+
+
+   Referencias:
+   - [[http://www.howardism.org/Technical/Emacs/literate-devops.html][Varios tips - Howardism.org]]
+   - [[https://maciaschain.gitlab.io/gnutas/eliminar_drawers.html][Eliminar los encabezados - By MaciasChain]]
+   - [[https://org-babel.readthedocs.io/en/latest/header-args/][Header args - By OrgBabel]]
+   - https://flipboard.com/@ipp/emacs-tricks-stuff-g7r2eiq2z
+
+   **Configuacion**
+
+   1. Modificar el archivo de configuracion de spacemacs con `SPC f e d`
+   2. Buscar la linea que diga `org-babel-do-load-languages` y agregar
+      una linea por cada lenguaje entre parentesis (nombreLenguaje . t)
+   3. Si no aparece agregar el siguiente bloque de codigo y modificar a gusto
+      #+BEGIN_SRC emacs-lisp
+        (org-babel-do-load-languages 'org-babel-load-languages
+                                     (append org-babel-load-languages
+                                             '((python     . t)
+                                               (ruby       . t)))
+      #+END_SRC
+    
+   Paso a paso:
+   1. Para encapsular bloques de codigo empezar con #+BEGIN_SRC seguido de nombre de lenguaje,
+   escribir el codigo deseado y finalizar con la siguiente linea #+END_SRC
+   2. Para ejecutar bloque de codigo ejecutar <bdk>C-c C-c</bdk>
+    
+
+
+   Referencias para configuracion y resolver errores:
+   - [[https://www.reddit.com/r/emacs/comments/4wm4y2/appending_to_orgbabelloadlanguages/][Referencia #1 - Reddit.com]]
+   - [[https://github.com/syl20bnr/spacemacs/issues/9867][Referencia #2 - Github.com]]
+   - [[https://orgmode.org/manual/Using-Header-Arguments.html][Using Header Arguments (orgmode.org)]]
+   - [[https://orgmode.org/worg/org-contrib/babel/header-args.html][Header Arguments and result types (orgmode.org)]]
+   - [[https://www.offerzen.com/blog/literate-programming-empower-your-writing-with-emacs-org-mode][Literate Programming (offerzen.com)]]
+   - [[https://steemit.com/spacemacs/@shark8me/indenting-code-blocks-in-spacemacs-org-mode][Indentar (tabular) codigo (steemit.com)]]
+   - [[https://emacs.stackexchange.com/questions/18273/tell-org-to-treat-block-quotes-as-a-special-environment][Modificar bloques de codigo en otro buffer (emacs.stackexchange.com)]]
+   - [[https://blog.8bitzen.com/posts/27-02-2019-using-orgmode-babel/][Using orgmode babel (8bitzen)]] 
+** NUevo - Bloques de codigo
+*** Referencias
+    - [[https://emacs.stackexchange.com/questions/15065/org-mode-babel-interactive-code-block-evaluation][Ingresar datos - Input - Stackoverflow]]
+    - [[https://kitchingroup.cheme.cmu.edu/blog/2019/02/12/Using-results-from-one-code-block-in-another-org-mode/][Ingresar datos, input -]]
+
+** [TODO] Creando tablas
+
+   |--------------+-----------------------------------------|
+   | Comando      | Descripción                             |
+   |--------------+-----------------------------------------|
+   | C-c -        | Agrega una linea divisoria              |
+   | C-c TAB      | Oculta/Expande una columna              |
+   | C-c C-c      | Ajusta las columnas (por si se deforma) |
+   | C-c SPC      | Borra el texto de una celda             |
+   | M-LEFT/RIGHT | Mover columnas (izquierda/derecha)      |
+   | M-UP/DOWN    | Mover filas (arriba/abajo)              |
+
+   + Referencias
+     - [[https://www.gnu.org/software/emacs/manual/html_node/org/Built_002din-table-editor.html][The built-in table editor - gnu.org]]
+     - [[https://orgmode.org/manual/Built_002din-Table-Editor.html][Built-in Table Editor - orgmode.org]]
+     - [[https://orgmode.org/manual/Column-Width-and-Alignment.html][Column width and alignment - orgmode.org]] 
+** TODO Usando Latex
+*** 1. Instalación
+
+    #+NAME: Instalacion en la terminal
+    #+BEGIN_SRC sh
+      # 1. primero instalar algunos paquetes de latex
+      #
+      # Existe otro textlive-common que instala todo pero esa 2Gb
+      # me pareció innecesario, con esos dos es más que suficiente
+      pacman -S texlive-core texlive-science texlive-latexextra
+
+      # 2. instalar un editor de latex
+      #
+      # Me pareció que es el más sencillo y fácil de usar
+      # la otra alternativa es utilizar spacemacs (pero no es tan completo)
+      pacman -S gummi
+    #+END_SRC
+
+*** 2. Configuración Spacemacs para Latex
+     
+    1. En los archivos .org
+
+    #+BEGIN_EXAMPLE
+    Para previsualizar al abrir los archivos .org agregar  #+STARTUP: latexpreview
+    Para que no previsualizar agregar      #+STARTUP: nolatexpreview
+    #+END_EXAMPLE
+
+    2. En el archivo de configuración de spacemacs
+
+       #+NAME: Configuracion de spacemacs
+       #+BEGIN_SRC emacs-lisp
+         ;; abrir la configuración de spacemacs SPC f e d
+         ;; o sinó SPC f f RET ~/.spacemacs
+
+         ;; Para agrandar el tamaño de la fuente de los preview de latex
+         ;; en los archivos .org que se previsualizan con C-c C-x C-l
+         (plist-put org-format-latex-options :scale 1.5)
+
+         ;; Encontrar una linea que diga dotspacemacs-configuration-layers
+         ;; y agregar el layer latex
+         ;; deberia quedar de la siguiente manera
+         dotspacemacs-configuration-layers
+         '(markdown
+           latex ;; << Agregar esta linea
+           python
+           auto-completion
+           emacs-lisp
+           git
+           helm
+           prolog
+           org
+           treemacs
+           )
+       #+END_SRC
+
+*** 3. Escribir código en org mode y previsualizarlo
+    + Si queremos previsualizar la ecuación ejecutamos *C-c C-x C-l*
+    + Supongamos que estamos en un archivo .org y escribimos algunas formulas que queremos previsualizar 
+ 
+    #+NAME: Escribir texto con pequeñas ecuaciones con $
+    #+BEGIN_EXAMPLE
+    Estamos escribiendo una ecuación $1+1=2$ mientras que $1+1=2$
+    #+END_EXAMPLE
+
+    #+NAME: Escribir una ecuacion enumerada con {equation}
+    #+BEGIN_EXAMPLE
+    \begin{equation}
+    1+1 = 2 
+    \end{equation}
+    #+END_EXAMPLE
+
+    #+NAME: Escribir bloques con varias ecuaciones con {align}
+    #+BEGIN_EXAMPLE
+    \begin{align}
+    1+1 = 2 \\
+    2+2 = 4 \\
+    3+3 = 6 \\
+    \end{align}
+    #+END_EXAMPLE
+
+    #+NAME: Escribir un bloque con varias ecuaciones enumeradas con {align*}
+    #+BEGIN_EXAMPLE
+    \begin{align*}
+    1+1 = 2 \\
+    2+2 = 4 \\
+    3+3 = 6 \\
+    \end{align*}
+    #+END_EXAMPLE
+
+*** Referencias
+    - [[https://orgmode.org/manual/Previewing-LaTeX-fragments.html][Previewing latex fragments - orgmode.org]]
+    - [[https://www.gnu.org/software/emacs/manual/html_node/org/Previewing-LaTeX-fragments.html][Previewing latex fragments - gnu.org]]
+    - [[https://www.overleaf.com/learn/latex/Mathematical_expressions][Mathematical expressions - Overleaf]]
+    - [[https://www.overleaf.com/learn/latex/List_of_Greek_letters_and_math_symbols][List of Greek letters and math symbols - Overleaf]]
+    - [[https://www1.cmc.edu/pages/faculty/aaksoy/latex/latexthree.html][Latex Tutorial Math Mode]]
+    - [[https://www.overleaf.com/learn/latex/aligning_equations_with_amsmath][Aligning equations with amsmath]]
+    - [[http://www.tug.org/teTeX/tetex-texmfdist/doc/latex/amsmath/amsldoc.pdf][User's Guide for the amsmath Package]]
+    - [[https://itsfoss.com/latex-editors-linux/][9 Best latex editors for Linux]]
+    - [[https://www.ugr.es/~mmartins/material/latex_basico.pdf][Introducción de Latex]]
+    - [[http://nokyotsu.com/latex/curso.html][Curso básico de Latex]]
+** Agregando imagenes
+*** Comandos
+*** Redimensionar imagenes
+     
+    #+BEGIN_EXAMPLE 
+    #+ATTR_ORG: :width 400
+    [[file:RUTA_DE_LA_IMAGEN]]
+    #+BEGIN_EXAMPLE
+     
+
+    + Para agregar una imagen ejecuta *C-c C-l* elegis la ruta de la imagen
+      pero no le pongas una descripción, porque sino no hace la vista preliminar
+    + Para ver una vista preliminar ejecuta *C-c C-x C-v*
+    + Para cambiar el tamaño de las imagenes
+
+
+    *Referencias*
+    - [[https://emacs.stackexchange.com/questions/10114/org-mode-no-images-to-display-inline][No images to display inline - Stackexchange.com]]
+    - [[https://ondahostil.wordpress.com/2017/12/26/lo-que-he-aprendido-imagenes-inline-en-org/][imagenes inline en org mode - Blog OndaHostil]]
+** TODO Utilizando columnas
+   Pendiente a revisar mas..
+    
+   Referencias:
+   - [[https://orgmode.org/worg/org-tutorials/org-column-view-tutorial.html][Org Column Tutorial - orgmode.org]]
+   - [[https://correl.phoenixinquis.net/2014/11/25/getting-organized-with-org-mode.html][Getting organized - By Correl Roush]]
+** Creando presentaciones con beamer
+   Errores comunes:
+   1. No me aparece la opcion para exportar beamer
+   Solucion
+   Escribir al principio del archivo la siguiente linea
+   #+BEGIN_SRC 
+   #+STARTUP: beamer#+STARTUP: beamer
+   #+END_SRC
+    
+   Referencias:
+   - https://www.reddit.com/r/emacs/comments/60tmkl/no_latexbeamer_export_available/
+   - https://notxor.nueva-actitud.org/blog/2019/04/29/presentaciones-con-org-beamer-mode/
+   - https://orgmode.org/worg/exporters/beamer/tutorial.html
+   - https://orgmode.org/worg/exporters/beamer/ox-beamer.html 
+   - https://orgmode.org/worg/exporters/beamer/presentation.html
+   - https://cestlaz.github.io/posts/using-emacs-50-presentations/
+   - https://www.youtube.com/watch?v=Ho6nMWGtepY
+** [TODO] Agenda 
+   - https://es.wikipedia.org/wiki/CalDAV
+   - https://es.wikipedia.org/wiki/ICalendar
+   - https://es.wikipedia.org/wiki/HCalendar
+   - https://es.wikipedia.org/wiki/WebDAV
+** Creando un html moderno
+   Referencias:
+   - https://github.com/fniessen/org-html-themes
+   - https://gongzhitaao.org/orgcss/
+   - https://orgmode.org/manual/Export-Settings.html#Export-settings
+   - https://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html
+   - http://snarvaez.poweredbygnulinux.com/notes/org-mode-publishing-system.html
+   - https://orgmode.org/manual/Include-Files.html
+   - https://orgmode.org/manual/Publishing.html
+** Atajos dentro de la agenda
+   | Atajo     | Descripcion                                                     |
+   | SPC-a o o | Abrir agenda                                                    |
+   | C-c a     |                                                                 |
+   | q         | Cerrar buffer de agenda                                         |
+   | f         | (foward) siguiente semana                                       |
+   | b         | (back) semana anterior                                          |
+   | m         | filtrar por keywords                                            |
+   | , d       | Cambiar desde la agenda la fecha programada (Schedule/deadline) |
+** Formato
+*** Cambiar la fecha
+*** Repetir fechas (hobbies, cursos semanales, ..)
+    Seguido de la fecha agregar +1w que significa repetir la tarea todas las semanas
+    Si es cada dos dias +2d
+    Referencias
+    - [[https://www.youtube.com/watch?v=nbC-gL5wcf4][Referencia #1 - Ver Video (Rainer Konig)]]
+    - [[https://www.youtube.com/watch?v=IofHvutUWV0&t=8s][Referencia #2 - Ver VIdeo]]
+    - [[https://www.youtube.com/watch?v=u00pglDfgX4][Referencia #3 - Ver Video]]
+    - [[https://www.youtube.com/watch?v=PJ3qHIl-eOM][Personalizar Agenda View - Referencia #4 - Ver Video]]
+** Uso profesional
+   - [[https://www.youtube.com/watch?v=7ybg3vjLQJM][Referencia #1 - Ver Video (GDQuest)]]
+   - [[https://www.youtube.com/watch?v=cRUCiF2MwP4][Referencia #1 - Ver Video (John Kitchin)]]
+   - [[https://www.youtube.com/watch?v=2t925KRBbFc][Referencia #2 - Ver Video]]
+
+** [DONE] Iniciar emacs con un archivo .org
+   CLOSED: [2020-04-13 lun 15:49]
+** [DONE] Crear una lista de tareas
+   CLOSED: [2020-04-13 lun 15:49]
+** [DONE] Crear una sub-lista de tareas
+   CLOSED: [2020-04-13 lun 15:49]
+** [DONE] Crear tareas con viñetas
+   CLOSED: [2020-04-13 lun 15:49]
+** [DONE] Crear una lista de seguimiento con to-do
+   CLOSED: [2020-04-13 lun 15:49]
+** [DONE] Crear una lista de seguimiento con checkboxes
+   CLOSED: [2020-04-13 lun 15:49]
+** [DONE] Atajos
+   CLOSED: [2020-04-13 lun 15:50]
+** [TODO] [#B] Asociar con Trello
+   Para pasar los archivos .org a trello
+   http://org-trello.github.io/demo.html
+   https://github.com/org-trello/org-trello/blob/master/TODO.org
+** Ahorra tiempo de trabajo con Modo Captura
+   https://elblogdelazaro.gitlab.io/posts/2019-11-04-org-mode-capturas-rapidas-con-org-capture/
+** [TODO] [#C] Crear hojas de calculo
+   **C-c C-c** realinea la tabla sin mover el cursor
+   **C-c -** inserta una linea horizontal debajo de la fila actual
+   **M-a** se mueve al campo anterior
+   **M-e** se mueve al campo siguiente
+   - http://www.blackhats.es/wordpress/?p=83
+   - https://www.blackhats.es/wordpress/?p=84
+** [TODO] [#A] Agenda y Fechas
+   **C-c .** inserta un timestamp plano
+   - https://elblogdelazaro.gitlab.io/posts/2019-03-19-vista_de_agenda_personalizada/
+   - https://www.blackhats.es/wordpress/?p=214
+** [TODO] [#C] Properties (No le encontre mucho uso por ahora)
+   - https://bzg.fr/en/org-column-view-tutorial.html/
+** [TODO] [#A] Crear links internos y externos
+   Por el momento podes usar el shortcut **C-c C-l**
+   Paginas pendientes
+   - [[https://orgmode.org/manual/Link-Format.html][Link-Format (orgmode.org)]]
+   - [[https://orgmode.org/guide/Hyperlinks.html][Hyperlink (orgemode.org)]]
+   - [[https://orgmode.org/manual/External-Links.html][External-links (orgmode.org)]]
+   - [[https://www.blackhats.es/wordpress/?p=86][Hiperenlaces (blackhats.es)]]
+   - https://nasciiboy.land/emacs/org-mode/
+   - https://elbauldelprogramador.com/chuleta-org-mode/
+** [TODO] [#A] Estado prioridad de las tareas
+*** [TODO] Como cambiar el estado/prioridad de cada tarea
+*** [TODO] Personalizar el color y texto del estado/prioridad
+*** [TODO] [#A] Agregar tareas con el estado TODO de forma predeterminada
+    Para no estar cambiando a cada tarea el estado a **TODO**
+** [TODO] [#A] Exportar archivos a markdown (.md)
+   Presionar el atajo <kbd>C-c C-e</kbd> o <kbd>, , e</kbd> o <kbd>SPC org-export-dispatch<kbd>
+   Por el momento agregamos el siguiente script en el archivo de configuracion de .spacemacs
+
+   Algunos paginas de referencia:
+   - [[https://stackoverflow.com/questions/22988092/emacs-org-mode-export-markdown][Agregar script en la configuracion de emacs/spacemacs (stackoverflow.com)]]
+   - [[https://www.gnu.org/software/emacs/manual/html_node/org/Markdown-export.html][Markdown export (gnu.org)]]
+   - [[https://orgmode.org/worg/exporters/ox-overview.html][List of Org-mode exporters (orgmode.org)]]
+   - [[https://orgmode.org/org.html#Markdown-Export][Markdown export (orgmode.org)]]
+   - [[https://orgmode.org/manual/Exporting.html][Exporting (orgmode.org)]]
+   - [[https://daringfireball.net/projects/markdown/][Plugin Markdown (daringfireball.net)]]
+** Sincronizar Google Calendar con Org Agenda
+   - https://www.youtube.com/watch?v=RyNBtfu9AJ4
+   - https://www.youtube.com/watch?v=vO_RF2dK7M0
+** [DONE] Referencias
+   CLOSED: [2020-04-13 lun 15:50]
+*** [DONE] Guias Basicas
+    CLOSED: [2020-04-13 lun 15:49]
+*** [DONE] Guias Completas
+    CLOSED: [2020-04-13 lun 15:49]
+*** [DONE] Como organizarse con el modo org
+    CLOSED: [2020-04-13 lun 15:49]
+*** [DONE] Cambiar las prioridades de las tareas
+    CLOSED: [2020-04-13 lun 15:49]
+*** [DONE] Modificar la agenda de estados
+    CLOSED: [2020-04-13 lun 15:49]
+*** [DONE] Otros
+    CLOSED: [2020-04-13 lun 15:49]
+*** [DONE] Integrar archivos .org en Dropbox
+    CLOSED: [2020-04-11 sáb 15:49]
+** [#C] Revisar
+   proyectos
+   - https://www.youtube.com/watch?v=3iHRZzEcBIY
+   - https://hiepph.github.io/post/2017-11-24-emacs-org-syncthing/
+   - https://www.youtube.com/watch?v=37onM0bjNDg
+   - https://awesomeopensource.com/projects/org-mode
+
+   Otros
+   - http://doc.norang.ca/org-mode.html
+
+   Programming with emacs
+   - https://www.youtube.com/watch?v=GK3fij-D1G8
+   - https://www.youtube.com/watch?v=dljNabciEGg&t=587s
+
+   - https://dynalist.io/pricing
+   -https://news.ycombinator.com/item?id=20477740
+   -https://www.meetup.com/New-York-Emacs-Meetup/
+   -https://plaintextproject.online/2018/03/27/orgmode.html
+** Configuraciones para Exportar
+   - [[https://orgmode.org/guide/Export-Settings.html][Referencia #1 (orgmode.org)]]
+   - [[https://orgmode.org/manual/Export-Settings.html][Referencia #2 (orgmode.org)]]
+* Integrando Git con MAGIT
+** Nuevas funcionalidades
+   [[http://jr0cket.co.uk/2017/02/spacemacs-using-magit-with-github.html][Magithub, by jr0cket]]
+** [TODO] Tips
+*** [TODO] Diferencia entre push remote y upstream
+    - Lo mismo para pull
+    - Algunas referencias
+    - https://help.github.com/es/github/using-git/pushing-commits-to-a-remote-repository
+    - https://stackoverflow.com/questions/13751319/git-push-current-vs-push-upstream-tracking
+    - https://www.reddit.com/r/emacs/comments/8ficmj/magit_upstream_vs_pushremote/
+    - https://fluca1978.github.io/2017/06/11/magit-spin-offs-anothew-way-to-name.html
+** [DONE] Referencias
+   CLOSED: [2020-04-13 lun 15:37]
+*** [DONE] Paginas de referencia
+    CLOSED: [2020-04-13 lun 15:37]
+    - [[https://develop.spacemacs.org/layers/+source-control/git/README.html][Git - Spacemacs.org]]
+
+* [TODO] Comentarios de Trello
+** Addons
+   CLiente de telegram
+   https://github.com/zevlg/telega.el

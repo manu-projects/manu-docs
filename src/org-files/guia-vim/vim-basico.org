@@ -1,0 +1,106 @@
+#+TITLE:     Guia Vim - Básico
+#+SETUPFILE: ../theme-readtheorg.setup
+#+EXPORT_FILE_NAME: ../../views/guia-vim/vim-basico.html
+
+ #+ATTR_HTML: :width 300 
+ [[../../assets/img/vim-meme.jpg]]
+
+* Comandos básicos
+** Reemplazar palabras
+   Se utiliza el comando ~:s~ (substitute) seguido de ~/REGEX/PALABRA_NUEVA/EXPRESSION_FLAGS~
+
+   Donde la *REGEX* es una expresión regular,
+   luego *PALABRA_NUEVA* claramente será el nuevo valor de la expresión,
+   y por último *EXPRESION_FLAGS* ampliará la búsqueda o no según cual *flag* coloquemos.
+   
+  Entonces seguido a los ~:~ tenemos dos maneras de activar el comando de sustitución
+    - ~s~ reemplaza la primera palabra que coincida (/solo en la linea donde este el cursor/)
+    - ~%s~ reemplaza la primera palabra que coincida (/en cada linea del archivo/)
+  
+  Daremos algunos ejemplos
+
+  #+BEGIN_QUOTE
+  ~:s/actualidad/actualmente~
+  Reemplazamos la primera palabra que coincida con "actualidad" al comienzo de la linea donde este el cursor,
+  y la reemplazamos por "actualmente"
+
+  ~:s/actualidad/actualmente/g~
+  Similar al anterior ejemplo, pero reemplaza todas las palabras que coincidan en la linea donde este el cursor
+  (/es decir no solo la primera que encuentre, si no todas/)
+
+  ~:s/actualidad/actualmente/gc~
+  Similar al anterior pero nos pide confirmacion al momento de reemplazar
+  
+  ~:%s/actualidad/actualmente~
+  Reemplazamos la primera palabra que coincida con "actualidad" al comienza de cada linea del archivo,
+  y la reemplazamos por "actualmente"
+
+  ~:%s/actualidad/actualmente/g~
+  Similar al anterior pero reemplaza todas las palabras que coincidan, en todo el archivo (/es decir no la primera que encuentre/)
+
+  ~:%s/actualidad/actualmente/gc~
+  Similar al anterior pero nos pide confirmación al momento de reemplazar
+  #+END_QUOTE
+** Referencias
+*** Referencias Web Extraoficiales
+     1. [[https://vim.fandom.com/wiki/Search_and_replace][Buscar y reemplazar - fandom.com]]
+     2. [[https://hipertextual.com/archivo/2015/01/como-usar-vim-14/][Como usar Vim - hipertextual.com]]
+     3. [[https://www.atareao.es/tutorial/vim/buscar-y-reemplazar-en-vim/][Buscar y reemplazar en Vim - atareo.es]]
+     4. [[https://www.imd.guru/sistemas/vim/buscar-y-reemplazar.html][Buscar y reemplazar - imd.guru]]
+     5. [[https://www.linux.com/training-tutorials/vim-tips-basics-search-and-replace/][Vim Tips Basics - linux.com]]
+*** Referencias Youtube
+     1. [[https://www.youtube.com/watch?v=iWo1cDGlNDI][Referencia #1]]
+     2. [[https://www.youtube.com/watch?v=8PZZkIr5Dcc][Referencia #2]]
+     3. [[https://www.youtube.com/watch?v=jwxK5Eg_TnM][Referencia #3]]
+     4. [[https://www.youtube.com/watch?v=OnUiHLYZgaA][Referencia #4]]
+* QuteBrowser - Navegador web con Modo Vim
+** Conceptos
+   Es un navegador web minimalista que utiliza *QtWebEngine* (/motor basado en Google Chromium/)
+   por defecto como buscador a DuckDuckGo
+** Atajos
+   + No es necesario escribir el comando : (dos puntos) para utilizarlos
+   + Para las letras en mayuscula presionar SHIFT+Letra, no funciona con BloqMayus
+
+   |-----------+------------------------------------------------------------------|
+   | Atajo     | Descripción                                                      |
+   |-----------+------------------------------------------------------------------|
+   | i         | Modo Escribir (Insert Mode)                                      |
+   | v         | Modo Lectura (Visual Mode)                                       |
+   | Escribir  | Modo Normal                                                      |
+   |-----------+------------------------------------------------------------------|
+   | :         | Listar todos los comandos                                        |
+   | r         | Recargar página                                                  |
+   | d         | Cierra la pestaña actual                                         |
+   | o         | Buscar algo en el Buscador "DuckDuckGo" en la pestaña actual     |
+   | O         | Buscar algo en el Buscador "DuckDuckGo" en nueva pestaña         |
+   | go        | Abrir una dirección web en la pestaña actual                     |
+   | gC        | Clonar pestaña                                                   |
+   | <Ctrl-Q>  | Salir                                                            |
+   | :q        | Guardar las pestañas abiertas y salir                            |
+   |-----------+------------------------------------------------------------------|
+   | f         | Muestra etiquetas en la pantalla, simula el click con el teclado |
+   | j, k      | Scrollear hacia arriba/abajo                                     |
+   | h, l      | Scrollear hacia izquierda/derecha                                |
+   | H, L      | Moverse por el historial, a la página anterior/siguiente         |
+   | J, K      | Movernos entre las pestañas                                      |
+   | <Alt-Num> | Seleccionar una pestaña                                          |
+   |-----------+------------------------------------------------------------------|
+   | /         | Buscar palabras en la pestaña actual                             |
+   | n         | Siguiente búsqueda                                               |
+   | N         | Anterior búsqueda                                                |
+   | yy        | Copiar url de la pestaña actual                                  |
+   | yt        | Copiar el titulo de la pestaña actual                            |
+   | pp        | Pegar                                                            |
+   |-----------+------------------------------------------------------------------|
+** Referencias
+*** Referencias Web Oficiales
+   1. [[https://qutebrowser.org/doc/help/commands.html][Comandos - qutebrowser.org]]
+   2. [[https://draculatheme.com/qutebrowser][Dracula Theme - draculatheme.com]]
+*** Referencias Web Extraoficiales
+   1. [[https://laboratoriolinux.es/index.php/-noticias-mundo-linux-/software/26950-la-nueva-version-de-qutebrowser-1-11-0-ya-esta-aqui-un-navegador-al-estilo-vim.html][QuteBrowser 1.11 - laboratoriolinux.es]]
+   2. [[https://laboratoriolinux.es/index.php/-noticias-mundo-linux-/software/27249-qutebrowser-el-navegador-al-estilo-vim-se-actualiza-a-su-nueva-version-1-12-0.html][QuteBrowser 1.12 - laboratoriolinux.es]]
+   3. [[https://ubunlog.com/qutebrowser-navegador-estilo-vim/][Intro QuteBrowser - ubunlog.com]]
+   4. [[https://www.xataka.com/basics/duckduckgo-que-principales-diferencias-google][DuckDuckGo - Características - xakata.com]]
+*** Referencias Youtube
+   1. [[https://www.youtube.com/watch?v=nu-YyL7iQC4][Referencia #1]]
+   2. [[https://www.youtube.com/watch?v=g2RtjO_jXvY][Referencia #2]]

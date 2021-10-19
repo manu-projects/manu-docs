@@ -1,0 +1,434 @@
+#+TITLE: Teoria de Juegos
+#+STARTUP: inlineimages
+* Dilema del Prisionero
+** Conceptos
+  - Las tuplas representan el valor para cad sospechoso quedando ~(sospechoso_A, sospechoso_B)~
+  - A mayor es el valor => mas años de carcel tendrá el sospechoso
+
+  #+NAME: matriz-de-pagos
+  |-------------+----------+-------------|
+  |             | Confiesa | NO confiesa |
+  |-------------+----------+-------------|
+  | Confiesa    | (5;5)    | (1;10)      |
+  |-------------+----------+-------------|
+  | NO confiesa | (10;1)   | (2;2)       |
+  |-------------+----------+-------------|
+
+  #+BEGIN_QUOTE
+  Si ambos confiesan matriz [0,0] => el valor es 5 años de carcel para ambos
+
+  Si ninguno confiesa matriz [1,1] => el valor es 2 años de carcel para cada uno
+
+  Si el sospechoso_A confiesa y    => le dan 10 años al sospechoso_A, y 1 año al sospechoso_B
+  el sospechoso_B NO confiesa 
+  matriz [1,0]
+
+  Si el sospechoso_B confiesa y    => le dan 10 años al sospechoso_B, y 1 año al sospechoso_A
+  el sospechoso_A NO confiesa 
+  matriz [0,1]
+  #+END_QUOTE
+** Estrategia dominante
+   Es la decisión más óptima para el jugador (independientemente de lo que haga el adversario)
+  
+   En la matriz la estrategia dominante para cada jugador estrategia 
+   - Para el sospechoso_A la posición [0,1] porque recibe 1 año, y el sospechoso_b recibe 10
+   - Para el sospechoso_B la posición [1,0] porque recibe 1 año y el sospechoso_a recibe 10
+
+  #+NAME: matriz-de-pagos
+  |-------------+----------+-------------|
+  |             | Confiesa | NO confiesa |
+  |-------------+----------+-------------|
+  | Confiesa    | (5;5)    | (1;10)      |
+  |-------------+----------+-------------|
+  | NO confiesa | (10;1)   | (2;2)       |
+  |-------------+----------+-------------|
+** Estrategia dominada
+   - Es la la PEOR decisión para el jugador
+   - No es la mejor respuesta/reacción a las acciones del adversario
+** Equilibrio de Nash
+*** Conceptos
+    - Conjunto de estrategias dominantes de c/jugador contra el adversario
+    - Es un equilibrio *estable*
+
+    #+BEGIN_QUOTE
+    En la matriz es la posición [0,0] que NO es la mejor, pero es un equilbrio
+    donde ambos obtienen 5 años de carcel :(
+
+    Mientras que la posición [1,1] es un equilbrio pero NO estable
+    por tanto no cumple con el equilbrio de nash
+    #+END_QUOTE
+
+     #+NAME: matriz-de-pagos
+     |-------------+----------+-------------|
+     |             | Confiesa | NO confiesa |
+     |-------------+----------+-------------|
+     | Confiesa    | (5;5)    | (1;10)      |
+     |-------------+----------+-------------|
+     | NO confiesa | (10;1)   | (2;2)       |
+     |-------------+----------+-------------|
+*** Multiples equilbrios de Nash
+*** Sin equilibrio de Nash
+    Suponiendo el típico juego de "piedra, papel y tijera"
+    donde cada componente es ~(puntos_jugador_A, puntos_jugador_B)~
+    
+    y los puntos son
+    - ~1~ cuando hay empate
+    - ~0~ si pierde
+    - ~2~ si gana (puntos a favor)
+
+    |--------+--------+-------+--------|
+    |        | Piedra | Papel | Tijera |
+    |--------+--------+-------+--------|
+    | Piedra | (1;1)  | (0;2) | (2;0)  |
+    |--------+--------+-------+--------|
+    | Papel  | (2;0)  | (1;1) | (0;2)  |
+    |--------+--------+-------+--------|
+    | Tijera | (0;2)  | (2;0) | (1;1)  |
+    |--------+--------+-------+--------|
+
+
+    En la matriz de pagos elegimos para el jugador_A, veremos que NO tiene una *estrategia dominante*
+    que le permita ganar en cualquier situación
+    - Si el jugador_B elije *piedra* al jugador_A le conviene elegir *papel* osea la posición ~[0,1]~
+    - Si el jugador_B elije *papel* el jugador_A le conviene elegir *tijera* osea posición ~[1,2]~
+    - Si el jugador_B elije *tijera* el jugador_A le conviene elegir *piedra* osea posición ~[0,2]~
+   
+    Lo mismo se repite para el jugador_B, no tiene una *estrategia dominante* que le permita
+    ganar en cualquier situación.
+
+    Por tanto concluimos que NO HAY un equilibrio de nash
+*** Equilibio de Nash
+    - Si los valores del juego oscilan entre 0-750, y mayor puntaje mejor..
+    - Las estrategias del jugador_A son {A,B,C} (las filas)
+    - Las estrategias del jugador_B son {D,E,F} (las columnas)
+
+    |---+------------+--------------+--------------|
+    |   | D          | E            | F            |
+    |---+------------+--------------+--------------|
+    | A | (100;125)  | (300, ~250~) | (200;100)    |
+    |---+------------+--------------+--------------|
+    | B | (~200~ ;0) | ~(500;500)~  | (~750~ ;400) |
+    |---+------------+--------------+--------------|
+    | C | (0;100)    | (400;300)    | (-50; ~350~) |
+    |---+------------+--------------+--------------|
+
+    El equilibrio de nash se da en [1,1] con ~(500,500)~ donde ambos salen ganando
+
+    Estrategias que deberia elegir el *jugador_B* según cual elija el contrario (jugador_A),
+    observamos que NO tiene *estrategia dominante* porque con ninguna le gana en cada decisión del contrario
+    - Si el jugador_A elije la estrategia ~A~ => el jugador_B debe elegir la estrategia ~E~ 
+    - Si el jugador_A elije la estrategia ~B~ => el jugador_B debe elegir la estrategia ~B~ 
+    - Si el jugador_A elije la estrategia ~C~ => el jugador_B debe elegir la estrategia ~F~
+    
+    Estrategias que deberia elegir el *jugador_A* según cual elija el contrario (jugador_B),
+    veremos que la *estrategia dominante* es la ~B~ porque gana ante cualquier decisión del jugador_B
+    - Si el jugador_B elije la estrategia ~D~ => el jugador_A debe elegir la estrategia ~B~ (porque con A,C piede)
+    - Si el jugador_B elije la estrategia ~E~ => el jugador_A debe elegir la estrategia ~B~ (porque con A,C pierde)
+    - Si el jugador_B elije la estrategia ~F~ => el jugador_A debe elegir la estrategia ~B~ (idem)
+* Algoritmo Minimax con matrices
+** Matriz de Decisión
+   - Las columnas representan un jugador A
+   - Las filas representan otro jugador B
+** Maximin (evaluación)
+   1. Se busca el valor mínimo de cada celda de la fila
+   2. Luego se elije el máximo de los minimos anteriores
+** Minimax (evaluación)
+   1. Se busca el valor máximo de cada celda de la columna
+   2. Luego se elije el mínimo de los máximos anteriores
+** Evaluación Maximin Minimax
+   Luego de realizar el ~Maximin~ y ~Minimax~ se evalúa si coincide algún valor,
+   si se cumple entonces hay equilibrio
+* Algoritmo Minimax
+** Conceptos
+   - Se elije con un nivel ~N~ finito de profundidad, porque si no son muchas posibilidades (el algoritmo tardaria mucho)
+   - Se parte desde las hojas, desde el ultimo nivel elegido
+   - Se analiza el peor de los escenarios, donde el rival elegiría una buena jugada
+   - Por cada movimiento se debe reconstruir el arbol, siendo ese movimiento mi nuevo *nodo raíz* del que parto
+   - Para que un (ABB) *Arbol Binario de Busqueda* tenga un tiempo razonable de respuesta debe tener 
+     - 10 niveles (si son mas niveles, tardará horas o más)
+     - un factor de ramificación de 10
+** Valores
+   En algunos materiales nos vamos a encontrar con las siguientes variables
+   - v: valor del nodo
+   - alfa: valor favorable para Max <-- en wikipedia es un cuadrado
+   - beta: valor favorable para Min <-- en wikipedia es un circulo
+
+   Los valores negativos representan *ventaja del contrincante* (minimizar)
+   los valores positivos representan *ventaja nuestra* (maximizar)
+
+   |------+----+----+---+---+---+------|
+   | -inf | -2 | -1 | 0 | 1 | 2 | +inf |
+   |------+----+----+---+---+---+------|
+** Busqueda en profundidad y en anchura
+** Niveles (Max y Min)
+   1. El *nodo raíz* es el primer *nivel max*.
+   2. A medida que se baja , se alterna entre *nivel Min* y *nivel Max* hasta llegar a los *nodos terminales* (ó hojas)
+** Factor de Ramificación
+*** Conceptos
+   - Se refiere al *grado* del árbol/nodos, osea la cant. max. de nodos-hijos que pueden
+   - Este factor puede incrementar (incrementando el *grado*) por cada nivel que se baja
+   - Una fórmula útil es ~b^d~ 
+     - ~b~ es el *factor de ramificación promedio*
+     - ~d~ es la *profundidad media*
+*** Ejemplos
+    Si tenemos un árbol binario de grado 2, con 3 niveles (0,1,2) tendremos ~2^(3)-1~ nodos (osea 7)
+   le restamos 1 por la imparidad de la raíz
+*** Ejemplo (1) con diagrama
+   #+BEGIN_SRC plantuml :file ../../assets/img/arbol-1.png :exports results
+     @startuml
+     title Arbol (profundidad y altura)
+     'left to right direction
+     top to bottom direction 
+
+     cloud "Arbol con Altura 4"{
+     rectangle "Nivel 0" as A{
+      (a)
+     }
+
+     rectangle "Nivel 1" as B{
+      (b)
+      (c)
+      (d)
+     }
+
+     rectangle "Nivel 2" as C{
+      (e)
+      (f)
+      (g)
+     }
+
+     rectangle "Nivel 3" as D{
+      (h)
+     }
+     }
+
+     note right of (a): Profundidad 0\nno tiene predecesor\nes la raíz
+     note right of (b): Profundidad 1\ntiene 1 predecesor (la raíz)
+     note right of (e): Profundidad 2\ntiene 2 predecesores{b,a}
+     note right of (h): Profundidad 3\ntiene 3 predecesores{g,c,a}\nel nodo mayor profundidad del árbol
+
+     (a) --> (b)
+     (a) --> (c)
+     (a) --> (d)
+
+     (b) --> (e)
+
+     (c) --> (f)
+     (c) --> (g)
+     (g) --> (h)
+
+     @enduml
+   #+END_SRC
+
+   #+RESULTS:
+   [[file:../../assets/img/arbol-1.png]]
+
+** Procedimiento
+   Se hace una búsqueda en profundidad
+   
+   1. Se arma el árbol binario de búsqueda desde el estado actual
+      (Si no movimos ninguna pieza, será del principio, caso contrario desde la última jugada)
+   2. Se parte desde las hojas hasta la raiz (de forma ascendente)
+   3. Se le da valores según si gano,pierdo ó empato (Ej. 1,0,-1)
+** Promover
+   Cuando promovemos (subimos al nivel de arriba) los valores al nodo-padre podemos estar maximizando ó minimizando
+   - Si solo hay un nodo-hijo, solo se copia ese valor al nodo-padre
+   - Si hay dos nodos-hijos se debe comparar el valor de ambos
+** Jugadores
+   - Max: Agente inteligente (maximiza) <- nosotros
+   - Min: Contrincante (minimiza)
+** Maximizar
+   - Cuando maximizamos elegimos el mayor valor
+   - Hacemos de cuenta que es nuestro turno
+   - Elegimos mayor valor (a favor nuestro)
+** Minimizar
+   - Cuando minimizamos elegimos el menor valor
+   - Hacemos de cuenta que es el turno del jugador contrario (y que hizo una buena jugada)
+   - Elegimos el peor escenario, en la que el rival elegirá su mejor opción, nos dará pelea
+** Puntos
+   |---------+--------|
+   | Pieza   | Puntos |
+   |---------+--------|
+   | Peón    |      1 |
+   | Caballo |      3 |
+   | Alfil   |      3 |
+   | Torre   |      5 |
+   | Dama    |      9 |
+   |---------+--------|
+** Función de evaluación
+** Ejemplos
+*** Ejemplo 1
+   #+BEGIN_SRC plantuml :file ../../assets/img/algoritmo-minimax-1.png :exports results
+      @startuml
+
+      title Algoritmo Minimax
+      top to bottom direction 
+
+      (max\n9) --> (min\n-6)
+      (max\n9) --> (min\n9)
+
+          (min\n-6) --> (max\n-6)
+          (min\n-6) --> (max\n-4)
+    
+          (min\n9) --> (max\n0)
+          (min\n9) --> (max\n9 )
+
+      note as A
+      Características del Arbol
+      ,* Profundidad: 2
+      ,* Grado: 2
+      ,* Niveles: 3
+      grado^niveles-1 => 2^3-1 = 7 nodos
+      end note
+
+      note left of (min\n-6)
+      Como **minimizamos**, al elegir
+      entre {-6, -4} seleccionamos **-6**
+      el más chico (a favor del oponente)
+      end note
+
+      note left of (max\n9)
+      Como **maximizamos** al elegir
+      entre {-6, 9} seleccionamos **9**
+      el mayor valor (a favor nuestra)
+      end note
+      @enduml
+    #+END_SRC
+
+    #+RESULTS:
+    [[file:../../assets/img/algoritmo-minimax-1.png]]
+*** Ejemplo Tic Tac Toc
+   #+BEGIN_SRC plantuml :file ../../assets/img/algoritmo-minimax-tictactoe.png :exports results
+     @startuml
+
+     title Algoritmo Minimax (Juego Tic-Tac-Toc)
+     top to bottom direction 
+
+     note as MAX_0
+     | X | O | X |
+     | X | O |   |
+     |   |   | O |
+     end note
+
+         note as MAX_1
+         | X | O | X |
+         | X | O | **X** |
+         |   |   | O |
+         end note
+
+         note as MAX_2
+         | X | O | X |
+         | X | O | x  |
+         | O | **X**  | O |
+
+         0*1 = 0
+         end note
+
+         note as MAX_3
+         | X | O | X |
+         | X | O |   |
+         | **X** |   | O |
+
+         (+1)*3 = +3
+         end note
+
+         note as MIN_1
+         | X | O | X |
+         | X | O | x  |
+         |   | **O** | O |
+
+         (-1)*2 = -2
+         end note
+
+         note as MIN_2
+         | X | O | X |
+         | X | O | x  |
+         | **O** |   | O |
+         end note
+
+         MIN_2 --> MAX_2
+
+         MAX_1 --> MIN_1
+         MAX_1 --> MIN_2
+
+         note as MAX_4
+         | X | O | X |
+         | X | O |   |
+         |   | **X** | O |
+         end note
+
+             note as MIN_3
+             | X | O | X |
+             | X | O | **O** |
+             |   | X  | O |
+             end note
+
+                 note as MAX_5
+                 | X | O | X |
+                 | X | O | O |
+                 | **X**  | X  | O |
+
+                 (+1)*1 = +1
+                 end note
+
+                 MIN_3 --> MAX_5
+
+             note as MIN_4
+             | X | O | X |
+             | X | O |   |
+             | **O**  | X  | O |
+             end note
+
+                 note as MAX_6
+                 | X | O | X |
+                 | X | O | **X**  |
+                 | O  | X  | O |
+
+                 0*1 = 0
+                 end note
+
+                 MIN_4 --> MAX_6
+
+             MAX_4 --> MIN_3
+             MAX_4 --> MIN_4
+
+     MAX_0 -->  MAX_1
+     MAX_0 -->  MAX_3
+     MAX_0 -->  MAX_4
+
+
+     note as X1
+     puntaje = puntos*nivel
+
+     ,**puntos**
+     ,* empate: 0
+     ,* perdido: -1
+     ,* ganado : +1
+     end note
+     @enduml
+    #+END_SRC
+
+    #+RESULTS:
+    [[file:../../assets/img/algoritmo-minimax-tictactoe.png]]
+
+* Poda alfa-beta
+  - Es una mejora del *algoritmo minimax* (reduce tiempo de calculo y buscar en mas profundidad)
+  - Corta ramas del arbol
+* Referencias Teoricas
+  2. https://underc0de.org/foro/inteligencia-artificial-y-biohacking/indice-de-la-seccion-(-ia-y-bh-)/
+  3. https://underc0de.org/foro/inteligencia-artificial-y-biohacking/1-1-aislamiento-(inteligencia-artificial)/
+  4. http://luisespino.com/temp/games/reversi/index.php
+* Referencias en Programming
+  1. https://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-1-introduction/
+  2. https://www.freecodecamp.org/news/simple-chess-ai-step-by-step-1d55a9266977/
+  3. https://www.youtube.com/playlist?list=PLZ1QII7yudbe4gz2gh9BCI6VDA-xafLog
+  4. https://www.youtube.com/playlist?list=PLZ1QII7yudbc7_ZgXA-gIXmME41Rs2GP5
+  5. https://www.youtube.com/playlist?list=PLZ1QII7yudbc-Ky058TEaOstZHVbT-2hg
+  6. https://www.uio.no/studier/emner/matnat/ifi/INF4130/h17/undervisningsmateriale/chess-algorithms-theory-and-practice_ver2017.pdf
+* Algoritmos de Fuerza Bruta
+  1. https://es.wikipedia.org/wiki/B%C3%BAsqueda_de_fuerza_bruta
+* Explosión Combinatoria
+  1. https://es.wikipedia.org/wiki/Explosi%C3%B3n_combinatoria
+* Juego Reversi-Othello
+  otro juego donde aplica minimax
+  https://es.wikipedia.org/wiki/Reversi

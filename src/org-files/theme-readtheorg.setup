@@ -1,7 +1,7 @@
 # -*- mode: org; -*-
 
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="assets/css/sass-style.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/assets/css/sass-style.css"/>
 
-#+HTML_HEAD: <script type="text/javascript" src="assets/js/all.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="/assets/js/all.js"></script>
 

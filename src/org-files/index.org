@@ -1,16 +1,31 @@
-#+TITLE:     Example of Tasks
-#+AUTHOR:    Jelou
-#+LANGUAGE:  es
-#+OPTIONS:   H:4 num:2 toc:4
+#+TITLE:     Inicio
 #+SETUPFILE: ./theme-readtheorg.setup
+#+EXPORT_FILE_NAME: ../views/index.html
 
- #+NAME: mover-html
- #+BEGIN_SRC elisp :exports none :results none
-   (shell-command-to-string "mv *.html ../views") ;; cuidado..!
+ #+NAME: auto-exportar-org-files-html
+ #+BEGIN_SRC elisp :exports none
+   (defun toggle-html-export-on-save ()
+     "Enable or disable export HTML when saving current buffer."
+     (interactive)
+     (when (not (eq major-mode 'org-mode))
+       (error "Not an org-mode file!"))
+     (if (memq 'org-html-export-to-html after-save-hook)
+         (progn (remove-hook 'after-save-hook 'org-html-export-to-html t)
+                (message "Disabled org html export on save"))
+       (add-hook 'after-save-hook 'org-html-export-to-html nil t)
+       (set-buffer-modified-p t)
+       (message "Enabled org html export on save")))
+
+   (toggle-html-export-on-save)
  #+END_SRC
+
+ #+RESULTS: auto-exportar-org-files-html
+ : Enabled org html export on save
 
  #+NAME: exportar-org-files-html
  #+BEGIN_SRC elisp :exports none :results none
+   ;; Deprecado
+   ;; te exportaba todo en vez de solo el que se modifcaba
    (defun exportar-archivo (f)
      (save-excursion (find-file f) (org-html-export-to-html f)
    ))
@@ -19,7 +34,6 @@
      (mapc 'exportar-archivo (directory-files dir t ".org$")
     ))
 
-   ;(exportar-archivos "~/Documentos/git/manu-docs/testing/src/")
    (exportar-archivos default-directory)
 
    ; find-file - opens a file in a buffer (this is what is run when you type C-x C-f)
@@ -27,11 +41,59 @@
    ; directory-files: obtiene todos los archivos y carpetas de un directorio
  #+END_SRC
 
-* Todos los temas a saber
-  1. Como codear
-  2. [[titulo 1][este titulo si]]
-* titulo 1
-* titulo 2
-** probando
-   un archivo [[file+emacs:archivo.org][probando che]]
-** algo
+#+ATTR_HTML: :width 600
+#+ATTR_HTML: :align center 
+[[../assets/img/knowledge.jpeg]]
+
+* Objetivos
+  Compartir conocimiento acerca de los lenguajes de programación, nuevas tecnologías e información útil y necesaria para mantenerse siempre actualizado. Dirigido a quienes realmente tengan ganas de aprender.
+* Documentado
+** Desarrollo Web
+   - [DESARROLLANDO] Conceptos importantes de Frontend
+   - [DESARROLLANDO] Desarrollar juegos Web con Javascript Nativo
+   - [DESARROLLANDO] Desarrollar juegos Web en Javascript+Frameworks
+   - [PENDIENTE] Testing y Webscrapping con Selenium Web
+   - [PENDIENTE] Hagamos magia en javascript con jQuery
+   - [PENDIENTE] Maquetar con CCSS2/CSS3
+   - [PENDIENTE] Aprendiendo lo mejor de algunos Frameworks de CSS
+   - [PENDIENTE] El gran salto de CSS a SASS
+** Herramientas para Programar
+*** Vim
+    - [DESARROLLANDO] Conociendo Vim como IDE [[file:guia-vim/vim-basico.org][[Ir a la pagina]​]]
+*** Emacs
+    - [ACTUALIZADO] Conociendo Emacs como IDE [[file:guia-emacs/ide-emacs.org][Ir a la página]]
+    - [NUEVO] Conociendo Spacemacs [[file:guia-emacs/emacs-spacemacs.org][Ir a la pagina]] 
+    - [DESARROLLANDO] Rompiendola con Spacemacs
+    - [NUEVO] Versionando proyectos en GIT con Magit [[file:guia-emacs/emacs-magit.org][[Ir a página]​]]
+    - [DESARROLLANDO] Programar dentro de Emacs con Elisp
+*** Github
+    - [DESARROLLANDO] Git primeros pasos
+    - Aprendiendo lo básico de Control de versiones con Github [[file:guia-git/git-basico.org][Ir a la página]]
+    - [NUEVO] Profundizando sobre Github Bash [[file:guia-git/git-2.org][Ir a la página]]
+** Linux
+   - Sobrevivir usando la terminal - Parte 1 [[file:guia-linux/linux-basico-1.org][Ir a la página]] 
+   - Sobrevivir usando la terminal - Parte 2 [[file:guia-linux/linux-basico-2.org][Ir a la página]]
+   - Trabajando desde linux [[file:guia-linux/linux-2.org][Ir a la página]]
+   - [NUEVO] Herramientas para resolver problemas frecuentes [[file:guia-linux/linux-problemas-comunes.org][[Ir a la pagina]​]]
+   - [DESARROLLANDO] Particionar el disco y no morir en el intento [[file:guia-linux/linux-particionamiento.org][[Ir a la pagina]​]]
+   - [DESARROLLANDO] Configuraciones útiles [[file:guia-linux/linux-configuraciones.org][[Ir a la página]​]]
+   - Personalizar el sistema [[file:guia-linux/linux-personalizar.org][[Ir a la página]​]]​
+   - [NUEVO] Entendiendo que son Gestores de Paquetes Linux [[file:guia-linux/linux-gestores-de-paquetes.org][[Ir a la Pagina]​]]
+   - [NUEVO] Sacale provecho a la terminal con las Expresiones Regulares [[file:guia-linux/linux-expresiones-regulares.org][[Ir a la Pagina]​]]​
+** Redes y Virtualización
+   - Virtualización ligera de Contenedores con Docker [[file:guia-virtualizacion/docker.org][[Ir a página]​]] 
+   - [DESARROLLANDO] Virtualización de Boxes con Vagrant y Ansible [[file:guia-virtualizacion/vagrant-ansible.org][[Ir a la pagina]​]]
+   - Como crear y configurar una Máquina Virtual [[file:guia-virtualizacion/virtualbox.org][[Ir a la página]​]]
+   - [DESARROLLANDO] Entender que es una de red [[file:guia-linux/linux-configuracion-de-red.org][[Ir a la pagina]​]]
+   - [PENDIENTE] Instalar y configurar ssh
+** Documentar
+   - [NUEVO] Organizando tareas y actividades con Org Mode [[file:guia-documentacion/emacs-modo-org.org][[Ir a la pagina]​]]
+   - [PENDIENTE] Descubriendo los archivos .md
+   - [PENDIENTE] Primeros pasos usando LaTeX
+** Repositorios materias de programación
+   - Aprendiendo Haskell [[https://github.com/neverkas/aprende-haskell][[Ir a la página]​]] 
+   - Aprendiendo C++ [[https://github.com/neverkas/aprende-cpp][[Ir a la página]​]] 
+   - Aprendiendo Lenguaje de Máquina [[https://github.com/neverkas/aprende-assembler-8085][[Ir a la página]​]]
+** Otros 
+   - [NUEVO] Extensiones utiles para navegadores web [Ir a la pagina]
+

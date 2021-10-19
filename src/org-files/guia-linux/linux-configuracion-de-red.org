@@ -1,0 +1,154 @@
+#+TITLE:     Guia Linux - Configuración de Red
+#+SETUPFILE: ../theme-readtheorg.setup
+#+EXPORT_FILE_NAME: ../../views/guia-linux/linux-configuracion-de-red.html
+
+ *Aviso:*
+ Por el momento esta sección no está del todo completa,
+ pero debajo dejo algunas referencias importantes para entrar en tema.
+
+* Proxy (Squid) y Firewall (Ufw)
+** Comandos básicos
+   Comandos utilizados en la distribución **ArchLinux** puede llegar a diferir según cual tengan instalado.
+
+   1. Para iniciar el servicio usar ~sudo systemctl start squid~
+   2. Para saber el estado ~sudo systemctl status squid~
+   3. Reiniciar ~sudo systemctl restart squid~
+   4. Revisar si no hay errores ~sudo squid -k check~
+** Referencias
+*** Referencias Web Oficiales
+    1. [[http://www.squid-cache.org][Página Oficial de Squid]]
+*** Referencias Web Extraoficiales
+    1. [[https://www.ajpdsoft.com/modules.php?name=News&file=article&sid=441][Configurar Squid en Ubuntu - Ajpsoft.com]]
+    2. [[http://www.ite.educacion.es/formacion/materiales/85/cd/linux/m6/proxy_squid.html][Conceptos de Proxy con Squid - Educacion ITE]]
+    3. [[http://www.kacharreando.com/ubuntu/configurar-proxy-squid/][Configurar Squid en Ubuntu - Kacharreando.com]]
+    4. [[https://www.sysadminsdecuba.com/2017/11/tips-configuracion-de-proxy-para-los-servicios-de-linux/][Configurar Servicios Linux con Proxy - SysadminsDeCuba.com]]
+    5. [[https://doxfer.webmin.com/Webmin/Squid_Proxy_Server][Breve introducción a Squid Server - Webmin.com]]
+    6. [[https://esgeeks.com/abrir-cerrar-puertos-linux/][Abrir y cerrar puertos - esgeeks.com]]
+* Configuración de red
+** Conceptos
+   Podemos identificar las interfaces de red de la siguiente forma
+   1) *Adaptadores Ethernet:* eth0, eth1, eth2, eth3, ...
+   2) *Adaptadores Inalambricos:* wlan0, wlan1, wlan2, wlan3, ...
+   3) *Adaptador de LoopBack:* lo 
+
+   #+BEGIN_QUOTE
+   El adaptador o *interfaz de loopback* es un adaptador virtual de la misma maquina y 
+   se accede de a traves de la direccion 127.0.0.1 o del nombre de dominio localhost
+   #+END_QUOTE
+** Comandos básicos
+   Según la distribución de Linux los comandos pueden variar, estos se hacen en ArchLinux
+
+*** Listar interfaces de red
+    #+NAME: linux-listar-interfaces
+    #+BEGIN_SRC shell
+      # listar interfaces
+      ip link
+    #+END_SRC
+*** Mostrar IP de las interfaces
+    #+NAME: linux-interfaces-mostrar-ip
+    #+BEGIN_SRC shell
+     ip address show
+    #+END_SRC
+*** Mostrar tablas de enrutamiento
+**** Procedimiento
+     #+NAME: linux-tablas-de-enrutamiento
+     #+BEGIN_SRC shell
+      ip route show
+     #+END_SRC
+**** Referencias Extraoficiales
+     1. [[https://www.sololinux.es/uso-del-comando-route-en-linux/][Como usar el comando route en linux - Sololinux.es]]
+*** Otros comandos
+    #+NAME: linux-interfaces-otros-comandos
+    #+BEGIN_SRC shell
+      # para ver las conexiones
+      nmcli
+
+      # editar conexiones via terminal
+      nmtui
+
+      # gui de conexiones
+      nm-connection-editor
+    #+END_SRC
+** Referencias
+*** Referencias Web Oficiales
+    1. [[http://www.tldp.org/LDP/nag2/][Documentación Oficial de Redes - Guía Sysadmin - TLDP.org]]
+    2. [[https://wiki.archlinux.org/index.php/Network_configuration][Configuración de red - Wiki ArchLinux.org]]
+    3. [[https://www.ibiblio.org/pub/Linux/docs/LuCaS/Presentaciones/200103hispalinux/eric/html/rutas.html][Tablas de routing - tldp-es]]
+*** Referencias Web Extraoficiales
+    1. [[https://www.redeszone.net/tutoriales/servidores/configurar-linux-comando-ip-iproute2-suite/][Comando ip - IPRoute 2 - RedesZone.net]]
+    2. [[https://linuxhint.com/arch_linux_network_manager/][Como usar NetworkManager - LinuxHint.com]]
+    3. [[http://cetemredes2.blogspot.com/2014/04/configurar-adaptador-de-red.html][Configurar Adaptador de Red - Blog CetemRedes]]
+    4. [[https://danjared.wordpress.com/2011/03/09/configurar-el-proxy-en-ubuntu/][Configurar Poxy en Ubuntu - Blog Danjared]]
+    5. [[https://securityhacklabs.net/articulo/enrutando-todo-tu-trafico-bajo-la-red-tor-como-un-proxy-transparente-en-linux][Enrutar tráfico con Proxy+Tor - SecurityHackLabs.net]]
+    6. [[http://www.nexolinux.com/configurar-red-en-linux/][Conceptos de Redes - NexoLinux.com]]
+* Configurar Proxy
+** Configuración
+  1. Abrir el archivo de configuración *enviroment* con ~sudo nano /etc/environment~
+  2. Agregar la siguiente configuración
+     #+NAME: environment-configuracion
+     #+BEGIN_SRC bash
+      http_proxy="http://192.168.1.89:3128/"
+      https_proxy="https://192.168.1.89:3128/"
+      no_proxy="localhost,127.0.0.1,::1
+     #+END_SRC
+    
+  3. Para verificar que se aplicaron los cambios verificamos las *variables globales* con ~env | grep proxy~
+
+  *Observación:*
+  El puerto 3128 es el predeterminado por squid, esta modificación solo afecta a la sesión abierta
+
+  #+BEGIN_COMMENT
+  Nos queda como pendiente como correrlo en la shell zsh al iniciar
+  #+END_COMMENT
+** Configurar Navegador Web
+   Cada navegador puede tomar diferente los proxy, en este caso mostraremos con Opera
+
+   #+NAME:
+   #+BEGIN_SRC shell
+      opera --proxy-server="http://192.168.1.89.3128/"
+   #+END_SRC
+
+   *Observación:*
+   Para más información ingresar lo siguiente en la barra de direcciones ~opera://linux-proxy-config~
+** Mostrar Errores de Squid
+   Para ver los errores de squid antes de correr del servicio 
+
+    #+NAME: squid-mostrar-errores
+    #+BEGIN_SRC shell
+      sudo squid -k check
+
+      # lanza error si hay algo mal configurado
+      sudo squid -k reconfigure
+    #+END_SRC
+** Referencias
+*** Referencias Web Extraoficiales
+    1. [[https://ketansingh.net/setting-proxy-for-archlinux/][Configurar Proxy en la Shell ZSH - Ketansingh.net]]
+    2. [[https://www.garron.me/es/gnu-linux/configurar-proxy-ubuntu-desktop-server.html][Configurar Proxy en Ubuntu - Garron.me]]
+    3. [[https://www.sololinux.es/instalar-squid-proxy-server-en-ubuntu-18-04/][Configurar Squid en Ubuntu - Sololinux.es]]
+    4. [[https://medium.com/@krish.raghuram/setting-up-proxy-in-ubuntu-95058da0b2d4][Configurar Enviroment - Blog by Krish]]
+    5. [[https://www.whoishostingthis.com/tools/user-agent/][Conocer user agente - whoishostingthis.com]]
+    6. [[https://www.sololinux.es/instalar-squid-proxy-server-en-ubuntu-18-04/][Instalar Squid Proxy Server en Ubuntu - Sololinux.es]]
+*** Referencias Youtube
+    1. [[https://www.youtube.com/watch?v=6qLRHDXPda8][Referencia #1]]
+*** Referencias Issues
+    1. [[https://www.linuxquestions.org/questions/linux-server-73/block-a-browser-in-squid-924596/][Block a Browser in Squid - Linuxquestions.org]]
+* Iptables
+** Referencias Youtube
+   1. [[https://www.youtube.com/watch?v=Yk61s5Ec6YA][Referencia #1]]
+   2. [[https://www.youtube.com/watch?v=qPEA6J9pjG8][Referencia #2]]
+   3. [[https://www.youtube.com/watch?v=zELPIdxoGaQ&t=93s][Referencia #3]]
+* Proxy Squid y Tor
+** Referencias Youtube
+   1. [[https://www.youtube.com/watch?v=vj00RVHGxFg][Referencia #1]]
+   2. [[https://www.youtube.com/watch?v=IJ-1Dksex5k][Referencia #2]]
+* Referencias
+** Referencias Web Oficiales
+   1. [[http://es.tldp.org/Manuales-LuCAS/GARL2/garl2/x-087-2-iface.ifconfig.html][Comando ifconfig, The Linux Documentation Project]]
+   2. [[http://e-ghost.deusto.es/docs/articulo.redes.html][Curso de Redes]]
+   3. [[http://persoal.citius.usc.es/tf.pena/ASR/Tema_3html/node21.html][Curso de Administracion de Sistemas y Redes]]
+** Referencias Web Extraoficiales
+   1. [[https://linuxconfig.org/configuring-virtual-network-interfaces-in-linux][Configurar Interfaces - LinuxConfig.org]]
+   2. [[http://www.meltit.com.ar/linux-configuracion-internetip-manual-permanente-y-temporal-route-nameserver-interfaces-ifconfig-gateway][Configurar manual ip permanente/temporal, Meltit.com.ar]]
+   3. [[http://www.ingdiaz.org/configuracion-de-interfaces-de-red-en-ubuntu-distros-basados-en-debian/][Configuracion de la Interfaz - IngDiaz.org]]
+   4. [[https://www.linux-party.com/29-internet/10036-ifconfig-vs-ip-diferencia-y-comparacion-de-la-configuracion-de-red][Comando ip y ifconfig, Linux Party]]
+   5. [[https://maslinux.es/comando-ifconfig-aprende-con-algunos-ejemplos/][Comando ifconfig con ejemplos - MasLinux.es]]

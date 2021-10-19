@@ -31,3 +31,34 @@ ul.nav > li.active > a {
 	  margin: 0;
 	  padding: .4045em 1em !important;
 }
+
+li a:not(#table-of-contents a, .internal-link){
+    background: url(/img/external-link-ltr.svg) center right no-repeat;
+    padding-right:15px;
+}
+
+li{
+    list-style:disc;
+}
+
+hr{
+    border: dashed 1px #999;
+}
+
+/*******************************************************/
+.badge-new {
+	  color: #fff;
+	  background-color: #dc3545;
+}
+.badge-updated {
+	  color: #fff;
+	  background-color: green;
+}
+.badge-waiting {
+	  color: #222;
+	  background-color: orange;
+}
+.badge-doing {
+	  color: #fff;
+	  background-color: #007bff;
+}

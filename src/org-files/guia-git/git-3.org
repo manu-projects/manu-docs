@@ -1,0 +1,26 @@
+#+TITLE:     Guia GIT 3.0
+#+SETUPFILE: ../theme-readtheorg.setup
+#+EXPORT_FILE_NAME: ../../views/guia-git/git-3.html
+
+* Traerse ramas remotas
+  #+BEGIN_SRC shell
+    git checkout -b nombreRama origin/nombreRama
+  #+END_SRC
+* Subir ramas locales
+  #+BEGIN_SRC shell
+    git push origin ramaLocal
+  #+END_SRC
+* Deshacer cambios confirmados
+  #+BEGIN_SRC shell
+    # si queremos volver un cambio atrás
+    git reset HEAD~1
+
+    # si queremos volver tres cambio atrás
+    git reset HEAD~3
+  #+END_SRC
+* Guardar cambios
+  #+BEGIN_SRC shell
+    git stash --save "nombre "
+    # lo q sea
+    git pop
+  #+END_SRC

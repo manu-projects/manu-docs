@@ -1,0 +1,803 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-10-18 lun 01:42 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Guia Virtualización - Vagrant y Ansible</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="jelou" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="/assets/css/sass-style.css"/>
+<script type="text/javascript" src="/assets/js/all.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Guia Virtualización - Vagrant y Ansible</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org4583a97">1. Configuración</a>
+<ul>
+<li><a href="#org089cf0c">1.1. Particionar disco</a>
+<ul>
+<li><a href="#orga741b3e">1.1.1. Crear particiones</a></li>
+<li><a href="#orgf6f69fc">1.1.2. Formatear particiones primarias</a></li>
+<li><a href="#org5c783ed">1.1.3. Montar las unidades (Filesystem)</a></li>
+</ul>
+</li>
+<li><a href="#orga1b51fa">1.2. Gestor de Paquetes</a>
+<ul>
+<li><a href="#org7466b0a">1.2.1. Agregamos el pacstrap</a></li>
+<li><a href="#org0df730c">1.2.2. Otros paquetes necesarios</a></li>
+</ul>
+</li>
+<li><a href="#org493d651">1.3. Configuramos la red</a>
+<ul>
+<li><a href="#orgc2f5c75">1.3.1. Conceptos</a></li>
+<li><a href="#org65d22bc">1.3.2. Modificamos la configuracion en hosts</a></li>
+<li><a href="#org8b4092c">1.3.3. Modificamos los DNS</a></li>
+<li><a href="#org5c1efd7">1.3.4. Referencias</a></li>
+</ul>
+</li>
+<li><a href="#org1c2d216">1.4. Configuración GRUB</a>
+<ul>
+<li><a href="#orgd50a24f">1.4.1. Instalación</a></li>
+<li><a href="#org86d8ab2">1.4.2. Agregamos la nueva unidad al filesystem</a></li>
+<li><a href="#org2e362ff">1.4.3. Referencias</a></li>
+</ul>
+</li>
+<li><a href="#org3c92a6b">1.5. Entorno gráfico</a></li>
+<li><a href="#org8b2013f">1.6. Referencias</a>
+<ul>
+<li><a href="#orgc8e125a">1.6.1. Referencias Web Oficiales</a></li>
+<li><a href="#org11073e3">1.6.2. Referencias Web Extraoficiales</a></li>
+<li><a href="#org0352773">1.6.3. Referencias Youtube</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgdad62e7">2. Utilizando Vagrant</a>
+<ul>
+<li><a href="#org8c4b88d">2.1. Conectarse a mariadb</a></li>
+<li><a href="#orge387560">2.2. Compartir archivos</a>
+<ul>
+<li><a href="#orgbddcc62">2.2.1. Procedimiento</a></li>
+<li><a href="#org62ef157">2.2.2. Referencias</a></li>
+</ul>
+</li>
+<li><a href="#org1b76628">2.3. Ingresar Usuario por VirtualBox</a>
+<ul>
+<li><a href="#orgd81cebd">2.3.1. Conceptos</a></li>
+<li><a href="#orgc929ffc">2.3.2. Referencias Web Extraoficiales</a></li>
+</ul>
+</li>
+<li><a href="#org00ab9a0">2.4. Redimensionar espacio en disco</a></li>
+<li><a href="#org866b425">2.5. Cambiar configuración SSH</a>
+<ul>
+<li><a href="#org7fca0b7">2.5.1. Procedimiento</a></li>
+<li><a href="#orgbc73790">2.5.2. Referencias</a></li>
+</ul>
+</li>
+<li><a href="#org63a4600">2.6. Posibles errores</a>
+<ul>
+<li><a href="#orgdf0f06f">2.6.1. Con Guest aditions</a></li>
+</ul>
+</li>
+<li><a href="#org831eb51">2.7. Plugins Recomendados</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="orge26a2ff" class="figure">
+<p><img src="../../assets/img/vagrant-ansible-docker.jpg" alt="vagrant-ansible-docker.jpg" width="450" />
+</p>
+</div>
+
+<p>
+<b>Aviso:</b>
+Esta es una sección que aún está en desarrollo, podría estar faltando contenido.
+</p>
+
+<div id="outline-container-org4583a97" class="outline-2">
+<h2 id="org4583a97"><span class="section-number-2">1.</span> Configuración</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org089cf0c" class="outline-3">
+<h3 id="org089cf0c"><span class="section-number-3">1.1.</span> Particionar disco</h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+<div id="outline-container-orga741b3e" class="outline-4">
+<h4 id="orga741b3e"><span class="section-number-4">1.1.1.</span> Crear particiones</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+Creamos dos particiones primarias y una SWAP
+</p>
+<ol class="org-ol">
+<li>Una particion primaria <code>/home</code> que usaremos como escritorio, le asignamos 20,50GB o el espacio que querramos</li>
+<li>Una partición primaria <code>/</code> que será para el sistema, le asignamos 8 GB</li>
+<li>Una SWAP para la memoria, asignamos 2GB</li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="orgd1b4895"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">iniciamos el proceso de particionar</span>
+fdisk /dev/sda
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">presionamos 'n' para crear una particion</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">presionamos 'p' para listar las particiones creadas</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">presionamos 'w' para guardar los cambios</span>
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">listamos las particiones, para verificar que aparezcan</span>
+fdisk -l
+</pre>
+</div>
+
+<p>
+<b>Observación:</b>
+La virtualbox bajada con vagrant solo necesitas crear 1 partición primaria /home, y formatear esta nueva.
+</p>
+</div>
+</div>
+<div id="outline-container-orgf6f69fc" class="outline-4">
+<h4 id="orgf6f69fc"><span class="section-number-4">1.1.2.</span> Formatear particiones primarias</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<div class="org-src-container">
+<pre class="src src-shell" id="orgf8f976d"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">cambiamos /dev/sda3 por el que aparezca cuando creamos las particiones primarias</span>
+mkfs.ext4 /dev/sda3
+</pre>
+</div>
+
+<p>
+<b>Observación:</b> 
+En mi caso solo tuve que formatear una sola
+</p>
+</div>
+</div>
+<div id="outline-container-org5c783ed" class="outline-4">
+<h4 id="org5c783ed"><span class="section-number-4">1.1.3.</span> Montar las unidades (Filesystem)</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<div class="org-src-container">
+<pre class="src src-shell" id="org4f421ff">mkdir /mnt/home
+mount /dev/sda3 /mnt/home
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orga1b51fa" class="outline-3">
+<h3 id="orga1b51fa"><span class="section-number-3">1.2.</span> Gestor de Paquetes</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-org7466b0a" class="outline-4">
+<h4 id="org7466b0a"><span class="section-number-4">1.2.1.</span> Agregamos el pacstrap</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+Sino lo hacemos no podremos correr el comando pacstrap
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="org9f684b1"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">instalamos pkgfile</span>
+yes | pacman -S pkgfile
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">lo actualizamos</span>
+pkgfile --update
+
+pkgfile pacstrap
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">instalamos los scripts faltantes</span>
+yes | pacman -S extra/arch-install-scripts
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0df730c" class="outline-4">
+<h4 id="org0df730c"><span class="section-number-4">1.2.2.</span> Otros paquetes necesarios</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<div class="org-src-container">
+<pre class="src src-shell" id="orgb14e826">pacstrap /mnt base base-devel
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org493d651" class="outline-3">
+<h3 id="org493d651"><span class="section-number-3">1.3.</span> Configuramos la red</h3>
+<div class="outline-text-3" id="text-1-3">
+</div>
+<div id="outline-container-orgc2f5c75" class="outline-4">
+<h4 id="orgc2f5c75"><span class="section-number-4">1.3.1.</span> Conceptos</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+La idea es poder correr algun servidor web por ejemplo con prolog y poder acceder via tu maquina (host)
+</p>
+</div>
+</div>
+<div id="outline-container-org65d22bc" class="outline-4">
+<h4 id="org65d22bc"><span class="section-number-4">1.3.2.</span> Modificamos la configuracion en hosts</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+Modificamos el archivo <code>hosts</code> mediante <code>vim /etc/hosts</code> y nos fijamos que quede de la siguiente manera
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="orgad1e154"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">agregamos lo siguiente</span>
+<span style="color: #a45bad;">127.0.0.1</span> localhost
+::1   localhost
+<span style="color: #a45bad;">127.0.0.1</span> arch-linux.localdomain  arch-linux
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8b4092c" class="outline-4">
+<h4 id="org8b4092c"><span class="section-number-4">1.3.3.</span> Modificamos los DNS</h4>
+<div class="outline-text-4" id="text-1-3-3">
+<p>
+Modificamos el archivo <code>resolv.conf</code> mediante <code>vim /etc/resolv.conf</code> y nos fijamos que quede de la siguiente manera
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="org85d2b9e"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">agregamos lo siguiente</span>
+nameserver <span style="color: #a45bad;">1.1.1.1</span>
+nameserver <span style="color: #a45bad;">8.8.8.8</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5c1efd7" class="outline-4">
+<h4 id="org5c1efd7"><span class="section-number-4">1.3.4.</span> Referencias</h4>
+<div class="outline-text-4" id="text-1-3-4">
+</div>
+<ol class="org-ol">
+<li><a id="orgc0157e2"></a>Referencias Web Oficiales<br />
+<div class="outline-text-5" id="text-1-3-4-1">
+<ol class="org-ol">
+<li><a href="https://www.vagrantup.com/docs/networking/public_network.html">Public Network - Vagrantup.com</a></li>
+</ol>
+</div>
+</li>
+<li><a id="org041b8d0"></a>Referencias Web Extraoficiales<br />
+<div class="outline-text-5" id="text-1-3-4-2">
+<ol class="org-ol">
+<li><a href="https://www.oreilly.com/library/view/vagrant-up-and/9781449336103/ch04.html">Networking in vagrant - Oreilly.com</a></li>
+<li><a href="https://stackoverflow.com/questions/33250304/how-to-automatically-select-bridged-network-interfaces-in-vagrant">How to automatically select bridge network interfaces - Stackoverflow.com</a></li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org1c2d216" class="outline-3">
+<h3 id="org1c2d216"><span class="section-number-3">1.4.</span> Configuración GRUB</h3>
+<div class="outline-text-3" id="text-1-4">
+</div>
+<div id="outline-container-orgd50a24f" class="outline-4">
+<h4 id="orgd50a24f"><span class="section-number-4">1.4.1.</span> Instalación</h4>
+<div class="outline-text-4" id="text-1-4-1">
+<div class="org-src-container">
+<pre class="src src-shell" id="org8bf18bc"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">instalamos package grub</span>
+pacman -S --noconfirm grub
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">instalamos el grub en el disco</span>
+grub-install /dev/sda
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Observaci&#243;n:</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">no tuve que crear el mkconfig porque ya estaba creada</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">pero dejo esta parte del c&#243;digo comentado por si se requiere</span>
+<span style="color: #2aa1ae; background-color: #292e34;">#</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">grub-mkconfig -o /boot/grub/grub.cfg # creamos la configuraci&#243;n</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">passwd root # para cambiar la clave del root</span>
+
+pacman -Syu <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">para actualizar el linux (es como un apt-get upgrade)</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org86d8ab2" class="outline-4">
+<h4 id="org86d8ab2"><span class="section-number-4">1.4.2.</span> Agregamos la nueva unidad al filesystem</h4>
+<div class="outline-text-4" id="text-1-4-2">
+<p>
+Modificamos el archivo <code>fstab</code> mediante <code>vim /etc/fstab</code> y revisamos que nos quede similar a lo siguiente
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="orgc1194c8">/dev/sda3 /home ext4 defaults <span style="color: #a45bad;">0</span> <span style="color: #a45bad;">2</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2e362ff" class="outline-4">
+<h4 id="org2e362ff"><span class="section-number-4">1.4.3.</span> Referencias</h4>
+<div class="outline-text-4" id="text-1-4-3">
+<ol class="org-ol">
+<li><a href="http://www.tldp.org/pub/Linux/docs/ldp-archived/system-admin-guide/translations/es/html/ch06s08.html">Que son los sistemas de archivos - The Linux Documentation Project</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/File_systems_(Espa%C3%B1ol)">Breve introducción a los sistemas de archivo - Wiki Arch Linux</a></li>
+<li><a href="https://hipertextual.com/archivo/2014/08/que-es-grub/">Que es el GRUB - Hipertextual.com</a></li>
+<li><a href="http://www.adminso.es/index.php/GRUB_-_Configuraci%C3%B3n">Configuración del GRUB - Adminso</a></li>
+<li><a href="https://www.debian.org/doc/manuals/debian-handbook/sect.config-bootloader.es.html">Configuración de GRUB 2 - Debian.org</a></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org3c92a6b" class="outline-3">
+<h3 id="org3c92a6b"><span class="section-number-3">1.5.</span> Entorno gráfico</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+Para poder empezar a usar una interfaz gráfica
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="orge3bbbfe">pacman -Syu
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">actualizamos la distribuci&#243;n de linux</span>
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">instalamos el servidor para el entorno gr&#225;fico</span>
+pacman -S --noconfirm -xorg-server
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">instalamos el escritorio Gnome</span>
+pacman -S --noconfirm gnome gnome-extra
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">activamos el servicio del escritorio Gnome (se crear&#225; un enlace simb&#243;lico)</span>
+systemctl enable gdm
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8b2013f" class="outline-3">
+<h3 id="org8b2013f"><span class="section-number-3">1.6.</span> Referencias</h3>
+<div class="outline-text-3" id="text-1-6">
+</div>
+<div id="outline-container-orgc8e125a" class="outline-4">
+<h4 id="orgc8e125a"><span class="section-number-4">1.6.1.</span> Referencias Web Oficiales</h4>
+<div class="outline-text-4" id="text-1-6-1">
+<ol class="org-ol">
+<li><a href="https://www.vagrantup.com/docs/cli/ssh_config.html">Configuración #1 - Vagrantup.com</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org11073e3" class="outline-4">
+<h4 id="org11073e3"><span class="section-number-4">1.6.2.</span> Referencias Web Extraoficiales</h4>
+<div class="outline-text-4" id="text-1-6-2">
+<ol class="org-ol">
+<li><a href="https://www.drivemeca.com/arch-linux-guia-de-instalacion/">Configuración # 1 - Drivemeca.com</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org0352773" class="outline-4">
+<h4 id="org0352773"><span class="section-number-4">1.6.3.</span> Referencias Youtube</h4>
+<div class="outline-text-4" id="text-1-6-3">
+<ol class="org-ol">
+<li><a href="https://www.youtube.com/watch?v=AdDw8qIQzW8">Referencia #1 - Configuración</a></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdad62e7" class="outline-2">
+<h2 id="orgdad62e7"><span class="section-number-2">2.</span> Utilizando Vagrant</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org8c4b88d" class="outline-3">
+<h3 id="org8c4b88d"><span class="section-number-3">2.1.</span> Conectarse a mariadb</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Para evitar errores al conectarse ingresar la siguiente linea de comando
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="org14bba22"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">pedir&#225; la contrase&#241;a que ingresamos al momento de instalar mariadb-server</span>
+mysql -u root -p
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge387560" class="outline-3">
+<h3 id="orge387560"><span class="section-number-3">2.2.</span> Compartir archivos</h3>
+<div class="outline-text-3" id="text-2-2">
+</div>
+<div id="outline-container-orgbddcc62" class="outline-4">
+<h4 id="orgbddcc62"><span class="section-number-4">2.2.1.</span> Procedimiento</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+Para compartir archivos y directorios entre la maquina local y la virtual
+</p>
+
+<ol class="org-ol">
+<li>Entramos al servidor <code>vagrant ssh</code></li>
+<li>Creamos el archivo o carpeta en <code>~/vagrant/</code></li>
+<li>Luego ya podemos acceder desde la maquina local en el directorio que tengamos el Vagrantfile</li>
+</ol>
+
+<p>
+Por ejemplo 
+</p>
+<div class="org-src-container">
+<pre class="src src-shell" id="orgdea0e0d"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">creamos una carpeta</span>
+mkdir ~/vagrant/curso-mysql
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">creamos un archivo sql</span>
+touch ~/vagrant/archivo.sql
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org62ef157" class="outline-4">
+<h4 id="org62ef157"><span class="section-number-4">2.2.2.</span> Referencias</h4>
+<div class="outline-text-4" id="text-2-2-2">
+</div>
+<ol class="org-ol">
+<li><a id="org4e0d99c"></a>Referencias Web Oficiales<br />
+<div class="outline-text-5" id="text-2-2-2-1">
+<ol class="org-ol">
+<li><a href="https://www.vagrantup.com/intro/getting-started/synced_folders.html">Intro - Vagrantup.com</a></li>
+<li><a href="https://www.vagrantup.com/docs/synced-folders/basic_usage">Básico - Vagrantup.com</a></li>
+</ol>
+</div>
+</li>
+<li><a id="orga95aecc"></a>Referencias Web Extraoficiales<br />
+<div class="outline-text-5" id="text-2-2-2-2">
+<ol class="org-ol">
+<li><a href="https://stackoverflow.com/questions/18528717/vagrant-shared-and-synced-folders">Referencia #1 - Stackoverflow</a></li>
+<li><a href="https://stackoverflow.com/questions/19231895/how-to-share-a-folder-created-inside-vagrant">Referencia #2 - Stackoverflow</a></li>
+<li><a href="https://drupalize.me/videos/sharing-files-between-your-guest-and-host-machines?p=1526">Referencia #3 - Drupalize</a></li>
+<li><a href="https://blog.theodo.com/2017/07/speed-vagrant-synced-folders/">Referencia #4 - Blog TheOdo</a></li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org1b76628" class="outline-3">
+<h3 id="org1b76628"><span class="section-number-3">2.3.</span> Ingresar Usuario por VirtualBox</h3>
+<div class="outline-text-3" id="text-2-3">
+</div>
+<div id="outline-container-orgd81cebd" class="outline-4">
+<h4 id="orgd81cebd"><span class="section-number-4">2.3.1.</span> Conceptos</h4>
+<div class="outline-text-4" id="text-2-3-1">
+<p>
+El usuario por defecto es <code>root</code> y la contraseña <code>vagrant</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orgc929ffc" class="outline-4">
+<h4 id="orgc929ffc"><span class="section-number-4">2.3.2.</span> Referencias Web Extraoficiales</h4>
+<div class="outline-text-4" id="text-2-3-2">
+<ol class="org-ol">
+<li><a href="https://bbs.archlinux.org/viewtopic.php?id=243685">Referencia #1 - BBS ArchLinux</a></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org00ab9a0" class="outline-3">
+<h3 id="org00ab9a0"><span class="section-number-3">2.4.</span> Redimensionar espacio en disco</h3>
+<div class="outline-text-3" id="text-2-4">
+<ol class="org-ol">
+<li>Instalar via terminal un plugin</li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="orgc24f9f1">vagrant plugin install vagrant-disksize
+</pre>
+</div>
+
+<ol class="org-ol">
+<li>Modificar la configuración llamado <b>.Vagrant</b></li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="org8b06bc0">config.vm.box = <span style="color: #2d9574;">'ubuntu/xenial64'</span>
+config.disksize.size = <span style="color: #2d9574;">'50GB'</span>
+</pre>
+</div>
+
+<ol class="org-ol">
+<li>Reiniciar la máquina virtual</li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="orge790bbb"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">detenemos la maquina</span>
+vagrant halt
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">levantamos de nuevo</span>
+vagrant up
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org866b425" class="outline-3">
+<h3 id="org866b425"><span class="section-number-3">2.5.</span> Cambiar configuración SSH</h3>
+<div class="outline-text-3" id="text-2-5">
+</div>
+<div id="outline-container-org7fca0b7" class="outline-4">
+<h4 id="org7fca0b7"><span class="section-number-4">2.5.1.</span> Procedimiento</h4>
+<div class="outline-text-4" id="text-2-5-1">
+<ol class="org-ol">
+<li>Cambiar en el archivo <code>.Vagrant</code></li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="orgbfb437b"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">si quiero cambiar el usuario al que se conecta</span>
+config.ssh.username = <span style="color: #2d9574;">'root'</span>
+config.ssh.password = <span style="color: #2d9574;">'MONICA'</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbc73790" class="outline-4">
+<h4 id="orgbc73790"><span class="section-number-4">2.5.2.</span> Referencias</h4>
+<div class="outline-text-4" id="text-2-5-2">
+<ol class="org-ol">
+<li><a href="https://computingforgeeks.com/how-to-fix-vagrant-ssh-authentication-failure-after-packaging-vagrant-box/">How to fix vagrant ssh failure - Computingforgeeks.com</a></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org63a4600" class="outline-3">
+<h3 id="org63a4600"><span class="section-number-3">2.6.</span> Posibles errores</h3>
+<div class="outline-text-3" id="text-2-6">
+</div>
+<div id="outline-container-orgdf0f06f" class="outline-4">
+<h4 id="orgdf0f06f"><span class="section-number-4">2.6.1.</span> Con Guest aditions</h4>
+<div class="outline-text-4" id="text-2-6-1">
+</div>
+<ol class="org-ol">
+<li><a id="org5549edf"></a>Procedimiento<br />
+<div class="outline-text-5" id="text-2-6-1-1">
+<p>
+Si tenes problemas para conectarte
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="org6346df3"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">instalar</span>
+vagrant plugins install vagrant-vbguest
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">revisamos el estado</span>
+vagrant vbguest --status
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">lo iniciamos</span>
+vagrant vbguest
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org9efe2ce"></a>Referencias<br />
+<div class="outline-text-5" id="text-2-6-1-2">
+<ol class="org-ol">
+<li><a href="https://medium.com/@thucnc/how-to-increase-disk-size-on-a-vagrant-vm-using-virtualbox-c3d24acee3f4">How to increase disk size on a vagrant vm - By Thucnc</a></li>
+<li><a href="https://marcbrandner.com/blog/increasing-disk-space-of-a-linux-based-vagrant-box-on-provisioning/">Increasing disk space - Blog MarcBrandner</a></li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org831eb51" class="outline-3">
+<h3 id="org831eb51"><span class="section-number-3">2.7.</span> Plugins Recomendados</h3>
+<div class="outline-text-3" id="text-2-7">
+<p>
+Algunos plugins utiles para usar con vagrant podrían ser
+</p>
+
+<ul class="org-ul">
+<li>vagrant-disksize</li>
+<li>vagrant-vbguest</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: jelou</p>
+<p class="date">Created: 2021-10-18 lun 01:42</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
