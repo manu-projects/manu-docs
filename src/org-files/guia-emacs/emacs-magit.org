@@ -3,18 +3,18 @@
 #+EXPORT_FILE_NAME: ../../views/guia-emacs/emacs-magit.html
 
 * Traer cambios de un branch al master
-  Si hicimos cambios y los guardamos en **branches* y queremos traerlos al *branch master* (suele ser la ultima version, la que ira a produccion)
+  Si hicimos cambios y los guardamos en *branches* y queremos traerlos al *branch master* (suele ser la última versión, la que irá a producción)
 
   1. Cambiamos al *branch master*
-     Presionamos ~SPC g s~ para acceder al menu de Magit, 
-     luego ~b b~ y elegimos el *master branch* (no es lo mismo que origin/master)
-  2. Hacemos *(merge)* con el branch que queremos (Ej. hotfix branch o testing branch)
+     Presionamos ~SPC g s~ para acceder al menú de Magit, 
+     luego ~b b~ y elegimos el *master branch* (/no es lo mismo que origin/master/)
+  2. Hacemos *(merge)* con el branch que queremos (/Ej. hotfix branch o testing branch/)
      Presionamos ~SPC g s~ luego ~m m~ y elegimos el *branch* para traer los cambios al *master branch*
   3. Hacemos *(push)* del *(merge)*
      Presionamos con ~SPC g s~ luego ~p p~
 * Diferencia entre master y origin/master
 ** Procedimiento
-  Del ejemplo anterior quizas puede aparecer esto, y pueden surgir dudas.
+  Del ejemplo anterior quizás puede aparecer esto, y pueden surgir dudas.
 
   Cuando se dice *master* se refiere al *local branch* (el entorno local),
   mientras que *origin/master* hace referencia al *remote branch* (el que esta en el servidor github)
@@ -23,35 +23,36 @@
   Lo mismo aplica con los *branches*
 
   Por ejemplo origin/hotfix y hotfix, origin/testing y testing, etc..
-** Referencias Web Extraoficiales
-   - Referencia #1 - Stackify.com - [Ver Pagina](https://stackify.com/git-checkout-remote-branch/)
-   - Referencia #2 - Stackoverfow - [Ver Pagina](https://stackoverflow.com/questions/48596045/git-difference-between-origin-master-and-origin-master)
+** Referencias
+*** Referencias Web Extraoficiales
+    1. [[https://stackify.com/git-checkout-remote-branch/][Git checkout remote branch - Stackify.com]]
+*** Referencias Issues
+    1. [[https://stackoverflow.com/questions/48596045/git-difference-between-origin-master-and-origin-master][Difference between master and origin master - Stackoverfow.com]]
 * Guardar cambios de forma temporal (Stash)
 ** Procedimiento
   Si hicimos cambios en archivos de nuestro ordenador (se dice que es local, y se guarda en *unstage*),
   para guardar esos cambios en otro lugar de "forma temporal" (se guarda en *stash*) antes de hacer un *pull* 
 
-  1. Antes de hacer *(commit)* de los cambios, separamos el codigo con *(stash)*
+  1. Antes de hacer *(commit)* de los cambios, separamos el código con *(stash)*
      Los cambios que se hicimos en los archivos del entorno local estan en *unstage* sino hicimos commit,
-     seleccionamos ese bloque de codigo y presionamos ~zz RET~ (no le asignamos nombre porque es opcional).
-     *Nota:* 
+     seleccionamos ese bloque de código y presionamos ~zz RET~ (no le asignamos nombre porque es opcional).
      Cuando volvamos al archivo, no apareceran lo cambios, quedaron separados en *stash*
   2. Creamos un *branch* para las nuevas características que nos pidieron de improviso
-     Al crear el *branch* nos aseguramos de separar las nuevas caracteristicas
-     del *commit* que hariamos con las funcionalidades que estabamos desarrollando.
-  3. Volvemos a traer el codigo que reservamos con *(stash)*
+     Al crear el *branch* nos aseguramos de separar las nuevas características
+     del *commit* que haríamos con las funcionalidades que estabamos desarrollando.
+  3. Volvemos a traer el código que reservamos con *(stash)*
      Seleccionamos los cambios que teniamos *stashes* y presionamos ~a~ (hace referencia a add/agregar)
      y volverá a aparecer esos cambios en el archivo, por tanto estará en *unstage* 
-     donde quedan las modificaciones que aun no se hizo *commit* (si lo hicieramos quedarian en *stage*)
+     donde quedan las modificaciones que aún no se hizo *commit* (si lo hicieramos quedarían en *stage*)
 ** Referencias Web Extraoficiales
-   - Referencia #1 - Code Tutsplus [Ver Pagina](https://code.tutsplus.com/es/tutorials/quick-tip-leveraging-the-power-of-git-stash--cms-22988)
-   - Referencia #2 - RunRoom -  [Ver Pagina](https://www.runroom.com/realworld/git-stash)
+   1. [[https://code.tutsplus.com/es/tutorials/quick-tip-leveraging-the-power-of-git-stash--cms-22988][Referencia #1 - Code Tutsplus]]
+   2. [[https://www.runroom.com/realworld/git-stash][Referencia #2 - RunRoom]]
 * Listar historial de commits de un archivo
 ** Procedimiento
   Corremos el comando *(blame)* presionando ~SPC g b~ y nos muestra un log de los cambios
   Si presionamos ~b~ va a los commits anteriores y con ~q~ los mas recientes
 ** Referencias Web Oficiales
-   - Referencia #1 - Magit.vc - [Ver Pagina](https://magit.vc/manual/magit/Blaming.html)
+   1. [[https://magit.vc/manual/magit/Blaming.html][Blaming - Magit.vc]]
 * Atajos 
   #+NAME:
   |---------+----------------------------------------------------------------------------|
@@ -93,7 +94,7 @@
    Si ya estamos en el menú de *magit* no es necesario presionar el atajo ~SPC g s~ del mode evil de spacemacs
 ** Resolver conflicto, diferencia entre archivos
    Si en el paso 5 del ejemplo anterior hubiesemos tenido un conflicto,
-   porque alguien modifico el mismo archivo en las mismas lineas.
+   porque alguien modificó el mismo archivo en las mismas lineas.
 
    1. Hacemos *(pull)*
       Para traer el archivo con el que tenemos conflicto,
@@ -127,11 +128,11 @@
    7. Hacemos *(commit)* del *(merge)* y *(push)*
       Comiteamos con ~c c~ y ~, ,~ y por último pusheamos con ~P p~
 * Referencias
-** Paginas recomendadas
-   - Referencia #1 - Salty Crane - [Ver Pagina](https://www.saltycrane.com/blog/2018/11/magit-spacemacs-evil-magit-notes/)
-** Videos de recomendados
-   - Referencia #1 - [Ver Video](https://www.youtube.com/watch?v=7ywEgcbaiys)
-   - Referencia #2 - [Ver Video](https://www.youtube.com/watch?v=qXgGtyjXPiw)
-   - Referencia #3 - [Ver Video](https://www.youtube.com/watch?v=fFuf3hExF5w)
-   - Referencia #4 - [Ver Video](https://www.youtube.com/watch?v=NDP91RNgT4A)
-   - Referencia #5 - [Ver Video](https://www.youtube.com/watch?v=1IYsiHXR620)
+** Referencias Web Extraoficiales
+   1. [[https://www.saltycrane.com/blog/2018/11/magit-spacemacs-evil-magit-notes/][Referencia #1 - Blog SaltyCrane.com]]
+** Referencias Youtube
+   1. [[https://www.youtube.com/watch?v=7ywEgcbaiys][Referencia #1]]
+   2. [[https://www.youtube.com/watch?v=qXgGtyjXPiw][Referencia #2]]
+   3. [[https://www.youtube.com/watch?v=fFuf3hExF5w][Referencia #3]]
+   4. [[https://www.youtube.com/watch?v=NDP91RNgT4A][Referencia #4]]
+   5. [[https://www.youtube.com/watch?v=1IYsiHXR620][Referencia #5]]

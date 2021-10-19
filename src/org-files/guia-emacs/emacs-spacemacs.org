@@ -6,8 +6,8 @@
 [[../../assets/img/spacemacs.png]]
 
 * Tips - Importantes
-  Para que se guarden los cambios de la agenda, y se puedan filtrar usar `M-x org-agenda-file-to-front`
-  Para abrir la agenda `C-c a`
+  Para que se guarden los cambios de la agenda, y se puedan filtrar usar ~M-x org-agenda-file-to-front~
+  Para abrir la agenda ~C-c a~
   
 ** Atajos configuraciones
    #+NAME: emacs-atajos-configuraciones
@@ -35,22 +35,23 @@
    | SPC p p                             | Cambiar del proyecto actual a otro           |
    | M-x projectile-remove-known-project | Eliminar alguno de los proyectos agregados   |
    |-------------------------------------+----------------------------------------------|
-** Referencias Web
- - Referencia #1 - Spacemacs.org, Develop [Ver Pagina](https://develop.spacemacs.org/layers/+filetree/neotree/README.html)
- - Referencia #2 - Spacemacs.org, Develop [Ver Pagina](https://develop.spacemacs.org/layers/+filetree/treemacs/README.html)
- - Referencia #3 - Github, Alexander Miller [Ver Pagina](https://github.com/Alexander-Miller/treemacs)
-** Referencias Youtube
- - Referencia #1 [Ver Video](https://www.youtube.com/watch?v=Bu7nF9hPSts)
- - Referencia #2 [Ver Video](https://www.youtube.com/watch?v=Rx3wRl5d-J0)
- - Referencia #3 [Ver Video](https://www.youtube.com/watch?v=OrTJ17ivOL0)
- - Referencia #4 [Ver Video](https://www.youtube.com/watch?v=Z88ZmeMo1X0)
- - Referencia #5 [Ver Video](https://www.youtube.com/watch?v=kPVVuJWS2vo)
+** Referencias
+*** Referencias Web
+  1. [[https://develop.spacemacs.org/layers/+filetree/neotree/README.html][Layer Neotree - Spacemacs.org, Develop]]
+  2. [[https://develop.spacemacs.org/layers/+filetree/treemacs/README.html][Layer Treemacs - Spacemacs.org, Develop]]
+  3. [[https://github.com/Alexander-Miller/treemacs][Layer Treemacs - Github, Alexander Miller]]
+*** Referencias Youtube
+  1. [[https://www.youtube.com/watch?v=Bu7nF9hPSts][Referencia #1]]
+  2. [[https://www.youtube.com/watch?v=Rx3wRl5d-J0][Referencia #2]]
+  3. [[https://www.youtube.com/watch?v=OrTJ17ivOL0][Referencia #3]]
+  4. [[https://www.youtube.com/watch?v=Z88ZmeMo1X0][Referencia #4]]
+  5. [[https://www.youtube.com/watch?v=kPVVuJWS2vo][Referencia #5]]
 * Atajos en Hybrid Mode
 ** Atajos Principales
-   El modo hibrido es una combinacion entre el **holy mode** (atajos de emacs) 
-   y el **evil mode** (atajos de vim).
+   El modo hibrido es una combinacion entre el *holy mode* (atajos de emacs) 
+   y el *evil mode* (atajos de vim).
 
-   El atajo **SPC** suele ser la tecla **espacio**
+   El atajo ~SPC~ suele ser la tecla *espacio*
 ** Atajos en Evil Mode (Vim)
    #+NAME: atajos-evil-mode
    |---------+------------------------------------------------------|
@@ -62,8 +63,8 @@
    | v       | Seleccionar/Deseleccionar texto                      |
    |---------+------------------------------------------------------|
 ** Atajos en Holy Mode (Emacs)
-   La metakey **M** suele referirse a la tecla **Alt** seguido a la tecla que haga referencia.
-   Mientras que **C** es la tecla **Control** seguido de la tecla que se mencione.
+   La metakey ~M~ suele referirse a la tecla ~Alt~ seguido a la tecla que haga referencia.
+   Mientras que ~C~ es la tecla ~Control~ seguido de la tecla que se mencione.
    
    #+NAME: atajos-holy-mode
    |-------------+-------------------------------------------|
@@ -85,115 +86,114 @@
    | C-x C--     | Disminuir el tamaño de texto              |
    |-------------+-------------------------------------------|
 
-   **Observación:***
-   El gestor de archivos Neotree/Treemacs es similar al **dired**, con la diferencia
+   *Observación:*
+   El gestor de archivos Neotree/Treemacs es similar al ~dired~, con la diferencia
    que este ocupa menos espacio en la pantalla
 * Ecuaciones algebraicas
 ** Configuraciones
-   Primero, agregamos o descomentamos las siguientes lineas en los layers de .spacemacs
+   Primero, agregamos o descomentamos las siguientes lineas en los layers de ~.spacemacs~
    #+BEGIN_SRC elisp
      latex
      bibtex
      auto-completion
    #+END_SRC
 
-   Luego agregamos la siguiente configuracion dentro de user-config de .spacemacs
+   Luego agregamos la siguiente configuracion dentro de *user-config* de ~.spacemacs~
    #+BEGIN_SRC elisp
      ;; Aumentamos el tamaño del texto que suele aparecer en tamaño chico
      (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0)** 
    #+END_SRC
 
-   Por último aplicamos los cambios reiniciando spacemacs con ``SPC-q-r`` 
-
+   Por último aplicamos los cambios reiniciando spacemacs con ~SPC-q-r~
 ** Como escribir las ecuaciones
-   1.Para escribir ecuaciones debemos encerrarlas con el simbolo pesos **$$**
+   1. Para escribir ecuaciones debemos encerrarlas con el simbolo pesos ~$$~
 
    #+BEGIN_SRC org
      $$ 4x^2 = 16 \times \frac{2}{4x} $$
    #+END_SRC
 
-   2- Para visualizar ejecutar `C-c C-x C-l` o  `, T x`
-   3- Para mostrar el texto en formato latex ejecutar `C-c C-c` o `, ,`
+   2. Para visualizar ejecutar ~C-c C-x C-l~ ó  ~, T x~
+   3. Para mostrar el texto en formato latex ejecutar ~C-c C-c~ ó ~, ,~
 
-   **Observacion:**
+   *Observación:*
    Si queremos que muestren todas las formulas al abrir un documento, agregar al principio del archivo la siguiente linea
 
    #+BEGIN_SRC org
      #+STARTUP: latexpreview
    #+END_SRC
-
 ** Errores Comunes
 *** No nos permita ver una vista preliminar del archivo
 **** Escenario
-      #+BEGIN_SRC org
+      #+BEGIN_QUOTE
          File "/tmp/orgtex9997XKu.dvi" wasn't produced. Please adjust 'dvipng' part of `org-preview-latex-process-alist'.
          Found a log is generated, /tmp/orgtex9997XKu.log. Something interesting is in this log: "LaTeX Error: File `wrapfig.sty' >not found.** Then a quick search tells me texlive-latex-extra package is missing.
-      #+END_SRC
+      #+END_QUOTE
 **** Solución
-   1- En la terminal instalar el paquete ``texlive-latex-extra`` y ``texlive-bin``
+   1. En la terminal instalar el paquete ~texlive-latex-extra~ y ~texlive-bin~
    #+BEGIN_SRC bash
      sudo pacman -S textlive-latex-extra
      sudo pacman -S textlive-bin
    #+END_SRC
  
-   2. Agregar configuracion en el **user-config** del archivo **.spacemacs** 
+   2. Agregar configuración en el *user-config* del archivo ~.spacemacs~ 
    #+BEGIN_SRC elisp
      ;; (setq org-latex-create-formula-image-program 'imagemagick)
      (setq org-latex-create-formula-image-program 'dvipng)
      ;;(setq-default org-html-with-latex `dvipng)
    #+END_SRC
-**** Referencias Web
-     - [Referencia #1 (reddit.com)](https://www.reddit.com/r/emacs/comments/5rf9d4/help_org_setup_preview_latex_fragments/)
-     - [Referencia #2 (emacs.stackexchange.com)](https://emacs.stackexchange.com/questions/18627/preview-latex-fragment-in-org-mode-blank-square-shown)
-     - [Referencia #3 (sourceforge.net)](https://sourceforge.net/projects/dvipng/)
-     - [Referencia #4 (ecuadorminingnews.com)](https://ecuadorminingnews.com/install-texlive-bin/)
-     -[Referencia #5 (bbs.archlinux.org)](https://bbs.archlinux.org/viewtopic.php?id=168634)
-     - [Referencia #6 (stackoverflow.com)](https://stackoverflow.com/questions/30151338/org-latex-preview-is-fuzzy-on-retina-displays)
-     - [PDF-tools (github.com)](https://github.com/politza/pdf-tools)
-
-** Referencias Web
-    - [Lista de simbolos (orgmode.org)](https://orgmode.org/worg/org-symbols.html)
-    - [Tutorial (orgmode.org)](https://orgmode.org/worg/org-tutorials/org-latex-preview.html)
-    - [Tutorial #2 (orgmode.org)](https://orgmode.org/manual/LaTeX-fragments.html)
-    - [Aumentar tamaño del texto #1 (emacs.stackexchange.com)](https://emacs.stackexchange.com/questions/19880/font-size-control-of-latex-previews-in-org-files)
-    - [Aumentar tamaño del texto #2 (tex.stackexchange.com)](https://tex.stackexchange.com/questions/78501/change-size-of-the-inline-image-for-latex-fragment-in-emacs-org-mode)
-* Referencias de Sitios Web
-** Guias basicas
-    - Referencia #1 - CharlasCyclon.com - [Ver Pagina](https://charlascylon.com/2017-09-20-spacemacs-mi-configuracion-personal)
-    - Referencia #2 - Medium.com, Kokegudiel2 - [Ver Pagina](https://medium.com/@kokegudiel2/configuari%C3%B3n-de-spacemacs-para-principiantes-ed43ddf3030f)
-** Guias Avanzadas
-    - Referencia #1 - Wiki, ArchLinux - [Ver Pagina](https://wiki.archlinux.org/index.php/Spacemacs)
-    - Referencia #2 - Github, Syl20bnr - [Ver Pagina](https://github.com/syl20bnr/spacemacs/blob/master/doc/DOCUMENTATION.org)
+** Referencias
+*** Referencias Web Oficiales
+    1. [[https://orgmode.org/worg/org-symbols.html][Lista de símbolos - orgmode.org]]
+    2. [[https://orgmode.org/worg/org-tutorials/org-latex-preview.html][Tutorial Org Latex Preview - orgmode.org]]
+    3. [[https://orgmode.org/manual/LaTeX-fragments.html][Tutorial Org Latex Fragments - orgmode.org]]
+*** Referencias Web Extraoficiales
+    1. [[https://github.com/politza/pdf-tools][PDF-tools - github.com, Politza]]
+    2. [[https://ecuadorminingnews.com/install-texlive-bin/][Install Textlive - ecuadorminingnews.com]]
+    3. [[https://sourceforge.net/projects/dvipng/][Dvipng - sourceforge.net]]
+*** Referencias Issues
+    1. [[https://emacs.stackexchange.com/questions/19880/font-size-control-of-latex-previews-in-org-files][Aumentar tamaño del texto #1 - emacs.stackexchange.com]]
+    2. [[https://tex.stackexchange.com/questions/78501/change-size-of-the-inline-image-for-latex-fragment-in-emacs-org-mode][Aumentar tamaño del texto #2 - tex.stackexchange.com]]
+    3. [[https://www.reddit.com/r/emacs/comments/5rf9d4/help_org_setup_preview_latex_fragments/][Org setup preview latex fragments - reddit.com]]
+    4. [[https://emacs.stackexchange.com/questions/18627/preview-latex-fragment-in-org-mode-blank-square-shown][Preview latex fragment in org mode - emacs.stackexchange.com]]
+    5. [[https://bbs.archlinux.org/viewtopic.php?id=168634][Dvipng unable to find required binary in libgd - bbs.archlinux.org]]
+    6. [[https://stackoverflow.com/questions/30151338/org-latex-preview-is-fuzzy-on-retina-displays][Org Latex preview is fuzzy on retina displays - stackoverflow.com]]
+* Referencias
+** Guías básicas
+   1. [[https://charlascylon.com/2017-09-20-spacemacs-mi-configuracion-personal][Configuración Spacemacs - CharlasCyclon.com]]
+   2. [[https://medium.com/@kokegudiel2/configuari%C3%B3n-de-spacemacs-para-principiantes-ed43ddf3030f][Configuración Básica Spacemacs - Blog Kokegudiel2]]
+** Guías Avanzadas
+   1. [[https://wiki.archlinux.org/index.php/Spacemacs][Referencia #1 - Wiki, ArchLinux.com]]
+   2. [[https://github.com/syl20bnr/spacemacs/blob/master/doc/DOCUMENTATION.org][Referencia #2 - Github, Syl20bnr]]
 ** Capas o Layers
     Subprogramas que agregan funcionalidad a spacemacs
-    - Referencia #1, Spacemacs.org - [Ver Pagina](https://www.spacemacs.org/layers/LAYERS.html)
+    1. [[https://www.spacemacs.org/layers/LAYERS.html][Referencia #1, Spacemacs.org]]
 ** Themes
     Para cambiar el estilo, la visualizacion, diseño, el color fondo y del texto,..
-    - Themes, ThemeGallery [Ver Pagina](https://themegallery.robdor.com/)
+    1. [[https://themegallery.robdor.com/][Themes, ThemeGallery]]
 ** Fuentes
-    El tipo de fuente, puede hacer mas entendible, claro, y ameno luego de muchas horas de lectura.
+    El tipo de fuente es fundamental para que sea más entendible el texto, en especial si estamos inmersos investigando/codeando muchas horas
 
-    - Referencia #1 - SourceFoundry.org - [Ver Pagina](https://sourcefoundry.org/hack/playground.html)
-    - Referencia #2 - Opensource.com - [Ver Pagina](https://opensource.com/article/17/11/how-select-open-source-programming-font)
+    1. [[https://sourcefoundry.org/hack/playground.html][Referencia #1 - SourceFoundry.org]]
+    2. [[https://opensource.com/article/17/11/how-select-open-source-programming-font][Referencia #2 - Opensource.com]]
 ** Configuraciones de Spacemacs
-   Las configuraciones se hacen en el archivo **~/.spacemacs**
+   Las configuraciones se hacen en el archivo ~~/.spacemacs~
 
-    - Referencia #1 - Out of cheese error - [Ver Pagina](https://out-of-cheese-error.netlify.com/spacemacs-config)
-    - Referencia #2 - Practicalli - [Ver Pagina](https://practicalli.github.io/spacemacs/install-spacemacs/additional-configuration.html)
+   1. [[https://out-of-cheese-error.netlify.com/spacemacs-config][Referencia #1 - Out of cheese error]]
+   2. [[https://practicalli.github.io/spacemacs/install-spacemacs/additional-configuration.html][Referencia #2 - Github, Practicalli]]
 * Referencias Youtube
 ** Canales Favoritos
     Conceptos, Atajos, Herramientas, etc.
 
-    - Referencia #1 - [Ir a canal](https://www.youtube.com/watch?v=MRYzPWnk2mE&list=PLxj9UAX4Em-IiOfvF2Qs742LxEK4owSkr)
-    - Referencia #2 - [Ir a Canal](https://www.youtube.com/watch?v=d6iY_1aMzeg&list=PLX2044Ew-UVVv31a0-Qn3dA6Sd_-NyA1n)
-    - Referencia #3 - [Ir a Canal](https://www.youtube.com/watch?v=BRqjaN4-gGQ&list=PLhXZp00uXBk4np17N39WvB80zgxlZfVwj)
+    1. [[https://www.youtube.com/watch?v=MRYzPWnk2mE&list=PLxj9UAX4Em-IiOfvF2Qs742LxEK4owSkr][Referencia #1]]
+    2. [[https://www.youtube.com/watch?v=d6iY_1aMzeg&list=PLX2044Ew-UVVv31a0-Qn3dA6Sd_-NyA1n][Referencia #2]]
+    3. [[https://www.youtube.com/watch?v=BRqjaN4-gGQ&list=PLhXZp00uXBk4np17N39WvB80zgxlZfVwj][Referencia #3]]
 ** Configuraciones basicas
-    Para los que recien estan iniciandose
+    Para los que recién estan iniciandose
 
-    - Referencia #1 - [Ver Video](https://www.youtube.com/watch?v=8k7BTIqufqQ)
-    - Referencia #2 - [Ver Video](https://www.youtube.com/watch?v=Ie4z9-z948c)
-    - Referencia #3 - [Ver video](https://www.youtube.com/watch?v=PKaJoqQQoIA)
+    1. [[https://www.youtube.com/watch?v=8k7BTIqufqQ][Referencia #1]]
+    2. [[https://www.youtube.com/watch?v=Ie4z9-z948c][Referencia #2]]
+    3. [[https://www.youtube.com/watch?v=PKaJoqQQoIA][Referencia #3]]
 ** Buffers, ibuffer y Emmet
-    - Referencia #1 [Ver Video](https://www.youtube.com/watch?v=yUfA-7wWNKA)
+   1. [[https://www.youtube.com/watch?v=yUfA-7wWNKA][Referencia #1]]
 ** Personalizando la terminal
-    - Referencia #1 [Ver Video](https://www.youtube.com/watch?v=L9vA7FHoQnk)
+   1. [[https://www.youtube.com/watch?v=L9vA7FHoQnk][Referencia #1]]
