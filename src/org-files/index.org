@@ -49,11 +49,13 @@
   Compartir conocimiento acerca de los lenguajes de programación, nuevas tecnologías e información útil y necesaria para mantenerse siempre actualizado. Dirigido a quienes realmente tengan ganas de aprender.
 * Documentado
 ** Desarrollo Web
-   - [DESARROLLANDO] Conceptos importantes de Frontend [Ir a la página]
+   - [DESARROLLANDO] Conceptos importantes de Frontend
+   - [DESARROLLANDO] Desarrollar juegos Web con Javascript Nativo
+   - [DESARROLLANDO] Desarrollar juegos Web en Javascript+Frameworks
    - [PENDIENTE] Testing y Webscrapping con Selenium Web
    - [PENDIENTE] Hagamos magia en javascript con jQuery
    - [PENDIENTE] Maquetar con CCSS2/CSS3
-   - [PENDIENTE] Los mejores Frameworks de CSS
+   - [PENDIENTE] Aprendiendo lo mejor de algunos Frameworks de CSS
    - [PENDIENTE] El gran salto de CSS a SASS
 ** Herramientas para Programar
 *** Vim
@@ -65,6 +67,7 @@
     - [NUEVO] Versionando proyectos en GIT con Magit [[file:guia-emacs/emacs-magit.org][[Ir a página]​]]
     - [DESARROLLANDO] Programar dentro de Emacs con Elisp
 *** Github
+    - [DESARROLLANDO] Git primeros pasos
     - Aprendiendo lo básico de Control de versiones con Github [[file:guia-git/git-basico.org][Ir a la página]]
     - [NUEVO] Profundizando sobre Github Bash [[file:guia-git/git-2.org][Ir a la página]]
 ** Linux
