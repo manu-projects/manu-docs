@@ -1,0 +1,274 @@
+#+TITLE:     Guia Linux - Sobrevivir a la terminal - Parte 2
+#+SETUPFILE: ../theme-readtheorg.setup
+#+EXPORT_FILE_NAME: ../../views/guia-linux/linux-basico-2.html
+
+#+ATTR_HTML: :width 600
+[[../../assets/img/linux-terminal.png]]
+
+* Tareas y Procesos
+  Los **procesos** son programas que se pueden estar ejecutando o no.
+  Estos procesos se los llama **tarea** en caso de que se esten corriendo en el sistema.
+
+  Las **tareas** se pueden iniciar tanto en 
+  - *Primer plano* (ó foreground) 
+  - *Segundo plano* (ó background).
+
+  En el primer caso, se puede dar si se ejecuta
+  la tarea desde la terminal, esta tomará el control de la consola y solo se podra hacer
+  uso de la terminal cuando la tarea finalize o que nosotros la finalizemos.
+
+  En el segundo caso, permiten utilizar la terminal mientras la tarea se está ejecutando.
+** Iniciar tareas
+*** Iniciar una tarea en primer plano
+    Esta tarea se va a seguir ejecutando hasta que se finalice desde la interfáz gráfica
+    de ese programa, o si se finaliza desde la terminal, hasta tanto no se puede usar esa terminal para otros comandos.
+
+    #+NAME: linux-procesos-foreground
+    #+BEGIN_SRC bash
+      # inicia el navegador firefox en primer plano
+      firefox
+    #+END_SRC
+*** Iniciar una tarea en segundo plano
+    En segundo plano se pueden agregar aquellas que no necesitan interactuar con la consola,
+    es como un "esconder" mientras se ejecutan.
+
+    #+NAME: linux-procesos-background
+    #+BEGIN_SRC shell
+      # inicia el navegador firefox en segundo plano
+      firefox &
+
+      # comprimir los archivos de la carpeta fotos
+      tar -cvzf fotos.tar.gz fotos &
+    #+END_SRC
+    
+    *Observación:*
+    Sólo se necesita de agregar el **&** seguido de nombre del programa
+*** Evitar imprimir  mensajes de una tarea que está segundo plano
+    Con el comando **nohup** podemos seguir utilizando la terminal, sin que aparezcan los mensajes 
+    que generan los programas que tenemos en segundo plano.
+
+    #+NAME: linux-ocultar-procesos-brackground
+    #+BEGIN_SRC shell
+      # corre el programa "mkdocs" en segundo plano, y no mostrará los mensajes
+      nohup mkdocs serve &
+    #+END_SRC
+*** Pasar una tarea a primer o segundo plano
+    A veces puede ocurrir que se desee alternar
+
+    #+NAME: linux-procesos-cambiar-plano
+    #+BEGIN_SRC shell
+      # pasa una tarea a primer plano
+      fg numeroTarea
+
+      # pasa la tarea a segundo plano
+      fg numeroTarea
+    #+END_SRC
+** Ver procesos y tareas
+   Con el comando **jobs** podemos conocer las tareas que se ejecutan en segundo plano 
+   desde la terminal que tenemos abierta. Este nos detallará el **número de proceso** 
+   (que es importante para luego detenerlo), y su **estado de ejecución**.
+
+   Con el comando **ps** nos mostrará todas las tareas (dispone de varios parametros que personalizan la información)
+
+   Algunas referencias a las columnas del listado de procesos:
+
+   #+NAME: linux-columnas-proceso
+   |---------+-------------------------------------------------|
+   | Columna | Descripción                                     |
+   |---------+-------------------------------------------------|
+   | pid     | Identificador del proceso                       |
+   | tty     | Identifica la terminal donde esta corriendo     |
+   | comm    | Es el comando que se ejecutó en la terminal     |
+   | etime   | Cantidad de tiempo en ejecución                 |
+   | %mem    | Cuanto ocupa en memoria                         |
+   | %cpu    | Cuanto utiliza del procesador                   |
+   |---------+-------------------------------------------------|
+
+   -----
+
+   Otras referencias de los parámetros para el comando **ps** que lista los procesos:
+
+   #+NAME: linux-parametros-comando-ps
+   |-------------+------------------------------------------------------------------|
+   | Parámetro   | Descripción                                                      |
+   |-------------+------------------------------------------------------------------|
+   | a           | Muestra los procesos que tienen una terminal controladora        |
+   | x           | Muestra los procesos que "no" tienen una terminal controladora   |
+   | f           | Muestra las relaciones padre/hijo entre los procesos             |
+   |-------------+------------------------------------------------------------------|
+
+   #+NAME: linux-comando-ps-jobs
+   #+BEGIN_SRC shell
+      # devuelve una lista con las tareas en ejecución en la terminal actual
+      jobs
+
+      # devuelve todas las tareas
+      ps
+   #+END_SRC
+*** Obtener solo el número de proceso
+    Suelo optar por **pgrep** seguido del nombre del proceso, que es mas sencillo.
+
+    Aunque también de una más extensa sería con **ps** para listar los procesos, 
+    con filtrar el proceso con **grep** y retornar la columna del PID con **awk**
+
+    #+NAME: linux-identificar-procesos
+    #+BEGIN_SRC shell
+      # devuelve el numero de id del un proceso
+      pgrep | nombreTarea
+
+      # también devuelve el numero de id del proceso
+      ps | grep nombreTarea | awk '{print $1}'
+    #+END_SRC
+*** Obtener solo algunos datos de los procesos
+    En caso de querer saber solo algunas de las columnas de **ps** podemos usar 
+    el parametro **eo** seguido de las columnas. 
+    Algunos campos podrian ser
+
+    #+NAME: 
+    #+BEGIN_SRC shell
+      # mostrará la columna del identificador, el comando, y tiempo en ejecución
+      ps -eo pid,comm,etime
+    #+END_SRC
+
+    *Observación:*
+    Es importante que las columnas este separadas por coma sin espacios.
+*** Ordenar los procesos por algun campo
+    Para esto necesitamos del parametro **--sort** seguido de los campos que utilizamos como criterio para ordenar
+
+    #+NAME: linux-ordenar-procesos
+    #+BEGIN_SRC shell
+      ps -eo pid,comm,etime,%cpu --sort=-%mem | head
+    #+END_SRC
+
+    *Observación:*
+    Si queres visualizar la cabecera de los campos, agregar **head**
+*** Mostrar procesos padres e hijos
+    A veces es importante conocer si un proceso depende de varios es decir al detener este sus procesos hijos también.
+
+    #+NAME: linux-procesos-padres-hijos
+    #+BEGIN_SRC shell
+      # muestra los procesos padres e hijos
+      ps --forest
+    #+END_SRC
+** Detener una tarea en ejecución
+   Si la tara está en **primer plano** podriamos usar el atajo **CTRL+Z**
+
+   Si la tarea está en **segundo plano**, utilizaremos el comando **kill** seguido 
+   del numero de proceso o el PID que lo identifica.
+
+    #+NAME: linux-detener-procesos
+    #+BEGIN_SRC shell
+      # detiene el proceso numero 1
+      kill %1
+    #+END_SRC
+
+    *Observación:* 
+    Al utilizar el % va seguido del número de proceso, caso contrario agregar el PID del proceso
+** Guardar un proceso dependiente de una terminal
+   Con el comando *disown* se puede guardar un proceso que está corriendo 
+   en *segundo plano* sobre una terminal, y si la misma se cierra el proceso no se interrumpirá.
+   
+   Como argumento se le puede pasar el *PID* ó el número de proceso precedido por el *%*
+
+   *Opción 1:* con el comando **pgrep**:
+
+    #+NAME: linux-comando-disown
+    #+BEGIN_SRC shell
+      # ejecuto el programa en segundo plano, y oculto sus mensajes
+      nohup mkdocs serve&
+
+      # busco el PID del proceso
+      pgrep mkdocs
+
+      # le paso PID para guardarlo (suponiendo que diga 3003)
+      disown 3003
+    #+END_SRC
+
+    *Opción 2*: con el comando **ps**:
+
+    #+NAME: 
+    #+BEGIN_SRC shell
+      # ejecuto el programa en segundo plano, y oculto sus mensajes
+      nohup mkdocs serve&
+
+      # busco el PID
+      ps -ax | grep mkdocs
+
+      # le paso el PID (si es que fuese 3003)
+      disown 3003
+    #+END_SRC
+** Practicando procesos, tareas
+    #+NAME: linux-procesos-tareas
+    #+BEGIN_SRC shell
+      # corro en segundo plano ambos navegadores web
+      firefox & ; chrome &
+
+      # verifico el numero de proceso de ambos, y si estan corriendo
+      jobs
+      # detengo el que tenga el número de proceso 1
+      kill %1
+
+      # verifico el PID del programa, suponiendo que firefox se detuvo
+      ps -a | grep chrome
+      # detengo el proceso con PID 3021 (suponiendo que es chrome)
+      kill 3021
+    #+END_SRC
+* Sincronizar directorios
+  El comando **rsync** cumple un rol fundamental para copiar, 
+  mover archivos y carpetas, se dice que es aún más rápido que 
+  utilizar **cp** ó **scp** ya que comprime los archivos antes de transferirlos.
+
+  Algunos de los parámetros son:
+
+  #+NAME: linux-comando-rsync-parametros
+  |-----------+----------------------------------------------------------------|
+  | Parámetro | Descripción                                                    |
+  |-----------+----------------------------------------------------------------|
+  | a         | Modo archivo                                                   |
+  | v         | Modo Verboso - Muestra el información durante la transferencia |
+  | q         | Modo Silencioso - No muestra la información que se transfiere  |
+  | z         | Comprimir datos al transferir                                  |
+  | h         | Humaniza los valores de transferencia                          |
+  |-----------+----------------------------------------------------------------|
+** Copiar un directorio local a otro
+   #+NAME: comando-rsync-copiar-directorios
+   #+BEGIN_SRC shell
+     # Copia todo lo del directorio1 al directorio2
+     rysnc -vazh directorio1/ directorio2/
+   #+END_SRC
+** Transferir todos los archivos de un directorio local a un servidor
+   #+NAME: comando-rsync-transferir-archivos-host-a-servidor
+   #+BEGIN_SRC shell
+     # transferir a un servidor
+     rysnc -vazh carpeta/* host1:pruebas/
+   #+END_SRC
+** Transferir un directorio local a un servidor pasandole usuario
+   #+NAME: comando-rsync-transferir-archivos-host-a-servidor
+   #+BEGIN_SRC shell
+     # transferir a un servidor pasando usuario
+     rysnc -vazh directorio2/ usuario:host2:fotos/
+   #+END_SRC
+** Transferir desde un servidor a la maquina local
+   #+NAME: comando-rsync-transferir-servidor-a-host
+   #+BEGIN_SRC shell
+     # transferir desde el servidor a la maquina local
+     rysnc -vazh admin:192.168.92.1:/srv/fotos /home/juan/carpeta
+   #+END_SRC
+** Transfencia segura con ssh desde el servidor a máquina local
+   A diferencia del resto se agrega el parámetro **e** y **ssh**
+
+   #+NAME: comando-rsync-transferencia-segura
+   #+BEGIN_SRC shell
+     rysnc -vazh -e ssh admin@192.168.92.1:/srv/fotos /home/juan/fotos
+   #+END_SRC
+** Simular transferencia de archivos
+   Si queremos probar en caso de errores podemos utilizar **--dry-run**
+
+   #+NAME: comando-rsync-simular-transferencia
+   #+BEGIN_SRC shell
+     # Copia todo lo del directorio1 al directorio2
+     rysnc -vazh --dry-run directorio1/ directorio2/
+   #+END_SRC
+** Referencias Web
+  - Documentación sobre rsyncm, Linux.die [[https://linux.die.net/man/1/rsync][[Ver Página]​]]
+  - Conociendo el comando rsync, LinuxTechi [[https://www.linuxtechi.com/rsync-command-examples-linux/][[Ver Página]​]]

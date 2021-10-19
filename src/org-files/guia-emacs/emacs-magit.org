@@ -1,0 +1,138 @@
+#+TITLE:     Guía Emacs - Versionando Proyectos con MAGIT
+#+SETUPFILE: ../theme-readtheorg.setup
+#+EXPORT_FILE_NAME: ../../views/guia-emacs/emacs-magit.html
+
+* Traer cambios de un branch al master
+  Si hicimos cambios y los guardamos en *branches* y queremos traerlos al *branch master* (suele ser la última versión, la que irá a producción)
+
+  1. Cambiamos al *branch master*
+     Presionamos ~SPC g s~ para acceder al menú de Magit, 
+     luego ~b b~ y elegimos el *master branch* (/no es lo mismo que origin/master/)
+  2. Hacemos *(merge)* con el branch que queremos (/Ej. hotfix branch o testing branch/)
+     Presionamos ~SPC g s~ luego ~m m~ y elegimos el *branch* para traer los cambios al *master branch*
+  3. Hacemos *(push)* del *(merge)*
+     Presionamos con ~SPC g s~ luego ~p p~
+* Diferencia entre master y origin/master
+** Procedimiento
+  Del ejemplo anterior quizás puede aparecer esto, y pueden surgir dudas.
+
+  Cuando se dice *master* se refiere al *local branch* (el entorno local),
+  mientras que *origin/master* hace referencia al *remote branch* (el que esta en el servidor github)
+
+  *Observación:*
+  Lo mismo aplica con los *branches*
+
+  Por ejemplo origin/hotfix y hotfix, origin/testing y testing, etc..
+** Referencias
+*** Referencias Web Extraoficiales
+    1. [[https://stackify.com/git-checkout-remote-branch/][Git checkout remote branch - Stackify.com]]
+*** Referencias Issues
+    1. [[https://stackoverflow.com/questions/48596045/git-difference-between-origin-master-and-origin-master][Difference between master and origin master - Stackoverfow.com]]
+* Guardar cambios de forma temporal (Stash)
+** Procedimiento
+  Si hicimos cambios en archivos de nuestro ordenador (se dice que es local, y se guarda en *unstage*),
+  para guardar esos cambios en otro lugar de "forma temporal" (se guarda en *stash*) antes de hacer un *pull* 
+
+  1. Antes de hacer *(commit)* de los cambios, separamos el código con *(stash)*
+     Los cambios que se hicimos en los archivos del entorno local estan en *unstage* sino hicimos commit,
+     seleccionamos ese bloque de código y presionamos ~zz RET~ (no le asignamos nombre porque es opcional).
+     Cuando volvamos al archivo, no apareceran lo cambios, quedaron separados en *stash*
+  2. Creamos un *branch* para las nuevas características que nos pidieron de improviso
+     Al crear el *branch* nos aseguramos de separar las nuevas características
+     del *commit* que haríamos con las funcionalidades que estabamos desarrollando.
+  3. Volvemos a traer el código que reservamos con *(stash)*
+     Seleccionamos los cambios que teniamos *stashes* y presionamos ~a~ (hace referencia a add/agregar)
+     y volverá a aparecer esos cambios en el archivo, por tanto estará en *unstage* 
+     donde quedan las modificaciones que aún no se hizo *commit* (si lo hicieramos quedarían en *stage*)
+** Referencias Web Extraoficiales
+   1. [[https://code.tutsplus.com/es/tutorials/quick-tip-leveraging-the-power-of-git-stash--cms-22988][Referencia #1 - Code Tutsplus]]
+   2. [[https://www.runroom.com/realworld/git-stash][Referencia #2 - RunRoom]]
+* Listar historial de commits de un archivo
+** Procedimiento
+  Corremos el comando *(blame)* presionando ~SPC g b~ y nos muestra un log de los cambios
+  Si presionamos ~b~ va a los commits anteriores y con ~q~ los mas recientes
+** Referencias Web Oficiales
+   1. [[https://magit.vc/manual/magit/Blaming.html][Blaming - Magit.vc]]
+* Atajos 
+  #+NAME:
+  |---------+----------------------------------------------------------------------------|
+  | Comando | Descripción                                                                |
+  |---------+----------------------------------------------------------------------------|
+  | SPC-g s | Muestra el estado de cambios                                               |
+  | Tab     | Expande/Oculta el contenido del bloque donde esta el cursor                |
+  | s       | Agrega archivos nuevos/Guarda los cambios locales *unstage* en *stage*     |
+  | u       | Pasa los cambios de *stage* al entorno local (unstage)                     |
+  | x       | Descarta los cambios                                                       |
+  | c c     | Crear *commit* (luego de escribir el motivo, se debe finalizar)            |
+  | , ,     | Finalizar *commit*                                                         |
+  | b c     | Crear un nuevo branch, y hacer checkout de ese branch                      |
+  | b b     | Cambiar de *branch* (Ej. Ir del master al develop o testing)               |
+  | t t     | Crear un *tag*                                                             |
+  | p p     | Hacer *push*                                                               |
+  | p e     | Hacer *push* en un repositorio externo                                     |
+  | F p     | Hacer *pull*                                                               |
+  |---------+----------------------------------------------------------------------------|
+* Posibles Situaciones
+** Hacer cambios, subirlos y actualizar
+   1. Guardamos los cambios de forma local *(unstage)*
+      Modificamos los archivos, guardamos con con ~SPC f s~ ó ~M-x s~
+   2. Guardo los cambios en *Stage*
+      Presionamos ~SPC g s~ seleccionamos los cambios que queremos guardar en *stage* 
+      con ~shift~ ó ~v~ y las flechas Down/Up, y presionamos ~s~
+   3. Hacemos *(commit)* (aplicamos los cambios)
+      Presionamos ~SPC g s~ seguido de ~c c~
+   4. Creamos un *(branch)* del *(commit)*
+      Presionamos ~SPC g s~ seguido de ~b c~ luego ~RET~ y escribimos
+      el nombre del nuevo *(branch)* donde se guardaran los cambios del *(commit)*
+   5. Hacemos *(push)*
+      Presionamos ~SPC g s~ seguido de ~p p~
+   6. Hacemos *(pull)* del *(branch)* nuevo al *master branch*
+      Presionamos ~SPC g s~ seguido de ~b b~ elegimos el *master branch*
+      y terminamos con ~F p~
+
+   *Observación:*
+   Si ya estamos en el menú de *magit* no es necesario presionar el atajo ~SPC g s~ del mode evil de spacemacs
+** Resolver conflicto, diferencia entre archivos
+   Si en el paso 5 del ejemplo anterior hubiesemos tenido un conflicto,
+   porque alguien modificó el mismo archivo en las mismas lineas.
+
+   1. Hacemos *(pull)*
+      Para traer el archivo con el que tenemos conflicto,
+      ver las diferencias entre este archivo y el archivo local para resolverlo.
+
+   2. Mostramos el conflicto
+      Presionamos ~SPC g s~ y luego ~e~ , apareciendo tres buffers 
+      identificados en la parte inferior izquierda con las letras A, B, C.
+
+      *Nota:*
+      A y B son los archivos en conflicto, y C el archivo final,
+      el que tendra los conflictos resuelto.
+
+   3. Comparamos las diferencias con ~n~ y ~p~
+      Si presionamos ~p~ o ~n~ se resaltará los cambios, 
+      donde ~p~ hace de *previous diff* y ~n~ de *next diff*
+
+   4. Corregimos el conflicto
+      Podemos elegir entre elegir que archivo (buffer A o B) sera el correcto como solucion e ira al buffer C, 
+      presionando la letra minuscula del buffer que identifica al archivo.
+
+      *Nota:*
+      La otra manera, seria si corregimos las diferencias de forma manual escribiendo en el buffer C
+
+   5. Guardamos los cambios y salimos
+      Presionamos ~q~ seguido de ~y~ dos veces para confirmar los cambios realizados.
+
+   6. Verificamos que se hizo el *(merge)*
+      Presionamos ~SPC g s~ y debe decir "Merging origin/nombre del branch"
+
+   7. Hacemos *(commit)* del *(merge)* y *(push)*
+      Comiteamos con ~c c~ y ~, ,~ y por último pusheamos con ~P p~
+* Referencias
+** Referencias Web Extraoficiales
+   1. [[https://www.saltycrane.com/blog/2018/11/magit-spacemacs-evil-magit-notes/][Referencia #1 - Blog SaltyCrane.com]]
+** Referencias Youtube
+   1. [[https://www.youtube.com/watch?v=7ywEgcbaiys][Referencia #1]]
+   2. [[https://www.youtube.com/watch?v=qXgGtyjXPiw][Referencia #2]]
+   3. [[https://www.youtube.com/watch?v=fFuf3hExF5w][Referencia #3]]
+   4. [[https://www.youtube.com/watch?v=NDP91RNgT4A][Referencia #4]]
+   5. [[https://www.youtube.com/watch?v=1IYsiHXR620][Referencia #5]]

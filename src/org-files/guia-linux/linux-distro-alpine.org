@@ -1,0 +1,73 @@
+#+TITLE: Guia Linux - Distro Alpine
+#+SETUPFILE: ../theme-readtheorg.setup
+#+EXPORT_FILE_NAME: ../../views/guia-linux/linux-configuraciones.html
+#+STARTUP: inlineimages
+* Instalación manual
+  1. http://obemsg.blogspot.com/2012/08/alpine-linux-installation-using-fdisk.html
+  2. https://mckayemu.github.io/alpineinstalls/instalar/instalar-desde-virtualbox-a-discoreal-dualboot-guia.html
+  3. https://wiki.alpinelinux.org/wiki/Bootloaders
+  4. https://gist.github.com/profOnno/e55c1b9be73fa1ff92ec8014b549d01c
+
+  #+BEGIN_COMMENT
+  para el grub hice
+  apk del syslinux
+  apk add grub grub-bios
+  gub-install --boot-directoy=/mnt/boot /dev/sda
+  #+END_COMMENT
+* Problemas comunes
+** Mirrors
+   1. https://superuser.com/questions/1453107/installing-alpine-linux-fails-to-scan-the-mirror-list-with-403-forbidden
+   2. https://github.com/saghul/lxd-alpine-builder/issues/1
+** Conexión de internet
+   1. https://unix.stackexchange.com/questions/266418/how-to-connect-alpine-linux-to-wifi
+** Grub
+   1. https://askubuntu.com/questions/266429/error-file-grub-i386-pc-normal-mod-not-found
+   2. https://gutsytechster.wordpress.com/2018/07/24/how-to-resolve-grub-error-file-grub-i386-pc-normal-mod-not-found/
+** Bootear alpine con grub
+   1. https://unix.stackexchange.com/questions/414655/not-syncing-vfs-unable-to-mount-root-fs-on-unknown-block0-0
+** Re-readigin the partion table failed 
+   1. https://unix.stackexchange.com/questions/264056/re-reading-the-partition-table-failed-with-error-16-device-or-resource-busy
+* Clonar Dispositivos
+** Comando dd
+* [WAITING] Fstab que es
+  1. https://en.wikipedia.org/wiki/Fstab
+  2. https://www.howtogeek.com/howto/38125/htg-explains-what-is-the-linux-fstab-and-how-does-it-work/
+  3. https://www.mikroways.net/2010/11/25/el-archivo-etcfstab/
+  4. https://blog.carreralinux.com.ar/2020/04/el-archivo-fstab-al-descubierto/
+  5. https://geek-university.com/linux/etc-fstab-file/
+* Procedimiento
+** Descriptivo
+  1. Crear partición con ~fdisk~
+  2. Formatear partición con ~mkfs.~ (seguido de ext2 ó ext3 ó ext4)
+** Terminal
+   #+BEGIN_SRC shell
+     # 1. particionamos el disco
+     fdisk /dev/sda
+
+     # 2. si ya estuviera creada, primero debemos desmontarla
+     umount /dev/sda1
+
+     # 3. formateamos la partición (creamos el filesystem)
+     mkfs.ext3 /dev/sda1
+   #+END_SRC
+* Referencias
+** Referencias Web - Oficiales
+  1. [[https://www.debian.org/releases/stable/armel/apcs04.es.html][Nombres de dispositivos en Linux - Debian.org]]
+** Referencias Web - Extra oficial
+  1. [[https://mundo-geek.com/volumen-vs-particion-cual-es-la-diferencia/][Diferencia entre Volumen y Partición - Mundo-Geek.com]]
+  2. [[https://programmerclick.com/article/9643818419/][Diferencia entre particionar con fdisk y parted - ProgrammerClick.com]]
+  3. https://es.easeus.com/partition-manager-tips/mbr-y-gpt.html
+  4. https://hardzone.es/2018/09/29/mbr-vs-gpt-mejor-disco-duro-ssd/
+** otros
+Particiones, comandos fdisk, df, ...
+1. https://www.unix.com/unix-for-dummies-questions-and-answers/212227-solved-help-new-disk-but-dont-know-how-add.html
+https://techoverflow.net/2018/05/03/how-to-create-a-partition-table-using-fdisk/
+
+Alpine - Extraoficial
+
+Alpine - Oficial
+https://wiki.alpinelinux.org/wiki/Alpine_setup_scripts#Partitioning
+https://wiki.alpinelinux.org/wiki/Setting_up_disks_manually
+https://wiki.alpinelinux.org/wiki/Installing_Alpine_on_HDD_dualbooting
+** Referencias - Youtube
+   1. [[https://www.youtube.com/playlist?list=PLSbhiuoC0XgX70ZtgJ7d-1rLui0jZRabg][Linux Command Line - By BlueMonkey]]

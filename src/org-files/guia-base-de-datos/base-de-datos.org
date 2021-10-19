@@ -1,0 +1,25 @@
+#+TITLE: Base de Datos
+
+#+BEGIN_COMMENT
+La idea es agregar contenido sobre (DER) Diagramas de Entidad relación
+de la materia (ADS) Análisis de Sistemas
+#+END_COMMENT
+
+* Canales de Youtube
+** CodigoCompilado
+*** Teoria
+  - [[https://www.youtube.com/watch?v=u2bXiPJf9oQ][#3 - Ejercicio DER]]
+  - [[https://www.youtube.com/watch?v=te-i37IIFeU][#4 - Modelado (sin normalización)]]
+  - [[https://www.youtube.com/watch?v=26p1oruLb2M][#13 Normalización (1FN,2FN,3FN)]]
+  - [[https://www.youtube.com/watch?v=-LrUJR0G_6g][#14 Normalización 3FN]]
+*** SQL
+  - [[https://www.youtube.com/watch?v=te-i37IIFeU][#7 Tipos de dato en SQL]]
+  - [[https://www.youtube.com/watch?v=SpVDFL4pWJE][#8 Creación de la Base de Datos]]
+  - [[https://www.youtube.com/watch?v=BbVQFqkpOXs][#9 Insertar y Consultar datos]]
+  - [[https://www.youtube.com/watch?v=h3gh_gqv4Ds][#10 Select con Inner join]]
+  - [[https://www.youtube.com/watch?v=26p1oruLb2M][#11 Update - Modificar datos]]
+  - [[https://www.youtube.com/watch?v=26p1oruLb2M][#12 Delete/Drop - Eliminar Tablas/Registros/Estructuras]]
+  - [[https://www.youtube.com/watch?v=_O5Zxa4iVGA][#15 Check/Like - Restricciones]]
+** Otros
+   - [[https://www.youtube.com/watch?v=0I_0lHj4GP4][Ejemplo #1 - Normalización]]
+   - [[https://www.youtube.com/watch?v=igctJY-YIjY][Ejemplo #2 - Normalización]]

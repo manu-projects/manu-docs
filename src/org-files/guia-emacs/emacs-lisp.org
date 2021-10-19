@@ -1,0 +1,458 @@
+#+TITLE:     Guia Emacs - Aprendiendo Elisp
+#+SETUPFILE: ../theme-readtheorg.setup
+#+EXPORT_FILE_NAME: ../../views/guia-emacs/emacs-lisp.html
+
+* Atajos
+  M-x eval-buffer para ejecutar codigo
+  C-x C-e evaluar la ultima expresion
+* Paginas de Referencia
+  - [[https://learnxinyminutes.com/docs/es-es/elisp-es/][Referencia #1 - (learn x in minutes)]]
+  - [[https://blog.8bitzen.com/posts/27-02-2019-using-orgmode-babel/][Using OrgMode Babel (8bitzen)]]
+  - [[https://www.gnu.org/software/emacs/manual/html_node/eintr/][Referencia #2 (Gnu.org)]]
+  - [[https://www.gnu.org/software/emacs/tour/][Referencia #3 - Guia en general (Gnu.org)]]
+  - [[https://www.davidam.com/docu/emacs-lisp-intro-es.html][Referencia #4 - Davidam]]
+* Videos de Referencia
+  Es el que usa emacs internamente
+  - [[https://www.youtube.com/watch?v=NQhud2ZNd1w][Tutorial (Mike Zamanasky)]]
+  - [[https://www.youtube.com/watch?v=FppjUvUDO4o][Referencia #2 - (Linuxhint)]]
+  - [[https://www.youtube.com/watch?v=8Zkte37UOnA&t=571s][Referencia #3 - (Uncle Dave)]]
+  - Serie de videos por Daniel Gopar
+    1. [[https://www.youtube.com/watch?v=CH0RUrO_oww][Elisp Tutorial Intro]]
+    2. [[https://www.youtube.com/watch?v=lmTPJB0Musk][Elisp Tutorial - Variables, Booleanos]]
+    3. [[https://www.youtube.com/watch?v=VqCSbDqHziM][Elisp Tutorial - Variables locales, bucles]]
+    4. [[https://www.youtube.com/watch?v=KwBRpS9Bs4U][Elisp Tutorial - Funciones]]
+    5. [[https://www.youtube.com/watch?v=QaX3AaK3_Lk][Elisp Tutorial - nose]]
+* Guia de Lisp
+** Conceptos
+   Para reforzar un poco el paradigma funcional e integrarlo con elisp que
+   es lo que utiliza emacs por dentro, se puede ejecutar tambien en la terminal eshell
+
+   -Para mostrar los bloques de codigo en otro buffer presionar <bdk>, '</bdk> o <bdk>C-x '</bdk>
+   -Para ejecutar el codigo presionar <bdk>, ,</bdk> o <bdk>C-c C-c</bdk>
+
+   Referencias:
+   - [[http://cl-cookbook.sourceforge.net/emacs-ide.html][Using emacs as LISP IDE (cl-cookbook)]]
+   - [[https://www.youtube.com/watch?v=-J_xL4IGhJA][Overview and Introduction to Lisp - Part 1]]
+   - [[https://www.youtube.com/watch?v=-J_xL4IGhJA&list=PLE18841CABEA24090][Playlist - Structure and Interpretation (MIT 1986)]]
+   - [[https://www.youtube.com/watch?v=QFbJKWhzhtU][Introduccion Lisp - Parte 1 (javierbravoudima) - Ver Video]]
+   -[[https://www.youtube.com/watch?v=Fz9Rig9lG50][ Intro Lisp - Parte 2 - Ver Video]]
+   - [[https://www.youtube.com/watch?v=Jx8riNWKe14][Intro Emacs (javier) - Ver Video]]
+   - [[https://www.youtube.com/watch?v=9aI7ZAEbiF0][Common LISP (Prof. Javier)]]
+** Comandos basicos
+
+   | Comando            | Descripcion                                                               |
+   | C-x C-e            | Ejecuta un comando (Con el cursor al final de linea)                      |
+   | M-x eval-last-sexp | Ejecuta un comando (Con el cursor al final de linea)                      |
+   | setq               | Cambia el valor de una variable local                                     |
+   | print              | Imprimir los datos de una variable                                        |
+   | setf               | Cambia el valor de una variable global                                    |
+   | length             | Devuelve la longitud de una lista (una cadena es una lista de caracteres) |
+   | read               | Pide ingresar datos                                                       |
+
+** Comandos para listas
+   | (1 2 3)   | Representa una lista, se forman con los ()        |
+   | append    | Inserta un elemento en una lista                  |
+   | cons      |                                                   |
+   | first,car | Devuelve primer elemento de una lista             |
+   | second    | Devuelve el segundo elemento de una lista         |
+   | nth <n>   | Devuelve el elemento en la posicion n de la lista |
+   | rest, cdr | Devuelve la lista sin el primer elemento          |
+
+** Comandos para funciones
+    
+   | prog1 	| Evalua todas las sentencias compuestas y devuelve la primer sentencia |
+   | progn  |	Evalua todas las sentencias compuestas y devuelve la ultima |
+
+   #+BEGIN_SRC emacs-lisp
+     (progn
+       ;; creamos un lista
+       (setf lista '(A B C))
+
+       ;; creamos la funcion saludo,
+       ;; que tiene solo un argumento
+       (defun saludo(msg)
+         ;; imprimimos el argumento usando el comando print
+         (print msg)
+         )
+
+       ;; llamamos a la funcion saludo y le pasamos como parametro una cadena
+       (saludo "hola")
+       )
+
+     (progn
+       ;; abro un buffer nuevo lamado test
+       (switch-to-buffer-other-window "*test")
+       ;; limpio el contenido si lo tuviese
+       (erase-buffer)
+       ;; declaro una variable unNombre
+       ;; y llamamos al comando read para que ingresen datos
+       (setf unNombre (read))
+       ;; imprimimos lo que se escribio
+       (print unNombre)
+       )
+   #+END_SRC
+
+** Buffers
+
+   | BUffer    | Descripcion              |
+   | backtrace | Es el depurador de emacs |
+   | scratch   | Para depurar codigo lisp |
+
+   Algunas diferencias
+
+   + Con setq y setf podemos cambiar el valor a las variables, pero el primero es de mas bajo nivel que setf. Este segundo es de mas alto nivel, e incorpora dentro a setq.
+   + Con setq no podemos cambiar el valor de una lista
+
+
+   #+BEGIN_SRC emacs-lisp
+     ;; Correr cada linea con M-x  C-x C-e   
+
+     ;; ejecuto una funcion prefija
+     (+ 1 2)
+
+     ;; declaro una variable local y le asigno una lista
+     (setq dias '(lunes martes))
+     (setq letras '(A B C))
+
+     ;; declaro una variable global
+     (setf dias '(lunes martes))
+
+     ;; pido el primer elemento de la lista (a b c)
+     (first '(a b c)
+
+            ;; imprimo la variable dias
+            (print dias)
+
+            ;; Le cambio el valor del primer elemento a una lista
+            ;; si probara con setq devolveria error
+            (setf (first dias) 'viernes)
+            (print dias) ;; ahora deberia devolver (viernes martes)
+
+            ;; Creo una funcion last (le resto 1 para no excederme de la cantidad de elementos)
+            (nth (- (length dias) 1) dias)
+
+            ;; Une dos listas en una
+            (append '(a b) '(c d))
+            ;; Insertamos una sublista al principio de otra lista
+            (cons '(a b) '(c d))
+
+            ;; Creo una funcion que imprima el argumento
+            (defun saludo(mensaje)
+              (print mensaje)
+              )
+   #+END_SRC
+
+   #+BEGIN_SRC emacs-lisp
+     (defvar nombre "jorgito")
+
+     (print nombre)
+   #+END_SRC
+
+* Tutoriales
+  1. https://www.davidam.com/docu/emacs-lisp-intro-es.html
+  2. https://learnxinyminutes.com/docs/es-es/elisp-es/
+  3. https://with-emacs.com/posts/tutorials/almost-all-you-need-to-know-about-variables/
+  4. https://www.gnu.org/software/emacs/manual/elisp.html
+  5. https://www.gnu.org/software/emacs/manual/html_node/eintr/
+  6. https://www.iteramos.com/pregunta/10725/-consejos-para-aprender-elisp-
+  7. https://poesiabinaria.net/2017/09/aprende-utilizar-emacs-abre-mente-desdobla-tus-dedos-trabaja-gusto-se-productivo/
+* Listas
+   1. Debemos comenzar con el apóstrofe '
+   2. Seguido de la lista entre paréntesis ()
+   
+   *Observación:*
+   No importa si le agregamos espacio, o enter, será una lista
+
+  #+BEGIN_SRC elisp
+    '(+ 2 2)
+
+    ; no confundir con la funcion (+ 2 2)
+    ; el de arriba empieza con el apóstrofe, por tanto es una lista
+  #+END_SRC
+
+  #+RESULTS:
+  | + | 2 | 2 |
+  
+  #+BEGIN_SRC elisp
+    '(rose
+      violet
+      daisy
+      buttercup)
+  #+END_SRC
+
+  #+RESULTS:
+  | rose | violet | daisy | buttercup |
+
+  #+BEGIN_SRC elisp
+    '(rose violet daisy buttercup)
+  #+END_SRC
+
+  #+RESULTS:
+  | rose | violet | daisy | buttercup |
+
+  #+BEGIN_SRC elisp
+    '(esta lista tiene "un cadena jojo")
+  #+END_SRC
+
+  #+RESULTS:
+  | esta | lista | tiene | un cadena jojo |
+* Variables setq y set
+  
+  #+BEGIN_SRC elisp
+    'flores
+  #+END_SRC
+
+  #+RESULTS:
+  : flores
+  
+  #+BEGIN_SRC elisp
+    ;; le asignamos a flower una lista
+    ;; 'flower es una variable
+    ;; y '(rosa violeta) es una lista con dos elementos
+    (set 'flowers '(rosa violeta))
+
+    ;; hacemos que retorne la lista que tiene la variable flowers
+    flowers
+  #+END_SRC
+
+  #+RESULTS:
+  | rosa | violeta |
+
+  #+BEGIN_SRC elisp
+    ;; la q de setq hace referencia a quote osea cita
+    ;; por tanto no es necesario citar el primer argumento carnivores
+    ;;
+    ;; mientras que con set solo, si habria que citar el primer argumento
+    ;; con el apóstrofe
+    (setq carnivores '(lion tiger leopard))
+    carnivores
+  #+END_SRC
+
+  #+RESULTS:
+  | lion | tiger | leopard |
+
+
+  #+BEGIN_SRC elisp
+    ;; con setq podemos hacer varias asignaciones
+    ;; en este caso a carnivores una lista
+    ;; y a hervivores otra lista
+    (setq carnivores '(lion tiger leopard)
+          hervivores '(gacela cebra))
+
+    carnivores
+    hervivores
+  #+END_SRC
+
+  #+RESULTS:
+  | gacela | cebra |
+  
+  #+BEGIN_SRC elisp
+    (setq contador 0)
+    (setq contador (+ contador 1))
+    contador
+  #+END_SRC
+
+  #+RESULTS:
+  : 1
+* let
+  Para crear variables locales, reescriben el valor de otra variable externa
+  para uso de la funcion 
+
+  #+BEGIN_SRC elisp
+    ;; let lleva como primer argumento lista de (variable valor)
+    ;; como tercer argumento un cuerpo que es una lista de..
+    (let ((a "I'm a")(b "I'm b"))
+      (message "Hello, %s. Hello %s" a b))
+  #+END_SRC
+
+  #+RESULTS:
+  : Hello, I'm a. Hello I'm b
+* Buffers
+  #+BEGIN_SRC elisp
+    (buffer-file-name)
+  #+END_SRC
+
+  #+RESULTS:
+  : /home/jelou/Documentos/git/aprende-elisp/test1.org
+
+  #+BEGIN_SRC elisp
+    (buffer-name)
+  #+END_SRC
+
+  #+RESULTS:
+  : test1.org
+
+  #+BEGIN_SRC elisp
+    (buffer-size)
+  #+END_SRC
+
+  #+RESULTS:
+  : 4953
+* Funciones
+  #+BEGIN_SRC elisp
+    (defun multiply-by-sevens (number)
+      "Multiply NUMBER by seven."
+      (* 7 number))
+
+    (multiply-by-sevens 3)
+  #+END_SRC
+
+  #+RESULTS:
+  : 21
+
+  #+BEGIN_SRC elisp
+    (defun multiply-by-seven (number)       ; Interactive version.
+      "Multiply NUMBER by seven."
+      (interactive "p")
+      (message "The result is %d" (* 7 number)))
+
+    (multiply-by-seven)
+  #+END_SRC
+
+  #+RESULTS:
+  : The result is 14
+
+  #+BEGIN_SRC elisp
+    (defun a-exists-only-in-my-body (a)
+      (other-function))
+
+    (defun other-function ()
+      (message "I see `a', its value is %s" a))
+
+    (a-exists-only-in-my-body t)
+  #+END_SRC
+
+  #+RESULTS:
+  : I see ‘a’, its value is t
+
+  #+BEGIN_SRC elisp
+    (defun some-other-function ()
+      (message "I see `c', its value is: %s" c))
+
+    (defvar c t)
+
+    (let ((a "I'm lexically bound")
+          (c "I'm special and therefore dynamically bound"))
+      (some-other-function)
+      (message "I see `a', its values is: %s" a))
+  #+END_SRC
+
+  #+RESULTS:
+  : I see ‘a’, its values is: I'm lexically bound
+
+  1. https://www.gnu.org/software/emacs/manual/html_node/eintr/defun.html
+* argumentos
+  #+BEGIN_SRC elisp
+    ;; concatenamos cadenas
+    (concat "hola" "como")
+  #+END_SRC
+
+  #+RESULTS:
+  : holacomo
+
+  #+BEGIN_SRC elisp
+    ;; pasamos valores de funciones como argumentos
+    ;; el (+ 1 2) es similar a haskell
+    (concat "hola " (number-to-string (+ 1 2)) " jo")
+  #+END_SRC
+
+  #+RESULTS:
+  : hola3jo
+* message
+  #+BEGIN_SRC elisp
+    ;; funciona como un echo o print
+    (message "hola")
+  #+END_SRC
+
+  #+RESULTS:
+  : hola
+
+  #+BEGIN_SRC elisp
+    (message "hola %s" (buffer-name))
+  #+END_SRC
+
+  #+RESULTS:
+  : hola test1.org
+
+  #+BEGIN_SRC elisp
+    ;; se le puede pasar parámetros
+    ;; y usar como el printf de c
+    (message "hola %s mi edad es %d" (buffer-name) (+ 10 10))
+  #+END_SRC
+
+  #+RESULTS:
+  : hola test1.org mi edad es 20
+* if
+  #+BEGIN_SRC elisp
+    ;; el (> 5 4) es como haskell, 5 es el primer agumento y 4 el segundo
+
+    (if(> 5 4)             ;; parte si..
+        (message "shit"))  ;; parte entonces
+  #+END_SRC
+
+  #+RESULTS:
+  : shit
+
+  #+BEGIN_SRC elisp
+    (defun tipo-animal (tipo)                      ;; defun nombre (lista-argumentos)
+      "Imprime un mensaje segun el tipo de animal" ;; "documentación"
+      (if (equal tipo 'fiera)                      ;; cuerpo parte-si
+          (message "Cuidado! Corré!")              ;; cuerpo parte-entonces
+          (message "No es peligroso")))            ;; cuerpo parte-resto
+
+
+    (tipo-animal 'fiera)
+    (tipo-animal 'cebrita)
+  #+END_SRC
+
+  #+RESULTS:
+  : No es peligroso
+* varios
+  #+BEGIN_SRC elisp
+    ;; let tiene una lista de dos elementos (nombre1 valor1) (nombre2 valor2)
+    ;; "en este caso valor1 y valor2 son funciones que retoran datos del buffer actual"
+    ;; seguido de un cuerpo que es (message )
+    (let ((foo (buffer-name))
+          (bar (buffer-size)))
+      (message "Este buffer es %s y tiene %d caracteres." foo bar))
+  #+END_SRC
+
+  #+RESULTS:
+  : Este buffer es test1.org y tiene 5993 caracteres.
+
+  #+BEGIN_SRC elisp
+    ;; (point-min) devuelve la posición del cursor al principio de buffer
+    ;; (point) devuelve la posición actual del cursor
+    (message "Hay %d caracteres dentro de este buffer."
+             (- (point)
+                (save-excursion
+                  (goto-char (point-min)) (point))))
+  #+END_SRC
+
+  #+RESULTS:
+  : Hay 6289 caracteres dentro de este buffer.
+
+  #+BEGIN_SRC elisp
+    (defun hello (name)
+      (insert (format "Hello %s!\n" name)))
+
+    (hello "you")
+  #+END_SRC
+
+  #+RESULTS:
+* practicando
+  #+BEGIN_SRC elisp
+    (setq invitados '("carlos" "pepe"))
+
+    (defun saludar(mi-nombre)
+      (let ((tu-nombre (read-from-minibuffer "Enter your name: ")))
+        (message "tu nombre es %s y yo soy %s" tu-nombre mi-nombre) )
+      )
+
+    ;;(saludar "perez")
+
+    (mapcar 'saludar invitados)
+  #+END_SRC
+
+  #+RESULTS:
+  | carlos | pepe |

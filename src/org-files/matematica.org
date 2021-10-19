@@ -1,0 +1,8 @@
+#+BEGIN_COMMENT
+Agregar lo que tengamos acerca de 
+octave, matlab, gnuplot, ....
+
+crear un repositorio exclusivo para esto
+
+agregar como submodulo en este git quizas? o hace un listado?
+#+END_COMMENT

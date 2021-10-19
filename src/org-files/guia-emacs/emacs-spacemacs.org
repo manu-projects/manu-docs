@@ -1,0 +1,199 @@
+#+TITLE:     Emacs Spacemacs
+#+SETUPFILE: ../theme-readtheorg.setup
+#+EXPORT_FILE_NAME: ../../views/guia-emacs/emacs-spacemacs.html
+
+#+ATTR_HTML: :width 650
+[[../../assets/img/spacemacs.png]]
+
+* Tips - Importantes
+  Para que se guarden los cambios de la agenda, y se puedan filtrar usar ~M-x org-agenda-file-to-front~
+  Para abrir la agenda ~C-c a~
+  
+** Atajos configuraciones
+   #+NAME: emacs-atajos-configuraciones
+   |-----------+-------------------------|
+   | Comando   | Descripcion             |
+   |-----------+-------------------------|
+   | SPC q r   | Reiniciar spacemacs     |
+   | M m f e R | Aplicar configuraciones |
+   |-----------+-------------------------|
+** Atajos con Treemacs o Neotree
+   #+NAME: atajos-treemacs-neotree
+   |-----------+-------------------|
+   | Comando   | Descripcion       |
+   |-----------+-------------------|
+   | C c C p a | Agregar proyecto  |
+   | C c C p d | Eliminar proyecto |
+   |-----------+-------------------|
+** Atajos con Projectfile
+   #+NAME: projectfile-atajos
+   |-------------------------------------+----------------------------------------------|
+   | Comando                             | Descripcion                                  |
+   |-------------------------------------+----------------------------------------------|
+   | SPC p f                             | Abrir algun archivo del proyecto actual      |
+   | SPC f r                             | Abrir algun archivo reciente (recent files** |
+   | SPC p p                             | Cambiar del proyecto actual a otro           |
+   | M-x projectile-remove-known-project | Eliminar alguno de los proyectos agregados   |
+   |-------------------------------------+----------------------------------------------|
+** Referencias
+*** Referencias Web
+  1. [[https://develop.spacemacs.org/layers/+filetree/neotree/README.html][Layer Neotree - Spacemacs.org, Develop]]
+  2. [[https://develop.spacemacs.org/layers/+filetree/treemacs/README.html][Layer Treemacs - Spacemacs.org, Develop]]
+  3. [[https://github.com/Alexander-Miller/treemacs][Layer Treemacs - Github, Alexander Miller]]
+*** Referencias Youtube
+  1. [[https://www.youtube.com/watch?v=Bu7nF9hPSts][Referencia #1]]
+  2. [[https://www.youtube.com/watch?v=Rx3wRl5d-J0][Referencia #2]]
+  3. [[https://www.youtube.com/watch?v=OrTJ17ivOL0][Referencia #3]]
+  4. [[https://www.youtube.com/watch?v=Z88ZmeMo1X0][Referencia #4]]
+  5. [[https://www.youtube.com/watch?v=kPVVuJWS2vo][Referencia #5]]
+* Atajos en Hybrid Mode
+** Atajos Principales
+   El modo hibrido es una combinacion entre el *holy mode* (atajos de emacs) 
+   y el *evil mode* (atajos de vim).
+
+   El atajo ~SPC~ suele ser la tecla *espacio*
+** Atajos en Evil Mode (Vim)
+   #+NAME: atajos-evil-mode
+   |---------+------------------------------------------------------|
+   | Comando | Descripción                                          |
+   |---------+------------------------------------------------------|
+   | SPC f t | Abrir gestor de archivos Neotree/Treemac (file tree) |
+   | SPC f f | Buscar un archivo (find file)                        |
+   | SPC f s | Guardar archivo                                      |
+   | v       | Seleccionar/Deseleccionar texto                      |
+   |---------+------------------------------------------------------|
+** Atajos en Holy Mode (Emacs)
+   La metakey ~M~ suele referirse a la tecla ~Alt~ seguido a la tecla que haga referencia.
+   Mientras que ~C~ es la tecla ~Control~ seguido de la tecla que se mencione.
+   
+   #+NAME: atajos-holy-mode
+   |-------------+-------------------------------------------|
+   | Comando     | Descripción                               |
+   |-------------+-------------------------------------------|
+   | C-1         | Cierra todos los buffer excepto el actual |
+   | C-0         | Cierra el buffer actual                   |
+   | C-2         | Abre un buffer horizontal al actual       |
+   | C-3         | Abre un buffer vertical al actual         |
+   | C-x k       | Matar el buffer actual                    |
+   | C-Shift-Del | Borra una linea entera                    |
+   | M-%         | Reemplazar palabras                       |
+   | M-m f-t     | Gestor de archivos Neotree/Treemacs       |
+   | C-k         | Borrar una linea                          |
+   | C-e         | Ir al final de la linea                   |
+   | C-Inicio    | Ir al principio del archivo               |
+   | C-Fin       | Ir al final del archivo                   |
+   | C-x C-+     | Aumentar el tamaño de texto               |
+   | C-x C--     | Disminuir el tamaño de texto              |
+   |-------------+-------------------------------------------|
+
+   *Observación:*
+   El gestor de archivos Neotree/Treemacs es similar al ~dired~, con la diferencia
+   que este ocupa menos espacio en la pantalla
+* Ecuaciones algebraicas
+** Configuraciones
+   Primero, agregamos o descomentamos las siguientes lineas en los layers de ~.spacemacs~
+   #+BEGIN_SRC elisp
+     latex
+     bibtex
+     auto-completion
+   #+END_SRC
+
+   Luego agregamos la siguiente configuracion dentro de *user-config* de ~.spacemacs~
+   #+BEGIN_SRC elisp
+     ;; Aumentamos el tamaño del texto que suele aparecer en tamaño chico
+     (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0)** 
+   #+END_SRC
+
+   Por último aplicamos los cambios reiniciando spacemacs con ~SPC-q-r~
+** Como escribir las ecuaciones
+   1. Para escribir ecuaciones debemos encerrarlas con el simbolo pesos ~$$~
+
+   #+BEGIN_SRC org
+     $$ 4x^2 = 16 \times \frac{2}{4x} $$
+   #+END_SRC
+
+   2. Para visualizar ejecutar ~C-c C-x C-l~ ó  ~, T x~
+   3. Para mostrar el texto en formato latex ejecutar ~C-c C-c~ ó ~, ,~
+
+   *Observación:*
+   Si queremos que muestren todas las formulas al abrir un documento, agregar al principio del archivo la siguiente linea
+
+   #+BEGIN_SRC org
+     #+STARTUP: latexpreview
+   #+END_SRC
+** Errores Comunes
+*** No nos permita ver una vista preliminar del archivo
+**** Escenario
+      #+BEGIN_QUOTE
+         File "/tmp/orgtex9997XKu.dvi" wasn't produced. Please adjust 'dvipng' part of `org-preview-latex-process-alist'.
+         Found a log is generated, /tmp/orgtex9997XKu.log. Something interesting is in this log: "LaTeX Error: File `wrapfig.sty' >not found.** Then a quick search tells me texlive-latex-extra package is missing.
+      #+END_QUOTE
+**** Solución
+   1. En la terminal instalar el paquete ~texlive-latex-extra~ y ~texlive-bin~
+   #+BEGIN_SRC bash
+     sudo pacman -S textlive-latex-extra
+     sudo pacman -S textlive-bin
+   #+END_SRC
+ 
+   2. Agregar configuración en el *user-config* del archivo ~.spacemacs~ 
+   #+BEGIN_SRC elisp
+     ;; (setq org-latex-create-formula-image-program 'imagemagick)
+     (setq org-latex-create-formula-image-program 'dvipng)
+     ;;(setq-default org-html-with-latex `dvipng)
+   #+END_SRC
+** Referencias
+*** Referencias Web Oficiales
+    1. [[https://orgmode.org/worg/org-symbols.html][Lista de símbolos - orgmode.org]]
+    2. [[https://orgmode.org/worg/org-tutorials/org-latex-preview.html][Tutorial Org Latex Preview - orgmode.org]]
+    3. [[https://orgmode.org/manual/LaTeX-fragments.html][Tutorial Org Latex Fragments - orgmode.org]]
+*** Referencias Web Extraoficiales
+    1. [[https://github.com/politza/pdf-tools][PDF-tools - github.com, Politza]]
+    2. [[https://ecuadorminingnews.com/install-texlive-bin/][Install Textlive - ecuadorminingnews.com]]
+    3. [[https://sourceforge.net/projects/dvipng/][Dvipng - sourceforge.net]]
+*** Referencias Issues
+    1. [[https://emacs.stackexchange.com/questions/19880/font-size-control-of-latex-previews-in-org-files][Aumentar tamaño del texto #1 - emacs.stackexchange.com]]
+    2. [[https://tex.stackexchange.com/questions/78501/change-size-of-the-inline-image-for-latex-fragment-in-emacs-org-mode][Aumentar tamaño del texto #2 - tex.stackexchange.com]]
+    3. [[https://www.reddit.com/r/emacs/comments/5rf9d4/help_org_setup_preview_latex_fragments/][Org setup preview latex fragments - reddit.com]]
+    4. [[https://emacs.stackexchange.com/questions/18627/preview-latex-fragment-in-org-mode-blank-square-shown][Preview latex fragment in org mode - emacs.stackexchange.com]]
+    5. [[https://bbs.archlinux.org/viewtopic.php?id=168634][Dvipng unable to find required binary in libgd - bbs.archlinux.org]]
+    6. [[https://stackoverflow.com/questions/30151338/org-latex-preview-is-fuzzy-on-retina-displays][Org Latex preview is fuzzy on retina displays - stackoverflow.com]]
+* Referencias
+** Guías básicas
+   1. [[https://charlascylon.com/2017-09-20-spacemacs-mi-configuracion-personal][Configuración Spacemacs - CharlasCyclon.com]]
+   2. [[https://medium.com/@kokegudiel2/configuari%C3%B3n-de-spacemacs-para-principiantes-ed43ddf3030f][Configuración Básica Spacemacs - Blog Kokegudiel2]]
+** Guías Avanzadas
+   1. [[https://wiki.archlinux.org/index.php/Spacemacs][Referencia #1 - Wiki, ArchLinux.com]]
+   2. [[https://github.com/syl20bnr/spacemacs/blob/master/doc/DOCUMENTATION.org][Referencia #2 - Github, Syl20bnr]]
+** Capas o Layers
+    Subprogramas que agregan funcionalidad a spacemacs
+    1. [[https://www.spacemacs.org/layers/LAYERS.html][Referencia #1, Spacemacs.org]]
+** Themes
+    Para cambiar el estilo, la visualizacion, diseño, el color fondo y del texto,..
+    1. [[https://themegallery.robdor.com/][Themes, ThemeGallery]]
+** Fuentes
+    El tipo de fuente es fundamental para que sea más entendible el texto, en especial si estamos inmersos investigando/codeando muchas horas
+
+    1. [[https://sourcefoundry.org/hack/playground.html][Referencia #1 - SourceFoundry.org]]
+    2. [[https://opensource.com/article/17/11/how-select-open-source-programming-font][Referencia #2 - Opensource.com]]
+** Configuraciones de Spacemacs
+   Las configuraciones se hacen en el archivo ~~/.spacemacs~
+
+   1. [[https://out-of-cheese-error.netlify.com/spacemacs-config][Referencia #1 - Out of cheese error]]
+   2. [[https://practicalli.github.io/spacemacs/install-spacemacs/additional-configuration.html][Referencia #2 - Github, Practicalli]]
+* Referencias Youtube
+** Canales Favoritos
+    Conceptos, Atajos, Herramientas, etc.
+
+    1. [[https://www.youtube.com/watch?v=MRYzPWnk2mE&list=PLxj9UAX4Em-IiOfvF2Qs742LxEK4owSkr][Referencia #1]]
+    2. [[https://www.youtube.com/watch?v=d6iY_1aMzeg&list=PLX2044Ew-UVVv31a0-Qn3dA6Sd_-NyA1n][Referencia #2]]
+    3. [[https://www.youtube.com/watch?v=BRqjaN4-gGQ&list=PLhXZp00uXBk4np17N39WvB80zgxlZfVwj][Referencia #3]]
+** Configuraciones basicas
+    Para los que recién estan iniciandose
+
+    1. [[https://www.youtube.com/watch?v=8k7BTIqufqQ][Referencia #1]]
+    2. [[https://www.youtube.com/watch?v=Ie4z9-z948c][Referencia #2]]
+    3. [[https://www.youtube.com/watch?v=PKaJoqQQoIA][Referencia #3]]
+** Buffers, ibuffer y Emmet
+   1. [[https://www.youtube.com/watch?v=yUfA-7wWNKA][Referencia #1]]
+** Personalizando la terminal
+   1. [[https://www.youtube.com/watch?v=L9vA7FHoQnk][Referencia #1]]
