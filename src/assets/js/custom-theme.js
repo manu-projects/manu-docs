@@ -62,4 +62,13 @@ $(document).ready(function(){
     item.html(function(buscayreemplaza, reemplaza) { // reemplazamos
         return reemplaza.replace(/\[DESARROLLANDO\]/g, seccionDesarrollando);
     });
+
+    /**********************************************************************************/
+
+    // para evitar agregar el icono de extern link
+    if ( window.location.pathname == '/' ){
+        $("a").addClass("internal-link");
+
+    } else {
+    }
 });
