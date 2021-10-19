@@ -1,0 +1,14 @@
+#+TITLE: Manu-Docs
+* Objetivos
+  - Aprender y compartir nuevas tecnologías/herramientas
+  - Conocer nuevos lenguajes de programación
+  - Dividir y analizar el contenido previo a documentar
+* Información procesada y documentada
+  - La información ya procesada la solemos volcar en [[https://neverkas.github.io][Manu-Docs]]
+* To-Do 1.0
+  - Utilizamos *mkdocs* como herramienta para facilitar la documentación
+* To-Do 2.0
+  - Agregamos nodejs + gulpjs como gestor de tareas
+  - Generamos scripts en *elisp* para favorecer la nueva transición
+  - Migramos la documentación de *mkdocs* que utilizaba *Markdown* al formato de *Org Mode* (/para Emacs/)
+  - Renovamos documentación + Nuevas guías (docker, desarrollo web, vim, spacemacs, ...)
