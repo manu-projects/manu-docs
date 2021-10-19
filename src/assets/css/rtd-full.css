@@ -93,7 +93,8 @@ ul,ol,dl{
     list-style-image:none}
 
 li{
-    list-style:none}
+    list-style:disc;
+}
 
 dd{
     margin:0}

@@ -65,7 +65,7 @@
      docker image tag asdasd123123 miPrimerDocker
    #+END_SRC
 ** Comandos básicos
-   + El parámetro *ps* es como en linux normal, muestra los procesos en ejecución por tanto mostrará los containers activos (en ejecución)
+   + El parámetro ~ps~ es como en linux normal, muestra los procesos en ejecución por tanto mostrará los containers activos (en ejecución)
 *** Lista de Comandos
    #+name: docker-lista-comandos
    |------------------------------------------+-------------------------------------------------------------------------|
@@ -100,16 +100,16 @@
    | docker rm $(docker images -q)            | Remover todas las imagenes                                              |
    | docker kill $(docker ps -q)              | Mata el proceso de todos los contenedores en ejecución                  |
    |------------------------------------------+-------------------------------------------------------------------------|
-
-   Referencias:
-   1. https://docs.docker.com/engine/reference/commandline/container_prune/
-   2. https://hub.docker.com/repository/docker/neverkas/distroalpine
-   3. https://www.digitalocean.com/community/tutorials/como-instalar-y-usar-docker-en-ubuntu-18-04-1-es
-   4. https://www.ionos.es/digitalguide/servidores/configuracion/tutorial-docker-instalacion-y-primeros-pasos/
-   5. https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
-   6. https://linuxize.com/post/how-to-remove-docker-images-containers-volumes-and-networks/
-   7. [[https://platzi.com/blog/desplegar-contenedores-docker/][Desplegar contenedores - platzi.com]]
-   8. [[https://pandorafms.com/blog/es/docker-run/][Docker run - pandorafms.com]]
+*** Referencias
+**** Referencias Web Oficiales
+    1. [[https://docs.docker.com/engine/reference/commandline/container_prune/][Comando container prune - Docs, Docker.com]]
+**** Referencias Web Extraoficiales
+    1. [[https://www.digitalocean.com/community/tutorials/como-instalar-y-usar-docker-en-ubuntu-18-04-1-es][Instalar Docker en Ubuntu - Digitalocean.com]]
+    2. [[https://www.ionos.es/digitalguide/servidores/configuracion/tutorial-docker-instalacion-y-primeros-pasos/][Instalación de Docker - Ionos.es]]
+    3. [[https://platzi.com/blog/desplegar-contenedores-docker/][Desplegar contenedores - platzi.com]]
+    4. [[https://pandorafms.com/blog/es/docker-run/][Docker run - pandorafms.com]]
+    5. [[https://linuxize.com/post/how-to-remove-docker-images-containers-volumes-and-networks/][Eliminar imagenes/contenedores/volumenes/conexiones de Docker - Linuxsize.com]]
+    6. [[https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/][Hacer pull de una imagen de un repositorio privado - Kubernetes.io]]
 *** Lista de parámetros
     #+name: docker-lista-parametros
     |-------------+-----------------+-----------------------------------------------------------------------|
@@ -127,9 +127,9 @@
     | link        |                 | Enlaza un contenedor con otro (ideal para servidores web)             |
     |-------------+-----------------+-----------------------------------------------------------------------|
 *** Observaciones importantes
-    + Si queremos acceder al container (NO CREAR UNO NUEVO) usamos "docker exec -it IDdeAlgunaImagen bash" (si usamos run se creará un nuevo container)
-    + Siempre se crea un contenedor distinto cuando ejecutas una imagen con "docker run -it IdAlgunaImagen bash"
-    + Podemos usar el comando "docker run -it IDdeAlgunaImagen bash" para crear un nuevo contenedor
+    + Si queremos acceder al container (NO CREAR UNO NUEVO) usamos ~docker exec -it IDdeAlgunaImagen bash~ (/si usamos run se creará un nuevo container/)
+    + Siempre se crea un contenedor distinto cuando ejecutas una imagen con ~docker run -it IdAlgunaImagen bash~
+    + Podemos usar el comando ~docker run -it IDdeAlgunaImagen bash~ para crear un nuevo contenedor
     + Si queremos guardar cambios de un container, podemos versionarlo comiteando y pusheando los cambios en algun repositorio
      
     #+name: docker-crear-imagen
@@ -150,13 +150,13 @@
     #+END_EXAMPLE
 *** Crear Contenedores en primer y segundo plano
 **** Conceptos
-    - Para crear contenedores que corran en segundo plano pasamos el parámetro -d al comando *docker run*
-    - Para ejecutar contenedores que corran en segundo plano pasamos el parámetro -d al comando *docker exec*
+    - Para crear contenedores que corran en segundo plano pasamos el parámetro ~-d~ al comando ~docker run~
+    - Para ejecutar contenedores que corran en segundo plano pasamos el parámetro ~-d~ al comando ~docker exec~
 
     #+name: docker-diferencias-primer-segundo-plano
     #+BEGIN_QUOTE
     Al crear un contenedor en segundo plano, se ejecutará de fondo (osea por detrás de la terminal)
-    de donde ejecutemos el comando *docker run*, pudiendo seguir utilizando esa terminal donde lo ejecutamos.
+    de donde ejecutemos el comando ~docker run~, pudiendo seguir utilizando esa terminal donde lo ejecutamos.
     (particularmente útil para correr servidores linux, base de datos, ....)
 
     Si no lo creamos en segundo plano, nos aparecerá en la terminal el resultado de ejecutar el contenedor.
@@ -166,23 +166,23 @@
 
     Es decir si creamos un contenedor en primer plano (no le pasamos el parámetro -d)
     que ejecuta un comando ó tarea. Luego que esta tarea/comando se ejecutó, se detendrá la ejecución del contenedor.
-    Por tanto no podremos ejecutar otro comando, a menos que iniciemos el contenedor con el comando *docker start*
+    Por tanto no podremos ejecutar otro comando, a menos que iniciemos el contenedor con el comando ~docker start~
     #+END_QUOTE
 
     #+name: docker-diferencias-comandos-run-exec
     #+BEGIN_QUOTE
-    El comando *docker run* crea un contenedor que corra una tarea/comando 
-    El comando *docker exec* ejecuta en un contenedor ya existente una tarea/comando
+    El comando ~docker run~ crea un contenedor que corra una tarea/comando 
+    El comando ~docker exec~ ejecuta en un contenedor ya existente una tarea/comando
 
     Si queremos crear un contenedor que tenga una distribución de linux,
     y podamos mandarle via terminal a ese linux comandos (ls, ps, ...) 
     ó acceder al linux con una pseudoterminal (modo interactivo)
     
-    debemos habilitar en el comando *docker run* el modo de "pseudoterminal" con el parámetro -t (hace referencia a tty)
-    para que luego podamos acceder con *docker exec* a la pseudoterminal de forma interactiva con el parámetro -i -t
+    debemos habilitar en el comando ~docker run~ el modo de "pseudoterminal" con el parámetro ~-t~ (hace referencia a tty)
+    para que luego podamos acceder con ~docker exec~ a la pseudoterminal de forma interactiva con el parámetro ~-i -t~
     ó solo enviarle comandos (sin usar -i -t)
     
-    Si usamos los parámetros -i -t en el comando *docker run*,
+    Si usamos los parámetros ~-i -t~ en el comando ~docker run~,
     habilitará la terminal, ejecutará el comando que le pasemos y entrará en el contenedor de manera interactiva
     #+END_QUOTE
 
@@ -265,7 +265,7 @@
        # - borrar los que fueron creados hace mas de 12 horas
        docker container prune --filter "until=12h"
      #+END_SRC
-**** Referencias 
+**** Referencias Web - Extraoficiales
     1. [[https://phoenixnap.com/kb/remove-docker-images-containers-networks-volumes][Remove Docker images containers networks volumes - phoenix.com]]
 *** Eliminar multiples imagenes
     Recordemos que para eliminar contenedores usamos el comando *rm*
@@ -310,8 +310,8 @@
      #+END_SRC
 *** Acceder ó Iniciar/Detener ejecución de contenedores
 **** Conceptos
-     - Iniciamos el contenedor ejecutando en la terminal *docker start*
-     - Detenemos la ejecución con *docker stop*
+     - Iniciamos el contenedor ejecutando en la terminal ~docker start~
+     - Detenemos la ejecución con ~docker stop~
     
      #+name: docker-ejemplo1-iniciar-contenedor
      #+BEGIN_EXAMPLE
@@ -383,13 +383,13 @@
        # - usuario (dueño) del repositorio: neverkas
        # - nombre del repositorio: distroalpine
        # - tag (version en este caso): 3.12
-     #+END_SRC
 
      docker tag local-image:tagname new-repo:tagname
      docker push new-repo:tagname
+     #+END_SRC
 *** Abrir Puertos
-    Usamos el parámetro -p
-*** Referencias Web
+    Usamos el parámetro ~-p~
+*** Referencias Web Extraoficiales
     1. [[https://es.linux-console.net/?p=1181][Contenedor en segundo plano - linux-console.com]]
 ** Estados
    Los estados que puede tener un contenedor son dos *exited* (inactivo) ó *up* (en ejecución)
@@ -404,7 +404,7 @@
 ** Configurando Puertos
 ** Configurando Volumenes
 *** Conceptos
-    Los volumenes por defecto se crean en la ruta /var/lib/docker/volumes
+    Los *volumenes* por defecto se crean en la ruta /var/lib/docker/volumes
 *** Ejemplos
     #+BEGIN_SRC sh
       # creamos un nuevo volumen
@@ -413,7 +413,7 @@
       docker run -it -v /datos:/www/ --name mi-server alpine:latest sh
     #+END_SRC
 *** Referencias Youtube
-    1. https://www.youtube.com/watch?v=GfL_Ltu-eyw
+    1. [[https://www.youtube.com/watch?v=GfL_Ltu-eyw][Referencia #1]]
 ** Probando Distribuciones Linux
 *** Probando Alpine Edge
     #+BEGIN_SRC sh
@@ -598,23 +598,22 @@
    #+END_QUOTE
 ** Referencias
 *** Referencias Web Extraoficiales
-    + [[https://docs.docker.com/develop/develop-images/dockerfile_best-practices/][Best practices for writing Dockerfiles - docs.docker.com]]
-    + https://docs.docker.com/engine/reference/commandline/container_prune/
-    + [[https://github.com/rocker-org/rocker/wiki/How-to-save-data][How to save data - github.com/rocker-org]]
-    + [[https://www.digitalocean.com/community/tutorials/como-instalar-y-usar-docker-en-ubuntu-18-04-1-es][Como instalar y usar Docker en Ubuntu 18.04 - Digitalocean.com]]
-    + [[https://www.ionos.es/digitalguide/servidores/configuracion/tutorial-docker-instalacion-y-primeros-pasos/][Tutorial Docker - Instalación y primeros pasos - Ionos.es]]
-    + [[https://colorfield.be/blog/cleaning-lando-containers][Cleaning up containers - colorfield.de]]
-    + [[https://blog.hipolabs.com/understanding-docker-without-losing-your-shit-cf2b30307c63][Understanding Docker - Blog hipolabs]]
-    + [[https://docs.docker.com/engine/reference/commandline/commit/][Docker commit - Docker.com]]
-
-    + https://stackoverflow.com/questions/21871479/docker-cant-connect-to-docker-daemon
-    + https://www.digitalocean.com/community/questions/how-to-fix-docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socket
-    + https://manjaro.site/how-to-install-docker-on-manjaro-18-0/
+    1. [[https://docs.docker.com/develop/develop-images/dockerfile_best-practices/][Best practices for writing Dockerfiles - docs.docker.com]]
+    2. https://docs.docker.com/engine/reference/commandline/container_prune/
+    3. [[https://github.com/rocker-org/rocker/wiki/How-to-save-data][How to save data - github.com/rocker-org]]
+    4. [[https://www.digitalocean.com/community/tutorials/como-instalar-y-usar-docker-en-ubuntu-18-04-1-es][Como instalar y usar Docker en Ubuntu 18.04 - Digitalocean.com]]
+    5. [[https://www.ionos.es/digitalguide/servidores/configuracion/tutorial-docker-instalacion-y-primeros-pasos/][Tutorial Docker - Instalación y primeros pasos - Ionos.es]]
+    6. [[https://colorfield.be/blog/cleaning-lando-containers][Cleaning up containers - colorfield.de]]
+    7. [[https://blog.hipolabs.com/understanding-docker-without-losing-your-shit-cf2b30307c63][Understanding Docker - Blog hipolabs]]
+    8. [[https://docs.docker.com/engine/reference/commandline/commit/][Docker commit - Docker.com]]
+*** Referencias Issues
+    1. [[https://stackoverflow.com/questions/21871479/docker-cant-connect-to-docker-daemon][Docker Can't connect to docker daemon - Stackoverflow.com]]
+    2. [[https://www.digitalocean.com/community/questions/how-to-fix-docker-got-permission-denied-while-trying-to-connect-to-the-docker-daemon-socket][Permission denied while trying to connect to Docker Daemon - Digitalocean.com]]
 *** Referencias Youtube
     1. [[https://www.youtube.com/watch?v=r6bxsuDq6wY&list=PLmBbXLdrZ-O3B3rsLOVHufTL_wmickgLf&ab_channel=ServersforHackers][Playlist #1]]
     2. [[https://www.youtube.com/watch?v=jjuIEHhXX7k&list=PLmBbXLdrZ-O0GxzRkPdY6zUe9XRYNt38A&ab_channel=ServersforHackers][Playlist #2]]
-    3. [[https://www.youtube.com/watch?v=PbiYll21Jxg&list=PLZdsdjcJ44WU_cY2Y1LFLnmsSjFD5BZLZ][Playlist - DOcker container course (el mejor por ahora)]]
-    4. [[https://www.youtube.com/watch?v=vjnOIE-CwMU&list=PLqRCtm0kbeHAep1hc7yW-EZQoAJqSTgD-&index=2][Video - DOcker - primeros pasos]]
+    3. [[https://www.youtube.com/watch?v=PbiYll21Jxg&list=PLZdsdjcJ44WU_cY2Y1LFLnmsSjFD5BZLZ][Playlist - Docker container course (el mejor por ahora)]]
+    4. [[https://www.youtube.com/watch?v=vjnOIE-CwMU&list=PLqRCtm0kbeHAep1hc7yW-EZQoAJqSTgD-&index=2][Video - Docker - primeros pasos]]
     5. [[https://www.youtube.com/watch?v=6idFknRIOp4&t=201s][Video - Aprender docker en 14min]]
 * Dockerfile
 ** Conceptos
@@ -718,8 +717,11 @@
       docker run -it miservidor
     #+END_SRC
 *** (RUN) Ejecutar comandos
-    - Por cada linea que repitamos RUN, se creará una capa de..?
     - Para escribir varios comandos en una capa, utiliza el slash invertido
+
+    #+BEGIN_COMMENT
+    - Por cada linea que repitamos RUN, se creará una capa de..?
+    #+END_COMMENT
    
     Supongamos que queremos un linux con la distribución ubuntu
     #+BEGIN_SRC shell
@@ -764,11 +766,13 @@
    - Manejar varios contenedores en un archivo
    - Se puede combinar con Dockerfile
 ** Instalación y Configuración
-   *Observación*:
-   En la distribución Manjaro, intenté de instalar con *pacman -S docker-compose*
+   #+BEGIN_QUOTE
+   En la distribución Manjaro, intenté de instalar con ~pacman -S docker-compose~
    pero tiraba error por falta de packages. 
-   Por tanto decidi realizar la instalación mediante *pip install docker-compose*
+   
+   Por tanto decidí realizar la instalación mediante ~pip install docker-compose~
    que tuvo éxito.
+   #+END_QUOTE
    
    #+name: docker-compose-ejemplo
    #+BEGIN_SRC yaml
@@ -864,7 +868,7 @@
 * Docker Tips
 ** Ejecutar contenedores al iniciar el sistema
    Si tenemos algún problema en nuestro ordenador (se reinicia, se apaga, cuelga, error, etc..)
-   podemos usar el parámetro *always*
+   podemos usar el parámetro ~always~
 
    #+NAME: docker-compose
    #+BEGIN_SRC yaml
@@ -880,8 +884,8 @@
          restart: always
    #+END_SRC
 ** Conocer el timestamp de los logs
-   Con el comando *docker logs nombreContenedor* nos muestra un historial de logs del contenedor,
-   pero podemos conocer en detalle cuando sucedió utilizando el parámetro *t*
+   Con el comando ~docker logs nombreContenedor~ nos muestra un historial de logs del contenedor,
+   pero podemos conocer en detalle cuando sucedió utilizando el parámetro ~t~
   
    #+NAME: docker-logs-timestamp 
    #+BEGIN_SRC sh 
@@ -892,7 +896,7 @@
    #+END_SRC
 * Servicios Básicos
 ** Nginx
-  para servidor http, similar a apache2 pero con menos configuración
+  Como servidor http, similar a apache2 pero con menos configuración
 ** Duckdns 
 *** Conceptos
    - duckdns para enmascarar por asi decir la ip, como no-ip

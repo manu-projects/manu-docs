@@ -1,7 +1,9 @@
 #+TITLE: Base de Datos
 
+#+BEGIN_COMMENT
 La idea es agregar contenido sobre (DER) Diagramas de Entidad relación
 de la materia (ADS) Análisis de Sistemas
+#+END_COMMENT
 
 * Canales de Youtube
 ** CodigoCompilado
@@ -18,9 +20,6 @@ de la materia (ADS) Análisis de Sistemas
   - [[https://www.youtube.com/watch?v=26p1oruLb2M][#11 Update - Modificar datos]]
   - [[https://www.youtube.com/watch?v=26p1oruLb2M][#12 Delete/Drop - Eliminar Tablas/Registros/Estructuras]]
   - [[https://www.youtube.com/watch?v=_O5Zxa4iVGA][#15 Check/Like - Restricciones]]
-
-
-
 ** Otros
    - [[https://www.youtube.com/watch?v=0I_0lHj4GP4][Ejemplo #1 - Normalización]]
    - [[https://www.youtube.com/watch?v=igctJY-YIjY][Ejemplo #2 - Normalización]]

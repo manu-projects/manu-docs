@@ -160,16 +160,16 @@
   esto quiere decir que es una *expresión regular extendida* donde agregaron el uso del operador ~?~
   que en las *expresiones regulares simples* que estabamos usando antes no tenían.
   Podes tratar de hacer el intento sin este parámetro y verás que el resultado es distinto.
-* Referencias
+* Referencias Web
   Las referencias estan ordenadas por cuales son más relevantes
-  - [Expansiones de la Shell - Curso Sysadmin](http://persoal.citius.usc.es/tf.pena/ASR/Tema_2html/node15.html)
-  - [Tilde Expansion, Brace Expansion, Arithmetic Expansion - Linuxcommand](http://linuxcommand.sourceforge.net/lc3_lts0080.php)
-  - [Expansion de comodines - IT Swarm.dev](http://linuxcommand.sourceforge.net/lc3_lts0080.php)
-  - [Cuando envolver las comillas alrededor de una variable de Shell - IT Swarm.dev](https://www.it-swarm.dev/es/linux/cuando-envolver-las-comillas-alrededor-de-una-variable-de-shell/1065766250/)
-  - [Busqueda de archivos de texto por Regexp - IBM](https://developer.ibm.com/es/tutorials/l-lpic1-v3-103-7/#)
-  - [Unix: Expresiones Regulares - Rm-rf.es](https://rm-rf.es/unix-expresiones-regulares/)
-  - [Expresiones Regulares - Curso Unix](https://bioinf.comav.upv.es/courses/unix/expresiones_regulares.html)
-  - [Expresiones Regulares - Curso Sysadmin](http://persoal.citius.usc.es/tf.pena/ASR/Tema_2html/node22.html)
-  - [Concepto generales POSIX, BRE ERE](https://blog.desdelinux.net/con-el-terminal-uso-de-expresiones-regulares/)
-  - [Expresion REgular Extendida, Boost](https://www.boost.org/doc/libs/1_38_0/libs/regex/doc/html/boost_regex/syntax/basic_extended.html)
-  - [Expresion Regular Basica vs Extendida](https://www.gnu.org/software/grep/manual/html_node/Basic-vs-Extended.html)
+  1. [[http://persoal.citius.usc.es/tf.pena/ASR/Tema_2html/node15.html][Expansiones de la Shell - Curso Sysadmin]]
+  2. [[http://linuxcommand.sourceforge.net/lc3_lts0080.php][Tilde Expansion, Brace Expansion, Arithmetic Expansion - Linuxcommand]]
+  3. [[http://linuxcommand.sourceforge.net/lc3_lts0080.php][Expansion de comodines - IT Swarm.dev]]
+  4. [[https://www.it-swarm.dev/es/linux/cuando-envolver-las-comillas-alrededor-de-una-variable-de-shell/1065766250/][Cuando envolver las comillas alrededor de una variable de Shell - IT Swarm.dev]]
+  5. [[https://developer.ibm.com/es/tutorials/l-lpic1-v3-103-7/][Busqueda de archivos de texto por Regexp - IBM]]
+  6. [[https://rm-rf.es/unix-expresiones-regulares/][Unix: Expresiones Regulares - Rm-rf.es]]
+  7. [[https://bioinf.comav.upv.es/courses/unix/expresiones_regulares.html][Expresiones Regulares - Curso Unix]]
+  8. [[http://persoal.citius.usc.es/tf.pena/ASR/Tema_2html/node22.html][Expresiones Regulares - Curso Sysadmin]]
+  9. [[https://blog.desdelinux.net/con-el-terminal-uso-de-expresiones-regulares/][Concepto generales POSIX, BRE ERE]]
+  10. [[https://www.boost.org/doc/libs/1_38_0/libs/regex/doc/html/boost_regex/syntax/basic_extended.html][Expresión Regular Extendida, Boost]]
+  11. [[https://www.gnu.org/software/grep/manual/html_node/Basic-vs-Extended.html][Expresión Regular Basica vs Extendida]]

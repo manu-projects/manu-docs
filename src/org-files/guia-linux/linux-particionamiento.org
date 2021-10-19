@@ -2,11 +2,412 @@
 #+SETUPFILE: ../theme-readtheorg.setup
 #+EXPORT_FILE_NAME: ../../views/guia-linux/linux-particionamiento.html
 
-* Particionar Disco
-** Partición para Almacenamiento
+* Conceptos Básicos
+** MBR vs GPT
+*** Conceptos
+    - Ambos son *esquemas de partición* y sólo se puede elegir uno u el otro (/cambiar de un esquema al otro, implíca perder datos y los SO instalados/)
+    - *MBR* es más antiguo (/usa el modo BIOS/) y limitado (/hasta 4 particiones primarias, discos de hasta 2TB/)
+    - *GPT* es más moderno (/usa el modo UEFI/) y no tan limitado (/128 particiones primarias, discos de más de 2 TB/)
+*** Estructuras
+    #+BEGIN_SRC plantuml :exports results :file ../../assets/img/mbr-gpt-scheme.png
+      @startuml
+      skinparam legendBackgroundColor #ffffff
+      title (GPT) Scheme Vs. (MBR) Scheme
+
+      rectangle "(MBR) Master Boot Record" as MBR
+
+      rectangle MBR_sectores[
+      ,**1º Sector de un disco MBR** (512 bytes)
+
+      Cada entrada a la **tabla de partición** del disco
+      tiene información de alguna **partición primaria**
+
+      |= Código maestro de arranque | (446 bytes) |
+
+      |= Tabla de Partición (64 bytes) | |
+      | 1º Entrada de Tabla de Partición | (16 bytes) |
+      | 2º Entrada de Tabla de Partición | (16 bytes) |
+      | 3º Entrada de Tabla de Partición | (16 bytes) |
+      | 4º Entrada de Tabla de Partición | (16 bytes) |
+
+      |= Firma de arranque | (2 bytes) |
+
+      --
+
+      ,** Sectores 2,3,4 de un disco MBR**
+
+      ,* Un disco (MBR) soporta hasta 4 **particiones primarias**
+      porque sólo se tienen 4 entradas a la tabla de particiones
+      del disco
+      ,* Cada **partición primaria** representa un **sector del disco**
+      que tiene un límite de hasta 2TB
+
+      | Nº |= Particiones Primarias |
+      | 1 | Partición Primaria (C:) |
+      | 2 | Partición Primaria (D:) |
+      | 3 | Partición Primaria (F:) |
+
+      | Nº  |= Partición Extendida |
+      | 5 | Partición Lógica (G:) |
+      | 6 | Partición Lógica (H:) |
+
+      ]
+
+      rectangle "(GPT) GUID Partition Table" as GPT
+
+      rectangle GPT_sectores[
+      ,**1º Sector de un disco GPT**
+
+      Un disco (GPT) también tiene un sector MBR,
+      pero es únicamente para que las herramientas
+      compatibles con MBR no sobreescriban las entradas
+      de los discos GPT
+
+      |= MBR Protector | (512 bytes) |
+
+      --
+
+      ,**2º Sector de un disco GPT**
+
+      Contiene el cabeza de la tabla de partición GUID primaria
+      con información de las entradas de la particiones GUID
+      ,* ubicación
+      ,* tamaño
+
+      |= Cabecera GPT Primaria |
+
+      --
+
+      ,**3º Sector de un disco GPT**
+
+      |= Tabla de Particiones GUID |  |
+      | 1º Entrada de la Partición GUID | (128 bytes) |
+      | 2º Entrada de la Partición GUID | (128 bytes) |
+      | 3º Entrada de la Partición GUID | (128 bytes) |
+      | 4º Entrada de la Partición GUID | (128 bytes) |
+      | Nº..128º Entrada de la Partición GUID | (N*128 bytes) |
+
+      --
+
+      | |= Particiones Primarias |
+      | 1 | Partición Primaria (C:)|
+      | 2 | Partición Primaria (E:) |
+      | 3 | Partición Primaria (F:)|
+      | n..128 | N Partición Primaria |
+
+      --
+
+      ,**Ultimos Sectores de un disco GPT**
+
+      ,* Se hacen copias automaticamente
+      ,* Restauran los datos en caso que se dañen
+      la **Tabla de Particiones GUID** ó la **Cabecera GPT**
+
+      |= Respaldo de la Tabla de Particiones GUID | |
+      | 1º Entrada de la Partición GUID | (128 bytes) |
+      | 2º Entrada de la Partición GUID | (128 bytes) |
+      | 3º Entrada de la Partición GUID | (128 bytes) |
+      | 4º Entrada de la Partición GUID | (128 bytes) |
+      | Nº..128º Entrada de la Partición GUID | (N*128 bytes) |
+
+      |= Respaldo de la Cabecera GPT |
+      ]
+
+
+      MBR_sectores .up. MBR
+      GPT_sectores .up. GPT
+      @enduml
+    #+END_SRC
+
+    #+RESULTS:
+    [[file:../../assets/img/mbr-gpt-scheme.png]]
+*** MBR (Master Boot Record)
+    - Las siglas (MBR) refieren a *Registro Maestro de Arranque*
+    - Es el primer sector del disco (/el sector cero/) en donde la *BIOS* busca si hay algún *Sistema Operativo*
+    - Sólo trabaja en *Modo BIOS Legacy*
+    - Solo trabaja con Sistemas Operativos de ~32 bits~ (/porque permite hasta 32 bits por c/sector de la unidad de almacenamiento/)
+    - Permite hasta *4 particiones primarias* y reconoce discos duros de hasta ~2 TB~
+    - NO comprueba la seguridad e integridad de los discos duros
+
+    #+BEGIN_QUOTE
+    El sector MBR, que es el primer sector del disco ocupa ~512 bytes~ donde
+    - ~446bytes~ son para el *Código de Arranque Maestro*
+    - ~64 bytes~ son para la (DPT) *Tabla Partición del disco*
+    - ~2 bytes~ son para la *firma de arranque* (/marca el fin del sector MBR/)
+
+    La limitante de solo tener hasta 4 *Particiones primarias* es porque
+    hay ~64 bytes~ de espacio para la (DPT) *Tabla de partición del disco*,
+    y sólo puede haber 4 *Entradas a la Tabla de Partición* cada una de ~16 bytes~.
+    Estas últimas son las que guardan información de alguna *Partición Primaria*.
+
+    Gestionar la limitante de las 4 particiones primarias, podriamos
+    1. Crear *3 particiones primarias* y *1 partición extendida*
+    2. La *partición extendida* la podemos dividir en *particiones lógicas* para grabar archivos.
+    3. En las *particiones primarias* podriamos instalar sistemas operativos, 
+    #+END_QUOTE
+*** GPT (GUID Partition Table)
+    - (GPT) su traducción es *Tabla de particiones GUID*
+    - Requiere que la *placa madre* (/motherboard/) tenga *UEFI*
+    - Trabaja con Sistemas Opeativos de ~32 bits~ y ~64 bits~ (/porque permite hasta 64 bits por c/sector de la unidad de almacenamiento/)
+    - Trabaja en ~Modo UEFI~ (/se habilita en la configuración de la BIOS/)
+    - Permite hasta de *128 particiones* por disco, y reconoce discos duros de más de ~2TB~
+    - Se debe crear una partición ~EFI~ (/de 500-600mb/) que
+      1. se ponen los *módulos de arranque* de todas las particiones
+      2. permite listar todos los (SO)
+
+    #+BEGIN_QUOTE
+    Otros datos relevantes son
+    + Para crear discos en la terminal de linux, se utilizan los comandos ~gdisk~ ó ~parted~
+    + Se debe habilitar el *Modo UEFI* en la configuración de la *BIOS*
+    + Se asegura de la *integridad de los datos* del disco, mediante una suma de *comprobación de redundancia cíclica* ~CRC32~
+      1. Chequea la integridad de la cabecera GPT
+      2. Si el ~CRC~ detecta daños en los datos => intenta recuperarlos con los respaldos de seguridad al final del disco
+    #+END_QUOTE
+*** Referencias Web
+    1. [[https://unix.stackexchange.com/questions/120221/gpt-or-mbr-how-do-i-know][GPT or MBR: How do I know? - unix.stackexchange.com]]
+*** Cuanto Espacio Asignar
+    - La partición de booteo (/que debe ser primaria/) suele asignarse ~/boot~ como *punto de montaje*
+    - Si el disco utiliza *MBR* se sugiere ~300mb~
+    - Si el disco utiliza *UEFI* se sugiere ~600mb~
+** Modo BIOS Legacy Vs Modo UEFI
+*** Conceptos
+    - Tanto *BIOS Legacy* como *UEFI* son software a bajo nivel, que inician al encender el ordenador
+*** Problemas de Cambio de Modo
+    #+BEGIN_QUOTE
+    Podemos cambiar la forma de booteo de *Modo BIOS* al *Modo UEFI*
+    en la configuración de la BIOS, pero esto implíca perder datos 
+    y volver reinstalar los *sistemas operativos*
+    #+END_QUOTE
+*** BIOS Legacy (Basic Input/Output System)
+    - Es un software de bajo nivel que se encuentra en un chip de la placa base del ordenador
+    - Utiliza una memoria *CMOS*
+
+    #+BEGIN_QUOTE
+    La estructura básica de arranque sería
+    ~Bios -> MBR -> (Boot Loader -> Kernel) -> Sistema Operativo~
+
+    El proceso de arranque de la BIOS más en detalle sería
+    1. Se enciende, se carga el BIOS
+    2. Identifica el *dispositivo de arranque* (/en la configuración de la placa madre se puede cambiar/)
+    3. Detecta el código almacenado en el sector *MBR* (/el código maestro de arranque/)
+    4. El *MBR* carga el *código de sector de arranque* de la partición activa (/se puede activar en la terminal con fdisk ó con un gestor de particiones/)
+    5. El *sector de arranque* carga y ejecuta el *cargador de arranque* (/boot loader/)
+    #+END_QUOTE
+*** UEFI (Unified Extensible Firmware Interface)
+    - Las siglas (UEFI) significan *Interfaz de Firmware Extensible Unificada*
+    - Es un software intermedio entre el *firmware* y el *sistema operativo*
+    - Reemplaza al antiguo *Modo BIOS Legacy*
+    - Tiene un tiempo de arranque más rápido comparado con el *Modo BIOS Legacy*
+    - Permite recuperación de datos dañados (/los respaldos están en los ultimos sectores del disco gpt/)
+    - Aporta más seguridad, protege el proceso previo al arranque del SO
+    - Tienen interfaz gráfica más moderna y soporte para mouse
+    - Utiliza una *memoria flash*
+
+     #+BEGIN_QUOTE
+    La estructura básica de arranque sería
+     ~UEFI -> EFI+Boot+Loader -> Kernel -> Sistema Operativo~
+     
+    El proceso de arranque de la UEFI más en detalle sería
+    1. El *gestor de arranque en la UEFI* chequea la *configuración de arranque*
+    2. El *gestor de arranque* se carga en la Memoria, y ejecuta el (loader) *cargador del Sistema operativo* ó su *kernel*
+     #+END_QUOTE
+*** Referencias
+    1. [[https://itsfoss.com/check-uefi-or-bios/][How to check if your computer uses UEFI or BIOS - itfoss.com]]
+** [TODO] Tabla de Particiones
+*** Conceptos
+    Contiene información sobre las particiones
+    - Formato (/Ej. NTFS, ext2, ext3, FAT32,.../)
+    - Tamaño
+    - Ubicación del Sector
+    - Si es arrancable o no
+** [TODO] Firma de unidad arrancable
+*** Conceptos
+    - Indica la posición del volumen de arranque
+** [DOING] Gestores de Arranque
+*** Conceptos
+    - Permiten elegir el *sistema operativo* a iniciar
+*** GRUB
+*** LILO
+** Particiones
+*** Conceptos
+    - Las *particiones* son discos duros virtuales/lógicos que se crean en un *disco físico*
+*** Partición Primaria
+    - Se pueden poner *sector de arranque* para bootear un SO
+    - Se pueden grabar datos
+*** Partición Extendida
+    - Sólo son necesarias en discos con *MBR*
+    - Cosas que NO se pueden hacer en una *partición extendida*
+      - NO se puede instalar Sistemas Operativos
+      - NO se puede grabar ficheros
+      - NO se puede poner un sector de arranque
+    - Se pueden partir en *particiones lógicas*
+*** Unidades Lógicas
+    - Solo se pueden grabar datos
+** [TODO] Sistemas de Archivos - FileSystems
+*** Conceptos
+    - Para linux tenemos ext2,ext3,ex4
+*** Linux
+    - ext2,ext3,ext4 para datos
+    - swap para la zona swap, 
+*** Windows
+    - FAT32 para los datos
+* [DOING] Particionamiento
+** Listar/Crear/Eliminar partición
+*** Conceptos
+    Posibles herramientas para particionar via terminal son
+     1. fdisk
+     2. parted
+*** Comando fdisk
+    - Para listar/crear/borrar particiones seleccionamos las letras de las operaciones una vez dentro
+    - Los cambios persisten en memoria como lectura hasta que decidamos persistirlos en disco
+    - Para guardar los cambios elegimos la operación *write* con ~w~
+
+    #+BEGIN_SRC shell
+      # gestionamos el disco a particionar
+      # (dev=device, sda=primer disco detectado)
+      fdisk /dev/sda
+    #+END_SRC
+
+    Algunas operaciones que podemos encontrar son
+    #+name: fdisk-operaciones
+    |-----------+---------------------------------------------------------------------|
+    | operación | Descripcion                                                         |
+    |-----------+---------------------------------------------------------------------|
+    | n         | Crear una partición (opción ~p~ para primaria y ~e~ para extendida) |
+    | w         | Escribir/Guardar los cambios                                        |
+    | m         | Listar menú de operaciones (/actúa como un --help/)                 |
+    | p         | Listar particiones primarias                                        |
+    | d         | Eliminar una partición seleccionada                                 |
+    |           | Listar los tipos de particiones (/Ej. SWAP, Ext2,Ext3,Ext4,.../)    |
+    | t         | Cambiar el tipo de una partición                                    |
+    |-----------+---------------------------------------------------------------------|
+    | o         | Crear tabla de partición DOS                                        |
+    |-----------+---------------------------------------------------------------------|
+*** Comando parted
+    Para gestionar las particiones iniciamos con el comando ~parted /dev/sda~ (/cambiamos "sda" por el dispositivo que queramos/)
+
+    Algunas operaciones que podemos encontrar son
+    #+name: fdisk-operaciones
+    |-----------+---------------------------------------------------------------------|
+    | operación | Descripcion                                                         |
+    |-----------+---------------------------------------------------------------------|
+    | mkpart    | Crear una partición                                                 |
+    |-----------+---------------------------------------------------------------------|
+*** Listar particiones 
+    #+BEGIN_SRC shell
+      # con permisos root - tool parted
+      sudo parted /dev/sda print
+      # con permisos root - tool fdisk
+      sudo fdisk --list /dev/sda
+      
+      # sin permisos root
+      lsblk -S
+    #+END_SRC
+** Tipo de Partición
+*** Conceptos
+    - El comando ~mkfs~ significa *make filesystem*
+    - El formato *swap* se refiere al *área de swap* (memoria en disco)
+
+    #+BEGIN_COMMENT
+    Diferenciar ext2 ext3 ext4
+    1. https://www.learnitguide.net/2016/08/difference-between-ext2-ext3-and-ext4.html
+    Identificar ext3 ext4
+    1. https://www.tecmint.com/find-linux-filesystem-type/
+    Crear Ext3 
+    1. https://www.thegeekstuff.com/2011/05/ext2-ext3-ext4/
+    Comando fsck
+    1. https://www.cyberciti.biz/tips/repairing-linux-ext2-or-ext3-file-system.html
+    #+END_COMMENT
+*** Comando mkfs (make file system)
+    - Crea un *file system* en una partición (/debe estar montada, es decir tener asociado un punto de montaje/)
+
+    #+name: mkfs-parametros
+    |-----------+-----------------------------------------------|
+    | Parámetro | Descripción                                   |
+    |-----------+-----------------------------------------------|
+    | Q         | Quick, para formatear rápido                  |
+    | L         | Label, para asignarle una etiqueta al volumen |
+    |-----------+-----------------------------------------------|
+
+    #+BEGIN_SRC shell
+      # Formateamos el disco sda1
+      # - le asignamos el tipo "ext3" (para linux)
+      # - le decimos que se haga "rápido" (parámetro Q)
+      # - le asignamos la etiqueta "manjarito" (parámetro L)
+      sudo mkfs.ext3 -QL manjarito /dev/sda1
+    #+END_SRC
+** Montar/Desmontar Partición
+*** Punto de Montaje (Mountpoint)
+    - Ruta donde vamos a montar una partición (/Ej. /mnt/boot, /mnt/usb/)
+    - Si queremos utilizar una partición como gestor de archivos => debemos asociarle un punto de montaje
+*** Comando mount
+    - Si queremos utilizar una partición como gestor de archivos => debemos asociarle un punto de montaje
+
+    Algunos parámetros que podemos pasarle a ~mount~ son
+
+    #+NAME: mount-parametros
+    |--------------------+----------------------------------------------------------|
+    | Parámetro          | Descripción                                              |
+    |--------------------+----------------------------------------------------------|
+    | ~-t tipoParticion~ | Especificar el tipo de partición a montar                |
+    | ~-o ro~            | Cambia los permisos de acceso a sólo lectura "read only" |
+    |--------------------+----------------------------------------------------------|
+*** Comando umount
+    - Si queremos formatear una partición => debemos desmontarla
+*** Ejemplo 1 - Basico
+    #+BEGIN_SRC shell
+      # -> Montamos un dispositivo usb, llamado "sdb2"
+      # -> Especificamos el formato NTFS
+      # -> Punto de montaje será la ruta "/mnt/usb1"
+      sudo mount -t ntfs /dev/sdb2 /mnt/usb1
+
+      # -> Desmontamos el dispositivo
+      # -> Previo a desmontar, debemos cerrar los archivos que tengamos abiertos de este dispositivo
+      sudo umount /mnt/usb1
+
+      # -> Montamos un disco duro como dispositivo, llamado "sda2"
+      # -> Especificamos el formato NTFS
+      # -> Punto de montaje será la ruta "/mnt/storage"
+      sudo mount -t ntfs /dev/sda2 /mnt/storage
+
+      # -> Montamos un disco duro como dispositivo, llamado "sda5"
+      # -> Tiene previamente instalado Windows10
+      # -> Especificamos el formato FAT32
+      # -> Punto de montaje será la ruta "/mnt/win10"
+      sudo mount -t fat32 /dev/sda5 /mnt/win10
+
+      # -> Montamos un disco duro como dispositivo, llamado "sda6"
+      # -> Tiene previamente instalado Debian
+      # -> Especificamos el formato ext4 (requisito para distribuciones Linux)
+      # -> Punto de montaje será la ruta "/mnt/debian"
+      sudo mount -t ext4 /dev/sda6 /mnt/debian
+    #+END_SRC
+*** Ejemplo 2 - Asignando usuario y permisos
+    Los parametros del comando ~mount~
+
+    |-----------+---------------------------------------------------------|
+    | Parámetro | Descripción                                             |
+    |-----------+---------------------------------------------------------|
+    | ~uid~     | Le pasamos nuestro usuario, que nos lo devuelve ~id -u~ |
+    | ~dmask~   |                                                         |
+    | ~fmask~   |                                                         |
+    |-----------+---------------------------------------------------------|
+   #+NAME: linux-montar-particion
+   #+BEGIN_SRC shell
+     # nos devuelve el id del usuario con el que iniciamos la sesion actual de la terminal
+     id -u
+
+     # solo cambiamos el 1001 por lo que nos devuelve id -u
+     sudo mount -o rw,user,uid=1001,dmask=007,fmask=117 /dev/sda10 /mnt/mystorage
+
+     #sudo mount -t ntfs -o ro /dev/sda10 /mnt/mystorage
+   #+END_SRC
+** Asignar permisos
+   #+BEGIN_QUOTE
    Creamos una partición primaria del tipo NTFS y le asignamos los permisos al usuario
-   Con el comando ``id -u -n`` obtenemos el nombre de usuario, mientras que con ``chown`` 
+   Con el comando ~id -u -n~ obtenemos el nombre de usuario, mientras que con ~chown~
    le damos acceso a un usuario especifico a un directorio/archivo
+   #+END_QUOTE
 
    #+NAME: linux-particionar-almacenamiento
    #+BEGIN_SRC shell
@@ -16,80 +417,194 @@
      # para asignarle los permisos de ese usuario
      sudo chown nombreUsuario /storage/
    #+END_SRC
-** Listar las particiones
-   Podemos usar el comando ``lsblk`` o ``fdisk``
-
-   #+NAME: linux-listar-particiones
-   #+BEGIN_SRC shell
-     # listar particiones (no pide permisos administrador)
-     lsblk
-
-     # listar particiones (pide permisos administrador)
-     sudo fdisk -l /dev/sda
-   #+END_SRC
-** Montar la particion de Almacenamiento NTFS
+** Partición para Windows-Linux
    Si la partición va interactuar entre Windows y Linux, se recomienda que sea NTFS.
    Si sólo va a ser entre distribuciones Linux, se recomienda Ext4
-
-   Destacamos un comentario de otro usuario linux 
 
    #+BEGIN_QUOTE
    A good practice for some static mounted storage system like you are doing is 
    to add a permanent mount point to /etc/fstab.
    There are several ways to do it, but I just wanted you to be aware.
    #+END_QUOTE
-*** Crear directorio de almacenamiento a compartir
-    Recordando que la ruta */* es la raiz y *mnt* el directorio que se 
-    se suele utilizar por defecto para acceder desde los demas distribuciones
-
-    Tambien que con el comando ``mkdir`` seguido del parametro *-p* nos facilita
-    un directorio A con subdirectorio B (dentro del directorio A)
-
-   #+NAME: linux-crear-directorio
-   #+BEGIN_SRC shell
-     # Creamos el directorio mnt y dentro mystorage
-     sudo mkdir -p /mnt/mystorage
-   #+END_SRC
-*** Montar la partición del directorio
-    - Con ``id -u`` nos permite obtener el nombre de usuario que esta en la sesion actual de la terminal
-    - Los parametros del comando ``mount``
-      1. **-uid** le pasamos el usuario que nos devuelve ``id -u``
-      2. **dmask** 
-      3. **fmask**
-      4. **/dev/sda10** es la particion de almacenamiento
-
-   #+NAME: linux-montar-particion
-   #+BEGIN_SRC shell
-     # nos devuelve el id del usuario con el que iniciamos la sesion
-     id -u
-
-     # solo cambiamos el 1001 por lo que nos devuelve id -u
-     sudo mount -o rw,user,uid=1001,dmask=007,fmask=117 /dev/sda10 /mnt/mystorage
-
-     #sudo mount -t ntfs -o ro /dev/sda10 /mnt/mystorage
-   #+END_SRC
 ** Anclar un directorio al Gestor de archivos
    El File manager por defecto de Ubuntu es Nautilus
 
    #+NAME: linux-anclar-directorio-filemanager
    #+BEGIN_SRC shell
-     # presionar Control+D
+     # luego de ingresar a la ruta, presionar Control+D
      cd /mnt/mystorage
    #+END_SRC
-** Referencias Web Extraoficiales
-   - [Referencia #2 - Ver Pagina](https://linuxconfig.org/how-to-mount-partition-with-ntfs-file-system-and-read-write-access)
-   - [Referencia #3 - Ver Página](https://askubuntu.com/questions/11840/how-do-i-use-chmod-on-an-ntfs-or-fat32-partition/956072#956072)
-   - [Agregar carpetas al Nautilus - Ver Página](https://askubuntu.com/questions/1109247/how-do-i-add-folder-to-ubuntu-18-04-1-nautilus-bookmark-list)
-   - [Opciones de Montaje - Ver Pagina (it-swarm.dev)](https://www.it-swarm.dev/es/mount/opciones-de-montaje-dmask-y-fmask/961637140/)
-** Referencias Youtube
-   - [Referencia #1 - Ver Video](https://www.youtube.com/watch?v=mPDhoYNao1o)
-   - [Referencia #4 - Ver Video](https://www.youtube.com/watch?v=hIq1dIgZrOc)
-   - [Referencia #5 - Ver Video](https://www.youtube.com/watch?v=ZlIbGnvTEDI) 
-   - [Particiones primarias/logicas/extendidas - Ver Video](https://www.youtube.com/watch?v=CSbUiK2pytE)
-   - [Recuperar Tabla de Particiones - Ver Video](https://www.youtube.com/watch?v=I1-0cpPO3e8)
-   - [Redimensionar Particiones en Ubuntu - Ver Video](https://www.youtube.com/watch?v=EQMWKwvsltY)
-   - [Redimensionar particiones - Ver Videos](https://www.youtube.com/watch?v=OSkK_lgSCzk)
-   - [Particionar disco duro en Ubuntu - Ver Video](https://www.youtube.com/watch?v=xuYhjtpWZuc)
+** Referencias
+*** Referencias Web Extraoficiales
+    1. [[https://linuxconfig.org/how-to-mount-partition-with-ntfs-file-system-and-read-write-access][Como montar una partición NTFS - linuxconfig.org]]
+    2. [[https://askubuntu.com/questions/11840/how-do-i-use-chmod-on-an-ntfs-or-fat32-partition/956072#956072][Como usar el comando chmod en una partición NTFS ó FAT32 - askubuntu.com]]
+    3. [[https://askubuntu.com/questions/1109247/how-do-i-add-folder-to-ubuntu-18-04-1-nautilus-bookmark-list][Agregar carpetas al Nautilus - askubuntu.com]]
+    4. [[https://www.it-swarm.dev/es/mount/opciones-de-montaje-dmask-y-fmask/961637140/][Opciones de Montaje - it-swarm.dev]]
+*** Referencias Youtube
+    1. [[https://www.youtube.com/watch?v=PBHFud-Dva8][Redimensionar con Gparted en Ubuntu]]
+    2. [[https://www.youtube.com/watch?v=mPDhoYNao1o][Como automontar un disco en linux - By OhHeyItsLou]]
+    3. [[https://www.youtube.com/watch?v=hIq1dIgZrOc&ab_channel=DevTechSolutions][Como montar una partición con Windows en Ubuntu - By DevTechSolutions]]
+    4. [[https://www.youtube.com/watch?v=ZlIbGnvTEDI][Como montar automaticamente particiones NTFS en Linux - By Root Tech]]
+    5. [[https://www.youtube.com/watch?v=CSbUiK2pytE][Particiones primarias/logicas/extendidas]]
+    6. [[https://www.youtube.com/watch?v=I1-0cpPO3e8][Recuperar Tabla de Particiones]]
+    7. [[https://www.youtube.com/watch?v=EQMWKwvsltY][Redimensionar Particiones en Ubuntu]]
+    8. [[https://www.youtube.com/watch?v=OSkK_lgSCzk][Redimensionar particiones]]
+    9. [[https://www.youtube.com/watch?v=xuYhjtpWZuc][Particionar disco duro en Ubuntu]]
+* [DOING] Comandos para FileSystems
+** Comando df (file system disk space usage)
+*** Conceptos
+   - NO necesita del comando ~sudo~
+   - El filesystem debe estar montado para utilizar el comando en él
+   - Muestra estadísticas de cada filesystem (/ruta de punto de montaje, el tamaño utilizado/disponible, ../)
+   - Si no especificamos el punto de montaje, lista todos los *file system* montados
+   - Seguido al comando podemos especificar el *punto de montaje*
+   - Seguido al comando podemos poner una ruta, y dará información del *fs* donde está incluida
+
+   #+name: df-parámetros
+   |-----------+----------------------------------------------------------------------|
+   | Parámetro | Descripción                                                          |
+   |-----------+----------------------------------------------------------------------|
+   | ~h~       | Muestra la información en un formato humanizado (más entendible)     |
+   | ~T~       | Muestra el *tipo de filesystem* (/Ej. NTFS, FAT32, ext3, ext4, .../) |
+   |-----------+----------------------------------------------------------------------|
+*** Ejemplo (1)
+    #+BEGIN_SRC shell
+      # -> listamos todos los filesystem
+      #
+      # -> parámetro h: en un formato más humanizado
+      # -> parámeto T: agrega la columna del tipo de filesystem
+      df -hT
+
+      # -> especificamos el punto de montaje
+      df -hT /dev/sda10
+      # posible respuesta
+      S.ficheros     Tipo Tamaño Usados  Disp Uso% Montado en
+      /dev/sda10     ext4    88G    81G  2,8G  97% /
+    #+END_SRC
+** Comando du (estimate file space usage)
+*** Conceptos
+    - Muestra estadísticas de uno o varios archivos/directorios (/tamaño, nombre/)
+    - NO necesita del comando ~sudo~
+
+   #+name: du-parámetros
+   |-----------+------------------------------------------------------------------|
+   | Parámetro | Descripción                                                      |
+   |-----------+------------------------------------------------------------------|
+   | ~h~       | Muestra la información en un formato humanizado (más entendible) |
+   | ~c~       | Agrega el tamaño total de todos los archivos/directorios         |
+   | ~s~       | Da un resumen de cada directorio, caso contrario será recursivo  |
+   |-----------+------------------------------------------------------------------|
+*** Ejemplo (1)
+    #+BEGIN_SRC shell
+      # -> El asterisco actúa como comodín, representa todos los archivos/sub-directorios de la ruta
+      # ->
+      # -> parámetro "h": muestra los datos en un formato humanizado (más entendible)
+      # -> parámetro "c": muestra el tamaño total de todos los archivos
+      # -> parámetro "s": da un resumen de cada directorio, sin listar cada archivo/subdirectorio
+      du -hcs /tmp/pepe/*
+
+      # -> Obtenemos información de todos los archivos/sub-directorios de la ruta en la que estemos
+      du -hcs ./*
+    #+END_SRC
+*** Ejemplo (2)
+    #+BEGIN_SRC shell
+      # No es necesario poner el ~./~ antes del asterisco, funciona igual.
+      # Lo agregamos con fines practicos, para entender que lo hacemos en la ruta donde estamos parados.
+
+      [jelou@jelou-pc Descargas]$ du -hcs ./*
+      4,0K    ./agenda.txt
+      4,0K    ./almendras
+      0       ./chau
+      0       ./hola
+      0       ./pedro
+      0       ./productos
+      8,0K    total
+
+      [jelou@jelou-pc Descargas]$ du ./*
+      4       ./agenda.txt
+      4       ./almendras
+      0       ./chau
+      0       ./hola
+      0       ./pedro
+      0       ./productos/farmacia/siempre
+      0       ./productos/farmacia
+      0       ./productos
+    #+END_SRC
+* [DOING] Información de particiones y dispositivos
+** Comando lsblk (list block devices)
+   - Muestra un listado de los dispositivos en formato de árbol
+   - Si queremos información resumida ejecutamos ~lsblk -S~
+
+   #+BEGIN_SRC shell
+     # ejecutamos el comando
+     lsblk
+     # el resultado es el siguiente
+     NAME    MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+     sda       8:0    0 465,8G  0 disk
+     ├─sda1    8:1    0  1000M  0 part
+     ├─sda2    8:2    0   260M  0 part /boot/efi
+     ├─sda3    8:3    0  1000M  0 part
+     ├─sda4    8:4    0   128M  0 part
+     ├─sda5    8:5    0 247,9G  0 part
+     ├─sda6    8:6    0   452M  0 part
+     ├─sda7    8:7    0    25G  0 part
+     ├─sda8    8:8    0    12G  0 part
+     ├─sda9    8:9    0   5,9G  0 part [SWAP]
+     ├─sda10   8:10   0  89,8G  0 part /
+     └─sda11   8:11   0  53,2G  0 part
+     sr0      11:0    1  1024M  0 rom
+   #+END_SRC
+** Comando hdparm
+   - Requiere del comando ~sudo~
+   - Parte de la información que imprime es
+     1. Modelo de disco
+     2. Número de serie
+     3. Firmware
+     4. Configuración (/cilindros, cabeceras, sectores, .../)
+     5. Características (/host protected area, write cache, .../)
+     6. Seguridad
+
+   #+BEGIN_SRC shell
+     # - el parámetro "I" solicita información de las especificaciones de hardware del disco duro
+     # - con la ruta "/dev/sda" indicamos que dispositivo, en este caso el disco *sda*
+     # pd: acortamos la cant. de información
+     [jelou@jelou-pc ~]$ sudo hdparm -I /dev/sda | less
+     ATA device, with non-removable media
+     Model Number:       HGST HTF525050A7E320
+     Serial Number:      TFA55A3R29JH7J
+     Firmware Revision:  GC2Z2D91
+
+     # también podemos evaluar el rendimiento
+     [jelou@jelou-pc ~]$ sudo hdparm -tT /dev/sda
+     Timing cached reads:   10408 MB in  1.99 seconds = 5220.06 MB/sec
+     Timing buffered disk reads: 222 MB in  3.02 seconds =  73.47 MB/sec
+
+     [jelou@jelou-pc ~]$ sudo hdparm -tT /dev/sda
+     Timing cached reads:   10776 MB in  1.99 seconds = 5405.44 MB/sec
+     Timing buffered disk reads: 288 MB in  3.01 seconds =  95.65 MB/sec
+   #+END_SRC
+** Comando blkid
+   - NO necesita del comando ~sudo~
+   - Podemos especificar la partición (/Ej. blkid /dev/sda1/) caso contrario muestra sobre todas las particiones
+   - La información por defecto que imprime es
+     1. UUID (/son los identificadores universales únicos que identifican a las particiones/)
+     2. Nombre del dispositivo (/sda1, sda2, sdb1, sdb2, .../)
+     3. Etiqueta (/Windows8_OS, Windows10, Manjaro, Debian, .../)
+     4. Tipo de partición (/ntfs, vfat, ext3, ext4, swap, .../)
+     5. Tamaño del bloque
+
+   #+BEGIN_SRC shell
+     # podemos consultar por todas las particiones
+     [jelou@jelou-pc ~]$ blkid
+     /dev/sda1: LABEL="Windows8_OS" BLOCK_SIZE="512" UUID="160252C68156AA3F" TYPE="ntfs" PARTLABEL="Basic data partition" PARTUUID="1d5cf7f1-411c-4784-ba21-f4aa45dd646e"
+     /dev/sda2: LABEL="RAM" UUID="37c62451-7261-2c90-ac93-26f8108ff43a" TYPE="swap" PARTUUID="11bee604-5954-45b2-a235-ab2862b22f35"
+     /dev/sda3: LABEL="Storage" UUID="212b83f5-3e5g-417c-a21d-35cd7gfa6245" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="c21e230f-30db-401c-a211-33f2b2fg9bf2"
+     /dev/sda4: LABEL="Manjarito" UUID="282f2b60-36ad-162c-c191-e2c2cb17c786" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="a522ed53-3b6b-4b3e-127a-e52d40dfb5fb"
+
+     # si preguntamos por una partición específica
+     [jelou@jelou-pc ~]$ blkid /dev/sda1
+     /dev/sda1: LABEL="Windows8_OS" BLOCK_SIZE="512" UUID="160252C68156AA3F" TYPE="ntfs" PARTLABEL="Basic data partition" PARTUUID="1d5cf7f1-411c-4784-ba21-f4aa45dd646e"
+   #+END_SRC
 * Bootear Multiples Sistemas Operativos
 ** Conceptos
   Si tenes un sistema operativo por defecto por ejemplo Windows, y lo queres mantener
@@ -97,8 +612,6 @@
   varias distribuciones de linux.
 
   Por lo general se suele crear un GRUB el que se ira modificando
-
-  Comentarios a destacar de uno de los artículos de las referencias que hemos agregado
   
   #+BEGIN_QUOTE
   I install Ubuntu GNOME (mount point: / ) into /dev/sda5.
@@ -130,28 +643,30 @@
      grub-install -v
    #+END_SRC
 ** Referencias Web Extraoficiales
-   - [Referencia #1 - Ver Página](https://medium.com/@manujarvinen/setting-up-a-multi-boot-of-5-linux-distributions-ca1fcf8d502)
-   - [Referencia # 2 - Ver Página](https://www.maketecheasier.com/how-to-run-multiple-linux-distros-without-virtualization/)
-   - [MultipleLInuxONe - Ver Página](https://itsfoss.com/multiple-linux-one-usb/)
-   - [Referencia #3 - Ver Página](https://www.solvetic.com/tutoriales/article/5859-como-crear-usb-booteable-linux-con-iso/)
-   - [Referencia #4 - Ver Página](https://linuxmint-installation-guide.readthedocs.io/es/latest/burn.html)
-* Particionar con GParted
-** Conceptos
-   Es el que se recomienda para particionar el disco
-** Referencias Web Oficiales
-   - [Pagina Oficial - Ver Página](https://gparted.org/download.php)
-** Referencias Youtube
-   - [Redimensionar con Gparted en Ubuntu - Ver Video](https://www.youtube.com/watch?v=PBHFud-Dva8)
-* Instalar un file manager
+   1. [[https://medium.com/@manujarvinen/setting-up-a-multi-boot-of-5-linux-distributions-ca1fcf8d502][Setting up a Multiboot - medium.com]]
+   2. [[https://www.maketecheasier.com/how-to-run-multiple-linux-distros-without-virtualization/][How to run multiple linux distros - maketecheasier.com]]
+   3. [[https://itsfoss.com/multiple-linux-one-usb/][Mulitple linux one usb]]
+   4. [[https://www.solvetic.com/tutoriales/article/5859-como-crear-usb-booteable-linux-con-iso/][Como crear USB Booteable LINUX]]
+   5. [[https://linuxmint-installation-guide.readthedocs.io/es/latest/burn.html][Burn - linuxmint Readthedocs]]
+* File Manager
 ** Conceptos
   Si aún no estás familiarizado a usar por completo la terminal para la gestión de archivos,
   te sugerimos instalar un programa con interfaz gráfica (GUI) que facilita dicha tarea.
-
-   #+NAME: linux-instalar-filemanager
-   #+BEGIN_SRC shell
-     sudo apt-get install thunar
-   #+END_SRC
+** Instalación
+  #+NAME: linux-instalar-filemanager
+  #+BEGIN_SRC shell
+    sudo apt-get install thunar
+  #+END_SRC
 ** Referencias Youtube
-   - Como funciona el Filesystem de Linux - # Referencia 1  [Ver Video](https://www.youtube.com/watch?v=HIXzJ3Rz9po)
-   - Como funciona el Filesystem de Linux - # Referencia 1  [Ver Video](https://www.youtube.com/watch?v=HbgzrKJvDRw)
-
+   1. [[https://www.youtube.com/watch?v=HIXzJ3Rz9po][Como funciona el Filesystem de Linux - By Joe Collins]]
+   2. [[https://www.youtube.com/watch?v=HbgzrKJvDRw][Como funciona el Filesystem de Linux - By DorianDotSlash]]
+* Glosario
+** Rutas
+  - dev: se refieren a device IO (dispositivo de entrada/salida)
+  - mnt: se refiere "mountpoint" (punto de montaje) donde se montan particiones)
+** Comandos
+  - mkfs: significa "make filesystem" crear el "sistema de ficheros"
+** Otros
+  - sda/sdb: hacen referencia a los dispositivos de almacenamiento masivo (disco duro)
+    1. sda: al primer disco detectado
+    2. sdb: al segundo disco detectado

@@ -4,8 +4,8 @@
 
 * [DOING] Aprendiendo Elisp
 ** Atajos
-   M-x eval-buffer para ejecutar codigo
-   C-x C-e evaluar la ultima expresion
+   ~M-x eval-buffer~ para ejecutar codigo
+   ~C-x C-e~ evaluar la ultima expresion
 ** Paginas de Referencia
    - [[https://learnxinyminutes.com/docs/es-es/elisp-es/][Referencia #1 - (learn x in minutes)]]
    - [[https://blog.8bitzen.com/posts/27-02-2019-using-orgmode-babel/][Using OrgMode Babel (8bitzen)]]
@@ -28,8 +28,8 @@
     Para reforzar un poco el paradigma funcional e integrarlo con elisp que
     es lo que utiliza emacs por dentro, se puede ejecutar tambien en la terminal eshell
 
-    -Para mostrar los bloques de codigo en otro buffer presionar <bdk>, '</bdk> o <bdk>C-x '</bdk>
-    -Para ejecutar el codigo presionar <bdk>, ,</bdk> o <bdk>C-c C-c</bdk>
+    -Para mostrar los bloques de codigo en otro buffer presionar ~, '~ ó ~C-x '~
+    -Para ejecutar el codigo presionar ~, ,~ ó ~C-c C-c~
 
     Referencias:
     - [[http://cl-cookbook.sourceforge.net/emacs-ide.html][Using emacs as LISP IDE (cl-cookbook)]]
@@ -40,8 +40,9 @@
     - [[https://www.youtube.com/watch?v=Jx8riNWKe14][Intro Emacs (javier) - Ver Video]]
     - [[https://www.youtube.com/watch?v=9aI7ZAEbiF0][Common LISP (Prof. Javier)]]
 *** Comandos basicos
-
-    | Comando            | Descripcion                                                               |
+    |--------------------+---------------------------------------------------------------------------|
+    | Comando            | Descripción                                                               |
+    |--------------------+---------------------------------------------------------------------------|
     | C-x C-e            | Ejecuta un comando (Con el cursor al final de linea)                      |
     | M-x eval-last-sexp | Ejecuta un comando (Con el cursor al final de linea)                      |
     | setq               | Cambia el valor de una variable local                                     |
@@ -49,8 +50,9 @@
     | setf               | Cambia el valor de una variable global                                    |
     | length             | Devuelve la longitud de una lista (una cadena es una lista de caracteres) |
     | read               | Pide ingresar datos                                                       |
-
+    |--------------------+---------------------------------------------------------------------------|
 *** Comandos para listas
+    |-----------+---------------------------------------------------|
     | (1 2 3)   | Representa una lista, se forman con los ()        |
     | append    | Inserta un elemento en una lista                  |
     | cons      |                                                   |
@@ -58,11 +60,12 @@
     | second    | Devuelve el segundo elemento de una lista         |
     | nth <n>   | Devuelve el elemento en la posicion n de la lista |
     | rest, cdr | Devuelve la lista sin el primer elemento          |
-
+    |-----------+---------------------------------------------------|
 *** Comandos para funciones
-    
-    | prog1 	| Evalua todas las sentencias compuestas y devuelve la primer sentencia |
-    | progn  |	Evalua todas las sentencias compuestas y devuelve la ultima |
+    |-------+-----------------------------------------------------------------------|
+    | prog1 | Evalua todas las sentencias compuestas y devuelve la primer sentencia |
+    | progn | Evalua todas las sentencias compuestas y devuelve la ultima           |
+    |-------+-----------------------------------------------------------------------|
 
     #+BEGIN_SRC emacs-lisp
       (progn
@@ -92,12 +95,13 @@
         (print unNombre)
         )
     #+END_SRC
-
 *** Buffers
-
-    | BUffer    | Descripcion              |
+    |-----------+--------------------------|
+    | Buffer    | Descripción              |
+    |-----------+--------------------------|
     | backtrace | Es el depurador de emacs |
     | scratch   | Para depurar codigo lisp |
+    |-----------+--------------------------|
 
     Algunas diferencias
 
@@ -148,41 +152,37 @@
 
       (print nombre)
     #+END_SRC
-
 * Empezando con Emacs
 ** Configuraciones
- La mejor guia de configuración https://config.phundrak.com/spacemacs
- https://blog.8bitzen.com/posts/27-02-2019-using-orgmode-babel/
- https://xgarrido.github.io/emacs-starter-kit/starter-kit-org.html
+*** Referencias
+    - https://config.phundrak.com/spacemacs
+    - https://blog.8bitzen.com/posts/27-02-2019-using-orgmode-babel/
+    - https://xgarrido.github.io/emacs-starter-kit/starter-kit-org.html
 ** [TODO] Comandos importantes
+    |---------+------------------------------------------------|
+    | Comando | Descripción                                    |
+    |---------+------------------------------------------------|
+    | w       | Ir a la siguiente palabra (word) a la derecha  |
+    | b       | Ir a la palabra anterior (back) a la izquierda |
+    |---------+------------------------------------------------|
 
-    
-   |---------+------------------------------------------------|
-   | Comando | Descripción                                    |
-   |---------+------------------------------------------------|
-   | w       | Ir a la siguiente palabra (word) a la derecha  |
-   | b       | Ir a la palabra anterior (back) a la izquierda |
-   |---------+------------------------------------------------|
-
-   |-------------------+--------------------------------------------------------------------------|
-   | Comando           | Descripción                                                              |
-   |-------------------+--------------------------------------------------------------------------|
-   | M-u               | Convertir a mayuscula (upper case) la siguiente palabra                  |
-   | M-l               | Convertir a minuscula (lower case) la siguiente palabra                  |
-   | M-c               | Convertir a letra capital (capitalize) la siguiente palabra              |
-   |-------------------+--------------------------------------------------------------------------|
-   | C-x C-u           | Convertir a mayuscula una región de texto seleccionada (Varias palabras) |
-   | C-x C-l           | Convertir a minuscula una región de texto seleccionada (varias palabras) |
-   | capitalize-region |                                                                          |
-   |-------------------+--------------------------------------------------------------------------|
-    
-   *Referencias*
+    |-------------------+--------------------------------------------------------------------------|
+    | Comando           | Descripción                                                              |
+    |-------------------+--------------------------------------------------------------------------|
+    | M-u               | Convertir a mayuscula (upper case) la siguiente palabra                  |
+    | M-l               | Convertir a minuscula (lower case) la siguiente palabra                  |
+    | M-c               | Convertir a letra capital (capitalize) la siguiente palabra              |
+    |-------------------+--------------------------------------------------------------------------|
+    | C-x C-u           | Convertir a mayuscula una región de texto seleccionada (Varias palabras) |
+    | C-x C-l           | Convertir a minuscula una región de texto seleccionada (varias palabras) |
+    | capitalize-region |                                                                          |
+    |-------------------+--------------------------------------------------------------------------|
+*** Referencias Web
    + [[http://ergoemacs.org/emacs/modernization_upcase-word.html][Toggle Letter case - ergoemacs.org]]
    + [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Case.html][Case Conversion Commands -  gnu.org]]
    + [[https://kb.iu.edu/d/abis][Change de case and capitalization of words and regions - Knowlege Base]]
-
 ** Canales favoritos
-   - https://www.youtube.com/watch?v=49kBWM3RQQ8&list=PL9KxKa8NpFxIcNQa9js7dQQIHc81b0-Xg (te falto agregar este, que es muy completo)
+   - https://www.youtube.com/watch?v=49kBWM3RQQ8&list=PL9KxKa8NpFxIcNQa9js7dQQIHc81b0-Xg
 ** [TODO] Modo artista, crear imagenes con texto
    Para crear diseños uml con texto
    - https://www.youtube.com/watch?v=cIuX87Xo8Fc
@@ -196,32 +196,34 @@
 ** Layers de Spacemacs 
 *** Treemacs
     Es un gestor de archivos
-    | Comando | Descripcion |
-    | SPC g r | Refrescar cambios    |
 
-    Referencias
-    - https://github.com/Alexander-Miller/treemacs/blob/master/README.org
+    |---------+-------------------|
+    | Comando | Descripcion       |
+    |---------+-------------------|
+    | SPC g r | Refrescar cambios |
+    |---------+-------------------|
+**** Referencias
+     - https://github.com/Alexander-Miller/treemacs/blob/master/README.org
 ** Nuevo modo cua-mode 
+   #+BEGIN_COMMENT
    No conozco aun todas las funcionalidades, pero te deja seleccionar 
    multiples lineas y editarlas al mismo tiempo. Ademas agregar incrementales.
-   Se activa con <kbd>M-x cua-mode</kbd> 
-    
-   Funcionalidades:
-   - Seleccionar multiples lineas
-     Presionar C-RET <keyUp> <keyDown> y escribir 
-   - Agregar numeros de forma incremental
-     Presionar <kbd>M-n</kbd> y debajo elegir a partir de que numero, de a cuanto incrementar, y el formato
-     seguido de RET
+   #+END_COMMENT
 
-   Referencias:
-   1. [[https://www.youtube.com/watch?v=uGLjkZxaFkw][Referencia #1 - Ver Video]]
-
+   - Se activa con ~M-x cua-mode~
+*** Funcionalidades
+    - seleccionar multiples lineas
+      Presionar C-RET <keyUp> <keyDown> y escribir 
+    - Agregar numeros de forma incremental
+      Presionar <kbd>M-n</kbd> y debajo elegir a partir de que numero, de a cuanto incrementar, y el formato
+      seguido de RET
+*** Referencias
+   - [[https://www.youtube.com/watch?v=uGLjkZxaFkw][Referencia #1 - Ver Video]]
 ** Atajos en Hybrid Mod 
-*** Nuevos atajos que uso mas frecuente
-
-    | :------             | :----------------------------------------------------                            |
+*** Nuevos atajos que uso frecuentemente
+    |---------------------+----------------------------------------------------------------------------------|
     | Comando             | Descripcion                                                                      |
-    | -------             | -----------------------------------------------------                            |
+    |---------------------+----------------------------------------------------------------------------------|
     | g c                 | Comentar un linea o bloque seleccionado (difiere entre lenguaje de programacion) |
     | SPC b b             | Muestra un listado de buffers, para cambiar el actual                            |
     | SPC '               | Carga el buffer de la terminal                                                   |
@@ -257,24 +259,27 @@
     | <sr RET             | Carga snippet de bloque de codigo                                                |
     | V g c               | Selecciona toda una linea y la comenta                                           |
     | v Arrow-Up/Down g c | Seleccionar bloques de codigo y comentarlos                                      |
-
+    |---------------------+----------------------------------------------------------------------------------|
 ** Ver historial de cambios, comando undo-tree
+   #+BEGIN_COMMENT
    "Tratar de mejorar con mas investigacion y desarrollo"
+   #+END_COMMENT
    Utilizamos undo-tree, se va a abrir un buffer *undo-tree*
 
-   Algunos comandos:
+   |-----------+-----------+-------------------------|
    | Holy Mode | Evil Mode | Descripcion             |
+   |-----------+-----------+-------------------------|
    | C-x u     | SPC a u   | Abrir arbol de cambios  |
    | C-g       | q         | Salir                   |
    | C-q       |           | Cancelar cambios        |
    |           | j,k       | Moverse entre los nodos |
    |           | h,l       | Moverse entre las ramas |
-
-   Referencias:
+   |-----------+-----------+-------------------------|
+*** Referencias
    - [[https://emacs.stackexchange.com/questions/27339/how-to-operate-the-undo-redo-tree-in-spacemacs][Algunos comandos (emacs.stackexchange.com)]]
    - [[http://pragmaticemacs.com/emacs/advanced-undoredo-with-undo-tree/][Algunas configuraciones (pragmaticemacs.com)]]
-
 ** Errores frecuentes
+*** No carga Org Agenda
    - No carga la org-agenda y muestra como error
      "Invalid function: org-preserve-local-variables"
      Solucion:
@@ -283,43 +288,28 @@
      find org*/*.elc -print0 | xargs -0 rm
      2. Ejecutar el comando dentro de spacemacs
         spacemacs/recompile-elpa
-   Referencia:
-   https://github.com/syl20bnr/spacemacs/issues/11801
-
-   - [[https://develop.spacemacs.org/doc/FAQ.html#why-are-packages-installed-with-package-install-automatically-deleted-by-spacemacs-when-it-boots][Preguntas frecuentes (develop.spacemacs.org)]]
-   - - Que se quiera borrar yasnippet-snippets porque tiene un package huerfano (company-tern)
-     Solucion: ir a la linea que dice **dotspacemacs-install-packages 'used-only))**
-     y cambiar el **used-only** por **used-but-keep-unused** esto lo que hace es conservar el
-     package **yasnippet-snippets** por mas que tenga packages huerfanos (con la opcion anterior lo borraba)
-     https://github.com/syl20bnr/spacemacs/issues/1538
-     https://github.com/syl20bnr/spacemacs/issues/1538#issuecomment-317241460
-
-** [DONE] Gestionar archivos, proyectos
-   CLOSED: [2020-04-13 lun 15:40]
+**** Referencias
+    - https://github.com/syl20bnr/spacemacs/issues/11801
+    - [[https://develop.spacemacs.org/doc/FAQ.html#why-are-packages-installed-with-package-install-automatically-deleted-by-spacemacs-when-it-boots][Preguntas frecuentes (develop.spacemacs.org)]]
 ** [TODO] Referencias
-*** [TODO] Videos
-    Quedaron algunos videos pendientes por mirar/revisar
     - https://www.youtube.com/watch?v=8k7BTIqufqQ
     - https://orgmode.org/guide/Hyperlinks.html
     - https://www.youtube.com/watch?v=I2C6QTtxfe8
     - https://www.youtube.com/watch?v=39u8K12rXHE
     - https://orgmode.org/manual/Initial-visibility.html
     - https://www.youtube.com/watch?v=S4f-GUxu3CY
-
 ** [TODO] Agregar snippets
-   Crear snippets
+*** Crear snippets
    1. Presionar SPC SPC yas-new-snippet  o M-x yas-new-sippet
    2. Crear un snippet
    3. Llamarlo escribiendolo y presionar tab o presioar M-/ o M-x hippie-expand o SPC SPC hippie-expand
+*** Se eliminan layers por paquetes huerfanos
+    Que se quiera borrar yasnippet-snippets porque tiene un package huerfano (company-tern)
+    Solucion: ir a la linea que dice **dotspacemacs-install-packages 'used-only))**
+    y cambiar el **used-only** por **used-but-keep-unused** esto lo que hace es conservar el
+    package **yasnippet-snippets** por mas que tenga packages huerfanos (con la opcion anterior lo borraba)
 
-   Posibles error:
-   - Que se quiera borrar yasnippet-snippets porque tiene un package huerfano (company-tern)
-     Solucion: ir a la linea que dice **dotspacemacs-install-packages 'used-only))**
-     y cambiar el **used-only** por **used-but-keep-unused** esto lo que hace es conservar el
-     package **yasnippet-snippets** por mas que tenga packages huerfanos (con la opcion anterior lo borraba)
-     https://github.com/syl20bnr/spacemacs/issues/1538
-     https://github.com/syl20bnr/spacemacs/issues/1538#issuecomment-317241460
-   Solucion:
+   *Solucion:*
    1.Agregar en user-config las sig tres lineas
    (global-set-key (kbd "TAB") 'hippie-expand)
    (global-set-key (kbd "<tab>") 'hippie-expand)
@@ -332,9 +322,10 @@
    auto-completion-enable-sort-by-usage t
    ;;auto-completion-tab-key-behavior nil
    auto-completion-enable-snippets-in-popup t)
-
-
-   Referencias
+**** Referencias
+      https://github.com/syl20bnr/spacemacs/issues/1538
+      https://github.com/syl20bnr/spacemacs/issues/1538#issuecomment-317241460
+*** Referencias
    - [[http://jr0cket.co.uk/2016/07/spacemacs-adding-your-own-yasnippets.html][Referencia #1 - Ver Pagina]]
    - [[https://www.youtube.com/watch?v=5kPrOs2ftN8][Referencia #1 - Ver Video]]
    - [[https://www.youtube.com/watch?v=51as0UrssLM][Referencia #2 - Ver Video]]
@@ -348,12 +339,13 @@
    - https://github.com/joaotavora/yasnippet#where-are-the-snippets
    - https://practicalli.github.io/spacemacs/snippets/add-your-own-snippets.html
 ** Utilizando el buffer scratch
-   Referencias:
+*** Referencias
    - https://dev.to/huytd/emacs-from-scratch-1cg6
 ** Utilizando Swiper
+*** Conceptos
    Al parecer sirve como buscador (parece que se pueden usar expresiones regulares),
    con un buffer debajo que indica las coincidencias
-   Referencias:
+*** Referencias
    - https://github.com/abo-abo/swiper/issues/1550
    - https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html
    - https://www.youtube.com/watch?v=AaUlOH4GTCs

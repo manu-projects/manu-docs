@@ -6,17 +6,17 @@
  [[../../assets/img/orgmode2.png]]
 
 
-* Tareas basicas para empezar
-** Para iniciar Emacs con un archivo .org"
-   1. Modificar el archivo de configuracion <kbd>C-x C-f</kbd> ~/.emacs.d/init.el
-   2. Ir al final del archivo <kbd>C-Fin</kbd> y agregar la siguiente linea
+* Tareas básicas para empezar
+** Para iniciar Emacs con un archivo .org
+   1. Modificar el archivo de configuración ~C-x C-f~ seguido de ~~/.emacs.d/init.el~
+   2. Ir al final del archivo ~C-Fin~ y agregar la siguiente linea
 
    #+BEGIN_SRC elisp
      ;; cambiar por la ruta que desees
      (find-file "~/Dropbox/orgfiles/agenda1.org")
    #+END_SRC
 ** Crear una lista de tareas
-   Escribimos el simbolo * asterisco seguido del texto
+   Escribimos el símbolo ~*~ asterisco seguido del texto
 
    Hagamos un ejemplo de algunos días de la semana
 
@@ -41,7 +41,7 @@
      ** Empezar ejercicios de Matemática
    #+END_EXAMPLE
 ** Crear tareas con viñetas
-   Escribimos un *guion* seguido del texto que queramos seguido de ~M-RET~
+   Escribimos un *guión* seguido del texto que queramos seguido de ~M-RET~
 
    - Para agregar nuevos elementos en el mismo nivel (tabulacion) presionar ~M-RET~
    - Para cambiar el tipo de viñeta presionar ~Shift~ y las flechas Up/Down
@@ -129,63 +129,63 @@
   |-----------+------------------------------+-------------------------------------------------------------------------|
 ** Referencias
 *** Referencias Web Oficiales
-   - [Atajos (Spacemacs.org)](https://www.spacemacs.org/layers/+emacs/org/README.html)
-   - https://www.gnu.org/software/emacs/refcards/pdf/refcard.pdf
-   - https://www.spacemacs.org/layers/+emacs/org/README.html#key-bindings
-*** Referencias Web Extraoficiales
-   - https://emacs.stackexchange.com/questions/33310/how-to-use-org-mode-speed-commands-speed-keys
-* Integrar archivos ORG con dropbox 
-  La referencia #1 me funciono solo necesitas realizar
+    1. [[https://www.spacemacs.org/layers/+emacs/org/README.html#key-bindings][Atajos - Spacemacs.org]]
+    2. [[https://www.gnu.org/software/emacs/refcards/pdf/refcard.pdf][Atajos - GNU.org]]
+*** Referencias Issues
+    1. [[https://emacs.stackexchange.com/questions/33310/how-to-use-org-mode-speed-commands-speed-keys][How to use org mode speed commands - emacs.stackexchange.com]]
+* Integrar archivos ORG con dropbox
+** Solución
+  1. Escribís en la terminal ~git clone https://aur.archlinux.org/dropbox.git~
+  2. Entras al directorio ~cd dropbox~
+  3. Lo compilas con ~makepkg -si~
 
-  1. Escribis en la terminal `git clone https://aur.archlinux.org/dropbox.git`
-  2. Entras al directorio `cd dropbox`
-  3. Lo compilas con `makepkg -si`
+  Luego de bajarse el paquete se te creará un directorio ~~\Dropbox~
 
-  Luego de bajarse el paquete se te creara un directorio `~\Dropbox`
-
-  - Referencia #1 - LinuxHint [Ver Pagina-](https://linuxhint.com/install_dropbox_manjaro_linux/)
-  - Referencia #2 - Webdav - [Ver Pagina](https://webdav.io/webdav/webdav-integrations/webdav-dropbox/)
-  - Referencia #3 - Opensource.com - [Ver Pagina](https://opensource.com/article/19/4/calendar-git)
+  Observación: La referencia #1 me funcionó
+** Referencias
+  - [[https://linuxhint.com/install_dropbox_manjaro_linux/][Referencia #1 - LinuxHint.com]] [Ver Pagina-]()
+  - [[https://webdav.io/webdav/webdav-integrations/webdav-dropbox/][Referencia #2 - Webdav.io]]
+  - [[https://opensource.com/article/19/4/calendar-git][Referencia #3 - Opensource.com]]
 * Sitios web recomendados
 ** Guias
 *** Referencias Web Oficiales
-   - Guia basica - Orgmode - [Ver Pagina](https://orgmode.org/worg/org-tutorials/orgtutorial_dto-es.html)
+   1. [[https://orgmode.org/worg/org-tutorials/orgtutorial_dto-es.html][Guía básica - Orgmode.org]]
 *** Referencias Web Extraoficiales
-   - Guia basica - Emacslife - [Ver Pagina](http://emacslife.com/baby-steps-org.html)
-   - Guia completa - Norang - [Ver Pagina](http://doc.norang.ca/org-mode.html)
+   1. [[http://emacslife.com/baby-steps-org.html][Guía básica - Emacslife.com]]
+   2. [[http://doc.norang.ca/org-mode.html][Guía completa - Doc Norang]]
 ** Agregar etiquetas a las tareas
 *** Referencias Web Oficiales
-    - Referencia #2 - Orgmode.org - [Ver Pagina](https://orgmode.org/manual/Setting-Tags.html)
+    1. [[https://orgmode.org/manual/Setting-Tags.html][Referencia #1 - Orgmode.org]]
 *** Referencias Youtube
-    - Referencia #1 - [Ver Video](https://www.youtube.com/watch?v=FJq__bBi0nI)
+    1. [[https://www.youtube.com/watch?v=FJq__bBi0nI][Referencia #1]]
 ** Como organizarse con el modo Org
 *** Referencias Youtube
-   - Referencia #1 - [Ver Video](https://www.youtube.com/watch?v=C6nbjqn5Uxw)
-   - Referencia #2 - [Ver Video - Parte 1](https://www.youtube.com/watch?v=QQSaDDVP__s)
-   - Referencia #2 - [Ver Video - Parte 2](https://www.youtube.com/watch?v=sXTtDiLXr48)
-   - Referencia #4 - [Ver Video](https://www.youtube.com/watch?v=PVsSOmUB7ic)
-   - Referencia #5 - [Ver Video](https://www.youtube.com/watch?v=gDHE23vl9E0)
-   - Referencia #6 - [Ver Video](https://www.youtube.com/watch?v=LFO2UbzbZhA)
-   - Referencia #7 - [Ver Video](https://www.youtube.com/watch?v=dljNabciEGg)
-   - Referencia #8 - [Ver Video](https://www.youtube.com/watch?v=fgizHHd7nOo)
+   1. [[https://www.youtube.com/watch?v=C6nbjqn5Uxw][Referencia #1]]
+   2. [[https://www.youtube.com/watch?v=QQSaDDVP__s][Referencia #2 - Parte 1]]
+   3. [[https://www.youtube.com/watch?v=sXTtDiLXr48][Referencia #2 - Parte 2]]
+   4. [[https://www.youtube.com/watch?v=PVsSOmUB7ic][Referencia #4]]
+   5. [[https://www.youtube.com/watch?v=gDHE23vl9E0][Referencia #5]]
+   6. [[https://www.youtube.com/watch?v=LFO2UbzbZhA][Referencia #6]]
+   7. [[https://www.youtube.com/watch?v=dljNabciEGg][Referencia #7]]
+   8. [[https://www.youtube.com/watch?v=fgizHHd7nOo][Referencia #8]]
 ** Cambiar las prioridades de las tareas
 *** Referencias Youtube
-   - Referencia #1 - [Ver Video](https://www.youtube.com/watch?v=WSF4EgQqa3Q)
+    1. [[https://www.youtube.com/watch?v=WSF4EgQqa3Q][Referencia #1]]
 *** Referencias Web Extraoficiales
-   - Referencia #2 - [Ver Pagina](https://github.com/harrybournis/org-fancy-priorities)
+    1. [[https://github.com/harrybournis/org-fancy-priorities][Referencia #2 - Github.com/harrybournis]]
 ** Modificar Agenda estados
 *** Referencias Web Oficiales
-   - Referencia #3 - Orgmode.org  - [Ver Pagina](https://orgmode.org/manual/TODO-Basics.html)
-   - Referencia #4 - Orgmode.org -  [Ver Pagina](https://orgmode.org/manual/Setting-Tags.html)
+    1. [[https://orgmode.org/manual/TODO-Basics.html][Referencia #1 - Orgmode.org]]
+    2. [[https://orgmode.org/manual/Setting-Tags.html][Referencia #2 - Orgmode.org]]
 *** Referencias Web Extraoficiales
-   - Referencia #1 - Practicalli - [Ver Pagina](https://practicalli.github.io/spacemacs/org-mode/todo-states-customise.html)
-   - Referencia #2 - Sainathadapa - [Ver Pagina](https://sainathadapa.github.io/emacs-spacemacs-config/org-config)
+    1. [[https://practicalli.github.io/spacemacs/org-mode/todo-states-customise.html][Referencia #1 - Practicalli]]
+    2. [[https://sainathadapa.github.io/emacs-spacemacs-config/org-config][Referencia #2 - By Sainathadapa]]
 ** Otros
 *** Referencias Web Oficiales
-    - Comandos agenda-file - Orgmode.org [Ver Pagina](https://orgmode.org/manual/Agenda-Files.html)
-    - Manejar los Hipervinculos - Orgmode.org - [Ver Pagina](https://orgmode.org/manual/Handling-Links.html)
+    1. [[https://orgmode.org/manual/Agenda-Files.html][Comandos agenda-file - Orgmode.org]]
+    2. [[https://orgmode.org/manual/Handling-Links.html][Manejar los Hipervinculos - Orgmode.org]]
 *** Referencias Youtube
-   - Como usar snippets -[Ver Video](https://www.youtube.com/watch?v=UT1bcq_HIkE)
-   - Agendar Fechas -[Ver Video](https://www.youtube.com/watch?v=QQSaDDVP__s)
-   - Crear presentaciones - [Ver video](https://www.youtube.com/watch?v=bRoSpJ23Kzk)
-   - Hacer gantt - [Ver Video](https://www.youtube.com/watch?v=5ViUBaarsbw)
+   1. [[https://www.youtube.com/watch?v=UT1bcq_HIkE][Como usar snippets]]
+   2. [[https://www.youtube.com/watch?v=QQSaDDVP__s][Agendar Fechas]]
+   3. [[https://www.youtube.com/watch?v=bRoSpJ23Kzk][Crear presentaciones]]
+   4. [[https://www.youtube.com/watch?v=5ViUBaarsbw][Hacer un diagrama de tipo gantt]]

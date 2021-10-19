@@ -63,8 +63,8 @@ problematicas que pudiesen llegar a aparecer.
     makepkg -si
   #+END_SRC
 ** Referencias Web Extraoficiales
-   - [Referencia #1 - Ver Pagina](https://medium.com/@mahekarim/install-dropbox-on-arch-linux-or-manjaro-kde-fa06be45d550)
-   - [Referencia #2 - Ver Pagina](https://www.gestionatuweb.net/instalar-dropbox-en-manjaro-18-illyria/)
+   1. Referencia #1 - [[https://medium.com/@mahekarim/install-dropbox-on-arch-linux-or-manjaro-kde-fa06be45d550][[Ver Pagina]​]]
+   2. Referencia #2 - [[https://www.gestionatuweb.net/instalar-dropbox-en-manjaro-18-illyria/][[Ver Pagina]​]]
 * Soporte en Canales IRC Configurar Cliente IRC (Weechat)
   Para solucionar problemas a veces (no siempre) se puede recurrir a los canales de soporte de irc
   del programa en cuestion. Resulta una manera mas rapida de plantear dudas en reemplazo a los foros.
@@ -76,13 +76,11 @@ problematicas que pudiesen llegar a aparecer.
   No se recomienda ejecutar este programa con el comando sudo
 ** Configuración de Weechat
 *** Agregar el servidor
-
    #+NAME: weechat-agregar-servidor
    #+BEGIN_SRC shell
      /server add freenode chat.freenode.net/6667 -autoconnect
    #+END_SRC
 *** Cambiar el nick predeterminado del servidor agregado
-
    #+NAME: weechat-cambiar-nick
    #+BEGIN_SRC shell
      /set irc.server.freenode.nicks escribirUnNick
@@ -181,13 +179,13 @@ problematicas que pudiesen llegar a aparecer.
    | ALT ArrowKeys | Se mueve entre los canales |
    |---------------+----------------------------|
 ** Referencias Web Oficiales
-   - [Referencia #2 - Ver Pagina](https://freenode.net/kb/answer/registration) 
-   - [Referencia #3 - Ver Pagina](https://wiki.archlinux.org/index.php/WeeChat) 
-   - [Referencia #4 - Ver Pagina](https://freenode.net/kb/answer/weechat)
-   - [Referencia #5 - Ver Pagina](https://weechat.org/files/doc/stable/weechat_quickstart.en.html)
-   - [Referencia #6 - Ver Pagina](https://weechat.org/files/doc/devel/weechat_quickstart.en.html)
-   - [Referencia #7 - Ver Pagina](https://weechat.org/files/doc/stable/weechat_quickstart.es.html)
-   - [Referencia #8 - Primeros pasos (weechat.org)](https://weechat.org/files/doc/stable/weechat_quickstart.en.html) 
+   1. Referencia #2 - [[https://freenode.net/kb/answer/registration][[Ver Pagina]​]]
+   2. Referencia #3 - [[https://wiki.archlinux.org/index.php/WeeChat][[Ver Pagina]​]]
+   3. Referencia #4 - [[https://freenode.net/kb/answer/weechat][[Ver Pagina]​]]
+   4. Referencia #5 - [[https://weechat.org/files/doc/stable/weechat_quickstart.en.html][[Ver Pagina]​]]
+   5. Referencia #6 - [[https://weechat.org/files/doc/devel/weechat_quickstart.en.html][[Ver Pagina]​]]
+   6. Referencia #7 - [[https://weechat.org/files/doc/stable/weechat_quickstart.es.html][[Ver Pagina]​]]
+   7. Referencia #8 - [[https://weechat.org/files/doc/stable/weechat_quickstart.en.html][[Ver Pagina]​]]
 ** Referencias Web Extraoficiales
-   - [Referencia #1 - Ver Pagina](http://www.chiark.greenend.org.uk/doc/weechat-doc/html/weechat_quickstart.en.html)
-   - [Referencia #9 - Configuracion (szorfein.github.io)](https://szorfein.github.io/weechat/tor/configure-weechat/)
+   1. Referencia #1 - [[http://www.chiark.greenend.org.uk/doc/weechat-doc/html/weechat_quickstart.en.html][[Ver Pagina]​]]
+   2. Referencia #9 - [[https://szorfein.github.io/weechat/tor/configure-weechat/][[Ver Pagina - Configuración (szorfein.github.io)]​]]

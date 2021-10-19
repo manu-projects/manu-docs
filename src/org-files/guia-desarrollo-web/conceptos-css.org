@@ -1,0 +1,154 @@
+#+TITLE: CSS - Estilos
+* [DOING] Temas
+  1. Ecmascript
+  2. Gulp
+* [DOING] Viendo - Parte 1
+  https://www.youtube.com/watch?v=D9_Hb4kWA04&list=PLM-Y_YQmMEqBxAQxxNW7J7-BTJdj_Ol3F&index=7&ab_channel=Wmedia%3AdesarrolloWebmodernoyproductivo
+
+  1. https://css-tricks.com/almanac/properties/f/flex/
+  2. https://www.sitepoint.com/css-viewport-units-quick-start/
+  3. https://www.quackit.com/html/templates/css_flexbox_templates.cfm
+  4. google: css overflow
+  5. google: css position absolute fixed relative
+  6. google: flexbox vs grid
+  7. https://www.hongkiat.com/blog/css-margin-auto/
+  8. https://stackoverflow.com/questions/35049262/difference-between-justify-content-vs-align-items
+  9. https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container
+  10. https://www.freecodecamp.org/news/css-positioning-and-flexbox-explained/
+  11. https://www.w3schools.com/css/css_positioning.asp
+  12. https://medium.com/@daniaherrera/getting-started-css-grid-vs-flexbox-b3012fce6476
+* [DOING] Viendo - Parte 2
+  1. https://www.youtube.com/watch?v=F-KCncXMPk0&ab_channel=FalconMasters
+  2. https://betterprogramming.pub/introduction-to-typescript-interfaces-extending-interfaces-and-classes-af10fcfc1238
+  3. https://www.typescripttutorial.net/typescript-tutorial/typescript-array-type/
+
+  videos de pixi o js
+  1. https://www.youtube.com/watch?v=o5W86aGBy5M&ab_channel=hlo21
+  2. https://www.youtube.com/watch?v=o5W86aGBy5M&ab_channel=hlo21
+  3. https://www.youtube.com/watch?v=eI9idPTT0c4&list=PLpPnRKq7eNW3We9VdCfx9fprhqXHwTPXL&index=19&ab_channel=ChrisCourses
+  4. https://www.youtube.com/watch?v=dDSKexgVCaU&t=2859s&ab_channel=Glitch
+  5. https://www.youtube.com/watch?v=RTb8icFiSfk&ab_channel=Frankslaboratory
+* Temas pendientes
+  1. el valor ~cover~ de la propiedad ~background~
+  2. el valor ~flex~ de la propiedad ~display~
+  3. ~tranform: translate(-50%, -50%);~ <- centrar elemento (además de usar posición absoluta, y left:50% && top:50%)
+* Flexible Box
+** Referencias
+   1. https://www.w3schools.com/css/css3_flexbox.asp
+   2. https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox
+* Flex Vs Inline-Block
+** Referencias
+  1. https://blog.devgenius.io/css-display-flex-vs-block-inline-and-inline-block-explained-5fa588a3a960
+  2. https://www.geeksforgeeks.org/what-is-the-difference-between-inline-flex-and-inline-block-in-css/
+* Unidades Px-Em-Rem
+** Conceptos
+   - Em y Rem son medidas escalables
+   - Los px son unidades precisas, en cualquier navegador-web se ven del mismo tamaño (?)
+** Referencias
+   1. https://chiamakaikeanyi.dev/sizing-in-css-px-vs-em-vs-rem/
+   2. https://abalozz.es/sobre-como-usar-px-em-rem-y-percent-en-responsive-design/
+* Viewport
+** Meta Viewport
+*** Conceptos
+    #+BEGIN_QUOTE
+    Do you have the meta tag “viewport” in the html doc?
+    ~<meta name="viewport" content="width=device-width, initial-scale=1.0">~
+    Without that you won’t get any responsive features.
+    #+END_QUOTE
+*** Referencias
+    1. https://www.reddit.com/r/tailwindcss/comments/lfz6kp/am_i_the_only_one_who_sees_tailwind_css/
+    2. https://www.htmlcinco.com/etiqueta-meta-viewport-web-movil/
+    3. https://webdesign.tutsplus.com/articles/quick-tip-dont-forget-the-viewport-meta-tag--webdesign-5972
+    4. https://webhint.io/docs/user-guide/hints/hint-meta-viewport/
+    5. https://desarrolloweb.com/articulos/etiqueta-meta-viewport.html
+** Viewport Units
+*** Conceptos
+    #+BEGIN_QUOTE
+    Viewport Height (~vh~)
+    This unit is based on the height of the viewport.
+    Ex. A value of 1vh is equal to 1% of the viewport height.
+    
+    Viewport Width (~vw~)
+    This unit is based on the width of the viewport.
+    Ex. A value of 1vw is equal to 1% of the viewport width.
+    
+    Viewport Minimum (~vmin~)
+    This unit is based on the smaller dimension of the viewport.
+    Ex. If the viewport height is smaller than the width, the value of 1vmin will be equal to 1% of the viewport height. Similarly, if the viewport width is smaller than the height, the value of 1vmin will be equal to 1% of the viewport width.
+    
+    Viewport Maximum (~vmax~)
+    This unit is based on the larger dimension of the viewport.
+    Ex. If the viewport height is larger than the width, the value of 1vmax will be equal to 1% of viewport height. Similarly, if the viewport width is larger than the height, the value of 1vmax will be equal to 1% of hte viewport width.
+    #+END_QUOTE
+*** Referencias
+    1. https://www.sitepoint.com/css-viewport-units-quick-start/
+* [TODO] Propiedades Interesantes
+** Margin:auto
+*** Conceptos
+*** Referencias
+    1. https://www.hongkiat.com/blog/css-margin-auto/
+** Overflow
+*** Conceptos
+*** Referencias
+    1. https://www.w3schools.com/css/css_overflow.asp
+    2. https://francescricart.com/la-propiedad-overflow/
+** Position (Fixed, Absolute, Relative)
+*** Referencias
+    1. https://www.w3schools.com/css/css_positioning.asp
+    2. https://css-tricks.com/absolute-relative-fixed-positioining-how-do-they-differ/
+** Display
+*** Conceptos
+    Además del display:block, display:none; display:inline, ..
+    Podemos usar flexbox y grid que están de moda :)
+*** Referencias
+    1. https://css-tricks.com/almanac/properties/d/display/
+    2. https://developer.mozilla.org/en-US/docs/Web/CSS/display
+* Colores
+** Sistema/Formato de color CMYK
+*** Conceptos
+    - Es un formato de color
+    - Es el que utiliza HSL
+*** Referencias
+    1. https://imborrable.com/blog/rgb-y-cmyk/
+** HSL
+*** Conceptos
+    (Hue,Saturation, Ligthness)
+*** (H) Tono
+*** (S) Saturación
+*** (L) Brillo
+*** Referencias Web
+    1. https://programmerclick.com/article/57321398871/
+    2. https://www.it-swarm-es.com/es/html/css-colores-hsl-o-rgb/1049714896/
+    3. https://www.silocreativo.com/codigos-color-web-usar-hsl-en-css/
+    4. https://ed.team/blog/manejo-de-colores-en-css
+** Opacity vs Alpha Transparency de RGBA
+*** Referencias
+    1. https://meetanshi.com/blog/opacity-vs-rgba/
+    2. https://stackoverflow.com/questions/14251511/what-is-the-difference-between-opacity-and-that-through-alpha-channel-rgba
+    3. http://thenewcode.com/239/Whats-The-Difference-Between-opacity-and-rgba
+* Flexbox
+** Conceptos
+** Referencias Web
+   1. https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+   2. https://lenguajecss.com/css/maquetacion-y-colocacion/flexbox/
+   3. https://www.softwarepark.cc/blog/2021/5/6/in-depth-introduction-to-flexbox
+   4. https://www.bitdegree.org/learn/css-flexbox
+* Flexbox Vs Grid
+** Referencias
+   1. http://www.differencebetween.net/technology/difference-between-css-flexbox-and-grid/
+   2. https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Relationship_of_Grid_Layout
+   3. https://webdesign.tutsplus.com/articles/flexbox-vs-css-grid-which-should-you-use--cms-30184
+* Referencias
+** Referencias - Youtube
+   1. https://www.youtube.com/channel/UCH7IANkyEcsVW_y1IlpkamQ (vue,angular,tailwindcss, ...)
+* Sass
+* Tutoriales
+** Tutoriales Web
+   1. https://mastery.games/post/overlapping-grid-items/ (muy completo)
+   2. https://morioh.com/p/96ae54d49d81
+   3. https://dopedesi.com/2020/10/13/css-layout-grid-vs-flexbox-blog/
+   4. https://ishadeed.com/article/grid-layout-flexbox-components/
+** Videotutoriales Youtube
+   1. https://www.youtube.com/watch?v=IcK3XPlGeDk&list=PLM-Y_YQmMEqBxAQxxNW7J7-BTJdj_Ol3F
+   2. https://www.youtube.com/c/juanwmedia/playlists
+   3. https://www.youtube.com/c/Bluuweb/playlists

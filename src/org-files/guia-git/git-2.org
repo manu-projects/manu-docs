@@ -21,7 +21,7 @@
 ** Head
    - Es un puntero que guarda la referencia del *branch* activo (el que se esté utilizando)
    - En el repositorio remoto *origin* el puntero HEAD apunta a la rama *master*
-   - En nuestro repositorio local, se puede cambiar la referencia haciendo *git checkout nombreRama*
+   - En nuestro repositorio local, se puede cambiar la referencia haciendo ~git checkout nombreRama~
 ** Track
 *** Conceptos
     - Su traducción al español es *rastrear* ó podría ser también *en seguimiento*
@@ -40,24 +40,22 @@
        - hace referencia a los archivos que NO están en el *staging area*
 
     #+NAME: git-archivos-estados
-    #+BEGIN_EXAMPLE
+    #+BEGIN_QUOTE
     1. Clonamos nuestro repositorio
     todos los archivos estarán por defecto *rastreados* (tracked) y sin modificar
 
     2. Modificamos los archivos del repositorio
-    tendrán cambios "no rastreados" (se da cuenta, porque compara con el último commit)
-    son cambios pendientes a agregar al *area de stage*
-    piden a gritos agregar los cambios con git add
+    tendrán cambios "no rastreados" (/se da cuenta, porque compara con el último commit/)
+    son cambios pendientes a agregar al *area de stage* piden a gritos agregar los cambios con git add
 
-    3. Creamos nuevos archivos, y aún no ejecutamos *git add*
+    3. Creamos nuevos archivos, y aún no ejecutamos ~git add~
     los archivos NO estarán en el "area de stage" (unstaged files)
-    (se da cuenta, porque compara con el último commit y ve que esos archivos NO estaban)
+    (/se da cuenta, porque compara con el último commit y ve que esos archivos NO estaban/)
     por tanto los cambios de esos archivos no serán rastreados y serán (untracked files)
     
-    4. Agregamos los archivos al "area de Stage" con git add
-    los archivos serán rastreados, osea tendrán seguimiento de sus cambios
-    (comparando con el último commit, para ver si hubo cambios)
-    #+END_EXAMPLE
+    4. Agregamos los archivos al "area de Stage" con ~git add~ los archivos serán rastreados, osea tendrán seguimiento de sus cambios
+    (/comparando con el último commit, para ver si hubo cambios/)
+    #+END_QUOTE
 *** Posibles escenarios
      #+NAME: escenario1-archivos-estados
      #+BEGIN_SRC shell
@@ -85,19 +83,19 @@
        git rm --cached promociones.txt
      #+END_SRC
 *** Referencias Oficiales
-    1. https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
+    1. [[https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio][Guardando cambios en el Repositorio - git-scm.com]]
 *** Referencias Extraoficiales
-    1. https://howtogit.archive.pieterdedecker.be/concepts/types-of-changes.html#:~:text=In%20a%20nutshell%3A%20Untracked%20changes,Git%20and%20marked%20for%20commit.
+    1. [[https://howtogit.archive.pieterdedecker.be/concepts/types-of-changes.html][Types of Changes - pieterdedecker.be]]
 ** Stage
    - También conocido como *Index* ó *Staging Area*
    - Su traducción al español es *Area de preparación*
    - Es el paso previo a la confirmación (commit)
-   - Son los archivos que agregamos con el comando *git add* y sus cambios serán *rastreados* (se hará un seguimiento)
+   - Son los archivos que agregamos con el comando ~git add~ y sus cambios serán *rastreados* (se hará un seguimiento)
    - Los archivos del *area de preparación* pueden tener dos estados
      - *Unstaged changes*: Si los modificamos
      - *Staged changes*: Si no los modificamos
      - Unstaged changes y Staged changes (osea ambos estados):
-       Si los modificamos, los agregamos con *git add* y los volvemos a modificar y NO hacemos *git add*
+       Si los modificamos, los agregamos con ~git add~ y los volvemos a modificar y NO hacemos ~git add~
 
     |------------------------|
     | History                |
@@ -113,25 +111,24 @@
     | - unstaged files       |
     | - untracked files      |
     |------------------------|
-
 ** Tracking Branch
 *** Conceptos
-    - Cuando creamos una *rama local* a partir de una *rama remota* con *git checkout*,
+    - Cuando creamos una *rama local* a partir de una *rama remota* con ~git checkout~
       la rama local se convierte en una *rama de seguimiento* porque guarda una referencia hacia la rama remota.
-    - Si queremos hacer un seguimiento de una rama remota se utiliza *git checkout --track remoto/nombreRama*
+    - Si queremos hacer un seguimiento de una rama remota se utiliza ~git checkout --track remoto/nombreRama~
 ** MERGE_HEAD
 *** Conceptos
     - *MERGE_HEAD* está presente siempre que hay una fusión (merge) en curso.
-    - El comando *git merge --abort* es equivalente a *git reset --merge* cuando *MERGE_HEAD* está presente.
+    - El comando ~git merge --abort~ es equivalente a ~git reset --merge~ cuando *MERGE_HEAD* está presente.
 *** Referencias Web Oficiales
-    1. https://mirrors.edge.kernel.org/pub/software/scm/git/docs/git-merge.html
+    1. [[https://mirrors.edge.kernel.org/pub/software/scm/git/docs/git-merge.html][Git Merge - Git Manual Page]]
 ** Detached Head
 *** Conceptos
     1. El *detached head* ó *head desacoplado* sucede cuando el *head* apunta a una confirmación (commit) que no es la última,
     es decir alguna de las confirmaciones (commits) anteriores al  último (al que debería apuntar HEAD)
-    2. Si queremos ir a una confirmación anterior podes utilizar *git checkout HEAD~n* (siendo n cualquier número natural,
+    2. Si queremos ir a una confirmación anterior podes utilizar ~git checkout HEAD~n~ (siendo n cualquier número natural,
        y representa cuantas confirmaciones hacia atrás queremos ir respecto de HEAD)
-    3. Podemos llegar a *detached head* desde cualquier rama (osea, no importa que hagamos *git checkout fix/precios* 
+    3. Podemos llegar a *detached head* desde cualquier rama (osea, no importa que hagamos ~git checkout fix/precios~
        y no estemos en la rama master)
 *** Posibles Escenarios
    #+NAME: detached-head-escenario1
@@ -193,13 +190,13 @@
       git branch nombreNuevaRama 192abc3
     #+END_SRC
 *** Referencias Web Extraoficiales
-    1. https://loquemeinteresadelared.wordpress.com/2016/03/28/git-cookbook-que-es-el-estado-o-modo-detached-head/
+    1. [[https://loquemeinteresadelared.wordpress.com/2016/03/28/git-cookbook-que-es-el-estado-o-modo-detached-head/][Que es el estado detached head - Blog LoQueMeInteresaDeLaRed]]
 ** Master
-    - es el nombre por defecto del *branch* inicial, se asigna en el momento que inicializamos el repositorio con *git init*
+    - es el nombre por defecto del *branch* inicial, se asigna en el momento que inicializamos el repositorio con ~git init~
 ** Origin
 *** Conceptos
-   - es el nombre por defecto al *repositorio remoto*, cuando se hace el *git clone*
-   - si quisieramos podriamos cambiar su nombre por otro con *git clone -o otroNombre*
+   - Es el nombre por defecto al *repositorio remoto*, cuando se hace el ~git clone~
+   - Si quisieramos podriamos cambiar su nombre por otro con ~git clone -o otroNombre~
 *** Ejemplos
     #+NAME: repositorio-origin
     #+BEGIN_SRC shell
@@ -251,12 +248,12 @@
    Al terminar los cambios en el branch, se debe ir a la rama master (checkout master)
    y fusionar los cambios (merge master:nombreBranch)
 *** Referencias Web Oficiales
-  1. https://docs.github.com/es/github/collaborating-with-issues-and-pull-requests/about-branches
-  2. https://docs.github.com/es/desktop/contributing-and-collaborating-using-github-desktop/managing-branches
-  3. https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%C3%A1sicos-para-Ramificar-y-Fusionar
-  4. https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Ramas-Remotas
+  1. [[https://docs.github.com/es/github/collaborating-with-issues-and-pull-requests/about-branches][Colaborando con Issues y PRs - Branches - github.com]]
+  2. [[https://docs.github.com/es/desktop/contributing-and-collaborating-using-github-desktop/managing-branches][Colaborando con github desktop - Branches - github.com]]
+  3. [[https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%C3%A1sicos-para-Ramificar-y-Fusionar][Ramificar y Fusionar - git-scm.com]]
+  4. [[https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Ramas-Remotas][Ramas remotas - git-scm.com]]
 *** Referencias Web Extraoficiales
-  1. https://www.atlassian.com/es/git/tutorials/using-branches/git-checkout
+  1. [[https://www.atlassian.com/es/git/tutorials/using-branches/git-checkout][Git Checkout - Atlassian.com]]
 ** Commits
    - Representan cambios/confirmaciones realizadas en una o varias ramas
 ** Tags
@@ -294,62 +291,60 @@
       git checkout -p
     #+END_SRC
 *** Referencias Extraoficiales
-    1. https://stackoverflow.com/questions/3639342/whats-the-difference-between-git-reset-and-git-checkout#:~:text=git%20reset%20is%20specifically%20about,up%20with%20a%20detached%20HEAD).
-    2. https://marklodato.github.io/visual-git-guide/index-es.html
+    1. [[https://marklodato.github.io/visual-git-guide/index-es.html][Referencia Visual de git - github.com, Marklodato]]
+*** Referencias Issues
+    1. [[https://stackoverflow.com/questions/3639342/whats-the-difference-between-git-reset-and-git-checkout][Difference between git reset and git checkout - stackoverflow.com]]
+** Conflict Markers
 * Interesante
 ** Git garbage collection process
   4. git garbage collection process
 ** Git patch mode
-   1. https://paritosh-pundir.medium.com/take-control-of-your-commits-with-git-adds-patch-mode-2a5187590c3#:~:text=You%20can%20use%20the%20patch,adding%20the%20files%20for%20commit.&text=After%20you%20run%20thi,of%20the%20code%20as%20hunk.
-   2. https://css-tricks.com/git-add-patch-mode/
-   3. https://nuclearsquid.com/writings/git-add/
+   1. [[https://paritosh-pundir.medium.com/take-control-of-your-commits-with-git-adds-patch-mode-2a5187590c3][Take control of your commits - Blog Paritosh]]
+   2. [[https://css-tricks.com/git-add-patch-mode/][Add patch mode - css-tricks.com]]
+   3. [[https://nuclearsquid.com/writings/git-add/][Add patch and interactive - nuclearsquid.com]]
 ** Tool rerere
-  1. https://git-scm.com/book/en/v2/Git-Tools-Rerere
-  4. https://git-scm.com/docs/git-rerere
+  1. [[https://git-scm.com/book/en/v2/Git-Tools-Rerere][Book v2 Git tools - git-scm.com]]
+  2. [[https://git-scm.com/docs/git-rerere][Docs - git-scm.com]]
 ** Otros
-  1. https://git-scm.com/book/es/v2/Herramientas-de-Git-Revisión-por-selección
-  2. https://sparkbox.com/foundry/better_pull_requests_merge_requests_with_templates
-  3. https://dzone.com/articles/a-tutorial-on-git-merge (para agregar sobre los marcadores)
-  4. https://learngitbranching.js.org/
-  5. https://www.vogella.com/tutorials/Git/article.html
-
-  no tan interesante como para documentar.., solo para dejar de referencia
-  5. https://docs.microsoft.com/en-us/azure/devops/repos/git/pull-requests?view=azure-devops 
+  1. [[https://git-scm.com/book/es/v2/Herramientas-de-Git-Revisión-por-selección][Herramientas - Revisión por selección - git-scm.com]]
+  2. [[https://sparkbox.com/foundry/better_pull_requests_merge_requests_with_templates][PRs con Templates - sparkbox.com]]
+  3. [[https://dzone.com/articles/a-tutorial-on-git-merge][Git Merge - Interpretación gráfica - dzone.com]]
+  4. [[https://learngitbranching.js.org/][LearningGit - learninggitbranching.js.org]] (/muy interactivo/)
+  5. [[https://www.vogella.com/tutorials/Git/article.html][Git Tutorial - vogella.com]]
 * Workflows
 ** Git flow
 *** Conceptos
 *** Referencias Oficiales
-    1. https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
-    2. https://www.atlassian.com/git/tutorials/comparing-workflows
+    1. [[https://www.atlassian.com/git/tutorials/comparing-workflows][Comparando Workflows - Atlassian.com]]
 *** Referencias Extraoficiales
-    1. https://raygun.com/blog/git-workflow/
+    1. [[https://raygun.com/blog/git-workflow/][Git Workflow - Blog Raygun]]
 ** Github flow
 *** Conceptos
 *** Referencias Oficiales
-    1. https://guides.github.com/introduction/flow/
-    2. https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/github-flow
-    3. https://githubflow.github.io/
+    1. [[https://guides.github.com/introduction/flow/][Github Flow - github.com, Guides]]
+    2. [[https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/github-flow][Colaborando con Issues+PRs - github.com, Docs]]
+    3. [[https://githubflow.github.io/][Githubflow]]
 *** Referencias Extraoficiales
-    1. https://hackernoon.com/15-tips-to-enhance-your-github-flow-6af7ceb0d8a3
+    1. [[https://hackernoon.com/15-tips-to-enhance-your-github-flow-6af7ceb0d8a3][15 tips to enhance your github flow - hackernoon.com]]
 ** Trunk-based Development
 *** Conceptos
 *** Referencias Oficiales
-    1. https://www.atlassian.com/continuous-delivery/continuous-integration/trunk-based-development
-    2. https://trunkbaseddevelopment.com/
+    1. [[https://www.atlassian.com/continuous-delivery/continuous-integration/trunk-based-development][Continuous Delivery - Atlassian.com]]
+    2. [[https://trunkbaseddevelopment.com/][Trunkbaseddevelopment]]
 *** Referencias Extraoficiales
-    1. https://dev.to/malvarezcr/por-que-trunk-based-development-i5n
+    1. [[https://dev.to/malvarezcr/por-que-trunk-based-development-i5n][Porque trunk base development - dev.to]]
 ** Referencias
 *** Referencias Extraoficiales
-    1. https://dev.to/arbitrarybytes/comparing-git-branching-strategies-dl4
-    2. https://www.toptal.com/software/trunk-based-development-git-flow
+    1. [[https://dev.to/arbitrarybytes/comparing-git-branching-strategies-dl4][Comparando estrategias para ramificar de git - dev.top]]
+    2. [[https://www.toptal.com/software/trunk-based-development-git-flow][Trunk base development - toptal.com]]
 * Problemas Comunes
 ** Deshacer cambios del Area de Unstaged
 *** Conceptos aplicados
 **** Stage files
      - Archivos guardados en el *area de stage* (area de preparado) paso previo a confirmación (commit)
-     - Estado de los archivos luego de *git add*
+     - Estado de los archivos luego de ~git add~
 **** Unstage files
-     - Archivos que se agregaron ó que se sacaron con *git rm*
+     - Archivos que se agregaron ó que se sacaron con ~git rm~
 **** Tracked files
      - Archivos que están en el *area de stage*
      - Concepto de *seguimiento* ó *rastreo* de las modificaciones de los archivos que están en *área de stage*
@@ -358,14 +353,14 @@
 **** Unstaged changes
      - Aplica sólo a los archivos que están en el área de stage
      - Concepto de que los archivos *rastreados* (que están en el area de stage) fueron modificados
-       y se necesita que se agregen los cambios al area de stage con *git add*
+       y se necesita que se agregen los cambios al area de stage con ~git add~
      - Si hacemos una confirmación (commit) de los cambios, estos no serán confirmados, por tanto tampoco se publicarán (push)
-       a menos que los agregemos con *git add*
+       a menos que los agregemos con ~git add~
 **** Staged changes
      - Aplica sólo a los archivos que están en el área de stage
      - Los archivos *rastreados* o en seguimiento del area de stage, no fueron modificados
 *** Posible Escenario
-    1. Estamos en una rama *feature-horarios* e hicimos varios cambios pero no hicimos *git add*
+    1. Estamos en una rama *feature-horarios* e hicimos varios cambios pero no hicimos ~git add~
     2. Queremos deshacer los cambios actuales
 *** Posible Solución
     #+NAME: solucion1-deshacer-cambios
@@ -382,11 +377,11 @@
       # -f: Forzar la acción de limpiar el directorio
       git clean -df
     #+END_SRC
-*** Referencias Oficiales
-    1. https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio
+*** Referencias Web Oficiales
+    1. [[https://git-scm.com/book/es/v2/Fundamentos-de-Git-Guardando-cambios-en-el-Repositorio][Guardando cambios en el Repositorio - git-scm.com, Book v2]]
 ** Deshacer cambios del Area de Staged
 *** Posible Escenario
-    1. Hacemos modificaciones en varios archivos y los agregamos al área de staged con *git add*
+    1. Hacemos modificaciones en varios archivos y los agregamos al área de staged con ~git add~
     2. Queremos deshacer esos cambios (el estado cambiará a *unstaged changes*)
 
     *Observaciones:*
@@ -461,13 +456,14 @@
       #
       git checkout -- .
     #+END_SRC
-*** Referencias Extraoficiales
-    1. https://howtogit.archive.pieterdedecker.be/recipes/prevent-change-from-being-committed.html
-    2. https://stackoverflow.com/questions/3639342/whats-the-difference-between-git-reset-and-git-checkout#:~:text=git%20reset%20is%20specifically%20about,up%20with%20a%20detached%20HEAD
+*** Referencias Web Extraoficiales
+    1. [[https://howtogit.archive.pieterdedecker.be/recipes/prevent-change-from-being-committed.html][Deshacer cambios del área de preparación/stage - pieterdedecker.be]]
+*** Referencias Issues
+    2. [[https://stackoverflow.com/questions/3639342/whats-the-difference-between-git-reset-and-git-checkout][Diferencia entre git reset y git checkout - stackoverflow.com]]
 ** Mostrar diferencias previo confirmar cambios
 *** Conceptos
     - Cuando confirmamos cambios nos referimos a hacer un *commit*
-    - En el *área de stage* aparecen los archivos *rastreados* los que agregamos con *git add*
+    - En el *área de stage* aparecen los archivos *rastreados* los que agregamos con ~git add~
 *** Posible escenario
     1. Realizamos modificaciones en los archivos en el *área de stage*
     2. Queremos ver QUE modificaciones hicimos previo a confirmar (commit) los cambios
@@ -482,17 +478,17 @@
     Queremos hacer un *push* para publicar los cambios/confirmaciones de una rama local,
     al repositorio remoto (que suele tener el nombre de origin)
 *** Posibles Soluciones
-    Usamos el push de la siguiente manera *git push (remoto) (rama)* suponiendo que la rama local
+    Usamos el push de la siguiente manera ~git push (remoto) (rama)~ suponiendo que la rama local
     y la rama remota tienen el mismo nombre.
 
     Pero si queremos que el nombre de la rama remota, se suba con un nombre distinto al repositorio remoto
     ya sea porque en el remoto tiene otro nombre o porque así lo queremos,
-    procedemos con lo siguiente *git push (remoto) ramaLocal:ramaRemota*
+    procedemos con lo siguiente ~git push (remoto) ramaLocal:ramaRemota~
     
     Si queremos saber a que rama local apunta *HEAD* (apuntará a la rama con que hicimos git checkout nombreRama)
-    ó el historial de cambio de referencias de las ramas locales, ejecutamos *git reflog*
+    ó el historial de cambio de referencias de las ramas locales, ejecutamos ~git reflog~
     
-    Si queremos conocer las referencias de las ramas locales, ejecutamos *git branch -vv*
+    Si queremos conocer las referencias de las ramas locales, ejecutamos ~git branch -vv~
 
     #+NAME: solucion1-push-branches
     #+BEGIN_SRC shell
@@ -531,13 +527,12 @@
       git push
     #+END_SRC
 *** Referencias Web Oficiales
-    1. https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Ramas-Remotas
-    2. https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%C3%A1sicos-para-Ramificar-y-Fusionar#r_basic_merge_conflicts
-    3. https://git-scm.com/docs/git-checkout
-    4. https://www.atlassian.com/es/git/tutorials/using-branches/git-checkout
-    5. https://www.atlassian.com/es/git/tutorials/using-branches/git-checkout
-*** Referencias Web Extraoficiales
-    1. https://stackoverflow.com/questions/2765421/how-do-i-push-a-new-local-branch-to-a-remote-git-repository-and-track-it-too
+    1. [[https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Ramas-Remotas][Ramas remotas - git-scm.com, Book v2]]
+    2. [[https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Procedimientos-B%C3%A1sicos-para-Ramificar-y-Fusionar#r_basic_merge_conflicts][Conflictos al mergear - git-scm.com, Book v2]]
+    3. [[https://git-scm.com/docs/git-checkout][Git checkout - git-scm.com, Doc]]
+    4. [[https://www.atlassian.com/es/git/tutorials/using-branches/git-checkout][Git checkout - atlassian.com]]
+*** Referencias Issues
+    1. [[https://stackoverflow.com/questions/2765421/how-do-i-push-a-new-local-branch-to-a-remote-git-repository-and-track-it-too][Como pushear una nueva rama local al repositorio remoto y rastrearlo - Stackoverfow.com]]
 ** Recuperar referencias de ramas sin modificar repositorio local
 *** Posible escenario
     Cuando existen ramas remotas que queremos *recuperar* (fetch) a nuestro directorio de trabajo, podemos
@@ -561,7 +556,7 @@
 *** Tips
     Para ver las ramas de seguimiento (track) asignadas,
     es decir la referencia que guardan nuestras ramas locales (si es que tienen referencias)
-    podemos utilizar *git branch -vv*
+    podemos utilizar ~git branch -vv~
 
     Las referencias tienen el formato (remoto)/(rama)
     pudiendo cambiar el repositorio remoto *origin* por otro (si es que tenemos varios repositorios)
@@ -574,12 +569,12 @@
    
     si tenemos "servidor2/serverFix"
     estamos apuntando a otro repositorio remoto, 
-    que previamente habiamos agregado con *git remote add servidor2 urlRepositorioRemoto*
-    si no recordamos el nombre, podemos listar los repositorios con *git remote --verbose*
+    que previamente habiamos agregado con: git remote add servidor2 urlRepositorioRemoto
+    si no recordamos el nombre, podemos listar los repositorios con: git remote --verbose
     #+END_EXAMPLE
 *** Posible Escenario
       Si ya tenemos un branch local llamado "serverfix" pero no tiene una referencia/puntero apuntando a una rama remota
-      se la podemos asignar con *git branch -u nombreRemoto/nombreBranch*
+      se la podemos asignar con ~git branch -u nombreRemoto/nombreBranch~
       - con esto estamos haciendo un seguimiento (track) de una rama remota
       - la referencia puede apuntar a una rama remota con el mismo nombre, ó a otra rama remota
 *** Posibles Soluciones
@@ -635,20 +630,20 @@
     Realizamos varios cambios en un branch (local) que aún no hemos subido (push) al repositorio remoto,
     otros colaboradores han realizado cambios en el mismo branch (remoto).
     
-    Si hacemos *git branch -vv* nos devolverá las *ramas de seguimiento* y su estado (ahead ó behind).
+    Si hacemos ~git branch -vv~ nos devolverá las *ramas de seguimiento* y su estado (ahead ó behind).
     - Si dice *(remoto)/nombreRama detrás 3* es porque hay 3 confirmaciones (commits) en la rama remota que
       no hemos recuperado (fetch) aún, es decir pendiente de fusionar/integrar (merge) con la rama local.
     - Si dice *(remoto)/(nombreRama) delante 2* es porque hay 2 confirmaciones (commits) en nuestra rama local que
       aún no hemos subido (push).
     - Si NO dice delante, ni detrás, es porque está actualizada.
  
-    *Importante*
+    *Importante:*
     Los números del estado ahead ó behind de las ramas de seguimiento, se actualizan
-    cuando recuperamos (fetch) los datos del servidor con *git fetch*
+    cuando recuperamos (fetch) los datos del servidor con ~git fetch~
 
-    *Observación*
-    Cuando ejecutamos *git pull* por detrás está haciendo un *git fetch* y luego *git merge*
-    que puede NO tener los resultados esperados, no se recomienda del todo usar *git pull*
+    *Observación:*
+    Cuando ejecutamos ~git pull~ por detrás está haciendo un ~git fetch~ y luego ~git merge~
+    que puede NO tener los resultados esperados, no se recomienda del todo usar ~git pull~
     porque trae los cambios y ya nos modifica el directorio de trabajo.
     
     #+NAME: ejemplo1-confirmaciones-estados
@@ -708,34 +703,33 @@
      git push origin --delete nombreRama
    #+END_SRC
 *** Referencias Web Extraoficiales
-    1. https://www.educative.io/edpresso/how-to-delete-remote-branches-in-git
+    1. [[https://www.educative.io/edpresso/how-to-delete-remote-branches-in-git][Como borrar ramas remotas - Educative.io]]
 * Resolver Conflictos Elementales
   git diff --check
 ** Conceptos Elementales
   #+NAME: git-merge-commit
   #+BEGIN_QUOTE
   Si hay cambios NO confirmados (commits) cuando comenzó la fusión (merge)
-  el comando *git merge --abort* puede que no pueda reconstruir los cambios.
+  el comando ~git merge --abort~ puede que no pueda reconstruir los cambios.
 
   Por tanto, se recomienda siempre confirmar (commit) ó guardar los cambios
-  previo a ejecutar el *git merge*
+  previo a ejecutar el ~git merge~
   #+END_QUOTE
-
-  https://dzone.com/articles/a-tutorial-on-git-merge
-  https://learngitbranching.js.org/ (forma interactiva, ver que agarrar)
-  https://sparkbox.com/foundry/better_pull_requests_merge_requests_with_templates
-
 ** Técnicas de Fusión
 *** Fast Foward Merge 
 **** Conceptos
+     #+BEGIN_QUOTE
      A fast-forward merge can occur when there is a linear path between branches 
      that we want to merge. If a master has not diverged, instead of creating a new commit,
      it will just point the master to the latest commit of the hotfix branch. 
      All commits from the hotfix branch are now available in the master branch.
+     #+END_QUOTE
      
+     #+BEGIN_QUOTE
      Ocurre cuando el registro (log) de confirmaciones (commits) entre las ramas que queremos fusionar
      no diverge (osea es lineal), se fusionarán las ramas y *HEAD* apuntará al último commit 
      de la rama a fusionada.
+     #+END_QUOTE
 **** Posibles Escenarios
      1. Creamos una rama *feature/horarios*, generamos cambios en los archivos y hacemos una confirmacion (la llamaremos c3).
      2. Queremos fusionar los cambios de la confirmación (c3) en la rama principal *master* que apunta a (c2)
@@ -779,7 +773,7 @@
      #+END_SRC
 ** Marcadores de Conflicto
 *** Conceptos 
-    Cuando hacemos un *git merge* ó *git rebase* para fusionar cambios de branches,
+    Cuando hacemos un ~git merge~ ó ~git rebase~ para fusionar cambios de branches,
     git nos avisa que hubo un conflicto porque se modificaron las mismas lineas 
     en uno o varios archivos en ambas ramas.
     
@@ -798,21 +792,20 @@
     | >>>>>>>  | Delimita el fin del conflicto                |
     |----------+----------------------------------------------|
 
-    1. Lo que está entre <<<<<<< HEAD y =======, son los cambios actuales del último commit al que apunta *HEAD*
-    2. Lo que está entre ======= y >>>>>>> fix/promociones, son los cambios de la rama que vamos a fusionar
+    1. Lo que está entre ~<<<<<<< HEAD~ y ~=======~, son los cambios actuales del último commit al que apunta *HEAD*
+    2. Lo que está entre ~=======~ y ~>>>>>>> fix/promociones~, son los cambios de la rama que vamos a fusionar
     
     #+NAME: git-marcadores-conflicto-ejemplo1
-    #+BEGIN_EXAMPLE
+    #+BEGIN_QUOTE
     Agregamos promociones
     <<<<<<< HEAD
     cambiamos descuentos
     =======
     agregamos promociones
     >>>>>>> fix/promociones
-    #+END_EXAMPLE
-
+    #+END_QUOTE
 *** Formato diff3
-    En este se agrega un nuevo marcador que es *||||||* que nos trae también al *ancestro en común*
+    En este se agrega un nuevo marcador que es ~||||||~ que nos trae también al *ancestro en común*
     de las ramas que estamos fusionando, antes que hubiese un conflicto.
 
     #+NAME: git-configurar-diff3
@@ -820,7 +813,6 @@
       # configuramos por defecto diff3
       git config --global merge.conflictstyle diff3
     #+END_SRC
-
 
     #+BEGIN_SRC shell
       git checkout master
@@ -853,18 +845,18 @@
     #+END_SRC
     
     Explicación sobre los marcadores
-    1. Lo que está entre *<<<<<<< HEAD* y *|||||||*
-       - HEAD apunta a este commit
+    1. Lo que está entre ~<<<<<<< HEAD~ y ~|||||||~
+       - ~HEAD~ apunta a este commit
        - fueron los primeros cambios fusionados
-       - se le suele decir OURS ó "nuestros cambios"
+       - se le suele decir *OURS* ó "nuestros cambios"
        - son los cambios de la rama *feature-precios*
-    2. Lo que está entre *|||||||* y *=======*
+    2. Lo que está entre ~|||||||~ y ~=======~
        - es el contenido al principio, previo a los cambios de las ramas
        - es el commit antes de fusionar las ramas *feature-precios* y *feature-descuentos* 
-       - es el commit antes que se bifurque el arbol de trabajo en las dos ramas que le agregan los precios/descuentos
-    3. Lo que está entre *=======* y *>>>>>>> features-descuentos*
+       - es el commit antes que se bifurque el árbol de trabajo en las dos ramas que le agregan los precios/descuentos
+    3. Lo que está entre ~=======~ y ~>>>>>>> features-descuentos~
        - Son los cambios de la rama que estamos tratando de fusionar (el segundo merge)
-       - Se le suele decir THEIRS ó "cambios de ellos"
+       - Se le suele decir *THEIRS* ó "cambios de ellos"
 
     Explicación de los cambios realizados
     1. Estamos en la rama principal, y creamos un listado de formato csv de una columna, con los productos
@@ -873,7 +865,7 @@
        y además le sacamos el último producto "kiwi"
 
     #+NAME: git-diff3
-    #+BEGIN_EXAMPLE
+    #+BEGIN_QUOTE
     <<<<<<< HEAD
     Producto,Precio
     Banana,$3
@@ -886,21 +878,22 @@
     Producto,Descuento
     Banana,5%
     >>>>>>> features-descuentos
-    #+END_EXAMPLE
+    #+END_QUOTE
 *** Referencias Web Oficiales
-    1. https://git-scm.com/docs/merge-config
+    1. [[https://git-scm.com/docs/merge-config][Conflictos al Mergear - git-scm.com, Docs]]
 *** Referencias Web Extraoficiales
-    1. https://dzone.com/articles/a-tutorial-on-git-merge
-    2. https://blog.nilbus.com/take-the-pain-out-of-git-conflict-resolution-use-diff3/
-    3. https://blog.nilbus.com/temporary-merge-branch-in-diff3-conflict-markers/
-    4. https://stackoverflow.com/questions/457927/git-workflow-and-rebase-vs-merge-questions/11219380#11219380
-    5. http://psung.blogspot.com/2011/02/reducing-merge-headaches-git-meets.html
-** Separar confirmaciones antes de una fusión (pendiente mejorar)
+    1. [[https://dzone.com/articles/a-tutorial-on-git-merge][Git Merge - dzone.com]]
+    2. [[https://blog.nilbus.com/take-the-pain-out-of-git-conflict-resolution-use-diff3/][Resolver conflictos con diff3 - Blog Nilbus]]
+    3. [[https://blog.nilbus.com/temporary-merge-branch-in-diff3-conflict-markers/][Temporary Merge Branches - Blog Nilbus]]
+    4. [[http://psung.blogspot.com/2011/02/reducing-merge-headaches-git-meets.html][Configurar git con diff3 - Blog Psung]]
+*** Referencias Issues
+    4. [[https://stackoverflow.com/questions/457927/git-workflow-and-rebase-vs-merge-questions/11219380#11219380][Rebase vs merge - Stackoverflow.com]]
+** [TODO] Separar confirmaciones antes de una fusión
 *** Conceptos
     Si tenemos cambios que NO queremos confirmar (commit) antes de comenzar una fusión (merge)
-    se recomienda realizar *git stash* de los cambios.
-    Luego de terminar la fusión *git merge* ó cancelarla *git merge --abort*
-    se sugiere ejecutar *git stash pop*
+    se recomienda realizar ~git stash~ de los cambios.
+    Luego de terminar la fusión ~git merge~ ó cancelarla ~git merge --abort~
+    se sugiere ejecutar ~git stash pop~
 *** Posibles Soluciones
     #+BEGIN_SRC shell
       # separamos los últimos cambios no confirmados (que no hicimos commit)
@@ -919,17 +912,17 @@
       git stash pop
     #+END_SRC
 *** Referencias Web Oficiales
-    1. https://mirrors.edge.kernel.org/pub/software/scm/git/docs/git-stash.html
+    1. [[https://mirrors.edge.kernel.org/pub/software/scm/git/docs/git-stash.html][Comando git stash - Git, Docs]]
 ** Reorganizar registro de confirmaciones
 *** Conceptos
-    - Si utilizamos el comando *git rebase* es posible alterar el registro/historial de confirmaciones
-    - El uso del *git rebase* se recomienda usar con *CUIDADO* tal como con *git reset --hard*
-    - NO se recomienda usar *git rebase* en repositorios públicos, podemos arruinar el trabajo de los demás.
+    - Si utilizamos el comando ~git rebase~ es posible alterar el registro/historial de confirmaciones
+    - El uso del ~git rebase~ se recomienda usar con *CUIDADO* tal como con ~git reset --hard~
+    - NO se recomienda usar ~git rebase~ en repositorios públicos, podemos arruinar el trabajo de los demás.
 *** Posible Escenario
     1. Creamos una rama *feature/precios* y generamos varias confirmaciones c1, c2, c3  (commits)
     2. Creamos una rama *feature/promociones* y generamos varias confirmaciones c4, c5, c6  (commits)
     3. Queremos traernos las confirmaciones de ambas ramas, pero si hubiese algun conflicto
-       no queremos que figure un *merged* en el registro de confirmacion *git log* 
+       no queremos que figure un *merged* en el registro de confirmacion ~git log~
 
     #+NAME: git-rebase-escenario1
     #+BEGIN_SRC shell
@@ -955,7 +948,6 @@
       git add productos.txt && git commit -m "agregamos las promociones"
     #+END_SRC
 *** Posibles Soluciones
-    *Observaciones:*
     Quizás se podría hacer el rebase directo en el master, pero esto podría alterar el registro de confirmaciones
     y no habría vuelta atrás. Por eso lo hacemos en las ramas *feature/descuentos* y *feature/promociones*
     para reorganizarlas y luego traerlas a la rama *master*
@@ -993,10 +985,10 @@
    #+END_SRC
 ** Deshacer fusión no publicada
 *** Posible Escenario
-    - Si resolvimos un conflicto pero queremos deshacer el merge, podemos usar el comando *git reset*
-    - Con No publicada nos referimos al haber ejecutado el comando *git push*
+    - Si resolvimos un conflicto pero queremos deshacer el merge, podemos usar el comando ~git reset~
+    - Con No publicada nos referimos al haber ejecutado el comando ~git push~
 *** Posible Solución
-    - Cuando se trata de resolver conflictos, no podemos usar el *git reset --soft* que mantiene los cambios
+    - Cuando se trata de resolver conflictos, no podemos usar el ~git reset --soft~ que mantiene los cambios
 
     #+NAME: git-merge-deshacer 
     #+BEGIN_SRC shell
@@ -1004,14 +996,13 @@
       # deshacemos los cambios, y no mantenemos los cambios
       git reset --hard HEAD~1
     #+END_SRC
-
 *** Referencias Web Extraoficiales
-    1. https://midu.dev/como-deshacer-el-ultimo-commit-git/
+    1. [[https://midu.dev/como-deshacer-el-ultimo-commit-git/][Como deshacer el último commit - midu.dev]]
 ** Abortar Fusión
 *** Posible Escenario
-    - Fusionamos branches ejecutando el comando *git merge* y nos salta un warning de conflicto
+    - Fusionamos branches ejecutando el comando ~git merge~ y nos salta un warning de conflicto
 *** Posible solución
-    - Podemos volver a ejecutar el comando *git merge* pero con el parámetro *--abort*
+    - Podemos volver a ejecutar el comando ~git merge~ pero con el parámetro *--abort*
 
    #+BEGIN_SRC shell
      # deshacemos el merge anterior
@@ -1019,10 +1010,10 @@
      git merge --abort
    #+END_SRC
 *** Referencias Web Oficiales
-    1. https://www.atlassian.com/es/git/tutorials/using-branches/merge-conflicts
+    1. [[https://www.atlassian.com/es/git/tutorials/using-branches/merge-conflicts][Mergear conflictos - Atlassian.com]]
 ** Cambiar Archivos
 *** Posible Escenario
-    1. Hacemos un merge y tenemos un conflicto
+    1. Hacemos un *merge* y tenemos un conflicto
     2. Nos informan que nos quedemos con nuestro cambio, porque el cambio de nuestro colega estaba mal
     
     #+BEGIN_SRC shell
@@ -1076,9 +1067,10 @@
       git show :3:README.md
     #+END_SRC
 *** Referencias Web Extraoficiales
-    1. https://nitaym.github.io/ourstheirs/
-    2. https://qastack.mx/programming/161813/how-to-resolve-merge-conflicts-in-git
-    3. https://stackoverflow.com/questions/25576415/what-is-the-precise-meaning-of-ours-and-theirs-in-git
+    1. [[https://nitaym.github.io/ourstheirs/][Ours vs Theirs - Github, Nitaym]]
+    2. [[https://qastack.mx/programming/161813/how-to-resolve-merge-conflicts-in-git][Como resolver un conflicto por mergear - QAStack.mx]]
+*** Referencias Issues
+    1. [[https://stackoverflow.com/questions/25576415/what-is-the-precise-meaning-of-ours-and-theirs-in-git][Que significa Ours, Theirs en git? - Stackoverflow.com]]
 ** Registro de Confirmaciones en conflicto
    Si queremos ver el registro de confirmaciones, pero sólo de aquellas confirmaciones en conflicto
 
@@ -1153,9 +1145,8 @@
            'emacs -nw --eval "(progn (setq vc-handled-backends ()) (ediff-merge-files-with-ancestor \"$LOCAL\" \"$REMOTE\" \"$BASE\" nil \"$MERGED\"))"'
      #+END_SRC
 **** Teclas atajo 
-    
      |-------+-----------------------------------------------------------|
-     | Atajo | Descripción                                          |
+     | Atajo | Descripción                                               |
      |-------+-----------------------------------------------------------|
      | k,p   | siguiente diferencia (cambio)                             |
      | j,n   | anterior diferencia (cambio)                              |
@@ -1166,9 +1157,8 @@
      | r     | Vuelve al cambio anterior (A ó B)                         |
      | +     | Agrega las diferencias de ambos, con los símbolos << y >> |
      |-------+-----------------------------------------------------------|
-     
 **** Referencias
-     1. http://www.campisano.org/wiki/en/Emacs_(Application)
+     1. [[http://www.campisano.org/wiki/en/Emacs_(Application)][Configuración Emacs - Campisano.org, Wiki]]
 *** Configurar Mergetools con Vim
 **** Configuración
      #+NAME: git-vim-mergetool
@@ -1178,7 +1168,6 @@
        git config mergetool.prompt false
      #+END_SRC
 **** Comandos y Teclas de atajo
-     
      #+NAME: git-vim-comandos
      |-------------+---------------+----------------------------------------------|
      | Comando     | Comando Corto | Descripción                                  |
@@ -1195,7 +1184,6 @@
      | Comando             | Comando Corto | Descripción                      |
      |---------------------+---------------+----------------------------------|
      | :set relativenumber |               | Agrega los números de las lineas |
-     |                     |               |                                  |
      |---------------------+---------------+----------------------------------|
 
      #+NAME: git-vim-atajos
@@ -1206,27 +1194,25 @@
      | [c    | anterior cambio   |
      | C w w | siguiente ventana |
      |-------+-------------------|
- 
 **** Referencias Youtube
-     1. https://www.youtube.com/watch?v=wxh-AOxPX_A&ab_channel=AltitudeAirspeedAndIdeas
+     1. [[https://www.youtube.com/watch?v=wxh-AOxPX_A&ab_channel=AltitudeAirspeedAndIdeas][Referencia #1]]
 **** Referencias Web Extraoficiales
-     1. https://qastack.mx/programming/161813/how-to-resolve-merge-conflicts-in-git
-     2. https://www.rosipov.com/blog/use-vimdiff-as-git-mergetool/#fromHistor
-     3. https://qastack.mx/programming/4556184/vim-move-window-left-right
+     1. [[https://www.rosipov.com/blog/use-vimdiff-as-git-mergetool/#fromHistor][Vimdiff como herramienta para mergear - Blog, Rosipov.com]]
+**** Referencias Issues
+     1. [[https://qastack.mx/programming/161813/how-to-resolve-merge-conflicts-in-git][Como resolver conflictos - QAStack.mx]]
+     2. [[https://qastack.mx/programming/4556184/vim-move-window-left-right][Vim, mover ventanas - QAStack.mx]]
+     3. [[https://wiki.archlinux.org/index.php/vim][Vim - Wiki, ArchLinux.org]]
 *** Referencias Web Oficiales
-    1. https://mirrors.edge.kernel.org/pub/software/scm/git/docs/git-merge.html#_how_to_resolve_conflicts
-    2. https://www.atlassian.com/es/git/tutorials/using-branches/merge-conflicts
-    3. https://wiki.archlinux.org/index.php/vim
+    1. [[https://mirrors.edge.kernel.org/pub/software/scm/git/docs/git-merge.html#_how_to_resolve_conflicts][Como resolver conflictos - Git Doc]]
+    2. [[https://www.atlassian.com/es/git/tutorials/using-branches/merge-conflicts][Resolver conflictos por Merge - Atlassian.com]]
 *** Referencias Web Extraoficiales
-    1. https://psung.blogspot.com/2011/02/reducing-merge-headaches-git-meets.html
-    2. https://nitaym.github.io/ourstheirs/
+    1. [[https://psung.blogspot.com/2011/02/reducing-merge-headaches-git-meets.html][Resolver conflictos con diff3 - Blog, Psung (repetido)]]
+    2. [[https://nitaym.github.io/ourstheirs/][Ours Vs Theirs - Github, Nitaym (repetido)]]
 ** Referencias
 *** Referencias Web Oficiales
-    1. https://docs.github.com/es/enterprise-server@2.21/github/collaborating-with-issues-and-pull-requests/resolving-a-merge-conflict-using-the-command-line
-    2. http://git-scm.com/docs/git-merge#_how_conflicts_are_presented
-    3. http://www.git-scm.com/docs/git-merge
-*** Referencias Web Extraoficiales
-    1. https://qastack.mx/programming/161813/how-to-resolve-merge-conflicts-in-git
+    1. [[https://docs.github.com/es/enterprise-server@2.21/github/collaborating-with-issues-and-pull-requests/resolving-a-merge-conflict-using-the-command-line][Colaborando con issues+PRs - Docs, Github.com]]
+    2. [[http://git-scm.com/docs/git-merge#_how_conflicts_are_presented][Introducción sobre Conflictos en Git - Docs, git-scm.com]]
+    3. [[http://www.git-scm.com/docs/git-merge][Comando merge - Docs, git-scm.com]]
 * Resolver Conflictos Basicos
 ** Fusionar rama y agrupar confirmaciones 
 *** Posible Escenario
@@ -1250,7 +1236,7 @@
       git push origin feature/anuncios
     #+END_SRC
 *** Posible Solución
-    Utilizamos *git merge* con el parámetro *--squash*
+    Utilizamos ~git merge~ con el parámetro ~--squash~
 
     #+BEGIN_SRC shell
       # activamos la rama master
@@ -1272,43 +1258,35 @@
     git log ..@{upstream}
   #+END_SRC
 ** Merge Vs Rebase
-*** Referencias
-    1. https://stackoverflow.com/questions/457927/git-workflow-and-rebase-vs-merge-questions/11219380#11219380
-    2. https://randyfay.com/content/rebase-workflow-git
-    3. http://www.randyfay.com/node/89
+*** Referencias Issues
+    1. [[https://stackoverflow.com/questions/457927/git-workflow-and-rebase-vs-merge-questions/11219380#11219380][Rebase Vs Merge - Stackoverflow.com (repetido)]]
+*** Referencias Web Extraoficiales
+    1. [[https://randyfay.com/content/rebase-workflow-git][Merge workflow - Blog, RandyFay.com]]
+    2. [[http://www.randyfay.com/node/89][Evitar desastres con git - Blog, RandyFay.com]]
 ** Referencias Web Oficiales
-   1. https://git-scm.com/book/es/v2/Herramientas-de-Git-Fusi%C3%B3n-Avanzada
-   2. https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Reorganizar-el-Trabajo-Realizado#r_rebase_peril
-   3. https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado#r_git_reset
-   4. https://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging
+   1. [[https://git-scm.com/book/es/v2/Herramientas-de-Git-Fusi%C3%B3n-Avanzada][Herramientas para Fusión (Avanzado) - Book v2, git-scm.com]]
+   2. [[https://git-scm.com/book/es/v2/Ramificaciones-en-Git-Reorganizar-el-Trabajo-Realizado#r_rebase_peril][El peligro de reorganizar (rebase) confirmaciones de cambio - Book v2, git-scm.com]]
+   3. [[https://git-scm.com/book/es/v2/Herramientas-de-Git-Reiniciar-Desmitificado#r_git_reset][Git Reset como funciona - Book v2, git-scm.com]]
+   4. [[https://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging][Herramientas para Mergear (Avanzado) - Book v2, git-scm.com]]
 ** Referencias Web Extraoficiales
-   1. https://gitolite.com/git-pull--rebase
-   2. 
-
-* Pendiente Revisar
-** [TODO] Como manejarse con los tags y las versiones
-   Algunas preguntas que se me ocurren
-   - Deberia hacer una lista de nuevas caracteristicas/funcionalidades por cada version?
-   - Por correcciones de tantos bugs pasaria de v0.1.0 a v0.1.1 ?
-   Pagina: [[https://github.com/org-trello/org-trello/blob/master/TODO.org][Org-Trello]]
-** [TODO] Cuando crear un branch (nuevas caracteristicas)
-   github branches para separar nuevas caracteristicas y para separar resolución de bugs
-   *OFICIALES*
-   1. https://git-scm.com/book/es/v2/Herramientas-de-Git-Guardado-r%C3%A1pido-y-Limpieza#r_git_stashing
-   2. https://git-scm.com/book/es/v2/Fundamentos-de-Git-Deshacer-Cosas
-   3. https://git-scm.com/book/es/v2/Herramientas-de-Git-Fusi%C3%B3n-Avanzada
-   4. https://docs.github.com/es/github/collaborating-with-issues-and-pull-requests/resolving-a-merge-conflict-using-the-command-line
-   5. https://www.atlassian.com/git/tutorials/comparing-workflows
-   6. https://www.atlassian.com/es/git/tutorials/undoing-changes
-   7. https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
+   1. [[https://gitolite.com/git-pull--rebase][Comando git pull --rebase - gitolite.com]] 
+* [TODO] Otros
+  #+BEGIN_COMMENT
+  *OFICIALES*
+  1. https://git-scm.com/book/es/v2/Herramientas-de-Git-Guardado-r%C3%A1pido-y-Limpieza#r_git_stashing
+  2. https://git-scm.com/book/es/v2/Fundamentos-de-Git-Deshacer-Cosas
+  3. https://git-scm.com/book/es/v2/Herramientas-de-Git-Fusi%C3%B3n-Avanzada
+  4. https://docs.github.com/es/github/collaborating-with-issues-and-pull-requests/resolving-a-merge-conflict-using-the-command-line
+  5. https://www.atlassian.com/git/tutorials/comparing-workflows
+  6. https://www.atlassian.com/es/git/tutorials/undoing-changes
+  7. https://git-scm.com/book/es/v2/Herramientas-de-Git-Reescribiendo-la-Historia
+  8. https://git-scm.com/book/es/v2/Fundamentos-de-Git-Etiquetado (cuando crear tags para release)
  
-   *OTROS*
-   1. https://www.genbeta.com/desarrollo/manejo-de-ramas-de-desarrollo-con-git
-   2. https://www.valenciatech.com/formacion/online/git/puntero-head-git/
-   3. https://carlossanchezperez.wordpress.com/2012/12/31/mi-guia-esencial-de-git-segunda-parte/
-   4. https://www.hostinger.es/tutoriales/que-es-github
-   5. https://www.hostinger.es/tutoriales/como-usar-git-branch
-   6. https://gist.github.com/jelcaf/1404619
-** [TODO] Cuando crear un tag (para armar releases)
-** Cuando crear pull request
-
+  *OTROS*
+  1. https://www.genbeta.com/desarrollo/manejo-de-ramas-de-desarrollo-con-git
+  2. https://www.valenciatech.com/formacion/online/git/puntero-head-git/
+  3. https://carlossanchezperez.wordpress.com/2012/12/31/mi-guia-esencial-de-git-segunda-parte/
+  4. https://www.hostinger.es/tutoriales/que-es-github
+  5. https://www.hostinger.es/tutoriales/como-usar-git-branch
+  6. https://gist.github.com/jelcaf/1404619
+  #+END_COMMENT

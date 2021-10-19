@@ -12,7 +12,6 @@
 
   #+RESULTS:
   : 0 0 0 12345 5 5 5
-
 * Multimedia - Musica/Videos/Youtube
 ** Bajar audios/videos de youtube
    + El package *youtube-dl* nos sirve para descargar videos, musica, playlist y contenido de youtube
@@ -58,36 +57,35 @@
      # descargará el audio y el video por separado y lo juntará
      youtube-dl -f 251+299 unaUrlDeYoutube
    #+END_SRC
-
 ** Reproducir música 
    + Con el package *cmus* podemos reproducir música desde la terminal
    + Las listas de reproducción,album, canciones quedan guardados como un historial al momento de abrir nuevamente
    + Carga las carpetas de música más rápido al no utilizar interfaz gráfica
 
    #+NAME: Comandos
-   |-----------------------------+-------------------------------------------------------|
-   | Comando                     | Descripción                                           |
-   |-----------------------------+-------------------------------------------------------|
-   | :add ~/rutaDePlaylist       | Agregar una carpeta de archivos de audio              |
-   | :clear                      | Limpiar todo el buffer de reproducción                |
+   |-----------------------------+--------------------------------------------------------|
+   | Comando                     | Descripción                                            |
+   |-----------------------------+--------------------------------------------------------|
+   | :add ~/rutaDePlaylist       | Agregar una carpeta de archivos de audio               |
+   | :clear                      | Limpiar todo el buffer de reproducción                 |
    | :colorscheme nombreDelTheme | Cambia el tema/theme el aspecto visual del reproductor |
-   |-----------------------------+-------------------------------------------------------|
-   | ENTER                       | Reproducir un tema                                    |
-   | x                           | Reproducir un tema                              |
-   | c                           | Detener la reproducción                         |
-   | TAB                         | Navegar entre los buffers (Album/Canciones)     |
-   | supr                        | Quitar un album/artista del buffer              |
-   | q                           | Salir del reproductor                           |
-   |-----------------------------+-------------------------------------------------------|
-   | 1                           | Modo 1                                                |
-   | 2                           | Modo 3                                                |
-   | 3                           | Modo 4                                                |
-   | 4                           | Modo 5                                                |
-   | 5                           | Modo 6                                                |
-   |-----------------------------+-------------------------------------------------------|
-   | +                           | Aumentar el volumen del reproductor  (no del sistema) |
-   | -                           | Disminuir el volumen del reproductor (no del sistema) |
-   |-----------------------------+-------------------------------------------------------|
+   |-----------------------------+--------------------------------------------------------|
+   | ENTER                       | Reproducir un tema                                     |
+   | x                           | Reproducir un tema                                     |
+   | c                           | Detener la reproducción                                |
+   | TAB                         | Navegar entre los buffers (Album/Canciones)            |
+   | supr                        | Quitar un album/artista del buffer                     |
+   | q                           | Salir del reproductor                                  |
+   |-----------------------------+--------------------------------------------------------|
+   | 1                           | Modo 1                                                 |
+   | 2                           | Modo 3                                                 |
+   | 3                           | Modo 4                                                 |
+   | 4                           | Modo 5                                                 |
+   | 5                           | Modo 6                                                 |
+   |-----------------------------+--------------------------------------------------------|
+   | +                           | Aumentar el volumen del reproductor  (no del sistema)  |
+   | -                           | Disminuir el volumen del reproductor (no del sistema)  |
+   |-----------------------------+--------------------------------------------------------|
 
    #+NAME: Ejemplos de cmus
    #+BEGIN_SRC sh
@@ -97,31 +95,30 @@
      # ejecutamos
      cmus
    #+END_SRC
-
-** Referencias
-   + [[https://www.youtube.com/watch?v=9A-HLSvtBWc][Video #1 - Downloading videos, music with Youtube-dl]]
-   + [[https://www.youtube.com/watch?v=fOjP-7-gI4Y][Video #2 - Command line app for downloading youtube videos]]
-   + [[https://www.youtube.com/watch?v=tvUs6LdLa1c][Video #3 CMUS | Reproductor de Musica de Terminal]]
-   + [[https://blog.desdelinux.net/youtube-dl-tips-que-no-sabias/][Tips de Youtube-dl - Blog DesdeLinux]]
-
+** Referencias Web
+   1. [[https://blog.desdelinux.net/youtube-dl-tips-que-no-sabias/][Tips de Youtube-dl - Blog DesdeLinux]]
+** Referencias Youtube
+   1. [[https://www.youtube.com/watch?v=9A-HLSvtBWc][Video #1 - Downloading videos, music with Youtube-dl]]
+   2. [[https://www.youtube.com/watch?v=fOjP-7-gI4Y][Video #2 - Command line app for downloading youtube videos]]
+   3. [[https://www.youtube.com/watch?v=tvUs6LdLa1c][Video #3 CMUS | Reproductor de Musica de Terminal]]
 * [TODO] Comandos Importantes
+  |-------------+---------------------------------------------------|
   | Comando     | Descripcion                                       |
-  | :------     | :----------                                       |
+  |-------------+---------------------------------------------------|
   | mhwd-kernel |                                                   |
   | ls -lt      | Lista los archivos ordenado por el último archivo |
-  | ls -ltr     | r de reverse ?                                    |
+  | ls -ltr     | r de reverse                                      |
+  |-------------+---------------------------------------------------|
 
   #+BEGIN_SRC sh
     mhwd-kernel -li
   #+END_SRC
-   
 ** Saber ultimo archivo descargado con el comando ls
-  - https://www.tecmint.com/sort-ls-output-by-last-modified-date-and-time/
-  - https://osxdaily.com/2017/02/02/ls-sort-by-date/
-
+** Referencias Web
+ 1. https://www.tecmint.com/sort-ls-output-by-last-modified-date-and-time/
+ 2. https://osxdaily.com/2017/02/02/ls-sort-by-date/
 * Manipular el Historial de comandos
 ** Comandos
-
    |---------------------+--------------------------------------------|
    | Comando             | Descripción                                |
    |---------------------+--------------------------------------------|
@@ -130,9 +127,7 @@
    | history             | Imprime todo el historial                  |
    |                     |                                            |
    |---------------------+--------------------------------------------|
-  
 ** Ejemplos
-
    #+BEGIN_SRC shell
      # listamos el historial para navegar con los atajos de vim
      history | less
@@ -149,20 +144,18 @@
      # ejecutamos el comando numero 101 del historial
      !101
    #+END_SRC
-** Referencias
-   + [[https://www.tldp.org/LDP/GNU-Linux-Tools-Summary/html/x1712.htm][The command line history - (TLDP) The Linux Documentation Project]]
-   + [[https://www.gnu.org/software/bash/manual/html_node/Bash-History-Builtins.html][Bash history builtins - gnu.org]]
-   + [[https://opensource.com/article/18/6/history-command][How to use the history command -  opensource.com]]
-   + [[https://mediatemple.net/community/products/dv/204404624/using-the-history-command][Using the history command - mediatemple.net]]
-   + [[https://www.thegeekstuff.com/2008/08/15-examples-to-master-linux-command-line-history/][15 examples to master linux command line history - thegeekstuff.com]]
-
+** Referencias Web
+   1. [[https://www.tldp.org/LDP/GNU-Linux-Tools-Summary/html/x1712.htm][The command line history - (TLDP) The Linux Documentation Project]]
+   2. [[https://www.gnu.org/software/bash/manual/html_node/Bash-History-Builtins.html][Bash history builtins - gnu.org]]
+   3. [[https://opensource.com/article/18/6/history-command][How to use the history command -  opensource.com]]
+   4. [[https://mediatemple.net/community/products/dv/204404624/using-the-history-command][Using the history command - mediatemple.net]]
+   5. [[https://www.thegeekstuff.com/2008/08/15-examples-to-master-linux-command-line-history/][15 examples to master linux command line history - thegeekstuff.com]]
 * [TODO] Comando awk
 ** Ejemplos
 ** Referencias
-   + [[https://likegeeks.com/es/comando-awk/][Comando awk - likegeeks.com]]
+   1. [[https://likegeeks.com/es/comando-awk/][Comando awk - likegeeks.com]]
 * Utilidades Interesantes
 ** Crear animaciones de captura de pantalla
-   
    Algunos packages útiles: 
    + Con *xrectsel* se puede saber las posiciciones (x,y) el tamaño(width,height) de una parte de la pantalla
    + Con *byzanz-record* se captura pantalla en formato gif mediante lineas de comando
@@ -243,19 +236,14 @@
      # Notify the user of end of recording.
      notify-send "GIFRecorder" "Screencast saved to $FOLDER/GIFrecord_$NAME_$TIME.gif"
    #+END_SRC
-
-   #+RESULTS: Script para capturar pantalla
-    
-   *Referencias*
-   - [[https://gfycat.com/upload][Sitio para subir animaciones - Gfycat.com]]
-   - [[http://zenon.en-getafe.org/2007/11/27/xdialog-ventanas-en-scripts][Xdialog ventanas en scripts - Blog Zenon]]
-   - [[https://www.it-swarm.dev/es/linux/como-solicito-la-entrada-sinocancelar-en-un-script-de-shell-de-linux/958436319/][Como usar xdialog - it-swarm.dev]]
-   - [[https://aur.archlinux.org/packages/xrectsel/][Package xrectsel - AUR Arch Linux]]
-   - [[https://wiki.ubuntu.com/CreatingScreencasts][CreatingScreenScasts - Wiki Ubuntu]]
-   - [[https://www.archlinuxuser.com/2013/01/how-to-record-desktop-into-gif-using.html][How to record desktop into GIF using byzanz - ArchLinuxUser.com]]
-
+** Referencias Web
+   1. [[https://gfycat.com/upload][Sitio para subir animaciones - Gfycat.com]]
+   2. [[http://zenon.en-getafe.org/2007/11/27/xdialog-ventanas-en-scripts][Xdialog ventanas en scripts - Blog Zenon]]
+   3. [[https://www.it-swarm.dev/es/linux/como-solicito-la-entrada-sinocancelar-en-un-script-de-shell-de-linux/958436319/][Como usar xdialog - it-swarm.dev]]
+   4. [[https://aur.archlinux.org/packages/xrectsel/][Package xrectsel - AUR Arch Linux]]
+   5. [[https://wiki.ubuntu.com/CreatingScreencasts][CreatingScreenScasts - Wiki Ubuntu]]
+   6. [[https://www.archlinuxuser.com/2013/01/how-to-record-desktop-into-gif-using.html][How to record desktop into GIF using byzanz - ArchLinuxUser.com]]
 ** Calculadora con notación polaca inversa (rpn - reverse polish notation)
-
 *** Conceptos
     + El comando para ejecutar es *dc* es nativo de linux
     + El orden de la pila se puede interpretar de derecha a izquierda,
@@ -287,28 +275,30 @@
     4. En la pila solo queda el resultado 0,11 no quedan mas valores por operar
     #+END_EXAMPLE
 
+    |---------+----------------------------------------------------------|
     | Comando | Descripción                                              |
-    | :------ | :------------------------------------------------------- |
+    |---------+----------------------------------------------------------|
     | dc      | Ejecuta la calculadora                                   |
     | p       | muestra el ultimo valor agregado en la pila (en la cima) |
     | f       | lista los valores (en el orden que se agregaron)         |
     | r       | conmuta los ultimos 2 valores (swap)                     |
     | c       | limpia la pila                                           |
     | v       | para obtener la raiz de un valor                         |
+    |---------+----------------------------------------------------------|
 
     Algunos ejemplos con la notación infija y polaca inversa
 
+    |-----------------+-------------------------|
     | Notación Infija | Notación Polaca inversa |
-    | :-------------  | :---------------------- |
+    |-----------------+-------------------------|
     | (3+5)*10        | 3 5 + 10 *              |
     | A+B*C           | A B C * +               |
     | A*B+C           | A B * C +               |
     | A*B+C*D         | A B * C D * +           |
     | (A+B) / (C-D)   | A B + C D - /           |
     | A*B / C         | A B * C /               |
-
-*** Ejemplos sencillos
-
+    |-----------------+-------------------------|
+*** Ejemplo 1
     #+NAME: Ejemplo 1, Operaciones sencillas (manera 1)
     #+BEGIN_SRC sh
       dc
@@ -340,7 +330,7 @@
       c # c, borra la pila, todos los valores que se hayan ingresado
       # Pila: Vacía, ya no está el -13
     #+END_SRC
-
+*** Ejemplo 2
     #+NAME: Ejemplo 2, Operaciones sencillas (manera 2)
     #+BEGIN_SRC sh
       dc
@@ -362,7 +352,7 @@
       - # 3 16 - es -13
       f # Pila: -13
     #+END_SRC
-    
+*** Ejemplo 3    
     #+NAME: Ejemplo 3, operaciones normales
     #+BEGIN_SRC sh
       dc
@@ -399,7 +389,7 @@
       p  # no devolvera valores, no hay
 
     #+END_SRC
-
+*** Ejemplo 4
     #+NAME: Ejemplo 4
     #+BEGIN_SRC sh
       dc
@@ -431,16 +421,14 @@
 
       p # devuelve 1 (es el resultado más reciente)
     #+END_SRC
-
-
-    *Referencias*
-    - https://www.computerhope.com/unix/udc.htm
+*** Referencias Web
+    1. https://www.computerhope.com/unix/udc.htm
 *** Ejemplos de ecuaciones con LaTeX y el comando dc
-
+    #+BEGIN_QUOTE
     \begin{align*}
       \frac{3 + \sqrt{4- \frac{2}{3} }}{(2+7 \times \sqrt{3} )^2} = 0.3
     \end{align*}
-
+    #+END_QUOTE
 
     #+NAME: Ejemplo de la ecuacion
     #+BEGIN_SRC sh
@@ -475,16 +463,16 @@
       p   # no hay valores en la pila
     #+END_SRC
 ** Calculadora
-   - En manjaro probé bc y qalac.
+*** Conceptos
    - Otra manera es usando el comando *expr* pero hay que separar los operandos de los operadores
-   *NOTA:* Me pareció que la mejor fué qalac
-    
-   *Referencias*
+     
+   *Observación:*
+   - Considero que es mejor *qalac* comparado con *bc*
+*** Referencias Web
    - https://ubunlog.com/calculadora-en-la-terminal-ubuntu/
 * [TODO] [#A] Errores de Manjaro
 ** Problemas al instalar paquetes
 *** Comandos
-
     #+NAME: Instalando depurador ddd
     #+BEGIN_SRC shell
       # descargamos un depurador con interfaz gráfica
@@ -518,20 +506,20 @@
       # "no es lo más recomendable"
       makepkg -sic -skippgpcheck
     #+END_SRC
-
 *** Referencias
-    + [[http://pgp.key-server.io/][PGP Public Key Server]]
-    + [[https://www.genbeta.com/desarrollo/manual-de-gpg-cifra-y-envia-datos-de-forma-segura][Manual de GPG, cifra, firma y envía datos de forma segura - genbeta.com]]
-    + [[https://medium.com/@btc_lovera/gu%C3%ADa-openpgp-pgp-y-gpg-lin-53766809f6d1][Guia OpenPGP, PGP, GPG - medium.com]]
-    + [[https://ssd.eff.org/es/module/como-usar-pgp-para-linux][Como usar pgp para linux - Surveillance Self-Defense]]
-    + https://forum.manjaro.org/t/solved-error-one-or-more-pgp-signatures-could-not-be-verified/50093
-    + https://forum.manjaro.org/t/invalid-or-corrupted-package-pgp-signature-different-error-appeared/114966/7
-    + https://forum.manjaro.org/t/error-failed-to-commit-transaction-invalid-or-corrupted-package-pgp-signature-errors-occurred-no-packages-were-upgraded/112792/3
-    + https://forum.manjaro.org/t/aur-package-fails-to-verify-pgp-gpg-key-unknown-public-key-one-or-more-pgp-signatures-could-not-be-verified/42687
-    + https://bbs.archlinux.org/viewtopic.php?id=233480
+    1. [[http://pgp.key-server.io/][PGP Public Key Server]]
+    2. [[https://www.genbeta.com/desarrollo/manual-de-gpg-cifra-y-envia-datos-de-forma-segura][Manual de GPG, cifra, firma y envía datos de forma segura - genbeta.com]]
+    3. [[https://medium.com/@btc_lovera/gu%C3%ADa-openpgp-pgp-y-gpg-lin-53766809f6d1][Guia OpenPGP, PGP, GPG - medium.com]]
+    4. [[https://ssd.eff.org/es/module/como-usar-pgp-para-linux][Como usar pgp para linux - Surveillance Self-Defense]]
+    5. https://forum.manjaro.org/t/solved-error-one-or-more-pgp-signatures-could-not-be-verified/50093
+    6. https://forum.manjaro.org/t/invalid-or-corrupted-package-pgp-signature-different-error-appeared/114966/7
+    7. https://forum.manjaro.org/t/error-failed-to-commit-transaction-invalid-or-corrupted-package-pgp-signature-errors-occurred-no-packages-were-upgraded/112792/3
+    8. https://forum.manjaro.org/t/aur-package-fails-to-verify-pgp-gpg-key-unknown-public-key-one-or-more-pgp-signatures-could-not-be-verified/42687
+    9. https://bbs.archlinux.org/viewtopic.php?id=233480
 ** Pasos a organizar
-Mezclar con la parte de particionamiento
-manjaro error: you need to load the kernel first
+   #+BEGIN_COMMENT
+   Mezclar con la parte de particionamiento
+   #+END_COMMENT
 
   #+BEGIN_SRC bash
     cat /etc/lsb-release # para saber la version de manjaro
@@ -551,53 +539,60 @@ manjaro error: you need to load the kernel first
 
     efibootmgr -v
   #+END_SRC
+** Referencias Web
+   #+BEGIN_COMMENT
+  para saber las particiones
+  I went to BIOS for another look at what you mention:Secure Boot: disabled.Fast Boot: I see no such option in my BIOS.UEFI:
+  Yes: “Boot Mode” is set to “UEFI”.Selected grub2 bootloader: I’m not quite sure what you mean by this. Is there a place I can go to select it?
+  #+END_COMMENT
+  1. 
+  2. https://instintobinario.com/rescatar-el-arranque-de-linux-con-la-consola-de-grub2/
+  3. https://forum.manjaro.org/t/howto-rescue-your-system-error-hook-invalid-value-path/123226
+  4. https://forum.manjaro.org/t/you-need-to-load-kernel-first-after-failed-update/132141/3
+  5. https://forum.manjaro.org/t/using-livecd-v17-0-1-and-above-as-grub-to-boot-os-with-broken-bootloader/24916
+  6. https://classicforum.manjaro.org/index.php?topic=1011.0 
+  7. https://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader
+  8. https://wiki.manjaro.org/index.php?title=UEFI_-_Install_Guide
+  9. https://forum.manjaro.org/t/grub-install-error-cannot-find-efi-directory/83380
+  10. https://forum.manjaro.org/t/node-error-while-loading-shared-libraries-libicui18n-so-60-cannot-open-shared-object-file-no-such-file-or-directory/37553/4
+  11. https://forum.manjaro.org/t/file-boot-vmlinuz-not-found-after-update-i-did-update-grub-black-screen/121445/2
+  12. https://forum.manjaro.org/t/howto-rescue-your-system-error-hook-invalid-value-path/123226
+  13. https://bbs.archlinux.org/viewtopic.php?id=235203
+  14. https://forum.manjaro.org/t/power-went-out-during-upgrade-file-boot-vmlinuz-5-1-x86-64-not-found/115909/21
+  15. https://forum.manjaro.org/t/boot-vmlinuz-not-found-after-hibernation/111409/7
+  16. https://forum.manjaro.org/t/manjaro-error-file-boot-vmlinuz-5-5-x86-64-not-found-after-update/131538/5
+  17. https://forum.manjaro.org/t/error-file-vmlinuz-5-4-x86-64-not-found/131502/4
+  18. https://forum.manjaro.org/t/error-file-vmlinuz-5-4-x86-64-not-found/131502/6
+  19. https://deblinux.wordpress.com/2012/09/22/como-crear-un-live-usb-de-manjaro-linux-y-no-morir-en-el-intento/
+  20. https://wiki.manjaro.org/index.php?title=Burn_an_ISO_File#Writing_to_a_USB_Stick_in_Linux
+  21. https://www.linuxadictos.com/17781.html
+  22. https://archlinuxlatinoamerica.wordpress.com/2016/10/08/crear-pendriveusb-booteable-desde-nuestra-terminal-en-gnulinux/
+  23. https://wiki.manjaro.org/index.php?title=Burn_an_ISO_File
   
-para saber las particiones
-I went to BIOS for another look at what you mention:Secure Boot: disabled.Fast Boot: I see no such option in my BIOS.UEFI: Yes: “Boot Mode” is set to “UEFI”.Selected grub2 bootloader: I’m not quite sure what you mean by this. Is there a place I can go to select it?
-
-- https://instintobinario.com/rescatar-el-arranque-de-linux-con-la-consola-de-grub2/
-
-- https://forum.manjaro.org/t/howto-rescue-your-system-error-hook-invalid-value-path/123226
-- https://forum.manjaro.org/t/you-need-to-load-kernel-first-after-failed-update/132141/3
-- https://forum.manjaro.org/t/using-livecd-v17-0-1-and-above-as-grub-to-boot-os-with-broken-bootloader/24916
-- https://classicforum.manjaro.org/index.php?topic=1011.0 
-- https://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader
-- https://wiki.manjaro.org/index.php?title=UEFI_-_Install_Guide
-- https://forum.manjaro.org/t/grub-install-error-cannot-find-efi-directory/83380
-- https://forum.manjaro.org/t/node-error-while-loading-shared-libraries-libicui18n-so-60-cannot-open-shared-object-file-no-such-file-or-directory/37553/4
-- https://forum.manjaro.org/t/file-boot-vmlinuz-not-found-after-update-i-did-update-grub-black-screen/121445/2
-- https://forum.manjaro.org/t/howto-rescue-your-system-error-hook-invalid-value-path/123226
-- https://bbs.archlinux.org/viewtopic.php?id=235203
-- https://forum.manjaro.org/t/power-went-out-during-upgrade-file-boot-vmlinuz-5-1-x86-64-not-found/115909/21
-- https://forum.manjaro.org/t/boot-vmlinuz-not-found-after-hibernation/111409/7
-- https://forum.manjaro.org/t/manjaro-error-file-boot-vmlinuz-5-5-x86-64-not-found-after-update/131538/5
-- https://forum.manjaro.org/t/error-file-vmlinuz-5-4-x86-64-not-found/131502/4
-- https://forum.manjaro.org/t/error-file-vmlinuz-5-4-x86-64-not-found/131502/6
-
-- https://deblinux.wordpress.com/2012/09/22/como-crear-un-live-usb-de-manjaro-linux-y-no-morir-en-el-intento/
-- https://wiki.manjaro.org/index.php?title=Burn_an_ISO_File#Writing_to_a_USB_Stick_in_Linux
-- https://www.linuxadictos.com/17781.html
-- https://archlinuxlatinoamerica.wordpress.com/2016/10/08/crear-pendriveusb-booteable-desde-nuestra-terminal-en-gnulinux/
-- https://wiki.manjaro.org/index.php?title=Burn_an_ISO_File
-
+  #+BEGIN_COMMENT
+  The issue is usually provoked when you don't maintain your system at regular intervals - and I am not thinking yearly - because such neglect will often result in similar problems.As the issue stems from a change in pacman code - you may be affected if you install from an ISO previous to 18.1.5.More technical it is a change to pacman and libalpm from 5.1 to 5.2. Users keeping their system up-to-date are not affected - users neglecting updates or installing from an older ISO are affected.1ra Solucion
+  You need an ISO. Boot your system using the ISO and chroot into the installation.# manjaro-chroot -a
+  Update pacmanFirst step is to update pacman - this may succeed or it may not# pacman -S pacman
   
-The issue is usually provoked when you don't maintain your system at regular intervals - and I am not thinking yearly - because such neglect will often result in similar problems.As the issue stems from a change in pacman code - you may be affected if you install from an ISO previous to 18.1.5.More technical it is a change to pacman and libalpm from 5.1 to 5.2. Users keeping their system up-to-date are not affected - users neglecting updates or installing from an older ISO are affected.1ra Solucion
-You need an ISO. Boot your system using the ISO and chroot into the installation.# manjaro-chroot -a
-Update pacmanFirst step is to update pacman - this may succeed or it may not# pacman -S pacman
-
-Otraou might also suffer from a faulty kernel-initramfs image. So enter your installation with chroot and update your packages.
-sudo pacman -SyuThen recreate the kernel
-sudo mkinitcpio -p linux
-And then redo the grub.cfg
-sudo update-grub2da SolucionOnce you booted in Live media and you chroot the installed system, then you run:manjaro-chroot -asudo pacman -Syyu - to complete the update
-sudo pacman -S grub
-sudo grub-install /dev/sda - for this you have to make sure the installed system is on sda
-sudo update-grub
-then reboot into your system, after you removed the live media install USB.
-ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) Create the /boot/efi directorysudo mkdir /boot/efi
-3.) Mount the EFI partition as /boot/efisudo mount /dev/sdXY /boot/efiX = Alphabet of the drive = a,b,c ...Y = Partition number of the EFI partition = 1,2,3,4...Example - /dev/sda4
-4.) Re-install Grub.sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=manjaro --recheck
-5.) Update Grub configuration file.sudo update-grub
+  Otra ou might also suffer from a faulty kernel-initramfs image. So enter your installation with chroot and update your packages.
+  sudo pacman -SyuThen recreate the kernel
+  sudo mkinitcpio -p linux
+  And then redo the grub.cfg
+  sudo update-grub2da
+  
+  Solucion
+  Once you booted in Live media and you chroot the installed system, then you run:manjaro-chroot -asudo pacman -Syyu - to complete the update
+  sudo pacman -S grub
+  sudo grub-install /dev/sda - for this you have to make sure the installed system is on sda
+  sudo update-grub
+  then reboot into your system, after you removed the live media install USB.
+  
+  ARREGLAR GRUB
+  https://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) Create the /boot/efi directorysudo mkdir /boot/efi
+  3.) Mount the EFI partition as /boot/efisudo mount /dev/sdXY /boot/efiX = Alphabet of the drive = a,b,c ...Y = Partition number of the EFI partition = 1,2,3,4...Example - /dev/sda4
+  4.) Re-install Grub.sudo grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=manjaro --recheck
+  5.) Update Grub configuration file.sudo update-grub
+  #+END_COMMENT
 * [TODO] [#A] Guia Linux Que hacer luego de Instalar Linux
 ** 1. Comandos Utiles
 |------------+--------------------------|
@@ -608,14 +603,14 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
 |------------+--------------------------|
 ** 2. Instalamos Paquetes 
     #+BEGIN_SRC sh
- # Navegador web minimalista que utiliza comandos de vim
- sudo pacman -S qutebrowser
- # Gestor de directorios por comandos
- sudo pacman -S ranger
- # Nuevo gestor de paquetes# aurman ?
-
- # otros
- sudo pacman -S telegram-desktop
+      # Navegador web minimalista que utiliza comandos de vim
+      sudo pacman -S qutebrowser
+      # Gestor de directorios por comandos
+      sudo pacman -S ranger
+      # Nuevo gestor de paquetes# aurman ?
+      
+      # otros
+      sudo pacman -S telegram-desktop
    #+END_SRC
 ** 3. Configuramos Github
    + Para evitar escribir usuario y clave en cada push trabajos con la clave publica y privada.
@@ -631,10 +626,8 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
      # agregamos git a la lista de host confiables
      ssh -T git@github.com
    #+END_SRC
-
 ** 4. Instalar y Configurar Emacs
 *** 4.1 Instalar y Configurar
-
     #+BEGIN_SRC sh
       # instalamos emacs
       sudo pacman -S emacs
@@ -643,14 +636,13 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
       # cambiamos la rama por develop, tiene mas funcionalidades (ej. treemacs)
       cd ~/.emacs.d && git checkout develop
     #+END_SRC
-*** 4.2  Activar el modo hibrido
+*** 4.2 Activar el modo hibrido
     + Modificar en el archivo de configuracion de spacemacs en `~/.spacemacs““;; encontrar la siguiente linea, debe quedar de esta manera con hybrid
 
     #+BEGIN_SRC sh
       dotspacemacs-editing-style 'hybrid`
     #+END_SRC
 *** 4.3 Activamos layers
-     
     + Activar algunos layers utilesBuscar la linea `dotspacemacs-configuration-layers` del archivo `~/.spacemacs` y agregar o descomentar las siguientes lineas“`
 
     #+BEGIN_SRC sh
@@ -660,27 +652,20 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
          org
     #+END_SRC
      
-    **Referencias**
-    + https://github.com/Alexander-Miller/treemacs/blob/master/README.org
-** [TODO] Versionar Dotfiles (PENDIENTE)
-    
+*** Referencias Web
+   1. https://github.com/Alexander-Miller/treemacs/blob/master/README.org
+** [TODO] Versionar Dotfiles
 * Guia del Gestor de Archivos Ranger
 ** Filtrar archivos
-
    1. Presionar zf seguido de la expresion regular
    2. Presionar v para seleccionar los archivos y luego accion que quieras (copiar, cortar)
    3. Presionar nuevamente zf para volver a ver todos los archivos
-
-   *Referencias*
-   + https://unix.stackexchange.com/questions/568899/search-and-select-all-matching-files-in-ranger
 ** Atajos
-
    Ranger, tiene los mismos atajos que vim
-
-   + h,l para moverse entre los niveles de los directorios
-   + dd para cortar
-   + y para copiar
-   + p para pegar 
+   1. h,l para moverse entre los niveles de los directorios
+   2. dd para cortar
+   3. y para copiar
+   4. p para pegar 
 
    |------------------------+--------------------------------------------------------------------|
    | Comando                | Descripcion                                                        |
@@ -691,13 +676,12 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
    | :shell algunComando    | Para ejecutar comandos de terminal en la ruta donde nos situamos   |
    | :set show_hidden!      | Mostrar los archivos ocultos (es necesario el signo de admiración) |
    |------------------------+--------------------------------------------------------------------|
-
-   *Referencias*
-   + https://www.atareao.es/software/utilidades/administrador-de-archivos-para-el-terminal/
-   + https://openwebinars.net/blog/vim-manual-de-uso-basico/
-   + https://unix.stackexchange.com/questions/384325/how-to-create-a-new-file-directory-using-ranger
-   + https://linuxconfig.org/manage-your-files-from-the-command-line-with-ranger
-
+** Referencias Web
+   1. https://www.atareao.es/software/utilidades/administrador-de-archivos-para-el-terminal/
+   2. https://openwebinars.net/blog/vim-manual-de-uso-basico/
+   3. https://unix.stackexchange.com/questions/384325/how-to-create-a-new-file-directory-using-ranger
+   4. https://linuxconfig.org/manage-your-files-from-the-command-line-with-ranger
+   5. https://unix.stackexchange.com/questions/568899/search-and-select-all-matching-files-in-ranger
 * Guia Linux Personalizar
 ** Cambiar el cursor y el theme
    - [[https://gitlab.com/cscs/matcha-hacked-cursor][Matcha cursor hacked]]
@@ -707,7 +691,6 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
    - https://www.fossmint.com/best-ubuntu-themes/
 ** Escritorios Virtuales
 *** Atajos personalizados
-     
     |----------------+-------------------------------------------|
     | Atajo          | Descripcion                               |
     |----------------+-------------------------------------------|
@@ -719,51 +702,45 @@ ARREGLAR GRUBhttps://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader2.) C
     | Ctrl-F2        | Moverse al escritorio 2 (Desarrollo)      |
     | Ctrl-F3        | Moverse al escritorio 3 (Multimedia)      |
     |----------------+-------------------------------------------|
-
-*** Referencias
-   + [[https://ubunlog.com/configuracion-de-los-escritorios-virtuales-en-kde/][Configuracion de los escritorios virtuales - ubunblog.com]]
-   + [[https://docs.kde.org/trunk5/es/applications/fundamentals/kbd.html][Accesos rápidos de teclados comunes - docs.kde.org]]
+*** Referencias Web
+   1. [[https://ubunlog.com/configuracion-de-los-escritorios-virtuales-en-kde/][Configuracion de los escritorios virtuales - ubunblog.com]]
+   2. [[https://docs.kde.org/trunk5/es/applications/fundamentals/kbd.html][Accesos rápidos de teclados comunes - docs.kde.org]]
 ** Ocultar el Hostname del prompt
-   https://charles4code.blogspot.com/2018/07/show-username-only-without-hostname-in.html
+   1. https://charles4code.blogspot.com/2018/07/show-username-only-without-hostname-in.html
 ** Guia de Linux - Particionamiento
+   #+BEGIN_COMMENT
   Pendiente en revisar
   - [[https://unix.stackexchange.com/questions/466625/cp-cannot-create-regular-file-permission-denied][Referencia #1]]
   - [[https://www.linuxadictos.com/solucion-al-error-read-only-file-system.html][Referencia #2]]
-
+  #+END_COMMENT
 ** Sincronizar Archivos en Google Drive
-   - https://www.youtube.com/watch?v=vPs9K_VC-lg
-   - https://www.youtube.com/watch?v=HblhrGIotFo
-   - https://rclone.org/drive/
-   - https://snapcraft.io/install/rclone/manjaro
-   - https://rclone.org/commands/
-   - https://snapcraft.io/install/rclone/arch
-   - https://www.youtube.com/watch?v=ARGU4HFUxq8
-   - https://www.youtube.com/watch?v=G8YMspboIXs
-** Nuevos comandos
-   - Crear directorios con subdirectorios, usando el parametro -p en mkdir
-     mkdir -p
-
-     Referencias:
-     - https://techlandia.com/crear-nuevo-directorio-linux-como_44793/
-   - Conocer la particion de un archivo
-     Con el comando df
-
-     Referencias
-     - https://elbauldelprogramador.com/como-saber-que-particion-pertenece-un/
-     - https://www.profesionalreview.com/2018/03/04/saber-particion-esta-instalado-ubuntu/
-** Herramientas de Seguridad
-   - Averiguar si el Bitwarden del escritorio funciona en las demas distribuciones ok
-   - Comentar lo de la encriptacion de contenido con rclone
-
-* Comando Sed (Manipular Texto)
- Al parecer es bastante parecido al reemplazar de vim
-
- Referencias:
- - http://www.sromero.org/wiki/linux/aplicaciones/uso_de_sed
- - https://likegeeks.com/es/sed-de-linux/
- - https://www.tecmint.com/linux-sed-command-tips-tricks/
- - https://www.linuxadictos.com/sed-ejemplos-del-comando-magico-para-gnu-linux.html
- - https://blog.desdelinux.net/sed-shell-scripting-comando/
-
-* Pendiente
+   1. https://www.youtube.com/watch?v=vPs9K_VC-lg
+   2. https://www.youtube.com/watch?v=HblhrGIotFo
+   3. https://rclone.org/drive/
+   4. https://snapcraft.io/install/rclone/manjaro
+   5. https://rclone.org/commands/
+   6. https://snapcraft.io/install/rclone/arch
+   7. https://www.youtube.com/watch?v=ARGU4HFUxq8
+   8. https://www.youtube.com/watch?v=G8YMspboIXs
+** Comandos Interesantes
+*** Conceptos
+   1. Crear directorios con subdirectorios, usando el parametro -p en mkdir ~mkdir -p carpeta1/carpeta2~
+*** Referencias Web
+    1. https://elbauldelprogramador.com/como-saber-que-particion-pertenece-un/
+    2. https://techlandia.com/crear-nuevo-directorio-linux-como_44793/
+    3. https://www.profesionalreview.com/2018/03/04/saber-particion-esta-instalado-ubuntu/
+** Herramientas de Seguridad    
+  #+BEGIN_COMMENT
   - # averiguar por: doas, cmus, qutebrowser, emerge
+  - Averiguar si el Bitwarden del escritorio funciona en las demas distribuciones ok
+  - Comentar lo de la encriptacion de contenido con rclone
+  #+END_COMMENT
+* Comando Sed (Manipular Texto)
+** Conceptos
+   Es bastante parecido al de reemplazar de vim
+** Referencias Web
+ 1. http://www.sromero.org/wiki/linux/aplicaciones/uso_de_sed
+ 2. https://likegeeks.com/es/sed-de-linux/
+ 3. https://www.tecmint.com/linux-sed-command-tips-tricks/
+ 4. https://www.linuxadictos.com/sed-ejemplos-del-comando-magico-para-gnu-linux.html
+ 5. https://blog.desdelinux.net/sed-shell-scripting-comando/

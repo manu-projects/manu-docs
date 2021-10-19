@@ -15,7 +15,7 @@
      emacs -nw /etc/hosts # abrimos el archivo hosts
    #+END_SRC
 
-   **Observación**:
+   *Observación*:
    Si queremos evitar pasarle el parámetro, podemos crear un alias en linux
 
 ** Atajos
@@ -138,7 +138,7 @@
   |-------------+-------------------------------------------------|
 ** Referencias
 *** Referencias Web Extraoficiales
-    - [Ver Pagina](https://caiorss.github.io/Emacs-Elisp-Programming/Keybindings.html)
+    1. [[https://caiorss.github.io/Emacs-Elisp-Programming/Keybindings.html][Emacs Keybindings - By Caiaorss]]
 * Configuración personalizada
 ** Configurar la indentación del código
    #+BEGIN_SRC elisp
@@ -207,31 +207,33 @@
    Cuando le pregunte por la confirmación, presionamos ~yes<Return>~ para ir 
    y recuperar la información del auto guardado.
 * Referencias
- - Configuración del archivo Init, ErgoEmacs [[http://ergoemacs.org/emacs/emacs_make_modern.html][Ver Página]]
- - Utilizando el Editor de Directorios, GNU [[http://dinasis.com/oliver/Learning_GNU_Emacs/gnu3-CHP-5-SECT-2.html][Ver Página]]
- - Documentación Oficial, GNU.org [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Exiting.html][Ver Página]]
- - Referencia de comandos, EmacsWiki [[https://www.emacswiki.org/emacs/EmacsNewbieKeyReference][Ver Página]]
- - Comando C-M-v Scroll-other-window, GNU.org [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Other-Window.html][Ver Página]]
- - Renombrar multiples archivos [[http://pragmaticemacs.com/emacs/dired-rename-multiple-files/][Ver Página]]
+** Referencias Web Oficiales
+   1. [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Exiting.html][Documentación Oficial - GNU.org]]
+   2. [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Other-Window.html][Comando C-M-v Scroll-other-window - GNU.org]]
+   3. [[https://www.emacswiki.org/emacs/EmacsNewbieKeyReference][Referencia de comandos - EmacsWiki.org]]
+** Referencias Web Extraoficiales
+   1. [[http://ergoemacs.org/emacs/emacs_make_modern.html][Configuración del archivo Init - ErgoEmacs.org]]
+   2. [[http://pragmaticemacs.com/emacs/dired-rename-multiple-files/][Renombrar multiples archivos - PragmaticEmacs.com]]
+   3. [[http://dinasis.com/oliver/Learning_GNU_Emacs/gnu3-CHP-5-SECT-2.html][Utilizando el Editor de Directorios - Dinasis.com]]
 * Referencias pendientes a revisar
 ** Otros
-   - https://www.emacswiki.org/emacs/WhatAreTheNeedsOfProgrammers#toc6
-   - https://truongtx.me/2013/03/10/ecb-emacs-code-browser
-   - https://www.reddit.com/r/emacs/comments/931ogo/finally_a_decent_method_outline_for_my_emacs_ecb/
+   1. https://www.emacswiki.org/emacs/WhatAreTheNeedsOfProgrammers#toc6
+   2. https://truongtx.me/2013/03/10/ecb-emacs-code-browser
+   3. https://www.reddit.com/r/emacs/comments/931ogo/finally_a_decent_method_outline_for_my_emacs_ecb/
 ** cedet
-  - https://appsintheopen.com/articles/1-setting-up-emacs-for-rails-development/part/6-setting-up-the-emacs-code-browser
+  1. https://appsintheopen.com/articles/1-setting-up-emacs-for-rails-development/part/6-setting-up-the-emacs-code-browser
 ** Neotree
-   - https://github.com/jaypei/emacs-neotree/blob/dev/README.md
-   - https://github.com/Alexander-Miller/treemacs
+   1. https://github.com/jaypei/emacs-neotree/blob/dev/README.md
+   2. https://github.com/Alexander-Miller/treemacs
 ** View method, classes
-   - https://stackoverflow.com/questions/7497132/emacs-ecb-method-window-not-showing-all-methods
-   - https://superuser.com/questions/629090/emacs-displaying-list-of-subroutines-functions-classes-in-a-source-file
-   - http://cedet.sourceforge.net/
-   - https://www.emacswiki.org/emacs/ImenuMode
-   - http://cedet.sourceforge.net/
+   1. https://stackoverflow.com/questions/7497132/emacs-ecb-method-window-not-showing-all-methods
+   2. https://superuser.com/questions/629090/emacs-displaying-list-of-subroutines-functions-classes-in-a-source-file
+   3. http://cedet.sourceforge.net/
+   4. https://www.emacswiki.org/emacs/ImenuMode
+   5. http://cedet.sourceforge.net/
 ** ECB
-   - http://ecb.sourceforge.net/docs/ecb_002dmethods.html
-   - http://www.xemacs.org/Documentation/sources/xemacs-packages/xemacs-packages/ecb/ecb_5.html
-   - http://ecb.sourceforge.net/docs/Interactive-ECB-commands.html
-   - https://elpy.readthedocs.io/en/latest/introduction.html#overview
-   - http://ecb.sourceforge.net/
+   1. http://ecb.sourceforge.net/docs/ecb_002dmethods.html
+   2. http://www.xemacs.org/Documentation/sources/xemacs-packages/xemacs-packages/ecb/ecb_5.html
+   3. http://ecb.sourceforge.net/docs/Interactive-ECB-commands.html
+   4. https://elpy.readthedocs.io/en/latest/introduction.html#overview
+   5. http://ecb.sourceforge.net/
