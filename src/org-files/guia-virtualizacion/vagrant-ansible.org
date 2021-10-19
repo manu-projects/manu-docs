@@ -12,8 +12,8 @@ Esta es una sección que aún está en desarrollo, podría estar faltando conten
 ** Particionar disco
 *** Crear particiones
     Creamos dos particiones primarias y una SWAP
-    1. Una particion primaria **/home** que usaremos como escritorio, le asignamos 20,50GB o el espacio que querramos
-    2. Una partición primaria **/** que será para el sistema, le asignamos 8 GB
+    1. Una particion primaria ~/home~ que usaremos como escritorio, le asignamos 20,50GB o el espacio que querramos
+    2. Una partición primaria ~/~ que será para el sistema, le asignamos 8 GB
     3. Una SWAP para la memoria, asignamos 2GB
 
     #+NAME: particionar-disco
@@ -46,7 +46,7 @@ Esta es una sección que aún está en desarrollo, podría estar faltando conten
       mount /dev/sda3 /mnt/home
     #+END_SRC
 ** Gestor de Paquetes
-*** [TODO] Agregamos el pacstrap
+*** Agregamos el pacstrap
     Sino lo hacemos no podremos correr el comando pacstrap
    
     #+NAME: 
@@ -62,7 +62,7 @@ Esta es una sección que aún está en desarrollo, podría estar faltando conten
       # instalamos los scripts faltantes
       yes | pacman -S extra/arch-install-scripts
     #+END_SRC
-*** [TODO] Otros paquetes necesarios
+*** Otros paquetes necesarios
     #+NAME: 
     #+BEGIN_SRC shell
       pacstrap /mnt base base-devel
@@ -71,8 +71,7 @@ Esta es una sección que aún está en desarrollo, podría estar faltando conten
 *** Conceptos
     La idea es poder correr algun servidor web por ejemplo con prolog y poder acceder via tu maquina (host)
 *** Modificamos la configuracion en hosts
-    Modificamos el archivo *hosts* mediante *vim /etc/hosts*
-    y nos fijamos que quede de la siguiente manera
+    Modificamos el archivo ~hosts~ mediante ~vim /etc/hosts~ y nos fijamos que quede de la siguiente manera
 
     #+NAME: archivo-hosts
     #+BEGIN_SRC shell
@@ -82,8 +81,7 @@ Esta es una sección que aún está en desarrollo, podría estar faltando conten
       127.0.0.1	arch-linux.localdomain	arch-linux
     #+END_SRC
 *** Modificamos los DNS
-    Modificamos el archivo *resolv.conf* mediante *vim /etc/resolv.conf*
-    y nos fijamos que quede de la siguiente manera
+    Modificamos el archivo ~resolv.conf~ mediante ~vim /etc/resolv.conf~ y nos fijamos que quede de la siguiente manera
    
     #+NAME: archivo-resolv.conf
     #+BEGIN_SRC shell
@@ -93,10 +91,10 @@ Esta es una sección que aún está en desarrollo, podría estar faltando conten
     #+END_SRC
 *** Referencias
 **** Referencias Web Oficiales
-   - https://www.vagrantup.com/docs/networking/public_network.html
+   1. [[https://www.vagrantup.com/docs/networking/public_network.html][Public Network - Vagrantup.com]]
 **** Referencias Web Extraoficiales
-   - https://www.oreilly.com/library/view/vagrant-up-and/9781449336103/ch04.html
-   - https://stackoverflow.com/questions/33250304/how-to-automatically-select-bridged-network-interfaces-in-vagrant
+   1. [[https://www.oreilly.com/library/view/vagrant-up-and/9781449336103/ch04.html][Networking in vagrant - Oreilly.com]]
+   2. [[https://stackoverflow.com/questions/33250304/how-to-automatically-select-bridged-network-interfaces-in-vagrant][How to automatically select bridge network interfaces - Stackoverflow.com]]
 ** Configuración GRUB
 *** Instalación
     #+NAME: 
@@ -117,19 +115,18 @@ Esta es una sección que aún está en desarrollo, podría estar faltando conten
       pacman -Syu # para actualizar el linux (es como un apt-get upgrade)
     #+END_SRC
 *** Agregamos la nueva unidad al filesystem
-    Modificamos el archivo *fstab* mediante *vim /etc/fstab*
-    y revisamos que nos quede similar a lo siguiente
+    Modificamos el archivo ~fstab~ mediante ~vim /etc/fstab~ y revisamos que nos quede similar a lo siguiente
 
     #+NAME: archivo-fstab
     #+BEGIN_SRC bash
       /dev/sda3 /home ext4 defaults 0 2
     #+END_SRC
 *** Referencias
-    - [Que son los sistemas de archivos - The Linux Documentation Project](http://www.tldp.org/pub/Linux/docs/ldp-archived/system-admin-guide/translations/es/html/ch06s08.html)
-    - [Breve introducción a los sistemas de archivo - Wiki Arch Linux](https://wiki.archlinux.org/index.php/File_systems_(Espa%C3%B1ol))
-    - [Que es el GRUB - Hipertextual](https://hipertextual.com/archivo/2014/08/que-es-grub/)
-    - [Configuracion del GRUB - Adminso](http://www.adminso.es/index.php/GRUB_-_Configuraci%C3%B3n)
-    - [Configuracion de GRUB 2 - Debian](https://www.debian.org/doc/manuals/debian-handbook/sect.config-bootloader.es.html)
+    1. [[http://www.tldp.org/pub/Linux/docs/ldp-archived/system-admin-guide/translations/es/html/ch06s08.html][Que son los sistemas de archivos - The Linux Documentation Project]]
+    2. [[https://wiki.archlinux.org/index.php/File_systems_(Espa%C3%B1ol)][Breve introducción a los sistemas de archivo - Wiki Arch Linux]]
+    3. [[https://hipertextual.com/archivo/2014/08/que-es-grub/][Que es el GRUB - Hipertextual.com]]
+    4. [[http://www.adminso.es/index.php/GRUB_-_Configuraci%C3%B3n][Configuración del GRUB - Adminso]]
+    5. [[https://www.debian.org/doc/manuals/debian-handbook/sect.config-bootloader.es.html][Configuración de GRUB 2 - Debian.org]]
 ** Entorno gráfico
    Para poder empezar a usar una interfaz gráfica
 
@@ -148,9 +145,12 @@ Esta es una sección que aún está en desarrollo, podría estar faltando conten
      systemctl enable gdm
    #+END_SRC
 ** Referencias
-   - [Configuración - Ver Video](https://www.youtube.com/watch?v=AdDw8qIQzW8)
-   - [Configuración # 1 - Ver Página](https://www.drivemeca.com/arch-linux-guia-de-instalacion/)
-   - [Configuración #2 - Ver Página](https://www.vagrantup.com/docs/cli/ssh_config.html)
+*** Referencias Web Oficiales
+    1. [[https://www.vagrantup.com/docs/cli/ssh_config.html][Configuración #1 - Vagrantup.com]]
+*** Referencias Web Extraoficiales
+    1. [[https://www.drivemeca.com/arch-linux-guia-de-instalacion/][Configuración # 1 - Drivemeca.com]]
+*** Referencias Youtube
+    1. [[https://www.youtube.com/watch?v=AdDw8qIQzW8][Referencia #1 - Configuración]]
 * Utilizando Vagrant
 ** Conectarse a mariadb
    Para evitar errores al conectarse ingresar la siguiente linea de comando
@@ -164,8 +164,8 @@ Esta es una sección que aún está en desarrollo, podría estar faltando conten
 *** Procedimiento
     Para compartir archivos y directorios entre la maquina local y la virtual
 
-    1. Entramos al servidor `vagrant ssh`
-    2. Creamos el archivo o carpeta en `~/vagrant/`
+    1. Entramos al servidor ~vagrant ssh~
+    2. Creamos el archivo o carpeta en ~~/vagrant/~
     3. Luego ya podemos acceder desde la maquina local en el directorio que tengamos el Vagrantfile
 
     Por ejemplo 
@@ -179,18 +179,18 @@ Esta es una sección que aún está en desarrollo, podría estar faltando conten
     #+END_SRC
 *** Referencias
 **** Referencias Web Oficiales
-  - [Referencia #1 - Vagrantup](https://www.vagrantup.com/intro/getting-started/synced_folders.html)
-    - https://www.vagrantup.com/docs/synced-folders/basic_usage
+     1. [[https://www.vagrantup.com/intro/getting-started/synced_folders.html][Intro - Vagrantup.com]]
+     2. [[https://www.vagrantup.com/docs/synced-folders/basic_usage][Básico - Vagrantup.com]]
 **** Referencias Web Extraoficiales
-  - [Referencia #2 - Stackoverflow](https://stackoverflow.com/questions/18528717/vagrant-shared-and-synced-folders)
-  - [Referencia #3 - Drupalize](https://drupalize.me/videos/sharing-files-between-your-guest-and-host-machines?p=1526)
-    - https://blog.theodo.com/2017/07/speed-vagrant-synced-folders/
-    - https://stackoverflow.com/questions/19231895/how-to-share-a-folder-created-inside-vagrant
+     1. [[https://stackoverflow.com/questions/18528717/vagrant-shared-and-synced-folders][Referencia #1 - Stackoverflow]]
+     2. [[https://stackoverflow.com/questions/19231895/how-to-share-a-folder-created-inside-vagrant][Referencia #2 - Stackoverflow]]
+     3. [[https://drupalize.me/videos/sharing-files-between-your-guest-and-host-machines?p=1526][Referencia #3 - Drupalize]]
+     4. [[https://blog.theodo.com/2017/07/speed-vagrant-synced-folders/][Referencia #4 - Blog TheOdo]]
 ** Ingresar Usuario por VirtualBox
 *** Conceptos
-    El usuario por defecto es `root` y la contraseña `vagrant`
+    El usuario por defecto es ~root~ y la contraseña ~vagrant~
 *** Referencias Web Extraoficiales
-  - [Referencia #1 ](https://bbs.archlinux.org/viewtopic.php?id=243685)
+  1. [[https://bbs.archlinux.org/viewtopic.php?id=243685][Referencia #1 - BBS ArchLinux]]
 ** Redimensionar espacio en disco
    1. Instalar via terminal un plugin
 
@@ -219,7 +219,7 @@ Esta es una sección que aún está en desarrollo, podría estar faltando conten
    #+END_SRC
 ** Cambiar configuración SSH
 *** Procedimiento
-   1. Cambiar en el archivo .Vagrant
+   1. Cambiar en el archivo ~.Vagrant~
 
    #+NAME:
    #+BEGIN_SRC shell
@@ -228,7 +228,7 @@ Esta es una sección que aún está en desarrollo, podría estar faltando conten
      config.ssh.password = 'MONICA'
    #+END_SRC
 *** Referencias
-    - [Referencia #1](https://computingforgeeks.com/how-to-fix-vagrant-ssh-authentication-failure-after-packaging-vagrant-box/)
+    1. [[https://computingforgeeks.com/how-to-fix-vagrant-ssh-authentication-failure-after-packaging-vagrant-box/][How to fix vagrant ssh failure - Computingforgeeks.com]]
 ** Posibles errores
 *** Con Guest aditions
 **** Procedimiento
@@ -246,10 +246,10 @@ Esta es una sección que aún está en desarrollo, podría estar faltando conten
       vagrant vbguest
     #+END_SRC
 **** Referencias
-     - [Referencia #1](https://medium.com/@thucnc/how-to-increase-disk-size-on-a-vagrant-vm-using-virtualbox-c3d24acee3f4)
-     - [Referencia #2](https://marcbrandner.com/blog/increasing-disk-space-of-a-linux-based-vagrant-box-on-provisioning/)
+     1. [[https://medium.com/@thucnc/how-to-increase-disk-size-on-a-vagrant-vm-using-virtualbox-c3d24acee3f4][How to increase disk size on a vagrant vm - By Thucnc]]
+     2. [[https://marcbrandner.com/blog/increasing-disk-space-of-a-linux-based-vagrant-box-on-provisioning/][Increasing disk space - Blog MarcBrandner]]
 ** Plugins Recomendados
-   Algunos plugins utiles para usar con vagrant podrían ser:
+   Algunos plugins utiles para usar con vagrant podrían ser
 
    - vagrant-disksize
    - vagrant-vbguest

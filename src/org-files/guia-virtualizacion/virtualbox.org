@@ -2,8 +2,8 @@
 #+SETUPFILE: ../theme-readtheorg.setup
 #+EXPORT_FILE_NAME: ../../views/guia-virtualizacion/virtualbox.html
 
-* 1. Instalacion de Virtualbox
-  Nos aseguramos de instalar una version que se adapte a nuestro kernel
+* Instalación de Virtualbox
+  Nos aseguramos de instalar una versión que se adapte a nuestro kernel
 
   #+NAME: instalar-virtualbox
   #+BEGIN_SRC shell
@@ -18,7 +18,7 @@
     # Agregamos el usuario actual al grupo de usuarios vbox
     sudo gpasswd -a $USER vboxusers
   #+END_SRC
-* 2. Integrar Vagrant
+* Integrar Vagrant
 ** Instalación
   Tenemos otro apartado donde se explica con más detalle sobre *Vagrant* 
   en esta sección mencionaremos lo básico.
@@ -57,24 +57,22 @@
    |-------------------+--------------------------------------------|
 ** Referencias
 *** Referencias Web Oficiales
-    - https://wiki.archlinux.org/index.php/Vagrant
-    - https://www.vagrantup.com/docs/boxes/base.html
-    - https://www.vagrantup.com/intro/getting-started/provisioning.html
+    1. [[https://wiki.archlinux.org/index.php/Vagrant][Vagrant - Wiki, ArchLinux.org]]
+    2. [[https://www.vagrantup.com/docs/boxes/base.html][Creating a Base Box - Vagrantup.com]]
+    3. [[https://www.vagrantup.com/intro/getting-started/provisioning.html][Provisioning - Vagrantup.com]]
 *** Referencias Web Extraoficiales
-    - https://dev.to/psnebc/vagrant-package-and-vagrant-box-add-8of
-    - https://medium.com/@Joachim8675309/vagrant-provisioning-e4c9fd57968d
-    - https://scotch.io/courses/getting-started-with-vagrant-for-local-development/provisioning-vmprovision-how-to-customize-the-box
-    - https://blog.ipswitch.com/installing-your-first-vagrant-box
-    - https://computingforgeeks.com/how-to-addinstall-and-run-centos-7-vagrant-box-to-virtualbox-using-vagrant/
+    1. [[https://dev.to/psnebc/vagrant-package-and-vagrant-box-add-8of][Vagrant Package and Vagrant Box - Dev.to]]
+    2. [[https://medium.com/@Joachim8675309/vagrant-provisioning-e4c9fd57968d][Vagrant Provisioning - Blog, Joachim]]
+    3. [[https://scotch.io/courses/getting-started-with-vagrant-for-local-development/provisioning-vmprovision-how-to-customize-the-box][Como personalizar una Box de Vagrant - Scotch.io]]
+    4. [[https://blog.ipswitch.com/installing-your-first-vagrant-box][Instalando tu primer Vagrant Box - Blog, IPSwitch]]
+    5. [[https://computingforgeeks.com/how-to-addinstall-and-run-centos-7-vagrant-box-to-virtualbox-using-vagrant/][Como instalar/ejecutar Centos7 con Vagrant]]
 * Referencias
 ** Referencias Web Oficiales
-   - https://wiki.manjaro.org/index.php?title=VirtualBox
+   1. [[https://wiki.manjaro.org/index.php?title=VirtualBox][Virtualbox - Wiki, Manjaro.org]]
 ** Referencias Web Extraoficiales
-   - https://www.2daygeek.com/how-to-resize-active-primary-root-partition-in-linux-using-gparted-utility/
-   - https://access.redhat.com/articles/1190213
-   - https://kwilson.io/blog/format-a-linux-disk-as-ext4-from-the-command-line/
-   - https://www.tecmint.com/create-new-ext4-file-system-partition-in-linux/
-   - https://www.profesionalreview.com/2018/11/19/virtualbox-extension-pack/
-   - https://www.hostinger.com.ar/tutoriales/centos-vs-ubuntu-elegir-servidor-web/
-   - https://webtematica.com/centos-o-debian-para-servidores-web
-   - https://www.sinologic.net/2011-02/porque-debian-no-centos.html
+   1. [[https://www.2daygeek.com/how-to-resize-active-primary-root-partition-in-linux-using-gparted-utility/][Como redimensionar una partición primaria - 2daygeek.com]]
+   2. [[https://access.redhat.com/articles/1190213][Redimensionar una partición con fdisk - redhat.com]]
+   3. [[https://www.profesionalreview.com/2018/11/19/virtualbox-extension-pack/][Virtualbox Extension Pack - Profesionalreview.com]]
+   4. [[https://www.hostinger.com.ar/tutoriales/centos-vs-ubuntu-elegir-servidor-web/][CentOs Vs Ubuntu como Servidor - Hostinger.com.ar]]
+   5. [[https://webtematica.com/centos-o-debian-para-servidores-web][CentOs Vs Debian como Servidor - webtematica.com]]
+   6. [[https://www.sinologic.net/2011-02/porque-debian-no-centos.html][Debian en vez de Centos - sinologic.net]]
