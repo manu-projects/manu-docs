@@ -14,48 +14,48 @@
    y por último *EXPRESION_FLAGS* ampliará la búsqueda o no según cual *flag* coloquemos.
    
   Entonces seguido a los ~:~ tenemos dos maneras de activar el comando de sustitución
-    - ~s~ reemplaza la primera palabra que coincida (solo en la linea donde este el cursor)
-    - ~%s~ reemplaza la primera palabra que coincida (en cada linea del archivo)
+    - ~s~ reemplaza la primera palabra que coincida (/solo en la linea donde este el cursor/)
+    - ~%s~ reemplaza la primera palabra que coincida (/en cada linea del archivo/)
   
   Daremos algunos ejemplos
 
-  #+BEGIN_EXAMPLE
-  :s/actualidad/actualmente
+  #+BEGIN_QUOTE
+  ~:s/actualidad/actualmente~
   Reemplazamos la primera palabra que coincida con "actualidad" al comienzo de la linea donde este el cursor,
   y la reemplazamos por "actualmente"
 
-  :s/actualidad/actualmente/g
+  ~:s/actualidad/actualmente/g~
   Similar al anterior ejemplo, pero reemplaza todas las palabras que coincidan en la linea donde este el cursor
-  (es decir no solo la primera que encuentre, si no todas)
+  (/es decir no solo la primera que encuentre, si no todas/)
 
-  :s/actualidad/actualmente/gc
+  ~:s/actualidad/actualmente/gc~
   Similar al anterior pero nos pide confirmacion al momento de reemplazar
   
-  :%s/actualidad/actualmente
+  ~:%s/actualidad/actualmente~
   Reemplazamos la primera palabra que coincida con "actualidad" al comienza de cada linea del archivo,
   y la reemplazamos por "actualmente"
 
-  :%s/actualidad/actualmente/g
-  Similar al anterior pero reemplaza todas las palabras que coincidan, en todo el archivo (es decir no la primera que encuentre)
+  ~:%s/actualidad/actualmente/g~
+  Similar al anterior pero reemplaza todas las palabras que coincidan, en todo el archivo (/es decir no la primera que encuentre/)
 
-  :%s/actualidad/actualmente/gc
+  ~:%s/actualidad/actualmente/gc~
   Similar al anterior pero nos pide confirmación al momento de reemplazar
-  #+END_EXAMPLE
+  #+END_QUOTE
 ** Referencias
 *** Referencias Web Extraoficiales
-     - https://vim.fandom.com/wiki/Search_and_replace
-     - https://hipertextual.com/archivo/2015/01/como-usar-vim-14/
-     - https://www.atareao.es/tutorial/vim/buscar-y-reemplazar-en-vim/
-     - https://www.imd.guru/sistemas/vim/buscar-y-reemplazar.html
-     - https://www.linux.com/training-tutorials/vim-tips-basics-search-and-replace/
+     1. [[https://vim.fandom.com/wiki/Search_and_replace][Buscar y reemplazar - fandom.com]]
+     2. [[https://hipertextual.com/archivo/2015/01/como-usar-vim-14/][Como usar Vim - hipertextual.com]]
+     3. [[https://www.atareao.es/tutorial/vim/buscar-y-reemplazar-en-vim/][Buscar y reemplazar en Vim - atareo.es]]
+     4. [[https://www.imd.guru/sistemas/vim/buscar-y-reemplazar.html][Buscar y reemplazar - imd.guru]]
+     5. [[https://www.linux.com/training-tutorials/vim-tips-basics-search-and-replace/][Vim Tips Basics - linux.com]]
 *** Referencias Youtube
-     - [[https://www.youtube.com/watch?v=iWo1cDGlNDI][comandos basicos - Ver Video]]
-     - https://www.youtube.com/watch?v=8PZZkIr5Dcc
-     - https://www.youtube.com/watch?v=jwxK5Eg_TnM
-     - https://www.youtube.com/watch?v=OnUiHLYZgaA
+     1. [[https://www.youtube.com/watch?v=iWo1cDGlNDI][Referencia #1]]
+     2. [[https://www.youtube.com/watch?v=8PZZkIr5Dcc][Referencia #2]]
+     3. [[https://www.youtube.com/watch?v=jwxK5Eg_TnM][Referencia #3]]
+     4. [[https://www.youtube.com/watch?v=OnUiHLYZgaA][Referencia #4]]
 * QuteBrowser - Navegador web con Modo Vim
 ** Conceptos
-   Es un navegador web minimalista que utiliza *QtWebEngine* (motor basado en Google Chromium)
+   Es un navegador web minimalista que utiliza *QtWebEngine* (/motor basado en Google Chromium/)
    por defecto como buscador a DuckDuckGo
 ** Atajos
    + No es necesario escribir el comando : (dos puntos) para utilizarlos
@@ -94,14 +94,13 @@
    |-----------+------------------------------------------------------------------|
 ** Referencias
 *** Referencias Web Oficiales
-   - https://qutebrowser.org/doc/help/commands.html
+   1. [[https://qutebrowser.org/doc/help/commands.html][Comandos - qutebrowser.org]]
+   2. [[https://draculatheme.com/qutebrowser][Dracula Theme - draculatheme.com]]
 *** Referencias Web Extraoficiales
-   - https://tecnovortex.com/qutebrowser/
-   - https://laboratoriolinux.es/index.php/-noticias-mundo-linux-/software/26950-la-nueva-version-de-qutebrowser-1-11-0-ya-esta-aqui-un-navegador-al-estilo-vim.html
-   - https://draculatheme.com/qutebrowser
-   - https://laboratoriolinux.es/index.php/-noticias-mundo-linux-/software/27249-qutebrowser-el-navegador-al-estilo-vim-se-actualiza-a-su-nueva-version-1-12-0.html
-   - https://ubunlog.com/qutebrowser-navegador-estilo-vim/
-   - https://www.xataka.com/basics/duckduckgo-que-principales-diferencias-google
+   1. [[https://laboratoriolinux.es/index.php/-noticias-mundo-linux-/software/26950-la-nueva-version-de-qutebrowser-1-11-0-ya-esta-aqui-un-navegador-al-estilo-vim.html][QuteBrowser 1.11 - laboratoriolinux.es]]
+   2. [[https://laboratoriolinux.es/index.php/-noticias-mundo-linux-/software/27249-qutebrowser-el-navegador-al-estilo-vim-se-actualiza-a-su-nueva-version-1-12-0.html][QuteBrowser 1.12 - laboratoriolinux.es]]
+   3. [[https://ubunlog.com/qutebrowser-navegador-estilo-vim/][Intro QuteBrowser - ubunlog.com]]
+   4. [[https://www.xataka.com/basics/duckduckgo-que-principales-diferencias-google][DuckDuckGo - Características - xakata.com]]
 *** Referencias Youtube
-   - https://www.youtube.com/watch?v=nu-YyL7iQC4
-   - https://www.youtube.com/watch?v=g2RtjO_jXvY
+   1. [[https://www.youtube.com/watch?v=nu-YyL7iQC4][Referencia #1]]
+   2. [[https://www.youtube.com/watch?v=g2RtjO_jXvY][Referencia #2]]
