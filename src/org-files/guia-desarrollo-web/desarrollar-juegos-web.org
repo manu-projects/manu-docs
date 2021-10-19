@@ -1,4 +1,5 @@
-* Paginas viendo
+#+BEGIN_COMMENT
+Paginas Interesantes
   https://github.com/IgnacioAmigo/dinogame <--- como base
   https://pixijs.io/examples/#/sprite/basic.js <--- para animaciones
   https://parceljs.org/getting_started.html <--- para levantar el servidor
@@ -8,6 +9,7 @@
   
   https://programmerclick.com/article/49701210925/
   sprite maker png
+#+END_COMMENT
 * Matemática aplicada a videojuegos
 ** Detección de Colisiones
 *** Conceptos
