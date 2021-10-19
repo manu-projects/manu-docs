@@ -270,5 +270,5 @@
      rysnc -vazh --dry-run directorio1/ directorio2/
    #+END_SRC
 ** Referencias Web
-  - Documentación sobre rsyncm, Linux.die [Ver Página](https://linux.die.net/man/1/rsync)
-  - Conociendo el comando rsync, LinuxTechi [Ver Página](https://www.linuxtechi.com/rsync-command-examples-linux/)
+  - Documentación sobre rsyncm, Linux.die [[https://linux.die.net/man/1/rsync][[Ver Página]​]]
+  - Conociendo el comando rsync, LinuxTechi [[https://www.linuxtechi.com/rsync-command-examples-linux/][[Ver Página]​]]

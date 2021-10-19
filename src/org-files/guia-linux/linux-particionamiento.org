@@ -295,11 +295,12 @@
     |-----------+---------------------------------------------------------------------|
 *** Listar particiones 
     #+BEGIN_SRC shell
-      # tool parted
+      # con permisos root - tool parted
       sudo parted /dev/sda print
-      # tool fdisk
+      # con permisos root - tool fdisk
       sudo fdisk --list /dev/sda
-      # command
+      
+      # sin permisos root
       lsblk -S
     #+END_SRC
 ** Tipo de Partición
@@ -353,7 +354,7 @@
     |--------------------+----------------------------------------------------------|
 *** Comando umount
     - Si queremos formatear una partición => debemos desmontarla
-*** Ejemplos
+*** Ejemplo 1 - Basico
     #+BEGIN_SRC shell
       # -> Montamos un dispositivo usb, llamado "sdb2"
       # -> Especificamos el formato NTFS
@@ -381,6 +382,74 @@
       # -> Punto de montaje será la ruta "/mnt/debian"
       sudo mount -t ext4 /dev/sda6 /mnt/debian
     #+END_SRC
+*** Ejemplo 2 - Asignando usuario y permisos
+    Los parametros del comando ~mount~
+
+    |-----------+---------------------------------------------------------|
+    | Parámetro | Descripción                                             |
+    |-----------+---------------------------------------------------------|
+    | ~uid~     | Le pasamos nuestro usuario, que nos lo devuelve ~id -u~ |
+    | ~dmask~   |                                                         |
+    | ~fmask~   |                                                         |
+    |-----------+---------------------------------------------------------|
+   #+NAME: linux-montar-particion
+   #+BEGIN_SRC shell
+     # nos devuelve el id del usuario con el que iniciamos la sesion actual de la terminal
+     id -u
+
+     # solo cambiamos el 1001 por lo que nos devuelve id -u
+     sudo mount -o rw,user,uid=1001,dmask=007,fmask=117 /dev/sda10 /mnt/mystorage
+
+     #sudo mount -t ntfs -o ro /dev/sda10 /mnt/mystorage
+   #+END_SRC
+** Asignar permisos
+   #+BEGIN_QUOTE
+   Creamos una partición primaria del tipo NTFS y le asignamos los permisos al usuario
+   Con el comando ~id -u -n~ obtenemos el nombre de usuario, mientras que con ~chown~
+   le damos acceso a un usuario especifico a un directorio/archivo
+   #+END_QUOTE
+
+   #+NAME: linux-particionar-almacenamiento
+   #+BEGIN_SRC shell
+     # para saber el nombre de usuario
+     id -u -n
+
+     # para asignarle los permisos de ese usuario
+     sudo chown nombreUsuario /storage/
+   #+END_SRC
+** Partición para Windows-Linux
+   Si la partición va interactuar entre Windows y Linux, se recomienda que sea NTFS.
+   Si sólo va a ser entre distribuciones Linux, se recomienda Ext4
+
+   #+BEGIN_QUOTE
+   A good practice for some static mounted storage system like you are doing is 
+   to add a permanent mount point to /etc/fstab.
+   There are several ways to do it, but I just wanted you to be aware.
+   #+END_QUOTE
+** Anclar un directorio al Gestor de archivos
+   El File manager por defecto de Ubuntu es Nautilus
+
+   #+NAME: linux-anclar-directorio-filemanager
+   #+BEGIN_SRC shell
+     # luego de ingresar a la ruta, presionar Control+D
+     cd /mnt/mystorage
+   #+END_SRC
+** Referencias
+*** Referencias Web Extraoficiales
+    1. [[https://linuxconfig.org/how-to-mount-partition-with-ntfs-file-system-and-read-write-access][Como montar una partición NTFS - linuxconfig.org]]
+    2. [[https://askubuntu.com/questions/11840/how-do-i-use-chmod-on-an-ntfs-or-fat32-partition/956072#956072][Como usar el comando chmod en una partición NTFS ó FAT32 - askubuntu.com]]
+    3. [[https://askubuntu.com/questions/1109247/how-do-i-add-folder-to-ubuntu-18-04-1-nautilus-bookmark-list][Agregar carpetas al Nautilus - askubuntu.com]]
+    4. [[https://www.it-swarm.dev/es/mount/opciones-de-montaje-dmask-y-fmask/961637140/][Opciones de Montaje - it-swarm.dev]]
+*** Referencias Youtube
+    1. [[https://www.youtube.com/watch?v=PBHFud-Dva8][Redimensionar con Gparted en Ubuntu]]
+    2. [[https://www.youtube.com/watch?v=mPDhoYNao1o][Como automontar un disco en linux - By OhHeyItsLou]]
+    3. [[https://www.youtube.com/watch?v=hIq1dIgZrOc&ab_channel=DevTechSolutions][Como montar una partición con Windows en Ubuntu - By DevTechSolutions]]
+    4. [[https://www.youtube.com/watch?v=ZlIbGnvTEDI][Como montar automaticamente particiones NTFS en Linux - By Root Tech]]
+    5. [[https://www.youtube.com/watch?v=CSbUiK2pytE][Particiones primarias/logicas/extendidas]]
+    6. [[https://www.youtube.com/watch?v=I1-0cpPO3e8][Recuperar Tabla de Particiones]]
+    7. [[https://www.youtube.com/watch?v=EQMWKwvsltY][Redimensionar Particiones en Ubuntu]]
+    8. [[https://www.youtube.com/watch?v=OSkK_lgSCzk][Redimensionar particiones]]
+    9. [[https://www.youtube.com/watch?v=xuYhjtpWZuc][Particionar disco duro en Ubuntu]]
 * [DOING] Comandos para FileSystems
 ** Comando df (file system disk space usage)
 *** Conceptos
@@ -536,94 +605,6 @@
      [jelou@jelou-pc ~]$ blkid /dev/sda1
      /dev/sda1: LABEL="Windows8_OS" BLOCK_SIZE="512" UUID="160252C68156AA3F" TYPE="ntfs" PARTLABEL="Basic data partition" PARTUUID="1d5cf7f1-411c-4784-ba21-f4aa45dd646e"
    #+END_SRC
-* Particionar Disco
-** Partición para Almacenamiento
-   Creamos una partición primaria del tipo NTFS y le asignamos los permisos al usuario
-   Con el comando ``id -u -n`` obtenemos el nombre de usuario, mientras que con ``chown`` 
-   le damos acceso a un usuario especifico a un directorio/archivo
-
-   #+NAME: linux-particionar-almacenamiento
-   #+BEGIN_SRC shell
-     # para saber el nombre de usuario
-     id -u -n
-
-     # para asignarle los permisos de ese usuario
-     sudo chown nombreUsuario /storage/
-   #+END_SRC
-** Listar las particiones
-   Podemos usar el comando ``lsblk`` o ``fdisk``
-
-   #+NAME: linux-listar-particiones
-   #+BEGIN_SRC shell
-     # listar particiones (no pide permisos administrador)
-     lsblk
-
-     # listar particiones (pide permisos administrador)
-     sudo fdisk -l /dev/sda
-   #+END_SRC
-** Montar la particion de Almacenamiento NTFS
-   Si la partición va interactuar entre Windows y Linux, se recomienda que sea NTFS.
-   Si sólo va a ser entre distribuciones Linux, se recomienda Ext4
-
-   Destacamos un comentario de otro usuario linux 
-
-   #+BEGIN_QUOTE
-   A good practice for some static mounted storage system like you are doing is 
-   to add a permanent mount point to /etc/fstab.
-   There are several ways to do it, but I just wanted you to be aware.
-   #+END_QUOTE
-*** Crear directorio de almacenamiento a compartir
-    Recordando que la ruta */* es la raiz y *mnt* el directorio que se 
-    se suele utilizar por defecto para acceder desde los demas distribuciones
-
-    Tambien que con el comando ``mkdir`` seguido del parametro *-p* nos facilita
-    un directorio A con subdirectorio B (dentro del directorio A)
-
-   #+NAME: linux-crear-directorio
-   #+BEGIN_SRC shell
-     # Creamos el directorio mnt y dentro mystorage
-     sudo mkdir -p /mnt/mystorage
-   #+END_SRC
-*** Montar la partición del directorio
-    - Con ``id -u`` nos permite obtener el nombre de usuario que esta en la sesion actual de la terminal
-    - Los parametros del comando ``mount``
-      1. **-uid** le pasamos el usuario que nos devuelve ``id -u``
-      2. **dmask** 
-      3. **fmask**
-      4. **/dev/sda10** es la particion de almacenamiento
-
-   #+NAME: linux-montar-particion
-   #+BEGIN_SRC shell
-     # nos devuelve el id del usuario con el que iniciamos la sesion
-     id -u
-
-     # solo cambiamos el 1001 por lo que nos devuelve id -u
-     sudo mount -o rw,user,uid=1001,dmask=007,fmask=117 /dev/sda10 /mnt/mystorage
-
-     #sudo mount -t ntfs -o ro /dev/sda10 /mnt/mystorage
-   #+END_SRC
-** Anclar un directorio al Gestor de archivos
-   El File manager por defecto de Ubuntu es Nautilus
-
-   #+NAME: linux-anclar-directorio-filemanager
-   #+BEGIN_SRC shell
-     # presionar Control+D
-     cd /mnt/mystorage
-   #+END_SRC
-** Referencias Web Extraoficiales
-   - [Referencia #2 - Ver Pagina](https://linuxconfig.org/how-to-mount-partition-with-ntfs-file-system-and-read-write-access)
-   - [Referencia #3 - Ver Página](https://askubuntu.com/questions/11840/how-do-i-use-chmod-on-an-ntfs-or-fat32-partition/956072#956072)
-   - [Agregar carpetas al Nautilus - Ver Página](https://askubuntu.com/questions/1109247/how-do-i-add-folder-to-ubuntu-18-04-1-nautilus-bookmark-list)
-   - [Opciones de Montaje - Ver Pagina (it-swarm.dev)](https://www.it-swarm.dev/es/mount/opciones-de-montaje-dmask-y-fmask/961637140/)
-** Referencias Youtube
-   - [Referencia #1 - Ver Video](https://www.youtube.com/watch?v=mPDhoYNao1o)
-   - [Referencia #4 - Ver Video](https://www.youtube.com/watch?v=hIq1dIgZrOc)
-   - [Referencia #5 - Ver Video](https://www.youtube.com/watch?v=ZlIbGnvTEDI) 
-   - [Particiones primarias/logicas/extendidas - Ver Video](https://www.youtube.com/watch?v=CSbUiK2pytE)
-   - [Recuperar Tabla de Particiones - Ver Video](https://www.youtube.com/watch?v=I1-0cpPO3e8)
-   - [Redimensionar Particiones en Ubuntu - Ver Video](https://www.youtube.com/watch?v=EQMWKwvsltY)
-   - [Redimensionar particiones - Ver Videos](https://www.youtube.com/watch?v=OSkK_lgSCzk)
-   - [Particionar disco duro en Ubuntu - Ver Video](https://www.youtube.com/watch?v=xuYhjtpWZuc)
 * Bootear Multiples Sistemas Operativos
 ** Conceptos
   Si tenes un sistema operativo por defecto por ejemplo Windows, y lo queres mantener
@@ -631,8 +612,6 @@
   varias distribuciones de linux.
 
   Por lo general se suele crear un GRUB el que se ira modificando
-
-  Comentarios a destacar de uno de los artículos de las referencias que hemos agregado
   
   #+BEGIN_QUOTE
   I install Ubuntu GNOME (mount point: / ) into /dev/sda5.
@@ -664,31 +643,23 @@
      grub-install -v
    #+END_SRC
 ** Referencias Web Extraoficiales
-   - [Referencia #1 - Ver Página](https://medium.com/@manujarvinen/setting-up-a-multi-boot-of-5-linux-distributions-ca1fcf8d502)
-   - [Referencia # 2 - Ver Página](https://www.maketecheasier.com/how-to-run-multiple-linux-distros-without-virtualization/)
-   - [MultipleLInuxONe - Ver Página](https://itsfoss.com/multiple-linux-one-usb/)
-   - [Referencia #3 - Ver Página](https://www.solvetic.com/tutoriales/article/5859-como-crear-usb-booteable-linux-con-iso/)
-   - [Referencia #4 - Ver Página](https://linuxmint-installation-guide.readthedocs.io/es/latest/burn.html)
-* Particionar con GParted
-** Conceptos
-   Es el que se recomienda para particionar el disco
-** Referencias Web Oficiales
-   - [Pagina Oficial - Ver Página](https://gparted.org/download.php)
-** Referencias Youtube
-   - [Redimensionar con Gparted en Ubuntu - Ver Video](https://www.youtube.com/watch?v=PBHFud-Dva8)
-* Instalar un file manager
+   1. [[https://medium.com/@manujarvinen/setting-up-a-multi-boot-of-5-linux-distributions-ca1fcf8d502][Setting up a Multiboot - medium.com]]
+   2. [[https://www.maketecheasier.com/how-to-run-multiple-linux-distros-without-virtualization/][How to run multiple linux distros - maketecheasier.com]]
+   3. [[https://itsfoss.com/multiple-linux-one-usb/][Mulitple linux one usb]]
+   4. [[https://www.solvetic.com/tutoriales/article/5859-como-crear-usb-booteable-linux-con-iso/][Como crear USB Booteable LINUX]]
+   5. [[https://linuxmint-installation-guide.readthedocs.io/es/latest/burn.html][Burn - linuxmint Readthedocs]]
+* File Manager
 ** Conceptos
   Si aún no estás familiarizado a usar por completo la terminal para la gestión de archivos,
   te sugerimos instalar un programa con interfaz gráfica (GUI) que facilita dicha tarea.
-
-   #+NAME: linux-instalar-filemanager
-   #+BEGIN_SRC shell
-     sudo apt-get install thunar
-   #+END_SRC
+** Instalación
+  #+NAME: linux-instalar-filemanager
+  #+BEGIN_SRC shell
+    sudo apt-get install thunar
+  #+END_SRC
 ** Referencias Youtube
-   - Como funciona el Filesystem de Linux - # Referencia 1  [Ver Video](https://www.youtube.com/watch?v=HIXzJ3Rz9po)
-   - Como funciona el Filesystem de Linux - # Referencia 1  [Ver Video](https://www.youtube.com/watch?v=HbgzrKJvDRw)
-
+   1. [[https://www.youtube.com/watch?v=HIXzJ3Rz9po][Como funciona el Filesystem de Linux - By Joe Collins]]
+   2. [[https://www.youtube.com/watch?v=HbgzrKJvDRw][Como funciona el Filesystem de Linux - By DorianDotSlash]]
 * Glosario
 ** Rutas
   - dev: se refieren a device IO (dispositivo de entrada/salida)

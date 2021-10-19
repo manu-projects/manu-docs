@@ -28,9 +28,9 @@
 ** Configuración Zsh
 *** Cambiar de theme
     Podemos cambiar el estilo, y el diseño de la terminal cambiando el theme
-    en el perfil de zsh en ~/.zshrc y cambiar el valor de la variable por el nombre de theme
+    en el perfil de zsh en ~~/.zshrc~ y cambiar el valor de la variable por el nombre de theme
     revisar en las página oficial la variedad de themes. 
-    El más conocido es *agnoster*
+    El más conocido es *Agnoster*
 
     #+NAME: zsh-cambiar-theme
     #+BEGIN_SRC shell
@@ -43,7 +43,7 @@
       source ~/.zshrc
     #+END_SRC
 *** Cambiar el prompt (símbolo del sistema)
-   Modificamos el archivo ~/.zshrc y agregamos la función *prompt_context()* que aparece debajo
+   Modificamos el archivo ~~/.zshrc~ y agregamos la función ~prompt_context()~ que aparece debajo
 
    #+NAME: configuracion-theme-oh-my-zsh
    #+BEGIN_SRC bash
@@ -56,18 +56,18 @@
      }
    #+END_SRC
 ** Referencias
-*** Referencias Oficiales
-    - https://powerline.readthedocs.io/en/latest/configuration.html
-    - https://ohmyz.sh/
-    - https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-    - https://github.com/powerline/fonts/tree/master/Inconsolata
-*** Referencias Web Extraoficiales
-    - Personalizar Theme Agnoster [Ver Página](https://charles4code.blogspot.com/2018/07/show-username-only-without-hostname-in.html)
-    - https://levien.com/type/myfonts/inconsolata.html
-    - https://aaronwinters.com/getting-started-with-the-zsh-shell/
+*** Referencias Web - Oficiales
+    1. [[https://ohmyz.sh/][Web - Oh My ZSH]]
+    2. [[https://powerline.readthedocs.io/en/latest/configuration.html][Powerline Configuración - Powerline Readthedocs]]
+    3. [[https://github.com/ohmyzsh/ohmyzsh/wiki/Themes][Wiki Themes Oh My ZSH - github.com/ohmyzsh]]
+    4. [[https://github.com/powerline/fonts/tree/master/Inconsolata][Fuente Inconsolata - github.com/powerline]]
+*** Referencias Web - Extraoficiales
+    1. [[https://charles4code.blogspot.com/2018/07/show-username-only-without-hostname-in.html][Personalizar Theme Agnoster - Charles4code Blogspot]]
+    2. [[https://levien.com/type/myfonts/inconsolata.html][Fuente Inconsolate - levien.com]]
+    3. [[https://aaronwinters.com/getting-started-with-the-zsh-shell/][Iniciando con zsh shell - aaronwinters.com]]
 *** Referencias Youtube
-    - Referencia #1 - [Ver Vídeo](https://www.youtube.com/watch?v=ADytC9a2g2Y)
-    - Referencia #2 - [Ver Video](https://www.youtube.com/watch?v=4KBuPCeF9Gc)
+    1. [[https://www.youtube.com/watch?v=ADytC9a2g2Y][Comenzando con z shell - By tutorialLinux]]
+    2. [[https://www.youtube.com/watch?v=4KBuPCeF9Gc][Trabajando con ZSh+Oh my Zsh - By Alessandro]]
 * Terminal RXVT Unicode
 ** Conceptos
    Existe una gran variedad de terminales, entre las más conocidas son:
@@ -81,16 +81,16 @@
    [[../../assets/img/urxvt-unicode-terminal.jpg]]
 ** Instalación
    Si queremos cambiar a una terminal más personalizada y sin limitaciones,
-   podemos hacer uso de **rxvt** que a diferencia de la predeterminada gnome de ubuntu
+   podemos hacer uso de *rxvt* que a diferencia de la predeterminada gnome de ubuntu
 
    #+NAME: instalar-terminal-rxvt
    #+BEGIN_SRC shell
      sudo apt install rxvt-unicode
    #+END_SRC
 ** Configuración
-   En el archivo oculto `.Xresources` guardaremos las configuraciones que luego aplicaremos los
-   cambios colocando en la terminal `xrdb .Xresources` suponiendo que estamos ubicados en el
-   directorio `~/`
+   En el archivo oculto ~.Xresources~ guardaremos las configuraciones que luego aplicaremos los
+   cambios colocando en la terminal ~xrdb .Xresources~ suponiendo que estamos ubicados en el
+   directorio ~~/~
 
    Ejecutamos las siguientes comandos en la terminal
 
@@ -211,14 +211,15 @@
    - Con *C* hacemos referencia a la tecla Control
    - Los shortcuts de copiar y pegar, los adapte por costumbre de usar Emacs
 ** Referencias
+*** Referencias Web Oficiales
+    1. [[https://wiki.archlinux.org/index.php/Rxvt-unicode_(Espa%C3%B1ol)][Documentación #1 - Wiki ArchLinux]]
+    2. [[https://wiki.gentoo.org/wiki/Rxvt-unicode][Documentación #2 - Wiki Gentoo]]
+    3. [[https://wiki.archlinux.org/index.php/Rxvt-unicode/Tips_and_tricks#Transparency][Habilitar transparencia - Wiki Archlinux]]
 *** Referencias Web Extraoficiales
-    - Documentación #1 por ArchLinux [Ver Pagina](https://wiki.archlinux.org/index.php/Rxvt-unicode_(Espa%C3%B1ol))
-    - Documentación #2 por Gentoo [Ver Página](https://wiki.gentoo.org/wiki/Rxvt-unicode)
-    - Configuración #1 por Addy [Ver Pagina](https://addy-dclxvi.github.io/post/configuring-urxvt/)		
-    - Pugins [Ver Página](https://github.com/muennich/urxvt-perls)
-    - Habilitar transparencia [Ver Pagina](https://wiki.archlinux.org/index.php/Rxvt-unicode/Tips_and_tricks#Transparency)
+    1. [[https://github.com/muennich/urxvt-perls][Pugins - github.com/muennich]]
+    2. [[https://addy-dclxvi.github.io/post/configuring-urxvt/][Configuración #1 - by Addy]]
 *** Referencias Youtube
-    - Configuración #2 [Ver Vídeo](https://www.youtube.com/watch?v=_kjbj-Ez1vU)
+    1. [[https://www.youtube.com/watch?v=_kjbj-Ez1vU][Configuración #2 [Ver Vídeo]​]]
 * Windows Manager i3wm
 ** Conceptos
    Podemos usar el *i3* que no se refiere al procesador, sino al nombre del
@@ -243,10 +244,10 @@
      sudo apt-get install -y i3 i3status i3lock compton nitrogen
    #+END_SRC
 ** Configuración
-   1. Debemos modificar el archivo de i3wm con `sudo nano ~/.config/i3/config`
-   2. Agregamos a la configuración `bindsym $mod+Return exec rxvt` para abra la terminal **rxvt unicode**
-      y presionamos el shortcut `Super+Shift+r` para reiniciar **i3wm**
-   3. Modificamos la configuración de bash con `sudo nano ~./.bashrc/`
+   1. Debemos modificar el archivo de i3wm con ~sudo nano ~/.config/i3/config~
+   2. Agregamos a la configuración ~bindsym $mod+Return exec rxvt~ para abrir la terminal ~rxvt unicode~
+      y presionamos el shortcut ~Super+Shift+r~ para reiniciar *i3wm*
+   3. Modificamos la configuración de bash con `sudo nano ~~./.bashrc/~
    4. Agregamos las siguientes lineas
 
    #+NAME: neofetch-cambiar-wallpaper
@@ -259,7 +260,7 @@
    #+END_SRC
 
    *Observación*:
-   Cada vez que se abra una terminal con `Super+Ret` se abrirá con la terminal rxvt unicode,
+   Cada vez que se abra una terminal con ~Super+Ret~ se abrirá con la terminal rxvt unicode,
    con el programa neofetch y con la zshell habilitada
 ** Atajos de i3
    Hay ciertos atajos que nos facilitan desplazarnos entre las ventanas, espacios de trabajo, etc..
@@ -281,8 +282,8 @@
    | Super v Super Ret    | Las próximas ventanas se abren en vertical            |
    |----------------------+-------------------------------------------------------|
 
-   La combinación de comandos `Super+v Super+Ret`, quiere decir que luego de presionar `Super+v` presionamos  `Super+Ret`
-   y las proximas nuevas ventanas que se abran con `Super+Ret` se apilaran debajo de la que estemos posicionados.
+   La combinación de comandos ~Super+v Super+Ret~, quiere decir que luego de presionar ~Super+v~ presionamos ~Super+Ret~
+   y las proximas nuevas ventanas que se abran con ~Super+Ret~ se apilaran debajo de la que estemos posicionados.
 ** Modo Resize
    Para cambiar el tamaño de las ventanas
    1. Super+r Activa el modo Resize
@@ -300,26 +301,25 @@
    | Super+e        | Desactiva el modo Widescreen                         |
    |----------------+------------------------------------------------------|
 ** Observaciones de Teclas
-   - **Super** es la tecla que asignamos al configurar i3 (suele ser Windows ó Alt).
-   - **Ret** se suele referir a la tecla **Enter**
-   - **ArrowKey** es cualquiera de las flechas del teclado
+   - *Super* es la tecla que asignamos al configurar i3 (suele ser Windows ó Alt).
+   - *Ret* se suele referir a la tecla *Enter*
+   - *ArrowKey* es cualquiera de las flechas del teclado
 ** Referencias
 *** Referencias Web Oficiales
-    - https://i3wm.org/docs/userguide.html
-    - Documentación Oficial #1 [Ver Página](https://i3wm.org/)
-    - Documentación Oficial #2 [Ver Página](https://i3wm.org/docs/userguide.html#_configuring_i3bar)
+    1. Guia de Usuario - i3wm.org https://i3wm.org/docs/userguide.html
+    2. [[https://i3wm.org/][Documentación Oficial #1]]
+    3. [[https://i3wm.org/docs/userguide.html#_configuring_i3bar][Documentación Oficial #2]]
 *** Referencias Web Extraoficiales
-    - Entendiendo i3 [Ver Pagina](https://github.com/Airblader/i3)
-    - https://www.maketecheasier.com/install-use-i3-window-manager-ubuntu/
-    - https://www.dagorret.com.ar/instalar-utilizar-i3-window-manager-ubuntu/
-    - https://opensource.com/article/18/8/getting-started-i3-window-manager
-    - https://ericren.me/posts/2019-01-27-minimal-ubuntu-tiling-wm-setup/
+    1. [[https://github.com/Airblader/i3][Entendiendo i3 - github.com/Airblader]]
+    2. [[https://www.maketecheasier.com/install-use-i3-window-manager-ubuntu/][Instalar i3 - MakeTechEasier.com]]
+    3. [[https://opensource.com/article/18/8/getting-started-i3-window-manager][Intro i3 wm - Opensource.com]]
+    4. [[https://ericren.me/posts/2019-01-27-minimal-ubuntu-tiling-wm-setup/][i3 Setup - Blog Eric Ren]]
 *** Referencias Youtube
-    - Opcion #1 [Ver Video](https://www.youtube.com/watch?v=8-S0cWnLBKg)
-    - Opcion #2 [Ver Vídeo](https://www.youtube.com/watch?v=CREit-6_IgI&t=928s)
+    1. [[https://www.youtube.com/watch?v=8-S0cWnLBKg][Referencia #1]]
+    2. [[https://www.youtube.com/watch?v=CREit-6_IgI&t=928s][Referencia #2]]
 * Usando w3m y w3m-img
-  Con el programa `w3m` podemos navegar via internet mediante la terminal de comandos,
-  mientras que con `w3m-img` nos permite visualizar imagenes desde la terminal.
+  Con el programa *w3m* podemos navegar via internet mediante la terminal de comandos,
+  mientras que con *w3m-img* nos permite visualizar imagenes desde la terminal.
 * Rofi
   #+ATTR_HTML: :width 650
   [[../../assets/img/rufi-menu.png]]
@@ -340,10 +340,10 @@
    #+END_SRC
 ** Configuración - Cambiar Theme
    Suponiendo que ya tenemos instalado y configurado con i3
-   1. Desplegamos el menú de lineas de comandos con `Super+d`  (Por default abre dmenu, pero en mi configuración ejecuta Rofi)
-   2. Escribimos `rofi-theme-selector` y luego seleccionamos el theme que querramos (Monokai, Solarized, etc..)
-   3. Para ver la lista de themes instalados escribimos `ls /usr/share/rofi/themes`
-   4. Modificamos el archivo de configuración de **i3wm**
+   1. Desplegamos el menú de lineas de comandos con ~Super+d~  (Por default abre dmenu, pero en mi configuración ejecuta Rofi)
+   2. Escribimos ~rofi-theme-selector~ y luego seleccionamos el theme que querramos (Monokai, Solarized, etc..)
+   3. Para ver la lista de themes instalados escribimos ~ls /usr/share/rofi/themes~
+   4. Modificamos el archivo de configuración de *i3wm*
 
    #+NAME: i3-configurar
    #+BEGIN_SRC shell
@@ -365,11 +365,11 @@
      bindsym $mod+d exec rofi -show run -opacity "80" -columns 2 -theme Monokai
    #+END_SRC
 
-   6 . Reiniciamos el **i3wm** con `Mod+Shift+R`
-   Por último podemos probar si los cambios surtieron efectos ejecutando `Mod+d`
+   6 . Reiniciamos el *i3wm* con ~Mod+Shift+R~
+   Por último podemos probar si los cambios surtieron efectos ejecutando ~Mod+d~
 ** Referencias Youtube
-   - Referencia #1 [Ver Video](https://www.youtube.com/watch?v=wcMyH3o5FMg)
-   - Referencia #2 [Ver Video](https://www.youtube.com/watch?v=Sa9SWMvAMIU)
+   - [[https://www.youtube.com/watch?v=wcMyH3o5FMg][Referencia #1]]
+   - [[https://www.youtube.com/watch?v=Sa9SWMvAMIU][Referencia #2]]
 * Nitrogen
 ** Conceptos
    Nos da la opción de elegir y agregar fondos de pantalla al sistema
@@ -393,7 +393,7 @@
    #+END_SRC
 
    Luego aparecerá una pantalla con las imágenes guardadas en esa ruta,
-   elegimos la imagen preferida aplicamos los cambios presionando en **Apply**
+   elegimos la imagen preferida aplicamos los cambios presionando en *Apply*
 * Compton
 ** Conceptos
   Es un compositor de ventanas, que agrega efectos como animación
@@ -409,7 +409,7 @@
      sudo apt-get install -y compton
    #+END_SRC
 ** Configuración
-   Suponiendo que tenemos instalado y configurado **i3wm**, agregamos en el
+   Suponiendo que tenemos instalado y configurado *i3wm*, agregamos en el
    archivo de configuración la siguiente linea
 
    #+NAME: iw3m-configurar-compton
@@ -419,20 +419,17 @@
      exec_always compton -f
    #+END_SRC
 ** Referencias Youtube
-     - Compton [Ver Vídeo](https://www.youtube.com/watch?v=5GpyaSEe0VY)
+     - [[https://www.youtube.com/watch?v=5GpyaSEe0VY][Referencia #1]]
 * Polybar
 ** Conceptos
-   El **Polybar** es para crear un *statusbar* (barra de estado) que muestra
+   El *Polybar* es para crear un *statusbar* (barra de estado) que muestra
    la información del sistema con una interfáz gráfica
 ** Referencias
 *** Referencias Web Oficiales
-    - https://polybar.github.io/
-    - https://wiki.archlinux.org/index.php/Polybar
+    1. [[https://polybar.github.io/][Polybar]]
+    2. [[https://wiki.archlinux.org/index.php/Polybar][Polybar - Wiki, ArchLinux.org]]
 *** Referencias Youtube
-     - Polybar [Ver Vídeo](https://www.youtube.com/watch?v=7RNgpvBMua0)
-*** Referencias Web Extraoficiales
-    - http://entornosgnulinux.com/tag/polybar/
-    - https://goto-linux.com/es/2020/6/11/polybar-un-mejor-panel-wm-para-su-sistema-linux/
+     - [[https://www.youtube.com/watch?v=7RNgpvBMua0][Referencia #1]]
 * i3Blocks
 ** Conceptos
   Muestra la información de la barra de estado en formato json,
@@ -445,10 +442,10 @@
      apt-get install -y i3blocks
    #+END_SRC
 ** Configuración
-   1. Copiamos la configuración al directorio de **i3wm** `cp /etc/i3blocks.conf ~/.config/i3/`
-   2. Modificamos en `~/.config/i3/i3blocks.conf` lo que queremos que aparezca en la barra de estado
-   3. Reiniciamos el **i3wm** con `Super+Shift+R`
-   4. Modificamos la configuración de **i3wm** con `sudo nano ~/.config/i3/config` y buscamos la linea que diga **bar**
+   1. Copiamos la configuración al directorio de *i3wm* ~cp /etc/i3blocks.conf ~/.config/i3/~
+   2. Modificamos en ~~/.config/i3/i3blocks.conf~ lo que queremos que aparezca en la barra de estado
+   3. Reiniciamos el *i3wm* con ~Super+Shift+R~
+   4. Modificamos la configuración de *i3wm* con ~sudo nano ~/.config/i3/config~ y buscamos la linea que diga *bar*
 
    #+NAME: linux-i3-configuracion
    #+BEGIN_SRC bash
@@ -474,7 +471,7 @@
    #+END_SRC
 
    *Observación:*
-   Para iniciarlo ejecutamos desde la terminal con `ranger`
+   Para iniciarlo ejecutamos desde la terminal con ~ranger~
 ** Atajos
    #+NAME: atajos-ranger-filemanager
    |---------+----------------------|
@@ -483,8 +480,8 @@
    | Shift+q | Salir de la terminal |
    |---------+----------------------|
 ** Configuración
-   1. Modificamos el archivo de configuración con `sudo nano ~/.config/ranger/rc.conf`
-   2. Buscar las lineas que dejamos comentadas con **#** y cambiar por la que aparece debajo
+   1. Modificamos el archivo de configuración con ~sudo nano ~/.config/ranger/rc.conf~
+   2. Buscar las lineas que dejamos comentadas con *#* y cambiar por la que aparece debajo
 
    #+NAME: ranger-filemanager-configuracion
    #+BEGIN_SRC bash
@@ -497,15 +494,15 @@
      set preview_images_method w3m
    #+END_SRC
 
-   1. Nos aseguramos de tener instalado w3m ejecutando `sudo apt-get install w3m -y`
-   2. Aplicamos los cambios de la configuración `source ~/.config/ranger/rc.conf`
+   1. Nos aseguramos de tener instalado w3m ejecutando ~sudo apt-get install w3m -y~
+   2. Aplicamos los cambios de la configuración ~source ~/.config/ranger/rc.conf~
 ** Referencias
 *** Referencias Web Oficiales
-      -Documentacion Oficial [Ver Pagina](https://github.com/ranger/ranger)
-      -Wiki, por ArchLinux [Ver Pagina](https://wiki.archlinux.org/index.php/Ranger)
+    1. [[https://github.com/ranger/ranger][Documentacion Oficial]]
+    2. [[https://wiki.archlinux.org/index.php/Ranger][Wiki - ArchLinux]]
 *** Referencias Web Extraoficiales
-      -Referencia 1, por Vitux [Ver Pagina](https://vitux.com/how-to-install-ranger-terminal-file-manager-on-linux/)
-      -Referencia 2, por Vultr [Ver Pagina](https://www.vultr.com/docs/how-to-install-ranger-terminal-file-manager-on-linux)
+    1. [[https://vitux.com/how-to-install-ranger-terminal-file-manager-on-linux/][How to install ranger - Vitux]]
+    2. [[https://www.vultr.com/docs/how-to-install-ranger-terminal-file-manager-on-linux][How to install ranger - Vultr]]
 * Neofetch
 ** Conceptos
    Para ver información del sistema operativo
@@ -515,7 +512,7 @@
      sudo add-apt-repository ppa:dawidd0811/neofetch
    #+END_SRC
 ** Configuración
-   1. Modificamos el archivo de configuración de bash con `sudo nano ~/.bashrc`
+   1. Modificamos el archivo de configuración de bash con ~sudo nano ~/.bashrc~
    2. Agregamos la siguiente configuración
 
    #+NAME: bashrc-configurar-neofetch
@@ -526,37 +523,37 @@
    #+END_SRC
 
    *Observación*:
-   Se debe tener cuidado al modificar el archivo `.bashrc`
+   Se debe tener cuidado al modificar el archivo ~.bashrc~
 ** Referencias Web Extraoficiales
-    - Referencia #1 - DylanRaps [Ver Página](https://github.com/dylanaraps/neofetch/wiki/Image-Backends)
-    - Referencia #2 - DesdeLinux [Ver Página](https://blog.desdelinux.net/neofetch-obten-informacion-de-tu-equipo-y-sistema-en-la-terminal/)
-    - Referencia #3 - OsTechnix [Ver Página](https://www.ostechnix.com/neofetch-display-linux-systems-information/)		
+    1. [[https://github.com/dylanaraps/neofetch/wiki/Image-Backends][Referencia #1 - DylanRaps]]
+    2. [[https://blog.desdelinux.net/neofetch-obten-informacion-de-tu-equipo-y-sistema-en-la-terminal/][Referencia #2 - DesdeLinux]]
+    3. [[https://www.ostechnix.com/neofetch-display-linux-systems-information/][Referencia #3 - OsTechnix]]
 * Dar color a la Terminal
 ** Conceptos
    Con la ayuda de la página *Gogh* podemos darle color a la terminal
 
    Para más información sugerimos revisar las referencias
-** Referencias
-  - [Ir a Página](https://www.linuxuprising.com/2019/07/179-color-schemes-for-your-gtk-based.html)
+** Referencias Web Extraoficiales
+  - [[https://www.linuxuprising.com/2019/07/179-color-schemes-for-your-gtk-based.html][Referencia #1 - Linuxuprising]]
 * Font Manager 
 ** Conceptos
-  Con el **Font manager** podemos elegir entre varias fuentes para cambiar la tipografía 
+  Con el *Font manager* podemos elegir entre varias fuentes para cambiar la tipografía 
    
   Para más información sugerimos revisar las referencias
   Además agregamos algunas fuentes que se suelen recomendar para programar
 ** Referencias Web Extraoficiales
-   - [Ir a Página](https://itsfoss.com/install-fonts-ubuntu/#targetText=To%20install%20several%20fonts%20at,show%20hidden%20files%20in%20Ubuntu.)
-   - Fuentes por Webos [Ver Página](https://wesbos.com/programming-fonts/)
-   - Referencia #1 Hivellogic [Ver Página](http://hivelogic.com/articles/top-10-programming-fonts/)
-   - Referencia #2 Narga [Ver Página](https://www.narga.net/top-best-programing-fonts/)
-   - Referencia #3 Slant [Ver Página](https://www.slant.co/topics/7014/~fonts-to-use-in-a-terminal-emulator)
+   1. [[https://wesbos.com/programming-fonts/][Fuentes - Webos]]
+   2. [[http://hivelogic.com/articles/top-10-programming-fonts/][Referencia #1 - Hivelogic]]
+   3. [[https://www.narga.net/top-best-programing-fonts/][Referencia #2 - Narga]]
+   4. [[https://www.slant.co/topics/7014/~fonts-to-use-in-a-terminal-emulator][Referencia #3 - Slant]]
+   5. [[https://itsfoss.com/install-fonts-ubuntu/][Referencia #4 - Itfoss.com]]
 * Configuraciones de otros usuarios
-  - Referencia #1 - Gerardbm [Ver Página](https://github.com/gerardbm/dotfiles)
-  - Referencia #2 - HackerNoon [Ver Página](https://hackernoon.com/how-to-trick-out-terminal-287c0e93fce0)
-  - Referencia #3 - Reddit [Ver Página](https://www.reddit.com/r/unixporn/)
-  - Referencia #4 - Reddit [Ver Página](https://www.reddit.com/r/unixporn/comments/baz6j0/bspwm_rxvtunicode_redgreenblueshift/
-  - Referencia #5 - Manjaro [Ver Página](https://forum.manjaro.org/t/noteworthy-november-2016-screenshots/11997/7)
-  - Referencia #6 - BrianCaffey [Ver Página](https://briancaffey.github.io/2017/10/17/moving-from-gnome-to-i3-on-arch-linux.html)
-  - https://github.com/notthebee/dotfiles
-  - https://github.com/bookercodes/dotfiles/tree/arch
+  1. [[https://github.com/gerardbm/dotfiles][Referencia #1 - Gerardbm]]
+  2. [[https://hackernoon.com/how-to-trick-out-terminal-287c0e93fce0][Referencia #2 - HackerNoon]]
+  3. [[https://www.reddit.com/r/unixporn/][Referencia #3 - Reddit]]
+  4. [[https://www.reddit.com/r/unixporn/comments/baz6j0/bspwm_rxvtunicode_redgreenblueshift/][Referencia #4 - Reddit]]
+  5. [[https://forum.manjaro.org/t/noteworthy-november-2016-screenshots/11997/7][Referencia #5 - Manjaro]]
+  6. [[https://briancaffey.github.io/2017/10/17/moving-from-gnome-to-i3-on-arch-linux.html][Referencia #6 - BrianCaffey]]
+  7. [[https://github.com/notthebee/dotfiles][Referencia #7 - NotTheBee]]
+  8. [[https://github.com/bookercodes/dotfiles/tree/arch][Referencia #8 - BookerCodes]]
 

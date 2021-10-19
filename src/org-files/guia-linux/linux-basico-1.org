@@ -506,23 +506,23 @@
   Para armar esta guia me base en algunos libros y sitios web que consideré útiles
 ** Referencias Oficiales
    - Libro - Manual de Administracion de Linux, Steve Shah
-   - Curso GNU/Linux - Tareas y Procesos [Ver Página](http://www2.lugro.org.ar/biblioteca/cursos/curso_intro/x1845.html)
-   - Resumen de programas en la terminal [Ver Página](https://www.tldp.org/LDP/GNU-Linux-Tools-Summary/html/index.html)
-   - Resumen de la Jerarquía del Sistema de Archivos [Ver Página](https://www.tldp.org/LDP/Linux-Filesystem-Hierarchy/html/index.html)
-   - Como utilizar la redirección [Ver Página](https://www.tldp.org/LDP/abs/html/abs-guide.html#IO-REDIRECTION)
-   - Proyecto de Informacion sobre Linux [Ver Página](http://www.linfo.org/index.html)
+   - Curso GNU/Linux - Tareas y Procesos [[http://www2.lugro.org.ar/biblioteca/cursos/curso_intro/x1845.html][[Ver Página]​]]
+   - Resumen de programas en la terminal [[https://www.tldp.org/LDP/GNU-Linux-Tools-Summary/html/index.html][[Ver Página]​]]
+   - Resumen de la Jerarquía del Sistema de Archivos [[https://www.tldp.org/LDP/Linux-Filesystem-Hierarchy/html/index.html][[Ver Página]​]]
+   - Como utilizar la redirección [[https://www.tldp.org/LDP/abs/html/abs-guide.html#IO-REDIRECTION][[Ver Página]​]]
+   - Proyecto de Informacion sobre Linux [[http://www.linfo.org/index.html][[Ver Página]​]]
 ** Referencias Extraoficiales
 *** Otros
-    - Ejemplos del comando ps [Ver Página](https://www.tecmint.com/ps-command-examples-for-linux-process-monitoring/)
-    - Guia de comandos bash [Ver Página](https://likegeeks.com/linux-bash-scripting-awesome-guide-part5/#Linux-Signals)
+    - Ejemplos del comando ps [[https://www.tecmint.com/ps-command-examples-for-linux-process-monitoring/][[Ver Página]​]]
+    - Guia de comandos bash [[https://likegeeks.com/linux-bash-scripting-awesome-guide-part5/#Linux-Signals][[Ver Página]​]]
 *** - Entendiendo como usar el comando sed
-    - Ejemplos del comando sed, LikeGeeks [Ver Página](https://likegeeks.com/sed-linux/)
-    - Ejemplos del comando sed, LinuxAdictos [Ver Página](https://www.linuxadictos.com/sed-ejemplos-del-comando-magico-para-gnu-linux.html)
-    - Ejemplos del comando sed, TecMint [Ver Página](https://www.tecmint.com/linux-sed-command-tips-tricks/)
+    - Ejemplos del comando sed, LikeGeeks [[https://likegeeks.com/sed-linux/][[Ver Página]​]]
+    - Ejemplos del comando sed, LinuxAdictos [[https://www.linuxadictos.com/sed-ejemplos-del-comando-magico-para-gnu-linux.html][[Ver Página]​]]
+    - Ejemplos del comando sed, TecMint [[https://www.tecmint.com/linux-sed-command-tips-tricks/][[Ver Página]​]]
 *** - Entendiendo como usar el comando cat
-    - Explicación #1 del comando cat por RedHat [Ver Página](https://access.redhat.com/documentation/en-US/RedHat_Enterprise_Linux/4/html/Step_by_Step_Guide/s1-navigating-sio.html)		
-    - Explicación #2 del comando cat [Ver Página](https://www.computerhope.com/unix/ucat.htm)
-    - Explicación #3 del comando cat [Ver Página](https://hipertextual.com/archivo/2014/07/redirecciones-y-tuberias-bash/)
+    - Explicación #1 del comando cat por RedHat [[https://access.redhat.com/documentation/en-US/RedHat_Enterprise_Linux/4/html/Step_by_Step_Guide/s1-navigating-sio.html][[Ver Página]​]]
+    - Explicación #2 del comando cat [[https://www.computerhope.com/unix/ucat.htm][[Ver Página]​]]
+    - Explicación #3 del comando cat [[https://hipertextual.com/archivo/2014/07/redirecciones-y-tuberias-bash/][[Ver Página]​]]
 *** - Personalizar prompt de la terminal
-    - Referencia #1, Vitux [Ver Pagina](https://vitux.com/how-to-customize-ubuntu-bash-prompt/)
-    - Referencia #2, Ubunlog [Ver Pagina](https://ubunlog.com/prompt-ejemplos-personalizar-terminal/)
+    - Referencia #1, Vitux [[https://vitux.com/how-to-customize-ubuntu-bash-prompt/][[Ver Pagina]​]]
+    - Referencia #2, Ubunlog [[https://ubunlog.com/prompt-ejemplos-personalizar-terminal/][[Ver Pagina]​]]
