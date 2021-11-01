@@ -138,6 +138,196 @@
      # si queremos volver tres cambios atrás
      git revert HEAD^^^
    #+END_SRC
+* Traerse cambios confirmados de otras ramas
+** Git Merge Vs Git Rebase
+   #+BEGIN_QUOTE
+   Las diferencias entre traerse los cambios con ~git merge~ y ~git rebase~
+   es más fácil si lo vemos a partir de una imagen del historial
+
+   Si hubiese algún *conflicto* al traerse los cambios de otra rama,
+   es más seguro si hubiesemos usado ~git merge~.
+   Porque luego de resolverlo se genera un nuevo commit con el conflicto resuelto,
+   éste nuevo commit queda separado de los otros dos commits que entraron en conflicto.
+   
+   Si un tercero dice que el conflicto no se resolvió de manera correcta,
+   es fácil volver a un estado anterior, porque tenemos el historial de cambios confirmados :)
+
+   ---------------------------------------------------------------------------------------------
+   
+   Mientras que si hubiesemos usado ~git rebase~,
+   luego de resolver el conflicto, éste hubiese pisado el commit donde se resolvió el conflicto
+   y veremos en el historial de cambios confirmados, que de los dos commits que entraron en conflicto
+   sólo vemos uno de ellos, y el commit del conflicto resuelto :(
+
+   y.. si un tercero dice que el conflicto no se había resuelto de manera correcta..? que hacemos?
+   quizás deberiamos usar ~git reflog~ para chequear a cual commit volver
+   y luego un ~git revert~ para volver a un estado anterior del conflicto...
+   #+END_QUOTE
+   
+   [[../../assets/img/git-merge-vs-rebase.png]]
+** Conflictos
+*** Conflictos con Rebase
+    #+BEGIN_SRC shell
+      git log --oneline --graph feature/notifications fix/componentes-notifications
+      # * 9d15ce9 (HEAD -> feature/notifications) Cambiamos los componentes del template <--- RECORDÁ ESTE HASH
+      # | * 15f67c2 (fix/componentes-notifications) Corregimos errores de componentes en el template
+      # |/
+      # * d0eab85 Nuevos componentes en el template
+      
+      git rebase fix/componentes-notifications
+      # Auto-fusionando src/templates/layout.hbs
+      # CONFLICTO (contenido): Conflicto de fusión en src/templates/layout.hbs
+      # error: no se pudo aplicar 9d15ce9... Cambiamos los componentes del template
+      
+      git status
+      # rebase interactivo en progreso; en 15f67c2
+      # El último comando realizado (1 comando realizado):
+      # pick 9d15ce9 Cambiamos los componentes del template
+      # Estás aplicando un rebase de la rama 'feature/notifications' en '15f67c2.
+      
+      # corregimos los errores
+      vim layout.hbs
+      # confirmamos que resolvimos el conflicto
+      git add layout.hbs
+      git rebase --continue
+      
+      #################################################################################
+      
+      git log --oneline --graph feature/notifications fix/componentes-notifications
+      
+      # * d97b639 (HEAD -> feature/notifications) Cambiamos los componentes del template <--- REESCRIBIÓ EL HISTORIAL
+      # * 15f67c2 (fix/componentes-notifications) Corregimos errores de componentes en el template
+      # * d0eab85 Nuevos componentes en el template
+    #+END_SRC
+*** Conflictos con Merge
+    #+BEGIN_SRC shell
+      git log --oneline --graph --all
+      #   * b524286 (fix/login) Corregimos errores de login, esto hará pum!
+      #   | * 8911ee8 (HEAD -> feature/login) Nuevo feature del login
+      #   | * f3cc3f4 Agregamos cambios al controller
+      #   |/
+      #   * c5a59a2 Corregimos errores del login
+      #   * e213803 Resolvemos bugs del controller del login
+      
+      git checkout feature/login
+      git merge fix/login
+      # Auto-fusionando src/controllers/ControllerLogin.java
+      # CONFLICTO (contenido): Conflicto de fusión en src/controllers/ControllerLogin.java
+      # Fusión automática falló; arregle los conflictos y luego realice un commit con el resultado.
+      
+      ##############################################################################################
+      
+      # corregimos los conflictos
+      git add ControllerLogin.java
+      git commit -m "Conflicto resuelto en login"
+      # 1c007b0 (HEAD -> feature/login) Conflicto resuelto en login
+      # b524286 (fix/login) Corregimos errores de login, esto hará pum!
+      # 8911ee8 Nuevo feature del login
+      
+      git log --oneline --graph feature/login fix/login
+      #    *   1c007b0 (HEAD -> feature/login) Conflicto resuelto en login <- nuevo commit, no reescribió historial
+      #    |\
+      #    | * b524286 (fix/login) Corregimos errores de login, esto hará pum!
+      #    * | 8911ee8 Nuevo feature del login <--- el "Merge" no lo reescribió, mantuvo este commit 
+      #    * | f3cc3f4 Agregamos cambios al controller
+      #    |/
+      #    * c5a59a2 Corregimos errores del login
+      #    * e213803 Resolvemos bugs del controller del login
+    #+END_SRC
+** Traerse cambios confirmados (reescribiendo el historial de commits)
+   - Usamos el ~git rebase otraRama~ para traernos los cambios de otra rama
+   - El ~git rebase~ altera el historial y hace que quede más lineal/uniforme, para eso elimina ramificaciones
+   
+   #+BEGIN_SRC shell
+     git log --oneline feature/login
+     # Previo al git rebase, estamos en feature/login
+     #
+     # 64db81f (HEAD -> feature/login) Cambios en el Controller del login
+     # 7f4719a Desarrollamos el template para el login
+     # 44dff8f Creamos la vista para el Login
+     # 2950f8f Implementamos el Controller del login
+     # 7ded51d Agregamos estructura MVC
+     # a566d68 (origin/master, master) Agregamos contenido al README
+     # 2175a2d Agregamos README
+     
+     git log --oneline fix/login
+     # Rama fix/login se creó a partir de feature/login
+     #
+     # e213803 (HEAD -> fix/login) Resolvemos bugs del controller del login
+     # bb00725 Corregimos errores de la Vista del Login
+     # 64db81f (HEAD -> feature/login) Cambios en el Controller del login
+     # "el resto de los commits de feature/login" hasta 2175..
+     
+     git log --oneline --graph feature/login fix/login
+     # Comparamos que tan avanzadas están ambas ramas
+     #
+     # e213803 (fix/login) Resolvemos bugs del controller del login
+     # bb00725 Corregimos errores de la Vista del Login
+     # 64db81f (HEAD -> feature/login) Cambios en el Controller del login
+     # 7f4719a Desarrollamos el template para el login
+     # 44dff8f Creamos la vista para el Login
+     # 2950f8f Implementamos el Controller del login
+     # 7ded51d Agregamos estructura MVC
+     # a566d68 (origin/master, master) Agregamos contenido al README
+     # 2175a2d Agregamos README
+     
+     #########################################################################
+     
+     # cambiamos a la rama "feature/login" donde HEAD apunta a su commit más reciente
+     git checkout feature/login
+     # nos traemos los cambios de la ama fix/login
+     git rebase fix/login
+     
+     # validamos que feature/login tenga los últimos commits de fix/login
+     git log --oneline
+     # e213803 (HEAD -> feature/login, fix/login) Resolvemos bugs del controller del login
+     # bb00725 Corregimos errores de la Vista del Login
+     # 64db81f Cambios en el Controller del login
+     # 7f4719a Desarrollamos el template para el login
+     # 44dff8f Creamos la vista para el Login
+     # 2950f8f Implementamos el Controller del login
+     # 7ded51d Agregamos estructura MVC
+     # a566d68 (origin/master, master) Agregamos contenido al README
+     # 2175a2d Agregamos README
+   #+END_SRC
+** Traese cambios confirmados (sin alterar el historial de commits)
+   - Usamos el ~git merge otraRama~ para traernos los cambios de otra rama
+   - El ~git merge~ a diferencia del ~git rebase~, mantiene las ramificaciones
+     
+   #+BEGIN_SRC shell
+     git log --oneline feature/notifications
+     # Previo al git merge, estamos en feature/notifications
+     #
+     # ba2b632 (HEAD -> feature/notifications) Implementamos el controller para las notificaciones
+     # 53eba36 Creamos template para las notificaciones
+     # 8c03d54 Creamos estructura MVC para las notificaciones
+     # ddbcd4e Creamos estructura para las notificaciones
+     # a566d68 (origin/master, master) Agregamos contenido al README
+     # 2175a2d Agregamos README
+     
+     git log --oneline fix/controllerNotifications
+     # eff7bf8 (HEAD -> fix/controllerNotifications) Corregimos los NullException
+     # 04f244b Removemos imports innecesarios
+     # ba2b632 (feature/notifications) Implementamos el controller para las notificaciones
+     # "el resto de los commits de feature/login" hasta 2175..
+     
+     git checkout feature/notifications
+     git merge fix/controllerNotifications
+     # Actualizando ba2b632..eff7bf8
+     # Fast-forward
+     # src/controllers/ControllerNotification.java | 2 ++
+     # 1 file changed, 2 insertions(+)
+     
+     git log --oneline
+     # eff7bf8 (HEAD -> feature/notifications, fix/controllerNotifications) Corregimos los NullException
+     # 04f244b Removemos imports innecesarios
+     # ba2b632 Implementamos el controller para las notificaciones
+     # 53eba36 Creamos template para las notificaciones
+     # 8c03d54 Creamos estructura MVC para las notificaciones
+     # ddbcd4e Creamos estructura para las notificaciones
+     # a566d68 (origin/master, master) Agregamos contenido al README
+     # 2175a2d Agregamos README
+   #+END_SRC
 * Borrar ramas
   #+BEGIN_SRC shell
     # borramos una rama local
