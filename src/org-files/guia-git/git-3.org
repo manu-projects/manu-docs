@@ -328,6 +328,49 @@
      # a566d68 (origin/master, master) Agregamos contenido al README
      # 2175a2d Agregamos README
    #+END_SRC
+* Alterar historial con GUI de varios commits
+  #+BEGIN_QUOTE
+  Con el comando ~git rebase -i hashCommit~ podemos reescribir el historial,
+  nos aparecerá un editor en la terminal con el historial de commits.
+  
+  A la izquierda del *Hash* de cada commit aparece por default ~pick~
+  pero podemos cambiarlo por otro comando (Ej. ~squash~)
+
+  Podemos fusionar varios commits en un solo commit con ~squash~ con el commit anterior
+  (un commit el que esté debajo)
+  ó cambiando el orden en que aparecen (/sólo debemos alterar el orden de las lineas/)
+  ó eliminando varios commits (/sólo debemos borrar las lineas/)
+
+  Ojo..! Los commits más recientes aparecen arriba, y los más viejos al final..
+  Se comporta como un *Stack*
+  #+END_QUOTE
+  
+  #+BEGIN_SRC shell
+    git log --oneline
+    # a60d9aa (HEAD -> feature/layout) Borramos layout viejo (el más reciente)
+    # 12935c2 Agregamos alternativa al layout
+    # 21da601 Cambiamos nombre del layout
+    # c2e1aa7 Corregimos errores del layout
+    # 9888240 Agregamos contenido al layout
+    # 69851c5 Creamos el layout.hbs <- HASTA ACÁ será el HEAD~6, porque también considera el a60d9
+    # a566d68 (origin/master, master) Agregamos contenido al README
+    # 2175a2d Agregamos README
+    
+    git rebase -i HEAD~6
+    # pick 69851c5 Creamos el layout.hbs
+    # squash 9888240 Agregamos contenido al layout
+    # squash c2e1aa7 Corregimos errores del layout
+    # squash 21da601 Cambiamos nombre del layout
+    # squash 12935c2 Agregamos alternativa al layout <--- se fusionará con el anterior (21da.. )
+    # squash a60d9aa Borramos layout viejo <--- se fusionará con el anterior (1293.. )
+    #
+    # Rebase a566d68..a60d9aa en a566d68 (6 comandos)
+    
+    git log --oneline
+    # 522ca88 (HEAD -> feature/layout) Desarrollamos layout <--- Fusionó los 6 commits en uno nuevo
+    # a566d68 (origin/master, master) Agregamos contenido al README
+    # 2175a2d Agregamos README
+  #+END_SRC
 * Borrar ramas
   #+BEGIN_SRC shell
     # borramos una rama local
