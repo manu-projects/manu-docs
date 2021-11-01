@@ -7,18 +7,146 @@
     git checkout -b nombreRama origin/nombreRama
   #+END_SRC
 * Subir ramas locales
+  - El *origin* hace referencia al *repositorio remoto* (/al que está en internet/)
+  
   #+BEGIN_SRC shell
     git push origin ramaLocal
   #+END_SRC
 * Deshacer cambios confirmados
-  #+BEGIN_SRC shell
-    # si queremos volver un cambio atrás
-    git reset HEAD~1
+** Deshacer cambios confirmados (borrando historial)
+   - Se sugiere sólo usar ~git reset~ en ramas locales, para evitar borrar cambios confirmados de otros usuarios en el *repositorio remoto*
+   - Con ~git reset~ nos podemos mover a un *commit* borrando del *historial* los *cambios confirmados*
+   - El ~HEAD~ es un puntero que apunta al *commit* actual en el que estémos trabajando, podemos cambiar su referencia con ~git checkout hashCommit~
+   
+   #+BEGIN_SRC shell
+     # ahora HEAD apunta al último cambio confirmado de la branch "feature/navbar"
+     git checkout feature/navbar
+     
+     # si queremos volver un cambio atrás
+     git reset HEAD^
+     
+     # si queremos volver un cambio atrás
+     git reset HEAD~1
+     
+     #######################################
+     
+     # si queremos volver tres cambios atrás
+     git reset HEAD~3
+     
+     # si queremos volver tres cambios atrás
+     git reset HEAD^^^
+   #+END_SRC
+** Deshacer el borrado de historial
+   #+BEGIN_QUOTE
+   Si hicimos un ~git reset~ por error y queremos volver al estado anterior,
+   no podríamos sólo usando ~git log --oneline -graph~ porque el historial de commits fue alterado..
+   
+   La solución es usar ~git reflog show nombreRama~ que muestra un historial de todos los comandos
+   (reset, rebase, commit, revert, ..) por tanto podemos elegir el hash del commit previo al ~git reset~
+   #+END_QUOTE
 
-    # si queremos volver tres cambio atrás
-    git reset HEAD~3
+   #+BEGIN_EXAMPLE
+   Hagamos de ejemplo que estamos desarrollando un navbar para un sitio web,
+   en la rama "feature/navbar".. y lo siguiente son cambios confirmados en nuestra rama local
+   1. Armamos la estructura del HTML con los respectivos tags
+   2. Agregamos estilos css, animaciones con javascript, iconos al html
+   
+   De repente nuestro jefe ve los últimos cambios, pero no le gustó nada del punto 2,
+   entonces debemos volver al punto 1 donde sólo tenemos la estructura html
+   #+END_EXAMPLE
+   
+   #+BEGIN_SRC shell
+     # Hacemos que HEAD apunte a la branch feature/navbar
+     # (apuntará al commit más reciente de esa rama)
+     git checkout feature/navbar
+     
+     git log --oneline
+     # Historial de commits en feature/navbar previo al "git reset"
+     # el puntero HEAD apunta al último commit con hash f373...
+     #
+     # f37332f (HEAD -> feature/navbar) Agregamos iconos al html del navbar <--- se borrará
+     # 09912df Agregamos animaciones js al navbar <--- se borrará
+     # 2c6d3b6 Agregamos estilos css al navbar <--- se borrará
+     # 43bc73d Agregamos estructura html al navbar
+     # e592a66 Creamos navbar
+     # a566d68 (origin/master, master) Agregamos contenido al README
+     # 2175a2d Agregamos README
+     
+     ######################################################################
+     # Nuestro jefe nos dijo que no le gustó nuestros cambios >:(
+     # bueno, empecemos de nuevo.. T_T
+     
+     # Volvemos 3 commits atrás, estaremos en el commit 43bc..
+     # se borrarán del historial los commits f373.., 0991.., 2c6d...
+     git reset HEAD~3
+     
+     # Historial de commits alterado, luego de un "git reset"
+     #
+     # 43bc73d (HEAD -> feature/navbar) Agregamos estructura html al navbar
+     # e592a66 Creamos navbar
+     # a566d68 (origin/master, master) Agregamos contenido al README
+     # 2175a2d Agregamos README
+     
+     ###########################################################################
+     # Ups..! Nuestro jefe se arripintió y nos dice que le gustaba lo que estaba hecho..
+     # bueno, volvemos al estado anterior, previo al "git reset HEAD~3"
+     
+     # Revisamos el historial de comandos de git (reset,rebase,commit,revert,....)
+     git reflog show feature/navbar
+     # 43bc73d (HEAD -> feature/navbar) feature/navbar@{0}: reset: moving to HEAD~3
+     # f37332f feature/navbar@{1}: commit: Agregamos iconos al html del navbar <--- acá queremos volver
+     # 09912df feature/navbar@{2}: commit: Agregamos animaciones js al navbar
+     # 2c6d3b6 feature/navbar@{3}: commit: Agregamos estilos css al navbar
+     # 43bc73d (HEAD -> feature/navbar) feature/navbar@{4}: commit: Agregamos estructura html al navbar
+     # e592a66 feature/navbar@{5}: commit: Creamos navbar
+     # a566d68 (origin/master, master) feature/navbar@{6}: branch: Created from HEAD
+     
+     # Volvemos al commit f373... que es anterior al "git reset"
+     # en vez de poner el hash del commit, usamos nombreRama@{1} para evitar errores de tipeo
+     git reset feature/navbar@{1}
+     
+     # Chequeamos el historial por si acaso, y aparecen nuevamente los commits
+     # que estaban perdidos :)
+     git log --oneline
+     # f37332f (HEAD -> feature/navbar) Agregamos iconos al html del navbar <--- volvió
+     # 09912df Agregamos animaciones js al navbar <--- volvió
+     # 2c6d3b6 Agregamos estilos css al navbar <--- volvió
+     # 43bc73d Agregamos estructura html al navbar
+     # e592a66 Creamos navbar
+     # a566d68 (origin/master, master) Agregamos contenido al README
+     # 2175a2d Agregamos README
+   #+END_SRC
+** Deshacer cambios confirmados (creando un commit)
+   - Con ~git revert~ hacemos casi lo mismo que con ~git reset~ pero no borra el historial, crea un nuevo *commit*
+   - Se recomienda usar ~git revert~ en *ramas remotas* porque no borra *cambios confirmados* de otros usuarios
+   
+   #+BEGIN_SRC shell
+     # ahora HEAD apunta al último cambio confirmado de la branch "feature/sidebar"
+     git checkout feature/sidebar
+     
+     # si queremos volver un cambio atrás
+     git revert HEAD^
+     
+     # si queremos volver un cambio atrás
+     git revert HEAD~1
+     
+     #######################################
+     
+     # si queremos volver tres cambios atrás
+     git revert HEAD~3
+     
+     # si queremos volver tres cambios atrás
+     git revert HEAD^^^
+   #+END_SRC
+* Borrar ramas
+  #+BEGIN_SRC shell
+    # borramos una rama local
+    git branch -d miRamaLocal
+    
+    # borramos la rama que está en el repositorio remoto (internet)
+    git push origin -d unaRamaRemota
   #+END_SRC
-* Guardar cambios
+* Guardar cambios temporalmente
   #+BEGIN_SRC shell
     git stash --save "nombre "
     # lo q sea
