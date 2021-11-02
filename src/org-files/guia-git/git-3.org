@@ -290,7 +290,7 @@
      # a566d68 (origin/master, master) Agregamos contenido al README
      # 2175a2d Agregamos README
    #+END_SRC
-** Traese cambios confirmados (sin alterar el historial de commits)
+** Traerse cambios confirmados (sin alterar el historial de commits)
    - Usamos el ~git merge otraRama~ para traernos los cambios de otra rama
    - El ~git merge~ a diferencia del ~git rebase~, mantiene las ramificaciones
      
@@ -341,13 +341,13 @@
   ó cambiando el orden en que aparecen (/sólo debemos alterar el orden de las lineas/)
   ó eliminando varios commits (/sólo debemos borrar las lineas/)
 
-  Ojo..! Los commits más recientes aparecen arriba, y los más viejos al final..
-  Se comporta como un *Stack*
+  Ojo..! El orden de los commits en el *rebase interactivo* aparece al revés que en ~git log --oneline~
+  Los commits más recientes aparecen al final, y los más viejos arriba..
   #+END_QUOTE
   
   #+BEGIN_SRC shell
     git log --oneline
-    # a60d9aa (HEAD -> feature/layout) Borramos layout viejo (el más reciente)
+    # a60d9aa (HEAD -> feature/layout) Borramos layout viejo (el commit más reciente)
     # 12935c2 Agregamos alternativa al layout
     # 21da601 Cambiamos nombre del layout
     # c2e1aa7 Corregimos errores del layout
@@ -357,12 +357,12 @@
     # 2175a2d Agregamos README
     
     git rebase -i HEAD~6
-    # pick 69851c5 Creamos el layout.hbs
+    # pick 69851c5 Creamos el layout.hbs (el commit más viejo)
     # squash 9888240 Agregamos contenido al layout
     # squash c2e1aa7 Corregimos errores del layout
     # squash 21da601 Cambiamos nombre del layout
     # squash 12935c2 Agregamos alternativa al layout <--- se fusionará con el anterior (21da.. )
-    # squash a60d9aa Borramos layout viejo <--- se fusionará con el anterior (1293.. )
+    # squash a60d9aa Borramos layout viejo <--- (el commit más reciente) se fusionará con el anterior (1293.. )
     #
     # Rebase a566d68..a60d9aa en a566d68 (6 comandos)
     
