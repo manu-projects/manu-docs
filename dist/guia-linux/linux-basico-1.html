@@ -1,0 +1,1378 @@
+<!--?xml version="1.0" encoding="utf-8"?--><!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<!-- 2021-09-13 lun 11:56 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guia Linux - Sobrevivir a la terminal - Parte 1</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="jelou">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/sass-style.css">
+<script type="text/javascript" src="/assets/js/all.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Guia Linux - Sobrevivir a la terminal - Parte 1</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org88fabef">1. Enlaces</a>
+<ul>
+<li><a href="#orgae5b32d">1.1. Conceptos</a></li>
+<li><a href="#orge11b270">1.2. Enlaces blandos</a></li>
+</ul>
+</li>
+<li><a href="#orgaff9c05">2. Directorios</a>
+<ul>
+<li><a href="#orge94467c">2.1. Crear un arbol de directorios</a></li>
+<li><a href="#orgc7e2f4c">2.2. Eliminar multiples directorios</a></li>
+</ul>
+</li>
+<li><a href="#org46991c9">3. Compresión de Archivos</a>
+<ul>
+<li><a href="#org14c1754">3.1. Conceptos</a></li>
+<li><a href="#org0a1b4b9">3.2. Comprimir con gzip y bzip2</a>
+<ul>
+<li><a href="#org971392f">3.2.1. Conceptos</a></li>
+<li><a href="#org5820b3d">3.2.2. Comprimir un archivo con gzip</a></li>
+<li><a href="#org115b6bd">3.2.3. Comprimir  un archivo con gzip con la mejor compresión posible</a></li>
+<li><a href="#orgfdc0d70">3.2.4. Comprimir con gzip varios archivos en una linea</a></li>
+<li><a href="#org7319282">3.2.5. Extraer con gzip el contenido de un archivo</a></li>
+</ul>
+</li>
+<li><a href="#orgb64a0b7">3.3. Comprimir con tar</a>
+<ul>
+<li><a href="#orgab7c5b8">3.3.1. Comprimir una carpeta</a></li>
+<li><a href="#orga960467">3.3.2. Comprimir multiples archivos</a></li>
+<li><a href="#orged35393">3.3.3. Descomprimir un archivo .tar.gz</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgec7cecf">4. Permisos</a>
+<ul>
+<li><a href="#orgf08f189">4.1. chown</a></li>
+<li><a href="#orgfb8496c">4.2. chgrp</a></li>
+<li><a href="#org4224e65">4.3. chmod</a></li>
+<li><a href="#org435de0f">4.4. Modo Númerico</a></li>
+<li><a href="#org3e81638">4.5. Modo Simbólico</a>
+<ul>
+<li><a href="#orgb3991d1">4.5.1. Conceptos</a></li>
+<li><a href="#org643aa84">4.5.2. Agregar permisos al usuario</a></li>
+<li><a href="#orged20ca4">4.5.3. Agregar permisos al usuario, grupo e invitados</a></li>
+<li><a href="#org6111de9">4.5.4. Agregar diferentes permisos</a></li>
+<li><a href="#org26ca050">4.5.5. Eliminar Permisos</a></li>
+<li><a href="#org887f430">4.5.6. Sobreescribir Permisos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org3ba5cfb">5. Listar directorios</a>
+<ul>
+<li><a href="#orgd249ea8">5.1. Listar las carpetas y archivos de un directorio</a></li>
+</ul>
+</li>
+<li><a href="#org3c04dc3">6. Tuberia (Pipe) y Redirección de datos</a>
+<ul>
+<li><a href="#orgf1a1392">6.1. Filtrar el listado de directorio</a></li>
+<li><a href="#orgb3dd231">6.2. Redirigir la salida de un programa como entrada de otro</a></li>
+<li><a href="#org30105fa">6.3. Redirigir como entrada la salida de otro programa</a></li>
+<li><a href="#orgca7f6fb">6.4. Insertar texto a un archivo</a></li>
+<li><a href="#orge941676">6.5. Insertar texto al principio de un archivo en una linea con cat</a></li>
+<li><a href="#org32f46d6">6.6. Insertar texto al principio de un archivo con el comando sed</a></li>
+</ul>
+</li>
+<li><a href="#orga852877">7. Documentación de los programas</a>
+<ul>
+<li><a href="#org3caba2e">7.1. Conceptos</a></li>
+<li><a href="#orga358c16">7.2. Obtener documentación resumida de un programa</a></li>
+<li><a href="#org9ac7c46">7.3. Obtener documentación más ordenada de un programa</a></li>
+</ul>
+</li>
+<li><a href="#org2b4aa4e">8. Otros comandos interesantes</a>
+<ul>
+<li><a href="#org410c91a">8.1. Ejecutar multiples comandos en una linea</a></li>
+<li><a href="#org86b2dee">8.2. Ejecutar un programa luego de otro</a></li>
+<li><a href="#org3a5d9e5">8.3. Saber la ruta de un programa</a></li>
+<li><a href="#org6cece50">8.4. Pasar por parametro la salida de un comando</a></li>
+<li><a href="#org3529f3a">8.5. Cambiar de usuario</a></li>
+<li><a href="#org48dcc3b">8.6. Saber en que terminal nos encontramos</a></li>
+<li><a href="#org3d1ba4b">8.7. Saber la ruta en la que se encuentra la terminal</a></li>
+<li><a href="#org1183063">8.8. Listar paquetes instalados ordenados por fecha</a></li>
+<li><a href="#orga8b939d">8.9. Conocer el tipo de terminal en ejecución</a></li>
+<li><a href="#orgbffe3ea">8.10. Personalizar el prompt de la terminal</a>
+<ul>
+<li><a href="#org9ad0273">8.10.1. Modificamos la configuracion de la terminal</a></li>
+<li><a href="#orgedfee4a">8.10.2. Otras variantes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org0f04797">9. Referencias Web</a>
+<ul>
+<li><a href="#org4682c3c">9.1. Referencias Oficiales</a></li>
+<li><a href="#org95967fa">9.2. Referencias Extraoficiales</a>
+<ul>
+<li><a href="#orgdf9ef89">9.2.1. Otros</a></li>
+<li><a href="#org2ad0ee1">9.2.2. - Entendiendo como usar el comando sed</a></li>
+<li><a href="#org6fb0cc1">9.2.3. - Entendiendo como usar el comando cat</a></li>
+<li><a href="#orgeac16c2">9.2.4. - Personalizar prompt de la terminal</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="org864deef" class="figure">
+<p><img src="/img/linux-terminal.png" alt="linux-terminal.png">
+</p>
+</div>
+
+<div id="outline-container-org88fabef" class="outline-2">
+<h2 id="org88fabef"><span class="section-number-2">1.</span> Enlaces</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgae5b32d" class="outline-3">
+<h3 id="orgae5b32d"><span class="section-number-3">1.1.</span> Conceptos</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Existen dos tipos de enlaces, blandos y duros, el que más nos interesa por ahora es el primero.
+</p>
+</div>
+</div>
+<div id="outline-container-orge11b270" class="outline-3">
+<h3 id="orge11b270"><span class="section-number-3">1.2.</span> Enlaces blandos</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Es parecido al acceso directo en Windows, permite dirigirse al archivo o directorio desde otro archivo ubicado donde uno quiera.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="org0eb8efb">ln -s original_file new_file
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgaff9c05" class="outline-2">
+<h2 id="orgaff9c05"><span class="section-number-2">2.</span> Directorios</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orge94467c" class="outline-3">
+<h3 id="orge94467c"><span class="section-number-3">2.1.</span> Crear un arbol de directorios</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Con <b><b>mkdir -p</b></b> seguido de los directorios que se quieran crear,
+a diferencia de usar solo <b><b>mkdir</b></b> sin el parametro <b><b>p</b></b>, es que este crea multiples directorios padres.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="org16db05a">mkdir -p git/proyectos/prueba1 <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">crea la carpeta git, dentro proyectos y dentro prueba1</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc7e2f4c" class="outline-3">
+<h3 id="orgc7e2f4c"><span class="section-number-3">2.2.</span> Eliminar multiples directorios</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Se opera de igual forma que con crear, pero se utiliza <b><b>rm</b></b> en vez de <b><b>mkdir</b></b>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="orgb178e5c">rm -p git/proyectos/sistemaDeControl <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">se borran todos los directorios</span>
+</pre>
+</div>
+
+<p>
+<b>Observacion:</b>
+Se puede también utilizar el parametro <b><b>-r</b></b> en vez de <b><b>-p</b></b>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org46991c9" class="outline-2">
+<h2 id="org46991c9"><span class="section-number-2">3.</span> Compresión de Archivos</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org14c1754" class="outline-3">
+<h3 id="org14c1754"><span class="section-number-3">3.1.</span> Conceptos</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+La compresión de archivos permite reducir el espacio que ocupan en disco,
+por tanto permite adjuntar en un correo, subir a la nube con mayor velocidad.
+</p>
+</div>
+</div>
+<div id="outline-container-org0a1b4b9" class="outline-3">
+<h3 id="org0a1b4b9"><span class="section-number-3">3.2.</span> Comprimir con gzip y bzip2</h3>
+<div class="outline-text-3" id="text-3-2">
+</div>
+<div id="outline-container-org971392f" class="outline-4">
+<h4 id="org971392f"><span class="section-number-4">3.2.1.</span> Conceptos</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<p>
+Con <b><b>gzip</b></b> se puede comprimir un archivo que le agrega la extensión <b><b>.gz</b></b>, mientras que con <b><b>bzip2</b></b> comprime el archivo aún más y le agrega la extensión <b><b>.bz</b></b>. En ambos casos los comprime de manera individual es decir no los agrupa en un solo archivo, pero que si lo permite <b><b>tar</b></b>
+</p>
+</div>
+</div>
+<div id="outline-container-org5820b3d" class="outline-4">
+<h4 id="org5820b3d"><span class="section-number-4">3.2.2.</span> Comprimir un archivo con gzip</h4>
+<div class="outline-text-4" id="text-3-2-2">
+<div class="org-src-container">
+<pre class="src src-shell" id="org337ef8d">gzip finanzas.txt <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">finanzas.txt se comprime y convierte en finanzas.txt.gz</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org115b6bd" class="outline-4">
+<h4 id="org115b6bd"><span class="section-number-4">3.2.3.</span> Comprimir  un archivo con gzip con la mejor compresión posible</h4>
+<div class="outline-text-4" id="text-3-2-3">
+<div class="org-src-container">
+<pre class="src src-shell" id="org6a85916">gzip -9 finanzas.txt <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">finanzas.txt se comprime y convierte en finanzas.txt.gz</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfdc0d70" class="outline-4">
+<h4 id="orgfdc0d70"><span class="section-number-4">3.2.4.</span> Comprimir con gzip varios archivos en una linea</h4>
+<div class="outline-text-4" id="text-3-2-4">
+<div class="org-src-container">
+<pre class="src src-shell" id="orgb1e17f1">gzip *.txt <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">comprime todos los archivos de extension .txt</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7319282" class="outline-4">
+<h4 id="org7319282"><span class="section-number-4">3.2.5.</span> Extraer con gzip el contenido de un archivo</h4>
+<div class="outline-text-4" id="text-3-2-5">
+<div class="org-src-container">
+<pre class="src src-shell" id="orgca0bea3">gzip -d finanzas.txt.gz <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">descomprime el archivo y vuelve al formato original finanzas.txt</span>
+gunzip - finanzas.txt.gz <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">otra manera de descomprimir sin pasar parametros</span>
+</pre>
+</div>
+
+<p>
+<b>Observación:</b>
+Solo se necesita agregar el parametro <b><b>-d</b></b> antes del nombre del archivo
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb64a0b7" class="outline-3">
+<h3 id="orgb64a0b7"><span class="section-number-3">3.3.</span> Comprimir con tar</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Esta herramienta incluye <b><b>gzip</b></b> y <b><b>bzip2</b></b> para comprimir multiples archivos, con el formato <b><b>.tar.gz</b></b> o <b><b>.tar.bz</b></b>
+</p>
+
+<p>
+La lista de los parametros que se le pueden pasar son:
+</p>
+
+<table id="orgbf62fcb" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Parametro</th>
+<th scope="col" class="org-left">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">c</td>
+<td class="org-left">Crea el archivo</td>
+</tr>
+
+<tr>
+<td class="org-left">x</td>
+<td class="org-left">Extrae el contenido</td>
+</tr>
+
+<tr>
+<td class="org-left">v</td>
+<td class="org-left">Muestra el paso a paso</td>
+</tr>
+
+<tr>
+<td class="org-left">z</td>
+<td class="org-left">Comprime con gzip</td>
+</tr>
+
+<tr>
+<td class="org-left">j</td>
+<td class="org-left">Comprime con bzip2</td>
+</tr>
+
+<tr>
+<td class="org-left">f</td>
+<td class="org-left">Para indicar nombre del archivo</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="outline-container-orgab7c5b8" class="outline-4">
+<h4 id="orgab7c5b8"><span class="section-number-4">3.3.1.</span> Comprimir una carpeta</h4>
+<div class="outline-text-4" id="text-3-3-1">
+<p>
+El parametro <b><b>v</b></b> permite visualizar por pantalla el paso a paso de que comprime, extrae, etc..
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="orga7f98fb">tar -cvzf archivos.tar.gz finanzas <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">comprime y agrupa en archivos.tar.gz, lo que tenga la carpeta en un solo archivo</span>
+</pre>
+</div>
+
+<p>
+<b>Observación:</b>
+Es importante respetar el orden de los parámetros, sino no funciona el comando.
+</p>
+</div>
+</div>
+<div id="outline-container-orga960467" class="outline-4">
+<h4 id="orga960467"><span class="section-number-4">3.3.2.</span> Comprimir multiples archivos</h4>
+<div class="outline-text-4" id="text-3-3-2">
+<div class="org-src-container">
+<pre class="src src-shell" id="orga855f12">tar -cvzf archivos.tar.gz *.txt <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">comprime y agrupa en archivos.tar.gz, los archivos de extension **.txt**</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orged35393" class="outline-4">
+<h4 id="orged35393"><span class="section-number-4">3.3.3.</span> Descomprimir un archivo .tar.gz</h4>
+<div class="outline-text-4" id="text-3-3-3">
+<p>
+La diferencia con comprimir es que se cambia el parametro <b><b>c</b></b> por <b><b>x</b></b>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="org4377529">tar -xczf achivos.tar.gz <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">extrae el contenido del archivo .tar.gz</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgec7cecf" class="outline-2">
+<h2 id="orgec7cecf"><span class="section-number-2">4.</span> Permisos</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-orgf08f189" class="outline-3">
+<h3 id="orgf08f189"><span class="section-number-3">4.1.</span> chown</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+Para cambiar la propiedad de un archivo a un usuario
+</p>
+</div>
+</div>
+<div id="outline-container-orgfb8496c" class="outline-3">
+<h3 id="orgfb8496c"><span class="section-number-3">4.2.</span> chgrp</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+Para cambiar la propiedad de un archivo a un grupo
+</p>
+</div>
+</div>
+<div id="outline-container-org4224e65" class="outline-3">
+<h3 id="org4224e65"><span class="section-number-3">4.3.</span> chmod</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+Para asignar permisos a directorios y/o archivos, se puede realizar de dos maneras
+</p>
+<ul class="org-ul">
+<li>Modo Simbólico</li>
+<li>Modo Númerico</li>
+</ul>
+
+<p>
+<b>Observación:</b>
+En lo personal prefiero la <b>simbólica</b>.
+</p>
+</div>
+</div>
+<div id="outline-container-org435de0f" class="outline-3">
+<h3 id="org435de0f"><span class="section-number-3">4.4.</span> Modo Númerico</h3>
+<div class="outline-text-3" id="text-4-4">
+<table id="org1da6b47" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col class="org-right">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Permiso</th>
+<th scope="col" class="org-left">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">Ejecución</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">Escritura</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-left">Lectura</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+El orden de los permisos es:
+</p>
+<ol class="org-ol">
+<li>Propietario</li>
+<li>Grupo</li>
+<li>Invitado (cualquier usuario)</li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="orge11e424"><span style="color: #2aa1ae; background-color: #292e34;">#### </span><span style="color: #2aa1ae; background-color: #292e34;">Permiso de sólo ejecución(1) para el Propietario</span>
+chmod <span style="color: #a45bad;">100</span> archivo.txt
+
+<span style="color: #2aa1ae; background-color: #292e34;">#### </span><span style="color: #2aa1ae; background-color: #292e34;">Permiso de ejecución(1) y lectura(4) para el Propietario</span>
+chmod <span style="color: #a45bad;">500</span> archivo.txt
+
+<span style="color: #2aa1ae; background-color: #292e34;">#### </span><span style="color: #2aa1ae; background-color: #292e34;">Permiso de ejecución(1), lectura(4) y escritura(2) para el Propietario</span>
+chmod <span style="color: #a45bad;">700</span> archivo.txt
+
+<span style="color: #2aa1ae; background-color: #292e34;">#### </span><span style="color: #2aa1ae; background-color: #292e34;">Permiso de ejecución(1), lectura(4) para el Propietario, y el grupo</span>
+chmod <span style="color: #a45bad;">550</span> archivo.txt
+
+<span style="color: #2aa1ae; background-color: #292e34;">#### </span><span style="color: #2aa1ae; background-color: #292e34;">Permiso de ejecución(1), lectura(4) para el Propietario, el grupo, invitados</span>
+chmod <span style="color: #a45bad;">555</span> archivo.txt
+
+<span style="color: #2aa1ae; background-color: #292e34;">#### </span><span style="color: #2aa1ae; background-color: #292e34;">Permiso de ejecución(1), lectura(4), Escritura(2) para el Propietario y ejecución(1), lectura(4) el grupo, invitados</span>
+chmod <span style="color: #a45bad;">755</span> archivo.txt
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3e81638" class="outline-3">
+<h3 id="org3e81638"><span class="section-number-3">4.5.</span> Modo Simbólico</h3>
+<div class="outline-text-3" id="text-4-5">
+</div>
+<div id="outline-container-orgb3991d1" class="outline-4">
+<h4 id="orgb3991d1"><span class="section-number-4">4.5.1.</span> Conceptos</h4>
+<div class="outline-text-4" id="text-4-5-1">
+<p>
+Para agregar, eliminar permisos se agrega primero a quien (usuario, grupo, cualquier usuario) 
+seguido del operador <b><b>+</b></b>, <b><b>-</b></b>, <b><b>=</b></b> que agrega, elimina, reemplaza los permisos respectivamente.
+</p>
+
+<table id="orgaea882a" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Permiso</th>
+<th scope="col" class="org-left">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">x</td>
+<td class="org-left">Ejecución</td>
+</tr>
+
+<tr>
+<td class="org-left">w</td>
+<td class="org-left">Escritura</td>
+</tr>
+
+<tr>
+<td class="org-left">r</td>
+<td class="org-left">Lectura</td>
+</tr>
+</tbody>
+</table>
+
+<ul class="org-ul">
+<li><b>u</b>: se refiere al usuario</li>
+<li><b>g</b>: al grupo al que pertenece</li>
+<li><b>o</b>: es cualquier usuario</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org643aa84" class="outline-4">
+<h4 id="org643aa84"><span class="section-number-4">4.5.2.</span> Agregar permisos al usuario</h4>
+<div class="outline-text-4" id="text-4-5-2">
+<p>
+Se utiliza el operador suma <b><b>+permiso</b></b>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="org0a591b4"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Permiso de Ejecucion</span>
+chmod u+x archivo.txt
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Permiso de Ejecución y lectura</span>
+chmod u+xr archivo.txt
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Permiso de Ejecución, lectura y escritura</span>
+chmod u+xwr archivo.txt
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orged20ca4" class="outline-4">
+<h4 id="orged20ca4"><span class="section-number-4">4.5.3.</span> Agregar permisos al usuario, grupo e invitados</h4>
+<div class="outline-text-4" id="text-4-5-3">
+<div class="org-src-container">
+<pre class="src src-shell" id="org329f81c"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Permiso de ejecución, lectura para el Usario/Grupo</span>
+chmod ug+xr archivo.txt
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Permiso de ejecución, lectura para el Usuario/Grupo/Invitados</span>
+chmod ugo+xwr archivo.txt
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6111de9" class="outline-4">
+<h4 id="org6111de9"><span class="section-number-4">4.5.4.</span> Agregar diferentes permisos</h4>
+<div class="outline-text-4" id="text-4-5-4">
+<p>
+Los permisos se deben separar por comas
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="orga0c587a"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Permiso de ejecución, lectura, escritura al Usuario,</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">y permisos de ejecución, lectura al Grupo/Invitados</span>
+chmod u+xwr, go+xr archivo.txt
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org26ca050" class="outline-4">
+<h4 id="org26ca050"><span class="section-number-4">4.5.5.</span> Eliminar Permisos</h4>
+<div class="outline-text-4" id="text-4-5-5">
+<p>
+Se utiliza el operador menos <b><b>-permiso</b></b>, funciona igual que agregar pero con el signo <b><b>-</b></b>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="org796bed3"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Eliminar Permiso de ejecucion para el Propietario</span>
+chmod u-x archivo.txt
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Eliminar Permiso de ejecución(x) y lectura(r) para el Propietario(u)</span>
+chmod u-xr archivo.txt
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org887f430" class="outline-4">
+<h4 id="org887f430"><span class="section-number-4">4.5.6.</span> Sobreescribir Permisos</h4>
+<div class="outline-text-4" id="text-4-5-6">
+<p>
+Tambien se procede de igual forma que los dos anteriores pero se cambia el operador por el <b><b>=</b></b>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="org19a8f76"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Asignar Permiso de ejecución(x) y lectura(r) para el Propietario(u)</span>
+chmod <span style="color: #7590db;">u</span>=xr archivo.txt
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Asignar solo Permiso de ejecución(x) y lectura(r) para el Propietario(u), Grupo, e Invitado</span>
+chmod <span style="color: #7590db;">ugo</span>=xr archivo.txt
+</pre>
+</div>
+
+<p>
+<b>Observación:</b>
+Si ya disponia de permisos, serán eliminados y reemplazaran por estos nuevos
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org3ba5cfb" class="outline-2">
+<h2 id="org3ba5cfb"><span class="section-number-2">5.</span> Listar directorios</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-orgd249ea8" class="outline-3">
+<h3 id="orgd249ea8"><span class="section-number-3">5.1.</span> Listar las carpetas y archivos de un directorio</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+Para esto utilizamos el comando <b><b>ls</b></b> que nos da información del directorio 
+en el que nos encontremos, como también podemos pasarle una ruta del directorio que queremos saber.
+</p>
+
+<p>
+Algunos parametros que le podemos pasar al comando <b>ls</b>:
+</p>
+<ul class="org-ul">
+<li><b>a</b>: muestra todos los archivos, hasta los ocultos</li>
+<li><b>l</b>: muestra los archivos y sus permisos</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="org67ab0f1"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">lista los archivos del directorio actual</span>
+ls
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">lista todos los archivos hasta los ocultos</span>
+ls -a
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">lista los archivos y sus permisos</span>
+ls -l
+
+ls -la
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org3c04dc3" class="outline-2">
+<h2 id="org3c04dc3"><span class="section-number-2">6.</span> Tuberia (Pipe) y Redirección de datos</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Una tuberia se representa con el simbolo <b><b>|</b></b> y permite utilizar la salida de un programa como 
+entrada de otro es decir pasarlo por parametro.
+</p>
+</div>
+<div id="outline-container-orgf1a1392" class="outline-3">
+<h3 id="orgf1a1392"><span class="section-number-3">6.1.</span> Filtrar el listado de directorio</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+Con <b><b>ls</b></b> listamos el directorio c
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="orgb2e7bad"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">listamos todo el directorio o señalamos los que digan "control"</span>
+ls -l | grep <span style="color: #2d9574;">"control"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb3dd231" class="outline-3">
+<h3 id="orgb3dd231"><span class="section-number-3">6.2.</span> Redirigir la salida de un programa como entrada de otro</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+Esto se podria usar para guardar información en caso de tener fallas al 
+instalar o configurar un programa y se necesite consultar en algún foro 
+que soliciten información de lo que devuelve ejecutar un comando
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="org7142703"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">guardamos en datos.txt lo que devuelve el comando ls (listado del directorio)</span>
+ls &gt; /tmp/datos.txt
+</pre>
+</div>
+
+<p>
+<b>Observación</b>:
+Si volvemos a ejecutar el comando, sobreescribirá el archivo, borrando el contenido que ya tenía:
+</p>
+</div>
+</div>
+<div id="outline-container-org30105fa" class="outline-3">
+<h3 id="org30105fa"><span class="section-number-3">6.3.</span> Redirigir como entrada la salida de otro programa</h3>
+<div class="outline-text-3" id="text-6-3">
+<div class="org-src-container">
+<pre class="src src-shell" id="orgd6f96e6"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">El contenido del .txt se lo pasa al grep</span>
+grep <span style="color: #2d9574;">'pedro'</span> &lt; /archivos/clientes.txt
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgca7f6fb" class="outline-3">
+<h3 id="orgca7f6fb"><span class="section-number-3">6.4.</span> Insertar texto a un archivo</h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+Si usamos lo aprendido, podemos insertar texto a un archivo
+Esta manera lleva más pasos, pero es una manera de entender algunos comandos
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="orgbe9c276"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">1. Creamos archivos temporales con texto</span>
+<span style="color: #4f97d7;">echo</span> <span style="color: #2d9574;">"Su nombre es Carlos"</span> &gt; /tmp/empleado-nombre.txt
+<span style="color: #4f97d7;">echo</span> <span style="color: #2d9574;">"su país es Argentina"</span> &gt; /tmp/empleado-pais.txt
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">2. Creamos un segundo archivo y le agregamos el contenido del anterior</span>
+cat /tmp/empleado-nombre.txt &gt;&gt; empleado.txt
+cat /tmp/empleado-pais.txt &gt;&gt; empleado.txt
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">3. Borramos los archivos temporales que ya no necesitamos</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">se borran los archivos .txt que empiecen con empleado seguido de un guión</span>
+rm /tmp/empleado-*.txt
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge941676" class="outline-3">
+<h3 id="orge941676"><span class="section-number-3">6.5.</span> Insertar texto al principio de un archivo en una linea con cat</h3>
+<div class="outline-text-3" id="text-6-5">
+<p>
+Esta manera lleva menos pasos, pero es mejor entender primero el mecanismo del anterior
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="orgb7321e9"><span style="color: #4f97d7;">echo</span> <span style="color: #2d9574;">"Su nombre es Carlos"</span> | cat - empleado.txt &gt; tmp &amp;&amp; mv tmp empleado.txt
+</pre>
+</div>
+
+<p>
+Explicación paso a paso de la anterior linea de comando:
+</p>
+
+<pre class="example" id="org34ac9a2">1. Con `echo` imprimimos por pantalla un texto, lo que esté entre comillas seguido de él
+
+2. Con ` | ` ó conocido como **pipe** utiliza como entrada la salida de otro programa,
+en este caso reutilizamos lo que imprimimos por pantalla, lo que queremos como texto
+pasar a un archivo.
+
+3. Con `cat` concatenamos texto de archivos, en este caso la salida del **echo**,
+el primer parámetro es un guión **-** que quiere decir que le pasaremos un texto no un archivo,
+el segundo parámetro **empleado.txt** es el nombre de archivo con el que concatena el texto
+
+4. Con `&gt;` utilizado para **redireccionar de la salida de un comando** pasará el texto
+que concatenamos con **cat**, y lo guardará en el archivo temporal **tmp** que podría
+haber tenido cualquier otro nombre que quisieramos
+
+5. Con `&amp;&amp;` indicamos que cuando se cumpla el comando anterior (de concatenar el texto con
+el archivo y guardarlo en otro temporal) entonces prosiga con el siguiente comando, pero
+sólo si solo el comando anterior tuvo éxito en realizarse. En caso que lanze un error,
+no ejecutará lo que le siga
+
+6. Con `mv` sobreescribimos el archivo **empleado.txt** con lo que se guardó en **tmp**
+</pre>
+</div>
+</div>
+<div id="outline-container-org32f46d6" class="outline-3">
+<h3 id="org32f46d6"><span class="section-number-3">6.6.</span> Insertar texto al principio de un archivo con el comando sed</h3>
+<div class="outline-text-3" id="text-6-6">
+<p>
+Con el comando `sed` se puede mostrar, y modificar un archivo mediante <b><b>expresiones regulares</b></b>
+Aunque esta manera parezca incluso más fácil que las anteriores, pero siempre es bueno conocer
+otras alternativas y entender como funcionan los comandos básicos de linux.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="org85f7499"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">agregamos un texto al principio seguido de un salto de linea</span>
+sed -i <span style="color: #2d9574;">"1iSu nombre es Carlos\n"</span> empleado.txt
+</pre>
+</div>
+
+<pre class="example" id="org2bdeffb">Su explicación sería:
+
+1. Con `-i` como parámetro nos referimos que vamos a insertar texto
+2. Con `"1i"` al principio de la cadena de texto, hacemos referencia a la primera linea
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga852877" class="outline-2">
+<h2 id="orga852877"><span class="section-number-2">7.</span> Documentación de los programas</h2>
+<div class="outline-text-2" id="text-7">
+</div>
+<div id="outline-container-org3caba2e" class="outline-3">
+<h3 id="org3caba2e"><span class="section-number-3">7.1.</span> Conceptos</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+Al usar el comando <b><b>man</b></b>, nos despliega información necesaria de como utilizar otros comandos y programas
+</p>
+</div>
+</div>
+<div id="outline-container-orga358c16" class="outline-3">
+<h3 id="orga358c16"><span class="section-number-3">7.2.</span> Obtener documentación resumida de un programa</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+Se le pasa el parametro <b><b>-f</b></b>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="org3fe3ee4"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">devuelve información acerca del comando grep</span>
+man -f grep
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9ac7c46" class="outline-3">
+<h3 id="org9ac7c46"><span class="section-number-3">7.3.</span> Obtener documentación más ordenada de un programa</h3>
+<div class="outline-text-3" id="text-7-3">
+<p>
+El comando <b>info</b> es otra herramienta parecida a man pero más fácil de entender,
+aunque no tan completa. Esta nueva dispone de hipervinculos de referencia
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="org10f1f32"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">devuelve información acerca del comando grep</span>
+info grep
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org2b4aa4e" class="outline-2">
+<h2 id="org2b4aa4e"><span class="section-number-2">8.</span> Otros comandos interesantes</h2>
+<div class="outline-text-2" id="text-8">
+</div>
+<div id="outline-container-org410c91a" class="outline-3">
+<h3 id="org410c91a"><span class="section-number-3">8.1.</span> Ejecutar multiples comandos en una linea</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+Para esto debemos utilizar el símbolo <b>* ; *</b> para separar los comandos a ejecutar
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="org0490a71">ls -l ; cat /etc/passwd
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org86b2dee" class="outline-3">
+<h3 id="org86b2dee"><span class="section-number-3">8.2.</span> Ejecutar un programa luego de otro</h3>
+<div class="outline-text-3" id="text-8-2">
+<p>
+A diferencia de utilizar <b><b>;</b></b>, con el operador lógico <b><b>&amp;&amp;</b></b> podemos pedirle 
+que ejecute un programa luego que uno anterior se haya ejecutado.
+Podria verse como un si sucede esto,entonces hace este otro también.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="orgf125c9a">mkdir programa1 &amp;&amp; programa2
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3a5d9e5" class="outline-3">
+<h3 id="org3a5d9e5"><span class="section-number-3">8.3.</span> Saber la ruta de un programa</h3>
+<div class="outline-text-3" id="text-8-3">
+<div class="org-src-container">
+<pre class="src src-shell" id="orgea66638">whereis ls
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6cece50" class="outline-3">
+<h3 id="org6cece50"><span class="section-number-3">8.4.</span> Pasar por parametro la salida de un comando</h3>
+<div class="outline-text-3" id="text-8-4">
+<p>
+Una alternativa a esto sería el uso de los <b><b>acentos inversos</b></b> que nos permiten 
+pasar la salida de un comando como parametro a otro comando
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #4f97d7;">kill</span> <span style="color: #bc6ec5;">`cat carpeta/proceso.pid`</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3529f3a" class="outline-3">
+<h3 id="org3529f3a"><span class="section-number-3">8.5.</span> Cambiar de usuario</h3>
+<div class="outline-text-3" id="text-8-5">
+<p>
+En caso que estemos usando varios usuarios, o accedamos a una terminal externa
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="org112c508"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">cambia el usuario a Neverkas</span>
+su neverkas
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org48dcc3b" class="outline-3">
+<h3 id="org48dcc3b"><span class="section-number-3">8.6.</span> Saber en que terminal nos encontramos</h3>
+<div class="outline-text-3" id="text-8-6">
+<p>
+En caso de que tengamos varias terminales abiertas ejecutando varios procesos en segundo plano,
+y queramos buscar los procesos de una terminal específica, pero no sabemos de cual.
+Nos posicionamos en esa terminal y ejecutamos el comando <b><b>tty</b></b>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="orgc279f04"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">nos devuelve información de la terminal actual</span>
+tty
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3d1ba4b" class="outline-3">
+<h3 id="org3d1ba4b"><span class="section-number-3">8.7.</span> Saber la ruta en la que se encuentra la terminal</h3>
+<div class="outline-text-3" id="text-8-7">
+<p>
+Con <b><b>pwd</b></b> podemos saber en que ruta nos encontramos en caso de conectarnos en algun servidor
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="orgbc9932c"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">muestra la ruta en donde nos encontramos parados</span>
+<span style="color: #4f97d7;">pwd</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1183063" class="outline-3">
+<h3 id="org1183063"><span class="section-number-3">8.8.</span> Listar paquetes instalados ordenados por fecha</h3>
+<div class="outline-text-3" id="text-8-8">
+<p>
+Si necesitamos saber por esas casualidades los paquetes instalados via terminal,
+y guardarlo en un archivo paquetes-instalados.txt buscamos en <b>dpkg.log</b>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="orgb03620d">grep -i <span style="color: #2d9574;">"install"</span> /var/log/dpkg.log &gt; /tmp/paquetes-instalados.txt
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga8b939d" class="outline-3">
+<h3 id="orga8b939d"><span class="section-number-3">8.9.</span> Conocer el tipo de terminal en ejecución</h3>
+<div class="outline-text-3" id="text-8-9">
+<p>
+Existen diversos tipos de terminales, quizás necesitas realizar una configuración
+y desconoces cual es el tipo de terminal que estas utilizando.
+</p>
+
+<p>
+Algunos tipos de terminal son:
+</p>
+<ul class="org-ul">
+<li>GNOME</li>
+<li>KDE</li>
+<li>XFCE</li>
+<li>JWM</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Para saber la distribución de linux y el tipo de terminal</span>
+env | grep XDG_CURRENT_DESKTOP
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Si es GNOME, algunas opciones para conocer la versión</span>
+gnome-shell --version <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">opcion 1</span>
+
+apt-cache show gnome-shell | grep Version <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">opcion 2 con apt-cache</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbffe3ea" class="outline-3">
+<h3 id="orgbffe3ea"><span class="section-number-3">8.10.</span> Personalizar el prompt de la terminal</h3>
+<div class="outline-text-3" id="text-8-10">
+<p>
+Con <b><b>prompt</b></b> nos referimos al texto que aparece antes de las lineas de comando
+que ejecutamos en la terminal. Este suele indicar el nombre de usuario, el grupo
+al que pertenece y la ruta de directorios a la que vamos accediendo en el sistema.
+</p>
+</div>
+
+<div id="outline-container-org9ad0273" class="outline-4">
+<h4 id="org9ad0273"><span class="section-number-4">8.10.1.</span> Modificamos la configuracion de la terminal</h4>
+<div class="outline-text-4" id="text-8-10-1">
+<p>
+Para modificar necesitamos modificar el archivo `.bashrc` (con cuidado) y buscamos
+en donde diga lo siguiente
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="org4a2d0b8"><span style="color: #4f97d7; font-weight: bold;">if</span> <span style="color: #4f97d7;">[</span> <span style="color: #2d9574;">"$color_prompt"</span> = yes <span style="color: #4f97d7;">]</span>; <span style="color: #4f97d7; font-weight: bold;">then</span>
+    <span style="color: #7590db;">PS1</span>=<span style="color: #2d9574;">'${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '</span>
+<span style="color: #4f97d7; font-weight: bold;">else</span>
+    <span style="color: #7590db;">PS1</span>=<span style="color: #2d9574;">'${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '</span>
+<span style="color: #4f97d7; font-weight: bold;">fi</span>
+</pre>
+</div>
+
+<p>
+Y lo modificamos para que se parezca a lo siguiente
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash" id="orge2dda5b"><span style="color: #4f97d7; font-weight: bold;">if</span> <span style="color: #4f97d7;">[</span> <span style="color: #2d9574;">"$color_prompt"</span> = yes <span style="color: #4f97d7;">]</span>; <span style="color: #4f97d7; font-weight: bold;">then</span>
+    <span style="color: #7590db;">PS1</span>=<span style="color: #2d9574;">'${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u:\[\033[01;34m\]\w\[\033[00m\]\$ '</span>
+<span style="color: #4f97d7; font-weight: bold;">else</span>
+    <span style="color: #7590db;">PS1</span>=<span style="color: #2d9574;">'${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '</span>
+<span style="color: #4f97d7; font-weight: bold;">fi</span>
+</pre>
+</div>
+
+<p>
+Lo que hicimos fue modificar la segunda linea, acortando la informacion que aparece en la terminal,
+ahora solo veremos el nombre del usuario seguido de la ruta.
+</p>
+</div>
+</div>
+<div id="outline-container-orgedfee4a" class="outline-4">
+<h4 id="orgedfee4a"><span class="section-number-4">8.10.2.</span> Otras variantes</h4>
+<div class="outline-text-4" id="text-8-10-2">
+<p>
+En caso que queramos entender un poco mas como funciona, y personalizarlo aun mas, esta te compartimos
+una lista de los parametros y que informacion imprime cada uno.
+</p>
+
+<table id="org7410038" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Caracter</th>
+<th scope="col" class="org-left">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">\u</td>
+<td class="org-left">Nombre del usuario de la sesion</td>
+</tr>
+
+<tr>
+<td class="org-left">\h</td>
+<td class="org-left">Nombre del host</td>
+</tr>
+
+<tr>
+<td class="org-left">\d</td>
+<td class="org-left">Fecha en formato mm/dd/YYYY</td>
+</tr>
+
+<tr>
+<td class="org-left">\A</td>
+<td class="org-left">Hora del sistema</td>
+</tr>
+
+<tr>
+<td class="org-left">\j</td>
+<td class="org-left">Cantidad de tareas en ejecucion por esa terminal</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Algunas variantes podrian ser:</span>
+
+<span style="color: #7590db;">PS1</span>=<span style="color: #2d9574;">"[codeando] \u@\h:\w\$ "</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">[codeando] user@group ~/Documents: $</span>
+
+<span style="color: #7590db;">PS1</span>=”\A \u: \w<span style="color: #2d9574;">\$</span> “
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">10:22 user: ~/Documents $</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org0f04797" class="outline-2">
+<h2 id="org0f04797"><span class="section-number-2">9.</span> Referencias Web</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+Para armar esta guia me base en algunos libros y sitios web que consideré útiles
+</p>
+</div>
+<div id="outline-container-org4682c3c" class="outline-3">
+<h3 id="org4682c3c"><span class="section-number-3">9.1.</span> Referencias Oficiales</h3>
+<div class="outline-text-3" id="text-9-1">
+<ul class="org-ul">
+<li>Libro - Manual de Administracion de Linux, Steve Shah</li>
+<li>Curso GNU/Linux - Tareas y Procesos <a href="http://www2.lugro.org.ar/biblioteca/cursos/curso_intro/x1845.html">[Ver Página]​</a></li>
+<li>Resumen de programas en la terminal <a href="https://www.tldp.org/LDP/GNU-Linux-Tools-Summary/html/index.html">[Ver Página]​</a></li>
+<li>Resumen de la Jerarquía del Sistema de Archivos <a href="https://www.tldp.org/LDP/Linux-Filesystem-Hierarchy/html/index.html">[Ver Página]​</a></li>
+<li>Como utilizar la redirección <a href="https://www.tldp.org/LDP/abs/html/abs-guide.html#IO-REDIRECTION">[Ver Página]​</a></li>
+<li>Proyecto de Informacion sobre Linux <a href="http://www.linfo.org/index.html">[Ver Página]​</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org95967fa" class="outline-3">
+<h3 id="org95967fa"><span class="section-number-3">9.2.</span> Referencias Extraoficiales</h3>
+<div class="outline-text-3" id="text-9-2">
+</div>
+<div id="outline-container-orgdf9ef89" class="outline-4">
+<h4 id="orgdf9ef89"><span class="section-number-4">9.2.1.</span> Otros</h4>
+<div class="outline-text-4" id="text-9-2-1">
+<ul class="org-ul">
+<li>Ejemplos del comando ps <a href="https://www.tecmint.com/ps-command-examples-for-linux-process-monitoring/">[Ver Página]​</a></li>
+<li>Guia de comandos bash <a href="https://likegeeks.com/linux-bash-scripting-awesome-guide-part5/#Linux-Signals">[Ver Página]​</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org2ad0ee1" class="outline-4">
+<h4 id="org2ad0ee1"><span class="section-number-4">9.2.2.</span> - Entendiendo como usar el comando sed</h4>
+<div class="outline-text-4" id="text-9-2-2">
+<ul class="org-ul">
+<li>Ejemplos del comando sed, LikeGeeks <a href="https://likegeeks.com/sed-linux/">[Ver Página]​</a></li>
+<li>Ejemplos del comando sed, LinuxAdictos <a href="https://www.linuxadictos.com/sed-ejemplos-del-comando-magico-para-gnu-linux.html">[Ver Página]​</a></li>
+<li>Ejemplos del comando sed, TecMint <a href="https://www.tecmint.com/linux-sed-command-tips-tricks/">[Ver Página]​</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6fb0cc1" class="outline-4">
+<h4 id="org6fb0cc1"><span class="section-number-4">9.2.3.</span> - Entendiendo como usar el comando cat</h4>
+<div class="outline-text-4" id="text-9-2-3">
+<ul class="org-ul">
+<li>Explicación #1 del comando cat por RedHat <a href="https://access.redhat.com/documentation/en-US/RedHat_Enterprise_Linux/4/html/Step_by_Step_Guide/s1-navigating-sio.html">[Ver Página]​</a></li>
+<li>Explicación #2 del comando cat <a href="https://www.computerhope.com/unix/ucat.htm">[Ver Página]​</a></li>
+<li>Explicación #3 del comando cat <a href="https://hipertextual.com/archivo/2014/07/redirecciones-y-tuberias-bash/">[Ver Página]​</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgeac16c2" class="outline-4">
+<h4 id="orgeac16c2"><span class="section-number-4">9.2.4.</span> - Personalizar prompt de la terminal</h4>
+<div class="outline-text-4" id="text-9-2-4">
+<ul class="org-ul">
+<li>Referencia #1, Vitux <a href="https://vitux.com/how-to-customize-ubuntu-bash-prompt/">[Ver Pagina]​</a></li>
+<li>Referencia #2, Ubunlog <a href="https://ubunlog.com/prompt-ejemplos-personalizar-terminal/">[Ver Pagina]​</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: jelou</p>
+<p class="date">Created: 2021-09-13 lun 11:56</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+
+
+</body></html>

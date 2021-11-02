@@ -7,18 +7,379 @@
     git checkout -b nombreRama origin/nombreRama
   #+END_SRC
 * Subir ramas locales
+  - El *origin* hace referencia al *repositorio remoto* (/al que está en internet/)
+  
   #+BEGIN_SRC shell
     git push origin ramaLocal
   #+END_SRC
 * Deshacer cambios confirmados
-  #+BEGIN_SRC shell
-    # si queremos volver un cambio atrás
-    git reset HEAD~1
+** Deshacer cambios confirmados (borrando historial)
+   - Se sugiere sólo usar ~git reset~ en ramas locales, para evitar borrar cambios confirmados de otros usuarios en el *repositorio remoto*
+   - Con ~git reset~ nos podemos mover a un *commit* borrando del *historial* los *cambios confirmados*
+   - El ~HEAD~ es un puntero que apunta al *commit* actual en el que estémos trabajando, podemos cambiar su referencia con ~git checkout hashCommit~
+   
+   #+BEGIN_SRC shell
+     # ahora HEAD apunta al último cambio confirmado de la branch "feature/navbar"
+     git checkout feature/navbar
+     
+     # si queremos volver un cambio atrás
+     git reset HEAD^
+     
+     # si queremos volver un cambio atrás
+     git reset HEAD~1
+     
+     #######################################
+     
+     # si queremos volver tres cambios atrás
+     git reset HEAD~3
+     
+     # si queremos volver tres cambios atrás
+     git reset HEAD^^^
+   #+END_SRC
+** Deshacer el borrado de historial
+   #+BEGIN_QUOTE
+   Si hicimos un ~git reset~ por error y queremos volver al estado anterior,
+   no podríamos sólo usando ~git log --oneline -graph~ porque el historial de commits fue alterado..
+   
+   La solución es usar ~git reflog show nombreRama~ que muestra un historial de todos los comandos
+   (reset, rebase, commit, revert, ..) por tanto podemos elegir el hash del commit previo al ~git reset~
+   #+END_QUOTE
 
-    # si queremos volver tres cambio atrás
-    git reset HEAD~3
+   #+BEGIN_EXAMPLE
+   Hagamos de ejemplo que estamos desarrollando un navbar para un sitio web,
+   en la rama "feature/navbar".. y lo siguiente son cambios confirmados en nuestra rama local
+   1. Armamos la estructura del HTML con los respectivos tags
+   2. Agregamos estilos css, animaciones con javascript, iconos al html
+   
+   De repente nuestro jefe ve los últimos cambios, pero no le gustó nada del punto 2,
+   entonces debemos volver al punto 1 donde sólo tenemos la estructura html
+   #+END_EXAMPLE
+   
+   #+BEGIN_SRC shell
+     # Hacemos que HEAD apunte a la branch feature/navbar
+     # (apuntará al commit más reciente de esa rama)
+     git checkout feature/navbar
+     
+     git log --oneline
+     # Historial de commits en feature/navbar previo al "git reset"
+     # el puntero HEAD apunta al último commit con hash f373...
+     #
+     # f37332f (HEAD -> feature/navbar) Agregamos iconos al html del navbar <--- se borrará
+     # 09912df Agregamos animaciones js al navbar <--- se borrará
+     # 2c6d3b6 Agregamos estilos css al navbar <--- se borrará
+     # 43bc73d Agregamos estructura html al navbar
+     # e592a66 Creamos navbar
+     # a566d68 (origin/master, master) Agregamos contenido al README
+     # 2175a2d Agregamos README
+     
+     ######################################################################
+     # Nuestro jefe nos dijo que no le gustó nuestros cambios >:(
+     # bueno, empecemos de nuevo.. T_T
+     
+     # Volvemos 3 commits atrás, estaremos en el commit 43bc..
+     # se borrarán del historial los commits f373.., 0991.., 2c6d...
+     git reset HEAD~3
+     
+     # Historial de commits alterado, luego de un "git reset"
+     #
+     # 43bc73d (HEAD -> feature/navbar) Agregamos estructura html al navbar
+     # e592a66 Creamos navbar
+     # a566d68 (origin/master, master) Agregamos contenido al README
+     # 2175a2d Agregamos README
+     
+     ###########################################################################
+     # Ups..! Nuestro jefe se arripintió y nos dice que le gustaba lo que estaba hecho..
+     # bueno, volvemos al estado anterior, previo al "git reset HEAD~3"
+     
+     # Revisamos el historial de comandos de git (reset,rebase,commit,revert,....)
+     git reflog show feature/navbar
+     # 43bc73d (HEAD -> feature/navbar) feature/navbar@{0}: reset: moving to HEAD~3
+     # f37332f feature/navbar@{1}: commit: Agregamos iconos al html del navbar <--- acá queremos volver
+     # 09912df feature/navbar@{2}: commit: Agregamos animaciones js al navbar
+     # 2c6d3b6 feature/navbar@{3}: commit: Agregamos estilos css al navbar
+     # 43bc73d (HEAD -> feature/navbar) feature/navbar@{4}: commit: Agregamos estructura html al navbar
+     # e592a66 feature/navbar@{5}: commit: Creamos navbar
+     # a566d68 (origin/master, master) feature/navbar@{6}: branch: Created from HEAD
+     
+     # Volvemos al commit f373... que es anterior al "git reset"
+     # en vez de poner el hash del commit, usamos nombreRama@{1} para evitar errores de tipeo
+     git reset feature/navbar@{1}
+     
+     # Chequeamos el historial por si acaso, y aparecen nuevamente los commits
+     # que estaban perdidos :)
+     git log --oneline
+     # f37332f (HEAD -> feature/navbar) Agregamos iconos al html del navbar <--- volvió
+     # 09912df Agregamos animaciones js al navbar <--- volvió
+     # 2c6d3b6 Agregamos estilos css al navbar <--- volvió
+     # 43bc73d Agregamos estructura html al navbar
+     # e592a66 Creamos navbar
+     # a566d68 (origin/master, master) Agregamos contenido al README
+     # 2175a2d Agregamos README
+   #+END_SRC
+** Deshacer cambios confirmados (creando un commit)
+   - Con ~git revert~ hacemos casi lo mismo que con ~git reset~ pero no borra el historial, crea un nuevo *commit*
+   - Se recomienda usar ~git revert~ en *ramas remotas* porque no borra *cambios confirmados* de otros usuarios
+   
+   #+BEGIN_SRC shell
+     # ahora HEAD apunta al último cambio confirmado de la branch "feature/sidebar"
+     git checkout feature/sidebar
+     
+     # si queremos volver un cambio atrás
+     git revert HEAD^
+     
+     # si queremos volver un cambio atrás
+     git revert HEAD~1
+     
+     #######################################
+     
+     # si queremos volver tres cambios atrás
+     git revert HEAD~3
+     
+     # si queremos volver tres cambios atrás
+     git revert HEAD^^^
+   #+END_SRC
+* Traerse cambios confirmados de otras ramas
+** Git Merge Vs Git Rebase
+   #+BEGIN_QUOTE
+   Las diferencias entre traerse los cambios con ~git merge~ y ~git rebase~
+   es más fácil si lo vemos a partir de una imagen del historial
+
+   Si hubiese algún *conflicto* al traerse los cambios de otra rama,
+   es más seguro si hubiesemos usado ~git merge~.
+   Porque luego de resolverlo se genera un nuevo commit con el conflicto resuelto,
+   éste nuevo commit queda separado de los otros dos commits que entraron en conflicto.
+   
+   Si un tercero dice que el conflicto no se resolvió de manera correcta,
+   es fácil volver a un estado anterior, porque tenemos el historial de cambios confirmados :)
+
+   ---------------------------------------------------------------------------------------------
+   
+   Mientras que si hubiesemos usado ~git rebase~,
+   luego de resolver el conflicto, éste hubiese pisado el commit donde se resolvió el conflicto
+   y veremos en el historial de cambios confirmados, que de los dos commits que entraron en conflicto
+   sólo vemos uno de ellos, y el commit del conflicto resuelto :(
+
+   y.. si un tercero dice que el conflicto no se había resuelto de manera correcta..? que hacemos?
+   quizás deberiamos usar ~git reflog~ para chequear a cual commit volver
+   y luego un ~git revert~ para volver a un estado anterior del conflicto...
+   #+END_QUOTE
+   
+   [[../../assets/img/git-merge-vs-rebase.png]]
+** Conflictos
+*** Conflictos con Rebase
+    #+BEGIN_SRC shell
+      git log --oneline --graph feature/notifications fix/componentes-notifications
+      # * 9d15ce9 (HEAD -> feature/notifications) Cambiamos los componentes del template <--- RECORDÁ ESTE HASH
+      # | * 15f67c2 (fix/componentes-notifications) Corregimos errores de componentes en el template
+      # |/
+      # * d0eab85 Nuevos componentes en el template
+      
+      git rebase fix/componentes-notifications
+      # Auto-fusionando src/templates/layout.hbs
+      # CONFLICTO (contenido): Conflicto de fusión en src/templates/layout.hbs
+      # error: no se pudo aplicar 9d15ce9... Cambiamos los componentes del template
+      
+      git status
+      # rebase interactivo en progreso; en 15f67c2
+      # El último comando realizado (1 comando realizado):
+      # pick 9d15ce9 Cambiamos los componentes del template
+      # Estás aplicando un rebase de la rama 'feature/notifications' en '15f67c2.
+      
+      # corregimos los errores
+      vim layout.hbs
+      # confirmamos que resolvimos el conflicto
+      git add layout.hbs
+      git rebase --continue
+      
+      #################################################################################
+      
+      git log --oneline --graph feature/notifications fix/componentes-notifications
+      
+      # * d97b639 (HEAD -> feature/notifications) Cambiamos los componentes del template <--- REESCRIBIÓ EL HISTORIAL
+      # * 15f67c2 (fix/componentes-notifications) Corregimos errores de componentes en el template
+      # * d0eab85 Nuevos componentes en el template
+    #+END_SRC
+*** Conflictos con Merge
+    #+BEGIN_SRC shell
+      git log --oneline --graph --all
+      #   * b524286 (fix/login) Corregimos errores de login, esto hará pum!
+      #   | * 8911ee8 (HEAD -> feature/login) Nuevo feature del login
+      #   | * f3cc3f4 Agregamos cambios al controller
+      #   |/
+      #   * c5a59a2 Corregimos errores del login
+      #   * e213803 Resolvemos bugs del controller del login
+      
+      git checkout feature/login
+      git merge fix/login
+      # Auto-fusionando src/controllers/ControllerLogin.java
+      # CONFLICTO (contenido): Conflicto de fusión en src/controllers/ControllerLogin.java
+      # Fusión automática falló; arregle los conflictos y luego realice un commit con el resultado.
+      
+      ##############################################################################################
+      
+      # corregimos los conflictos
+      git add ControllerLogin.java
+      git commit -m "Conflicto resuelto en login"
+      # 1c007b0 (HEAD -> feature/login) Conflicto resuelto en login
+      # b524286 (fix/login) Corregimos errores de login, esto hará pum!
+      # 8911ee8 Nuevo feature del login
+      
+      git log --oneline --graph feature/login fix/login
+      #    *   1c007b0 (HEAD -> feature/login) Conflicto resuelto en login <- nuevo commit, no reescribió historial
+      #    |\
+      #    | * b524286 (fix/login) Corregimos errores de login, esto hará pum!
+      #    * | 8911ee8 Nuevo feature del login <--- el "Merge" no lo reescribió, mantuvo este commit 
+      #    * | f3cc3f4 Agregamos cambios al controller
+      #    |/
+      #    * c5a59a2 Corregimos errores del login
+      #    * e213803 Resolvemos bugs del controller del login
+    #+END_SRC
+** Traerse cambios confirmados (reescribiendo el historial de commits)
+   - Usamos el ~git rebase otraRama~ para traernos los cambios de otra rama
+   - El ~git rebase~ altera el historial y hace que quede más lineal/uniforme, para eso elimina ramificaciones
+   
+   #+BEGIN_SRC shell
+     git log --oneline feature/login
+     # Previo al git rebase, estamos en feature/login
+     #
+     # 64db81f (HEAD -> feature/login) Cambios en el Controller del login
+     # 7f4719a Desarrollamos el template para el login
+     # 44dff8f Creamos la vista para el Login
+     # 2950f8f Implementamos el Controller del login
+     # 7ded51d Agregamos estructura MVC
+     # a566d68 (origin/master, master) Agregamos contenido al README
+     # 2175a2d Agregamos README
+     
+     git log --oneline fix/login
+     # Rama fix/login se creó a partir de feature/login
+     #
+     # e213803 (HEAD -> fix/login) Resolvemos bugs del controller del login
+     # bb00725 Corregimos errores de la Vista del Login
+     # 64db81f (HEAD -> feature/login) Cambios en el Controller del login
+     # "el resto de los commits de feature/login" hasta 2175..
+     
+     git log --oneline --graph feature/login fix/login
+     # Comparamos que tan avanzadas están ambas ramas
+     #
+     # e213803 (fix/login) Resolvemos bugs del controller del login
+     # bb00725 Corregimos errores de la Vista del Login
+     # 64db81f (HEAD -> feature/login) Cambios en el Controller del login
+     # 7f4719a Desarrollamos el template para el login
+     # 44dff8f Creamos la vista para el Login
+     # 2950f8f Implementamos el Controller del login
+     # 7ded51d Agregamos estructura MVC
+     # a566d68 (origin/master, master) Agregamos contenido al README
+     # 2175a2d Agregamos README
+     
+     #########################################################################
+     
+     # cambiamos a la rama "feature/login" donde HEAD apunta a su commit más reciente
+     git checkout feature/login
+     # nos traemos los cambios de la ama fix/login
+     git rebase fix/login
+     
+     # validamos que feature/login tenga los últimos commits de fix/login
+     git log --oneline
+     # e213803 (HEAD -> feature/login, fix/login) Resolvemos bugs del controller del login
+     # bb00725 Corregimos errores de la Vista del Login
+     # 64db81f Cambios en el Controller del login
+     # 7f4719a Desarrollamos el template para el login
+     # 44dff8f Creamos la vista para el Login
+     # 2950f8f Implementamos el Controller del login
+     # 7ded51d Agregamos estructura MVC
+     # a566d68 (origin/master, master) Agregamos contenido al README
+     # 2175a2d Agregamos README
+   #+END_SRC
+** Traerse cambios confirmados (sin alterar el historial de commits)
+   - Usamos el ~git merge otraRama~ para traernos los cambios de otra rama
+   - El ~git merge~ a diferencia del ~git rebase~, mantiene las ramificaciones
+     
+   #+BEGIN_SRC shell
+     git log --oneline feature/notifications
+     # Previo al git merge, estamos en feature/notifications
+     #
+     # ba2b632 (HEAD -> feature/notifications) Implementamos el controller para las notificaciones
+     # 53eba36 Creamos template para las notificaciones
+     # 8c03d54 Creamos estructura MVC para las notificaciones
+     # ddbcd4e Creamos estructura para las notificaciones
+     # a566d68 (origin/master, master) Agregamos contenido al README
+     # 2175a2d Agregamos README
+     
+     git log --oneline fix/controllerNotifications
+     # eff7bf8 (HEAD -> fix/controllerNotifications) Corregimos los NullException
+     # 04f244b Removemos imports innecesarios
+     # ba2b632 (feature/notifications) Implementamos el controller para las notificaciones
+     # "el resto de los commits de feature/login" hasta 2175..
+     
+     git checkout feature/notifications
+     git merge fix/controllerNotifications
+     # Actualizando ba2b632..eff7bf8
+     # Fast-forward
+     # src/controllers/ControllerNotification.java | 2 ++
+     # 1 file changed, 2 insertions(+)
+     
+     git log --oneline
+     # eff7bf8 (HEAD -> feature/notifications, fix/controllerNotifications) Corregimos los NullException
+     # 04f244b Removemos imports innecesarios
+     # ba2b632 Implementamos el controller para las notificaciones
+     # 53eba36 Creamos template para las notificaciones
+     # 8c03d54 Creamos estructura MVC para las notificaciones
+     # ddbcd4e Creamos estructura para las notificaciones
+     # a566d68 (origin/master, master) Agregamos contenido al README
+     # 2175a2d Agregamos README
+   #+END_SRC
+* Alterar historial con GUI de varios commits
+  #+BEGIN_QUOTE
+  Con el comando ~git rebase -i hashCommit~ podemos reescribir el historial,
+  nos aparecerá un editor en la terminal con el historial de commits.
+  
+  A la izquierda del *Hash* de cada commit aparece por default ~pick~
+  pero podemos cambiarlo por otro comando (Ej. ~squash~)
+
+  Podemos fusionar varios commits en un solo commit con ~squash~ con el commit anterior
+  (un commit el que esté debajo)
+  ó cambiando el orden en que aparecen (/sólo debemos alterar el orden de las lineas/)
+  ó eliminando varios commits (/sólo debemos borrar las lineas/)
+
+  Ojo..! El orden de los commits en el *rebase interactivo* aparece al revés que en ~git log --oneline~
+  Los commits más recientes aparecen al final, y los más viejos arriba..
+  #+END_QUOTE
+  
+  #+BEGIN_SRC shell
+    git log --oneline
+    # a60d9aa (HEAD -> feature/layout) Borramos layout viejo (el commit más reciente)
+    # 12935c2 Agregamos alternativa al layout
+    # 21da601 Cambiamos nombre del layout
+    # c2e1aa7 Corregimos errores del layout
+    # 9888240 Agregamos contenido al layout
+    # 69851c5 Creamos el layout.hbs <- HASTA ACÁ será el HEAD~6, porque también considera el a60d9
+    # a566d68 (origin/master, master) Agregamos contenido al README
+    # 2175a2d Agregamos README
+    
+    git rebase -i HEAD~6
+    # pick 69851c5 Creamos el layout.hbs (el commit más viejo)
+    # squash 9888240 Agregamos contenido al layout
+    # squash c2e1aa7 Corregimos errores del layout
+    # squash 21da601 Cambiamos nombre del layout
+    # squash 12935c2 Agregamos alternativa al layout <--- se fusionará con el anterior (21da.. )
+    # squash a60d9aa Borramos layout viejo <--- (el commit más reciente) se fusionará con el anterior (1293.. )
+    #
+    # Rebase a566d68..a60d9aa en a566d68 (6 comandos)
+    
+    git log --oneline
+    # 522ca88 (HEAD -> feature/layout) Desarrollamos layout <--- Fusionó los 6 commits en uno nuevo
+    # a566d68 (origin/master, master) Agregamos contenido al README
+    # 2175a2d Agregamos README
   #+END_SRC
-* Guardar cambios
+* Borrar ramas
+  #+BEGIN_SRC shell
+    # borramos una rama local
+    git branch -d miRamaLocal
+    
+    # borramos la rama que está en el repositorio remoto (internet)
+    git push origin -d unaRamaRemota
+  #+END_SRC
+* Guardar cambios temporalmente
   #+BEGIN_SRC shell
     git stash --save "nombre "
     # lo q sea

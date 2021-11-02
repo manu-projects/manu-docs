@@ -1,0 +1,31 @@
+name: Deploy ManuDocs
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # por el momento demora mucho el build..
+      # - name: install build npm
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     node-version: 14.x
+      # - name: build
+      #   run: |
+      #         npm install
+      #         gulp build
+      - name: Push a mi GH Page
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'dist'
+          destination-github-username: 'neverkas'
+          destination-repository-name: 'neverkas.github.io'
+          commit-message: See ORIGIN_COMMIT from $GITHUB_REF
+          target-branch: master

@@ -1,0 +1,861 @@
+<!--?xml version="1.0" encoding="utf-8"?--><!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<!-- 2021-10-18 lun 20:12 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emacs Spacemacs</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="jelou">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/sass-style.css">
+<script type="text/javascript" src="/assets/js/all.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Emacs Spacemacs</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orge199a48">1. Tips - Importantes</a>
+<ul>
+<li><a href="#org3dcbd6c">1.1. Atajos configuraciones</a></li>
+<li><a href="#org9c641e5">1.2. Atajos con Treemacs o Neotree</a></li>
+<li><a href="#orge8c4086">1.3. Atajos con Projectfile</a></li>
+<li><a href="#org481e3cc">1.4. Referencias</a>
+<ul>
+<li><a href="#org323d04c">1.4.1. Referencias Web</a></li>
+<li><a href="#orgd927ac0">1.4.2. Referencias Youtube</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org6e440a4">2. Atajos en Hybrid Mode</a>
+<ul>
+<li><a href="#org69a1c14">2.1. Atajos Principales</a></li>
+<li><a href="#org716adc8">2.2. Atajos en Evil Mode (Vim)</a></li>
+<li><a href="#org929952c">2.3. Atajos en Holy Mode (Emacs)</a></li>
+</ul>
+</li>
+<li><a href="#org37c2794">3. Ecuaciones algebraicas</a>
+<ul>
+<li><a href="#org56ee72a">3.1. Configuraciones</a></li>
+<li><a href="#orgb9a0805">3.2. Como escribir las ecuaciones</a></li>
+<li><a href="#org0c2cefd">3.3. Errores Comunes</a>
+<ul>
+<li><a href="#org9ff4b4c">3.3.1. No nos permita ver una vista preliminar del archivo</a></li>
+</ul>
+</li>
+<li><a href="#org235065c">3.4. Referencias</a>
+<ul>
+<li><a href="#org7dbf827">3.4.1. Referencias Web Oficiales</a></li>
+<li><a href="#orge5bc8c2">3.4.2. Referencias Web Extraoficiales</a></li>
+<li><a href="#orge4a1e61">3.4.3. Referencias Issues</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orged860b0">4. Referencias</a>
+<ul>
+<li><a href="#org01ea03b">4.1. Guías básicas</a></li>
+<li><a href="#orgeb60676">4.2. Guías Avanzadas</a></li>
+<li><a href="#org647c9b5">4.3. Capas o Layers</a></li>
+<li><a href="#org4562650">4.4. Themes</a></li>
+<li><a href="#orgfe11a6b">4.5. Fuentes</a></li>
+<li><a href="#org053dd60">4.6. Configuraciones de Spacemacs</a></li>
+</ul>
+</li>
+<li><a href="#orgd5ca01f">5. Referencias Youtube</a>
+<ul>
+<li><a href="#orga4ba687">5.1. Canales Favoritos</a></li>
+<li><a href="#org8f9cc1d">5.2. Configuraciones basicas</a></li>
+<li><a href="#org191168d">5.3. Buffers, ibuffer y Emmet</a></li>
+<li><a href="#org849657b">5.4. Personalizando la terminal</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="org7f30f15" class="figure">
+<p><img src="/img/spacemacs.png" alt="spacemacs.png" width="650">
+</p>
+</div>
+
+<div id="outline-container-orge199a48" class="outline-2">
+<h2 id="orge199a48"><span class="section-number-2">1.</span> Tips - Importantes</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Para que se guarden los cambios de la agenda, y se puedan filtrar usar <code>M-x org-agenda-file-to-front</code>
+Para abrir la agenda <code>C-c a</code>
+</p>
+</div>
+
+<div id="outline-container-org3dcbd6c" class="outline-3">
+<h3 id="org3dcbd6c"><span class="section-number-3">1.1.</span> Atajos configuraciones</h3>
+<div class="outline-text-3" id="text-1-1">
+<table id="org188fb73" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Comando</th>
+<th scope="col" class="org-left">Descripcion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">SPC q r</td>
+<td class="org-left">Reiniciar spacemacs</td>
+</tr>
+
+<tr>
+<td class="org-left">M m f e R</td>
+<td class="org-left">Aplicar configuraciones</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org9c641e5" class="outline-3">
+<h3 id="org9c641e5"><span class="section-number-3">1.2.</span> Atajos con Treemacs o Neotree</h3>
+<div class="outline-text-3" id="text-1-2">
+<table id="org8534593" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Comando</th>
+<th scope="col" class="org-left">Descripcion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C c C p a</td>
+<td class="org-left">Agregar proyecto</td>
+</tr>
+
+<tr>
+<td class="org-left">C c C p d</td>
+<td class="org-left">Eliminar proyecto</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orge8c4086" class="outline-3">
+<h3 id="orge8c4086"><span class="section-number-3">1.3.</span> Atajos con Projectfile</h3>
+<div class="outline-text-3" id="text-1-3">
+<table id="org396cf5f" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Comando</th>
+<th scope="col" class="org-left">Descripcion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">SPC p f</td>
+<td class="org-left">Abrir algun archivo del proyecto actual</td>
+</tr>
+
+<tr>
+<td class="org-left">SPC f r</td>
+<td class="org-left">Abrir algun archivo reciente (recent files**</td>
+</tr>
+
+<tr>
+<td class="org-left">SPC p p</td>
+<td class="org-left">Cambiar del proyecto actual a otro</td>
+</tr>
+
+<tr>
+<td class="org-left">M-x projectile-remove-known-project</td>
+<td class="org-left">Eliminar alguno de los proyectos agregados</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org481e3cc" class="outline-3">
+<h3 id="org481e3cc"><span class="section-number-3">1.4.</span> Referencias</h3>
+<div class="outline-text-3" id="text-1-4">
+</div>
+<div id="outline-container-org323d04c" class="outline-4">
+<h4 id="org323d04c"><span class="section-number-4">1.4.1.</span> Referencias Web</h4>
+<div class="outline-text-4" id="text-1-4-1">
+<ol class="org-ol">
+<li><a href="https://develop.spacemacs.org/layers/+filetree/neotree/README.html">Layer Neotree - Spacemacs.org, Develop</a></li>
+<li><a href="https://develop.spacemacs.org/layers/+filetree/treemacs/README.html">Layer Treemacs - Spacemacs.org, Develop</a></li>
+<li><a href="https://github.com/Alexander-Miller/treemacs">Layer Treemacs - Github, Alexander Miller</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgd927ac0" class="outline-4">
+<h4 id="orgd927ac0"><span class="section-number-4">1.4.2.</span> Referencias Youtube</h4>
+<div class="outline-text-4" id="text-1-4-2">
+<ol class="org-ol">
+<li><a href="https://www.youtube.com/watch?v=Bu7nF9hPSts">Referencia #1</a></li>
+<li><a href="https://www.youtube.com/watch?v=Rx3wRl5d-J0">Referencia #2</a></li>
+<li><a href="https://www.youtube.com/watch?v=OrTJ17ivOL0">Referencia #3</a></li>
+<li><a href="https://www.youtube.com/watch?v=Z88ZmeMo1X0">Referencia #4</a></li>
+<li><a href="https://www.youtube.com/watch?v=kPVVuJWS2vo">Referencia #5</a></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org6e440a4" class="outline-2">
+<h2 id="org6e440a4"><span class="section-number-2">2.</span> Atajos en Hybrid Mode</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org69a1c14" class="outline-3">
+<h3 id="org69a1c14"><span class="section-number-3">2.1.</span> Atajos Principales</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+El modo hibrido es una combinacion entre el <b>holy mode</b> (atajos de emacs) 
+y el <b>evil mode</b> (atajos de vim).
+</p>
+
+<p>
+El atajo <code>SPC</code> suele ser la tecla <b>espacio</b>
+</p>
+</div>
+</div>
+<div id="outline-container-org716adc8" class="outline-3">
+<h3 id="org716adc8"><span class="section-number-3">2.2.</span> Atajos en Evil Mode (Vim)</h3>
+<div class="outline-text-3" id="text-2-2">
+<table id="org00ae235" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Comando</th>
+<th scope="col" class="org-left">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">SPC f t</td>
+<td class="org-left">Abrir gestor de archivos Neotree/Treemac (file tree)</td>
+</tr>
+
+<tr>
+<td class="org-left">SPC f f</td>
+<td class="org-left">Buscar un archivo (find file)</td>
+</tr>
+
+<tr>
+<td class="org-left">SPC f s</td>
+<td class="org-left">Guardar archivo</td>
+</tr>
+
+<tr>
+<td class="org-left">v</td>
+<td class="org-left">Seleccionar/Deseleccionar texto</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org929952c" class="outline-3">
+<h3 id="org929952c"><span class="section-number-3">2.3.</span> Atajos en Holy Mode (Emacs)</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+La metakey <code>M</code> suele referirse a la tecla <code>Alt</code> seguido a la tecla que haga referencia.
+Mientras que <code>C</code> es la tecla <code>Control</code> seguido de la tecla que se mencione.
+</p>
+
+<table id="orgdd2c4a4" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Comando</th>
+<th scope="col" class="org-left">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-1</td>
+<td class="org-left">Cierra todos los buffer excepto el actual</td>
+</tr>
+
+<tr>
+<td class="org-left">C-0</td>
+<td class="org-left">Cierra el buffer actual</td>
+</tr>
+
+<tr>
+<td class="org-left">C-2</td>
+<td class="org-left">Abre un buffer horizontal al actual</td>
+</tr>
+
+<tr>
+<td class="org-left">C-3</td>
+<td class="org-left">Abre un buffer vertical al actual</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x k</td>
+<td class="org-left">Matar el buffer actual</td>
+</tr>
+
+<tr>
+<td class="org-left">C-Shift-Del</td>
+<td class="org-left">Borra una linea entera</td>
+</tr>
+
+<tr>
+<td class="org-left">M-%</td>
+<td class="org-left">Reemplazar palabras</td>
+</tr>
+
+<tr>
+<td class="org-left">M-m f-t</td>
+<td class="org-left">Gestor de archivos Neotree/Treemacs</td>
+</tr>
+
+<tr>
+<td class="org-left">C-k</td>
+<td class="org-left">Borrar una linea</td>
+</tr>
+
+<tr>
+<td class="org-left">C-e</td>
+<td class="org-left">Ir al final de la linea</td>
+</tr>
+
+<tr>
+<td class="org-left">C-Inicio</td>
+<td class="org-left">Ir al principio del archivo</td>
+</tr>
+
+<tr>
+<td class="org-left">C-Fin</td>
+<td class="org-left">Ir al final del archivo</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x C-+</td>
+<td class="org-left">Aumentar el tamaño de texto</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x C--</td>
+<td class="org-left">Disminuir el tamaño de texto</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b>Observación:</b>
+El gestor de archivos Neotree/Treemacs es similar al <code>dired</code>, con la diferencia
+que este ocupa menos espacio en la pantalla
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org37c2794" class="outline-2">
+<h2 id="org37c2794"><span class="section-number-2">3.</span> Ecuaciones algebraicas</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org56ee72a" class="outline-3">
+<h3 id="org56ee72a"><span class="section-number-3">3.1.</span> Configuraciones</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Primero, agregamos o descomentamos las siguientes lineas en los layers de <code>.spacemacs</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp">latex
+bibtex
+auto-completion
+</pre>
+</div>
+
+<p>
+Luego agregamos la siguiente configuracion dentro de <b>user-config</b> de <code>.spacemacs</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">Aumentamos el tamaño del texto que suele aparecer en tamaño chico</span>
+<span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">setq</span> org-format-latex-options <span style="color: #bc6ec5;">(</span>plist-put org-format-latex-options <span style="color: #4f97d7;">:scale</span> <span style="color: #a45bad;">2.0</span><span style="color: #bc6ec5;">)</span>** 
+</pre>
+</div>
+
+<p>
+Por último aplicamos los cambios reiniciando spacemacs con <code>SPC-q-r</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orgb9a0805" class="outline-3">
+<h3 id="orgb9a0805"><span class="section-number-3">3.2.</span> Como escribir las ecuaciones</h3>
+<div class="outline-text-3" id="text-3-2">
+<ol class="org-ol">
+<li>Para escribir ecuaciones debemos encerrarlas con el simbolo pesos <code>$$</code></li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-org">$$ 4x^2 = 16 \times \frac{2}{4x} $$
+</pre>
+</div>
+
+<ol class="org-ol">
+<li>Para visualizar ejecutar <code>C-c C-x C-l</code> ó  <code>, T x</code></li>
+<li>Para mostrar el texto en formato latex ejecutar <code>C-c C-c</code> ó <code>, ,</code></li>
+</ol>
+
+<p>
+<b>Observación:</b>
+Si queremos que muestren todas las formulas al abrir un documento, agregar al principio del archivo la siguiente linea
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span style="color: #9f8766;">#+STARTUP: latexpreview</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0c2cefd" class="outline-3">
+<h3 id="org0c2cefd"><span class="section-number-3">3.3.</span> Errores Comunes</h3>
+<div class="outline-text-3" id="text-3-3">
+</div>
+<div id="outline-container-org9ff4b4c" class="outline-4">
+<h4 id="org9ff4b4c"><span class="section-number-4">3.3.1.</span> No nos permita ver una vista preliminar del archivo</h4>
+<div class="outline-text-4" id="text-3-3-1">
+</div>
+<ol class="org-ol">
+<li><a id="org3b15170"></a>Escenario<br>
+<div class="outline-text-5" id="text-3-3-1-1">
+<blockquote>
+<p>
+File "/tmp/orgtex9997XKu.dvi" wasn't produced. Please adjust 'dvipng' part of `org-preview-latex-process-alist'.
+Found a log is generated, /tmp/orgtex9997XKu.log. Something interesting is in this log: "LaTeX Error: File `wrapfig.sty' &gt;not found.** Then a quick search tells me texlive-latex-extra package is missing.
+</p>
+</blockquote>
+</div>
+</li>
+<li><a id="org7f5895d"></a>Solución<br>
+<div class="outline-text-5" id="text-3-3-1-2">
+<ol class="org-ol">
+<li>En la terminal instalar el paquete <code>texlive-latex-extra</code> y <code>texlive-bin</code></li>
+</ol>
+<div class="org-src-container">
+<pre class="src src-bash">sudo pacman -S textlive-latex-extra
+sudo pacman -S textlive-bin
+</pre>
+</div>
+
+<ol class="org-ol">
+<li>Agregar configuración en el <b>user-config</b> del archivo <code>.spacemacs</code></li>
+</ol>
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #2aa1ae; background-color: #292e34;">;; </span><span style="color: #2aa1ae; background-color: #292e34;">(setq org-latex-create-formula-image-program 'imagemagick)</span>
+<span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold;">setq</span> org-latex-create-formula-image-program 'dvipng<span style="color: #4f97d7;">)</span>
+<span style="color: #2aa1ae; background-color: #292e34;">;;</span><span style="color: #2aa1ae; background-color: #292e34;">(setq-default org-html-with-latex `dvipng)</span>
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org235065c" class="outline-3">
+<h3 id="org235065c"><span class="section-number-3">3.4.</span> Referencias</h3>
+<div class="outline-text-3" id="text-3-4">
+</div>
+<div id="outline-container-org7dbf827" class="outline-4">
+<h4 id="org7dbf827"><span class="section-number-4">3.4.1.</span> Referencias Web Oficiales</h4>
+<div class="outline-text-4" id="text-3-4-1">
+<ol class="org-ol">
+<li><a href="https://orgmode.org/worg/org-symbols.html">Lista de símbolos - orgmode.org</a></li>
+<li><a href="https://orgmode.org/worg/org-tutorials/org-latex-preview.html">Tutorial Org Latex Preview - orgmode.org</a></li>
+<li><a href="https://orgmode.org/manual/LaTeX-fragments.html">Tutorial Org Latex Fragments - orgmode.org</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orge5bc8c2" class="outline-4">
+<h4 id="orge5bc8c2"><span class="section-number-4">3.4.2.</span> Referencias Web Extraoficiales</h4>
+<div class="outline-text-4" id="text-3-4-2">
+<ol class="org-ol">
+<li><a href="https://github.com/politza/pdf-tools">PDF-tools - github.com, Politza</a></li>
+<li><a href="https://ecuadorminingnews.com/install-texlive-bin/">Install Textlive - ecuadorminingnews.com</a></li>
+<li><a href="https://sourceforge.net/projects/dvipng/">Dvipng - sourceforge.net</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orge4a1e61" class="outline-4">
+<h4 id="orge4a1e61"><span class="section-number-4">3.4.3.</span> Referencias Issues</h4>
+<div class="outline-text-4" id="text-3-4-3">
+<ol class="org-ol">
+<li><a href="https://emacs.stackexchange.com/questions/19880/font-size-control-of-latex-previews-in-org-files">Aumentar tamaño del texto #1 - emacs.stackexchange.com</a></li>
+<li><a href="https://tex.stackexchange.com/questions/78501/change-size-of-the-inline-image-for-latex-fragment-in-emacs-org-mode">Aumentar tamaño del texto #2 - tex.stackexchange.com</a></li>
+<li><a href="https://www.reddit.com/r/emacs/comments/5rf9d4/help_org_setup_preview_latex_fragments/">Org setup preview latex fragments - reddit.com</a></li>
+<li><a href="https://emacs.stackexchange.com/questions/18627/preview-latex-fragment-in-org-mode-blank-square-shown">Preview latex fragment in org mode - emacs.stackexchange.com</a></li>
+<li><a href="https://bbs.archlinux.org/viewtopic.php?id=168634">Dvipng unable to find required binary in libgd - bbs.archlinux.org</a></li>
+<li><a href="https://stackoverflow.com/questions/30151338/org-latex-preview-is-fuzzy-on-retina-displays">Org Latex preview is fuzzy on retina displays - stackoverflow.com</a></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orged860b0" class="outline-2">
+<h2 id="orged860b0"><span class="section-number-2">4.</span> Referencias</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org01ea03b" class="outline-3">
+<h3 id="org01ea03b"><span class="section-number-3">4.1.</span> Guías básicas</h3>
+<div class="outline-text-3" id="text-4-1">
+<ol class="org-ol">
+<li><a href="https://charlascylon.com/2017-09-20-spacemacs-mi-configuracion-personal">Configuración Spacemacs - CharlasCyclon.com</a></li>
+<li><a href="https://medium.com/@kokegudiel2/configuari%C3%B3n-de-spacemacs-para-principiantes-ed43ddf3030f">Configuración Básica Spacemacs - Blog Kokegudiel2</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgeb60676" class="outline-3">
+<h3 id="orgeb60676"><span class="section-number-3">4.2.</span> Guías Avanzadas</h3>
+<div class="outline-text-3" id="text-4-2">
+<ol class="org-ol">
+<li><a href="https://wiki.archlinux.org/index.php/Spacemacs">Referencia #1 - Wiki, ArchLinux.com</a></li>
+<li><a href="https://github.com/syl20bnr/spacemacs/blob/master/doc/DOCUMENTATION.org">Referencia #2 - Github, Syl20bnr</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org647c9b5" class="outline-3">
+<h3 id="org647c9b5"><span class="section-number-3">4.3.</span> Capas o Layers</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+Subprogramas que agregan funcionalidad a spacemacs
+</p>
+<ol class="org-ol">
+<li><a href="https://www.spacemacs.org/layers/LAYERS.html">Referencia #1, Spacemacs.org</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org4562650" class="outline-3">
+<h3 id="org4562650"><span class="section-number-3">4.4.</span> Themes</h3>
+<div class="outline-text-3" id="text-4-4">
+<p>
+Para cambiar el estilo, la visualizacion, diseño, el color fondo y del texto,..
+</p>
+<ol class="org-ol">
+<li><a href="https://themegallery.robdor.com/">Themes, ThemeGallery</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgfe11a6b" class="outline-3">
+<h3 id="orgfe11a6b"><span class="section-number-3">4.5.</span> Fuentes</h3>
+<div class="outline-text-3" id="text-4-5">
+<p>
+El tipo de fuente es fundamental para que sea más entendible el texto, en especial si estamos inmersos investigando/codeando muchas horas
+</p>
+
+<ol class="org-ol">
+<li><a href="https://sourcefoundry.org/hack/playground.html">Referencia #1 - SourceFoundry.org</a></li>
+<li><a href="https://opensource.com/article/17/11/how-select-open-source-programming-font">Referencia #2 - Opensource.com</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org053dd60" class="outline-3">
+<h3 id="org053dd60"><span class="section-number-3">4.6.</span> Configuraciones de Spacemacs</h3>
+<div class="outline-text-3" id="text-4-6">
+<p>
+Las configuraciones se hacen en el archivo <code>~/.spacemacs</code>
+</p>
+
+<ol class="org-ol">
+<li><a href="https://out-of-cheese-error.netlify.com/spacemacs-config">Referencia #1 - Out of cheese error</a></li>
+<li><a href="https://practicalli.github.io/spacemacs/install-spacemacs/additional-configuration.html">Referencia #2 - Github, Practicalli</a></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd5ca01f" class="outline-2">
+<h2 id="orgd5ca01f"><span class="section-number-2">5.</span> Referencias Youtube</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-orga4ba687" class="outline-3">
+<h3 id="orga4ba687"><span class="section-number-3">5.1.</span> Canales Favoritos</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+Conceptos, Atajos, Herramientas, etc.
+</p>
+
+<ol class="org-ol">
+<li><a href="https://www.youtube.com/watch?v=MRYzPWnk2mE&amp;list=PLxj9UAX4Em-IiOfvF2Qs742LxEK4owSkr">Referencia #1</a></li>
+<li><a href="https://www.youtube.com/watch?v=d6iY_1aMzeg&amp;list=PLX2044Ew-UVVv31a0-Qn3dA6Sd_-NyA1n">Referencia #2</a></li>
+<li><a href="https://www.youtube.com/watch?v=BRqjaN4-gGQ&amp;list=PLhXZp00uXBk4np17N39WvB80zgxlZfVwj">Referencia #3</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org8f9cc1d" class="outline-3">
+<h3 id="org8f9cc1d"><span class="section-number-3">5.2.</span> Configuraciones basicas</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+Para los que recién estan iniciandose
+</p>
+
+<ol class="org-ol">
+<li><a href="https://www.youtube.com/watch?v=8k7BTIqufqQ">Referencia #1</a></li>
+<li><a href="https://www.youtube.com/watch?v=Ie4z9-z948c">Referencia #2</a></li>
+<li><a href="https://www.youtube.com/watch?v=PKaJoqQQoIA">Referencia #3</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org191168d" class="outline-3">
+<h3 id="org191168d"><span class="section-number-3">5.3.</span> Buffers, ibuffer y Emmet</h3>
+<div class="outline-text-3" id="text-5-3">
+<ol class="org-ol">
+<li><a href="https://www.youtube.com/watch?v=yUfA-7wWNKA">Referencia #1</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org849657b" class="outline-3">
+<h3 id="org849657b"><span class="section-number-3">5.4.</span> Personalizando la terminal</h3>
+<div class="outline-text-3" id="text-5-4">
+<ol class="org-ol">
+<li><a href="https://www.youtube.com/watch?v=L9vA7FHoQnk">Referencia #1</a></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: jelou</p>
+<p class="date">Created: 2021-10-18 lun 20:12</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+
+
+</body></html>

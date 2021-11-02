@@ -1,0 +1,470 @@
+<!--?xml version="1.0" encoding="utf-8"?--><!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<!-- 2021-03-31 mié 00:47 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Libros de Formación</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="jelou">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Libros de Formación</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgff428f4">1. Otros</a></li>
+<li><a href="#org8291697">2. Programación</a></li>
+<li><a href="#org1faf2b2">3. Blogs</a></li>
+<li><a href="#orga3c8156">4. Youtube</a>
+<ul>
+<li><a href="#org507febc">4.1. Modelado</a></li>
+<li><a href="#org48d9f08">4.2. Especificación y Requisitos</a>
+<ul>
+<li><a href="#orgba5d02c">4.2.1. UCAM - Universidad Catolica de Murcia</a></li>
+<li><a href="#org51b08c5">4.2.2. Otros</a></li>
+</ul>
+</li>
+<li><a href="#orge912280">4.3. Historias de Usuario - User Stories</a>
+<ul>
+<li><a href="#orga1375fb">4.3.1. Conceptos</a></li>
+<li><a href="#org22e9952">4.3.2. Referencias</a></li>
+</ul>
+</li>
+<li><a href="#org3216659">4.4. Impact Mapping</a></li>
+<li><a href="#orgde5b644">4.5. Puntos de Historia</a></li>
+<li><a href="#orge8e3f32">4.6. Product Backlog</a>
+<ul>
+<li><a href="#org85d485c">4.6.1. Mejores</a></li>
+</ul>
+</li>
+<li><a href="#orgcb72e86">4.7. Burndown Chart - Grafica de scrum</a></li>
+<li><a href="#org519579f">4.8. Requesitos Funciones y NO funcionales</a></li>
+<li><a href="#org7b1ad79">4.9. Usando Jira con Scrum</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+Blogs y Libros interesantes para mejorar mi formación académica
+</p>
+
+<div id="outline-container-orgff428f4" class="outline-2">
+<h2 id="orgff428f4"><span class="section-number-2">1</span> Otros</h2>
+</div>
+
+<div id="outline-container-org8291697" class="outline-2">
+<h2 id="org8291697"><span class="section-number-2">2</span> Programación</h2>
+</div>
+<div id="outline-container-org1faf2b2" class="outline-2">
+<h2 id="org1faf2b2"><span class="section-number-2">3</span> Blogs</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li><a href="https://devexperto.com/principio-responsabilidad-unica">https://devexperto.com/principio-responsabilidad-unica</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga3c8156" class="outline-2">
+<h2 id="orga3c8156"><span class="section-number-2">4</span> Youtube</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org507febc" class="outline-3">
+<h3 id="org507febc"><span class="section-number-3">4.1</span> Modelado</h3>
+<div class="outline-text-3" id="text-4-1">
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=y3MWfPDmVqo">Javascript Kata - Clean Code y Buenas practicas</a></li>
+<li><a href="https://www.youtube.com/watch?v=y3MWfPDmVqo">Codigo Limpio- El arte de construir software</a></li>
+<li><a href="https://www.youtube.com/watch?v=y3MWfPDmVqo">Refactor de Code Smells - Clean Code</a></li>
+<li><a href="https://www.youtube.com/watch?v=y3MWfPDmVqo">Refactoring Tips - De codigo a Codigo Limpio</a></li>
+<li><a href="https://www.youtube.com/watch?v=y3MWfPDmVqo">Solid #1 - Principio de INversion de Dependencias</a></li>
+<li><a href="https://www.youtube.com/watch?v=y3MWfPDmVqo">Solid #2 - Errores comunes al diseñar interfaces</a></li>
+<li><a href="https://www.youtube.com/watch?v=y3MWfPDmVqo">Clean Architecture - Uncle bob</a></li>
+<li><a href="https://www.youtube.com/watch?v=y3MWfPDmVqo">Arquitectura Hexagonal #1 - DDD</a></li>
+<li><a href="https://www.youtube.com/watch?v=y3MWfPDmVqo">Arquitectura Hexagonal #2 - DDD - Domain DRive Design</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org48d9f08" class="outline-3">
+<h3 id="org48d9f08"><span class="section-number-3">4.2</span> Especificación y Requisitos</h3>
+<div class="outline-text-3" id="text-4-2">
+</div>
+<div id="outline-container-orgba5d02c" class="outline-4">
+<h4 id="orgba5d02c"><span class="section-number-4">4.2.1</span> UCAM - Universidad Catolica de Murcia</h4>
+<div class="outline-text-4" id="text-4-2-1">
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=AbwwtjOfJIY">Ingenieria de Requisitos - Conceptos Basicos</a></li>
+<li><a href="https://www.youtube.com/watch?v=gagdT0gJyqA">Especificacion de REquisitos</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org51b08c5" class="outline-4">
+<h4 id="org51b08c5"><span class="section-number-4">4.2.2</span> Otros</h4>
+<div class="outline-text-4" id="text-4-2-2">
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=4q2yBHjceLQ">https://www.youtube.com/watch?v=4q2yBHjceLQ</a></li>
+<li><a href="https://www.youtube.com/watch?v=19sxPKlH2eo">https://www.youtube.com/watch?v=19sxPKlH2eo</a></li>
+<li><a href="https://www.youtube.com/watch?v=nH4l2NfEesU">https://www.youtube.com/watch?v=nH4l2NfEesU</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orge912280" class="outline-3">
+<h3 id="orge912280"><span class="section-number-3">4.3</span> Historias de Usuario - User Stories</h3>
+<div class="outline-text-3" id="text-4-3">
+</div>
+<div id="outline-container-orga1375fb" class="outline-4">
+<h4 id="orga1375fb"><span class="section-number-4">4.3.1</span> Conceptos</h4>
+</div>
+<div id="outline-container-org22e9952" class="outline-4">
+<h4 id="org22e9952"><span class="section-number-4">4.3.2</span> Referencias</h4>
+<div class="outline-text-4" id="text-4-3-2">
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=txOLx58sT5g">User Story mapping - cris rua</a></li>
+<li><a href="https://www.youtube.com/watch?v=FJuq_lrM5Cc">Historias de Usuario - Jorge Ruiz Agile</a></li>
+<li><a href="https://www.youtube.com/watch?v=ky6wFiF5vMk">Como crear historias de usuario -  Cris Rua</a></li>
+<li><a href="https://www.youtube.com/watch?v=Ueq786iZ30I">Como dividir las historias de usuario  en tareas - Cris rua</a></li>
+<li><a href="https://www.youtube.com/watch?v=PEaqUlwyDS4">Ing. de requisitos - UPM</a></li>
+<li><a href="https://www.youtube.com/watch?v=FJuq_lrM5Cc">https://www.youtube.com/watch?v=FJuq_lrM5Cc</a></li>
+<li><a href="https://www.youtube.com/watch?v=Zi9E1aUO_1U">https://www.youtube.com/watch?v=Zi9E1aUO_1U</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org3216659" class="outline-3">
+<h3 id="org3216659"><span class="section-number-3">4.4</span> Impact Mapping</h3>
+<div class="outline-text-3" id="text-4-4">
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=dt-EIN8dBbY">Impact mapping - Como iniciar un proyecto - Cris rua</a></li>
+</ul>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Tipo de Meta</th>
+<th scope="col" class="org-left">&nbsp;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">(S)pecific</td>
+<td class="org-left">&nbsp;</td>
+</tr>
+
+<tr>
+<td class="org-left">(M)easurable</td>
+<td class="org-left">&nbsp;</td>
+</tr>
+
+<tr>
+<td class="org-left">(A)lcanzable</td>
+<td class="org-left">&nbsp;</td>
+</tr>
+
+<tr>
+<td class="org-left">(R)elevant</td>
+<td class="org-left">&nbsp;</td>
+</tr>
+
+<tr>
+<td class="org-left">(T)emporal</td>
+<td class="org-left">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgde5b644" class="outline-3">
+<h3 id="orgde5b644"><span class="section-number-3">4.5</span> Puntos de Historia</h3>
+<div class="outline-text-3" id="text-4-5">
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=4I6F0nSCdmE">Puntos de Historia Vs horas - Cris Rua</a></li>
+<li><a href="https://www.youtube.com/watch?v=O-D22kLYi2M">Estimacion de puntos de historia - Cris rua</a></li>
+<li><a href="https://www.youtube.com/watch?v=ey6Pm46WXkY">Scrum Poker - Estimacion y Planeación del Scrum - Cris rua</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge8e3f32" class="outline-3">
+<h3 id="orge8e3f32"><span class="section-number-3">4.6</span> Product Backlog</h3>
+<div class="outline-text-3" id="text-4-6">
+</div>
+<div id="outline-container-org85d485c" class="outline-4">
+<h4 id="org85d485c"><span class="section-number-4">4.6.1</span> Mejores</h4>
+<div class="outline-text-4" id="text-4-6-1">
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=JuIVHk1wvcw">https://www.youtube.com/watch?v=JuIVHk1wvcw</a></li>
+<li></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcb72e86" class="outline-3">
+<h3 id="orgcb72e86"><span class="section-number-3">4.7</span> Burndown Chart - Grafica de scrum</h3>
+<div class="outline-text-3" id="text-4-7">
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=_7NJpxMT54U">Burndown chart - Cris Rua</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org519579f" class="outline-3">
+<h3 id="org519579f"><span class="section-number-3">4.8</span> Requesitos Funciones y NO funcionales</h3>
+</div>
+<div id="outline-container-org7b1ad79" class="outline-3">
+<h3 id="org7b1ad79"><span class="section-number-3">4.9</span> Usando Jira con Scrum</h3>
+<div class="outline-text-3" id="text-4-9">
+<ul class="org-ul">
+<li><a href="https://www.youtube.com/watch?v=t4w8E2dKtQ8">COmo usar Kanban - Cris Rua</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: jelou</p>
+<p class="date">Created: 2021-03-31 mié 00:47</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+
+
+</body></html>
