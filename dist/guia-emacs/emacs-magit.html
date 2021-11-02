@@ -1,0 +1,593 @@
+<!--?xml version="1.0" encoding="utf-8"?--><!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<!-- 2021-10-18 lun 20:49 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía Emacs - Versionando Proyectos con MAGIT</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="jelou">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/sass-style.css">
+<script type="text/javascript" src="/assets/js/all.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Guía Emacs - Versionando Proyectos con MAGIT</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org7575de1">1. Traer cambios de un branch al master</a></li>
+<li><a href="#org97a9c7d">2. Diferencia entre master y origin/master</a>
+<ul>
+<li><a href="#org464b382">2.1. Procedimiento</a></li>
+<li><a href="#orgd5b6994">2.2. Referencias</a>
+<ul>
+<li><a href="#org80caf7e">2.2.1. Referencias Web Extraoficiales</a></li>
+<li><a href="#orgc551c51">2.2.2. Referencias Issues</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org3ff3416">3. Guardar cambios de forma temporal (Stash)</a>
+<ul>
+<li><a href="#org1718f08">3.1. Procedimiento</a></li>
+<li><a href="#org99cb8de">3.2. Referencias Web Extraoficiales</a></li>
+</ul>
+</li>
+<li><a href="#orgfa75c6f">4. Listar historial de commits de un archivo</a>
+<ul>
+<li><a href="#org77865c1">4.1. Procedimiento</a></li>
+<li><a href="#org6d2ac57">4.2. Referencias Web Oficiales</a></li>
+</ul>
+</li>
+<li><a href="#orgb357793">5. Atajos</a></li>
+<li><a href="#org3f05726">6. Posibles Situaciones</a>
+<ul>
+<li><a href="#org4a3a2cc">6.1. Hacer cambios, subirlos y actualizar</a></li>
+<li><a href="#org9feac71">6.2. Resolver conflicto, diferencia entre archivos</a></li>
+</ul>
+</li>
+<li><a href="#org741e38d">7. Referencias</a>
+<ul>
+<li><a href="#org14b9980">7.1. Referencias Web Extraoficiales</a></li>
+<li><a href="#org49a6dbe">7.2. Referencias Youtube</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7575de1" class="outline-2">
+<h2 id="org7575de1"><span class="section-number-2">1.</span> Traer cambios de un branch al master</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Si hicimos cambios y los guardamos en <b>branches</b> y queremos traerlos al <b>branch master</b> (suele ser la última versión, la que irá a producción)
+</p>
+
+<ol class="org-ol">
+<li>Cambiamos al <b>branch master</b>
+Presionamos <code>SPC g s</code> para acceder al menú de Magit, 
+luego <code>b b</code> y elegimos el <b>master branch</b> (<i>no es lo mismo que origin/master</i>)</li>
+<li>Hacemos <b>(merge)</b> con el branch que queremos (<i>Ej. hotfix branch o testing branch</i>)
+Presionamos <code>SPC g s</code> luego <code>m m</code> y elegimos el <b>branch</b> para traer los cambios al <b>master branch</b></li>
+<li>Hacemos <b>(push)</b> del <b>(merge)</b>
+Presionamos con <code>SPC g s</code> luego <code>p p</code></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org97a9c7d" class="outline-2">
+<h2 id="org97a9c7d"><span class="section-number-2">2.</span> Diferencia entre master y origin/master</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org464b382" class="outline-3">
+<h3 id="org464b382"><span class="section-number-3">2.1.</span> Procedimiento</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Del ejemplo anterior quizás puede aparecer esto, y pueden surgir dudas.
+</p>
+
+<p>
+Cuando se dice <b>master</b> se refiere al <b>local branch</b> (el entorno local),
+mientras que <b>origin/master</b> hace referencia al <b>remote branch</b> (el que esta en el servidor github)
+</p>
+
+<p>
+<b>Observación:</b>
+Lo mismo aplica con los <b>branches</b>
+</p>
+
+<p>
+Por ejemplo origin/hotfix y hotfix, origin/testing y testing, etc..
+</p>
+</div>
+</div>
+<div id="outline-container-orgd5b6994" class="outline-3">
+<h3 id="orgd5b6994"><span class="section-number-3">2.2.</span> Referencias</h3>
+<div class="outline-text-3" id="text-2-2">
+</div>
+<div id="outline-container-org80caf7e" class="outline-4">
+<h4 id="org80caf7e"><span class="section-number-4">2.2.1.</span> Referencias Web Extraoficiales</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<ol class="org-ol">
+<li><a href="https://stackify.com/git-checkout-remote-branch/">Git checkout remote branch - Stackify.com</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgc551c51" class="outline-4">
+<h4 id="orgc551c51"><span class="section-number-4">2.2.2.</span> Referencias Issues</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<ol class="org-ol">
+<li><a href="https://stackoverflow.com/questions/48596045/git-difference-between-origin-master-and-origin-master">Difference between master and origin master - Stackoverfow.com</a></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org3ff3416" class="outline-2">
+<h2 id="org3ff3416"><span class="section-number-2">3.</span> Guardar cambios de forma temporal (Stash)</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org1718f08" class="outline-3">
+<h3 id="org1718f08"><span class="section-number-3">3.1.</span> Procedimiento</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Si hicimos cambios en archivos de nuestro ordenador (se dice que es local, y se guarda en <b>unstage</b>),
+para guardar esos cambios en otro lugar de "forma temporal" (se guarda en <b>stash</b>) antes de hacer un <b>pull</b> 
+</p>
+
+<ol class="org-ol">
+<li>Antes de hacer <b>(commit)</b> de los cambios, separamos el código con <b>(stash)</b>
+Los cambios que se hicimos en los archivos del entorno local estan en <b>unstage</b> sino hicimos commit,
+seleccionamos ese bloque de código y presionamos <code>zz RET</code> (no le asignamos nombre porque es opcional).
+Cuando volvamos al archivo, no apareceran lo cambios, quedaron separados en <b>stash</b></li>
+<li>Creamos un <b>branch</b> para las nuevas características que nos pidieron de improviso
+Al crear el <b>branch</b> nos aseguramos de separar las nuevas características
+del <b>commit</b> que haríamos con las funcionalidades que estabamos desarrollando.</li>
+<li>Volvemos a traer el código que reservamos con <b>(stash)</b>
+Seleccionamos los cambios que teniamos <b>stashes</b> y presionamos <code>a</code> (hace referencia a add/agregar)
+y volverá a aparecer esos cambios en el archivo, por tanto estará en <b>unstage</b> 
+donde quedan las modificaciones que aún no se hizo <b>commit</b> (si lo hicieramos quedarían en <b>stage</b>)</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org99cb8de" class="outline-3">
+<h3 id="org99cb8de"><span class="section-number-3">3.2.</span> Referencias Web Extraoficiales</h3>
+<div class="outline-text-3" id="text-3-2">
+<ol class="org-ol">
+<li><a href="https://code.tutsplus.com/es/tutorials/quick-tip-leveraging-the-power-of-git-stash--cms-22988">Referencia #1 - Code Tutsplus</a></li>
+<li><a href="https://www.runroom.com/realworld/git-stash">Referencia #2 - RunRoom</a></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfa75c6f" class="outline-2">
+<h2 id="orgfa75c6f"><span class="section-number-2">4.</span> Listar historial de commits de un archivo</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org77865c1" class="outline-3">
+<h3 id="org77865c1"><span class="section-number-3">4.1.</span> Procedimiento</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+Corremos el comando <b>(blame)</b> presionando <code>SPC g b</code> y nos muestra un log de los cambios
+Si presionamos <code>b</code> va a los commits anteriores y con <code>q</code> los mas recientes
+</p>
+</div>
+</div>
+<div id="outline-container-org6d2ac57" class="outline-3">
+<h3 id="org6d2ac57"><span class="section-number-3">4.2.</span> Referencias Web Oficiales</h3>
+<div class="outline-text-3" id="text-4-2">
+<ol class="org-ol">
+<li><a href="https://magit.vc/manual/magit/Blaming.html">Blaming - Magit.vc</a></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb357793" class="outline-2">
+<h2 id="orgb357793"><span class="section-number-2">5.</span> Atajos</h2>
+<div class="outline-text-2" id="text-5">
+<table id="orgf6e41cf" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Comando</th>
+<th scope="col" class="org-left">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">SPC-g s</td>
+<td class="org-left">Muestra el estado de cambios</td>
+</tr>
+
+<tr>
+<td class="org-left">Tab</td>
+<td class="org-left">Expande/Oculta el contenido del bloque donde esta el cursor</td>
+</tr>
+
+<tr>
+<td class="org-left">s</td>
+<td class="org-left">Agrega archivos nuevos/Guarda los cambios locales <b>unstage</b> en <b>stage</b></td>
+</tr>
+
+<tr>
+<td class="org-left">u</td>
+<td class="org-left">Pasa los cambios de <b>stage</b> al entorno local (unstage)</td>
+</tr>
+
+<tr>
+<td class="org-left">x</td>
+<td class="org-left">Descarta los cambios</td>
+</tr>
+
+<tr>
+<td class="org-left">c c</td>
+<td class="org-left">Crear <b>commit</b> (luego de escribir el motivo, se debe finalizar)</td>
+</tr>
+
+<tr>
+<td class="org-left">, ,</td>
+<td class="org-left">Finalizar <b>commit</b></td>
+</tr>
+
+<tr>
+<td class="org-left">b c</td>
+<td class="org-left">Crear un nuevo branch, y hacer checkout de ese branch</td>
+</tr>
+
+<tr>
+<td class="org-left">b b</td>
+<td class="org-left">Cambiar de <b>branch</b> (Ej. Ir del master al develop o testing)</td>
+</tr>
+
+<tr>
+<td class="org-left">t t</td>
+<td class="org-left">Crear un <b>tag</b></td>
+</tr>
+
+<tr>
+<td class="org-left">p p</td>
+<td class="org-left">Hacer <b>push</b></td>
+</tr>
+
+<tr>
+<td class="org-left">p e</td>
+<td class="org-left">Hacer <b>push</b> en un repositorio externo</td>
+</tr>
+
+<tr>
+<td class="org-left">F p</td>
+<td class="org-left">Hacer <b>pull</b></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org3f05726" class="outline-2">
+<h2 id="org3f05726"><span class="section-number-2">6.</span> Posibles Situaciones</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-org4a3a2cc" class="outline-3">
+<h3 id="org4a3a2cc"><span class="section-number-3">6.1.</span> Hacer cambios, subirlos y actualizar</h3>
+<div class="outline-text-3" id="text-6-1">
+<ol class="org-ol">
+<li>Guardamos los cambios de forma local <b>(unstage)</b>
+Modificamos los archivos, guardamos con con <code>SPC f s</code> ó <code>M-x s</code></li>
+<li>Guardo los cambios en <b>Stage</b>
+Presionamos <code>SPC g s</code> seleccionamos los cambios que queremos guardar en <b>stage</b> 
+con <code>shift</code> ó <code>v</code> y las flechas Down/Up, y presionamos <code>s</code></li>
+<li>Hacemos <b>(commit)</b> (aplicamos los cambios)
+Presionamos <code>SPC g s</code> seguido de <code>c c</code></li>
+<li>Creamos un <b>(branch)</b> del <b>(commit)</b>
+Presionamos <code>SPC g s</code> seguido de <code>b c</code> luego <code>RET</code> y escribimos
+el nombre del nuevo <b>(branch)</b> donde se guardaran los cambios del <b>(commit)</b></li>
+<li>Hacemos <b>(push)</b>
+Presionamos <code>SPC g s</code> seguido de <code>p p</code></li>
+<li>Hacemos <b>(pull)</b> del <b>(branch)</b> nuevo al <b>master branch</b>
+Presionamos <code>SPC g s</code> seguido de <code>b b</code> elegimos el <b>master branch</b>
+y terminamos con <code>F p</code></li>
+</ol>
+
+<p>
+<b>Observación:</b>
+Si ya estamos en el menú de <b>magit</b> no es necesario presionar el atajo <code>SPC g s</code> del mode evil de spacemacs
+</p>
+</div>
+</div>
+<div id="outline-container-org9feac71" class="outline-3">
+<h3 id="org9feac71"><span class="section-number-3">6.2.</span> Resolver conflicto, diferencia entre archivos</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+Si en el paso 5 del ejemplo anterior hubiesemos tenido un conflicto,
+porque alguien modificó el mismo archivo en las mismas lineas.
+</p>
+
+<ol class="org-ol">
+<li>Hacemos <b>(pull)</b>
+Para traer el archivo con el que tenemos conflicto,
+ver las diferencias entre este archivo y el archivo local para resolverlo.</li>
+
+<li><p>
+Mostramos el conflicto
+Presionamos <code>SPC g s</code> y luego <code>e</code> , apareciendo tres buffers 
+identificados en la parte inferior izquierda con las letras A, B, C.
+</p>
+
+<p>
+<b>Nota:</b>
+A y B son los archivos en conflicto, y C el archivo final,
+el que tendra los conflictos resuelto.
+</p></li>
+
+<li>Comparamos las diferencias con <code>n</code> y <code>p</code>
+Si presionamos <code>p</code> o <code>n</code> se resaltará los cambios, 
+donde <code>p</code> hace de <b>previous diff</b> y <code>n</code> de <b>next diff</b></li>
+
+<li><p>
+Corregimos el conflicto
+Podemos elegir entre elegir que archivo (buffer A o B) sera el correcto como solucion e ira al buffer C, 
+presionando la letra minuscula del buffer que identifica al archivo.
+</p>
+
+<p>
+<b>Nota:</b>
+La otra manera, seria si corregimos las diferencias de forma manual escribiendo en el buffer C
+</p></li>
+
+<li>Guardamos los cambios y salimos
+Presionamos <code>q</code> seguido de <code>y</code> dos veces para confirmar los cambios realizados.</li>
+
+<li>Verificamos que se hizo el <b>(merge)</b>
+Presionamos <code>SPC g s</code> y debe decir "Merging origin/nombre del branch"</li>
+
+<li>Hacemos <b>(commit)</b> del <b>(merge)</b> y <b>(push)</b>
+Comiteamos con <code>c c</code> y <code>, ,</code> y por último pusheamos con <code>P p</code></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org741e38d" class="outline-2">
+<h2 id="org741e38d"><span class="section-number-2">7.</span> Referencias</h2>
+<div class="outline-text-2" id="text-7">
+</div>
+<div id="outline-container-org14b9980" class="outline-3">
+<h3 id="org14b9980"><span class="section-number-3">7.1.</span> Referencias Web Extraoficiales</h3>
+<div class="outline-text-3" id="text-7-1">
+<ol class="org-ol">
+<li><a href="https://www.saltycrane.com/blog/2018/11/magit-spacemacs-evil-magit-notes/">Referencia #1 - Blog SaltyCrane.com</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org49a6dbe" class="outline-3">
+<h3 id="org49a6dbe"><span class="section-number-3">7.2.</span> Referencias Youtube</h3>
+<div class="outline-text-3" id="text-7-2">
+<ol class="org-ol">
+<li><a href="https://www.youtube.com/watch?v=7ywEgcbaiys">Referencia #1</a></li>
+<li><a href="https://www.youtube.com/watch?v=qXgGtyjXPiw">Referencia #2</a></li>
+<li><a href="https://www.youtube.com/watch?v=fFuf3hExF5w">Referencia #3</a></li>
+<li><a href="https://www.youtube.com/watch?v=NDP91RNgT4A">Referencia #4</a></li>
+<li><a href="https://www.youtube.com/watch?v=1IYsiHXR620">Referencia #5</a></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: jelou</p>
+<p class="date">Created: 2021-10-18 lun 20:49</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+
+
+</body></html>

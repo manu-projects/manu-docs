@@ -67,9 +67,9 @@
     - [NUEVO] Versionando proyectos en GIT con Magit [[file:guia-emacs/emacs-magit.org][[Ir a página]​]]
     - [DESARROLLANDO] Programar dentro de Emacs con Elisp
 *** Github
-    - [DESARROLLANDO] Git primeros pasos
     - Aprendiendo lo básico de Control de versiones con Github [[file:guia-git/git-basico.org][Ir a la página]]
     - [NUEVO] Profundizando sobre Github Bash [[file:guia-git/git-2.org][Ir a la página]]
+    - [NUEVO] GIT evitando conflictos con tu team laboral [[file:guia-git/git-3.org][[Ir a la página]​]]
 ** Linux
    - Sobrevivir usando la terminal - Parte 1 [[file:guia-linux/linux-basico-1.org][Ir a la página]] 
    - Sobrevivir usando la terminal - Parte 2 [[file:guia-linux/linux-basico-2.org][Ir a la página]]

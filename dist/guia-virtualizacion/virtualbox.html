@@ -1,0 +1,413 @@
+<!--?xml version="1.0" encoding="utf-8"?--><!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<!-- 2021-10-19 mar 04:02 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guia Virtualización - Virtualbox</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="jelou">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/sass-style.css">
+<script type="text/javascript" src="/assets/js/all.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Guia Virtualización - Virtualbox</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgee643c8">1. Instalación de Virtualbox</a></li>
+<li><a href="#org2006107">2. Integrar Vagrant</a>
+<ul>
+<li><a href="#org68df5a7">2.1. Instalación</a></li>
+<li><a href="#org6b612f7">2.2. Comandos básicos</a></li>
+<li><a href="#orgd03d21a">2.3. Referencias</a>
+<ul>
+<li><a href="#org522d847">2.3.1. Referencias Web Oficiales</a></li>
+<li><a href="#orgead4461">2.3.2. Referencias Web Extraoficiales</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgd842974">3. Referencias</a>
+<ul>
+<li><a href="#orgbb4447b">3.1. Referencias Web Oficiales</a></li>
+<li><a href="#org9882763">3.2. Referencias Web Extraoficiales</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgee643c8" class="outline-2">
+<h2 id="orgee643c8"><span class="section-number-2">1.</span> Instalación de Virtualbox</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Nos aseguramos de instalar una versión que se adapte a nuestro kernel
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell" id="orgd94b4f2"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">La version que nos diga sera la que agregamos</span>
+mhwd-kernel -li
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Instalamos virtualbox (suponiendo que tu kernel es linux54)</span>
+sudo pacman -Syu virtualbox linux54-virtualbox-host-modules
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Cargamos virtualbox</span>
+sudo vboxreload
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Instalamos la version extendida que agrega nuevas funcionalidades</span>
+pacmac build virtualbox-ext-oracle
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Agregamos el usuario actual al grupo de usuarios vbox</span>
+sudo gpasswd -a $<span style="color: #7590db;">USER</span> vboxusers
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2006107" class="outline-2">
+<h2 id="org2006107"><span class="section-number-2">2.</span> Integrar Vagrant</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org68df5a7" class="outline-3">
+<h3 id="org68df5a7"><span class="section-number-3">2.1.</span> Instalación</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Tenemos otro apartado donde se explica con más detalle sobre <b>Vagrant</b> 
+en esta sección mencionaremos lo básico.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh" id="orge2f060b"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Instalamos vagrant</span>
+pacman -S vagrant
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Instalamos plugins </span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">vagrant plugin install vagrant-vbguest vagrant-share</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">creamos directorio donde instalar sl ervidor</span>
+mkdir manu-server &amp;&amp; <span style="color: #4f97d7;">cd</span> manu-server
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Inicializamos con una distribucion centos 7 como servidor linux</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">vagrant box add centos-7.0-x86_64.box --name centos7</span>
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">vagrant init centos/7</span>
+vagrant init ubuntu/trusty64
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Descargamos e instalamos el servidor linux </span>
+vagrant up 
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Nos conectamos al servidor</span>
+vagrant ssh
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6b612f7" class="outline-3">
+<h3 id="org6b612f7"><span class="section-number-3">2.2.</span> Comandos básicos</h3>
+<div class="outline-text-3" id="text-2-2">
+<table id="org5fd3069" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col class="org-left">
+
+<col class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Comando</th>
+<th scope="col" class="org-left">Descripcion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">vagrant provision</td>
+<td class="org-left">Instalar paquetes agregados en Vagrantfile</td>
+</tr>
+
+<tr>
+<td class="org-left">vagrant halt</td>
+<td class="org-left">&nbsp;</td>
+</tr>
+
+<tr>
+<td class="org-left">vagrant up</td>
+<td class="org-left">Descargar e instalar un box</td>
+</tr>
+
+<tr>
+<td class="org-left">vagrant ssh</td>
+<td class="org-left">Conectarse al servidor</td>
+</tr>
+
+<tr>
+<td class="org-left">vagrant init</td>
+<td class="org-left">Inicializar</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgd03d21a" class="outline-3">
+<h3 id="orgd03d21a"><span class="section-number-3">2.3.</span> Referencias</h3>
+<div class="outline-text-3" id="text-2-3">
+</div>
+<div id="outline-container-org522d847" class="outline-4">
+<h4 id="org522d847"><span class="section-number-4">2.3.1.</span> Referencias Web Oficiales</h4>
+<div class="outline-text-4" id="text-2-3-1">
+<ol class="org-ol">
+<li><a href="https://wiki.archlinux.org/index.php/Vagrant">Vagrant - Wiki, ArchLinux.org</a></li>
+<li><a href="https://www.vagrantup.com/docs/boxes/base.html">Creating a Base Box - Vagrantup.com</a></li>
+<li><a href="https://www.vagrantup.com/intro/getting-started/provisioning.html">Provisioning - Vagrantup.com</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgead4461" class="outline-4">
+<h4 id="orgead4461"><span class="section-number-4">2.3.2.</span> Referencias Web Extraoficiales</h4>
+<div class="outline-text-4" id="text-2-3-2">
+<ol class="org-ol">
+<li><a href="https://dev.to/psnebc/vagrant-package-and-vagrant-box-add-8of">Vagrant Package and Vagrant Box - Dev.to</a></li>
+<li><a href="https://medium.com/@Joachim8675309/vagrant-provisioning-e4c9fd57968d">Vagrant Provisioning - Blog, Joachim</a></li>
+<li><a href="https://scotch.io/courses/getting-started-with-vagrant-for-local-development/provisioning-vmprovision-how-to-customize-the-box">Como personalizar una Box de Vagrant - Scotch.io</a></li>
+<li><a href="https://blog.ipswitch.com/installing-your-first-vagrant-box">Instalando tu primer Vagrant Box - Blog, IPSwitch</a></li>
+<li><a href="https://computingforgeeks.com/how-to-addinstall-and-run-centos-7-vagrant-box-to-virtualbox-using-vagrant/">Como instalar/ejecutar Centos7 con Vagrant</a></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd842974" class="outline-2">
+<h2 id="orgd842974"><span class="section-number-2">3.</span> Referencias</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgbb4447b" class="outline-3">
+<h3 id="orgbb4447b"><span class="section-number-3">3.1.</span> Referencias Web Oficiales</h3>
+<div class="outline-text-3" id="text-3-1">
+<ol class="org-ol">
+<li><a href="https://wiki.manjaro.org/index.php?title=VirtualBox">Virtualbox - Wiki, Manjaro.org</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org9882763" class="outline-3">
+<h3 id="org9882763"><span class="section-number-3">3.2.</span> Referencias Web Extraoficiales</h3>
+<div class="outline-text-3" id="text-3-2">
+<ol class="org-ol">
+<li><a href="https://www.2daygeek.com/how-to-resize-active-primary-root-partition-in-linux-using-gparted-utility/">Como redimensionar una partición primaria - 2daygeek.com</a></li>
+<li><a href="https://access.redhat.com/articles/1190213">Redimensionar una partición con fdisk - redhat.com</a></li>
+<li><a href="https://www.profesionalreview.com/2018/11/19/virtualbox-extension-pack/">Virtualbox Extension Pack - Profesionalreview.com</a></li>
+<li><a href="https://www.hostinger.com.ar/tutoriales/centos-vs-ubuntu-elegir-servidor-web/">CentOs Vs Ubuntu como Servidor - Hostinger.com.ar</a></li>
+<li><a href="https://webtematica.com/centos-o-debian-para-servidores-web">CentOs Vs Debian como Servidor - webtematica.com</a></li>
+<li><a href="https://www.sinologic.net/2011-02/porque-debian-no-centos.html">Debian en vez de Centos - sinologic.net</a></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: jelou</p>
+<p class="date">Created: 2021-10-19 mar 04:02</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+
+
+</body></html>
