@@ -1,0 +1,1509 @@
+#+TITLE: Guia Frontend Conceptos
+#+SETUPFILE: ../theme-readtheorg.setup
+#+EXPORT_FILE_NAME: ../../views/guia-desarrollo-web/frontend-conceptos.html
+* Reduce Method
+** Conceptos
+   - El método ~reduce()~ actúa similar al ~foldl~ y ~foldl1~ de *Haskell*
+   - Opera elementos de un array con una función que recibe por parámetro
+   - Retorna el resultado de operar cada elemento del array con la función que recibe por parámetro
+
+   #+BEGIN_QUOTE
+   La función que recibe por parámetro se les llama *callback function* cuando son pasadas por parámetro
+   a otra función, y cuando ésta es invocada dentro de la función indica que la función principal
+   ya completó su rutina/acción y retornan el resultado de la *callback function*
+   
+   En el caso del método ~reduce()~, éste funciona como una *función recursiva*.
+   Aplica la *callback function* en cada elemento de un *array*
+   y cada vez que opera un elemento vuelve a ejecutar la función que se pasó por parámetro,
+   usando el resultado que devolvió el ejecutar esa función con el primer elemento, con el segundo, ...
+   hasta que no hayan más elementos.
+
+   Es decir se alimenta de cada resultado del ejecutar la función pasada por parámetro con los elementos
+   de un array, y usa el resultado para volver a operar con otro elemento del array tantas veces como elementos tenga
+   el arreglo.
+   #+END_QUOTE
+** Modo de uso
+   #+BEGIN_QUOTE
+   Si a ~reduce(callbackFn)~ le pasamos una función que reciba al menos dos parámetros
+   por ejemplo ~callbackFn(previousElement, currentElement)~,
+   entonces se comporta como un ~foldl1~, usando como *semilla* (seed) el primer elemento del array
+
+   Si a ~reduce(callbackFn)~ le pasamos como segundo parámetro un objeto ó un valor,
+   por ejemplo ~reduce(callbackFn, valor)~,
+   entonces se comporta como un ~foldl~, usando como *semilla* el elemento pasado como segundo parámetro.
+   
+   Ese segundo parámetro es el que usa como valor inicial..
+   puede ser un objeto (Ej. ~{}~) ó un array vacío ~[]~, un valor primitivo (Ej. ~string~, ~number~, ...)
+   #+END_QUOTE
+** Ejemplos Básicos
+*** Ejemplo 1 - Sumatoria de números y Concatenar Strings
+    #+BEGIN_SRC javascript
+      let resultado = [1,2,3,4].reduce(
+          (previousValue, currentValue) => previousValue + currentValue
+      );
+      
+      // El resultado será 1+2+3+4 es decir 10
+      console.log(resultado);
+      
+      // ----------------------------------------------------------------
+      
+      resultado = ['rojo', 'verde', 'azul'].reduce(
+          function(previousValue, currentValue){
+              return previousValue.concat(currentValue + ' ');
+          }, ''
+      );
+      
+      // el resultado será 'rojo verde azul'
+      console.log(resultado);
+    #+END_SRC
+*** Ejemplo 2 - Sumatoria de números más detallado
+    #+BEGIN_SRC javascript
+      const numeros = [1,2,3,4];
+      
+      // esta será la función anónima que pasaremos de parámetro al reduce()
+      let reducer = function (previousValue, currentValue) {
+          return previousValue + currentValue;
+      }
+      
+      // aunque también podríamos usar una función lambda
+      reducer = (previousValue, currentValue) => previousValue + currentValue;
+      
+      // Usará el primer elemento del array como semilla
+      //
+      // 1) 1+2=3
+      // 2) 3+3=6
+      // 3) 6+4=10
+      // 4) 10 <-- el método reduce() retornará un valor
+      let resultado = numeros.reduce(reducer);
+      console.log(resultado);
+      
+      // Usará al "5" como elemento semilla, como valor inicial
+      //
+      // 1) 5+1=6
+      // 2) 6+2=8
+      // 3) 8+3=11
+      // 4) 11+4=15
+      // 5) 15 <- el método reduce() retorna un valor
+      resultado = numeros.reduce(reducer, 5);
+      console.log(resultado);
+    #+END_SRC
+*** Ejemplo 3
+    #+BEGIN_SRC javascript
+      const numeros = [1,2,3,4];
+      
+      // - El tercer y cuarto parámetro de la callback function son opcionales
+      let resultado = numeros.reduce(function(previousValue, currentValue, currentIndex, array){
+          return previousValue + currentValue;
+      });
+      console.log(resultado);
+      
+      // -------------------------------------------------------------------------------
+      
+      // - Le pasamos una función anónima como primer parámetro
+      // - Si se agrega un segundo parámetro luego de la callback function, lo usará como valor inicial/semilla
+      resultado = numeros.reduce(
+          function(previousValue, currentValue, currentIndex, array){
+              return previousValue + currentValue;
+          },
+          5 // valor semilla, 5 + primerValorDelArray
+      );
+      console.log(resultado);
+      
+      // -------------------------------------------------------------------------------
+      
+      // - Le pasamos una función lamba como primer parámetro, hace lo mismo que la anterior
+      resultado = numeros.reduce(
+          (previousValue, currentValue, currentIndex, array) => previousValue + currentValue,
+          5);
+      console.log(resultado);
+    #+END_SRC
+** Ejemplos Interesantes
+*** Ejemplo 1 - Operar con Objetos
+    #+BEGIN_SRC javascript
+      // Creamos una lista con 3 objetos
+      let personas = [
+          {nombre: 'pepe', sueldo:500},
+          {nombre: 'pedro', sueldo:600},
+          {nombre: 'pepito', sueldo:700}
+      ];
+      
+      // Usaremos sueldoBase como semilla, valor inicial de la sumatoria
+      const sueldoBase = 0;
+      let sueldos = personas.reduce(
+          function(previousValue, currentValue){
+              console.log(previousValue + '+ '+ currentValue.sueldo);
+              return previousValue+ currentValue.sueldo;
+          },
+          sueldoBase // valor semilla, 0 + primerElementoDelArray.sueldo
+      );
+      console.log(sueldos);
+      
+      // -------------------------------------------------------------------------------
+      
+      // - Si le pasamos por parámetro una función lambda, nos evitamos hacer el retorno y las llaves { } y el ;
+      // - Como la función lambda tiene varios parámetros es requisito el uso de ( )
+      sueldos = personas.reduce(
+          (previousValue, currentValue) => previousValue+ currentValue.sueldo
+          , sueldoBase);
+      console.log(sueldos);
+    #+END_SRC
+*** Ejemplo 2 - Aplanar miembros de Objetos que son array de arrays
+    #+BEGIN_SRC javascript
+      let empleados = [
+          {nombre:'carlos', sector:'ventas'}, {nombre:'pedro', sector:'ventas'}, {nombre:'pepito', sector:'ventas'},
+          {nombre:'maria', sector:'compras'}, {nombre:'meli', sector:'compras'}
+      ];
+      
+      // Aplanamos (flatten) un array de arrays,
+      // es decir pasar de [[a,b], [c, d], [e, f]] a esto [a, b, c, d, e, f]
+      let listaEmpleados = empleados.reduce(
+          function(previousElement, currentElement){
+              return previousElement.concat(currentElement.nombre);
+          },
+          [] // [] es la semilla, [].concat(primerElementoDelArreglo)
+      );
+      console.log(listaEmpleados);
+      
+      // hacemos lo mismo pero con una función lambda
+      listaEmpleados = empleados.reduce(
+          (previousElement, currentElement) => previousElement.concat(currentElement.nombre),
+          [] // [] es la semilla, [].concat(primerElementoDelArreglo)
+      );
+      console.log(listaEmpleados);
+    #+END_SRC
+*** Ejemplo 3 - Armar un Diccionario (clave, valor)
+    #+BEGIN_SRC javascript
+      // Diccionario (clave, valor)
+      //
+      // Cada elemento del array será la componente Clave,
+      // la componente Valor será el número de repeticiones del elemento en el array
+      //
+      let usuariosIngresos = ['pedro', 'garcia', 'perez', 'pedro', 'garcia'];
+      let usuariosCantidadIngresos = usuariosIngresos.reduce(
+          function(usuarios, nombre){
+              // - Usa el parámetro "nombre" como Clave, para buscar en el diccionario
+              // similar a buscar por el índice de un arreglo, donde el índice es un string
+              //
+              // - Incrementamos el valor de la clave asociada, hace diccionario[clave]=diccionario[clave]+1
+              if(nombre in usuarios){
+                  usuarios[nombre]++;
+              }
+              // - En la primera ejecución de la callback function hará ('pedro' in {})
+              // como la condición anterior da false, pasará por este else y lo agregará al diccionario quedando {'pedro':1}
+              else{
+                  usuarios[nombre] = 1;
+              }
+      
+              // es necesario retornar "usuarios" porque cuando se vuelve a ejecutar la función anónima
+              // ésta lo reutiliza como "previousValue"
+              return usuarios;
+          },
+          {} // el elemento semilla será un object sin atributos {}, luego a éste se le agregará (clave, valor) por cada elemento del array
+      );
+      
+      console.log(usuariosCantidadIngresos);
+    #+END_SRC
+*** Ejemplo 4 - Aplanar arrays de objetos con el Spread Operator
+    #+BEGIN_SRC javascript
+      let lectores = [
+          {nombre: 'pepito', edad: 18, librosLeidos: ['un dragon perdido', 'blanca nieves']},
+          {nombre: 'samuel', edad: 16, librosLeidos: ['el argentino', 'un chino perdido']},
+          {nombre: 'fede', edad: 19, librosLeidos: ['los patriarcas']},
+          {nombre: 'cindi', edad: 21, librosLeidos: ['los mejores años']}
+      ];
+      
+      let libros = lectores.reduce(
+          function(previousElement, currentElement){
+              // Usamos el "spread operator" que es los tres puntos "..." para convertir un array
+              // en una lista de argumentos, pero al colocar los corchetes [ ] quedará como un array
+              //
+              // En la primera ejecución de la función anónima
+              // 1. el previousElement inicialmente es [] una lista vacía,
+              // agarra todos los elementos que tiene, que es ninguno
+              // 2. el currentElement es el primer object {nombre:'pepito', blabla}
+              //
+              // Es necesario el return, porque cuando se vuelve a ejecutar la función anónima
+              // ésta recibe como previousElement el valor de retorno,
+              //
+              // y como currentElement al segundo object {nombre:'samuel', blabla}
+              return [...previousElement, ...currentElement.librosLeidos];
+      
+              // Otra alternativa, hubiese sido concatenando con concat()
+              // return previousElement.concat(currentElement.librosLeidos);
+          },
+          []
+      );
+      
+      console.log(libros);
+    #+END_SRC
+** Referencias
+*** Referencias Oficiales
+    1. [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat][Array.prototype.flat() (developer.mozilla.org)]]
+    2. [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map][Array.prototype.map() (developer.mozilla.org)]]
+    3. [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter][Array.prototype.filter() (developer.mozilla.org)]]
+    4. [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach][Array.prototype.forEach() (developer.mozilla.org)]]
+    5. [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce][Array.prototype.reduce() (developer.mozilla.org)]]
+* Parámetros de Funciones
+** Spread Operator && Rest Parameters
+*** Conceptos
+    - El *Spread Operator* es "similar" al operador *Ellipsis* del lenguaje C, se denota con ~...~
+    - El *Spread operator* convierte/transforma un *array* ó cualquier *Iterable* en una *lista de argumentos*
+    - El *Rest parameters* es un concepto donde una función puede recibir un número indefinido de argumentos ~f(a,b,...args)~
+
+    #+BEGIN_QUOTE
+    El *Spread Operator* que se denota ~...~ es una feature del *ES6* (ES2015)
+    para convertir un array en una lista de argumentos.
+    Un ejemplo sencillo de esto sería un array de arrays ~[...[1,2], ...[3,4]]~
+    quedaría aplanado como un único array ~[1,2,3,4]~
+    
+    Luego en *ES9* (ES2018) extendieron su funcionalidad, para copiar atributos
+    de un objeto en otro objeto.
+    Llevandolo a código podríamos hacer ~{{name:'Carlos', age:19}, {roles:['admin','staff']}}~
+    quedando en ~{name:'Carlos', age:19, roles:['admin','staff']}~
+    #+END_QUOTE
+** Parámetros por default
+*** Conceptos
+*** Referencias
+    1. [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters][Default parameters (developer.mozilla.org)]]
+** Ejemplos
+*** Ejemplo 1 - Copiar un objeto sin su referencia
+    #+BEGIN_SRC javascript
+      // creamos un objeto
+      const cliente1 = {nombre: 'Pedro', pais:'Argentina', barrio: 'Belgrano'};
+      
+      // - Creamos una copia del objeto anterior, pero sin su referencia
+      // - Si hicieramos cliente2 = cliente1, al modificar cliente2 se modificaría cliente1
+      // porque se guardaría la referencia
+      const cliente2 = {...cliente1};
+      cliente2.nombre = 'Carlitos'
+      
+      // Otra manera, reescribimos el valor de la clave nombre
+      const cliente3 = {...cliente1, nombre: 'Perez'};
+    #+END_SRC
+*** Ejemplo 2 - Combinar propiedades de varios objetos en un objeto
+    #+BEGIN_SRC javascript
+      const userInfo = {nombre:'Carlos', apellido:'Perez', edad:23};
+      const userRoles = {roles: ['admin', 'staff']};
+      
+      // - El resultado será un sólo object, con todos los atributos {atributo1, atributo2, ...}
+      // - Si no usaramos el "spread operator" quedaría algo como {objeto, objeto}
+      const user = {...userInfo, ...userRoles}
+    #+END_SRC
+*** Ejemplo 3 - Función con número indefinido de parámetros
+    #+BEGIN_SRC javascript
+      // podemos recibir un número indefinido de hobbies
+      const usuario = function(nombre, edad, ...hobbies){
+          console.log(nombre);
+          console.log(edad);
+          console.log(hobbies); // cocinar, bailar, nadar, soñar, y todos los que agreguemos
+      }
+      
+      usuario('carlos', 17, 'cocinar', 'bailar', 'nadar', 'soñar');
+    #+END_SRC
+*** Ejemplo 4 - Aplanar array de arrays
+    #+BEGIN_SRC javascript
+      const numeros = [1,2,3];
+      const otrosNumeros = [4,5,6];
+      
+      // - Convertimos los arrays en una lista de valores
+      // - En vez de [[1,2,3], [4,5,6]] se aplana quedando [1,2,3,4,5,6]
+      console.log(...numeros, ...otrosNumeros);
+      
+      // resultado: [1,2,3,4,5,6]
+      console.log(...numeros, 4,5,6)
+      
+      // resultado: [1,2,3,4,5,6]
+      console.log(1,2,3,...otrosNumeros);
+    #+END_SRC
+*** Ejemplo 5 - Sumatoria de array de numeros
+    #+BEGIN_SRC javascript
+      // Si queremos pasar una lista de argumentos
+      let sumatoria= function (...numeros){
+          return numeros.reduce(
+              (previous,current) => previous+current, // callback function como lambda
+              0 // el 0 es la semilla (valor inicial) del método reduce
+          )
+      }
+      
+      console.log(producto(1,2,3,4));
+      
+      // -------------------------------------
+      // Alternativa
+      
+      // Si queremos para un arreglo como argumento
+      sumatoria = function (numeros){
+          return numeros.reduce((previous,current) => previous+current, 0)
+      }
+      console.log([1,2,3,4]);
+    #+END_SRC
+** Referencias
+*** Referencias Oficiales
+    1. [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax][Spread syntax (developer.mozilla.org)]]
+    2. [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters][Rest parameters (developer.mozilla.org)]]
+    3. [[https://en.wikipedia.org/wiki/Variadic_function][Variadic function (wikipedia.org)]]
+    4. [[https://en.wikipedia.org/wiki/Ellipsis_(computer_programming)][Ellipsis (wikipedia.org)]]
+*** Referencias Extraoficiales
+    1. [[https://anamartinezaguilar.medium.com/spread-operator-1e6667da2830][Spread operator (anamartinezaguilar.medium.com)]]
+    2. [[https://www.javascripttutorial.net/es6/javascript-spread/][Practical usages of Spread Operator (javascripttutorial.net)]]
+    3. [[https://www.javascripttutorial.net/es6/javascript-rest-parameters/][Rest Parameters (javascripttutorial.net)]]
+    4. [[https://www.javascripttutorial.net/es-next/javascript-object-spread/][Object Spread (javascripttutorial.net)]]
+    5. [[https://medium.com/@luke_smaki/javascript-es6-spread-operator-and-rest-parameters-b3e89d112281][Javascript ES6: Spread Operator and Rest Parameters (medium.com/@luke_smaki)]]
+    6. [[https://betterprogramming.pub/exploring-the-spread-operator-and-rest-parameter-in-javascript-8f425b4031e2][Exploring the Spread Operator (betterprogramming.pub)]]
+* Funciones Anónimas/Lambda/Nombradas
+** Conceptos
+   - Entre las funciones anónimas/lambda/named, sólo las *named functions* ocupan espacio en memoria en *tiempo de ejecución*
+   - Las *Anonymous functions* no necesitan un identificar/nombre
+   - Las *Lambda function* ó *Arrow functions* son como las *funciones anónimas* pero más cortas
+
+   #+BEGIN_QUOTE
+   Una de las diferencias que podemos notar entre las *funciones lambda* y las *funciones anónimas*
+   es que las primeras se pierde un poco la semántica, puede que a simple vista no se entienda del todo su objetivo...
+   Mientras que con las segundas se gana un poco de expresividad.
+   #+END_QUOTE
+** Ejemplos Básicos
+*** Ejemplo 1 - Funciones Lambda
+    #+BEGIN_SRC javascript
+     // Función Lamba (ó Arrow function)
+     const despedirse = (nombre) => {
+         return "chau " + nombre;
+     };
+     
+     // esta otra también es una función lambda
+     const elDoble = valor => valor * 2;
+     
+     // los paréntesis son un requisito, si usamos varios parámetros
+     const sumar = (a, b) => a + b;
+     
+     const operar = (a,b) => {
+         let c = 100;
+         return a + b + c;
+     };
+    #+END_SRC
+*** Ejemplo 2 - Funciones Anónimas
+    #+BEGIN_SRC javascript
+      // Función Anónima
+      const saludo = function (nombre){
+          return "hola " + nombre;
+      }
+      
+      // - esta otra también es una función anónima
+      // - la keyword "function" es opcional
+      const elTriple = (valor){
+          return valor * 3;
+      };
+      
+      const restar = (a, b){
+          return a - b;
+      }
+    #+END_SRC
+*** Ejemplo 3 - Named Functions
+   #+BEGIN_SRC javascript
+     // Named function
+     function saludar(nombre){
+         return "hola" + nombre;
+     }
+   #+END_SRC
+** Referencias
+*** Referencias Oficiales
+    1. [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions#call_apply_and_bind][Arrow functions, call apply and bind (developer.mozilla.org)]]
+    2. [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function][Function expression (developer.mozilla.org)]]
+    3. [[https://developer.mozilla.org/en-US/docs/Glossary/Callback_function][Callback function (developer.mozilla.org)]]
+    4. [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions][Guide Functions (developer.mozilla.org)]]
+*** Referencias Extraoficiales
+    1. [[https://dev.to/mathlete/anonymous-functions-vs-named-functions-vs-arrow-functions-57pm][Anonymous Functions Vs Named Functions Vs Arrow Functions (dev.to)]]
+    2. [[https://medium.com/@chineketobenna/lambda-expressions-vs-anonymous-functions-in-javascript-3aa760c958ae][Lambda Functions Vs Anonymous Functions in javascript (medium.com)]]
+    3. [[https://dmitripavlutin.com/when-not-to-use-arrow-functions-in-javascript/][When not to use Arrow Functions (dmitripavlutin.com)]]
+* Javascript Asíncrono
+** Conceptos
+   #+BEGIN_QUOTE
+   Un programa (A) se comunica de forma asíncrona cuando realiza una petición/solicitud
+   de información a otro programa (B) (Ej. un servidor) y continuar haciendo otras tareas,
+   mientras espera la respuesta de (B)..
+   
+   Realizar operaciones asincrónicas permite el flujo de un programa no dependa
+   de la respuesta a una solicitud/petición de recursos que hizo (Ej. una imagen, un archivo json, ...).
+   
+   Es decir que las peticiones que hagan no detengan/bloqueen la ejecución de otras tareas,
+   que le permita realizar varias tareas al mismo tiempo, en paralelo, en simultáneo.
+   #+END_QUOTE
+** Referencias
+*** Referencias Oficiales
+    1. [[https://developer.mozilla.org/es/docs/Glossary/Asynchronous][Asíncrono (developer.mozilla.org)]]
+* Callback Functions
+** Conceptos
+   - Una *callback function* es una función que es pasada por parámetro a otra función
+   - Son usadas para indicar que *operación asincrónica* fue completada con éxito ó falló
+
+   #+BEGIN_QUOTE
+   Cuando una función ~f1~ es pasada por parámetro a otra función ~f2~
+   a ~f1~ se llama *callback function*
+
+   Si ~f1~ (callback function) es invocada dentro de la función ~f2~
+   significa que ~f2~ terminó su rutina/acción y por eso es invocada.
+   #+END_QUOTE
+** Callback Hell
+   - Se la conoce por *Callback Hell* ó *Hadouken* (como en street fighter)
+   - Es el peor escenario que puede ocurrir con los *callback*
+   - Resulta en un código ilegible, dificil de mantener
+     
+   #+BEGIN_QUOTE
+   Sucede cuando una función ~f1~ es pasada por parámetro a otra ~f2~,
+   y esta a otra ~f3~ y esta a otra ~f4~, ...
+   quedando algo similar a ~f1(error, f2){ f2(error, f3){ f3(error, f4){ accion(); }  }~
+   similar sería ~function f(err, callback){ callback(err, callback){ callback(err, callback){ accion(); } } }~
+   #+END_QUOTE
+** Ejemplos Básicos
+*** Ejemplo 1 - Operaciones Síncronas
+    #+BEGIN_SRC javascript
+      function saludar(nombre){
+          console.log('Hola ' + nombre);
+      }
+     
+      // - el parámetro que recibe es una función
+      function preguntarNombre(callback){
+          var nombre = prompt('escriba su nombre');
+     
+          // - esta es una "synchronous callback" porque se ejecuta en el momento
+          // que es invocada
+          // - se invoca porque la función que la contiene, ya hizo lo que debía hacer
+          callback(nombre);
+      }
+     
+      // - le pasamos por parámetro la función "saludar"
+      // - la función "saludar" actúa como una "callback function"
+      preguntarNombre(saludar);
+    #+END_SRC
+*** Ejemplo 2 - Eventos
+    #+BEGIN_SRC javascript
+      const imagen = document.querySelector('img');
+      // el segundo parámetro es una función lambda,
+      // se ejecutará cuando ocurra el evento 'click'
+      imagen.addEventListener('click', e => console.log('click en imagen') );
+      
+      // el segundo parámetro es una función anónima
+      const botonOk = document.getElementById('ok');
+      botonOk.addEventListener('click', function(e){ console.log('click en boton'); });
+    #+END_SRC
+*** Ejemplo 3 - SetTimeout como Función Asíncrona
+    #+BEGIN_SRC javascript
+      const callback = function() {
+          console.log("Es hora de descansar");
+      };
+      
+      // - setTimeout es una función asíncrona, porque pasado un período de tiempo
+      // invoca la función que se le pasó por parámetro
+      setTimeout(callback, 5000);
+      
+      // - Le pasamos por parámetro una función anónima, que será ejecutada pasados 2 segundos
+      setTimeout(function(){
+          console.log('Es hora de correr');
+      }, 2000);
+    #+END_SRC
+*** Ejemplo 4 - Callback Hell
+    #+BEGIN_SRC javascript
+      setTimeout(function(){
+          // pasados 5 segundos se ejecutará la función anónima que se le pasó de parámetro
+          // al setTimeout y que contiene a otro setTimeout
+          console.log('1) función anónima ejecutada, pasaron 5 segundos');
+          setTimeout(function(){
+              console.log('2) función anónima ejecutada, pasaron 5+2 segundos');
+              setTimeout(function(){
+                  console.log('3) función anónima ejecutada, pasaron 5+2+3 segundos');
+                  setTimeout(function(){
+                      // cuando se ejecute esta función anónima, ya pasaron 11 segundos
+                      console.log('4) función anónima ejecutada, pasaron 5+2+3+1 segundos');
+                      console.log('se terminaron de ejecutar todas las callback');
+                  }, 1000);
+              }, 3000);
+          }, 2000);
+      }, 5000);
+    #+END_SRC
+** Ejemplos Interesantes
+*** Ejemplo 1 - Validar Password
+    #+BEGIN_QUOTE
+    Lo que me interesa de este ejemplo es pasar por parámetro objetos
+    que representan una configuración, en este caso el options, los mensajes de error, ...
+
+    Algunos plugins tendían a seguir un patrón similar a éste
+    #+END_QUOTE
+    
+    #+BEGIN_SRC javascript
+      const login = function (data){
+          console.log('Usuario haciendo login..');
+      
+          const options = data.options;
+          return options.callbackFn(data.username, data.password);
+      }
+      
+      const validarPassword = function (password){
+          console.log('Validando si la clave es segura..');
+      
+          if(password == ''){
+              return {
+                  valid: false,
+                  message: 'Debe completar la clave'
+              };
+          }
+      
+          if(password.length < 4){
+              return {
+                  valid: false,
+                  message: 'La clave debe tener al menos 4 caracteres'
+              };
+          }
+      
+          return {valid: true};
+      }
+      
+      let userLogin = {username: 'carlitos', password: '123123'};
+      
+      let statusLogin = login({
+          ...userLogin, // nos traemos las propiedades dell object userLogin
+          options:{
+              callbackFn: validarPassword
+          }
+      });
+      
+      console.log(statusLogin)
+    #+END_SRC
+*** Ejemplo 2 - Validar Login (1)
+    #+BEGIN_QUOTE
+    En este ejemplo cada función llama a otra función (callbackFn1),
+    y le pasa por parámetro otra función (callbackFn2).
+
+    Pero presenta un problema, mientras más funciones aparezcan llamandose
+    entre si y pasandose funciones por parámetro, más dificil se vuelve seguir
+    la traza de ejecución del programa..
+    #+END_QUOTE
+    
+    #+BEGIN_SRC javascript
+      function login(username, password, callbackFn){
+          console.log('Usuario haciendo login..');
+      
+          callbackFn(username, password, validarPassword);
+      }
+      
+      function validarUsuario(username, password, callbackFn){
+          console.log('Validando el usuario contra el sistema..');
+      
+          setTimeout(() =>{
+              callbackFn(password, generarToken);
+          }, 1000); // luego de 2 segundos ejecutará la función lambda
+      }
+      
+      function validarPassword(password, callbackFn){
+          console.log('Validando si la clave es segura..');
+      
+          setTimeout( () =>{
+              callbackFn(password);
+          }, 1000);
+      }
+      
+      function generarToken(password){
+          console.log('Generando token de acceso...');
+      
+          setTimeout( () =>{
+              console.log('Has ingresado al sistema! :)');
+          }, 1000);
+      }
+      
+      login('carlitos', '123123', validarUsuario);
+    #+END_SRC
+*** Ejemplo 3 - Validar Login (2)
+    #+BEGIN_SRC javascript
+      const usuariosRegistrados = [
+          {username: 'carlitos', age: 19},
+          {username: 'pepito', age: 23}
+      ];
+      
+      const login = function (username, password, callbackFn){
+          console.log('Usuario haciendo login..');
+      
+          return callbackFn(username, password, validarPassword);
+      }
+      
+      const validarUsuario = function (username, password, callbackFn){
+          console.log('Validando el usuario contra el sistema..');
+      
+          const listaUsuarios = usuariosRegistrados.map(x => x.username);
+      
+          if(listaUsuarios.indexOf(username) != -1){
+              return callbackFn(password);
+          }
+      }
+      
+      const validarPassword = function (password){
+          console.log('Validando si la clave es segura..');
+      
+          if(password == ''){
+              return {
+                  valid: false,
+                  message: 'Debe completar la clave'
+              };
+          }
+      
+          if(password.length < 4){
+              return {
+                  valid: false,
+                  message: 'La clave debe tener al menos 4 caracteres'
+              };
+          }
+      
+          return {valid: true};
+      }
+      
+      let statusLogin = login('carlitos', '123123', validarUsuario);
+      console.log(statusLogin)
+    #+END_SRC
+** Referencias
+*** Referencias Oficiales
+    1. [[https://developer.mozilla.org/en-US/docs/Web/API/fetch][method fetch() - (developer.mozilla.org)]]
+    2. [[https://developer.mozilla.org/en-US/docs/Web/API/Response][The response to a request (developer.mozilla.org)]] 
+*** Referencias Extraoficiales
+    1. [[https://lemoncode.net/lemoncode-blog/2018/1/29/javascript-asincrono][Javascript asíncrono (lemoncode.net)]]
+* Promises
+** Conceptos
+   - Una *promesa* es un objeto que representa una *operación asincrónica*
+   - Tienen métodos para registrar una *callback function* que se *ejecutará sólo si la operación tuvo éxito o falló*
+
+   #+BEGIN_QUOTE
+   El constructor recibe una *callback function* que debe soportar sólo dos parámetros ~resolve~ y ~reject~
+   quedando algo asi.. ~new Promise(fn(resolveFn, rejectFn){ })~
+   
+   Los dos parámetros de la función que es pasada por parámetro a la Promise son *callback function*
+   1. El primero es ~resolve(value)~ y se invoca si la operación se completó con éxito, el valor se captura con ~then(callbackFn)~
+   2. El segundo es ~reject(error)~ se invoca si la operación falló, el error se captura con ~catch(callbackFn)~
+
+   Tanto ~then()~ cómo ~catch()~ actúan como handlers, capturando el valor ó error de la Promise
+   con una *callback function* (función que es pasada por parámetro a otra función)
+   #+END_QUOTE
+** Estados
+   |-----------+----------------------------------------------------------------------------|
+   | Estado    | Descripción                                                                |
+   |-----------+----------------------------------------------------------------------------|
+   | PENDING   | - si la operación está en progreso                                         |
+   |           | - es el estado por default cuando se crea una promesa                      |
+   |-----------+----------------------------------------------------------------------------|
+   | FULFILLED | - si la operación se completó con éxito porque se llamó a ~resolve(value)~ |
+   |           | - el valor se consume/obtiene con el método ~then()~                       |
+   |-----------+----------------------------------------------------------------------------|
+   | REJECTED  | - si la operación tuvo un error porque se llamó a ~rejected(callbackFn)~   |
+   |           | - el error object se captura con el método ~catch(callbackFn)~             |
+   |-----------+----------------------------------------------------------------------------|
+** Método then()
+   - El método ~then()~ nos permite
+     1) Registrar una *callback function* que se ejecutará si la petición tuvo éxito
+     2) Consumir el valor de una promesa que se completó con éxito
+   - Tiene dos parámetros ~onFulfilled~ y ~onRejected~
+     1) Se ejecuta ~onFulfilled()~ si la promesa se completó con éxito
+     2) Se ejecuta ~onRejected()~ si la promesa se falló (alternativa a esto, es usar ~catch(callbackFn)~ en vez de ~then()~)aaa
+
+   #+BEGIN_QUOTE
+   El segundo parámetro de ~then()~ que es para manejar errores se puede evitar y usar ~catch()~
+
+   Por ejemplo registramos dos *callback function* con then,
+   donde ambas son funciones lambda (/podrían haber sido funciones anónimas, name function, ../)
+   ~promesa.then(result => console.log(result), err => console.log(err))~
+   
+   La primera función captura el resultado/valor si la promesa se completó con éxito e imprime el valor,
+   la segunda captura si hubo un error y lo imprime..
+
+   Si el cuerpo de las funciones fuese extensa, quedaría un código no tan legible..
+   Por eso podemos usar el método ~catch()~ como handler para los errores..
+   #+END_QUOTE
+
+   #+BEGIN_SRC javascript
+     // la primera solución planteada
+     promesa.then(result => console.log(result), err => console.log(err))
+     
+     // alternativa si sólo queremos manejar el error, aunque sería algo extraño
+     promesa.then(null, err => console.log(err))
+     
+     // La mejor solución sería..
+     // queda más expresivo que pasarle dos parámetros a then(callbackFn1, calbackFn2)
+     promesa
+         .then(result => console.log(result))
+         .catch(err => console.log(err));
+   #+END_SRC
+** Consumir Multiples Promesas en paralelo con all() y race()
+*** Conceptos
+    - Con los métodos ~all()~ y ~race()~ podemos ejecutar multiples *promesas* en paralelo (tareas/operaciones asincrónicas)
+    - Ambos reciben por parámetro un *array de promesas* ~[p1, p2, ...]~
+*** Método all()
+    - Devuelve una *Promise* que se completará con éxito cuando todas las *promises* del array se completen con éxito
+    - La *Promise* principal fallará, si alguna de las *promises* del array falla
+    - La *Promise* devuelta tendrá como resultado un array con los resultados (/responses/) de cada *promesa*
+*** Método race()
+    - Devuelve la *Promise* que más rápido se complete con éxito del array de promises
+    - Como lo dice el nombre, la promesa que menos tarde en cargar es la que ganará y la que se mostrará (/response/)
+** Ejemplos Básicos
+*** Ejemplo 1 - Promesa completada con éxito
+    #+BEGIN_SRC javascript
+      // Declaramos una variable que contiene una función anónima,
+      // que retorna una Promesa que contiene otra función anónima
+      // que pasados los 3 segundos ejecutará el resolve()
+      //
+      // Recordemos que resolve() es el primer argumento de la única función
+      // que recibe por parámetro una Promesa..
+      const promesaExitosa = function (valor){
+          return new Promise(
+              function(resolve, reject){
+                  setTimeout(function(){
+                      resolve('Wiii.!' + valor * 2)  // puede capturarse este valor con .then()
+                  }, 3000);  // se ejecutará la función lambda luego de 3 segundos
+              }
+          );
+      }
+      
+      // alternativa a la anterior, hace lo mismo pero con Funciones Lambda
+      function otraPromesaExitosa(x){
+          return new Promise(
+              (resolve, reject) =>
+              setTimeout( () => resolve('Wiii.!' + x * 2), 3000)
+          );
+      }
+      
+      promesaExitosa(10)
+          .then( value => console.log(value) ) // imprimirá 'Wiii.! 20'
+          .catch(err => console.log(err) );
+      
+      otraPromesaExitosa(5)
+          .then( value => console.log(value) )  // imprimirá 'Wiii.! 10'
+          .catch(err => console.log(err) );
+    #+END_SRC
+*** Ejemplo 2 - Promesa que fallará
+    #+BEGIN_SRC javascript
+      // simulamos una promesa que fallará
+      function promesaQueFallara(x){
+          return new Promise(
+              function(resolve, reject){
+                  setTimeout(
+                      () => reject(new Error('Ups..!')), // puede capturarse el error con .catch()
+                      2000 // se ejecutará la función lambda luego de 2 segundos
+                  );
+              }
+          );
+      }
+      
+      promesaQueFallara(10)
+          .then( value => console.log(value) )
+          .catch(err => console.log(err) ); // imprimirá 'Ups..!'
+    #+END_SRC
+*** Ejemplo 3 - Cadena de promesas completadas con éxito
+    Antes de mostrar el ejemplo, es necesario destacar que este comportamiento
+    de encadenar muchas promesas con ~then()~ se suele evitar,
+    esto es sólo a modo de ejemplo.
+    
+    #+BEGIN_SRC javascript
+      function p1(x){
+          return new Promise(
+              // - al usar resolve() indicamos que la promesa se completó con éxito
+              // - si hubieramos usado reject() diríamos que la promesa fue rechazada
+              // y al invocar p1() aparte del then(f) deberiamos capturar el error con catch(f)
+              (resolve, reject) => resolve(x + 1) // función lambda
+          );
+      }
+      
+      function p2(x){
+          return new Promise(
+              (resolve, reject) => resolve(x + 2) // función lambda
+          );
+      }
+      
+      function p3(x){
+          return new Promise(
+              (resolve, reject) => resolve(x + 10) // función lambda
+          );
+      }
+      
+      function p4(x){
+          // Ojo..! esta función p4() no retorna una Promise como p1, p2, p3
+          // pero como usamos el método then() éste ya retorna una promesa
+          // con x+1 como resultado
+          return x + 1;
+      }
+      
+      console.log(p1(0));
+      
+      // La ejecución de estas promesas será sincrónica, de forma secuencial..
+      // Luego de ejecutarse una, ésta retornará un resultado que usará la otra, y asi..
+      //
+      p1(0) // p1 retorna una promesa que tiene como resultado de 0+1
+      // then() consume el resultado de la promesa p1, se lo pasa por parámetro a p2,
+      // y retorna otra promesa con el resultado que devuelve la función lambda 1+2
+          .then(p2)
+          .then(p3) // then() consume el resultado de la promesa p2 anterior y retorna otra promesa con resultado 3+10
+          .then(p4) // then() consume el resultado de la promesa p3 anterior y retorna otra promesa con resultado 10+1
+          .then(console.log)
+          .catch(e => console.log(e));
+    #+END_SRC
+*** Ejemplo 4 - Múltiples promesas para cargar fotos
+    #+BEGIN_SRC javascript
+      // El método fetch() retorna una Promise que se crea con la petición de un recurso,
+      const fotoAuto = fetch('/assets/images/auto.png');
+      const wallpaperLinux = fetch('/assets/wallpapers/linux.jpeg');
+      const thumbnailUser = fetch('/assets/thumbnails/user.png');
+      
+      // - ejecutamos todas las tareas asincrónicas,
+      // - si todas se completaron con éxito, se ejecutará la callback function dentro del then()
+      // - si alguna de las peticiones falla, se capturará el error con el catch()
+      // y ejecutará la función pasada por parámetro
+      Promise.all([fotoAuto, wallpaperLinux, thumbnailUser])
+          .then(resultArray => console.log(resultArray) )
+          .catch(err => console.log(err));
+      
+      // --------------------------------------------------------------------------------
+      
+      // supongamos que tenemos el mismo recurso repartido en varios subdominios
+      const recursoOpcionA = fetch('http://opcion-a.webhosting.com/archivos/usuarios.json');
+      const recursoOpcionB = fetch('http://opcion-b.webhosting.com/archivos/usuarios.json');
+      const recursoOpcionC = fetch('http://opcion-c.webhosting.com/archivos/usuarios.json');
+      
+      // el resultado será el de la promesa que carga más rápido el recurso usuarios.json
+      Promise.race([recursoOpcionA, recursoOpcionB, recursoOpcionC])
+          .then(result => console.log(result) )
+          .catch(err => console.log(err));
+    #+END_SRC
+** Ejemplos Interesantes
+*** Ejemplo 1 - Sistema de Login con Promesas encadenadas con then()
+    #+BEGIN_SRC javascript
+      // declaramos una función lamba para recibir los dos parámetros (podría haber sido anónima ó nombrada)
+      const validarUsuario = (username, password) => {
+          // retornamos una promesa, porque prometemos que vamos a retornar un valor, pero.. deben esperar :(
+          // simulamos que procesamos/operamos los datos y luego devolvemos el resultado en la promesa
+          return new Promise(
+              (resolve, reject) => {
+                  console.log('Validando usuario contra el sistema...');
+                  // simulamos que el usuario existe en el sistema :)
+                  const usuarioValido = true;
+      
+                  setTimeout(() =>{
+                      if(usuarioValido){
+                          resolve('El usuario es válido'); // este mensaje se puede capturar con then(callbackFn)
+                      }else{
+                          reject('El usuario no existe'); // este error se captura con catch(callbackFn) ó then(null, fn)
+                      }
+                  }, 1000);  // la función lambda que le pasamos por parámetro al seTimeout se ejecutará en 1 segundo
+              }
+          );
+      }
+      
+      const validarPassword = (password) => {
+          // retornamos una promesa, porque prometemos que vamos a retornar un valor, pero.. deben esperar :(
+          // simulamos que procesamos/operamos los datos y luego devolvemos el resultado en la promesa
+          return new Promise(
+              (resolve, reject) => {
+                  console.log('Validando la seguridad de la clave...');
+      
+                  // simulamos que la clave es válida, le corresponde al usuario :)
+                  const claveCorrecta = true;
+      
+                  setTimeout(() =>{
+                      if(claveCorrecta){
+                          resolve('La clave ingresada es válida'); // este mensaje se puede capturar con then(callbackFn)
+                      }else{
+                          reject('La clave no es correcta'); // este error se captura con catch(callbackFn) ó then(null, fn)
+                      }
+                  }, 2000); // la función lambda que le pasamos por parámetro al seTimeout se ejecutará en 2 segundos
+              }
+          );
+      }
+      
+      const generarToken = (password) => {
+          return new Promise(
+              (resolve, reject) => {
+                  console.log('Generando token de acceso...');
+      
+                  setTimeout( () => {
+                      resolve('Ha ingresado al sistema con éxito! :)');
+                  }, 1000);
+              }
+          );
+      }
+      
+      // en esta función vamos a encadenar promesas, se ejecutarán de forma secuencial p1, p2, p3, ...
+      // Ojo...! Por lo general se suele evitar este comportamiento, y se usan las keywords 'async' y 'await'
+      function login(username, password){
+          // el validarUsuario retorna una promesa, usamos then(callbackFn) para consumir el resultado
+          // cuando la promesa se complete exitosamente se ejecutará la función anónima pasada por parámetro a then()
+          validarUsuario(username, password)
+              .then(function(done){
+                  console.log(done); // imprime el valor de la promesa
+      
+                  // esto retorna una promesa, el próximo then() deberá esperar
+                  // a que la promesa se haya completo con éxito para el generarToken
+                  return validarPassword(password);
+              })
+              .then(function(done){
+                  console.log(done); // imprime el valor de la promesa
+      
+                  // esto retorna una promesa, el próximo then() deberá esperar
+                  // a que la promesa se haya completo con éxito para informar que se ingresó al sistema
+                  return generarToken(password);
+              })
+              .then(function(done){
+                  console.log(done);
+              })
+              .catch(function(err){
+                  console.log(err);
+              });
+      }
+      
+      login('pepito', '123123');
+    #+END_SRC
+*** Ejemplo 2 - Sistema de Login con Funciones Asincrónicas (async + await)
+    #+BEGIN_QUOTE
+    Este sería la versión mejorada de ejemplo anterior que tiene promesas encadenadas con el método ~then()~.
+    
+    Usamos la keyword ~async~ para convertir la función a una función asincrónica,
+    y la keyword ~await~ dentro de la función asincrónica para *esperar a la promesa*,
+    pudiendo completarse con éxito (fulfilled) ó fallar (reject)
+    #+END_QUOTE
+
+    #+BEGIN_SRC javascript
+      // declaramos una función lamba para recibir los dos parámetros (podría haber sido anónima ó nombrada)
+      const validarUsuario = (username, password) => {
+          // retornamos una promesa, porque prometemos que vamos a retornar un valor, pero.. deben esperar :(
+          // simulamos que procesamos/operamos los datos y luego devolvemos el resultado en la promesa
+          return new Promise(
+              (resolve, reject) => {
+                  console.log('Validando usuario contra el sistema...');
+                  // simulamos que el usuario existe en el sistema :)
+                  const usuarioValido = true;
+      
+                  setTimeout(() =>{
+                      if(usuarioValido){
+                          resolve('El usuario es válido'); // este mensaje se puede capturar con then(callbackFn)
+                      }else{
+                          reject('El usuario no existe'); // este error se captura con catch(callbackFn) ó then(null, fn)
+                      }
+                  }, 1000);  // la función lambda que le pasamos por parámetro al seTimeout se ejecutará en 1 segundo
+              }
+          );
+      }
+      
+      const validarPassword = (password) => {
+          // retornamos una promesa, porque prometemos que vamos a retornar un valor, pero.. deben esperar :(
+          // simulamos que procesamos/operamos los datos y luego devolvemos el resultado en la promesa
+          return new Promise(
+              (resolve, reject) => {
+                  console.log('Validando la seguridad de la clave...');
+      
+                  // simulamos que la clave es válida, le corresponde al usuario :)
+                  const claveCorrecta = true;
+      
+                  setTimeout(() =>{
+                      if(claveCorrecta){
+                          resolve('La clave ingresada es válida'); // este mensaje se puede capturar con then(callbackFn)
+                      }else{
+                          reject('La clave no es correcta'); // este error se captura con catch(callbackFn) ó then(null, fn)
+                      }
+                  }, 2000); // la función lambda que le pasamos por parámetro al seTimeout se ejecutará en 2 segundos
+              }
+          );
+      }
+      
+      const generarToken = (password) => {
+          return new Promise(
+              (resolve, reject) => {
+                  console.log('Generando token de acceso...');
+      
+                  setTimeout( () => {
+                      resolve('Ha ingresado al sistema con éxito! :)');
+                  }, 1000);
+              }
+          );
+      }
+      
+      async function loginMejorado(username, password){
+          // con el 'await' la función asincrónica
+          // se queda esperando a la promesa que se complete con éxito ó que falle
+          const usuarioOK = await validarUsuario(username, password);
+          console.log(usuarioOK); // imprimimos el resultado de la promesa
+          const passwordOK = await validarPassword(password);
+          console.log(passwordOK);
+          const tokenOK = await generarToken(password);
+          console.log(tokenOK);
+      }
+      
+      loginMejorado('pepito', '123123');
+    #+END_SRC
+*** Ejemplo 3 - Manejar errores
+    #+BEGIN_SRC javascript
+      const validarPassword = (password) => {
+          // retornamos una promesa, porque prometemos que vamos a retornar un valor, pero.. deben esperar :(
+          // simulamos que procesamos/operamos los datos y luego devolvemos el resultado en la promesa
+          return new Promise(
+              (resolve, reject) => {
+                  console.log('Validando la seguridad de la clave...');
+      
+                  // simulamos que la clave es válida, le corresponde al usuario :)
+                  const claveCorrecta = false;
+      
+                  setTimeout(() =>{
+                      if(claveCorrecta){
+                          resolve('La clave ingresada es válida'); // este mensaje se puede capturar con then(callbackFn)
+                      }else{
+                          reject('La clave no es correcta'); // este error se captura con catch(callbackFn) ó then(null, fn)
+                      }
+                  }, 2000); // la función lambda que le pasamos por parámetro al seTimeout se ejecutará en 2 segundos
+              }
+          );
+      }
+      
+      async function login(username, password){
+          // como ya no usamos then().catch(), necesitamos usar try{ ... }catch(e){ ... }
+          try{
+              // con el 'await' la función asincrónica
+              // se queda esperando a la promesa que se complete con éxito ó que falle
+              const passwordOK = await validarPassword2(password);
+              console.log(passwordOK);
+          } catch(err){
+              console.log(err);
+          }
+      }
+      
+      login('pepito', '123123');
+    #+END_SRC
+** Referencias
+*** Referencias Extraoficiales
+    1. [[https://masteringjs.io/tutorials/fundamentals/promise][Promises in Javascript (masteringjs.io)]]
+    2. [[https://javascript.info/promise-basics][Promise Basics (javascript.info)]]
+    3. [[https://enlear.academy/how-to-use-javascript-callback-promises-and-async-await-7970b5292985][how to use callback promises and async await (enlear.academy)]]
+* Fetch
+** Conceptos
+   - Es un método para iniciar el proceso de obtener un recurso por la red
+   - Es una *función asincrónica* que retorna una *promesa* que se completa con éxito, si el recurso solicitado está disponible
+   - La *promesa* no se rechaza por errores de *HTTP*, sólo por errores de la red como permisos
+     (para manejar errores de HTTP Ej. 404, para esto se debe usar ~then~)
+      
+  #+BEGIN_QUOTE
+  Usamos ~fetch()~ para obtener recursos como imagenes, archivos json, archivos de texto plano, ..
+  la llamada a ~fetch()~ retorna una *promesa* como un objeto ~Response~,
+  esta respuesta se puede consumir usando la operación ~then()~
+   
+  La interfaz ~Response~ de la *Fetch API* representa la respuesta de una *petición*
+  #+END_QUOTE
+** Ejemplos Básicos
+*** Ejemplo 1 - Usando Fetch para obtener un archivo JSON de recurso
+    #+BEGIN_SRC javascript
+      // encerramos la petición en una función anónima,
+      // para manejar el instante que queramos la petición del fetch
+      // caso contrario lo hace de inmediato
+      const posts = function(){
+          fetch('/assets/posts.json')
+              .then(function(response) {
+                  return response.json();
+              })
+              .then(function(json){
+                  // recibe de parámetro el retorno el anterior then
+                  console.log(json);
+              });
+      }
+      
+      // ahora si hace la petición del fetch
+      posts();
+    #+END_SRC
+*** Ejemplo 2 - Usando Fetch para obtener un archivo de texto plano de recurso
+    #+BEGIN_SRC javascript
+      // obtenemos el elemento del DOM
+      var div = document.querySelector('div');
+      
+      const texto = function(){
+          fetch('/assets/texto.txt')
+              .then(function(response) {
+                  return response.text();
+              })
+              .then(function(text){
+                  // modificamos el contenido del elemento,
+                  // por cualquiera la información del archivo de texto plano
+                  div.innerHTML = text;
+              });
+      }
+    #+END_SRC
+*** Ejemplo 3 - Usando Fetch para obtener una imagen como recurso
+    #+BEGIN_SRC javascript
+      var myImage = document.querySelector('img');
+      // var myImage = document.getElementById('fotito');
+      
+      var myRequest = new Request('/assets/foto.jpeg');
+      
+      const wallpaper = function(){
+          fetch(myRequest)
+              .then(function(response) {
+                  // obtenemos el blob() que representa un objeto inmutable del tipo archivo
+                  return response.blob();
+              })
+              .then(function(myBlob){
+                  // creamos una url a partir del blob
+                  var objectURL = URL.createObjectURL(myBlob);
+                  myImage.src = objectURL;
+              });
+      }
+      
+      wallpaper();
+    #+END_SRC
+*** Ejemplo 4 - Ajax (Javascript Asíncrono y XML) con php
+    #+BEGIN_SRC javascript
+      const ajax = async function (){
+          // - el método fetch() devuelve una promesa, que se resuelve con un objeto Response
+          // - la keyword "await" retiene/demora la ejecución de la función asincrónica
+          // hasta que se complete la promesa devuelta por la operación fetch(),
+          // 
+          const response = await fetch('datos.php'); // <-- se retiene el flujo de ejecución de la función
+      
+          // si llegó hasta acá, es porque la promesa fue completada con éxito (fulfilled)
+          if(response.ok){
+              const json = await response.json(); // obtiene el valor del cuerpo de la respuesta
+              return Promise.resolve(json);
+          }
+          // si llegó hasta acá, es porque la promesa fue rechazada (reject)
+          else{
+              return Promise.reject('Ups..! Error con el archivo php');
+          }
+      }
+      
+      // invocamos a la función e imprimimos su valor de retorno ó un mensaje de error
+      ajax().then(console.log).catch(console.log);
+    #+END_SRC
+** Referencias
+*** Referencias Oficiales
+    1. [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises][Using promises (developer.mozilla.org)]]
+    2. [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise][Promises (developer.mozilla.org)]]
+    3. [[https://developer.mozilla.org/en-US/docs/Web/API/fetch][method fetch() (developer.mozilla.org)]]
+    4. [[https://github.com/mdn/fetch-examples][Fetch examples (github.com/mdn)]]
+    5. [[https://developer.mozilla.org/en-US/docs/Web/API/Response][La interfaz Response de la Fetch API (developer.mozilla.org)]]
+* [WAITING] Funciones Asincrónicas
+** Conceptos
+   - Aparecen las keywords ~async~ y ~await~ que *simplifican el uso de promesas*
+   - El retorno de una *Función Asincrónica* es una *Promesa* (/de que una tarea en algun momento se completará con éxito ó fallará/)
+   - El uso de ~async~ y ~await~ es *azúcar sintático* que evitan anidamientos y configuran los callback
+
+   #+BEGIN_QUOTE
+   Async functions always return a promise.
+   If the return value of an async function is not explicitly a promise,
+   it will be implicitly wrapped in a promise.
+
+   Even though the return value of an async function behaves as if it's wrapped
+   in a Promise.resolve, they are not equivalent.
+   An async function will return a different reference,
+   whereas Promise.resolve returns the same reference if the given value is a promise.
+   #+END_QUOTE
+** keyword async
+   - La *palabra clave* ~async~ delante de una *función*, la convierte en una *función asincrónica*
+   - Al convertir a una función en asincrónica, implíca que ésta retornará una *promesa* en vez de un *valor*
+** keyword await
+   - La palabra clave ~await~ sólo se puede usar dentro de *funciones asincrónicas*
+   - Con ~await~ podemos detener/pausar la ejecución de una *función asincrónica* hasta que se resuelva una promesa
+   - Hace que *espere a una promesa* de forma asincrónica y no bloqueante
+** Ejemplos Básicos
+*** Ejemplo 1
+    #+BEGIN_SRC javascript
+      // la función asincrónica retornará una promesa que se completo con éxito,
+      // que tiene como resultado 'hola'
+      let saludar = async function foo() {
+          return 'hola';
+      }
+      
+      saludar().then(result => console.log(result));
+      
+      // ---------------------------------------------------------------
+      
+      // - comportamiento similar a la función asincrónica anterior
+      // - creamos una función anónima que retorna una promesa,
+      // al ejecutar resolve() indicamos que finalizó con éxito
+      // y el parámetro será el valor de retorno de la promesa
+      let despedirse = function () {
+          return Promise.resolve('chau');
+      }
+      
+      saludar().then(result => console.log(result));
+    #+END_SRC
+*** Ejemplo 2
+    #+BEGIN_SRC javascript
+      // Named Function (función nombrada)
+      // - su retorno es un valor
+      function saludar(){ return "Hola!"; }
+      
+      // Async Function (función asincrónica)
+      // - su retorno es una promesa
+      async function despedirse(){ return "Chau"; }
+      
+      // Guardamos la referencia a la promesa de la función anónima
+      let despedirse = async function(){ return "Chau"; }
+      // - Con "then" consumimos el valor de retorno de la promesa
+      // - Le pasamos por parámetro una función lambda
+      despedirse.then((valor) => { console.log(valor) });
+      
+      // Otra alternativa para definir una función asincrónica, con una función lambda
+      let saludar = async () => "Hola";
+    #+END_SRC
+*** Ejemplo 3
+    #+BEGIN_SRC javascript
+      function resolveAfter2Seconds() {
+          console.log("starting slow promise")
+      
+          return new Promise(resolve => {
+              setTimeout(function() {
+                  resolve("slow")
+                  console.log("slow promise is done")
+              }, 2000)
+          })
+      }
+      
+      function resolveAfter1Second() {
+          console.log("starting fast promise")
+      
+          return new Promise(resolve => {
+              setTimeout(function() {
+                  // 1. Luego de 1 segundo, se ejecuta la función anónima
+                  // que es pasada por parámetro a setTimeout
+                  //
+                  // 2. Al invocar la función "resolve" que pasamos por parámetro a la promesa,
+                  // indicamos que la promesa termina..
+                  // 3. A la función "resolve" le pasamos el valor que retonará la promise
+                  resolve("fast")
+      
+                  console.log("fast promise is done")
+              }, 1000)
+          })
+      }
+      
+      async function sequentialStart() {
+          console.log('==SEQUENTIAL START==')
+      
+          // 1. Comienza el flujo de ejecución de la función asincrónica
+          const slow = await resolveAfter2Seconds()
+          console.log(slow) // 2. Se ejecuta 2 segundos después del paso (1), t=2
+      
+          const fast = await resolveAfter1Second()
+          console.log(fast) // 3. Se ejecuta 1 segundo después que terminó la anterior, t=3
+      }
+      
+      sequentialStart();
+    #+END_SRC
+*** Ejemplo 4 - Usando Fetch para obtener un archivo de texto plano de recurso
+    #+BEGIN_SRC javascript
+      // agarramos un div del DOM
+      var div = document.querySelector('div');
+      
+      // Usamos fetch() dentro de una función anónima
+      let texto1 = function(){
+          fetch('/assets/texto.txt')
+              .then(response => response.text() )
+              .then(text => div.innerHTML = text );
+      }
+      
+      texto1();
+      
+      // ----------------------------------------------------------------
+      // Usmos async + await
+      
+      let texto2 = async (url) => {
+          const response  = await fetch(url);
+      
+          return response;
+      }
+      
+      texto2('/assets/texto.txt')
+          .then(response => response.text())
+          .then(text =>  div.innerHTML = text);
+    #+END_SRC
+** [WAITING] Ejemplos Interesantes
+*** Ejemplo 1 - Múltiples promesas para cargar fotos
+    #+BEGIN_COMMENT
+    fetch2.html
+    https://dmitripavlutin.com/javascript-fetch-async-await/
+    https://developer.mozilla.org/en-US/docs/Web/API/Response
+    https://medium.com/nerd-for-tech/fetch-api-async-await-in-a-few-bites-6b4f19f7db9e
+    #+END_COMMENT
+** Referencias
+*** Referencias Oficiales
+   1. [[https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await][Async and await (developer.mozilla.org)]]
+   2. [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function][Async function (developer.mozilla.org)]]
+   1. [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions][Arrow function expressions (developer.mozilla.org)]]
+*** Referencias Issues
+    1. [[https://forum.freecodecamp.org/t/is-it-possible-to-use-typescript-inside-html-file/433922/3][Typescript inside html file (freecodecamp.org)]]
+    2. [[https://stackoverflow.com/questions/45285129/any-difference-between-await-promise-all-and-multiple-await][Difference between await Promise.all() and multiple await (stackoverflow.com)]]
+* [TODO] Blob
+** Conceptos
+   - ~Blob~ representa un objeto inmutable del tipo archivo
+   - Puede ser leido como texto plano ó archivo binario
+     
+   #+BEGIN_QUOTE
+   La interfáz ~File~ está basada en ~Blob~, hereda sus funcionalidades
+   y lo extiende agregando soporte para sistemas de archivos de usuario
+   #+END_QUOTE
+** [TODO] Ejemplos
+** Referencias
+*** Referencias Oficiales
+    1. [[https://developer.mozilla.org/en-US/docs/Web/API/Blob][Blob (developer.mozilla.org)]]
+*** Referencias Extraoficiales
+    1. [[https://javascript.plainenglish.io/javascript-blob-why-is-it-useful-20c372dfca00][What are Blobs used in Javascript? (javascript.plainenglish.io)]]
+    2. [[https://javascript.info/blob][Blob (javascript.info)]]
+    3. [[https://www.geeksforgeeks.org/javascript-blob/][Javascript Blob (geeksforgeeks.org)]]
+    4. [[https://www.javascripture.com/Blob][Blob Javascript API (javascripture.com)]]
+    5. [[https://www.javatpoint.com/javascript-blob][Javascript Blob (javatpoint.com)]]
+* Iterators && Generators
+** Conceptos
+** Referencias
+*** Oficiales
+    1. [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators][Iteratos and Generators (developer.mozilla.org)]]
+* Guias Interesantes
+  1. https://javascript.info/
+  2. https://github.com/zloirock/core-js#ecmascript-array
+  3. https://exploringjs.com/impatient-js/toc.html
+  4. https://rawgit.com/CrossEye/eweda/master/docs/eweda.html
+  5. https://jcouyang.gitbooks.io/functional-javascript/content/en/index.html
+  6. https://eloquentjavascript.net/03_functions.html
+  7. https://lemoncode.net/lemoncode-blog/2018/1/29/javascript-asincrono
+
+  #+BEGIN_COMMENT
+  Pendiente a revisar...
+  1. https://caniuse.com/
+  2. https://gist.github.com/sergiojunene/08c316cf80cadec4355688eb7477ce4b#postcss
+  3. https://wordpress.stackexchange.com/questions/241466/functions-callback-vs-fallback
+  4. https://github.com/postcss/postcss/blob/main/docs/plugins.md
+  5. https://blog.aulaformativa.com/que-es-postcss/
+  6. https://github.com/thecodercoder/gulp-browsersync/blob/main/gulpfile.js
+  7. https://www.npmjs.com/package/gulp-terser
+  #+END_COMMENT
+* Glosario
+** Ecmascript
+*** Referencias
+    1. [[https://fullstackseries.com/post_series/javascript-moderno/][Javascript moderno (fullstackseries.com)]]
+** Hoisting
+*** Conceptos
+*** Referencias
+    1. [[https://developer.mozilla.org/es/docs/Glossary/Hoisting][Hosting (developer.mozilla.org)]]
+** Babeljs
+*** Referencias
+   1. https://babeljs.io/docs/en/babel-preset-env.html 
+** Inversión de Control
+*** Conceptos
+*** Referencias
+    1. https://es.wikipedia.org/wiki/Inversi%C3%B3n_de_control
+** Prefijos Vendor
+*** Conceptos
+    Son prefijos que se anteponen a las propiedades de estilos que aún no están estandarizados,
+    por tanto en algunos navegadores puede no verse de igual forma que en otro. Se recomienda
+    no utilizarlos en un entorno de producción (el que está público listo para usar).
+*** Ejemplos 
+    #+NAME: ejemplo-vendor-prefixies
+    #+BEGIN_SRC css
+    -webkit-transition: all 4s ease; /* google chrome ó safari */
+    -moz-transition: all 4s ease; /* mozilla firefox */
+    -ms-transition: all 4s ease; /* internet explorer */
+    -o-transition: all 4s ease; /* opera */
+    transition: all 4s ease; 
+    #+END_SRC
+   
+*** Referencias
+    1. https://developer.mozilla.org/en-US/docs/Glossary/Vendor_Prefix
+    2. https://www.wextensible.com/articulos/vendor-prefixes/
+    3. https://css-tricks.com/how-to-deal-with-vendor-prefixes/
+** Live Server
+*** Referencias
+    1. https://desarrolloweb.com/articulos/servidor-desarrollo-webpack.html
+** Dependencias
+   #+BEGIN_COMMENT
+   (integrar con el otro)
+   #+END_COMMENT
+*** Conceptos
+   Anteriormente se utilizaba una carpeta *vendor* donde se guardaban los archivos javascript, css,
+   y bibliotecas de terceros.
+   Luego con la aparición de *Webpack* se empezó a utilizar un archivo *vendor.js* que contiene
+   todas las dependencias de la aplicación.
+
+   Diferencias con bower ? y al package.json?
+
+*** Referencias
+    1. https://www.it-swarm-es.com/es/javascript/diferencia-entre-grunt-npm-y-bower-package.json-vs-bower.json/1043868077/
+    2. https://platzi.com/blog/que-es-el-vendor-file/
+    3. https://docs.npmjs.com/cli/v7/configuring-npm/package-json
+** [TODO] Dependencias de Desarrollo
+*** Conceptos
+   Existen dependencias para desarrollo conocidas como *devDependencies* y dependencias.
+   Si instalamos un paquete con *npm install nombrePaquete* se instalarán sus dependencias, 
+   es decir los otros paquetes que este necesita.
+   En cambio si usamos *npm install nombrePaquete --save-dev* sólo se instalára ese paquete,
+   sin sus dependencias.
+   
+   #+BEGIN_SRC shell
+     # instalamos gulp localmente en el directorio de la aplicación
+     # y además sus depedencias
+     npm install gulp
+
+     # instalamos solo el paquete gulp-terser
+     # se puede reemplazar --save-dev por -D
+     npm install gulp-terser --save-dev
+
+   #+END_SRC
+   
+*** Referencias
+    1. https://qastack.mx/programming/18875674/whats-the-difference-between-dependencies-devdependencies-and-peerdependencies
+    2. https://qastack.mx/programming/11207638/advantages-of-bundleddependencies-over-normal-dependencies-in-npm?lq=1
+** [TODO] Integración Continua
+*** Conceptos
+   Algunas herramientas son gitlab, travis, jenkins, hudson, circleci, .. entre otros
+   
+   Los conceptos que intervienen son
+   - (CI) es Continuous Integration
+   - (CD) Continuous Delivery ó Entrega Continua
+   - (CD) Continuous Deployment ó Despliegue Continuo
+*** Referencias
+    1. https://www.ionos.es/digitalguide/paginas-web/desarrollo-web/herramientas-de-integracion-continua/
+    2. https://blog.nicopaez.com/2019/01/19/servidores-ci-cd-diferencias-de-modelos-jenkins-vs-circleci/
+    3. https://spa.small-business-tracker.com/beyond-jenkins-7-devops-tools-141275
+    4. https://devopsti.wordpress.com/2014/09/26/integracion-continua-ci-entrega-continua-cd-y-despliegue-continuo-cd/
+    5. https://geeks.ms/jorge/2019/02/25/integracion-entrega-y-despliegue-continuo-diferencias-y-similitudes/
+** [TODO] Minificación
+*** Conceptos
+*** Referencias
+    1. https://docs.microsoft.com/es-es/archive/msdn-magazine/2013/october/cutting-edge-programming-css-bundling-and-minification
+** Transpilado
+*** Conceptos
+*** Referencias
+    1. https://desarrolloweb.com/articulos/transpilado-javascript-webpack.html
+    2. https://desarrolloweb.com/manuales/manual-webpack.html
+** Bundles
+*** Conceptos
+*** Referencias
+    1. https://www.drauta.com/que-son-los-bundles-de-symfony
+    2. http://www.maestrosdelweb.com/curso-symfony2-proyecto-bundles/
+** Assets Web
+*** Conceptos
+    Son las hojas de estilos css, los archivos javascript, las imágenes que se utilizan en el *frontend*
+    de las aplicaciones web, por lo general están en el directorio público de la web.
+*** Ejemplos
+    #+NAME: ejemplo-yii-assets
+    #+BEGIN_EXAMPLE
+    A menudo es preferible gestionar los assets mediante programación.
+    Por ejemplo, cuando se usa el widget yii\jui\DatePicker en una página, 
+    éste incluirá automáticamente los archivos CSS y JavaScript requeridos, 
+    en vez de tener que buscar los archivos e incluirlos manualmente. 
+    Y cuando se actualice el widget a una nueva versión, 
+    ésta usará de forma automática la nueva versión de los archivos asset
+    #+END_EXAMPLE
+*** Referencias
+    1. https://uniwebsidad.com/libros/buenas-practicas-symfony/capitulo-10
+    2. https://www.yiiframework.com/doc/guide/2.0/es/structure-assets
+    3. https://www.tutorialesprogramacionya.com/angularya/detalleconcepto.php?punto=60&codigo=60&inicio=40
+** Otros
+   1. https://webdesign.tutsplus.com/series/the-command-line-for-web-design--cms-777
+* Referencias
+** Referencias Youtube
+*** Javascript
+   1. [[https://www.youtube.com/watch?v=CSWnqdhN5vk&ab_channel=4tomik][JS para gente que ya sabe programar]]
+*** WebSockets
+    1. [[https://www.youtube.com/watch?v=gzIcGhJC8hA][Scaling Websockets with Redis, HAProxy and Node JS]]
+    2. [[https://www.youtube.com/watch?v=1BfCnjr_Vjg][WebSockets in 100 Seconds & Beyond with Socket.io]]
+*** Redis && Node.js
+   1. [[https://www.youtube.com/watch?v=DbWOUste1uo&ab_channel=Aprendeense%C3%B1ando][Caching en Node js usando Redis]]
+   2. [[https://www.youtube.com/watch?v=BhvLIzVL8_o&ab_channel=Fazt][Nodejs Curso Desde Cero, para principiantes]]
+   3. [[https://www.youtube.com/watch?v=RL9mnX0qXhY][Learn how to do caching in NodeJS using Redis]]
+   4. [[https://www.youtube.com/watch?v=V_9b95ecGcU&list=PLTgRMOcmRb3PULeoSKL-fH1WKY3q_wGwv][Build Complex Express Sites with Redis and Socket.io]]
+   5. [[https://www.youtube.com/watch?v=lYQgQFYhcQs][44.- Curso NodeJS - PubSub Redis, Express y SocketIO]]
+   6. [[https://www.youtube.com/watch?v=fLZ3L9MIXAQ&list=PLpOqH6AE0tNjx0SzNvlsP9-JGJ0zmuFnS&ab_channel=codigofacilito][Playlist - Curso Nodejs]]
+*** Laravel && Redis && Socket.io
+    1. [[https://www.youtube.com/watch?v=oUOQzx60zYY][Aplicaciones en tiempo real con Laravel, Socket.IO y Redis]]
