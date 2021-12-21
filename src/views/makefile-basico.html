@@ -1,0 +1,1346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-12-20 lun 23:44 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Guia Básica Makefile</title>
+<meta name="author" content="jelou" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="/assets/css/sass-style.css"/>
+<script type="text/javascript" src="/assets/js/all.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Guia Básica Makefile</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org19b0dc8">1. Conceptos</a></li>
+<li><a href="#orga8b0000">2. Reglas</a>
+<ul>
+<li><a href="#orgd440020">2.1. Conceptos</a></li>
+<li><a href="#orgbedf472">2.2. Reglas Implícitas</a></li>
+</ul>
+</li>
+<li><a href="#org3ad1604">3. Target</a>
+<ul>
+<li><a href="#org3053acc">3.1. Conceptos</a></li>
+<li><a href="#org9ce999d">3.2. Target Final</a></li>
+<li><a href="#orgc276062">3.3. Falso target</a>
+<ul>
+<li><a href="#org39a93fd">3.3.1. Conceptos</a></li>
+<li><a href="#org8cef615">3.3.2. Ejemplos</a></li>
+</ul>
+</li>
+<li><a href="#org30230c1">3.4. Target Ficticio - Phony</a>
+<ul>
+<li><a href="#orgd2a7a29">3.4.1. Conceptos</a></li>
+<li><a href="#org6db5a48">3.4.2. Ejemplo 1 - Limpiar archivos compilados</a></li>
+<li><a href="#orgcf877fa">3.4.3. Ejemplo 2 - Compilar programas</a></li>
+<li><a href="#org2e12819">3.4.4. Ejemplo 3 - Subrutinas</a></li>
+</ul>
+</li>
+<li><a href="#org87eed80">3.5. Target de Seguimiento</a>
+<ul>
+<li><a href="#org704fd8e">3.5.1. Conceptos</a></li>
+<li><a href="#org3a82a0d">3.5.2. Ejemplo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgc69ad01">4. Dependencias</a>
+<ul>
+<li><a href="#orgf16bea2">4.1. Conceptos</a></li>
+</ul>
+</li>
+<li><a href="#org6c7762e">5. Comandos</a>
+<ul>
+<li><a href="#org8ed884b">5.1. Conceptos</a></li>
+<li><a href="#org1dc2239">5.2. Tener varios makefiles</a></li>
+<li><a href="#orgb9a5c72">5.3. Ejecutar ignorando errores</a></li>
+<li><a href="#orga7c8aca">5.4. Simular ejecución</a></li>
+<li><a href="#orgc7493b7">5.5. Imprimir mensajes</a></li>
+</ul>
+</li>
+<li><a href="#orga698ee2">6. Macros</a>
+<ul>
+<li><a href="#org548ce06">6.1. Conceptos</a></li>
+<li><a href="#org132d2ae">6.2. Convenciones de Macros</a>
+<ul>
+<li><a href="#orge0b9b7c">6.2.1. Conceptos</a></li>
+<li><a href="#org4acc8d2">6.2.2. Ejemplo 1 - Sin usar la macro OBJS</a></li>
+<li><a href="#org5a645e6">6.2.3. Ejemplo 1 - Usando la macro OBJS</a></li>
+</ul>
+</li>
+<li><a href="#orga388c51">6.3. Macros predefinidas</a></li>
+<li><a href="#org442c8da">6.4. Macros automáticas</a>
+<ul>
+<li><a href="#org0ab8e32">6.4.1. Conceptos</a></li>
+<li><a href="#org5134c77">6.4.2. Macro ($@) - Obtener target</a></li>
+<li><a href="#orga1c7cf6">6.4.3. Macro ($&lt;) - Obtener primer dependencia</a></li>
+<li><a href="#org5e7f0d5">6.4.4. Macro ($?) - Obtener las dependencias más recientes/actualizadas</a></li>
+<li><a href="#org60abc1f">6.4.5. Macro ($^) - Obtener TODAS las dependencias</a></li>
+<li><a href="#orgd1277a8">6.4.6. Macro @(F) y @(D) - Obtener directorio y archivo de un target</a></li>
+</ul>
+</li>
+<li><a href="#org540c7df">6.5. Macros con comodines</a></li>
+<li><a href="#orgae866d2">6.6. Macros de expansión única y expansión recursiva</a>
+<ul>
+<li><a href="#org15f168a">6.6.1. Conceptos</a></li>
+<li><a href="#org3baebaf">6.6.2. Ejemplo 1 - Expansión de una macro</a></li>
+<li><a href="#orgda0f242">6.6.3. Ejemplo 2 - Expansión única y expansión recursiva</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgd697292">7. Ejemplos</a>
+<ul>
+<li><a href="#orgb656bab">7.1. Expresividad - Lineas muy extensas</a></li>
+<li><a href="#org3f64669">7.2. Generar varios ejecutables</a></li>
+<li><a href="#org834e31b">7.3. Comandos en Shell diferentes</a></li>
+<li><a href="#orgf0cc169">7.4. Prioridad entre target y dependencia</a></li>
+</ul>
+</li>
+<li><a href="#orgb0c99f8">8. Referencias</a></li>
+<li><a href="#orga1863d5">9. Otras Referencias</a></li>
+<li><a href="#orga343622">10. Nuevas referencias</a></li>
+<li><a href="#org2ca1c62">11. Libros</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org19b0dc8" class="outline-2">
+<h2 id="org19b0dc8"><span class="section-number-2">1.</span> Conceptos</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Se utiliza <code>make</code> para cualquier proyecto con <b>dependencias</b> entre archivos (no solo para ejecutar <code>gcc</code>)</li>
+<li>En <code>C</code> la relación de dependencia es
+<ol class="org-ol">
+<li>Los ejecutables dependen de los archivos <code>.o</code></li>
+<li>Los  <code>.o</code> dependen de su <code>.c</code> y de los <code>.h</code> que incluyan los <code>.c</code></li>
+</ol></li>
+</ul>
+
+<p>
+<b>Observaciones:</b>
+</p>
+<ul class="org-ul">
+<li>Los archivos <code>.o</code> se conocen por <b>objetos</b></li>
+<li>Los <code>.h</code> como archivos cabecera, se incluyen declaraciones de estructuras, variables globales y funciones (prototipos/firmas)</li>
+<li>Los <code>.c</code> son el código fuente, el que tiene la lógica del programa</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga8b0000" class="outline-2">
+<h2 id="orga8b0000"><span class="section-number-2">2.</span> Reglas</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orgd440020" class="outline-3">
+<h3 id="orgd440020"><span class="section-number-3">2.1.</span> Conceptos</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>Si una regla tiene archivos en las <a href="#orgc69ad01">4</a> que también son <a href="#org3ad1604">3</a> de otras reglas
+<ol class="org-ol">
+<li>Se ejecuta la regla donde aparece como <code>target</code></li>
+<li>Luego la regla donde aparece como <code>dependencia</code></li>
+</ol></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">La forma general de cada regla es de la forma</span>
+<span style="color: #bc6ec5; font-weight: bold;">target</span>: dependencias
+  comando1
+  comando2
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbedf472" class="outline-3">
+<h3 id="orgbedf472"><span class="section-number-3">2.2.</span> Reglas Implícitas</h3>
+<div class="outline-text-3" id="text-2-2">
+<ul class="org-ul">
+<li>Utiliza el concepto de <b>implicit pattern rules</b> (patrón de reglas implícitas)</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org3ad1604" class="outline-2">
+<h2 id="org3ad1604"><span class="section-number-2">3.</span> Target</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org3053acc" class="outline-3">
+<h3 id="org3053acc"><span class="section-number-3">3.1.</span> Conceptos</h3>
+<div class="outline-text-3" id="text-3-1">
+<ul class="org-ul">
+<li>Cada <b>target</b> representa el nombre del archivo que se genera, luego de cumplirse la regla</li>
+<li>Debe ser recompilado cuando cambien las dependencias</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9ce999d" class="outline-3">
+<h3 id="org9ce999d"><span class="section-number-3">3.2.</span> Target Final</h3>
+<div class="outline-text-3" id="text-3-2">
+<ul class="org-ul">
+<li>Es la primera regla del makefile y tiende a ser el ejecutable</li>
+<li>Es el último <b>target</b> en el <b>árbol de dependencias</b> por tanto el último que se ejecuta</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc276062" class="outline-3">
+<h3 id="orgc276062"><span class="section-number-3">3.3.</span> Falso target</h3>
+<div class="outline-text-3" id="text-3-3">
+</div>
+<div id="outline-container-org39a93fd" class="outline-4">
+<h4 id="org39a93fd"><span class="section-number-4">3.3.1.</span> Conceptos</h4>
+<div class="outline-text-4" id="text-3-3-1">
+<ul class="org-ul">
+<li>No se les suele agregar <a href="#orgc69ad01">4</a></li>
+<li>Cuando queremos que la regla se ejecute siempre</li>
+<li>Es un target que no existe (porque un target tiende a representar un archivo existente)</li>
+<li>El <code>make</code> nota que no existe el archivo, y ejecuta los comandos que generan la regla</li>
+</ul>
+
+<blockquote>
+<p>
+Un posible problema sería si agregamos un <b>falso target</b> y en el directorio existe un 
+fichero con ese nombre.
+Porque al no tener <b>dependencias</b> el <code>make</code> interpretará que el archivo está actualizado,
+y no ejecutará los <b>comandos</b> de la <b>regla</b>
+La solución a esto es utilizar <code>PHONY</code> (representa a un <b>target ficticio</b>)
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-org8cef615" class="outline-4">
+<h4 id="org8cef615"><span class="section-number-4">3.3.2.</span> Ejemplos</h4>
+<div class="outline-text-4" id="text-3-3-2">
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">este es un ejemplo t&#237;pico de un "falso target", que borra los archivos .o de fichero c compilado</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">- porque "clean" no es un archivo en si (no deber&#237;a)</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">- la regla tampoco tiene dependencia (lo que se agrega seguido de los dos puntos)</span>
+<span style="color: #bc6ec5; font-weight: bold;">clean</span>:
+  rm *.o
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Podemos usar .PHONY</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">para evitar problemas si llegase a existir un archivo "clean"</span>
+<span style="color: #bc6ec5; font-weight: bold;">.PHONY</span>: clean
+<span style="color: #bc6ec5; font-weight: bold;">clean</span>:
+  rm *.o
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org30230c1" class="outline-3">
+<h3 id="org30230c1"><span class="section-number-3">3.4.</span> Target Ficticio - Phony</h3>
+<div class="outline-text-3" id="text-3-4">
+</div>
+<div id="outline-container-orgd2a7a29" class="outline-4">
+<h4 id="orgd2a7a29"><span class="section-number-4">3.4.1.</span> Conceptos</h4>
+<div class="outline-text-4" id="text-3-4-1">
+<p>
+Con <code>PHONY</code> se soluciona el problema de los <b>falsos target</b> si llegase a existir un archivo 
+con el mismo nombre que el target
+</p>
+
+<blockquote>
+<p>
+Cuando a un <b>falso target</b> le agregamos como dependencia otro <b>falso target</b>
+la regla siempre se cumple. Por tanto podemos usar los <b>falsos targets</b>
+como subrutinas a ejecutar.
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-org6db5a48" class="outline-4">
+<h4 id="org6db5a48"><span class="section-number-4">3.4.2.</span> Ejemplo 1 - Limpiar archivos compilados</h4>
+<div class="outline-text-4" id="text-3-4-2">
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Si usamos .PHONY</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">evitamos problemas si llegase a existir un archivo "clean"</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">(osea que un fichero con el mismo nombre que el "falso target")</span>
+<span style="color: #bc6ec5; font-weight: bold;">.PHONY</span>: clean
+<span style="color: #bc6ec5; font-weight: bold;">clean</span>:
+  rm *.o
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcf877fa" class="outline-4">
+<h4 id="orgcf877fa"><span class="section-number-4">3.4.3.</span> Ejemplo 2 - Compilar programas</h4>
+<div class="outline-text-4" id="text-3-4-3">
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #bc6ec5; font-weight: bold;">.PHONY</span>: all
+<span style="color: #bc6ec5; font-weight: bold;">all</span>: programa1, programa2
+
+<span style="color: #bc6ec5; font-weight: bold;">programa1</span>: main.o archivo1.o archivo2.o
+  gcc -o programa1 main.o archivo1.o archivo2.o
+
+<span style="color: #bc6ec5; font-weight: bold;">programa2</span>: main.o archivo1.o archivo3.o
+  gcc -o programa2 main.o archivo1.o archivo3.o
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2e12819" class="outline-4">
+<h4 id="org2e12819"><span class="section-number-4">3.4.4.</span> Ejemplo 3 - Subrutinas</h4>
+<div class="outline-text-4" id="text-3-4-4">
+<p>
+Este ejemplo lo podemos ejecutar con <code>makefile cleanall</code>
+donde se ejecutarán las subrutinas de borrar los archivos de tipo object
+y luego los de texto
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #bc6ec5; font-weight: bold;">.PHONY</span>: cleanall cleanobj cleantxt
+<span style="color: #bc6ec5; font-weight: bold;">cleanall</span>: cleanobj cleantxt
+  rm miprograma
+
+<span style="color: #bc6ec5; font-weight: bold;">cleanobj</span>:
+  rm *.o
+
+<span style="color: #bc6ec5; font-weight: bold;">cleantxt</span>:
+  rm *.txt
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org87eed80" class="outline-3">
+<h3 id="org87eed80"><span class="section-number-3">3.5.</span> Target de Seguimiento</h3>
+<div class="outline-text-3" id="text-3-5">
+</div>
+<div id="outline-container-org704fd8e" class="outline-4">
+<h4 id="org704fd8e"><span class="section-number-4">3.5.1.</span> Conceptos</h4>
+<div class="outline-text-4" id="text-3-5-1">
+<ul class="org-ul">
+<li>Representan <b>depedencias</b> pero de archivos reales, contienen la fecha y hora de creación (timestamp)</li>
+<li>El <code>$?</code> se <b>expande</b> por las <b>dependencias</b> (osea archivos) cuyo <b>timestamp</b> sea más reciente</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3a82a0d" class="outline-4">
+<h4 id="org3a82a0d"><span class="section-number-4">3.5.2.</span> Ejemplo</h4>
+<div class="outline-text-4" id="text-3-5-2">
+<p>
+Suponiendo que ya habiamos creado los archivos main.c, jugadores.c, items.c
+</p>
+<ol class="org-ol">
+<li>Ejecutamos el make imprime<sub>actualizados</sub> y se construirá el ejecutable imprime<sub>actualizados</sub></li>
+<li>Si modificamos alguno de los .c y volvemos a ejecutar el comando anterior, se imprimirá sólo aquellos modificados
+y se volverá a crear el ejecutable imprime<sub>actualizados</sub></li>
+</ol>
+
+<p>
+<b>Observación:</b>
+En este ejemplo el <code>$?</code> se expande por los archivos más recientes que <code>imprime_actualizados</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">- con "cat" imprimimos contenido de un archivo</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">- el $</span><span style="color: #a45bad; background-color: #292e34;">?</span><span style="color: #2aa1ae; background-color: #292e34;"> se expande con los archivos de timestamp mas reciente que imprime_actualizados</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">- imprimimos el contenido de los archivos actualizados/modificados</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">es decir su timestamp es m&#225;s reciente que el del archivo imprime_actualizados</span>
+<span style="color: #bc6ec5; font-weight: bold;">imprime_actualizados</span>: main.c jugadores.c items.c
+  cat $<span style="color: #a45bad;">?</span>
+  touch imprime_actualizados
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc69ad01" class="outline-2">
+<h2 id="orgc69ad01"><span class="section-number-2">4.</span> Dependencias</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-orgf16bea2" class="outline-3">
+<h3 id="orgf16bea2"><span class="section-number-3">4.1.</span> Conceptos</h3>
+<div class="outline-text-3" id="text-4-1">
+<ul class="org-ul">
+<li>Representa a uno o varios archivos cuyo <b>timestamp</b> (fecha y hora de creación) se debe
+comprobar para ver si son más modernos (porque fue actualizado/modificado) que el archivo a construir</li>
+<li>Si se cumple que el <b>timestamp</b> es más moderno que el archivo a construir
+entonces se construye ó reconstruye</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org6c7762e" class="outline-2">
+<h2 id="org6c7762e"><span class="section-number-2">5.</span> Comandos</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-org8ed884b" class="outline-3">
+<h3 id="org8ed884b"><span class="section-number-3">5.1.</span> Conceptos</h3>
+<div class="outline-text-3" id="text-5-1">
+<ul class="org-ul">
+<li>Los <b>comandos</b> se ejecutan cuando se cumple la regla</li>
+<li>Deben empezar por <b>tabulador</b> (si nos olvidamos, habrán errores)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1dc2239" class="outline-3">
+<h3 id="org1dc2239"><span class="section-number-3">5.2.</span> Tener varios makefiles</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+Por lo general se puede tener sólo un archivo <b>Makefile</b> pero podemos utilizar el 
+parámetro <code>-f</code> ó <code>--file</code> para ejecutar un archivo <b>Makefile2</b> ó <b>Makefile2</b>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">suponiendo que tenemos un segundo makefile</span>
+make -f Makefile2
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">la otra alternativa es</span>
+make --file=Makefile3
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb9a5c72" class="outline-3">
+<h3 id="orgb9a5c72"><span class="section-number-3">5.3.</span> Ejecutar ignorando errores</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+Si alguno de los comandos falla, también falla la construcción del make.
+Para evitar esto podemos agregar el guión <code>-</code> previo al comando a ejecutar.
+De esta manera si falla y lanza algún error el comando, se sigue ejecutando.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">este era el caso t&#237;pico que sol&#237;amos hacer</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">si por alg&#250;n motivo falla el rm, no contin&#250;a borrando</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">(Ej. no encuentra alg&#250;n archivo .o)</span>
+<span style="color: #bc6ec5; font-weight: bold;">.PHONY</span>: clean
+  <span style="color: #bc6ec5; font-weight: bold;">clean</span>:
+  rm *.o
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">SOLUCION HERE..!</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">Si falla el rm por mismos motivos que el de arriba</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">no importa, seguir&#225; ejecutandose borrando los que falten</span>
+<span style="color: #bc6ec5; font-weight: bold;">.PHONY</span>: clean
+  <span style="color: #bc6ec5; font-weight: bold;">clean</span>:
+  -rm *.o <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">ac&#225; estamos agregando el gui&#243;n.. :)</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga7c8aca" class="outline-3">
+<h3 id="orga7c8aca"><span class="section-number-3">5.4.</span> Simular ejecución</h3>
+<div class="outline-text-3" id="text-5-4">
+<p>
+Si queremos sólo mostrar que comandos ejecutaría el comando <code>make</code>
+podemos pasarle el parámetro <code>-n</code> quedando.. <code>make -n</code>
+Esto nos imprimirá los comandos que ejecutaría, pero sin hacerlo realmente.
+</p>
+
+<p>
+Un ejemplo de esto podría ser compilar un programa de C
+</p>
+
+<pre class="example" id="orge6263d2">
+&gt; make -n
+gcc -c jugadores.c
+gcc -c main.c
+gcc -o programa main.o jugadores.o
+</pre>
+</div>
+</div>
+<div id="outline-container-orgc7493b7" class="outline-3">
+<h3 id="orgc7493b7"><span class="section-number-3">5.5.</span> Imprimir mensajes</h3>
+<div class="outline-text-3" id="text-5-5">
+<p>
+Si usamos el comando <code>echo</code> para imprimir mensaje por la <b>shell</b> se imprimirá dos veces.
+Una será toda la sentencia, incluyendo el comando <code>echo</code>, y la segunda será la ejecución de ese comando.
+Para evitar esto podemos anteponer un <code>@</code> arroba antes de ese comando.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">- esto s&#243;lo imprimira en la shell un "hola mundo"</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">- si no anteponemos el arroba, lo har&#225; dos veces</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">y la primera ser&#225; con el comando echo seguido del string</span>
+<span style="color: #bc6ec5; font-weight: bold;">programa</span>:
+  @echo hola mundo
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orga698ee2" class="outline-2">
+<h2 id="orga698ee2"><span class="section-number-2">6.</span> Macros</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-org548ce06" class="outline-3">
+<h3 id="org548ce06"><span class="section-number-3">6.1.</span> Conceptos</h3>
+<div class="outline-text-3" id="text-6-1">
+<ul class="org-ul">
+<li>Las <b>macros</b> ó <b>variables</b> son <b>identificadores</b> que se sustituyen por su valor
+(al parsear el archivo <code>Makefile</code>)</li>
+<li>Se <b>expanden</b> (sustituyen por su valor) cuando se usa con el <code>$</code> Ej. <code>$(macro)</code></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #7590db;">unamacro</span> = unvalor
+
+<span style="color: #7590db;">otramacro</span> = otrovalor
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org132d2ae" class="outline-3">
+<h3 id="org132d2ae"><span class="section-number-3">6.2.</span> Convenciones de Macros</h3>
+<div class="outline-text-3" id="text-6-2">
+</div>
+<div id="outline-container-orge0b9b7c" class="outline-4">
+<h4 id="orge0b9b7c"><span class="section-number-4">6.2.1.</span> Conceptos</h4>
+<div class="outline-text-4" id="text-6-2-1">
+<p>
+La mayoría de los <code>Makefiles</code> tienden a seguir estas convenciones al crear <b>macros</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Nombre</th>
+<th scope="col" class="org-left">Expansión</th>
+<th scope="col" class="org-left">Descripcion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">OBJS</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Representa todos los archivos .o</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Nos evita repetir cada .o como dependencia en varias reglas</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">INSTALLDIR</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Para indicar la ruta donde estará el ejecutable del programa</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Se tiende a utilizar en un target <code>INSTALL</code> que creemos</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">INCLUDE</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Para indicar una o varias rutas de archivos a incluir</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">(por lo general archivos de cabecera <code>.h</code>)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org4acc8d2" class="outline-4">
+<h4 id="org4acc8d2"><span class="section-number-4">6.2.2.</span> Ejemplo 1 - Sin usar la macro OBJS</h4>
+<div class="outline-text-4" id="text-6-2-2">
+<p>
+La ventaja de usar esta macro (podriamos ponerle cualquier otro nombre, es sólo una convención)
+es que sólo la nombramos usando el <code>$</code> y listo :)
+</p>
+
+<p>
+Pero.. si NO la usamos y.. hay muchas reglas que usen los mismos archivos <code>.o</code> habrán reglas redundantes
+que repitan dependencias, y en caso que llegase a dejar de usa alguno de los archivos o cambiase
+el nombre de alguno de ellos deberiamos modificar uno por uno&#x2026; :(
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #7590db;">OBJS</span>=main.o jugadores.c items.c
+
+<span style="color: #bc6ec5; font-weight: bold;">unprograma</span>: main.o jugadores.c items.c
+  $<span style="color: #4f97d7;">(</span><span style="color: #7590db;">CC</span><span style="color: #4f97d7;">)</span> $<span style="color: #4f97d7;">(</span><span style="color: #7590db;">CFLAGS</span><span style="color: #4f97d7;">)</span> -o unprograma main.o jugadores.c items.c
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5a645e6" class="outline-4">
+<h4 id="org5a645e6"><span class="section-number-4">6.2.3.</span> Ejemplo 1 - Usando la macro OBJS</h4>
+<div class="outline-text-4" id="text-6-2-3">
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #7590db;">OBJS</span>=main.o jugadores.c items.c
+
+<span style="color: #bc6ec5; font-weight: bold;">unprograma</span>: $<span style="color: #4f97d7;">(</span><span style="color: #7590db;">OBJS</span><span style="color: #4f97d7;">)</span>
+  $<span style="color: #4f97d7;">(</span><span style="color: #7590db;">CC</span><span style="color: #4f97d7;">)</span> $<span style="color: #4f97d7;">(</span><span style="color: #7590db;">CFLAGS</span><span style="color: #4f97d7;">)</span> -o unprograma $<span style="color: #4f97d7;">(</span><span style="color: #7590db;">OBJS</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orga388c51" class="outline-3">
+<h3 id="orga388c51"><span class="section-number-3">6.3.</span> Macros predefinidas</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+Hay más variedad de <b>macros predefinidas</b> listo aquellas que me resultan útiles.
+</p>
+
+<p>
+<b>Observación:</b>
+Cuando las escribimos dentro del <b>Makefile</b> las estamos sobreescribiendo.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Nombre</th>
+<th scope="col" class="org-left">Expansión</th>
+<th scope="col" class="org-left">Descripcion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">MAKE</td>
+<td class="org-left">make</td>
+<td class="org-left">Programa que gestiona los <code>Makefile</code></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">LDFLAGS</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Flags del <b>enlazador</b> <code>ld</code></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">CC</td>
+<td class="org-left">gcc</td>
+<td class="org-left">Compilador predefinido de C</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">CXX</td>
+<td class="org-left">g++</td>
+<td class="org-left">Compilador predefinido de C++</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">CFLAGS</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Flags del compilador de C</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">CXXFLAGS</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Flags del compilador de C++</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org442c8da" class="outline-3">
+<h3 id="org442c8da"><span class="section-number-3">6.4.</span> Macros automáticas</h3>
+<div class="outline-text-3" id="text-6-4">
+</div>
+<div id="outline-container-org0ab8e32" class="outline-4">
+<h4 id="org0ab8e32"><span class="section-number-4">6.4.1.</span> Conceptos</h4>
+<div class="outline-text-4" id="text-6-4-1">
+<ul class="org-ul">
+<li>Las <b>macros automáticas</b> son macros <b>internas</b> cuyo valor depende de la regla que estemos ejecutando.</li>
+<li>Estas <b>macros</b> previo a ejecutar un <b>comando</b> evalúan el <b>timestamp</b> del <b>target</b> y de sus <b>dependencias</b></li>
+</ul>
+
+<blockquote>
+<p>
+Para ver algunos de los ejemplos, luego de ejecutar el target <code>init</code> que hicimos para simular un programa
+deberemos actualizar los archivos que se creen. Porque estas macros evalúan las <b>dependencias</b>
+que sean más recientes que el <b>target</b>.
+</p>
+
+<p>
+Es decir si tratamos de ejecutarlos luego de usar <code>init</code> puede que en algunos solo diga
+"tal archivo está actualizado" y es porque las <b>dependencias</b> tienen la misma fecha/hora de 
+modificación que el <b>target</b>.
+</p>
+
+<p>
+Por tanto.. repito, debemos modificar los archivos, para ver funcionar algunos de los ejemplos,
+si no dirá solo el mensaje que dijimos antes.
+</p>
+</blockquote>
+
+<table id="org2774f66" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Macro</th>
+<th scope="col" class="org-left">Expansión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">$@</td>
+<td class="org-left">Target de la regla que se está ejecutando</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">$*</td>
+<td class="org-left">Target con el sufijo eliminado</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">$&lt;</td>
+<td class="org-left">Primer archivo de dependencia que permitió que la regla se ejecute</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">$?</td>
+<td class="org-left">Lista de los archivos de dependencias más recientes que el target</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">(recordemos lo del timestamp más reciente)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">$^</td>
+<td class="org-left">Lista todas las dependencias</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org5134c77" class="outline-4">
+<h4 id="org5134c77"><span class="section-number-4">6.4.2.</span> Macro ($@) - Obtener target</h4>
+<div class="outline-text-4" id="text-6-4-2">
+<p>
+La macro <code>$@</code> nos permite obtener el nombre del <b>target</b>
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="orgc234522"></a>Ejemplo 1 - Crear y nombrar un ejecutable de C<br />
+<div class="outline-text-5" id="text-6-4-2-1">
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">1. "supongamos" que ya tenemos los targets OBJS, CC, ...</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">2. El -o es un par&#225;metro de gcc para definir el nombre de ejecutable</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">en este caso se llamar&#225; "unprograma" osea tal cual al target</span>
+<span style="color: #bc6ec5; font-weight: bold;">unprograma</span>: $<span style="color: #4f97d7;">(</span><span style="color: #7590db;">OBJS</span><span style="color: #4f97d7;">)</span>
+  $<span style="color: #4f97d7;">(</span><span style="color: #7590db;">CC</span><span style="color: #4f97d7;">)</span> $<span style="color: #4f97d7;">(</span><span style="color: #7590db;">CFLAGS</span><span style="color: #4f97d7;">)</span> -o <span style="color: #bc6ec5; font-weight: bold;">$</span><span style="color: #a45bad; font-weight: bold;">@</span> $<span style="color: #4f97d7;">(</span><span style="color: #7590db;">OBJS</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org5a57cfb"></a>Ejemplo 2 - Imprimir con el comando echo<br />
+<div class="outline-text-5" id="text-6-4-2-2">
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">- imprimir&#225; por pantalla el nombre del target!</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">- el @ antes del echo es para no imprimir el comando echo,</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">permite que se imprima solo el mensaje que el echo quiere imprimir</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">- el </span><span style="color: #2aa1ae; background-color: #292e34; font-weight: bold;">$</span><span style="color: #a45bad; background-color: #292e34; font-weight: bold;">@</span><span style="color: #2aa1ae; background-color: #292e34;"> es la MACRO AUTOMATICA :) obtendr&#225; el nombre del target</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">es decir "unprograma"</span>
+<span style="color: #bc6ec5; font-weight: bold;">unprograma</span>:
+  @echo <span style="color: #2d9574;">"el target se llama: "</span> <span style="color: #bc6ec5; font-weight: bold;">$</span><span style="color: #a45bad; font-weight: bold;">@</span>
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orga1c7cf6" class="outline-4">
+<h4 id="orga1c7cf6"><span class="section-number-4">6.4.3.</span> Macro ($&lt;) - Obtener primer dependencia</h4>
+<div class="outline-text-4" id="text-6-4-3">
+<p>
+La macro <code>$&lt;</code> obtiene el primer archivo de dependencia que permitió que se ejecute la regla
+(es decir elige la primer <b>dependencia</b>, la que esté más a la izquierda)
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org5311198"></a>Ejemplo 1 - Imprimir primer dependencia<br />
+<div class="outline-text-5" id="text-6-4-3-1">
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">- Siempre va a imprimir el nombe "main.o" porque es la primer dependencia</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">- La macro $</span><span style="color: #a45bad; background-color: #292e34;">&lt;</span><span style="color: #2aa1ae; background-color: #292e34;"> elige la primer dependencia que hizo que se ejecutara</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">la regla (la regla est&#225; formada por el target+dependencias+comando)</span>
+<span style="color: #bc6ec5; font-weight: bold;">unprograma.c</span>: main.o players.o items.o
+  @echo $<span style="color: #a45bad;">&lt;</span>
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org1231c11"></a>Ejemplo 2 - Compilar programa C<br />
+<div class="outline-text-5" id="text-6-4-3-2">
+<p>
+Recordemos que las <b>dependencias</b> van seguido del <b>target</b>,
+en este caso se va a compilar un programa que usará sólo el archivo <code>players.c</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">- Se compilar&#225; un archivo llamado "programa.o"</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">- La macro $</span><span style="color: #a45bad; background-color: #292e34;">&lt;</span><span style="color: #2aa1ae; background-color: #292e34;"> obtendr&#225; unicamente la primer dependencia (players.c)</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">- La segunda dependencia (players.h) nunca ser&#225; usada por $</span><span style="color: #a45bad; background-color: #292e34;">&lt;</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">- La macro </span><span style="color: #2aa1ae; background-color: #292e34; font-weight: bold;">$</span><span style="color: #a45bad; background-color: #292e34; font-weight: bold;">@</span><span style="color: #2aa1ae; background-color: #292e34;"> obtiene el nombre del target (programa.o)</span>
+<span style="color: #bc6ec5; font-weight: bold;">programa.o</span>: players.c players.h
+  gcc -c $<span style="color: #a45bad;">&lt;</span> -o <span style="color: #bc6ec5; font-weight: bold;">$</span><span style="color: #a45bad; font-weight: bold;">@</span>
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">codigo de abajo no cuenta para el ejemplo</span>
+<span style="color: #bc6ec5; font-weight: bold;">init</span>:
+  touch players.c players.h
+
+<span style="color: #bc6ec5; font-weight: bold;">.PHONY</span>: clean
+<span style="color: #bc6ec5; font-weight: bold;">clean</span>:
+  -rm *.<span style="color: #4f97d7;">{</span>c,h<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org5e7f0d5" class="outline-4">
+<h4 id="org5e7f0d5"><span class="section-number-4">6.4.4.</span> Macro ($?) - Obtener las dependencias más recientes/actualizadas</h4>
+<div class="outline-text-4" id="text-6-4-4">
+<p>
+La macro <code>$?</code> obtiene la <b>dependencia</b> más reciente/actualizada.
+(mas reciente respecto comparado con el target de la regla)
+Si recordamos que una dependencia representa un archivo, y tenemos varias dependencias
+entonces <code>$?</code> obtendrá el último archivo modificado, el que alteramos recientemente.
+</p>
+
+<p>
+<b>Observaciones:</b>
+</p>
+<ul class="org-ul">
+<li>La macro <code>$?</code> se <b>expande</b> cuando hay archivos más recientes que el target</li>
+<li>Cada vez que compilemos el programa del ejemplo, el <b>timestamp</b> del target se actualizará</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="orgdf52557"></a>Ejemplo 1<br />
+<div class="outline-text-5" id="text-6-4-4-1">
+<p>
+Si modificamos solo dos achivos luego del <code>make init</code> se mostrarán los nombe de esos archivos,
+(si cambiaramos el <code>$?</code> por <code>$^</code> mostraría todas las dependencias/archivos)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">- La macro $</span><span style="color: #a45bad; background-color: #292e34;">?</span><span style="color: #2aa1ae; background-color: #292e34;"> obtendr&#225; s&#243;lo las dependencias m&#225;s recientes</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">- Se intentar&#225; compilar un archivo con los &#250;ltimos .c modificados</span>
+<span style="color: #bc6ec5; font-weight: bold;">main.o</span>: main.c players.h players.c
+  gcc $<span style="color: #a45bad;">?</span> -c <span style="color: #bc6ec5; font-weight: bold;">$</span><span style="color: #a45bad; font-weight: bold;">@</span>
+  @echo <span style="color: #2d9574;">"Se compilaron los archivos"</span> $<span style="color: #a45bad;">?</span>
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">el codigo de abajo no cuenta para el ejemplo</span>
+<span style="color: #bc6ec5; font-weight: bold;">init</span>:
+  touch main.o main.c players.c players.h
+
+<span style="color: #bc6ec5; font-weight: bold;">.PHONY</span>: clean
+<span style="color: #bc6ec5; font-weight: bold;">clean</span>:
+  -rm *.<span style="color: #4f97d7;">{</span>c,h<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org60abc1f" class="outline-4">
+<h4 id="org60abc1f"><span class="section-number-4">6.4.5.</span> Macro ($^) - Obtener TODAS las dependencias</h4>
+<div class="outline-text-4" id="text-6-4-5">
+<p>
+La macro <code>$^</code> obtiene todas las dependencias, no le interesa si fue la más reciente o no
+</p>
+</div>
+
+<ol class="org-ol">
+<li><a id="org0c9d50b"></a>Ejemplo 1<br />
+<div class="outline-text-5" id="text-6-4-5-1">
+<p>
+Si modificamos solo dos archivos luego del <code>make init</code> se mostrarán todos los nombre de los archivos,
+no solo los recientemente modificados. 
+Si queremos sólo los más recientes respecto al <b>target</b> debemos usar la macro <code>$?</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">- La macro $</span><span style="color: #a45bad; background-color: #292e34;">^</span><span style="color: #2aa1ae; background-color: #292e34;"> obtendr&#225; todas las dependencias</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">- Se intentar&#225; compilar un archivo todos los .c y .h</span>
+<span style="color: #bc6ec5; font-weight: bold;">main.o</span>: main.c players.h players.c
+  gcc $<span style="color: #a45bad;">^</span> -c <span style="color: #bc6ec5; font-weight: bold;">$</span><span style="color: #a45bad; font-weight: bold;">@</span>
+  @echo <span style="color: #2d9574;">"Se compilaron los archivos"</span> $<span style="color: #a45bad;">^</span>
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">el codigo de abajo no cuenta para el ejemplo</span>
+<span style="color: #bc6ec5; font-weight: bold;">init</span>:
+  touch main.o main.c players.c players.h
+
+<span style="color: #bc6ec5; font-weight: bold;">.PHONY</span>: clean
+<span style="color: #bc6ec5; font-weight: bold;">clean</span>:
+  -rm *.<span style="color: #4f97d7;">{</span>c,h<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orgd1277a8" class="outline-4">
+<h4 id="orgd1277a8"><span class="section-number-4">6.4.6.</span> Macro @(F) y @(D) - Obtener directorio y archivo de un target</h4>
+<div class="outline-text-4" id="text-6-4-6">
+</div>
+<ol class="org-ol">
+<li><a id="orge7d9712"></a>Ejemplo<br />
+<div class="outline-text-5" id="text-6-4-6-1">
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #bc6ec5; font-weight: bold;">ho/player/player.o</span>: player/items.c player/account.c
+  @echo <span style="color: #2d9574;">"Carpeta:"</span> $<span style="color: #4f97d7;">(</span><span style="color: #7590db;">@D</span><span style="color: #4f97d7;">)</span>
+  @echo <span style="color: #2d9574;">"Archivo:"</span> $<span style="color: #4f97d7;">(</span><span style="color: #7590db;">@F</span><span style="color: #4f97d7;">)</span>
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">el codigo de abajo no cuenta para el ejemplo</span>
+<span style="color: #bc6ec5; font-weight: bold;">.PHONY</span>: init
+<span style="color: #bc6ec5; font-weight: bold;">init</span>: crearDirectorios crearArchivos
+  @echo <span style="color: #2d9574;">"Terminamos de ejecutar las dependencias :)"</span>
+
+<span style="color: #bc6ec5; font-weight: bold;">crearArchivos</span>:
+  touch player/items.c player/account.c
+<span style="color: #bc6ec5; font-weight: bold;">crearDirectorios</span>:
+  mkdir player
+
+<span style="color: #bc6ec5; font-weight: bold;">.PHONY</span>: clean
+<span style="color: #bc6ec5; font-weight: bold;">clean</span>:
+  -rm player/*.<span style="color: #4f97d7;">{</span>c,o<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org540c7df" class="outline-3">
+<h3 id="org540c7df"><span class="section-number-3">6.5.</span> Macros con comodines</h3>
+</div>
+<div id="outline-container-orgae866d2" class="outline-3">
+<h3 id="orgae866d2"><span class="section-number-3">6.6.</span> Macros de expansión única y expansión recursiva</h3>
+<div class="outline-text-3" id="text-6-6">
+</div>
+<div id="outline-container-org15f168a" class="outline-4">
+<h4 id="org15f168a"><span class="section-number-4">6.6.1.</span> Conceptos</h4>
+<div class="outline-text-4" id="text-6-6-1">
+<ul class="org-ul">
+<li>Las <b>macros</b> NO se <b>expanden</b> (sustituyen por su valor) durante la asignación
+(es decir podemos tener asignaciones a macros en distinto orden, y no afectará)</li>
+<li>Las macros se <b>expanden</b> durante su <b>evaluación</b> en alguna de las <b>reglas</b></li>
+</ul>
+
+<blockquote>
+<p>
+En caso de utilizar una <b>macro de expansión recursiva</b> (que se llama a si misma)
+utilizamos el operador <code>:=</code> para indica que se expanda una única vez por cada asignación
+si no lo utilizamos el <code>make</code> da warning y detiene la recursividad.
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-org3baebaf" class="outline-4">
+<h4 id="org3baebaf"><span class="section-number-4">6.6.2.</span> Ejemplo 1 - Expansión de una macro</h4>
+<div class="outline-text-4" id="text-6-6-2">
+<p>
+Podemos observar que la macro <code>UNO</code> le estamos asignando el valor de <code>OTRO</code>
+pero.. ese <code>OTRO</code> el <b>parser</b> de <b>make</b> NO lo conoce. Quizás podemos suponer
+que ese <code>OTRO</code> debería estar al principio, pero NO.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #7590db;">UNO</span>  = $<span style="color: #4f97d7;">(</span><span style="color: #7590db;">ESE</span><span style="color: #4f97d7;">)</span>  <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">ac&#225; no se expande esta macro ESE</span>
+<span style="color: #7590db;">ESE</span>  = $<span style="color: #4f97d7;">(</span><span style="color: #7590db;">OTRO</span><span style="color: #4f97d7;">)</span> <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">ac&#225; tampoco se expande la macro OTRO</span>
+<span style="color: #7590db;">OTRO</span> = Pepito
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">las macros se expanden en el momento de evaluaci&#243;n de la regla</span>
+<span style="color: #bc6ec5; font-weight: bold;">culpable</span>:
+  @echo $<span style="color: #4f97d7;">(</span><span style="color: #7590db;">UNO</span><span style="color: #4f97d7;">)</span> <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">ac&#225; SI se expande esta macro</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgda0f242" class="outline-4">
+<h4 id="orgda0f242"><span class="section-number-4">6.6.3.</span> Ejemplo 2 - Expansión única y expansión recursiva</h4>
+<div class="outline-text-4" id="text-6-6-3">
+<p>
+El siguiente programa nos imprimirá por pantalla <code>-O -Wall</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">- debajo tenemos dos "macros de expansi&#243;n recursivas" porque se llaman asi mismas</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">- usamos el operador := para evitar que se detenga la ejecuci&#243;n del programa</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">con ese operador salvamos la recursividad haciendo q sean "macros de expansi&#243;n &#250;nica"</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">y se expanden una sola vez en cada asignaci&#243;n (es como ponerle un tope)</span>
+<span style="color: #7590db;">CFLAGS</span> := $<span style="color: #4f97d7;">(</span><span style="color: #7590db;">CFLAGS</span><span style="color: #4f97d7;">)</span> -O
+<span style="color: #7590db;">CFLAGS</span> := $<span style="color: #4f97d7;">(</span><span style="color: #7590db;">CFLAGS</span><span style="color: #4f97d7;">)</span> -Wall
+
+<span style="color: #bc6ec5; font-weight: bold;">programa</span>:
+  @echo $<span style="color: #4f97d7;">(</span><span style="color: #7590db;">CFLAGS</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd697292" class="outline-2">
+<h2 id="orgd697292"><span class="section-number-2">7.</span> Ejemplos</h2>
+<div class="outline-text-2" id="text-7">
+</div>
+<div id="outline-container-orgb656bab" class="outline-3">
+<h3 id="orgb656bab"><span class="section-number-3">7.1.</span> Expresividad - Lineas muy extensas</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+Si tenemos lineas muy extensas podemos usar el carácter <code>\</code> al igual que en <code>bash</code>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #bc6ec5; font-weight: bold;">main.o</span>: main.c players.h monsters.h items.h \
+configs.h events.h messages.h
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3f64669" class="outline-3">
+<h3 id="org3f64669"><span class="section-number-3">7.2.</span> Generar varios ejecutables</h3>
+<div class="outline-text-3" id="text-7-2">
+<ul class="org-ul">
+<li>Podemos usar <code>all</code> (se considea un <b>falso target</b>) cuando tenemos reglas para varios ejecutables,</li>
+<li>Si no agregamos este target, sólo se ejecutará la regla 1
+(porque es el target final, y la regla 2 no es una dependencia de ella)</li>
+</ul>
+
+<p>
+<b>Observación:</b>
+El <code>make</code> siempre considera la primera regla como el <a href="#org9ce999d">3.2</a> (el ejecutable),
+y si la "regla 2" NO es una <b>dependencia</b> de esa primera regla, entonces no lo ejecutará.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">hacemos que se ejecuten ambos por separado</span>
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">porque no dependen entre ellos</span>
+<span style="color: #bc6ec5; font-weight: bold;">all</span>: programa1 programa2
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">regla 1</span>
+<span style="color: #bc6ec5; font-weight: bold;">programa1</span>: main.o players.o items.o
+  gcc -o programa1 main.o players.o items.o
+
+<span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">regla 2</span>
+<span style="color: #bc6ec5; font-weight: bold;">programa2</span>: server.o configs.o
+  gcc -o programa2 server.o configs.o
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org834e31b" class="outline-3">
+<h3 id="org834e31b"><span class="section-number-3">7.3.</span> Comandos en Shell diferentes</h3>
+<div class="outline-text-3" id="text-7-3">
+<p>
+Cada comando se ejecuta en una <code>shell</code> diferente
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #bc6ec5; font-weight: bold;">programa</span>: players/items.c
+  cd players;\   <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">se ejecuta en una shell</span>
+  gcc -c items.c <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">se ejecuta en otra shell</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf0cc169" class="outline-3">
+<h3 id="orgf0cc169"><span class="section-number-3">7.4.</span> Prioridad entre target y dependencia</h3>
+<div class="outline-text-3" id="text-7-4">
+<ul class="org-ul">
+<li>Los <b>targets</b> son main.o, players.o, monsters.o</li>
+<li>El <code>main.o</code> aparece en dos reglas
+<ol class="org-ol">
+<li>En la primera regla aparece como <b>dependencia</b></li>
+<li>En la segunda regla aparece como <b>target</b> (esta se ejecutará primero)</li>
+</ol></li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-makefile"><span style="color: #bc6ec5; font-weight: bold;">juegito</span>: main.o players.o monsters.o
+  gcc -o juegito main.o players.o monsters.o
+
+<span style="color: #bc6ec5; font-weight: bold;">main.o</span>: main.c players.h players.c monsters.o
+  gcc -c main.c
+
+<span style="color: #bc6ec5; font-weight: bold;">players.o</span>: players.c players.h
+  gcc -c players.c
+
+<span style="color: #bc6ec5; font-weight: bold;">monsters.o</span>: monsters.c monsters.h
+  gcc -c monsters.c
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb0c99f8" class="outline-2">
+<h2 id="orgb0c99f8"><span class="section-number-2">8.</span> Referencias</h2>
+<div class="outline-text-2" id="text-8">
+<ol class="org-ol">
+<li><a href="https://www.gnu.org/software/make/manual/make.html">https://www.gnu.org/software/make/manual/make.html</a></li>
+<li><a href="http://profesores.elo.utfsm.cl/~agv/elo320/makefile/makefile.html">http://profesores.elo.utfsm.cl/~agv/elo320/makefile/makefile.html</a></li>
+<li><a href="https://www.zator.com/Cpp/E1_4_0a.htm">https://www.zator.com/Cpp/E1_4_0a.htm</a></li>
+<li><a href="https://makefiletutorial.com/">https://makefiletutorial.com/</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orga1863d5" class="outline-2">
+<h2 id="orga1863d5"><span class="section-number-2">9.</span> Otras Referencias</h2>
+<div class="outline-text-2" id="text-9">
+<ol class="org-ol">
+<li><a href="https://www.islabit.com/94440/comando-ar-de-linux-usalo-para-crear-bibliotecas-estaticas.html">https://www.islabit.com/94440/comando-ar-de-linux-usalo-para-crear-bibliotecas-estaticas.html</a></li>
+<li><a href="https://www.thegeekstuff.com/2012/10/gcc-compiler-options/">https://www.thegeekstuff.com/2012/10/gcc-compiler-options/</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orga343622" class="outline-2">
+<h2 id="orga343622"><span class="section-number-2">10.</span> Nuevas referencias</h2>
+<div class="outline-text-2" id="text-10">
+<ol class="org-ol">
+<li><a href="https://github.com/ninenines/erlang.mk/blob/master/Makefile">https://github.com/ninenines/erlang.mk/blob/master/Makefile</a></li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org2ca1c62" class="outline-2">
+<h2 id="org2ca1c62"><span class="section-number-2">11.</span> Libros</h2>
+<div class="outline-text-2" id="text-11">
+<ol class="org-ol">
+<li><a href="https://www.oreilly.com/openbook/make3/book/">https://www.oreilly.com/openbook/make3/book/</a></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: jelou</p>
+<p class="date">Created: 2021-12-20 lun 23:44</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

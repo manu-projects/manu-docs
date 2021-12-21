@@ -79,7 +79,9 @@
    - [DESARROLLANDO] Configuraciones útiles [[file:guia-linux/linux-configuraciones.org][[Ir a la página]​]]
    - Personalizar el sistema [[file:guia-linux/linux-personalizar.org][[Ir a la página]​]]​
    - [NUEVO] Entendiendo que son Gestores de Paquetes Linux [[file:guia-linux/linux-gestores-de-paquetes.org][[Ir a la Pagina]​]]
-   - [NUEVO] Sacale provecho a la terminal con las Expresiones Regulares [[file:guia-linux/linux-expresiones-regulares.org][[Ir a la Pagina]​]]​
+   - [NUEVO] Sacale provecho a la terminal con las Expresiones Regulares [[file:guia-linux/linux-expresiones-regulares.org][[Ir a la Pagina]​]]
+** Automatización de Procedimientos
+   - [NUEVO] Automatizá tus primeras tareas con Makefile [[file:guia-makefile/makefile-basico.org][[Ir a la pagina]​]]
 ** Redes y Virtualización
    - Virtualización ligera de Contenedores con Docker [[file:guia-virtualizacion/docker.org][[Ir a página]​]] 
    - [DESARROLLANDO] Virtualización de Boxes con Vagrant y Ansible [[file:guia-virtualizacion/vagrant-ansible.org][[Ir a la pagina]​]]
