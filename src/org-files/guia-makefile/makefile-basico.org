@@ -314,15 +314,8 @@ buscar ejemplos utiles con awk también, y agregar en "linux regex"
 ** Macros con comodines
 ** Macros de expansión simple y expansión recursiva
 *** Conceptos
-   - Las *macros* NO se *expanden* (sustituyen por su valor) durante la asignación
-     (es decir podemos tener asignaciones a macros en distinto orden, y no afectará)
-   - Las macros se *expanden* durante su *evaluación* en alguna de las *reglas*
-
-   #+BEGIN_QUOTE
-   En caso de utilizar una *macro de expansión recursiva* (que se llama a si misma)
-   utilizamos el operador ~:=~ para indica que se expanda una única vez por cada asignación
-   si no lo utilizamos el ~make~ da warning y detiene la recursividad.
-   #+END_QUOTE
+   - Las *macros* NO siempre se *expanden* en el momento de *asignación*
+   - Algunas macros se *expanden* cuando son usadas en alguna *reglas*
 *** Expansión simple de una macro con el operador :=
    - Si usamos el operador ~:=~ consideramos que la expansión de la macro será simple
    - En una expansión simple, *la asignación del valor a la macro/variable es inmediata*
@@ -397,7 +390,7 @@ buscar ejemplos utiles con awk también, y agregar en "linux regex"
    + Se lo suele llamar ~all~
 ** Falso target
 *** Conceptos
-    + No se les suele agregar [[Dependencias]]
+    + No se les suele agregar [[Dependencias][Dependencias]]
     + Cuando queremos que la regla se ejecute siempre (/evitamos que compare el timestamp del target y las dependencias/)
     + Es un target que no existe (/porque un target tiende a representar un archivo físico que persiste en disco/)
     + Make nota que no aparece el archivo en las entradas del directorio donde esté el Makefile, entonces ejecuta los comandos que generan la regla
@@ -703,7 +696,7 @@ buscar ejemplos utiles con awk también, y agregar en "linux regex"
 * Reglas
 ** Conceptos
    - Si una regla tiene una dependencia no existe => GNU Make buscará una regla que la cree (osea que esté como objetivo/target)
-   - Si una regla tiene archivos en las [[Dependencias]] que además son [[Target]] de otras reglas, entonces
+   - Si una regla tiene archivos en las [[Dependencias][Dependencias]] que además son [[Target/Objetivo][Target/Objetivo]] de otras reglas, entonces
      1. Primero se ejecuta la regla donde aparece como ~target~
      2. Luego la regla donde aparece como ~dependencia~
 
@@ -1079,54 +1072,6 @@ buscar ejemplos utiles con awk también, y agregar en "linux regex"
    #+END_QUOTE
 *** Ejemplo
 ** [WAITING] Directiva include
-* [DOING] Funciones
-   #+BEGIN_COMMENT
-   hay varias buenas acá, sólo relacionadas a los archivos
-   https://www.gnu.org/software/make/manual/html_node/File-Name-Functions.html
-   https://www.oreilly.com/library/view/managing-projects-with/0596006101/ch04.html
-   https://web.mit.edu/gnu/doc/html/make_8.html
-#+END_COMMENT
-** [DOING] Tabla comparativa
-   | Función  | Descripción |
-   |----------+-------------|
-   | wildcard |             |
-   | patsubst |             |
-   | dir      |             |
-   | sort     |             |
-   |----------+-------------|
-** wildcard
-*** Conceptos
-   - Busca todos los archivos que coincidan con un patrón y devuelve una lista de los nombres (Ej. ~$(wildcard fuentes/*.c)~)
-   - La sintáxis ~$(wildcard carpeta/*.extension)~ busca en el directorio "carpeta" todos los archivos que tengan esa extensión
-*** Ejemplo
-   #+BEGIN_SRC makefile
-     ORG_FILES = guia-linux.org guia-makefile.org guia-emacs.org
-     PDF_FILES = $(patsubst %.org, %.pdf, $(ORG_FILES))
-
-     # una manera más fácil que usar patsubst es $(variable:palabra=nuevaPalabra)
-     HTML_FILES = $(ORG_FILES:.org=.html)
-   #+END_SRC
-** patsubst
-*** Conceptos
-   - Para sustituir palabras en un string
-   - El último parámetro es la variable de donde obtiene el string y busca/reemplaza las palabras
-   - La forma de usarlo es ~$(patsubst palabraAbuscar, nuevaPalabra, $(variable))~
-*** Ejemplo
-   #+BEGIN_SRC makefile
-     ORG_FILES = guia-linux.org guia-makefile.org guia-emacs.org
-     PDF_FILES = $(patsubst %.org, %.pdf, $(ORG_FILES))
-
-     # una manera más fácil que usar patsubst es $(variable:palabra=nuevaPalabra)
-     HTML_FILES = $(ORG_FILES:.org=.html)
-   #+END_SRC
-** [DOING] dir
-*** Conceptos
-  - Obtiene el nombre de directorio de una ruta a un archivo
-*** Ejemplo
-** [DOING] sort
-*** Conceptos
-   - Ordena una lista de palabras, remueve las palabras duplicadas y retorna la lista de palabras separadas por espacio
-*** Ejemplo
 * Ejemplos prácticos
 ** Proyecto Simple en C
    #+BEGIN_SRC makefile
@@ -1395,12 +1340,9 @@ buscar ejemplos utiles con awk también, y agregar en "linux regex"
 * Referencias
 ** Referencias Oficiales
   1. https://www.gnu.org/software/make/manual/make.html
-  2. https://www.gnu.org/software/make/manual/html_node/Text-Functions.html
-  3. https://www.gnu.org/software/make/manual/make.html#Substitution-Refs
-  4. https://www.gnu.org/software/make/manual/html_node/Wildcard-Function.html
-  1. https://www.gnu.org/software/make/manual/html_node/Static-Usage.html
-  5. [[https://gcc.gnu.org/onlinedocs/gcc/Link-Options.html][GCC - Link Options (gcc.gnu.org)]]
-  6. [[https://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html][Implicit Variables (gnu.org/make)]]
+  2. https://www.gnu.org/software/make/manual/html_node/Static-Usage.html
+  3. [[https://gcc.gnu.org/onlinedocs/gcc/Link-Options.html][GCC - Link Options (gcc.gnu.org)]]
+  4. [[https://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html][Implicit Variables (gnu.org/make)]]
 ** Referencias Extraoficiales
   1. http://profesores.elo.utfsm.cl/~agv/elo320/makefile/makefile.html
   2. https://www.zator.com/Cpp/E1_4_0a.htm
@@ -1430,11 +1372,11 @@ buscar ejemplos utiles con awk también, y agregar en "linux regex"
    8. [[https://stackoverflow.com/questions/7539563/is-there-a-smarter-alternative-to-watch-make][Alternative to watch make (stackoverflow.com)]]
    9. [[https://stackoverflow.com/questions/27318702/makefile-silence-the-maken-line-specifically][Makefile silence the maken line specifically (stackoverflow.com)]]
 ** Referencias Youtube
-  5. https://www.youtube.com/watch?v=E_ih19uktac (Chequear si es buena)
-* Referencias pendientes
+  1. [[https://www.youtube.com/watch?v=E_ih19uktac][Module 05, Lecture 43 - Makefiles (by nptelhrd)]]
+* [TODO] Referencias pendientes
   1. https://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/
   2. https://randu.org/tutorials/c/make.php
-  3. https://docs.oracle.com/cd/E19504-01/802-5880/6i9k05dhj/index.html (parece interesante)
+  3. https://docs.oracle.com/cd/E19504-01/802-5880/6i9k05dhj/index.html
   4. https://docs.microsoft.com/en-us/cpp/build/reference/description-blocks?view=msvc-170
   5. https://gist.github.com/kristopherjohnson/7466917
   6. https://tsh.io/blog/taskfile-and-gnu-make-for-automation/

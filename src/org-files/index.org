@@ -82,6 +82,7 @@
    - [NUEVO] Sacale provecho a la terminal con las Expresiones Regulares [[file:guia-linux/linux-expresiones-regulares.org][[Ir a la Pagina]​]]
 ** Automatización de Procedimientos
    - [NUEVO] Automatizá tus primeras tareas con Makefile [[file:guia-makefile/makefile-basico.org][[Ir a la pagina]​]]
+   - [PENDIENTE] Makefile para generar entornos de trabajo e integración con Docker
 ** Redes y Virtualización
    - Virtualización ligera de Contenedores con Docker [[file:guia-virtualizacion/docker.org][[Ir a página]​]] 
    - [DESARROLLANDO] Virtualización de Boxes con Vagrant y Ansible [[file:guia-virtualizacion/vagrant-ansible.org][[Ir a la pagina]​]]
