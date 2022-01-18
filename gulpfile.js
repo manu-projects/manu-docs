@@ -6,7 +6,8 @@ const concat = require('gulp-concat'); // agrupa varios archivos en uno solo
 const sourcemaps = require('gulp-sourcemaps');
 const postcss = require('gulp-postcss');
 const cssnano = require('cssnano');
-const sass = require("gulp-sass");
+const sass = require('gulp-sass')(require('sass'));
+
 
 var rep = require('gulp-replace-image-src');
 
@@ -122,8 +123,15 @@ function watchTask() {
           series(parallel(copyViews, copyComponents, cssTask, scssTask, jsTask, optimizeImagesTask), browsersyncReload));
 }
 
+function buildTask(done) {
+	parallel(copyViews, copyComponents, cssTask, scssTask, jsTask, optimizeImagesTask);
+	done();
+}
+
 // cualquiera de las tareas que exportamos,
 // se pueden ejecutar por separado en la terminal con: gulp nombreTarea
+exports.build = buildTask;
+
 exports.optimizeImagesTask = optimizeImagesTask;
 exports.copyViews = copyViews;
 exports.copyComponents = copyComponents;

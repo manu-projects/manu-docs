@@ -1,0 +1,53 @@
+#+TITLE:     Guia Emacs - Features de Org Mode
+#+SETUPFILE: ../theme-readtheorg.setup
+#+EXPORT_FILE_NAME: ../../views/guia-documentacion/emacs-org-features.html
+* Org Tables
+** Referencias a la tabla
+   |-----------+------------------------|
+   |           | Descripción            |
+   |-----------+------------------------|
+   | ~@numero~ | Referencia una fila    |
+   | ~$numero~ | Referencia una columna |
+   | ~$-1~     | Última columna         |
+   |-----------+------------------------|
+     
+   #+BEGIN_QUOTE
+   Algunos ejemplos
+   
+   ~@1$1~ es Fila=1,Columna=1 -> otra manera ~A1~
+   ~@2$1~ es Fila=2,Columna=1 -> otra manera ~A2~
+   ~@2$2~ es Fila=2,Columna=2 -> otra manera ~B2~
+   #+END_QUOTE
+
+   *Observación:*
+   - Las columnas las podemos indicar con letras como en las hojas de cálculo en vez del ~$~
+** Shortcuts
+   |---------+----------------------------------------------------------------------|
+   | Atajo   | Descripción                                                          |
+   |---------+----------------------------------------------------------------------|
+   | C-c =   | Para cambiar la fórmula de un campo                                  |
+   | C-c }   | Muestra/oculta los numeros de fila/columna de la tabla               |
+   | C-c ?   | Indica la fila/columna de un campo en donde estémos                  |
+   | C-c C-c | Hacerlo en el TBLFM y actualizará el resultado de todas las formulas |
+   |---------+----------------------------------------------------------------------|
+   | C-c ^   | Para ordenar las filas alfabéticamente, numericamente,  ..           |
+   |---------+----------------------------------------------------------------------|
+** Fórmulas
+   |------------------+---------------------------------------------------------------------------------|
+   | Fórmula          | Descripción                                                                     |
+   |------------------+---------------------------------------------------------------------------------|
+   | $2+$3            | Suma todas las filas de la columna2+columna3 de la fila en donde estémos        |
+   | ~:=vsum($2..$4)~ | Hace sumatoria desde columna2 hasta la columna4, en la fila actual              |
+   | ~=vsum($2..$4)~  | Hace sumatoria desde columna2 hasta la columna4 de TODAS las filas,             |
+   | ~=vsum($2..$-1)~ | Hace sumatoria desde columna2 hasta la ULTIMA (por el ~$-1~) de TODAS las filas |
+   |------------------+---------------------------------------------------------------------------------|
+** Referencias
+*** Referencias Oficiales
+    1. [[https://orgmode.org/worg/org-tutorials/org-spreadsheet-intro.html][Org Spreadsheet Intro (orgmode.org)]]
+    2. [[https://orgmode.org/org.html#Advanced-features][Advanced features (orgmode.org)]]
+*** Referencias Extraoficiales
+    1. [[https://newbedev.com/permanently-summing-a-column-in-an-org-mode-table][Summing a column in a org mode table (newbedev.com)]]
+*** Referecias Issues
+    1. [[https://stackoverflow.com/questions/6688075/permanently-summing-a-column-in-an-org-mode-table][Permanently summing a column in a org mode table (stackoverflow.com)]]
+    2. [[
+https://emacs.stackexchange.com/questions/28559/how-to-have-the-sum-of-a-column-with-computed-data-in-the-first-row][How to have the sum of a column (emacs.stackexchange.com)]] 
