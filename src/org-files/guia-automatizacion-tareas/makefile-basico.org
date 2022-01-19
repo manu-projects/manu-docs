@@ -1,6 +1,6 @@
 #+TITLE: Guia Básica Makefile
 #+SETUPFILE: ../theme-readtheorg.setup
-#+EXPORT_FILE_NAME: ../../views/guia-makefile/makefile-basico.html
+#+EXPORT_FILE_NAME: ../../views/guia-automatizacion-tareas/makefile-basico.html
 #+STARTUP: inlineimages
 
 #+BEGIN_COMMENT
@@ -1344,23 +1344,25 @@ buscar ejemplos utiles con awk también, y agregar en "linux regex"
   3. [[https://gcc.gnu.org/onlinedocs/gcc/Link-Options.html][GCC - Link Options (gcc.gnu.org)]]
   4. [[https://www.gnu.org/software/make/manual/html_node/Implicit-Variables.html][Implicit Variables (gnu.org/make)]]
 ** Referencias Extraoficiales
-  1. http://profesores.elo.utfsm.cl/~agv/elo320/makefile/makefile.html
-  2. https://www.zator.com/Cpp/E1_4_0a.htm
-  3. https://makefiletutorial.com/
-  4. [[http://nuclear.mutantstargoat.com/articles/make/][Practical Makefiles, by Example (nuclear.mutantstargoat.com)]]
-  5. [[https://www.thegeekstuff.com/2012/10/gcc-compiler-options/][Most frequently used gcc cmd line options (thegeekstuff.com)]]
-  6. [[http://make.mad-scientist.net/papers/advanced-auto-dependency-generation/][Advanced auto dependency generation (make.mad-scientist.net)]]
-  7. [[https://scottmcpeak.com/autodepend/autodepend.html][Autodependencies with GNU Make (scottmcpeak.com)]]
-  8. [[https://www.oreilly.com/library/view/managing-projects-with/0596006101/ch03.html][Variables and Macros - Managing Projects with GNU Make (oreilly.com)]]
-  9. [[https://www.fatalerrors.org/a/gnu-makefile-generation-of-dependency-rules-for-c-c-header-files.html][Generation of dependency rules (fatalerrors.org)]]
-  10. [[http://www.mathcs.emory.edu/~cheung/Courses/255/Syllabus/1-C-intro/make.html][The Make (UNIX) Utility (mathcs.emory.edu)]]
-  11. [[https://www.it.uc3m.es/~pedmume/asignaturas/2005/LAO/Lab2/tutorial4/make.html][Construcción de archivos makefile (it.uc3m.es)]]
-  12. [[https://swcarpentry.github.io/make-novice/reference.html][Automation and Make (swcarpentry.github.io)]]
-  13. [[https://earthly.dev/blog/make-flags/][Understanding and using makefile Flags (earthly.dev)]]
-  14. [[https://courses.cs.duke.edu/cps108/doc/makefileinfo/sample.html][A sample makefile and how it works (courses.cs.duke.edu)]]
-  15. [[https://jjmerelo.medium.com/dos-o-tres-cosas-que-posiblemente-no-sepas-sobre-gnu-make-65f245f1c640][Cosas que posiblemente no sepas sobre gnu make #1 (jjmerelo.medmium.com)]]
-  16. [[https://jjmerelo.medium.com/dos-o-tres-cosas-m%C3%A1s-que-posiblemente-no-sepas-sobre-gnu-make-9e012488e12a][Cosas que posiblemente no sepas sobre gnu make #2 (jjmerelo.medmium.com)]]
-  17. [[https://www.islabit.com/94440/comando-ar-de-linux-usalo-para-crear-bibliotecas-estaticas.html][Comando AR, para crear bibliotecas estáticas (islabit.com)]]
+  1. [[https://devhints.io/makefile][Makefile cheatsheet (devhints.io)]]
+  2. http://profesores.elo.utfsm.cl/~agv/elo320/makefile/makefile.html
+  3. https://www.zator.com/Cpp/E1_4_0a.htm
+  4. https://makefiletutorial.com/
+  5. [[http://nuclear.mutantstargoat.com/articles/make/][Practical Makefiles, by Example (nuclear.mutantstargoat.com)]]
+  6. [[https://www.thegeekstuff.com/2012/10/gcc-compiler-options/][Most frequently used gcc cmd line options (thegeekstuff.com)]]
+  7. [[http://make.mad-scientist.net/papers/advanced-auto-dependency-generation/][Advanced auto dependency generation (make.mad-scientist.net)]]
+  8. [[https://scottmcpeak.com/autodepend/autodepend.html][Autodependencies with GNU Make (scottmcpeak.com)]]
+  9. [[https://www.oreilly.com/library/view/managing-projects-with/0596006101/ch03.html][Variables and Macros - Managing Projects with GNU Make (oreilly.com)]]
+  10. [[https://www.fatalerrors.org/a/gnu-makefile-generation-of-dependency-rules-for-c-c-header-files.html][Generation of dependency rules (fatalerrors.org)]]
+  11. [[http://www.mathcs.emory.edu/~cheung/Courses/255/Syllabus/1-C-intro/make.html][The Make (UNIX) Utility (mathcs.emory.edu)]]
+  12. [[https://www.it.uc3m.es/~pedmume/asignaturas/2005/LAO/Lab2/tutorial4/make.html][Construcción de archivos makefile (it.uc3m.es)]]
+  13. [[https://swcarpentry.github.io/make-novice/reference.html][Automation and Make (swcarpentry.github.io)]]
+  14. [[https://earthly.dev/blog/make-flags/][Understanding and using makefile Flags (earthly.dev)]]
+  15. [[https://courses.cs.duke.edu/cps108/doc/makefileinfo/sample.html][A sample makefile and how it works (courses.cs.duke.edu)]]
+  16. [[https://slideplayer.com/slide/7540240/][Introduction How to Use Makefiles (sliderplayer.com)]]
+  17. [[https://jjmerelo.medium.com/dos-o-tres-cosas-que-posiblemente-no-sepas-sobre-gnu-make-65f245f1c640][Cosas que posiblemente no sepas sobre gnu make #1 (jjmerelo.medmium.com)]]
+  18. [[https://jjmerelo.medium.com/dos-o-tres-cosas-m%C3%A1s-que-posiblemente-no-sepas-sobre-gnu-make-9e012488e12a][Cosas que posiblemente no sepas sobre gnu make #2 (jjmerelo.medmium.com)]]
+  19. [[https://www.islabit.com/94440/comando-ar-de-linux-usalo-para-crear-bibliotecas-estaticas.html][Comando AR, para crear bibliotecas estáticas (islabit.com)]]
 ** Referencias Issues
    1. [[https://www.py4u.net/discuss/87388][Makefile vpath not working for header files (py4u.net)]]
    2. [[https://stackoverflow.com/questions/34219186/what-is-the-difference-between-and-in-a-makefile][What is the difference between % and * (stackoverflow.com)]]
@@ -1374,11 +1376,25 @@ buscar ejemplos utiles con awk también, y agregar en "linux regex"
 ** Referencias Youtube
   1. [[https://www.youtube.com/watch?v=E_ih19uktac][Module 05, Lecture 43 - Makefiles (by nptelhrd)]]
 * [TODO] Referencias pendientes
-  1. https://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/
-  2. https://randu.org/tutorials/c/make.php
-  3. https://docs.oracle.com/cd/E19504-01/802-5880/6i9k05dhj/index.html
-  4. https://docs.microsoft.com/en-us/cpp/build/reference/description-blocks?view=msvc-170
-  5. https://gist.github.com/kristopherjohnson/7466917
-  6. https://tsh.io/blog/taskfile-and-gnu-make-for-automation/
+** Otras
+  1. https://docs.oracle.com/cd/E19504-01/802-5880/6i9k05dhj/index.html
+  2. https://www.oreilly.com/library/view/managing-projects-with/0596006101/ch03.html
+  3. https://gist.github.com/kristopherjohnson/7466917
+
+  #+BEGIN_COMMENT
+  imagenes interesantes
+  1. https://www.oreilly.com/library/view/managing-projects-with/0596006101/figs/web/03fig01.png.jpg
+  2. http://matrix.etseq.urv.es/manuals/matlab/toolbox/rtw/rtw_ug/targe10a.gif
+  #+END_COMMENT
+** Makefile + Java
+  1. https://stackoverflow.com/questions/25735553/creating-a-makefile-for-jar-executable
+  2. http://www.dcs.gla.ac.uk/~wpc/advancedprogramming/makefiles.pdf
+  3. https://docs.oracle.com/javase/tutorial/deployment/jar/build.html
+  4. https://www.cs.odu.edu/~tkennedy/cs350/f19/Public/make/index.html
+  5. https://www.cs.swarthmore.edu/~newhall/unixhelp/javamakefiles.html
+  6. https://www.baeldung.com/java-create-jar
+  7. https://cs.iupui.edu/~ajharris/240/jarFiles.html
+  8. https://inst.eecs.berkeley.edu/~cs164/fa06/docs/compilation.pdf
+  9. https://www.cs.jhu.edu/~gkaptch1/sum19/cs226sum19/resources/JavaCommandLineNotes.html
 * Libros
   1. https://www.oreilly.com/openbook/make3/book/

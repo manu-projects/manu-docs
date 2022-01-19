@@ -80,9 +80,11 @@
    - Personalizar el sistema [[file:guia-linux/linux-personalizar.org][[Ir a la página]​]]​
    - [NUEVO] Entendiendo que son Gestores de Paquetes Linux [[file:guia-linux/linux-gestores-de-paquetes.org][[Ir a la Pagina]​]]
    - [NUEVO] Sacale provecho a la terminal con las Expresiones Regulares [[file:guia-linux/linux-expresiones-regulares.org][[Ir a la Pagina]​]]
-** Automatización de Procedimientos
-   - [NUEVO] Automatizá tus primeras tareas con Makefile [[file:guia-makefile/makefile-basico.org][[Ir a la pagina]​]]
-   - [PENDIENTE] Makefile para generar entornos de trabajo e integración con Docker
+** Automatización de Tareas
+   - [NUEVO] Makefile + Automatizar pequeños proyectos de C ó java [[file:guia-makefile/makefile-basico.org][[Ir a la pagina]​]]
+   - [PENDIENTE] Makefile + Automatizar entornos de trabajo e integración con Docker
+   - [PENDIENTE] Makefile Vs Taskfile
+   - [PENDIENTE] Gestores de tareas en Javascript
 ** Redes y Virtualización
    - Virtualización ligera de Contenedores con Docker [[file:guia-virtualizacion/docker.org][[Ir a página]​]] 
    - [DESARROLLANDO] Virtualización de Boxes con Vagrant y Ansible [[file:guia-virtualizacion/vagrant-ansible.org][[Ir a la pagina]​]]
