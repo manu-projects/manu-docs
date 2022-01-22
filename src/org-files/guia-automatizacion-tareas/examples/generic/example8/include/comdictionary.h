@@ -1,0 +1,1 @@
+void despedir(int x);
