@@ -1,0 +1,63 @@
+#+TITLE: CHANGELOG
+#+BEGIN_QUOTE
+Este fichero se usa para el seguimiento de los cambios realizados en cada versión de Manu-Docs
+#+END_QUOTE
+* To-Do 3.0 (31 Enero, 2022)
+  #+BEGIN_COMMENT
+  Próximos cambios
+  - [Añadido] Gestión de logs
+  - [Deprecado] Biblioteca jQuery por Alpinejs
+  - [Deprecado] Bootstrap3 por Tailwindcss 
+  - [Deprecado] Gulp y Browsersync por Eleventy ó Parcel ó Webpack ó Gruntjs
+  - [Añadido] Documentación Automatización con Taskfile
+  - [Añadido] Documentación Alpinejs
+  - [Añadido] Documentación Tailwindcss
+  - [Añadido] Documentación Makefile Avanzado
+  - [Añadido] Documentación Frontend Básico
+  - [Añadido] Documentación Frontend Tecnologías
+  - [Añadido] Documentación Videojuegos en Javascript
+  #+END_COMMENT
+** Características
+  - [Añadido] Automatizar tareas para exportar documentos .org y el manejo de contenedores con GNU Makefile
+  - [Añadido] Exportar documentación .org a .html con *pandoc*
+  - [Añadido] Changelog para organizar cambios realizados
+** Documentación
+  - [Añadido] Makefile
+  - [Añadido] Git Avanzado
+** Breaking Changes
+  - [Añadido] Entorno aislado para la exportar documentación con tecnología de contenedores en Docker
+  - [Añadido] Entorno aislado para la aplicación web con tecnología de contenedores en Docker
+  - [Modificado] Ruta de la documentación ~./src/org-files~ a ~./doc~
+  - [Removido] Scripts en *elisp* por *pandoc*
+* To-Do 2.0 (19 Octubre, 2021)
+** Características
+  - [Añadido] Despliegue automático a github.io con *github actions*
+  - [Añadido] Scripts en *elisp* para exportar documentos .org a .html
+** Breaking Changes
+  - [Añadido] Tecnología *nodejs* para la aplicación web
+  - [Añadido] Gestionar tareas frontend con *gulpjs*
+  - [Modificado] Formato de documentación de *Markdown* a *Org Mode*
+  - [Removido] Tecnología *mkdocs* (/requería python/)
+** Documentación
+  - [Añadido] Docker Básico
+  - [Actualizado] Emacs Básico
+  - [Actualizado] Spacemacs
+  - [Añadido] Linux Particionamiento
+  - [Añadido] Vim Básico
+  - [Añadido] Git Intermedio
+  - [Añadido] Vagrant y Ansible
+* To-Do 1.0 (18 Octubre, 2020)
+** Características
+  - [Añadido] Tecnología *mkdocs* como generar documentación
+** Documentación
+  - [Añadido] Virtualbox Básico
+  - [Añadido] Git Básico
+  - [Añadido] Emacs Básico
+  - [Añadido] Emacs Magit
+  - [Añadido] Emacs Org-Mode
+  - [Añadido] Spacemacs
+  - [Añadido] Linux Básico
+  - [Añadido] Linux Personalizar
+  - [Añadido] Linux Regexp
+  - [Añadido] Linux Problemas comúnes
+  - [Añadido] Linux Gestores de Paquetes

@@ -1,6 +1,7 @@
 nohup.out
 
 node_modules/
+.log
 
 # mkdocs
 site/
