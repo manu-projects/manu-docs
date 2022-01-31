@@ -1,2 +1,0 @@
-int jugadoresEnLinea;
-int limiteDeUsuarios;

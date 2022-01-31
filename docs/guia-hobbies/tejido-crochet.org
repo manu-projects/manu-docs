@@ -1,0 +1,37 @@
+* Crochet + Programming
+** Referencias
+   1. [[https://webscapegardener.co.uk/why-coding-like-crochet/][Why codig is like Crochet (webscapegardener.co.uk)]]
+   2. [[https://mercedesbernard.com/blog/crochet-code-craft][Crochet, Code, Craft (mercedesbernard.com, Blog)]]
+* Diagramas
+** Referencias Web
+   1. [[https://thecrochetcrowd.com/what-program-do-i-use-to-make-crochet-diagrams/][What program do I use to make crochet diagram? (thecrochetcrowd.com)]]
+   2. https://mondayscrochet.com/2015/06/03/clase-5-como-leer-un-diagrama-lineal-de-crochet/
+   3. https://mondayscrochet.com/2016/04/18/clase-8-como-leer-un-diagrama-circular-de-crochet-circulo-perfecto-how-to-read-a-circular-diagram-in-crochet-perfect-circle/
+   4. https://www.mundocrochet.com/como-leer-diagramas-de-crochet/29-como-leer-diagramas-de-crochet1/
+   5. [[https://aprender-a-tejer.info/blog/como-aprender-tejer-en-crochet-paso-paso/1907412_10203619202593318_5178879484722271827_n/][Aprender a tejer en crochet (aprener-a-tejer.info)]]
+   6. [[https://www.patronesgratisdetejido.com/2014/08/como-tejer-en-redondo-al-crochet-paso.html][Com tejer en redondo al crochet (patronesgratisdetejido.com)]]
+   7. [[https://www.aprendercrochet.com/aprender-crochet/crochet-basico/como-cambiar-de-color-en-crochet-y-no-morir-en-el-intento/][Como cambiar de color (aprendercrochet.com)]]
+   8. [[https://www.patronesgratisdetejido.com/2017/02/patrones-crochet-faciles-de-tejer.html][Patrones crochet faciles de tejer (patronesgratisdetejido.com)]]
+** Referencias Youtube
+   1. [[https://www.youtube.com/watch?v=QkQ7nqaLbQo][Leer patrones, esquemas ó diagramas - By Gloriarte]]
+* Software
+   1. [[https://www.stitchfiddle.com/][Stich Fiddle - Aplicación Web]]
+* Tips
+* Glosario
+* Referencias
+** Tutoriales Web
+   1. [[https://www.mundocrochet.com/aprender-tejer-crochet/][Aprende a tejer crochet (mundocrochet.com)]]
+   2. [[https://www.mundocrochet.com/como-tejer-crochet-o-ganchillo-puntos-basicos/][Como tejer a crochet (mundocrochet.com)]]
+** Cursos Básicos Youtube
+   1. [[https://www.youtube.com/playlist?list=PLAtMlAPFymt00-mq0OhQmqNX5vnjPsjFw][Curso desde cero Crochet - By La casita de Mokala Crochet]]
+   2. [[https://www.youtube.com/watch?v=vKX4wyTh3pY&list=PL2te6ntc99jG02WFC-q0OEwY3YqHWkbTY][Curso Basico de Crochet - By Ahuyama Crochet]]
+   3. [[https://www.youtube.com/watch?v=8gbjH1QH1bs&list=PL1y05sotmmUGAAWlEkY3lyBHsvWiTGXaz][Curso Basico Crochet - By Gloriarte]]
+   4. [[https://www.youtube.com/watch?v=zLLY1BwB7R4&list=PLFqeH0fLfRrCIIqzYXnp92BacNu4ahw_I&index=1][Curso de Crochet para principiantes - By Querer es Tejer]]
+   5. [[https://www.youtube.com/watch?v=C1cVKNpAMC4&list=PL2te6ntc99jFJkAd_fLuIHiggiBjzffdp][Gorros - Ahuyama Crochet]]
+   6. [[https://www.youtube.com/watch?v=aDY0kpf7nqc&list=PL3koAnbgBu1Z50lQHOT4FGebEMdiGD9ML][Curso de crochet paso a paso - By Arte en Crochet]]
+** Cursos Amigurumi Youtube
+   1. [[https://www.youtube.com/playlist?list=PLJGZPy_5SqPhzeE8DjdJS2_3N-LNjB8_3][Curso de amigurumi y Crochet - By Duende de los Hilos]]
+   2. [[https://www.youtube.com/playlist?list=PLAtMlAPFymt2XPLrIXR9MQtMfbfqMtZBS][Tutoriales de Amigurumis - By La casita de Mokala Crochet]]
+** Glosario
+   1. [[https://www.misslanitas.com/guias/glosario-de-terminos-de-calceta-y-crochet/][Glosario de terminos de crochet (misslanitas.com)]]
+   2. [[https://www.guiaparatejerbien.com/2008/07/abreviaturas-y-expresiones-de-uso-comn.html][Abreviaturas, expreisones y diagramas (guiaparatejerbien.com)]]

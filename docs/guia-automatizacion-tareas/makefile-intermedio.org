@@ -1,0 +1,124 @@
+#+TITLE: Guia Intermedia Makefile
+#+SETUPFILE: ../theme-readtheorg.setup
+#+EXPORT_FILE_NAME: ../../views/guia-automatizacion-tareas/makefile-intermedio.html
+#+STARTUP: inlineimages
+* [DOING] Funciones
+   #+BEGIN_COMMENT
+   haciendo el example10
+   https://www.andrewheiss.com/blog/2020/01/10/makefile-subdirectory-zips/
+   https://www.fatalerrors.org/a/makefile-builds-multi-level-directory-projects.html
+   https://riptutorial.com/makefile/example/21376/building-from-different-source-folders-to-different-target-folders
+   https://www.lrde.epita.fr/~tiger/doc/gnuprog2/Multiple-Directories.html
+   https://gcc.gnu.org/onlinedocs/gcc-3.4.6/gnat_ugn_unw/Automatically-Creating-a-List-of-Directories.html
+   
+   hay varias buenas acá, sólo relacionadas a los archivos
+   https://www.gnu.org/software/make/manual/html_node/File-Name-Functions.html
+   https://www.oreilly.com/library/view/managing-projects-with/0596006101/ch04.html
+   https://web.mit.edu/gnu/doc/html/make_8.html
+
+   otros
+   https://alligator.io/workflow/command-line-creating-files-directories/
+   https://www.gnu.org/software/make/manual/html_node/Selective-Search.html#Selective-Search
+   https://docs.oracle.com/cd/E19504-01/802-5880/6i9k05dhj/index.html (investigar lo de .lint)
+#+END_COMMENT
+** [DOING] Tabla comparativa
+   | Función  | Descripción |
+   |----------+-------------|
+   | wildcard |             |
+   | patsubst |             |
+   | dir      |             |
+   | sort     |             |
+   |----------+-------------|
+** wildcard
+*** Conceptos
+   - Busca todos los archivos que coincidan con un patrón y devuelve una lista de los nombres (Ej. ~$(wildcard fuentes/*.c)~)
+   - La sintáxis ~$(wildcard carpeta/*.extension)~ busca en el directorio "carpeta" todos los archivos que tengan esa extensión
+*** Ejemplo
+   #+BEGIN_SRC makefile
+     ORG_FILES = guia-linux.org guia-makefile.org guia-emacs.org
+     PDF_FILES = $(patsubst %.org, %.pdf, $(ORG_FILES))
+
+     # una manera más fácil que usar patsubst es $(variable:palabra=nuevaPalabra)
+     HTML_FILES = $(ORG_FILES:.org=.html)
+   #+END_SRC
+** patsubst
+*** Conceptos
+   - Para sustituir palabras en un string
+   - El último parámetro es la variable de donde obtiene el string y busca/reemplaza las palabras
+   - La forma de usarlo es ~$(patsubst palabraAbuscar, nuevaPalabra, $(variable))~
+*** Ejemplo
+   #+BEGIN_SRC makefile
+     ORG_FILES = guia-linux.org guia-makefile.org guia-emacs.org
+     PDF_FILES = $(patsubst %.org, %.pdf, $(ORG_FILES))
+
+     # una manera más fácil que usar patsubst es $(variable:palabra=nuevaPalabra)
+     HTML_FILES = $(ORG_FILES:.org=.html)
+   #+END_SRC
+** [DOING] dir
+*** Conceptos
+  - Obtiene el nombre de directorio de una ruta a un archivo
+*** Ejemplo
+** [DOING] sort
+*** Conceptos
+   - Ordena una lista de palabras, remueve las palabras duplicadas y retorna la lista de palabras separadas por espacio
+*** Ejemplo
+   #+BEGIN_SRC makefile
+  #+END_SRC
+** Referencias
+*** Referencias Oficiales
+  1. https://www.gnu.org/software/make/manual/html_node/Wildcard-Function.html
+  2. https://www.gnu.org/software/make/manual/html_node/Text-Functions.html
+  3. https://www.gnu.org/software/make/manual/make.html#Substitution-Refs
+  4. [[https://gcc.gnu.org/onlinedocs/gcc-3.4.6/gnat_ugn_unw/Automatically-Creating-a-List-of-Directories.html][Automatically creating a list of directories (gcc.gnu.org)]]
+  5. http://manpages.ubuntu.com/manpages/trusty/man1/makepp_cookbook.1.html
+*** Referencias Extraoficiales
+  1. https://www.andrewheiss.com/blog/2020/01/10/makefile-subdirectory-zips/
+  2. https://www.fatalerrors.org/a/makefile-builds-multi-level-directory-projects.html
+  3. https://riptutorial.com/makefile/example/21376/building-from-different-source-folders-to-different-target-folders
+*** Referencias Issues
+  1. https://stackoverflow.com/questions/6498727/show-and-execute
+  2. https://stackoverflow.com/questions/4036191/sources-from-subdirectories-in-makefile
+* Variables de Entorno (.env)
+* Mutiples proyectos (submakes)
+* Integración con Docker
+* Makefile Vs .sh (?)
+* Combinar Makefile + .sh
+* Crear/Usar Bibliotecas (Static Vs Shared?)
+* Ejemplos Practicos
+** Makefile + Pandoc
+* [DOING] Ejemplos
+   1. https://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/
+   2. https://github.com/richfelker/musl-cross-make/blob/master/Makefile
+   3. https://github.com/lexrus/ios-makefile/blob/master/makefile
+   4. https://github.com/Cheedoong/MakefileTemplate/blob/master/Makefile
+   5. https://github.com/mvanholsteijn/docker-makefile
+   6. https://stackoverflow.com/questions/44597823/makefile-patsubst-using-value-of-shell-variable
+   7. https://github.com/TheNetAdmin/Makefile-Templates
+   8. https://github.com/alextanhongpin/.makefiles
+   9. https://github.com/ninenines/erlang.mk/blob/master/Makefile
+   10. https://github.com/OPAE/linux-dfl/blob/master/Makefile (kernel de linux)
+   11. https://victoria.dev/blog/how-to-create-a-self-documenting-makefile/
+   12. https://acecilia.medium.com/introducing-the-taskfile-e9068e3b2804 (relacionado a configurar un entorno)
+   13. https://www.olioapps.com/blog/the-lost-art-of-the-makefile/ (relacionado con js)
+   14. https://simulationresearch.lbl.gov/VS/doc/problem_driver_api_html/page__makefile_singleproblem.html
+   15. https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
+   16. https://chromium.googlesource.com/chromiumos/third_party/coreboot/+/chromeos-2016.02/Makefile.inc
+* Proyectos Interesantes
+   1. [[https://earthly.dev/][Earthly, it's like Makefile+Dockerfile (earthly.dev)]]
+   2. [[https://taskfile.dev/][TaskFile, Task Runner (taskfile.dev)]] (en .yaml, se parece a los docker-compose)
+* Referencias
+** Referencias Extraoficiales
+   1. [[https://yankeexe.medium.com/streamline-your-projects-using-makefile-744ebbc69cc1][Streamline your projects using makefile (yankeexe.medium.com)]]
+   2. https://3musketeers.io/docs/environment-variables.html#environment-variable-check-for-make-target
+   3. https://dev.to/serhatteker/get-environment-variables-from-a-file-into-makefile-2m5l
+   4. https://learntutorials.net/es/makefile/topic/6860/reglas-de-patron-de-gnu (lo de multiples objetivos)
+   5. https://www.oreilly.com/library/view/managing-projects-with/0596006101/ch03.html (leyendo sobre ~$$~)
+   6. http://www.eecs.umich.edu/courses/eecs380/HANDOUTS/Makefile-Tutorial.html (leyendo sobre ~$$~)
+   7. https://www.oreilly.com/openbook/make3/book/ (ibas por el chapter2, pero.. el chapter12 explica como debugear makefiles)
+   8. https://dev.to/allenap/some-direnv-best-practices-actually-just-one-4864
+   9. .env .envrc ?
+** Referencias Youtube
+   1. [[https://www.youtube.com/watch?v=vybdPTfNLo4][Streamline projects with makefile (by Yankee maharjan)]]
+** Referencias Oficiales
+  1. https://www.gnu.org/software/make/manual/make.html (leyendo sobre ~$$~)
+** Referencias Issues

@@ -1,0 +1,12 @@
+#+TITLE: Guia Taskfile
+#+SETUPFILE: ../theme-readtheorg.setup
+#+EXPORT_FILE_NAME: ../../views/guia-automatizacion-tareas/taskfile.html
+#+STARTUP: inlineimages
+* Referencias
+** Referencias Oficiales
+   1. https://taskfile.dev/#/
+** Referencias Extraoficiales
+   1. https://tsh.io/blog/taskfile-and-gnu-make-for-automation/
+   2. https://dev.to/stack-labs/introduction-to-taskfile-a-makefile-alternative-h92
+   3. https://github.com/go-task/examples/blob/master/go-web-app/Taskfile.yml
+   4. https://github.com/go-task/examples/tree/master/go-web-app

@@ -1,1 +1,0 @@
-int probando(int x);

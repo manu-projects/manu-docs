@@ -1,0 +1,102 @@
+* Comandos raros
+** strip
+** subst
+* Comando shopt
+** Conceptos
+** Configuración
+   #+BEGIN_SRC shell
+     # Agregamos las siguientes lineas en el ~/.bashrc
+     shopt -s histverify
+     shopt -s autocd
+     shopt -s dotglob
+     shopt -s nocaseglob
+   #+END_SRC
+** Comandos
+   |------------------------+---------------------------------|
+   | Comando                | Descripción                     |
+   |------------------------+---------------------------------|
+   | shopt  nombreComando   | Imprime el estado del comando   |
+   | shopt -s               | Lista los comandos habilitados  |
+   | shopt -u               | Lista los comandos desactivados |
+   |------------------------+---------------------------------|
+   | shopt -s nombreComando | Habilita el comando             |
+   | shopt -u nombreComando | Desactiva el comando            |
+   |------------------------+---------------------------------|
+** Comandos útiles
+*** autocd
+   #+BEGIN_SRC shell
+     # activamos el autocd
+     shopt -s autocd
+
+     # ya no necesitamos escribir "cd Documentos"
+     Documentos
+   #+END_SRC
+*** histverify
+   #+BEGIN_SRC shell
+     # activamos el comando
+     shopt -s histverify
+
+     # listamos las entradas del directorio actual
+     ls
+
+     # supongamos que el anterior comando fue el número 500,
+     # entonces lo agregará en la terminal ese comando..
+     # (la aclaración es porque por defecto !numero ejecuta el comando del historial sin preguntar)
+     !500
+   #+END_SRC
+*** dotglob + nocaseglob
+   #+BEGIN_SRC shell
+     # activamos el dotglob para usar el asterisco
+     shopt -s dotglob
+     
+     # activamos el nocaseglob para que el asterisco no sea sensible a las mayusculas/minusculas
+     shopt -s nocaseglob
+
+     # podemos filtrar las entradas del directorio sin usar el comando grep
+     ls *pdf
+   #+END_SRC
+** Referencias
+*** Referencias Oficiales
+1. https://www.gnu.org/software/bash/manual/html_node/The-Shopt-Builtin.html
+*** Referencias Extraoficiales
+1. https://www.computerhope.com/unix/ubash.htm#history
+2. https://linuxhint.com/how-to-customize-a-bash-shell-with-the-shopt-command/
+3. https://www.networkworld.com/article/3574960/using-bashs-shopt-builtin-to-manage-linux-shell-behavior.html
+4. https://www.howtogeek.com/691980/how-to-customize-the-bash-shell-with-shopt/
+* Comando echo
+** Referencias
+1. https://www.howtogeek.com/446071/how-to-use-the-echo-command-on-linux/
+* Otros
+** column
+*** Ejemplo
+#+BEGIN_SRC shell
+  # muestra las entradas del directorio en formato de columna
+  ls | column
+#+END_SRC
+** wc
+*** Ejemplo
+#+begin_SRC shell
+  # cuenta la cantidad de bytes de cada archivo
+  ls | wc
+#+END_SRC
+*** Referencias
+1. https://man7.org/linux/man-pages/man1/wc.1.html
+* Chequear
+1. https://www.fpgenred.es/GNU-Linux/redirecciones.html
+* git
+** ejemplos
+   #+BEGIN_SRC shell
+     git show-branch nombre
+
+     git show-branch --list
+
+     git show-branch --all
+
+     # si no existe no dice nada
+     git show-ref refs/heads/master
+
+     # si no existe dice "fatal: se necesitó una revisión singular"
+     git rev-parse --verify master
+   #+END_SRC
+** referencias
+   1. https://git-scm.com/docs/git-rev-parse

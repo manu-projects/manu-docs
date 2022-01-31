@@ -1,3 +1,0 @@
-# la idea era agregar pandoc, pero...
-# falta investigar más para hacerlo ok :c
-# porque tiene muchas configuraciones, no es así nomás

@@ -1,410 +1,0 @@
-Script iniciado en 2021-12-21 19:50:52-03:00 [TERM="xterm-256color" TTY="/dev/pts/5" COLUMNS="121" LINES="25"]
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/test1[?2004h[01;32m[jelou@jelou-pc[01;37m test1[01;32m]$[00m ls
-[?2004lcfiles  [0m[01;32mcounter[0m  counter.c  counter.o  count_words.c  coutner  size  test1.mk  typescript
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/test1[?2004h[01;32m[jelou@jelou-pc[01;37m test1[01;32m]$[00m rm tye[Kpescript
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/test1[?2004h[01;32m[jelou@jelou-pc[01;37m test1[01;32m]$[00m ls
-[?2004lcfiles  [0m[01;32mcounter[0m  counter.c  counter.o  count_words.c  coutner  size  test1.mk
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/test1[?2004h[01;32m[jelou@jelou-pc[01;37m test1[01;32m]$[00m . counter
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/test1[?2004h[01;32m[jelou@jelou-pc[01;37m test1[01;32m]$[00m ls
-[?2004lcfiles  [0m[01;32mcounter[0m  counter.c  counter.o  count_words.c  coutner  size  test1.mk
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/test1[?2004h[01;32m[jelou@jelou-pc[01;37m test1[01;32m]$[00m cd ..
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples[?2004h[01;32m[jelou@jelou-pc[01;37m examples[01;32m]$[00m ls
-[?2004l[0m[01;34mtest1[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples[?2004h[01;32m[jelou@jelou-pc[01;37m examples[01;32m]$[00m mkdir exampl2[Ke2
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples[?2004h[01;32m[jelou@jelou-pc[01;37m examples[01;32m]$[00m ls
-[?2004l[0m[01;34mexample2[0m  [01;34mtest1[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples[?2004h[01;32m[jelou@jelou-pc[01;37m examples[01;32m]$[00m cd example2
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m cd [K[K[Kmkdir src
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m mkdir include
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004l[0m[01;34minclude[0m  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m cd src
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2/src[?2004h[01;32m[jelou@jelou-pc[01;37m src[01;32m]$[00m ls
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2/src[?2004h[01;32m[jelou@jelou-pc[01;37m src[01;32m]$[00m touch j[Kplayer.c items.c[K[K[K[K[K[K[K[K
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2/src[?2004h[01;32m[jelou@jelou-pc[01;37m src[01;32m]$[00m cd [K[K[Ktouch player.c[K[K[K[K[K[K[K[Kitems.c
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2/src[?2004h[01;32m[jelou@jelou-pc[01;37m src[01;32m]$[00m cd ..
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004l[0m[01;34minclude[0m  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m cd include
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2/include[?2004h[01;32m[jelou@jelou-pc[01;37m include[01;32m]$[00m touch {}p}l}a}y}e}r},}i}t}e}m}s}[C.h
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2/include[?2004h[01;32m[jelou@jelou-pc[01;37m include[01;32m]$[00m ls
-[?2004litems.h  player.h
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2/include[?2004h[01;32m[jelou@jelou-pc[01;37m include[01;32m]$[00m ls
-[?2004litem.h  player.h
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2/include[?2004h[01;32m[jelou@jelou-pc[01;37m include[01;32m]$[00m cd ..
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004l[0m[01;34minclude[0m  Makefile  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make
-[?2004lmake: *** No hay ninguna regla para construir el objetivo 'item.c', necesario para 'item.o'.  Alto.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make
-[?2004lgcc -c src/item.c
-gcc -c src/player.c
-[01m[Ksrc/player.c:[m[K En la función ‘[01m[Ksaludar[m[K’:
-[01m[Ksrc/player.c:8:3:[m[K [01;35m[Kaviso: [m[Kdeclaración implícita de la función ‘[01m[Kprintf[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wimplicit-function-declaration-Wimplicit-function-declaration]8;;[m[K]
-    8 |   [01;35m[Kprintf[m[K("Hola..!\n");
-      |   [01;35m[K^~~~~~[m[K
-[01m[Ksrc/player.c:2:1:[m[K [01;36m[Knota: [m[Kinclude ‘[01m[K<stdio.h>[m[K’ or provide a declaration of ‘[01m[Kprintf[m[K’
-    1 | #include "../include/player.h"
-  +++ |+[32m[K#include <stdio.h>[m[K
-    2 | 
-[01m[Ksrc/player.c:8:3:[m[K [01;35m[Kaviso: [m[Kdeclaración implícita incompatible de la función interna ‘[01m[Kprintf[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wbuiltin-declaration-mismatch-Wbuiltin-declaration-mismatch]8;;[m[K]
-    8 |   [01;35m[Kprintf[m[K("Hola..!\n");
-      |   [01;35m[K^~~~~~[m[K
-[01m[Ksrc/player.c:8:3:[m[K [01;36m[Knota: [m[Kincluya ‘[01m[K<stdio.h>[m[K’ o proporcione una declaración de ‘[01m[Kprintf[m[K’
-gcc -c src/game.c
-gcc item.o player.o game.o -o program
-/usr/bin/ld: player.o: en la función `getNombre':
-player.c:(.text+0x0): definiciones múltiples de `getNombre'; item.o:item.c:(.text+0x0): primero se definió aquí
-collect2: error: ld devolvió el estado de salida 1
-make: *** [Makefile:4: program] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004lgame.o  [0m[01;34minclude[0m  item.o  Makefile  player.o  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m clean
-[?2004lbash: clean: orden no encontrada
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make clean
-[?2004lrm *.[o]
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004l[0m[01;34minclude[0m  Makefile  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m lsmake clean[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make clean[5Pcleanmake clean[K[K[K[K[K[K
-[?2004lgcc -c src/item.c
-gcc -c src/player.c
-gcc -c src/game.c
-gcc item.o player.o game.o -o program
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004lgame.o  [0m[01;34minclude[0m  item.o  Makefile  player.o  [01;32mprogram[0m  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ./program
-[?2004lLa app..!]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004lgame.o  [0m[01;34minclude[0m  item.o  Makefile  player.o  [01;32mprogram[0m  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004lgame.o  [0m[01;34minclude[0m  item.o  Makefile  player.o  [01;32mprogram[0m  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m gam[K[K[Kmake clean
-[?2004lrm *.[o]
-rm program
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004l[0m[01;34minclude[0m  Makefile  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make
-[?2004lgcc -c src/item.c
-gcc -c src/player.c
-[01m[Ksrc/player.c:[m[K En la función ‘[01m[Ksaludar[m[K’:
-[01m[Ksrc/player.c:9:39:[m[K [01;31m[Kerror: [m[K‘[01m[KMAX_FUERZA[m[K’ no se declaró aquí (primer uso en esta función)
-    9 |   printf("Hola tu fuerza es %d..!\n", [01;31m[KMAX_FUERZA[m[K);
-      |                                       [01;31m[K^~~~~~~~~~[m[K
-[01m[Ksrc/player.c:9:39:[m[K [01;36m[Knota: [m[Kcada identificador sin declarar se reporta sólo una vez para cada función en el que aparece
-make: *** [Makefile:13: player.o] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make
-[?2004lgcc -c src/player.c
-[01m[Ksrc/player.c:[m[K En la función ‘[01m[Ksaludar[m[K’:
-[01m[Ksrc/player.c:9:39:[m[K [01;31m[Kerror: [m[K‘[01m[KMAX_FUERZA[m[K’ no se declaró aquí (primer uso en esta función)
-    9 |   printf("Hola tu fuerza es %d..!\n", [01;31m[KMAX_FUERZA[m[K);
-      |                                       [01;31m[K^~~~~~~~~~[m[K
-[01m[Ksrc/player.c:9:39:[m[K [01;36m[Knota: [m[Kcada identificador sin declarar se reporta sólo una vez para cada función en el que aparece
-make: *** [Makefile:13: player.o] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m  1[Kmake[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make
-[?2004lgcc -c src/player.c
-[01m[Ksrc/player.c:[m[K En la función ‘[01m[Ksaludar[m[K’:
-[01m[Ksrc/player.c:9:39:[m[K [01;31m[Kerror: [m[K‘[01m[KMAX_FUERZA[m[K’ no se declaró aquí (primer uso en esta función)
-    9 |   printf("Hola tu fuerza es %d..!\n", [01;31m[KMAX_FUERZA[m[K);
-      |                                       [01;31m[K^~~~~~~~~~[m[K
-[01m[Ksrc/player.c:9:39:[m[K [01;36m[Knota: [m[Kcada identificador sin declarar se reporta sólo una vez para cada función en el que aparece
-make: *** [Makefile:13: player.o] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m [H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make
-[?2004lgcc -c src/player.c
-gcc -c src/game.c
-gcc item.o player.o game.o -o program
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m echo VPATH
-[?2004lVPATH
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m echo VPATH$VPATH
-[?2004l
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m echo $VPATH[Kz
-[?2004l
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004lgame.o  [0m[01;34minclude[0m  item.o  Makefile  Makefile2  player.o  [01;32mprogram[0m  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make clean
-[?2004lrm *.[o]
-rm program
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004l[0m[01;34minclude[0m  Makefile  Makefile2  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m m[Kmake -f Makefile2
-[?2004lmake: *** No hay ninguna regla para construir el objetivo '%.o', necesario para 'program'.  Alto.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2ls[Kmake -f Makefile2[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2
-[?2004lrm *.[o]
-rm: no se puede borrar '*.[o]': No existe el fichero o el directorio
-make: *** [Makefile2:15: clean] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2 clean
-[?2004lrm *.[o]
-rm: no se puede borrar '*.[o]': No existe el fichero o el directorio
-make: *** [Makefile2:15: clean] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2 clean[K
-[?2004lrm *.[o]
-rm: no se puede borrar '*.[o]': No existe el fichero o el directorio
-make: *** [Makefile2:15: clean] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2
-[?2004lrm *.[o]
-rm: no se puede borrar '*.[o]': No existe el fichero o el directorio
-make: *** [Makefile2:15: clean] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2
-[?2004lmake: *** No hay ninguna regla para construir el objetivo '%.o', necesario para 'program'.  Alto.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2
-[?2004lmake: *** No hay ninguna regla para construir el objetivo 'BINS', necesario para 'all'.  Alto.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2 all
-[?2004lmake: *** No hay ninguna regla para construir el objetivo 'BINS', necesario para 'all'.  Alto.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2 all[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2 all
-[?2004lmake: *** No hay ninguna regla para construir el objetivo 'BINS', necesario para 'all'.  Alto.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2 all[K[K[K[K
-[?2004lmake: *** No hay ninguna regla para construir el objetivo '%.o', necesario para 'program'.  Alto.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2
-[?2004lmake: *** No hay objetivos.  Alto.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2
-[?2004lmake: *** No hay objetivos.  Alto.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2
-[?2004lmake: *** No hay objetivos.  Alto.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2
-[?2004lmake: *** No hay ninguna regla para construir el objetivo '%.o', necesario para 'program'.  Alto.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2
-[?2004lmake: *** No hay ninguna regla para construir el objetivo '%.o', necesario para 'program'.  Alto.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2
-[?2004lmake: *** No hay ninguna regla para construir el objetivo 'player.c', necesario para 'program'.  Alto.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f Makefile2[K[K[K[K[K[K[K[K[Kgame.mk[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk
-[?2004lgcc  -o program
-[01m[Kgcc:[m[K [01;31m[Kerror fatal: [m[Kno hay ficheros de entrada
-compilación terminada.
-make: *** [game.mk:13: program] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk
-[?2004lgcc  -o program
-[01m[Kgcc:[m[K [01;31m[Kerror fatal: [m[Kno hay ficheros de entrada
-compilación terminada.
-make: *** [game.mk:13: program] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk
-[?2004lgcc  -o program
-[01m[Kgcc:[m[K [01;31m[Kerror fatal: [m[Kno hay ficheros de entrada
-compilación terminada.
-make: *** [game.mk:13: program] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk
-[?2004lgcc  -o program
-[01m[Kgcc:[m[K [01;31m[Kerror fatal: [m[Kno hay ficheros de entrada
-compilación terminada.
-make: *** [game.mk:13: program] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m [H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk
-[?2004lgcc  -o program
-[01m[Kgcc:[m[K [01;31m[Kerror fatal: [m[Kno hay ficheros de entrada
-compilación terminada.
-make: *** [game.mk:13: program] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004lgame.mk  [0m[01;34minclude[0m  Makefile  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m c[Krstyn[K[K[K[K[K(reverse-i-search)`': [Ks': l[7ms[27m[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m rsync in[K[Ksrc/
-src/game.c     src/item.c     src/player.c   
-[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m rsync src/
-src/game.c     src/item.c     src/player.c   
-[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m rsync src/player.c .
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004lgame.mk  [0m[01;34minclude[0m  Makefile  player.c  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m rm player.c 
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m rm player.c ls[Krsync src/player.c .[C[C[C[C[C[C[1P[1P[1P[1P[1P[1P[1@+[1P[1@*[C[C[C[C
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004lgame.c  game.mk  [0m[01;34minclude[0m  item.c  Makefile  player.c  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m lsrsync src/*.c .[3Pm player.c ls[Krsync src/player.c .ls[Kmake -f game.mk
-[?2004lgcc game.c item.c player.c -o program
-[01m[Kgame.c:2:10:[m[K [01;31m[Kerror fatal: [m[K../include/item.h: No existe el fichero o el directorio
-    2 | #include [01;31m[K"../include/item.h"[m[K
-      |          [01;31m[K^~~~~~~~~~~~~~~~~~~[m[K
-compilación terminada.
-[01m[Kitem.c:1:10:[m[K [01;31m[Kerror fatal: [m[K../include/item.h: No existe el fichero o el directorio
-    1 | #include [01;31m[K"../include/item.h"[m[K
-      |          [01;31m[K^~~~~~~~~~~~~~~~~~~[m[K
-compilación terminada.
-[01m[Kplayer.c:2:10:[m[K [01;31m[Kerror fatal: [m[K../include/player.h: No existe el fichero o el directorio
-    2 | #include [01;31m[K"../include/player.h"[m[K
-      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~[m[K
-compilación terminada.
-make: *** [game.mk:13: program] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk
-[?2004lgcc game.c item.c player.c -o program
-[01m[Kgame.c:2:10:[m[K [01;31m[Kerror fatal: [m[K../include/item.h: No existe el fichero o el directorio
-    2 | #include [01;31m[K"../include/item.h"[m[K
-      |          [01;31m[K^~~~~~~~~~~~~~~~~~~[m[K
-compilación terminada.
-[01m[Kitem.c:1:10:[m[K [01;31m[Kerror fatal: [m[K../include/item.h: No existe el fichero o el directorio
-    1 | #include [01;31m[K"../include/item.h"[m[K
-      |          [01;31m[K^~~~~~~~~~~~~~~~~~~[m[K
-compilación terminada.
-[01m[Kplayer.c:2:10:[m[K [01;31m[Kerror fatal: [m[K../include/player.h: No existe el fichero o el directorio
-    2 | #include [01;31m[K"../include/player.h"[m[K
-      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~[m[K
-compilación terminada.
-make: *** [game.mk:14: program] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004lgame.c  game.mk  [0m[01;34minclude[0m  item.c  Makefile  player.c  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m lsmake -f game.mk[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk
-[?2004lgcc -Iinclude game.c item.c player.c -o program
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004lgame.c  game.mk  [0m[01;34minclude[0m  item.c  Makefile  player.c  [01;32mprogram[0m  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004lgame.c  game.mk  [0m[01;34minclude[0m  item.c  Makefile  player.c  [01;32mprogram[0m  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m rm *.c[K[c]
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004lgame.mk  [0m[01;34minclude[0m  Makefile  [01;32mprogram[0m  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m rm program
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004lgame.mk  [0m[01;34minclude[0m  Makefile  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m lsrm programls[Krm *.[c]ls[Kmake -f game.mk[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk
-[?2004lgcc -Iinclude  -o program
-[01m[Kgcc:[m[K [01;31m[Kerror fatal: [m[Kno hay ficheros de entrada
-compilación terminada.
-make: *** [game.mk:16: program] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk
-[?2004lgcc -Iinclude  -o program
-[01m[Kgcc:[m[K [01;31m[Kerror fatal: [m[Kno hay ficheros de entrada
-compilación terminada.
-make: *** [game.mk:16: program] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk
-[?2004lgcc  -o game
-[01m[Kgcc:[m[K [01;31m[Kerror fatal: [m[Kno hay ficheros de entrada
-compilación terminada.
-make: *** [game.mk:15: game] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk
-[?2004lmake: *** No hay ninguna regla para construir el objetivo 'player.c', necesario para 'game'.  Alto.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk
-[?2004lgcc src/player.c -o game
-/usr/bin/ld: /usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../lib/Scrt1.o: en la función `_start':
-(.text+0x24): referencia a `main' sin definir
-collect2: error: ld devolvió el estado de salida 1
-make: *** [game.mk:16: game] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk
-[?2004lmake: *** No hay ninguna regla para construir el objetivo 'src/main.c', necesario para 'game'.  Alto.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk
-[?2004lmake: *** No hay ninguna regla para construir el objetivo 'src/main.c', necesario para 'game'.  Alto.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk
-[?2004lgcc src/game.c -o game
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004l[0m[01;32mgame[0m  game.mk  [01;34minclude[0m  Makefile  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004l[0m[01;32mgame[0m  game.mk  [01;34minclude[0m  Makefile  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m rm game
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004lgame.mk  [0m[01;34minclude[0m  Makefile  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m lsrm gamels[Kmake -f game.mk[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk
-[?2004lgcc  -o game
-[01m[Kgcc:[m[K [01;31m[Kerror fatal: [m[Kno hay ficheros de entrada
-compilación terminada.
-make: *** [game.mk:16: game] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004lgame.mk  [0m[01;34minclude[0m  Makefile  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m lsmake -f game.mk
-[?2004lgcc src/game.c -o game
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk
-[?2004lmake: *** No hay objetivos.  Alto.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk
-[?2004lmake: *** No hay objetivos.  Alto.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk
-[?2004lmake: *** No hay objetivos.  Alto.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk
-[?2004lmake: 'game' está actualizado.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004l[0m[01;32mgame[0m  game.mk  [01;34minclude[0m  Makefile  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m rm game
-[?2004l]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004lgame.mk  [0m[01;34minclude[0m  Makefile  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m lsrm gamels[Kmake -f game.mk
-[?2004lgcc src/player.c -o game
-/usr/bin/ld: /usr/lib/gcc/x86_64-pc-linux-gnu/11.1.0/../../../../lib/Scrt1.o: en la función `_start':
-(.text+0x24): referencia a `main' sin definir
-collect2: error: ld devolvió el estado de salida 1
-make: *** [game.mk:6: game] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004lgame.mk  [0m[01;34minclude[0m  Makefile  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m lsmake -f game.mk
-[?2004lgcc  -o game
-[01m[Kgcc:[m[K [01;31m[Kerror fatal: [m[Kno hay ficheros de entrada
-compilación terminada.
-make: *** [game.mk:6: game] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk -n
-[?2004lgcc  -o game
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk -n[K-just-print
-[?2004lgcc  -o game
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m [H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004lgame.mk  [0m[01;34minclude[0m  Makefile  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make cleanls[Kmake -f game.mk --just-print[K[K[K[K[K[K[K[K[K[K[K[Kclean
-[?2004lrm -vrf player.o game.o
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk clean[K[K[K[K[K[K
-[?2004lgcc  -o game
-[01m[Kgcc:[m[K [01;31m[Kerror fatal: [m[Kno hay ficheros de entrada
-compilación terminada.
-make: *** [game.mk:10: game] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk
-[?2004lmake: *** No hay ninguna regla para construir el objetivo 'player.h', necesario para 'player.o'.  Alto.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make -f game.mk
-[?2004lmake: *** No hay ninguna regla para construir el objetivo 'player.h', necesario para 'player.o'.  Alto.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make
-[?2004lgcc -c src/item.c
-gcc -c src/player.c
-gcc -c src/game.c
-gcc item.o player.o game.o -o game
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004l[0m[01;32mgame[0m  game.mk  game.o  [01;34minclude[0m  item.o  Makefile  player.o  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m lsmake clean
-[?2004lrm -vrf *.[o]
-'game.o' borrado
-'item.o' borrado
-'player.o' borrado
-rm -vrf game
-'game' borrado
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make
-[?2004lgcc -c src/item.c
-gcc -c src/player.c
-gcc -c src/game.c
-gcc item.o player.o game.o -o game
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004l[0m[01;32mgame[0m  game.mk  game.o  [01;34minclude[0m  item.o  Makefile  player.o  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m lsmake clean
-[?2004l'game.o' borrado
-'item.o' borrado
-'player.o' borrado
-'game' borrado
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make clean[K[K[K[K[K[K
-[?2004lgcc -c src/item.c
-gcc -c src/player.c
-[01m[Ksrc/player.c:[m[K En la función ‘[01m[Ksaludar[m[K’:
-[01m[Ksrc/player.c:10:39:[m[K [01;31m[Kerror: [m[K‘[01m[KMAX_FUERZA[m[K’ no se declaró aquí (primer uso en esta función)
-   10 |   printf("Hola tu fuerza es %d..!\n", [01;31m[KMAX_FUERZA[m[K);
-      |                                       [01;31m[K^~~~~~~~~~[m[K
-[01m[Ksrc/player.c:10:39:[m[K [01;36m[Knota: [m[Kcada identificador sin declarar se reporta sólo una vez para cada función en el que aparece
-make: *** [Makefile:23: player.o] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make
-[?2004lmake: *** No hay ninguna regla para construir el objetivo 'item.c', necesario para 'item.o'.  Alto.
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make
-[?2004lgcc -c src/player.c
-[01m[Ksrc/player.c:[m[K En la función ‘[01m[Ksaludar[m[K’:
-[01m[Ksrc/player.c:10:39:[m[K [01;31m[Kerror: [m[K‘[01m[KMAX_FUERZA[m[K’ no se declaró aquí (primer uso en esta función)
-   10 |   printf("Hola tu fuerza es %d..!\n", [01;31m[KMAX_FUERZA[m[K);
-      |                                       [01;31m[K^~~~~~~~~~[m[K
-[01m[Ksrc/player.c:10:39:[m[K [01;36m[Knota: [m[Kcada identificador sin declarar se reporta sólo una vez para cada función en el que aparece
-make: *** [Makefile:23: player.o] Error 1
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make[H[2J[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make
-[?2004lgcc -c src/item.c
-gcc -c src/player.c
-gcc -c src/game.c
-gcc item.o player.o game.o -o game
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make clean
-[?2004l'game.o' borrado
-'item.o' borrado
-'player.o' borrado
-'game' borrado
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m make
-[?2004lgcc -c src/item.c
-gcc -c src/player.c
-gcc -c src/game.c
-[01m[Ksrc/game.c:[m[K En la función ‘[01m[Kmain[m[K’:
-[01m[Ksrc/game.c:7:3:[m[K [01;35m[Kaviso: [m[Kdeclaración implícita de la función ‘[01m[Ksaludar[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wimplicit-function-declaration-Wimplicit-function-declaration]8;;[m[K]
-    7 |   [01;35m[Ksaludar[m[K();
-      |   [01;35m[K^~~~~~~[m[K
-gcc item.o player.o game.o -o game
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ls
-[?2004l[0m[01;32mgame[0m  game.mk  game.o  [01;34minclude[0m  item.o  Makefile  player.o  [01;34msrc[0m
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m ./game
-[?2004lLa app..!
-Hola tu fuerza es 500..!
-]0;jelou@jelou-pc:~/Documentos/git/manu-docs/src/org-files/guia-makefile/examples/example2[?2004h[01;32m[jelou@jelou-pc[01;37m example2[01;32m]$[00m [?2004l
-exit
-
-Script terminado en 2021-12-22 01:46:33-03:00 [CÓDIGO_SALIDA_ORDEN="0"]
