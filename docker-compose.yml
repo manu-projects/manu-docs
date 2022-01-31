@@ -1,0 +1,34 @@
+version: '3.4'
+services:
+  docexport:
+    container_name: manudocs-docexport
+    image: neverkas/manudocs-docexport:3.0
+    #user: "${UID:-1000}:${GID:-1000}"
+    # depends_on:
+    #   - webapp
+    build:
+      context: .
+      dockerfile: export.Dockerfile
+    restart: unless-stopped # reiniciar hasta que lo detengamos nosotros
+    # environment:
+    #   - .env
+    # stdin_open: true
+    # tty: true
+    volumes:
+      - ./docs:/data/docs
+      - ./src/views/:/data/html
+  webapp:
+    container_name: manudocs-webapp
+    image: neverkas/manudocs-webapp:3.0
+    user: "${UID:-1000}:${GID:-1000}" # resolvemos (temporalmente) permisos de usuario root
+    build:
+      context: .
+      dockerfile: webapp.Dockerfile
+      network: host # evitamos problemas de conexion de npm al instalar las dependencias
+      # environment:
+      #  - .env
+    restart: unless-stopped
+    volumes:
+      - .:/opt/manu-docs/ # mapeamos el directorio `.` del (host) a `/opt/manu-docs` del (contenedor)
+    ports:
+      - "80:3000" # mapeamos el puerto 80 (host) al 3000 (contenedor)
