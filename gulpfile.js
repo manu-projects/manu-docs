@@ -14,7 +14,7 @@ var rep = require('gulp-replace-image-src');
 const imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
 var zopfli = require('imagemin-zopfli');
-var mozjpeg = require('imagemin-mozjpeg');
+//var mozjpeg = require('imagemin-mozjpeg');
 var giflossy = require('imagemin-giflossy');
 
 const browsersync = require("browser-sync").create();
@@ -58,10 +58,10 @@ function optimizeImagesTask(){
                     zopfli({
                         more: true
                     }),
-                    mozjpeg({
-                        quality: 70,
-                        progressive: true
-                    }),
+                    // mozjpeg({
+                    //     quality: 70,
+                    //     progressive: true
+                    // }),
                     giflossy({
                         optimizationLevel: 3, optimize: 3, lossy: 2
                     })
@@ -103,6 +103,7 @@ function scssTask() {
 
 function browsersyncServe(cb){
     browsersync.init({
+        open:false,
         server: {
             baseDir: './dist',
             hostname: "manudocs.local",
