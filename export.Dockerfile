@@ -11,7 +11,7 @@ USER pandoc
 WORKDIR /data
 COPY export.mk .
 COPY ./docs ./docs
-COPY ./src/views ./html
+COPY ./src/views ./src/views
 
 # el punto de entrada por defecto de la imagen base es /bin/pandoc
 ENTRYPOINT ["/bin/sh", "-c"]

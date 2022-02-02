@@ -31,4 +31,7 @@ sh:
 npm:
 	@docker-compose exec $(CONTAINER_WEBAPP) npm $(ARGS)
 
-.PHONY: all sh npm watch b build u up s stop l logs d down clean p pause
+export:
+	@$(MAKE) --no-print-directory -f export.mk watch
+
+.PHONY: all sh npm export b build u up s stop l logs d down clean p pause

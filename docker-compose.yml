@@ -16,7 +16,7 @@ services:
     # tty: true
     volumes:
       - ./docs:/data/docs
-      - ./src/views/:/data/html
+      - ./src/:/data/src
   webapp:
     container_name: manudocs-webapp
     image: neverkas/manudocs-webapp:3.0
