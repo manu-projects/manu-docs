@@ -17,10 +17,10 @@ HTML_FILES := $(subst $(DOC_PATH),$(HTML_PATH), $(DOC_FILES))
 HTML_FILES := $(patsubst %.org,%.html, $(HTML_FILES))
 
 RM := rm -rfv
+MKDIR := mkdir -vp
 
 # ---------------------------------------------------------------------------
 # PANDOC CONFIG
-# TODO: Añadir en el docker-compose un `export HOST_ENV`
 
 PANDOC_PARAMS =  \
 	--from=org --to=html --out=$@ --table-of-contents --toc-depth 3 \
@@ -47,11 +47,11 @@ export: $(SUBDIRS) $(HTML_FILES)
 
 watch:
 	$(info Observando cambios en la documentación para exportar...)
-	@while true; do $(MAKE) -q || $(MAKE) --no-print-directory; sleep 1; done
+	$(call watch)
 
 $(SUBDIRS):
 	$(info Creando estructura de directorios)
-	@mkdir -vp $@
+	@$(MKDIR) $@
 
 $(HTML_FILES):$(HTML_PATH)/%.html:$(DOC_PATH)/%.org
 	$(info Exportando a html el fichero $(subst $(DOC_PATH)/,,$<))
@@ -62,3 +62,5 @@ clean:
 	@-$(RM) $(HTML_FILES)
 
 .PHONY: watch export clean
+
+-include functions.mk

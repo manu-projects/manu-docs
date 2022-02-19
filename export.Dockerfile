@@ -10,6 +10,7 @@ USER pandoc
 
 WORKDIR /data
 COPY export.mk .
+COPY functions.mk .
 COPY ./docs ./docs
 COPY ./src/views ./src/views
 

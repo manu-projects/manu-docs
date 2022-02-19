@@ -1,5 +1,7 @@
 nohup.out
 
+src/views/
+dist/
 node_modules/
 .log
 

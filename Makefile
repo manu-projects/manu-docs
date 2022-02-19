@@ -1,37 +1,38 @@
-include Makefile.conf
-
 all: down up
 
 b build:
 	$(info Construyendo imagenes...)
-	@docker-compose build $(ARGS)
+	$(call docker_cmd, build)
 
 u up:
 	$(info Ejecutando contenedor/es...)
-	@docker-compose up $(ARGS)
+	$(call docker_cmd, up)
 
 p pause:
 	$(info Pausando contenedor/es...)
-	@docker-compose pause $(ARGS)
+	$(call docker_cmd, pause)
 
 s stop:
 	$(info Deteniendo contenedor/es...)
-	@docker-compose stop $(ARGS)
+	$(call docker_cmd, stop)
 
 d down:
-	@docker-compose down $(ARGS)
+	$(call docker_cmd, down)
 
 l logs:
-	@docker-compose logs --tail 50 --follow $(ARGS)
+	$(call docker_cmd, logs --tail 50 --follow)
 
 sh:
 	$(info Accediendo al contentendor en modo interactivo...)
-	@docker-compose exec $(ARGS) /bin/sh
+	$(call docker_cmd, exec, /bin/sh)
 
 npm:
 	@docker-compose exec $(CONTAINER_WEBAPP) npm $(ARGS)
 
 export:
-	@$(MAKE) --no-print-directory -f export.mk watch
+  $(call make_exec, export.mk, watch)
 
 .PHONY: all sh npm export b build u up s stop l logs d down clean p pause
+
+-include Makefile.conf
+-include functions.mk

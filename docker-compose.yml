@@ -10,8 +10,9 @@ services:
       context: .
       dockerfile: export.Dockerfile
     restart: unless-stopped # reiniciar hasta que lo detengamos nosotros
-    # environment:
-    #   - .env
+    environment:
+      - HOST_ENV=container
+      # - .env
     # stdin_open: true
     # tty: true
     volumes:
